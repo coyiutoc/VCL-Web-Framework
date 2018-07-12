@@ -4,10 +4,10 @@
     <!-- Scripts: -->
 
     <!-- Local scripts: -->
-    <script type="text/javascript" src="scripts/gaussian_distribution_generator.js" ></script> 
-    <script type="text/javascript" src="scripts/adjust_correlation.js" ></script>
-    <script type="text/javascript" src="scripts/jnd_experiment_helpers.js" ></script>
-
+    <script type="text/javascript" src="../../scripts/gaussian_distribution_generator.js" ></script> 
+    <script type="text/javascript" src="../../scripts/experiments/jnd.js" ></script>
+    <script type="text/javascript" src="../../scripts/experiment_helpers.js" ></script>
+    
     <!-- Math.js: -->
     <script src="https://unpkg.com/mathjs@4.4.2/dist/math.min.js"></script>
 
@@ -15,25 +15,29 @@
     <script src = "https://d3js.org/d3.v4.min.js"></script>
 
     <!-- Style: -->
-    <link rel="stylesheet" href="styles.css">
+    <!-- <link rel="stylesheet" href="../../styles/trial_display.css"> -->
 
 </head>
 <body>
   <div align = "center">
 
     <!-- For margin buffer: -->
-    <svg width="400" height="180">
+    <svg width="400" height="180"></svg>
+    
+    <!-- D3 graph goes here: -->
     <div id="graph">
-
     </div>
-
+    
     <script type="text/javascript">
 
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     // NOTE: If testing this file independent of jnd_experiment.html,
     //       uncomment all variables encapsulated in this !!!! block.
 
-    // Constants -----------------------------------------------------
+    // ========================================
+    // CONSTANTS
+
+    // const MATHJS_URL = "https://unpkg.com/mathjs@4.4.2/dist/math.min.js";
 
     // const MIN_CORRELATION = 0.0
     // const MAX_CORRELATION = 1.0
@@ -48,7 +52,10 @@
     // const CONVERGE_FROM_ABOVE = true;
     // const MAX_STEP_SIZE = 0.01;
 
-    // // Generate distribution -----------------------------------------
+    // var distribution_size = 100; 
+
+    // // ========================================
+    // // GENERATE DISTRIBUTIONS
 
     // var left_coordinates = generateDistribution(BASE_CORRELATION, ERROR, NUM_POINTS, NUM_SD, MEAN, SD);
 
@@ -62,17 +69,19 @@
 
     // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-    // Prepare Data --------------------------------------------------
+    // ========================================
+    // PREPARE DATA
 
-    var left_dataset = prepareCoordinates(left_coordinates, multiplier);
-    var right_dataset = prepareCoordinates(right_coordinates, multiplier);
+    var left_dataset = prepare_coordinates(left_coordinates, distribution_size);
+    var right_dataset = prepare_coordinates(right_coordinates, distribution_size);
 
     var datasets = [left_dataset, right_dataset];
 
-    // Graphing ------------------------------------------------------
+    // ========================================
+    //  GRAPHING
 
-    var width = 400;
-    var height = 400;
+    var width = 250;
+    var height = 500;
 
     // Create scales:
     // ** D3 creates a function that takes in input between [0, 100] and 
@@ -83,7 +92,10 @@
                    .range([0, width]);
 
     var yscale = d3.scaleLinear()
-                   .domain([0, multiplier])
+                   .domain([multiplier * -1, 0]) // !!! NOTE: this is the hack b/c we flipped the y-values 
+                                                 //     to be negative --> graph is now positive correlation
+                                                 //     but on 4th quadrant --> force domain to be from 
+                                                 //     [-1, 0] to move it to 1st quadrant 
                    .range([height/2, 0]);
 
     // Create axes: 
@@ -106,11 +118,13 @@
       // Creating transform SVG elements + append to SVG: 
       var yAxisElements = chart.append("g")
                                  .attr("transform", "translate(50, 10)")
+                                 //.attr("transform", "translate(50, " + height/2 + ")")
                                  .call(y_axis);
 
       yAxisElements.selectAll("text").remove(); // Remove tick labels
 
       var xAxisTranslate = height/2 + 10;
+      //var xAxisTranslate = height - 1;
       var xAxisElements = chart.append("g")
                                 .attr("transform", "translate(50, " + xAxisTranslate  +")")
                                 .call(x_axis)
@@ -130,6 +144,7 @@
               })
               .attr("r", 2);
     }
+
 
     </script>
   </div>

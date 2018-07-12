@@ -45,6 +45,12 @@ jsPsych.plugins['external-html-keyboard-response'] = (function() {
         default: jsPsych.ALL_KEYS,
         description: 'The keys the subject is allowed to press to respond to the stimulus.'
       },
+      trial_duration: {
+        type: jsPsych.plugins.parameterType.INT,
+        pretty_name: 'Trial duration',
+        default: null,
+        description: 'How long to show trial before it ends.'
+      },
       response_ends_trial: {
         type: jsPsych.plugins.parameterType.BOOL,
         pretty_name: 'Response ends trial',
@@ -118,6 +124,13 @@ jsPsych.plugins['external-html-keyboard-response'] = (function() {
         persist: false,
         allow_held_key: false
       });
+    }
+
+    // if trial_duration is defined, set timer
+    if (trial.trial_duration !== null) {
+      jsPsych.pluginAPI.setTimeout(function() {
+        end_trial();
+      }, trial.trial_duration);
     }
 
     load(display_element, url, function() {

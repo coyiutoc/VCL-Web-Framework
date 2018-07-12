@@ -1,11 +1,12 @@
 
 const TRIAL_LIMIT = 250;
-const MATHJS_URL = "https://unpkg.com/mathjs@4.4.2/dist/math.min.js";
 
 function generateDistribution(correlation, error, size, numsd, mean, sd){
 
   dynamicallyLoadScript(MATHJS_URL);
   var coordinates = {x_values: [], y_values: []};
+  var overshootSize = size + 20; // Generating > size will guarantee we have
+                                 // a distribution of the speciied size later. 
 
   var done = true;
   // Initialize the points and make sure the correlation is in an acceptable error range.
@@ -14,19 +15,26 @@ function generateDistribution(correlation, error, size, numsd, mean, sd){
       // Reset coordinates:
       coordinates = {x_values: [], y_values: []};
 
-      initializePoints(coordinates, correlation, size, numsd, mean, sd);
-      done = adjustPointsForError(coordinates, correlation, error, size, numsd, mean, sd);
+      initializePoints(coordinates, correlation, overshootSize, numsd, mean, sd);
+      done = adjustPointsForError(coordinates, correlation, error, overshootSize, numsd, mean, sd);
   } while(done == false);
 
   // Transformation into range [0, 1]
   transformPoints(coordinates, mean, sd);
-  readjustPoints(coordinates, correlation, error, size, numsd, mean, sd);
+  readjustPoints(coordinates, correlation, error, overshootSize, numsd, mean, sd);
+
+  // Since this is code ported from the java codebase, coordinates are plotted
+  // so that origin as at the top left (this makes the distribution negative instead
+  // of positive). To force it to be positive, we flip the whole distribution 
+  // across y axis. 
+  for (i = 0; i<coordinates.y_values.length; i++) {
+    coordinates.y_values[i] = coordinates.y_values[i] * (-1);
+  }
 
   return coordinates; 
 }
 
 function initializePoints(coordinates, correlation, size, numsd, mean, sd){
-
   var xVal;
   var x2Val;
   var yVal;
