@@ -1,26 +1,35 @@
-div {
-    width: 550px;
-    height: 500px;
-    /*background-color: red;*/
-
-    position: absolute;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    margin: auto;
-}
-
 img {
-	display: block;
-    margin-left: auto;
-    margin-right: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
     /*width: 40%;*/
 }
 
+.block {
+  /*width: 100px;*/
+  /*float: left;*/
+  display: inline-block;
+  zoom: 1;
+  margin-left: 20px;
+}
+
+.center {
+  position: absolute;
+  margin: auto;
+  top: 150px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: auto;
+  height: auto;
+}
+
+.row {
+  width: 100%;
+  /*margin: 0 auto;*/
+  text-align: center;
+}
+
 #wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
 }

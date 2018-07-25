@@ -1,8 +1,13 @@
 // --- LOADING MODULES
 var express = require('express');
+var body_parser = require('body-parser');
 
 // --- INSTANTIATE THE APP
 var app = express();
+
+// Configure body-parser for express
+app.use(body_parser.urlencoded({extended:false}));
+app.use(body_parser.json());
 
 // --- STATIC MIDDLEWARE 
 app.use(express.static(__dirname + '/public'));
@@ -19,6 +24,23 @@ app.set('view engine', 'html');
 // Home page
 app.get('/', function(request, response) {
     response.render('index.html');
+});
+
+// POST on Practice Enabling
+app.get('/user', function(req, res){
+    // response = {
+    //     first_name : req.body.first_name,
+    //     last_name : req.body.last_name,
+    //     gender: req.body.gender
+    //  };
+    
+    //this line is optional and will print the response on the command prompt
+    //It's useful so that we know what infomration is being transferred 
+    //using the server
+    console.log(req);
+    
+    //convert the response in JSON format
+    //res.end(JSON.stringify(response));
 });
 
 // JND Experiment

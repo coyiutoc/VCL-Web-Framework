@@ -43,6 +43,7 @@
 
     var timeline = [];
     const localhost = "http://localhost:8080";
+    var practice_end = false; // Flag to check when practice trials have ended
 
     // Variables used to generate D3 stevens_trial_display.html:
     var left_coordinates;
@@ -55,17 +56,35 @@
     // INSTANTIATE STEVENS EXPERIMENT OBJECT
 
     const STEVENS_EXCEL = [
-      {round_type: 'test', trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5},
+      {round_type: 'consistency', trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, 
+        num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5},
 
-      {round_type: 'test', trials_per_round: 4, high_ref: 0.5, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5},
+      {round_type: 'consistency', trials_per_round: 4, high_ref: 0.5, low_ref: 0, error: 0.0001, 
+        num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5},
 
-      {round_type: 'test', trials_per_round: 4, high_ref: 1, low_ref: 0.5, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5},
+      {round_type: 'consistency', trials_per_round: 4, high_ref: 1, low_ref: 0.5, error: 0.0001, 
+        num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5},
 
-      {round_type: 'test', trials_per_round: 4, high_ref: 0.25, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5}
+      {round_type: 'consistency', trials_per_round: 4, high_ref: 0.25, low_ref: 0, error: 0.0001,
+        num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5}
     ];
 
+    const STEVENS_PRACTICE = [
+      {round_type: 'consistency', trials_per_round: 4, high_ref: 0.375, low_ref: 0.125, error: 0.0001, 
+        num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5},
+
+      {round_type: 'consistency', trials_per_round: 4, high_ref: 0.5, low_ref: 0.25, error: 0.0001, 
+        num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5}
+
+      // {round_type: 'consistency', trials_per_round: 4, high_ref: 0.625, low_ref: 0.375, error: 0.0001, 
+      //   num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5},
+
+      // {round_type: 'consistency', trials_per_round: 4, high_ref: 0.75, low_ref: 0.5, error: 0.0001,
+      //   num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5}
+    ]
+
     var stevens_exp = new stevens("foundational"); 
-    stevens_exp.prepare_experiment('latin_square', STEVENS_EXCEL);
+    stevens_exp.prepare_experiment("latin_square", STEVENS_EXCEL, STEVENS_PRACTICE);
 
     // =========================================================
     // WELCOME TRIAL BLOCK
@@ -94,7 +113,7 @@
 
     var ready = {
       type: 'html-keyboard-response',
-      stimulus: "<div align = 'center'> <font size = 20><p>Ready?<p>" + "<p><b>Press any key to begin.</b></p></font></div>",
+      stimulus: "<div align = 'center'> <font size = 20><p>Ready? We will first do some practice trials. <p>" + "<p><b>Press any key to begin.</b></p></font></div>",
       data: {type: 'instruction'}
     }
 
@@ -105,98 +124,75 @@
     timeline.push(instruction_trials);
 
     // =========================================================
-    // EXPERIMENT TRIAL BLOCK
+    // PRACTICE TRIAL BLOCKS
 
-    var trial = {
-      type:'external-html-keyboard-response',
-      url: localhost + "/stevens_trial",
-      choices:[38, 40, 'q'], //38 = up, 40 = down, q is exit button (for debugging)
-      execute_script: true,
-      response_ends_trial: false,
-      trial_duration: 1000, 
-      data: stevens_exp.trial_variables,
-      on_start: function(trial){ // NOTE: on_start takes in trial var 
+    // ---------------------------------------------------------
+    // PRACTICE HANDLING
 
-        // Force reset that input_count and trial_num = 0
-        // !!! For some reason, the previous trial's is carrying over...
-        trial.data.input_count = 0;
-        trial.data.trial_num = 0; 
+    var practice_stevens = stevens_exp.generate_trial("practice");
 
-        // Set the constants to be used:
-        var index = stevens_exp.current_sub_condition_index;
-        var constants = stevens_exp.sub_conditions_constants[index];
+    var practice = {
+      timeline: [practice_stevens],
+      loop_function: function(data){ // Return true if timeline should continue
+                                     // Return false if timeline should end
 
-        // Retrieve data from last trial:
-        var last_stevens_trial;
-
-        if (jsPsych.data.get().filter({type: "stevens", sub_condition_index: index}).last(1).values()[0]){
-          last_stevens_trial = jsPsych.data.get().filter({type: "stevens", sub_condition_index: index}).last(1).values()[0];
-        }
-        else{
-          last_stevens_trial = null;
+        // For debugging, if you want to exit out of experiment, press q:
+        if (jsPsych.pluginAPI.convertKeyCharacterToKeyCode('q') == data.values()[0].key_press){
+          practice_end = true;
+          return false;
         }
 
-        // Set the estimated correlation
-        var estimated_correlation = stevens_exp.update_estimated_correlation(trial, constants, last_stevens_trial);
-
-        // Handling saving the data: 
-        trial.data.estimated_correlation = estimated_correlation;
-        trial.data.sub_condition_index = index;
-
-        // If trial is still part of same sub-condition, add onto trial num
-        // and carry over step size (it is constant throughout sub conditions)
-        if (last_stevens_trial){
-          trial.data.trial_num = last_stevens_trial.trial_num + 1;
-          trial.data.step_size = last_stevens_trial.step_size;
+        // If subcondition should end:
+        if(stevens_exp.end_sub_condition()){
+          // If there are still more subconditions, increment current index
+          if (stevens_exp.current_sub_condition_index < (stevens_exp.sub_conditions_constants.length-1))
+          { 
+            stevens_exp.current_sub_condition_index++; 
+            console.log("!!!!!!!!!! Moved to new sub condition at index " 
+                         + stevens_exp.current_sub_condition_index);
+            return true; 
+          }
+          // Else end experiment
+          else{
+            practice_end = true;
+            return false;
+          }
+        } 
+        // Else continue w/ current subcondition:
+        else {
+          return true;
         }
-        else{
-          trial.data.trial_num = 1;
-        }
-
-        console.log("trial num: " + trial.data.trial_num);
-
-        // Generate distributions
-        var high_coordinates = generateDistribution(constants.high_ref, 
-                                                    constants.error, 
-                                                    constants.num_points, 
-                                                    constants.num_SD, 
-                                                    constants.mean, 
-                                                    constants.SD);
-
-        var low_coordinates = generateDistribution(constants.low_ref, 
-                                                   constants.error, 
-                                                   constants.num_points, 
-                                                   constants.num_SD, 
-                                                   constants.mean,
-                                                   constants.SD);
-
-        var estimated_coordinates = generateDistribution(estimated_correlation, 
-                                                      constants.error, 
-                                                      constants.num_points, 
-                                                      constants.num_SD, 
-                                                      constants.mean, 
-                                                      constants.SD);
-
-        // Randomize position of the base and adjusted graphs
-        var result = randomize_position(trial, 
-                                       high_coordinates,
-                                       low_coordinates, 
-                                       constants.high_ref, 
-                                       constants.low_ref);
-
-        left_coordinates = result.left;
-        right_coordinates = result.right; 
-        middle_coordinates = estimated_coordinates;  
-        distribution_size = constants.num_points; 
-
-        console.log("[RIGHT] Correlation: " + trial.data.right_correlation);
-        console.log("[MIDPOINT] Correlation: " + trial.data.estimated_correlation);
-        console.log("[LEFT] Correlation: " + trial.data.left_correlation);
       }
     };
 
+    timeline.push(practice);
+
+    // ---------------------------------------------------------
+    // STOP BLOCK
+
+    var stop = {
+      type: 'html-keyboard-response',
+      stimulus: "<div align = 'center'> <font size = 20><p>This concludes the practice trials.<p>" + "<p><b>Any questions?</b></p></font></div>",
+      data: {type: 'instruction'}
+    }
+
+    var ready_experiment = {
+      type: 'html-keyboard-response',
+      stimulus: "<div align = 'center'> <font size = 20><p>Ready?<p>" + "<p><b>Press any key to begin.</b></p></font></div>",
+      data: {type: 'instruction'}
+    }
+
+    var stop_trials = {
+      timeline: [stop, ready_experiment]
+    };
+
+    timeline.push(stop_trials);
+
+
     // =========================================================
-    // EXPERIMENT BLOCK
+    // EXPERIMENT TRIAL BLOCKS
+
+    var trial = stevens_exp.generate_trial("test");
 
     var experiment = {
       timeline: [trial],

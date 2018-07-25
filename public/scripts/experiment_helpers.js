@@ -80,6 +80,7 @@ function randomize_position(trial, base_coordinates, adjusted_coordinates, base_
 /** 
  * Forces the right graph to always have the greater correlation.
  * Used for testing purposes.
+ *
  * @param  trial {object}
  *         base_coordinates { {x_values: [], y_values: []} }  
  *         adjusted_coordinates { {x_values: [], y_values: []} }        
