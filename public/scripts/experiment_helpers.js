@@ -9,17 +9,17 @@
 */
 function prepare_coordinates(coordinates, num_points){
 
-	var array = [];
-	var reorganized_coordinates = [];
+  var array = [];
+  var reorganized_coordinates = [];
 
-	for (i = 0; i < coordinates.x_values.length; i++){
-		array.push(coordinates.x_values[i]);
-		array.push(coordinates.y_values[i]);
+  for (i = 0; i < coordinates.x_values.length; i++){
+    array.push(coordinates.x_values[i]);
+    array.push(coordinates.y_values[i]);
 
-		reorganized_coordinates.push(array);
-		array = [];
-	}
-	
+    reorganized_coordinates.push(array);
+    array = [];
+  }
+  
   var output_coordinates = sample_coordinates(reorganized_coordinates, num_points);
 
   return output_coordinates;
@@ -56,10 +56,10 @@ function sample_coordinates(coordinates, num_points){
  * @return result { {left: [coordinates], right: [coordinates]} }          
  */
 function randomize_position(trial, base_coordinates, adjusted_coordinates, base_correlation, adjusted_correlation){
-	
-	var result = {left: [], right: []};
+  
+  var result = {left: [], right: []};
 
-	if (Math.random() < 0.5){
+  if (Math.random() < 0.5){
     result.left = base_coordinates;
     trial.data.left_correlation = base_correlation;
 

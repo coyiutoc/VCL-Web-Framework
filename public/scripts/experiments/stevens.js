@@ -1,10 +1,10 @@
 /**
  * Initializes a Stevens experiment object. 
- * @param	 condition_name {string}		Name of condition (i.e foundational)
+ * @param  condition_name {string}    Name of condition (i.e foundational)
  */
 function stevens(condition_name){
 
-	this.MAX_STEP_INTERVAL = 10;
+  this.MAX_STEP_INTERVAL = 10;
 
   // ========================================
   // EXPERIMENT VARIABLES
@@ -18,19 +18,19 @@ function stevens(condition_name){
 
   this.practice_conditions_constants;
 
-	// ========================================
-	// TEST TRIAL VARIABLES
+  // ========================================
+  // TEST TRIAL VARIABLES
 
-	this.condition_name = condition_name; 
+  this.condition_name = condition_name; 
   this.experiment_conditions_constants;
 
-	// ========================================
-	// JSPSYCH TRIAL VARIABLES
+  // ========================================
+  // JSPSYCH TRIAL VARIABLES
 
-	// Define the jsPsych data variables to be used
-	// per Stevens trial. 
-	this.trial_variables =         
-				{type: 'stevens',
+  // Define the jsPsych data variables to be used
+  // per Stevens trial. 
+  this.trial_variables =         
+        {type: 'stevens',
         left_correlation: '',
         right_correlation: '',
         estimated_correlation: '',
@@ -46,14 +46,14 @@ stevens.prototype.constructor = stevens;
 /**
  * Orders the input data according to balancing type and
  * initializes the Stevens object's variables.  
- * @param	 balancing_type {string}													 Type of balancing. Currently only latin_square
- *																													 is supported.
- *				 data_set {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. 
+ * @param  balancing_type {string}                           Type of balancing. Currently only latin_square
+ *                                                           is supported.
+ *         data_set {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. 
  *         practice_set {[{assoc array}, {assoc array}, ... ]} The practice data. 
  */
 stevens.prototype.prepare_experiment = function(balancing_type, data_set, practice_set){
 
-	if (balancing_type == 'latin_square'){
+  if (balancing_type == 'latin_square'){
     var order = initialize_latin_square(data_set.length);
 
     var ordered_data_set = [];
@@ -63,9 +63,9 @@ stevens.prototype.prepare_experiment = function(balancing_type, data_set, practi
     }
 
     // Set experiment trials
-	  this.experiment_conditions_constants = ordered_data_set;
-	  //this.current_sub_condition_index = 0; 
-	  //this.input_count_array = new Array(this.sub_conditions_constants.length).fill(0);
+    this.experiment_conditions_constants = ordered_data_set;
+    //this.current_sub_condition_index = 0; 
+    //this.input_count_array = new Array(this.sub_conditions_constants.length).fill(0);
 
     // Set experiment variables to the practice first
     this.sub_conditions_constants = practice_set;
@@ -73,9 +73,9 @@ stevens.prototype.prepare_experiment = function(balancing_type, data_set, practi
     this.input_count_array = new Array(practice_set.length).fill(0);
 
     console.log(this.sub_conditions_constants);   
-	 	console.log(this.input_count_array);
-	}
-	else {throw Error(balancing_type + " balancing type is not supported.")};
+    console.log(this.input_count_array);
+  }
+  else {throw Error(balancing_type + " balancing type is not supported.")};
 }
 
 /**
@@ -213,39 +213,39 @@ stevens.prototype.generate_trial = function(block_type){
 
 /**
  * Determines whether the current sub condition can end or not.
- * @return {boolean} 						True if sub condition should end.
+ * @return {boolean}            True if sub condition should end.
  */
 stevens.prototype.end_sub_condition = function(){
 
-	var index = this.current_sub_condition_index;
-	console.log(this.input_count_array);
-	if (this.input_count_array[index] == this.sub_conditions_constants[index].trials_per_round){
-		return true;
-	}
-	else {
-		return false;
-	}
+  var index = this.current_sub_condition_index;
+  console.log(this.input_count_array);
+  if (this.input_count_array[index] == this.sub_conditions_constants[index].trials_per_round){
+    return true;
+  }
+  else {
+    return false;
+  }
 }
 
 /**
  * Updates the estimated correlation.
  * If is the first trial, will initialize the correlation and step size.
  * Else:
- *		If there was a key press in previous trial, will calculate the
+ *    If there was a key press in previous trial, will calculate the
  *    the estimated correlation (depending on whether it was an inc or dec).
  *    Else if no key press in previous trial, will set estimated correlation
  *    to the previous trial's. 
- * @param	 trial {object}		
- *				 constants {object}         
- *				 last_trial {object}
- * @return estimated_correlation {double} 					
+ * @param  trial {object}   
+ *         constants {object}         
+ *         last_trial {object}
+ * @return estimated_correlation {double}           
  */
 stevens.prototype.update_estimated_correlation = function(trial, constants, last_trial){
 
-	var estimated_correlation;
-	var index = this.current_sub_condition_index;
-	
-	// If first trial (estimated_correlation is null), so initialize
+  var estimated_correlation;
+  var index = this.current_sub_condition_index;
+  
+  // If first trial (estimated_correlation is null), so initialize
   // estimated midpoint and set step size:
   if (trial.data.trial_num == 0 && !last_trial){
     //Initialize the estimated midpoint correlation:
@@ -278,11 +278,11 @@ stevens.prototype.update_estimated_correlation = function(trial, constants, last
   // Else use the previous trial's midpoint
   else{
 
-  	// QUESTION: If there is user input, on the next viz, the graph will display 
-  	// that estimated correlation. However, AFTER that, we are changing the 
-  	// estimated correlation??
+    // QUESTION: If there is user input, on the next viz, the graph will display 
+    // that estimated correlation. However, AFTER that, we are changing the 
+    // estimated correlation??
 
-  	// Based on StevensTrial.java (line 75), the estimated midpoint gets updated this way:
+    // Based on StevensTrial.java (line 75), the estimated midpoint gets updated this way:
     // var prev_constants = this.sub_conditions_constants[current_sub_condition_index-1];
     // if (last_trial.estimated_correlation == prev_constants.high_ref){
     //   estimated_midpoint = constants.low_ref;
