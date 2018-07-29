@@ -4,20 +4,20 @@
     <title>VCL: Stevens Experiment</title>
 
     <!-- Scripts: -->
-    
-    <!-- JsPsych: -->
-    <script src="../../../jspsych/jspsych.js"></script>
-    <script src="../../../jspsych/plugins/jspsych-html-keyboard-response.js"></script>
-    <script src="../../../jspsych/plugins/jspsych-image-keyboard-response.js"></script>
-    <script src="../../../jspsych/plugins/jspsych-external-html.js"></script>
-    <script src="../../../jspsych/plugins/jspsych-external-html-keyboard-response.js"></script>
 
     <!-- Local scripts: -->
     <script type="text/javascript" src="../../scripts/experiments/stevens.js" ></script>
     <script type="text/javascript" src="../../scripts/gaussian_distribution_generator.js" ></script> 
     <script type="text/javascript" src="../../scripts/experiment_helpers.js" ></script>
     <script type="text/javascript" src="../../scripts/latin_square_generator.js" ></script>
-    <script type="text/javascript" src="../../scripts/gaussian.js" ></script>
+    <script type="text/javascript" src="../../scripts/foundational_data_generator.js" ></script>
+
+    <!-- JsPsych: -->
+    <script src="../../../jspsych/jspsych.js"></script>
+    <script src="../../../jspsych/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="../../../jspsych/plugins/jspsych-image-keyboard-response.js"></script>
+    <script src="../../../jspsych/plugins/jspsych-external-html.js"></script>
+    <script src="../../../jspsych/plugins/jspsych-external-html-keyboard-response.js"></script>
 
     <!-- Math.js: -->
     <script type="text/javascript" src="https://unpkg.com/mathjs@4.4.2/dist/math.min.js"></script>
@@ -55,33 +55,10 @@
     // =========================================================
     // INSTANTIATE STEVENS EXPERIMENT OBJECT
 
-    const STEVENS_EXCEL = [
-      {round_type: 'consistency', trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, 
-        num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5},
+    var use_all_data = false;
 
-      {round_type: 'consistency', trials_per_round: 4, high_ref: 0.5, low_ref: 0, error: 0.0001, 
-        num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      {round_type: 'consistency', trials_per_round: 4, high_ref: 1, low_ref: 0.5, error: 0.0001, 
-        num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      {round_type: 'consistency', trials_per_round: 4, high_ref: 0.25, low_ref: 0, error: 0.0001,
-        num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5}
-    ];
-
-    const STEVENS_PRACTICE = [
-      {round_type: 'consistency', trials_per_round: 4, high_ref: 0.375, low_ref: 0.125, error: 0.0001, 
-        num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      {round_type: 'consistency', trials_per_round: 4, high_ref: 0.5, low_ref: 0.25, error: 0.0001, 
-        num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5}
-
-      // {round_type: 'consistency', trials_per_round: 4, high_ref: 0.625, low_ref: 0.375, error: 0.0001, 
-      //   num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      // {round_type: 'consistency', trials_per_round: 4, high_ref: 0.75, low_ref: 0.5, error: 0.0001,
-      //   num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5}
-    ]
+    const STEVENS_EXCEL = get_stevens_data(use_all_data);
+    const STEVENS_PRACTICE = get_stevens_data(use_all_data);
 
     var stevens_exp = new stevens("foundational"); 
     stevens_exp.prepare_experiment("latin_square", STEVENS_EXCEL, STEVENS_PRACTICE);
@@ -127,7 +104,7 @@
     // PRACTICE TRIAL BLOCKS
 
     // ---------------------------------------------------------
-    // PRACTICE HANDLING
+    // PRACTICE TIMELINE
 
     var practice_stevens = stevens_exp.generate_trial("practice");
 

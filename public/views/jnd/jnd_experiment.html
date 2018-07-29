@@ -10,7 +10,7 @@
     <script type="text/javascript" src="../../scripts/gaussian_distribution_generator.js" ></script> 
     <script type="text/javascript" src="../../scripts/experiment_helpers.js" ></script>
     <script type="text/javascript" src="../../scripts/latin_square_generator.js" ></script>
-    <script type="text/javascript" src="../../scripts/gaussian.js" ></script>
+    <script type="text/javascript" src="../../scripts/foundational_data_generator.js" ></script>
 
     <!-- JsPsych: -->
     <script src="../../../jspsych/jspsych.js"></script>
@@ -59,52 +59,11 @@
     // =========================================================
     // INSTANTIATE JND EXPERIMENT OBJECT
 
-    const JND_EXCEL = [
-      {base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, converge_from_above: false, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5},
+    var use_all_data = false;
 
-      {base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: false, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      {base_correlation: 0.8, error: 0.0001, max_step_size: 0.01, converge_from_above: false, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      {base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: false, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5}
-    ];
-
-    const JND_PRACTICE = [
-      {base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: false, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      {base_correlation: 0.8, error: 0.0001, max_step_size: 0.01, converge_from_above: false, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      {base_correlation: 0.7, error: 0.0001, max_step_size: 0.01, converge_from_above: false, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      {base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: false, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      {base_correlation: 0.5, error: 0.0001, max_step_size: 0.01, converge_from_above: false, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5}
-
-      // {base_correlation: 0.4, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      // {base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      // {base_correlation: 0.2, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      // {base_correlation: 0.1, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      // {base_correlation: 0.0, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      // {base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      // {base_correlation: 0.8, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      // {base_correlation: 0.7, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      // {base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      // {base_correlation: 0.5, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      // {base_correlation: 0.4, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5},
-
-      // {base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5}
-    ];
-
+    const JND_EXCEL = get_jnd_data("test", use_all_data);
+    const JND_PRACTICE = get_jnd_data("practice", use_all_data);
+    
     var jnd_exp = new JND("foundational"); 
     jnd_exp.prepare_experiment("latin_square", JND_EXCEL, JND_PRACTICE);
 
@@ -182,7 +141,7 @@
     };
 
     // ---------------------------------------------------------
-    // PRACTICE HANDLING
+    // PRACTICE TIMELINE
 
     var practice_jnd = jnd_exp.generate_trial("practice");
 
@@ -190,6 +149,10 @@
       timeline: [practice_jnd, feedback], // We use same feedback block as that used in practice 
       loop_function: function(data){ // Return true if timeline should continue
                                      // Return false if timeline should end
+
+        // Flag is always true for each trial since we display one trial for 
+        // each condition on the practice                              
+        jnd_exp.first_trial_of_sub_condition = true;
 
         // For debugging, if you want to exit out of experiment, press q:
         if (jsPsych.pluginAPI.convertKeyCharacterToKeyCode('q') == data.values()[0].key_press){

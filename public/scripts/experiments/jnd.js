@@ -12,12 +12,9 @@ function JND(condition_name){
 
   this.MIN_CORRELATION = 0.0;
   this.MAX_CORRELATION = 1.0;
-  // this.MIN_TRIALS = 24;
-  // this.MAX_TRIALS = 52;
-  // this.WINDOW_SIZE = 24;
-  this.MIN_TRIALS = 3;
-  this.MAX_TRIALS = 3;
-  this.WINDOW_SIZE = 3;
+  this.MIN_TRIALS = 24;
+  this.MAX_TRIALS = 52;
+  this.WINDOW_SIZE = 24;
   this.WINDOW_INTERVAL = 3;
   this.CONVERGENCE_THRESHOLD = 0.75; 
   this.INCORRECT_MULTIPLIER = 3;
@@ -132,15 +129,13 @@ JND.prototype.generate_trial = function(block_type){
     on_start: function(trial){ // NOTE: on_start takes in trial var 
 
       // Set the constants to be used:
-      var index;
-      var constants;
       if (block_type == "test"){ 
-        index = jnd_exp.current_sub_condition_index; 
-        constants = jnd_exp.sub_conditions_constants[index];
+        var index = jnd_exp.current_sub_condition_index; 
+        var constants = jnd_exp.sub_conditions_constants[index];
       }
       else { 
-        index = jnd_exp.current_practice_condition_index; 
-        constants = jnd_exp.practice_conditions_constants[index];
+        var index = jnd_exp.current_practice_condition_index; 
+        var constants = jnd_exp.practice_conditions_constants[index];
       }
 
       // Calculate adjusted correlation
@@ -148,10 +143,6 @@ JND.prototype.generate_trial = function(block_type){
 
       // Handling saving this trial's data: 
       jnd_exp.handle_data_saving(trial, block_type, constants, index, adjusted_correlation);
-
-      if (block_type == "test"){
-        jnd_exp.adjusted_quantity_matrix[index].push(adjusted_correlation);
-      }
 
       // Generate distributions
       var base_coordinates = generateDistribution(constants.base_correlation, 
@@ -169,17 +160,17 @@ JND.prototype.generate_trial = function(block_type){
                                                       constants.SD);
 
       // Randomize position of the base and adjusted graphs
-      // var result = randomize_position(trial, 
-      //                                base_coordinates,
-      //                                adjusted_coordinates, 
-      //                                constants.base_correlation, 
-      //                                adjusted_correlation);
-      // For testing purposes, can force R graph to have greater correlation
-      var result = force_greater_right_position(trial,
-                                                base_coordinates,
-                                                adjusted_coordinates,
-                                                constants.base_correlation,
-                                                adjusted_correlation);
+      var result = randomize_position(trial, 
+                                     base_coordinates,
+                                     adjusted_coordinates, 
+                                     constants.base_correlation, 
+                                     adjusted_correlation);
+      // // For testing purposes, can force R graph to have greater correlation
+      // var result = force_greater_right_position(trial,
+      //                                           base_coordinates,
+      //                                           adjusted_coordinates,
+      //                                           constants.base_correlation,
+      //                                           adjusted_correlation);
 
       // Set up D3 variables for plotting
       left_coordinates = result.left;
@@ -220,12 +211,13 @@ JND.prototype.handle_data_saving = function(trial, block_type, constants, index,
   trial.data.adjusted_correlation = adjusted_correlation;
   trial.data.converge_from_above = constants.converge_from_above; //Since is boolean check, cannot do in loop
   trial.data.jnd = Math.abs(adjusted_correlation - constants.base_correlation);
+  trial.data.sub_condition = index; 
+  trial.data.balanced_sub_condition = this.sub_condition_order[index];
 
   // Block specific saves 
   if (block_type == "test"){
+    jnd_exp.adjusted_quantity_matrix[index].push(adjusted_correlation);
     trial.data.run_type = "test";
-    trial.data.sub_condition = index+1; 
-    trial.data.balanced_sub_condition = this.sub_condition_order[index];
   }
   else{
     trial.data.run_type = "practice";
@@ -299,8 +291,6 @@ JND.prototype.is_converged_in_window = function(){
       for (i = 0; i < current_interval_size; ++i) {
         var adjusted_quantity = this.adjusted_quantity_matrix[this.current_sub_condition_index][i + window_start];
         adjusted_quantities.push(adjusted_quantity);
-        // adjustedQuantities[i] = ((StaircaseTrial) this.trials.get(subConditionIndex).get(i + windowStart))
-        //    .getAdjustedQuantity();
       }
 
       // Set the window start to the next interval
@@ -316,19 +306,6 @@ JND.prototype.is_converged_in_window = function(){
       variance.push(math.var(adjusted_quantity_windows[i]));
       mean.push(math.mean(adjusted_quantity_windows[i]));
     }
-
-    // Calculate the F value
-    // Iterator<double[]> iterator = adjustedQuantityWindows.iterator();
-    // double[] variance = new double[adjustedQuantityWindows.size()];
-    // double[] mean = new double[adjustedQuantityWindows.size()];
-
-    // int i = 0;
-    // while (iterator.hasNext()) {
-    //  double[] d = iterator.next();
-    //  variance[i] = StatUtils.variance(d);
-    //  mean[i] = StatUtils.mean(d);
-    //  i++;
-    // }
 
     var mean_of_variances = math.mean(variance);
     var variance_of_means = math.var(mean);
@@ -506,6 +483,7 @@ JND.prototype.export_summary_data = function(){
 
   var data = [];
   
+  // Organize each row of the csv
   for (var i = 0; i<this.sub_conditions_constants.length; i++){
     var row = [this.condition_name];
     var constants = this.sub_conditions_constants[i];
@@ -522,6 +500,7 @@ JND.prototype.export_summary_data = function(){
     data.push(row);
   }
 
+  // Append each row
   data.forEach(function(row){
     csv += row.join(',');
     csv += "\n";

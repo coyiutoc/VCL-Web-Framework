@@ -1,43 +1,70 @@
 /**
  * Initializes a Stevens experiment object. 
+ *
  * @param  condition_name {string}    Name of condition (i.e foundational)
  */
 function stevens(condition_name){
 
   this.MAX_STEP_INTERVAL = 10;
 
-  // ========================================
-  // EXPERIMENT VARIABLES
-
   this.input_count_array;
   this.sub_conditions_constants;
   this.current_sub_condition_index;
 
   // ========================================
-  // PRACTICE TRIAL VARIABLES
+  // PRACTICE EXPERIMENT VARIABLES
 
   this.practice_conditions_constants;
 
   // ========================================
-  // TEST TRIAL VARIABLES
+  // TEST EXPERIMENT VARIABLES
 
   this.condition_name = condition_name; 
   this.experiment_conditions_constants;
+  this.sub_condition_order;
 
   // ========================================
   // JSPSYCH TRIAL VARIABLES
 
   // Define the jsPsych data variables to be used
   // per Stevens trial. 
+  // this.trial_variables =         
+  //       {type: 'stevens',
+  //       run_type: '',
+  //       left_correlation: '',
+  //       right_correlation: '',
+  //       estimated_correlation: '',
+  //       sub_condition: '',
+  //       step_size: '',
+  //       input_count: 0,
+  //       trial_num: 0
+  //       };
+
+  // Variables that are meant to help run experiment (can be deleted before exporting)
   this.trial_variables =         
         {type: 'stevens',
+        run_type: '',
         left_correlation: '',
         right_correlation: '',
         estimated_correlation: '',
-        sub_condition_index: '',
-        step_size: '',
         input_count: 0,
         trial_num: 0
+        };
+
+  // Variables that will be exported into final CSV       
+  this.export_variables = 
+        {condition: this.condition_name,
+         sub_condition: '',           // Chronological ordering of sub_condition [1, 2, 3 ... ]
+         balanced_sub_condition: '',  // Index of sub_condition according to balancing order
+         high_ref: '',
+         estimated_mid: '',
+         low_ref: '',
+         trials_per_round: '',
+         error: '',
+         num_points: '',
+         mean: '',
+         SD: '',
+         num_SD: ''
         };
 }
 
@@ -46,6 +73,7 @@ stevens.prototype.constructor = stevens;
 /**
  * Orders the input data according to balancing type and
  * initializes the Stevens object's variables.  
+ *
  * @param  balancing_type {string}                           Type of balancing. Currently only latin_square
  *                                                           is supported.
  *         data_set {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. 
@@ -54,18 +82,18 @@ stevens.prototype.constructor = stevens;
 stevens.prototype.prepare_experiment = function(balancing_type, data_set, practice_set){
 
   if (balancing_type == 'latin_square'){
-    var order = initialize_latin_square(data_set.length);
 
+    this.sub_condition_order = initialize_latin_square(data_set.length);
     var ordered_data_set = [];
 
-    for (i=0; i < order.length; i++){
-      ordered_data_set[i] = data_set[order[i]];
+    // Order the data set according to the latin square
+    // Initialize adjusted_quantity_matrix size 
+    for (i=0; i < this.sub_condition_order.length; i++){
+      ordered_data_set[i] = data_set[this.sub_condition_order[i]];
     }
 
     // Set experiment trials
     this.experiment_conditions_constants = ordered_data_set;
-    //this.current_sub_condition_index = 0; 
-    //this.input_count_array = new Array(this.sub_conditions_constants.length).fill(0);
 
     // Set experiment variables to the practice first
     this.sub_conditions_constants = practice_set;
@@ -111,7 +139,9 @@ stevens.prototype.generate_trial = function(block_type){
       execute_script: true,
       response_ends_trial: false,
       trial_duration: 1000, 
-      data: stevens_exp.trial_variables,
+      data: function(){
+        return Object.assign({},stevens_exp.trial_variables, stevens_exp.export_variables);
+      },
       on_start: function(trial){ // NOTE: on_start takes in trial var 
 
         // Reset the variables to use the experiment if we have just ended
@@ -121,50 +151,28 @@ stevens.prototype.generate_trial = function(block_type){
         //            to set boolean outside this object. 
         if (practice_end == true){
           stevens_exp.set_variables_to_experiment();
-          console.log(stevens_exp);
           practice_end = false;
         }
 
+        // Set the constants to be used:
+        var index = stevens_exp.current_sub_condition_index; 
+        var constants = stevens_exp.sub_conditions_constants[index];
+
         // Force reset that input_count and trial_num = 0
-        // !!! For some reason, the previous trial's is carrying over...
+        // !!! For some reason, JsPsych is carrying the previous trial's over,
+        //     and this sometimes interferes with resets when we change to a
+        //     different sub condition 
         trial.data.input_count = 0;
         trial.data.trial_num = 0; 
 
-        // Set the constants to be used:
-        var index;
-        var constants;
-
-        index = stevens_exp.current_sub_condition_index; 
-        constants = stevens_exp.sub_conditions_constants[index];
-
-        console.log(stevens_exp.sub_conditions_constants);
-
         // Retrieve data from last trial:
-        var last_stevens_trial;
-
-        if (jsPsych.data.get().filter({type: "stevens", sub_condition_index: index}).last(1).values()[0]){
-          last_stevens_trial = jsPsych.data.get().filter({type: "stevens", sub_condition_index: index}).last(1).values()[0];
-        }
-        else{
-          last_stevens_trial = null;
-        }
+        var last_stevens_trial = stevens_exp.get_last_trial(trial, block_type, index);
 
         // Set the estimated correlation
         var estimated_correlation = stevens_exp.update_estimated_correlation(trial, constants, last_stevens_trial);
 
         // Handling saving the data: 
-        trial.data.estimated_correlation = estimated_correlation;
-        trial.data.sub_condition_index = index;
-
-        // If trial is still part of same sub-condition, add onto trial num
-        // and carry over step size (it is constant throughout sub conditions)
-        if (last_stevens_trial){
-          trial.data.trial_num = last_stevens_trial.trial_num + 1;
-          trial.data.step_size = last_stevens_trial.step_size;
-        }
-        else{
-          trial.data.trial_num = 1;
-        }
+        stevens_exp.handle_data_saving(trial, block_type, constants, estimated_correlation, last_stevens_trial, index);
 
         console.log("trial num: " + trial.data.trial_num);
 
@@ -212,29 +220,86 @@ stevens.prototype.generate_trial = function(block_type){
 }
 
 /**
- * Determines whether the current sub condition can end or not.
- * @return {boolean}            True if sub condition should end.
+ * Retrieves the last stevens trial depending on block_type for a
+ * given sub condition index. 
+ * If this is the first trial of a given block_type, returns null. 
+ *
+ * @param  trial {object}   
+ *         block_type {string}          "test" or "practice"         
+ *         index {integer}
+ * @return last_stevens_trial {object}           
  */
-stevens.prototype.end_sub_condition = function(){
+stevens.prototype.get_last_trial = function(trial, block_type, index){
 
-  var index = this.current_sub_condition_index;
-  console.log(this.input_count_array);
-  if (this.input_count_array[index] == this.sub_conditions_constants[index].trials_per_round){
-    return true;
+  // Set trial run_type depending on block type
+  // (we need to set trial's run_type so we can do the filter in the
+  // next if block)
+  if (block_type == "test"){
+    trial.data.run_type = "test";
   }
-  else {
-    return false;
+  else{
+    trial.data.run_type = "practice";
+  }
+
+  // Retrieve previous stevens trial if it exists
+  if (block_type == "practice" && jsPsych.data.get().filter({type: "stevens", run_type: "practice", sub_condition: index}).last(1).values()[0]){
+    last_stevens_trial = jsPsych.data.get().filter({type: "stevens", run_type: "practice", sub_condition: index}).last(1).values()[0];
+  }
+  else if (block_type == "test" && jsPsych.data.get().filter({type: "stevens", run_type: "test", sub_condition: index}).last(1).values()[0]){
+    last_stevens_trial = jsPsych.data.get().filter({type: "stevens", run_type: "test", sub_condition: index}).last(1).values()[0];
+  }
+  else{
+    last_stevens_trial = null;
+  }
+
+  return last_stevens_trial; 
+}
+
+/**
+ * Handles saving the relevant data on a given trial.
+ *
+ * @param trial {object}
+ *        block_type {string}               "test" or "practice"
+ *        constants {assoc array}
+ *        estimated_correlation {double}
+ *        last_stevens_trial {object}
+ *        index {integer}
+ */
+stevens.prototype.handle_data_saving = function(trial, block_type, constants, estimated_correlation, last_stevens_trial, index){
+
+  // Extract relevant data from constants and save into trial data
+  for (var key in trial.data){
+    if (constants[key]){
+      trial.data[key] = constants[key];
+    }
+  }
+
+  trial.data.estimated_correlation = estimated_correlation;
+  trial.data.estimated_mid = estimated_correlation;
+  trial.data.sub_condition = index;
+  trial.data.balanced_sub_condition = this.sub_condition_order[index];
+
+  // If trial is still part of same sub-condition, add onto trial num
+  // and carry over step size (it is constant throughout sub conditions)
+  if (last_stevens_trial){
+    trial.data.trial_num = last_stevens_trial.trial_num + 1;
+    trial.data.step_size = last_stevens_trial.step_size;
+  }
+  else{
+    trial.data.trial_num = 1;
   }
 }
 
 /**
  * Updates the estimated correlation.
- * If is the first trial, will initialize the correlation and step size.
+ * If  : 
+ *    Is the first trial, will initialize the correlation and step size.
  * Else:
  *    If there was a key press in previous trial, will calculate the
  *    the estimated correlation (depending on whether it was an inc or dec).
  *    Else if no key press in previous trial, will set estimated correlation
  *    to the previous trial's. 
+ *
  * @param  trial {object}   
  *         constants {object}         
  *         last_trial {object}
@@ -296,3 +361,21 @@ stevens.prototype.update_estimated_correlation = function(trial, constants, last
 
   return estimated_correlation;
 }
+
+/**
+ * Determines whether the current sub condition can end or not.
+ *
+ * @return {boolean}            True if sub condition should end.
+ */
+stevens.prototype.end_sub_condition = function(){
+
+  var index = this.current_sub_condition_index;
+  console.log(this.input_count_array);
+  if (this.input_count_array[index] == this.sub_conditions_constants[index].trials_per_round){
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
