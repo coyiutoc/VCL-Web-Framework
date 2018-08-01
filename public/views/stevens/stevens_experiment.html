@@ -19,6 +19,11 @@
     <script src="../../../jspsych/plugins/jspsych-external-html.js"></script>
     <script src="../../../jspsych/plugins/jspsych-external-html-keyboard-response.js"></script>
 
+    <!-- Bootstrap + JQuery: -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
     <!-- Math.js: -->
     <script type="text/javascript" src="https://unpkg.com/mathjs@4.4.2/dist/math.min.js"></script>
 
@@ -206,6 +211,22 @@
     timeline.push(experiment);
 
     console.log("======================");
+
+    // =========================================================
+    // DATA DOWNLOADING 
+
+    var experiment_end = {
+      type: 'html-keyboard-response',
+      stimulus: '<div align = "center">' + 
+                '<p><font size = 10>You have completed the experiment!<p></font>' +
+                '<br>' +
+                '<a href="#" onclick="stevens_exp.export_trial_data();" class="btn btn-info btn-block" role="button" style="width: 300px; font-size: 20px">Download Trial Data</a>' +
+                '<a href="#" onclick="stevens_exp.export_summary_data();" class="btn btn-info btn-block" role="button" style="width: 300px; font-size: 20px">Download Summary Data</a>' +
+                '</div>' 
+
+
+    };
+    timeline.push(experiment_end);
     
     // =========================================================
     // START JSPSYCH

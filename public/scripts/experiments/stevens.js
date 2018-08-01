@@ -26,27 +26,12 @@ function stevens(condition_name){
   // ========================================
   // JSPSYCH TRIAL VARIABLES
 
-  // Define the jsPsych data variables to be used
-  // per Stevens trial. 
-  // this.trial_variables =         
-  //       {type: 'stevens',
-  //       run_type: '',
-  //       left_correlation: '',
-  //       right_correlation: '',
-  //       estimated_correlation: '',
-  //       sub_condition: '',
-  //       step_size: '',
-  //       input_count: 0,
-  //       trial_num: 0
-  //       };
-
   // Variables that are meant to help run experiment (can be deleted before exporting)
   this.trial_variables =         
         {type: 'stevens',
         run_type: '',
         left_correlation: '',
         right_correlation: '',
-        estimated_correlation: '',
         input_count: 0,
         trial_num: 0
         };
@@ -64,7 +49,8 @@ function stevens(condition_name){
          num_points: '',
          mean: '',
          SD: '',
-         num_SD: ''
+         num_SD: '',
+         round_type: ''
         };
 }
 
@@ -211,7 +197,7 @@ stevens.prototype.generate_trial = function(block_type){
         distribution_size = constants.num_points; 
 
         console.log("[RIGHT] Correlation: " + trial.data.right_correlation);
-        console.log("[MIDPOINT] Correlation: " + trial.data.estimated_correlation);
+        console.log("[MIDPOINT] Correlation: " + trial.data.estimated_mid);
         console.log("[LEFT] Correlation: " + trial.data.left_correlation);
       }
     };
@@ -269,12 +255,11 @@ stevens.prototype.handle_data_saving = function(trial, block_type, constants, es
 
   // Extract relevant data from constants and save into trial data
   for (var key in trial.data){
-    if (constants[key]){
-      trial.data[key] = constants[key];
+    if (constants[key] || key == 'high_ref' || key == 'low_ref' || key == 'estimated_mid'){ //Force for high_ref etc. or else
+      trial.data[key] = constants[key];                                                     // js detects 0.0 values as null
     }
   }
 
-  trial.data.estimated_correlation = estimated_correlation;
   trial.data.estimated_mid = estimated_correlation;
   trial.data.sub_condition = index;
   trial.data.balanced_sub_condition = this.sub_condition_order[index];
@@ -315,7 +300,7 @@ stevens.prototype.update_estimated_correlation = function(trial, constants, last
   if (trial.data.trial_num == 0 && !last_trial){
     //Initialize the estimated midpoint correlation:
     estimated_correlation = Math.random() < 0.5 ? constants.low_ref : constants.high_ref;
-    trial.data.estimated_midpoint = estimated_correlation;
+    trial.data.estimated_mid = estimated_correlation;
     trial.data.step_size = (constants.high_ref - constants.low_ref) / this.MAX_STEP_INTERVAL;
   }
 
@@ -327,11 +312,11 @@ stevens.prototype.update_estimated_correlation = function(trial, constants, last
     switch (last_trial.key_press){
 
       case trial.choices[0]: // up
-        estimated_correlation = Math.min(constants.high_ref, last_trial.estimated_correlation + (Math.random() * last_trial.step_size));
+        estimated_correlation = Math.min(constants.high_ref, last_trial.estimated_mid + (Math.random() * last_trial.step_size));
         break;
 
       case trial.choices[1]: // down
-        estimated_correlation = Math.max(constants.low_ref, last_trial.estimated_correlation - (Math.random() * last_trial.step_size));
+        estimated_correlation = Math.max(constants.low_ref, last_trial.estimated_mid - (Math.random() * last_trial.step_size));
         break;
     }
 
@@ -356,7 +341,7 @@ stevens.prototype.update_estimated_correlation = function(trial, constants, last
     //   estimated_midpoint = constants.high_ref;
     // }
 
-    estimated_correlation = last_trial.estimated_correlation;
+    estimated_correlation = last_trial.estimated_mid;
   }
 
   return estimated_correlation;
@@ -379,3 +364,85 @@ stevens.prototype.end_sub_condition = function(){
   }
 }
 
+/**
+ * When called, will save individual trial data into a CSV.     
+ */
+stevens.prototype.export_trial_data = function(){
+
+  var trial_data = jsPsych.data.get().filter({type: 'stevens', run_type: 'test'})
+                                     .filterCustom(function(x){ //Don't include the exit trials
+                                       return x.correct != -1; 
+                                     })
+                                     .filterCustom(function(x){ //Don't include trials with no user input
+                                       return x.rt != null;
+                                     })
+                                     // Stevens's trial variables
+                                     .ignore('type')
+                                     .ignore('run_type')
+                                     .ignore('left_correlation')
+                                     .ignore('right_correlation')
+                                     .ignore('estimated_correlation')
+                                     .ignore('input_count')
+                                     .ignore('trial_num')
+                                     // These are variables forced on by jsPsych
+                                     .ignore('stimulus')
+                                     .ignore('key_press')
+                                     .ignore('choices')
+                                     .ignore('trial_type')
+                                     .ignore('trial_index')
+                                     .ignore('time_elapsed')
+                                     .ignore('internal_node_id');
+
+  // TODO: js converting key_string to use double quotes, needs to be single to pass into ignore() fxn
+  //
+  // for (var key in jnd_exp.trial_variables){
+  //  var key_string = '${key}';
+  //  trial_data.ignore(key);
+  // }
+
+  var string = this.condition_name + "_stevens_trial_results.csv";
+
+  trial_data.localSave('csv', string);
+}
+
+/**
+ * When called, will save aggregated trial data into a CSV.     
+ */
+stevens.prototype.export_summary_data = function(){
+  var csv = 'ROUND_TYPE,NUM_TRIALS,HIGH_REF,ESTIMATED_MIDPOINT,LOW_REF\n';
+
+  var data = [];
+  
+  // Organize each row of the csv
+  for (var i = 0; i<this.sub_conditions_constants.length; i++){
+    var row = [];
+    var constants = this.sub_conditions_constants[i];
+    var condition_data = jsPsych.data.get().filter({type: 'stevens', run_type: 'test', balanced_sub_condition: this.sub_condition_order[i]})
+                                           .filterCustom(function(x){ //Don't include the exit trials
+                                              return x.correct != -1; 
+                                           })
+                                           .filterCustom(function(x){ //Don't include trials with no user input
+                                              return x.rt != null;
+                                           });
+
+    row.push(constants.round_type);
+    row.push(constants.trials_per_round);
+    row.push(constants.high_ref);
+    row.push(condition_data.select('estimated_mid').mean());
+    row.push(constants.low_ref);  
+
+    data.push(row);
+  }
+
+  // Append each row
+  data.forEach(function(row){
+    csv += row.join(',');
+    csv += "\n";
+  });
+
+  var hiddenElement = document.createElement('a');
+  hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+  hiddenElement.target = '_blank';
+  hiddenElement.download = this.condition_name + "_stevens_summary_results.csv";
+  hiddenElement.click();
+}
