@@ -12,7 +12,7 @@ This is a Node.js application that runs proof of concept experiments for the fol
 
 Visit the following link to download Node: [here.](https://nodejs.org/en/)
 
-Then run:
+Navigate into repository folder, then run:
 ```
 npm init
 ```
