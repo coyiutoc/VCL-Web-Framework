@@ -56,11 +56,12 @@ function sample_coordinates(coordinates, num_points){
  * @return result { {left: [coordinates], right: [coordinates]} }          
  */
 function randomize_position(trial, base_coordinates, adjusted_coordinates, base_correlation, adjusted_correlation){
-  
-  var result = {left: [], right: []};
+
+  var result = {left: [], right: [], base_is_right: true};
 
   if (Math.random() < 0.5){
     result.left = base_coordinates;
+    result.base_is_right = false; 
     trial.data.left_correlation = base_correlation;
 
     result.right = adjusted_coordinates;

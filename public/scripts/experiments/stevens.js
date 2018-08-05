@@ -7,7 +7,8 @@ function stevens(condition_name){
 
   this.MAX_STEP_INTERVAL = 10;
 
-  this.input_count_array;
+  this.input_count_array; // Array of length trials_per_round, each index representing num inputs per round 
+                          // for a given sub condition
   this.sub_conditions_constants;
   this.current_sub_condition_index;
 
@@ -32,18 +33,20 @@ function stevens(condition_name){
         run_type: '',
         left_correlation: '',
         right_correlation: '',
-        input_count: 0,
-        trial_num: 0
+        round_refreshes: 0,      // Number of times there is a refresh for a given round 
+        high_ref_is_right: false     
         };
 
   // Variables that will be exported into final CSV       
   this.export_variables = 
         {condition: this.condition_name,
+         trial_num: 0,                // Round index trial is currently on (aka trial_num from excel)
          sub_condition: '',           // Chronological ordering of sub_condition [1, 2, 3 ... ]
          balanced_sub_condition: '',  // Index of sub_condition according to balancing order
          high_ref: '',
          estimated_mid: '',
          low_ref: '',
+         num_adjustments: 0,          // Number of inputs for a given round (aka num_adjustments from excel)
          trials_per_round: '',
          error: '',
          num_points: '',
@@ -80,14 +83,13 @@ stevens.prototype.prepare_experiment = function(balancing_type, data_set, practi
 
     // Set experiment trials
     this.experiment_conditions_constants = ordered_data_set;
-
+    
     // Set experiment variables to the practice first
     this.sub_conditions_constants = practice_set;
     this.current_sub_condition_index = 0; 
-    this.input_count_array = new Array(practice_set.length).fill(0);
+    this.input_count_array = new Array(this.sub_conditions_constants[0].trials_per_round).fill(0);
 
     console.log(this.sub_conditions_constants);   
-    console.log(this.input_count_array);
   }
   else {throw Error(balancing_type + " balancing type is not supported.")};
 }
@@ -101,7 +103,7 @@ stevens.prototype.prepare_experiment = function(balancing_type, data_set, practi
  */
 stevens.prototype.set_variables_to_experiment = function(){
     this.sub_conditions_constants = this.experiment_conditions_constants;
-    this.input_count_array = new Array(this.experiment_conditions_constants.length).fill(0);
+    this.input_count_array = new Array(this.sub_conditions_constants[0].trials_per_round).fill(0);
     this.current_sub_condition_index = 0;
 }
 
@@ -121,7 +123,7 @@ stevens.prototype.generate_trial = function(block_type){
   var trial = {
       type:'external-html-keyboard-response',
       url: localhost + "/stevens_trial",
-      choices:[38, 40, 'q'], //38 = up, 40 = down, q is exit button (for debugging)
+      choices:[38, 40, 32, 'q'], //38 = up, 40 = down, 32 = spacebar, q is exit button (for debugging)
       execute_script: true,
       response_ends_trial: false,
       trial_duration: 1000, 
@@ -144,23 +146,19 @@ stevens.prototype.generate_trial = function(block_type){
         var index = stevens_exp.current_sub_condition_index; 
         var constants = stevens_exp.sub_conditions_constants[index];
 
-        // Force reset that input_count and trial_num = 0
-        // !!! For some reason, JsPsych is carrying the previous trial's over,
-        //     and this sometimes interferes with resets when we change to a
-        //     different sub condition 
-        trial.data.input_count = 0;
-        trial.data.trial_num = 0; 
-
         // Retrieve data from last trial:
         var last_stevens_trial = stevens_exp.get_last_trial(trial, block_type, index);
-
-        // Set the estimated correlation
-        var estimated_correlation = stevens_exp.update_estimated_correlation(trial, constants, last_stevens_trial);
 
         // Handling saving the data: 
         stevens_exp.handle_data_saving(trial, block_type, constants, estimated_correlation, last_stevens_trial, index);
 
-        console.log("trial num: " + trial.data.trial_num);
+        // Set the estimated correlation
+        var estimated_correlation = stevens_exp.update_estimated_correlation(trial, constants, last_stevens_trial);
+
+        console.log("round refreshes: " + trial.data.round_refreshes);
+        console.log("trial/round num: " + trial.data.trial_num);
+        console.log("num adjustments: " + trial.data.num_adjustments);
+        console.log("input count array: " + stevens_exp.input_count_array);
 
         // Generate distributions
         var high_coordinates = generateDistribution(constants.high_ref, 
@@ -184,15 +182,25 @@ stevens.prototype.generate_trial = function(block_type){
                                                       constants.mean, 
                                                       constants.SD);
 
-        // Randomize position of the base and adjusted graphs
-        var result = randomize_position(trial, 
-                                       high_coordinates,
-                                       low_coordinates, 
-                                       constants.high_ref, 
-                                       constants.low_ref);
+        // Randomize position of the high and low correlated graphs for a given round
+        if (trial.data.round_refreshes == 1){
+          var result = randomize_position(trial, 
+                                         high_coordinates,
+                                         low_coordinates, 
+                                         constants.high_ref, 
+                                         constants.low_ref);
+          trial.data.high_ref_is_right = result.base_is_right;
+        }
 
-        left_coordinates = result.left;
-        right_coordinates = result.right; 
+        if (trial.data.high_ref_is_right){
+          right_coordinates = high_coordinates;
+          left_coordinates = low_coordinates;
+        }
+        else{
+          right_coordinates = low_coordinates;
+          left_coordinates = high_coordinates;
+        }
+
         middle_coordinates = estimated_coordinates;  
         distribution_size = constants.num_points; 
 
@@ -256,22 +264,39 @@ stevens.prototype.handle_data_saving = function(trial, block_type, constants, es
   // Extract relevant data from constants and save into trial data
   for (var key in trial.data){
     if (constants[key] || key == 'high_ref' || key == 'low_ref' || key == 'estimated_mid'){ //Force for high_ref etc. or else
-      trial.data[key] = constants[key];                                                     // js detects 0.0 values as null
+      trial.data[key] = constants[key];                                                     //js detects 0.0 values as null
     }
   }
 
-  trial.data.estimated_mid = estimated_correlation;
   trial.data.sub_condition = index;
   trial.data.balanced_sub_condition = this.sub_condition_order[index];
 
-  // If trial is still part of same sub-condition, add onto trial num
-  // and carry over step size (it is constant throughout sub conditions)
+  // If trial is still part of same sub-condition, carry over constants from
+  // the previous trial
   if (last_stevens_trial){
-    trial.data.trial_num = last_stevens_trial.trial_num + 1;
     trial.data.step_size = last_stevens_trial.step_size;
+    trial.data.right_correlation = last_stevens_trial.right_correlation;
+    trial.data.left_correlation = last_stevens_trial.left_correlation;
+    trial.data.high_ref_is_right = last_stevens_trial.high_ref_is_right;
+
+    // If a round has just ended, increment the trial_num and
+    // reset the refresh number 
+    if (round_end == true){
+      trial.data.trial_num = last_stevens_trial.trial_num + 1;
+      trial.data.round_refreshes = 1;
+      round_end = false; //Reset flag
+    }
+    // Else trial_num and num_adjustments is the same, but round_refresh ++ 
+    else{
+      trial.data.trial_num = last_stevens_trial.trial_num;
+      trial.data.round_refreshes = last_stevens_trial.round_refreshes + 1;
+      trial.data.num_adjustments = last_stevens_trial.num_adjustments;
+    }
   }
+  // Else this is the first refresh of a given trial 
   else{
-    trial.data.trial_num = 1;
+    trial.data.num_adjustments = 0;
+    trial.data.round_refreshes = 1; 
   }
 }
 
@@ -297,7 +322,7 @@ stevens.prototype.update_estimated_correlation = function(trial, constants, last
   
   // If first trial (estimated_correlation is null), so initialize
   // estimated midpoint and set step size:
-  if (trial.data.trial_num == 0 && !last_trial){
+  if (trial.data.round_refreshes == 1){
     //Initialize the estimated midpoint correlation:
     estimated_correlation = Math.random() < 0.5 ? constants.low_ref : constants.high_ref;
     trial.data.estimated_mid = estimated_correlation;
@@ -320,9 +345,8 @@ stevens.prototype.update_estimated_correlation = function(trial, constants, last
         break;
     }
 
-    trial.data.input_count = last_trial.input_count + 1;
-    this.input_count_array[index]++;
-    console.log("input count array: " + this.input_count_array);
+    trial.data.num_adjustments = last_trial.num_adjustments + 1;
+    this.input_count_array[trial.data.trial_num]++;
   }
 
   // Else use the previous trial's midpoint
@@ -344,23 +368,43 @@ stevens.prototype.update_estimated_correlation = function(trial, constants, last
     estimated_correlation = last_trial.estimated_mid;
   }
 
+  // Update the trial's estimated_mid
+  trial.data.estimated_mid = estimated_correlation;
+
   return estimated_correlation;
 }
 
 /**
+ * Determines whether the round can end or not. A round can end ONLY if 
+ * there has been at least 1 input from the user on the given round. 
+ *
+ * @return {boolean}            True if sub condition should end.
+ */
+stevens.prototype.end_round = function(){
+
+  var last_trial = jsPsych.data.get().last(1).values()[0];
+
+  // If there is no num_adjustment count, we shouldn't end round 
+  return !(last_trial.num_adjustments == 0);
+}
+
+/**
  * Determines whether the current sub condition can end or not.
+ * 
  *
  * @return {boolean}            True if sub condition should end.
  */
 stevens.prototype.end_sub_condition = function(){
-
-  var index = this.current_sub_condition_index;
-  console.log(this.input_count_array);
-  if (this.input_count_array[index] == this.sub_conditions_constants[index].trials_per_round){
-    return true;
-  }
-  else {
+  
+  var trials_per_round = this.sub_conditions_constants[0].trials_per_round;
+  
+  if (this.input_count_array[trials_per_round - 1] == 0){ 
     return false;
+  }
+  else{
+    // Reset array
+    this.input_count_array = new Array(this.sub_conditions_constants[0].trials_per_round).fill(0);
+    return true;
   }
 }
 
@@ -369,40 +413,65 @@ stevens.prototype.end_sub_condition = function(){
  */
 stevens.prototype.export_trial_data = function(){
 
-  var trial_data = jsPsych.data.get().filter({type: 'stevens', run_type: 'test'})
-                                     .filterCustom(function(x){ //Don't include the exit trials
-                                       return x.correct != -1; 
-                                     })
-                                     .filterCustom(function(x){ //Don't include trials with no user input
-                                       return x.rt != null;
-                                     })
-                                     // Stevens's trial variables
-                                     .ignore('type')
-                                     .ignore('run_type')
-                                     .ignore('left_correlation')
-                                     .ignore('right_correlation')
-                                     .ignore('estimated_correlation')
-                                     .ignore('input_count')
-                                     .ignore('trial_num')
-                                     // These are variables forced on by jsPsych
-                                     .ignore('stimulus')
-                                     .ignore('key_press')
-                                     .ignore('choices')
-                                     .ignore('trial_type')
-                                     .ignore('trial_index')
-                                     .ignore('time_elapsed')
-                                     .ignore('internal_node_id');
+  var csv = 'condition,trial_num,sub_condition,balanced_sub_condition,high_ref,estimated_mid,low_ref,num_adjustments,trials_per_round,error,average_rt,num_points,mean,SD,num_SD,round_type,step_size\n';
+  // Get most recent subcondition - will have the max subcondition value
+  var max_sub_condition = jsPsych.data.get().filter({type: 'stevens', run_type: 'test'}).last(1).values()[0].sub_condition;
+  var data = [];
 
-  // TODO: js converting key_string to use double quotes, needs to be single to pass into ignore() fxn
-  //
-  // for (var key in jnd_exp.trial_variables){
-  //  var key_string = '${key}';
-  //  trial_data.ignore(key);
-  // }
+  // Iterate through each sub condition
+  for (var i = 0; i<=max_sub_condition; i++){
+    var condition_data = jsPsych.data.get().filter({type: 'stevens', run_type: 'test', sub_condition: i})
+                                           .filterCustom(function(x){ //Don't include trials with no user input
+                                              return x.rt != null;
+                                           });                                
+    var condition_values = condition_data.values()[0];
+    var max_trial_num = condition_data.last(1).values()[0].trial_num; //The last trial of this sub-condition
+                                                                      //has the last trial num
+    // Iterate through each trial of a given sub condition                                                               
+    for (var j = 0; j<=max_trial_num; j++){
+      //Data for a given trial of a sub condition
+      var trial_data = condition_data.filter({trial_num: j});
+      //Take the last trial's estimated mid since we want the most recent value
+      var last_estimated_mid = trial_data.last(1).values()[0].estimated_mid;
+      var last_num_adjustments = trial_data.last(1).values()[0].num_adjustments;
+      var average_rt = trial_data.filterCustom(function(x){ return x.key_press != 81 }) //Don't use the exit trial rt
+                                 .select('rt')
+                                 .mean();
+                                            
+      var row = [this.condition_name];
 
-  var string = this.condition_name + "_stevens_trial_results.csv";
+      row.push(j+1);
+      row.push(condition_values.sub_condition);
+      row.push(condition_values.balanced_sub_condition);
+      row.push(condition_values.high_ref);
+      row.push(last_estimated_mid);
+      row.push(condition_values.low_ref);
+      row.push(last_num_adjustments);
+      row.push(condition_values.trials_per_round);
+      row.push(condition_values.error);
+      row.push(average_rt);
+      row.push(condition_values.num_points);
+      row.push(condition_values.mean);
+      row.push(condition_values.SD);
+      row.push(condition_values.num_SD);
+      row.push(condition_values.round_type);
+      row.push(condition_values.step_size);
 
-  trial_data.localSave('csv', string);
+      data.push(row);
+    }
+  }
+
+  // Append each row
+  data.forEach(function(row){
+    csv += row.join(',');
+    csv += "\n";
+  });
+
+  var hiddenElement = document.createElement('a');
+  hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+  hiddenElement.target = '_blank';
+  hiddenElement.download = this.condition_name + "_stevens_trial_results.csv";
+  hiddenElement.click();
 }
 
 /**
