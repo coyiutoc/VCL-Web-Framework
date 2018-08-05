@@ -18,6 +18,13 @@ npm init
 ```
 
 #### (3) Install Dependencies
+
+```
+npm install
+```
+
+If it is still giving errors on not being able to find ejs or express npm modules, manually install:
+
 ```
 npm install ejs
 npm install --save express
@@ -27,7 +34,9 @@ npm install --save express
 
 Nodemon is an npm module that restarts the server every time there is changes to the source code (otherwise we always have to restart our server manually whenever a change is made). 
 
-```npm install nodemon```
+```
+npm install nodemon
+```
 
 ## Running the Experiment
 
