@@ -44,11 +44,13 @@ timeline.push(welcome);
 
 var instructions = {
   type: "html-keyboard-response",
-  stimulus: "<div align = 'center'> <p>In this experiment, you will be using the <b>up</b>" +
-      " and <b>down</b> keys to adjust the center graph <br> so that the correlation is roughly" +
-      " the <u>midpoint</u> between the left and right graphs. <br>" +
-      "<div style='float: left;'><img src='../img/sample_stevens.png'></img></div>" +
-      "<br> <br> When you are done adjusting the center graph, hit the <b>spacebar</b>." + 
+  stimulus: "<div align = 'center'> <p>In this experiment, you will be using the <b>m</b>" +
+      " and <b>z</b> keys to adjust the center graph <br> so that its correlation is roughly" +
+      " the <u>midpoint</u> between the left and right graphs. <br><br>" +
+      " <b>m</b> increases the correlation. <br>" +
+      " <b>z</b> decreases the correlation. <br><br>" + 
+      "<div style='float: left; margin-bottom: 25px;'><img src='../img/sample_stevens.png'></img></div>" +
+      "<br> <br> <br> When you are done adjusting the center graph, hit the <b>spacebar</b>." + 
       "<br> Press any key to continue. </div>"          
 };
 
