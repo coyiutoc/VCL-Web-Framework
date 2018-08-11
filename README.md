@@ -57,7 +57,7 @@ The app is available at [localhost:8080](localhost:8080). If you want to access 
 ## Testing the POC
 
 The following features can be used to assist in debugging:
-- We can toggle between using only 4 sub conditions for the experiment, or the full 17. Make variable `use_all_data = false` if the shorter version is desired, or `use_all_data = true` if we want the full 17 sub conditions. Variable is on line 62 of `public/views/jnd/jnd_experiment.html` or on line 64 of `public/views/stevens/stevens_experiment.html`.
+- We can toggle between using only 4 sub conditions for the experiment, or the full 17. Make variable `use_all_data = false` if the shorter version is desired, or `use_all_data = true` if we want the full 17 sub conditions. Variable is on line 62 of `public/scripts/timelines/jnd_timeline.html` or on line 64 of `public/scripts/timelines/stevens_timeline.html`.
 
 #### For JND: 
 - We can force the right graph to ALWAYS be of greater correlation. To do so, comment the function `force_greater_right_position` and uncomment function `randomize_position` at lines 163-168 in `public/scripts/experiments/jnd.js`.
