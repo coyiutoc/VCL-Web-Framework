@@ -123,7 +123,7 @@ stevens.prototype.generate_trial = function(block_type){
   var trial = {
       type:'external-html-keyboard-response',
       url: localhost + "/stevens_trial",
-      choices:[38, 40, 32, 'q'], //38 = up, 40 = down, 32 = spacebar, q is exit button (for debugging)
+      choices:[77, 90, 32, 81], //m = 77 (up), z = 90 (down), 32 = spacebar, 81 = q (exit button for debugging)
       execute_script: true,
       response_ends_trial: false,
       trial_duration: 1000, 
@@ -319,7 +319,6 @@ stevens.prototype.update_estimated_correlation = function(trial, constants, last
 
   var estimated_correlation;
   var index = this.current_sub_condition_index;
-  
   // If first trial (estimated_correlation is null), so initialize
   // estimated midpoint and set step size:
   if (trial.data.round_refreshes == 1){
@@ -328,7 +327,6 @@ stevens.prototype.update_estimated_correlation = function(trial, constants, last
     trial.data.estimated_mid = estimated_correlation;
     trial.data.step_size = (constants.high_ref - constants.low_ref) / this.MAX_STEP_INTERVAL;
   }
-
   // If there is input on PREVIOUS trial, change the midpoint + increment trial number
   // (Since we are plotting the new middle graph based on PREVIOUS input, we look
   // at the last_trials's estimated_correlation and step size.)
