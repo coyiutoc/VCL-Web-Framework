@@ -348,7 +348,6 @@ JND.prototype.calculate_adjusted_correlation = function(constants){
                                                             constants.converge_from_above,
                                                             last_JND_trial.adjusted_correlation,
                                                             constants.base_correlation,
-                                                            constants.initial_difference,
                                                             constants.max_step_size);
   }
   return adjusted_correlation; 
@@ -385,10 +384,10 @@ JND.prototype.initialize_adjusted_statistic = function(converge_from_above, base
  *         max_step_size {double}
  * @return adjusted_correlation {double}          
  */
-JND.prototype.get_next_adjusted_statistic = function(correct, converge_from_above, adjusted_quantity, base_correlation, initial_difference, max_step_size){
+JND.prototype.get_next_adjusted_statistic = function(correct, converge_from_above, adjusted_quantity, base_correlation, max_step_size){
   var next_adjusted_statistic;
 
-  initial_difference = base_correlation;
+  var initial_difference = base_correlation;
 
   if (converge_from_above) {
     if (correct) {

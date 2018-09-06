@@ -82,6 +82,7 @@ var practice = {
     // For debugging, if you want to exit out of experiment, press q:
     if (81 == data.values()[0].key_press){
       practice_end = true;
+      round_end = false;
       return false;
     }
 
@@ -108,7 +109,9 @@ var practice = {
       }
       // Else end experiment
       else{
+        console.log("!!!!!!!!!! Practice trials finished ");
         practice_end = true;
+        round_end = false;
         return false;
       }
     }

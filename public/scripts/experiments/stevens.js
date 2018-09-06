@@ -274,14 +274,15 @@ stevens.prototype.handle_data_saving = function(trial, block_type, constants, es
   // If trial is still part of same sub-condition, carry over constants from
   // the previous trial
   if (last_stevens_trial){
+
     trial.data.step_size = last_stevens_trial.step_size;
     trial.data.right_correlation = last_stevens_trial.right_correlation;
     trial.data.left_correlation = last_stevens_trial.left_correlation;
     trial.data.high_ref_is_right = last_stevens_trial.high_ref_is_right;
 
     // If a round has just ended, increment the trial_num and
-    // reset the refresh number 
-    if (round_end == true){
+    // reset the refresh number (only applies for test trials)
+    if (round_end == true && trial.data.run_type == "test"){
       trial.data.trial_num = last_stevens_trial.trial_num + 1;
       trial.data.round_refreshes = 1;
       round_end = false; //Reset flag
@@ -326,6 +327,11 @@ stevens.prototype.update_estimated_correlation = function(trial, constants, last
     estimated_correlation = Math.random() < 0.5 ? constants.low_ref : constants.high_ref;
     trial.data.estimated_mid = estimated_correlation;
     trial.data.step_size = (constants.high_ref - constants.low_ref) / this.MAX_STEP_INTERVAL;
+
+    if (trial.data.run_type == "practice"){
+      last_trial = jsPsych.data.get().filter({type: "stevens", run_type: "practice"}).last(1).values()[0];
+      trial.data.trial_num = last_trial ? (last_trial.trial_num+1) : 0; 
+    }
   }
   // If there is input on PREVIOUS trial, change the midpoint + increment trial number
   // (Since we are plotting the new middle graph based on PREVIOUS input, we look

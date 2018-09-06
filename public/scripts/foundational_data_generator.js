@@ -120,8 +120,7 @@ const STEVENS_SHORT =
   {round_type: 'test', trials_per_round: 4, high_ref: 1, low_ref: 0.5, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5},
 
   {round_type: 'test', trials_per_round: 4, high_ref: 0.25, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5}
-]
-
+];
 
 /**
  * Retrieves foundational data set. If desired, can choose a shorter version of 
