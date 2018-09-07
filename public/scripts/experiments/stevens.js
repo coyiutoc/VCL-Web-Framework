@@ -53,7 +53,12 @@ function stevens(condition_name){
          mean: '',
          SD: '',
          num_SD: '',
-         round_type: ''
+         round_type: '',
+         regen_rate: '',
+         point_color: '',
+         axis_color: '',
+         text_color: '',
+         background_color: ''
         };
 }
 
@@ -125,8 +130,7 @@ stevens.prototype.generate_trial = function(block_type){
       url: localhost + "/stevens_trial",
       choices:[77, 90, 32, 81], //m = 77 (up), z = 90 (down), 32 = spacebar, 81 = q (exit button for debugging)
       execute_script: true,
-      response_ends_trial: false,
-      trial_duration: 1000, 
+      response_ends_trial: false, 
       data: function(){
         return Object.assign({},stevens_exp.trial_variables, stevens_exp.export_variables);
       },
@@ -203,6 +207,7 @@ stevens.prototype.generate_trial = function(block_type){
 
         middle_coordinates = estimated_coordinates;  
         distribution_size = constants.num_points; 
+        trial_data = trial.data; 
 
         console.log("[RIGHT] Correlation: " + trial.data.right_correlation);
         console.log("[MIDPOINT] Correlation: " + trial.data.estimated_mid);
@@ -270,6 +275,8 @@ stevens.prototype.handle_data_saving = function(trial, block_type, constants, es
 
   trial.data.sub_condition = index;
   trial.data.balanced_sub_condition = this.sub_condition_order[index];
+
+  trial.trial_duration = trial.data.regen_rate;
 
   // If trial is still part of same sub-condition, carry over constants from
   // the previous trial
@@ -417,7 +424,7 @@ stevens.prototype.end_sub_condition = function(){
  */
 stevens.prototype.export_trial_data = function(){
 
-  var csv = 'condition,trial_num,sub_condition,balanced_sub_condition,high_ref,estimated_mid,low_ref,num_adjustments,trials_per_round,error,average_rt,num_points,mean,SD,num_SD,round_type,step_size\n';
+  var csv = 'condition,trial_num,sub_condition,balanced_sub_condition,high_ref,estimated_mid,low_ref,num_adjustments,trials_per_round,error,average_rt,num_points,mean,SD,num_SD,round_type,step_size,point_color,background_color,text_color,axis_color,regen_rate\n';
   // Get most recent subcondition - will have the max subcondition value
   var max_sub_condition = jsPsych.data.get().filter({type: 'stevens', run_type: 'test'}).last(1).values()[0].sub_condition;
   var data = [];
@@ -460,6 +467,11 @@ stevens.prototype.export_trial_data = function(){
       row.push(condition_values.num_SD);
       row.push(condition_values.round_type);
       row.push(condition_values.step_size);
+      row.push(condition_values.point_color);
+      row.push(condition_values.background_color);
+      row.push(condition_values.text_color);
+      row.push(condition_values.axis_color);
+      row.push(condition_values.regen_rate);
 
       data.push(row);
     }

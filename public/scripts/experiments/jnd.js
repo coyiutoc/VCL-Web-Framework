@@ -62,7 +62,12 @@ function JND(condition_name){
          num_points: '',
          mean: '',
          SD: '',
-         num_SD: ''
+         num_SD: '',
+         point_color: '',
+         axis_color: '',
+         text_color: '',
+         feedback_background_color: '',
+         background_color: ''
         };
 }
 
@@ -176,10 +181,11 @@ JND.prototype.generate_trial = function(block_type){
       left_coordinates = result.left;
       right_coordinates = result.right;
       distribution_size = constants.num_points;   
+      trial_data = trial.data; 
 
       console.log("[RIGHT] Correlation: " + trial.data.right_correlation);
       console.log("[LEFT] Correlation: " + trial.data.left_correlation);
-
+      
     },
     on_finish: function(data){ // NOTE: on_finish takes in data var 
       check_response(data);

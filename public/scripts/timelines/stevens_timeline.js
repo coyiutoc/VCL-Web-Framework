@@ -12,6 +12,7 @@ var practice_end = false; // Flag to check when practice trials have ended
 var left_coordinates;
 var right_coordinates;
 var middle_coordinates;
+var trial_data; 
 
 var multiplier = 1; // Sets how much the data should be scaled by.
 
@@ -20,8 +21,10 @@ var multiplier = 1; // Sets how much the data should be scaled by.
 
 var use_all_data = false;
 
-const STEVENS_EXCEL = get_stevens_data(use_all_data);
-const STEVENS_PRACTICE = get_stevens_data(use_all_data);
+// const STEVENS_EXCEL = get_stevens_data(use_all_data);
+// const STEVENS_PRACTICE = get_stevens_data(use_all_data);
+const STEVENS_PRACTICE = STEVENS_DESIGN_PRACTICE_SHORT;
+const STEVENS_EXCEL = STEVENS_DESIGN_PRACTICE_SHORT; 
 
 var stevens_exp = new stevens("foundational"); 
 stevens_exp.prepare_experiment("latin_square", STEVENS_EXCEL, STEVENS_PRACTICE);
@@ -130,7 +133,11 @@ timeline.push(practice);
 var stop = {
   type: 'html-keyboard-response',
   stimulus: "<div align = 'center'> <font size = 20><p>This concludes the practice trials.<p>" + "<br><br><p><b>Any questions?</b></p></font></div>",
-  data: {type: 'instruction'}
+  data: {type: 'instruction'},
+  on_start: function(stop){
+    // Reset background color to feedback
+    document.body.style.backgroundColor = 'WHITE';
+  }
 }
 
 var ready_experiment = {
@@ -204,7 +211,11 @@ var experiment_end = {
             '<br>' +
             '<a href="#" onclick="stevens_exp.export_trial_data();" class="btn btn-info btn-block" role="button" style="width: 300px; font-size: 20px">Download Trial Data</a>' +
             '<a href="#" onclick="stevens_exp.export_summary_data();" class="btn btn-info btn-block" role="button" style="width: 300px; font-size: 20px">Download Summary Data</a>' +
-            '</div>' 
+            '</div>',
+  on_start: function(stop){
+    // Reset background color to feedback
+    document.body.style.backgroundColor = 'WHITE';
+  }
 };
 timeline.push(experiment_end);
 

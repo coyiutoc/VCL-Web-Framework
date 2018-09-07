@@ -9,7 +9,8 @@ const localhost = "http://localhost:8080";
 // Variables used to generate D3 jnd_trial_display.html:
 var left_coordinates;
 var right_coordinates;
-var distribution_size; 
+var distribution_size;
+var trial_data;  
 
 var multiplier = 1; // Sets how much the data should be scaled by.
 
@@ -18,8 +19,10 @@ var multiplier = 1; // Sets how much the data should be scaled by.
 
 var use_all_data = false;
 
-const JND_EXCEL = get_jnd_data("test", use_all_data);
-const JND_PRACTICE = get_jnd_data("practice", use_all_data);
+//const JND_EXCEL = get_jnd_data("test", use_all_data);
+//const JND_PRACTICE = get_jnd_data("practice", use_all_data);
+const JND_PRACTICE = JND_DESIGN_PRACTICE_SHORT;
+const JND_EXCEL = JND_DESIGN_PRACTICE_SHORT;
 
 var jnd_exp = new JND("foundational"); 
 jnd_exp.prepare_experiment("latin_square", JND_EXCEL, JND_PRACTICE);
@@ -77,6 +80,9 @@ var feedback = {
   trial_duration: 500,
   data: {type: 'feedback'},
   stimulus: function(){
+
+    document.body.style.backgroundColor = trial_data.feedback_background_color;
+
     var last_trial = JSON.parse(jsPsych.data.getLastTrialData().json());
     var last_trial_correct = last_trial[0]["correct"];
 
@@ -142,7 +148,11 @@ timeline.push(practice);
 var stop = {
   type: 'html-keyboard-response',
   stimulus: "<div align = 'center'> <font size = 20><p>This concludes the practice trials.<p>" + "<br><br><p><b>Any questions?</b></p></font></div>",
-  data: {type: 'instruction'}
+  data: {type: 'instruction'},
+  on_start: function(stop){
+    // Reset background color to feedback
+    document.body.style.backgroundColor = trial_data.feedback_background_color;
+  }
 }
 
 var ready_experiment = {
@@ -211,7 +221,11 @@ var experiment_end = {
             '<br>' +
             '<a href="#" onclick="jnd_exp.export_trial_data();" class="btn btn-info btn-block" role="button" style="width: 300px; font-size: 20px">Download Trial Data</a>' +
             '<a href="#" onclick="jnd_exp.export_summary_data();" class="btn btn-info btn-block" role="button" style="width: 300px; font-size: 20px">Download Summary Data</a>' +
-            '</div>' 
+            '</div>' ,
+  on_start: function(stop){
+    // Reset background color to feedback
+    document.body.style.backgroundColor = trial_data.feedback_background_color;
+  }
 };
 timeline.push(experiment_end);
 
