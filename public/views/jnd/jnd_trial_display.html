@@ -31,45 +31,6 @@
     
     <script type="text/javascript">
 
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // NOTE: If testing this file independent of jnd_experiment.html,
-    //       uncomment all variables encapsulated in this !!!! block.
-
-    // ========================================
-    // CONSTANTS
-
-    // const MATHJS_URL = "https://unpkg.com/mathjs@4.4.2/dist/math.min.js";
-
-    // const MIN_CORRELATION = 0.0
-    // const MAX_CORRELATION = 1.0
-    // const BASE_CORRELATION = 0.3
-
-    // const NUM_POINTS = 100;
-    // const ERROR = 0.0001;
-    // const NUM_SD = 2.5;
-    // const SD = 0.2;
-    // const MEAN = 0.5;
-    // const INITIAL_DIFFERENCE = 0.1;
-    // const CONVERGE_FROM_ABOVE = true;
-    // const MAX_STEP_SIZE = 0.01;
-
-    // var distribution_size = 100; 
-
-    // // ========================================
-    // // GENERATE DISTRIBUTIONS
-
-    // var left_coordinates = generateDistribution(BASE_CORRELATION, ERROR, NUM_POINTS, NUM_SD, MEAN, SD);
-
-    // if (CONVERGE_FROM_ABOVE){
-    //   adjustedCorrelation = Math.min(MAX_CORRELATION, BASE_CORRELATION + INITIAL_DIFFERENCE); }
-    // else{
-    //   adjustedCorrelation = Math.max(MIN_CORRELATION, BASE_CORRELATION - INITIAL_DIFFERENCE);
-    // };
-
-    // var right_coordinates = generateDistribution(adjustedCorrelation, ERROR, NUM_POINTS, NUM_SD, MEAN, SD);
-
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
     // ========================================
     // PREPARE DATA
 
@@ -139,7 +100,7 @@
               .attr("cy", function (d) {
                 return yscale(d[1]);
               })
-              .attr("r", 2).style("fill", trial_data.point_color);
+              .attr("r", trial_data.point_size).style("fill", trial_data.point_color);
 
       // Set axis color
       chart.selectAll("path")

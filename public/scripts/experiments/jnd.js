@@ -67,7 +67,8 @@ function JND(condition_name){
          axis_color: '',
          text_color: '',
          feedback_background_color: '',
-         background_color: ''
+         background_color: '',
+         point_size: ''
         };
 }
 

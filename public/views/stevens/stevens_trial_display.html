@@ -94,14 +94,10 @@
                                  .attr("transform", "translate(50, 10)")
                                  .call(y_axis);
 
-      yAxisElements.selectAll("text").remove(); // Remove tick labels
-
       var xAxisTranslate = height/2 + 10;
       var xAxisElements = chart.append("g")
                                 .attr("transform", "translate(50, " + xAxisTranslate  +")")
                                 .call(x_axis)
-
-      xAxisElements.selectAll("text").remove(); // Remove tick labels 
 
       // Populating data: 
       chart.selectAll("circle") // Technically no circles inside div yet, but will be creating it
@@ -115,7 +111,7 @@
                 return yscale(d[1]);
               })
               .attr("r", 2)
-              .attr("r", 2).style("fill", trial_data.point_color);
+              .attr("r", trial_data.point_size).style("fill", trial_data.point_color);
 
       // Set axis color
       chart.selectAll("path")

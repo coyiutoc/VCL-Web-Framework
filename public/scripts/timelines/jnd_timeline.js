@@ -19,10 +19,8 @@ var multiplier = 1; // Sets how much the data should be scaled by.
 
 var use_all_data = false;
 
-//const JND_EXCEL = get_jnd_data("test", use_all_data);
-//const JND_PRACTICE = get_jnd_data("practice", use_all_data);
-const JND_PRACTICE = JND_DESIGN_PRACTICE_SHORT;
-const JND_EXCEL = JND_DESIGN_PRACTICE_SHORT;
+const JND_EXCEL = get_jnd_data("test", use_all_data);
+const JND_PRACTICE = get_jnd_data("practice", use_all_data);
 
 var jnd_exp = new JND("foundational"); 
 jnd_exp.prepare_experiment("latin_square", JND_EXCEL, JND_PRACTICE);
@@ -82,7 +80,7 @@ var feedback = {
   stimulus: function(){
 
     document.body.style.backgroundColor = trial_data.feedback_background_color;
-
+    
     var last_trial = JSON.parse(jsPsych.data.getLastTrialData().json());
     var last_trial_correct = last_trial[0]["correct"];
 

@@ -21,10 +21,8 @@ var multiplier = 1; // Sets how much the data should be scaled by.
 
 var use_all_data = false;
 
-// const STEVENS_EXCEL = get_stevens_data(use_all_data);
-// const STEVENS_PRACTICE = get_stevens_data(use_all_data);
-const STEVENS_PRACTICE = STEVENS_DESIGN_PRACTICE_SHORT;
-const STEVENS_EXCEL = STEVENS_DESIGN_PRACTICE_SHORT; 
+const STEVENS_EXCEL = get_stevens_data(use_all_data);
+const STEVENS_PRACTICE = get_stevens_data(use_all_data);
 
 var stevens_exp = new stevens("foundational"); 
 stevens_exp.prepare_experiment("latin_square", STEVENS_EXCEL, STEVENS_PRACTICE);

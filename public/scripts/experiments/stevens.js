@@ -58,7 +58,8 @@ function stevens(condition_name){
          point_color: '',
          axis_color: '',
          text_color: '',
-         background_color: ''
+         background_color: '',
+         point_size: ''
         };
 }
 
@@ -424,7 +425,7 @@ stevens.prototype.end_sub_condition = function(){
  */
 stevens.prototype.export_trial_data = function(){
 
-  var csv = 'condition,trial_num,sub_condition,balanced_sub_condition,high_ref,estimated_mid,low_ref,num_adjustments,trials_per_round,error,average_rt,num_points,mean,SD,num_SD,round_type,step_size,point_color,background_color,text_color,axis_color,regen_rate\n';
+  var csv = 'condition,trial_num,sub_condition,balanced_sub_condition,high_ref,estimated_mid,low_ref,num_adjustments,trials_per_round,error,average_rt,num_points,mean,SD,num_SD,round_type,step_size,point_color,background_color,text_color,axis_color,point_size,regen_rate\n';
   // Get most recent subcondition - will have the max subcondition value
   var max_sub_condition = jsPsych.data.get().filter({type: 'stevens', run_type: 'test'}).last(1).values()[0].sub_condition;
   var data = [];
@@ -471,6 +472,7 @@ stevens.prototype.export_trial_data = function(){
       row.push(condition_values.background_color);
       row.push(condition_values.text_color);
       row.push(condition_values.axis_color);
+      row.push(condition_values.point_size);
       row.push(condition_values.regen_rate);
 
       data.push(row);
