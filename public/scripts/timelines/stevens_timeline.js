@@ -24,7 +24,7 @@ var use_all_data = false;
 const STEVENS_EXCEL = get_stevens_data(use_all_data);
 const STEVENS_PRACTICE = get_stevens_data(use_all_data);
 
-var stevens_exp = new stevens("foundational"); 
+var stevens_exp = new stevens("foundational", "scatter"); 
 stevens_exp.prepare_experiment("latin_square", STEVENS_EXCEL, STEVENS_PRACTICE);
 
 // =========================================================

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="icon" href="./img/VCL_favicon.png">
     <title>VCL: JND Experiment</title>
 
     <!-- Scripts: -->
@@ -28,11 +29,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Local scripts: -->
-    <script type="text/javascript" src="../../scripts/gaussian_distribution_generator.js" ></script> 
-    <script type="text/javascript" src="../../scripts/experiment_helpers.js" ></script>
-    <script type="text/javascript" src="../../scripts/latin_square_generator.js" ></script>
-    <script type="text/javascript" src="../../scripts/foundational_data_generator.js" ></script>
+    <script type="text/javascript" src="../../scripts/generators/gaussian_distribution_generator.js" ></script> 
+    <script type="text/javascript" src="../../scripts/helpers/experiment_helpers.js" ></script>
+    <script type="text/javascript" src="../../scripts/generators/latin_square_generator.js" ></script>
+    <script type="text/javascript" src="../../scripts/generators/foundational_data_generator.js" ></script>
     <script type="text/javascript" src="../../scripts/experiments/jnd.js" ></script>
+
+    <script type="text/javascript">
+        var jnd_exp = new JND("foundational", "scatter"); 
+    </script> 
+
     <script type="text/javascript" src="../../scripts/timelines/jnd_timeline.js" ></script>
 
   </head>

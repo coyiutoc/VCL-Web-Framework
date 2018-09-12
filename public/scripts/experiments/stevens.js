@@ -2,10 +2,23 @@
  * Initializes a Stevens experiment object. 
  *
  * @param  condition_name {string}    Name of condition (i.e foundational)
+ * @param  graph_type     {string}    Name of graph_type
  */
-function stevens(condition_name){
+function stevens(condition_name, graph_type){
+
+  if ((graph_type !== "scatter") && (graph_type !== "strip")) {
+    throw Error(graph_type + " is not supported.")} 
+  else { 
+    this.graph_type = graph_type;
+  };  
+
+  // ========================================
+  // EXPERIMENT CONSTANTS
 
   this.MAX_STEP_INTERVAL = 10;
+
+  // ========================================
+  // EXPERIMENT VARIABLES
 
   this.input_count_array; // Array of length trials_per_round, each index representing num inputs per round 
                           // for a given sub condition
@@ -532,4 +545,116 @@ stevens.prototype.export_summary_data = function(){
   hiddenElement.target = '_blank';
   hiddenElement.download = this.condition_name + "_stevens_summary_results.csv";
   hiddenElement.click();
+}
+
+/**
+ * Performs the necessary D3 operations to plot distributions depending on graph type.
+ */
+stevens.prototype.plot_distributions = function(){
+
+  var left_dataset = prepare_coordinates(left_coordinates, distribution_size);
+  var right_dataset = prepare_coordinates(right_coordinates, distribution_size);
+  var middle_dataset = prepare_coordinates(middle_coordinates, distribution_size);
+
+  var datasets = [left_dataset, middle_dataset, right_dataset];
+
+  switch(this.graph_type){
+    case "scatter":
+      this.plot_scatter(datasets);
+      break;
+    case "strip":
+      //this.plot_strip(datasets);
+      break;
+  }
+}
+
+/**
+ * Plots distributions using scatter plots. 
+ *
+ * @ param  datasets   {array}
+ */
+stevens.prototype.plot_scatter = function(datasets){
+
+  var height = window.innerHeight/1.5; 
+  var width = height/2;
+
+  // Create scales:
+  // ** D3 creates a function that takes in input between [0, 100] and 
+  //    outputs between [0, width].
+  //    Basically, domain = input, range = ouput. 
+  var xscale = d3.scaleLinear()
+                 .domain([0, multiplier]) 
+                 .range([0, width]);
+
+  var yscale = d3.scaleLinear()
+                 .domain([multiplier * -1, 0]) // !!! NOTE: this is the hack b/c we flipped the y-values 
+                                               //     to be negative --> graph is now positive correlation
+                                               //     but on 4th quadrant --> force domain to be from 
+                                               //     [-1, 0] to move it to 1st quadrant 
+                 .range([height/2, 0]);
+
+  // Create axes: 
+  var x_axis = d3.axisBottom()
+                 .scale(xscale)
+                 .tickSize([0]);
+
+  var y_axis = d3.axisLeft()
+                 .scale(yscale)
+                 .tickSize([0]);
+
+  var count = 0;
+  // Create/append the SVG for both graphs: 
+  for (var data of datasets){
+    
+    if (count > 0){
+      var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
+                  .append("svg") 
+                    .attr("width", width + 60) // Width and height of the SVG viewpoint
+                    .attr("height", height)   // +40 is for buffer (points going -x)
+                    .attr("style", "margin-left: 100px"); // For width in between graphs
+    }
+    else{
+      var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
+                  .append("svg") 
+                    .attr("width", width + 60) // Width and height of the SVG viewpoint
+                    .attr("height", height);   // +40 is for buffer (points going -x)
+
+    }
+
+    // Creating transform SVG elements + append to SVG: 
+    var yAxisElements = chart.append("g")
+                               .attr("transform", "translate(50, 10)")
+                               .call(y_axis);
+
+    var xAxisTranslate = height/2 + 10;
+    var xAxisElements = chart.append("g")
+                              .attr("transform", "translate(50, " + xAxisTranslate  +")")
+                              .call(x_axis)
+
+    // Populating data: 
+    chart.selectAll("circle") // Technically no circles inside div yet, but will be creating it
+          .data(data)
+            .enter()
+            .append("circle") // Creating the circles for each entry in data set 
+            .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
+              return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
+            })
+            .attr("cy", function (d) {
+              return yscale(d[1]);
+            })
+            .attr("r", 2)
+            .attr("r", trial_data.point_size).style("fill", trial_data.point_color);
+
+    // Set axis color
+    chart.selectAll("path")
+         .attr("stroke", trial_data.axis_color);
+
+    // Remove tick labels
+    chart.selectAll("text").remove();   
+
+    count++;
+  }
+
+  // Set background color
+  document.body.style.backgroundColor = trial_data.background_color;
 }

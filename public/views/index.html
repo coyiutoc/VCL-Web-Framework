@@ -1,42 +1,54 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="icon" href="./img/VCL_favicon.png">
     <title>VCL: POC Experiments</title>
 
-    <!-- Scripts: -->
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
-    <!-- Style: -->
-    <!-- <link href="../../jspsych/css/jspsych.css" rel="stylesheet" type="text/css"></link> -->
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
+    <!-- Scripts: -->  
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
+    <!-- Style: -->
     <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
   </head>
 
   <body>
-    <div class = "center">
+    <div class = "box">
       <img src="../img/VCL_lab_logo.png"></img>
-      <h1 align = "center"> Proof of Concept Experiments </h1>
-      <br>
-      <div class = "row">
 
-        <div class = "block">
-          <a href="/jnd" class="btn btn-info btn-block" role="button" style="width: 250px; font-size: 20px">JND Experiment</a>
-          <a href="/stevens" class="btn btn-info btn-block" role="button" style="width: 250px; font-size: 20px">Stevens Experiment</a>
+      <h1>Proof of Concept Experiments</h1>
+      <br>
+        <div class="btn-group">
+
+          <button class="btn btn-info btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 250px">
+            JND
+          </button>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="width: 250px">
+            <h6 class="dropdown-header">Scatter Plot</h6>
+              <a class="dropdown-item" href="/jnd_scatter">Foundational</a>
+            <h6 class="dropdown-header">Strip Plot</h6>
+              <a class="dropdown-item" href="/jnd_strip">Base Strip</a>
+          </div>
+
         </div>
 
-        <!-- <form action="http://localhost:8888/practice_pref" method="GET" style="margin-top: 20px; height:20px;">
-          <div class="radio">
-            <label><input type="checkbox" id="practice" name="practice"/> Enable Practice Trials</label>
-          </div>      
-        </form> -->
-        <br>
+        <div class="btn-group">
 
-      </div>
+          <button class="btn btn-info btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 250px; margin-left: 20px">
+            Stevens
+          </button>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="width: 250px">
+            <h6 class="dropdown-header">Scatter Plot</h6>
+              <a class="dropdown-item" href="/stevens">Foundational</a>
+          </div>
+
+        </div>
+
     </div>
   </body>
 

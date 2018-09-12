@@ -11,3 +11,9 @@ body {
   display: table-cell;
   vertical-align: middle;
 }
+
+.line {
+  stroke: #000000;
+  stroke-width: 2px;
+  fill: none;
+}

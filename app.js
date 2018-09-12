@@ -26,26 +26,14 @@ app.get('/', function(request, response) {
     response.render('index.html');
 });
 
-// POST on Practice Enabling
-app.get('/user', function(req, res){
-    // response = {
-    //     first_name : req.body.first_name,
-    //     last_name : req.body.last_name,
-    //     gender: req.body.gender
-    //  };
-    
-    //this line is optional and will print the response on the command prompt
-    //It's useful so that we know what infomration is being transferred 
-    //using the server
-    console.log(req);
-    
-    //convert the response in JSON format
-    //res.end(JSON.stringify(response));
+// JND Experiment (Scatter)
+app.get('/jnd_scatter', function(request, response) {
+    response.render('jnd/jnd_experiment_scatter.html');
 });
 
-// JND Experiment
-app.get('/jnd', function(request, response) {
-    response.render('jnd/jnd_experiment.html');
+// JND Experiment (Strip)
+app.get('/jnd_strip', function(request, response) {
+    response.render('jnd/jnd_experiment_strip.html');
 });
 
 // JND Trial Display
@@ -62,8 +50,6 @@ app.get('/stevens', function(request, response) {
 app.get('/stevens_trial', function(request, response) {
     response.render('stevens/stevens_trial_display.html');
 });
-
-// Stevens Trial Display
 
 // --- START THE SERVER 
 var server = app.listen(8080, function(){
