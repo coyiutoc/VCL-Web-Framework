@@ -1,45 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="icon" href="./img/VCL_favicon.png">
+
     <title>VCL: JND Experiment</title>
 
-    <!-- Scripts: -->
+    <%- include('../header'); %>
 
-    <!-- JsPsych: -->
-    <script src="../../../jspsych/jspsych.js"></script>
-    <script src="../../../jspsych/plugins/jspsych-html-keyboard-response.js"></script>
-    <script src="../../../jspsych/plugins/jspsych-image-keyboard-response.js"></script>
-    <script src="../../../jspsych/plugins/jspsych-external-html.js"></script>
-    <script src="../../../jspsych/plugins/jspsych-external-html-keyboard-response.js"></script>
-
-    <!-- Bootstrap + JQuery: -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <!-- Math.js: -->
-    <script type="text/javascript" src="https://unpkg.com/mathjs@4.4.2/dist/math.min.js"></script>
-
-    <!-- D3: -->
-    <script src = "https://d3js.org/d3.v4.min.js"></script>
-    
-    <!-- Style: -->
-    <link href="../../../jspsych/css/jspsych.css" rel="stylesheet" type="text/css"></link>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <!-- Local scripts: -->
-    <script type="text/javascript" src="../../scripts/generators/gaussian_distribution_generator.js" ></script> 
-    <script type="text/javascript" src="../../scripts/helpers/experiment_helpers.js" ></script>
-    <script type="text/javascript" src="../../scripts/generators/latin_square_generator.js" ></script>
-    <script type="text/javascript" src="../../scripts/generators/foundational_data_generator.js" ></script>
-    <script type="text/javascript" src="../../scripts/experiments/jnd.js" ></script>
+    <script type="text/javascript" src="/scripts/experiments/jnd.js" ></script>
 
     <script type="text/javascript">
-        var jnd_exp = new JND("foundational", "scatter"); 
+        var jnd_exp = new JND("foundational", "<%= graph_type %>"); 
     </script> 
 
-    <script type="text/javascript" src="../../scripts/timelines/jnd_timeline.js" ></script>
+    <script type="text/javascript" src="/scripts/timelines/jnd_timeline.js" ></script>
 
   </head>
 

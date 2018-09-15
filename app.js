@@ -28,12 +28,12 @@ app.get('/', function(request, response) {
 
 // JND Experiment (Scatter)
 app.get('/jnd_scatter', function(request, response) {
-    response.render('jnd/jnd_experiment_scatter.html');
+    response.render('jnd/jnd_experiment_scatter.html', {graph_type: 'scatter'});
 });
 
 // JND Experiment (Strip)
 app.get('/jnd_strip', function(request, response) {
-    response.render('jnd/jnd_experiment_strip.html');
+    response.render('jnd/jnd_experiment_strip.html', {graph_type: 'strip'});
 });
 
 // JND Trial Display
