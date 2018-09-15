@@ -565,7 +565,7 @@ class Stevens {
         this.plot_scatter(datasets);
         break;
       case "strip":
-        //this.plot_strip(datasets);
+        this.plot_strip(datasets);
         break;
     }
   }
@@ -655,6 +655,72 @@ class Stevens {
       chart.selectAll("text").remove();   
 
       count++;
+    }
+
+    // Set background color
+    document.body.style.backgroundColor = trial_data.background_color;
+  }
+
+    /**
+   * Plots distributions using strip plots. 
+   *
+   * @ param  datasets   {array}
+   */
+  plot_strip(datasets) {
+
+    var width = window.innerWidth * 0.7;
+    var height = window.innerHeight * 0.25;
+
+    var xscale = d3.scaleLinear()
+                   .domain([0, multiplier]) 
+                   .range([0, width]);
+
+    var yscale = d3.scaleLinear()
+                   .domain([multiplier * -1, 0])
+                   .range([height/2, 0]);
+
+    // Create axes: 
+    var x_axis = d3.axisBottom()
+                   .scale(xscale)
+                   .tickSize([0]);
+
+    var y_axis = d3.axisLeft()
+                   .scale(yscale)
+                   .tickSize([0]);
+
+    // Create/append the SVG for both graphs: 
+    for (var data of datasets){
+
+      var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
+                    .append("svg") 
+                      .attr("width", width) 
+                      .attr("height", height)
+                      .attr("style", "display: block");   
+
+      var xAxisTranslate = height/2;
+      var xAxisElements = chart.append("g")
+                                .attr("transform", "translate(50, " + xAxisTranslate  +")")
+                                .call(x_axis)
+
+      // Populating data: 
+      chart.selectAll("strip") // Technically no circles inside div yet, but will be creating it
+            .data(data)
+              .enter()
+              .append("rect") // Creating the circles for each entry in data set 
+              .attr("x", function (d) {
+                return xscale(d[0]);
+              })
+              .attr("transform", "translate(50, " + height/4 + ")")
+              .style("width", 2)
+              .style("height", height/2);
+
+      // Set axis color
+      chart.selectAll("path")
+           .attr("stroke", trial_data.axis_color);
+
+      // Remove tick labels
+      chart.selectAll("text").remove();     
+
     }
 
     // Set background color

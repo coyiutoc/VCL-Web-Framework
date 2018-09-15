@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    
+
     <title>VCL: Stevens Experiment</title>
 
     <%- include('../header'); %>
 
     <script type="text/javascript" src="/scripts/experiments/stevens.js" ></script>
+
+    <script type="text/javascript">
+        var stevens_exp = new Stevens("foundational", "<%= graph_type %>"); 
+    </script> 
+
     <script type="text/javascript" src="/scripts/timelines/stevens_timeline.js" ></script>
 
   </head>

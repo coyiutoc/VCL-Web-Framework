@@ -28,12 +28,12 @@ app.get('/', function(request, response) {
 
 // JND Experiment (Scatter)
 app.get('/jnd_scatter', function(request, response) {
-    response.render('jnd/jnd_experiment_scatter.html', {graph_type: 'scatter'});
+    response.render('jnd/jnd_experiment.html', {graph_type: 'scatter'});
 });
 
 // JND Experiment (Strip)
 app.get('/jnd_strip', function(request, response) {
-    response.render('jnd/jnd_experiment_strip.html', {graph_type: 'strip'});
+    response.render('jnd/jnd_experiment.html', {graph_type: 'strip'});
 });
 
 // JND Trial Display
@@ -41,10 +41,16 @@ app.get('/jnd_trial', function(request, response) {
     response.render('jnd/jnd_trial_display.html');
 });
 
-// Stevens Experiment
-app.get('/stevens', function(request, response) {
-    response.render('stevens/stevens_experiment.html');
+// Stevens Experiment (Scatter)
+app.get('/stevens_scatter', function(request, response) {
+    response.render('stevens/stevens_experiment.html', {graph_type: 'scatter'});
 });
+
+// Stevens Experiment (Strip)
+app.get('/stevens_strip', function(request, response) {
+    response.render('stevens/stevens_experiment.html', {graph_type: 'strip'});
+});
+
 
 // Stevens Trial Display
 app.get('/stevens_trial', function(request, response) {
