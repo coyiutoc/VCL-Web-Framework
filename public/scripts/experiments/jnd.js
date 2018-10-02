@@ -139,6 +139,7 @@ class JND {
         return Object.assign({},jnd_exp.trial_variables, jnd_exp.export_variables);
       },
       on_start: function(trial){ // NOTE: on_start takes in trial var 
+        debugger;
 
         // Set the constants to be used:
         if (block_type == "test"){ 

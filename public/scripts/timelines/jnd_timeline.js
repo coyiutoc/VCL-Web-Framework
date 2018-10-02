@@ -1,3 +1,7 @@
+import * as React from "react";
+import ReactDOMServer from 'react-dom/server';
+import { Hello } from "./components/Hello";
+
 // =========================================================
 // CONSTANTS
 
@@ -32,6 +36,9 @@ var welcome = {
   stimulus: '<div align = "center">' + '<img src="../img/VCL_lab_logo.png"></img> <br>' +
             'This is a <b>Proof of Concept</b> for a <b>Foundational JND Experiment</b>.' + 
             '<br><br><p><font size = 15>Press any key to begin.<p></font>' +
+            ReactDOMServer.renderToStaticMarkup(
+              <Hello compiler="foo" framework="bar" />
+            ) +
             '</div>',
   data: {type: 'instruction'}
 };
