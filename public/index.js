@@ -1,14 +1,10 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import ReactDOMServer from 'react-dom/server';
+import Index from "./components/Index";
 
-import { Hello } from "./components/Hello";
-
-const e = <Hello compiler="VCLLLLLLL" framework="ohnoiatethewholepizza" />;
+const e = <Index />;
 
 ReactDOM.render(
     e,
-    document.getElementById("banana")
+    document.getElementById("sparoot")
 );
-
-console.log(ReactDOMServer.renderToStaticMarkup(e));
