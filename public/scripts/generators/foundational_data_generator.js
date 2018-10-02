@@ -198,3 +198,13 @@ function get_stevens_data(is_full_set){
     return STEVENS_SHORT;
   }
 }
+
+export {
+  JND_PRACTICE_FULL,
+  JND_PRACTICE_SHORT,
+  JND_DESIGN_PRACTICE_SHORT,
+  JND_TEST_FULL,
+  JND_TEST_SHORT,
+  get_jnd_data,
+  get_stevens_data
+}

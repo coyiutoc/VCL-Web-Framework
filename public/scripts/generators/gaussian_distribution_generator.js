@@ -237,3 +237,8 @@ function dynamicallyLoadScript(url) {
 
   document.head.appendChild(script); // Add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
 }
+
+export {
+  TRIAL_LIMIT,
+  generateDistribution
+}

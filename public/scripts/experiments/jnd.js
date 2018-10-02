@@ -1,4 +1,6 @@
-class JND {
+import { initialize_latin_square } from '../generators/latin_square_generator';
+
+export default class JND {
 
   /**
    * Initializes a JND experiment object. 
