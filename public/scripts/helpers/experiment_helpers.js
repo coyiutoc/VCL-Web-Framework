@@ -109,3 +109,10 @@ function force_greater_right_position(trial, base_coordinates, adjusted_coordina
 
   return result;
 }
+
+export {
+  prepare_coordinates,
+  sample_coordinates,
+  force_greater_right_position,
+  randomize_position
+}
