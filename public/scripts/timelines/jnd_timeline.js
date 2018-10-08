@@ -6,17 +6,7 @@ export const ExecJsPsych = (jnd_exp) => {
   // =========================================================
   // CONSTANTS
 
-  const MATHJS_URL = "https://unpkg.com/mathjs@4.4.2/dist/math.min.js";
-
   var timeline = [];
-  const localhost = "http://localhost:8080";
-
-  // Variables used to generate D3 jnd_trial_display.html:
-  var left_coordinates;
-  var right_coordinates;
-  var distribution_size;
-  var trial_data;  
-
   var multiplier = 1; // Sets how much the data should be scaled by.
 
   // =========================================================
@@ -98,7 +88,7 @@ export const ExecJsPsych = (jnd_exp) => {
     data: {type: 'feedback'},
     stimulus: function(){
 
-      document.body.style.backgroundColor = trial_data.feedback_background_color;
+      document.body.style.backgroundColor = jnd_exp.trial_data.feedback_background_color;
 
       var last_trial = JSON.parse(jsPsych.data.getLastTrialData().json());
       var last_trial_correct = last_trial[0]["correct"];
@@ -168,7 +158,7 @@ export const ExecJsPsych = (jnd_exp) => {
     data: {type: 'instruction'},
     on_start: function(stop){
       // Reset background color to feedback
-      document.body.style.backgroundColor = trial_data.feedback_background_color;
+      document.body.style.backgroundColor = jnd_exp.trial_data.feedback_background_color;
     }
   }
 
@@ -241,7 +231,7 @@ export const ExecJsPsych = (jnd_exp) => {
               '</div>' ,
     on_start: function(stop){
       // Reset background color to feedback
-      document.body.style.backgroundColor = trial_data.feedback_background_color;
+      document.body.style.backgroundColor = jnd_exp.trial_data.feedback_background_color;
     }
   };
   timeline.push(experiment_end);

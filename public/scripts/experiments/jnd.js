@@ -1,7 +1,10 @@
-import { initialize_latin_square } from '../generators/latin_square_generator';
 import * as React from 'react';
-import JNDTrialDisplay from '../../components/JNDTrialDisplay';
 import ReactDOMServer from 'react-dom/server';
+
+import JNDTrialDisplay from '../../components/JNDTrialDisplay';
+import { randomize_position } from '../helpers/experiment_helpers';
+import { generateDistribution } from '../generators/gaussian_distribution_generator';
+import { initialize_latin_square } from '../generators/latin_square_generator';
 import { LOCAL_HOST } from '../../constants';
 
 export default class JND {
@@ -84,6 +87,10 @@ export default class JND {
            background_color: '',
            point_size: ''
           };
+
+      // originally floated in "jnd_timeline"
+      this.left_coordinates, this.right_coordinates, this.distribution_size = null;
+      this.trial_data = null;
   }
 
   /**
@@ -133,13 +140,17 @@ export default class JND {
     if ((block_type !== "test") && (block_type !== "practice")) {throw Error(block_type + " is not supported.")};
 
     // Initialize a variable for this so it is usable inside on_start
-    var jnd_exp = this; 
+    var jnd_exp = this;
 
     var trial = {
       type:'html-keyboard-response',
       // url: LOCAL_HOST + "/jnd_trial",
-      stimulus: ReactDOMServer.renderToStaticMarkup(
-        <JNDTrialDisplay />
+      stimulus: ReactDOMServer.renderToString(
+        <JNDTrialDisplay
+          leftCoordinates={this.left_coordinates} 
+          rightCoordinates={this.right_coordinates}
+          distributionSize={this.distribution_size}
+          />
       ),
       choices:['z', 'm', 'q'], //q is exit button (for debugging)
       execute_script: true,
@@ -193,10 +204,10 @@ export default class JND {
         //                                           adjusted_correlation);
 
         // Set up D3 variables for plotting
-        left_coordinates = result.left;
-        right_coordinates = result.right;
-        distribution_size = constants.num_points;   
-        trial_data = trial.data; 
+        this.left_coordinates = result.left;
+        this.right_coordinates = result.right;
+        this.distribution_size = constants.num_points;   
+        this.trial_data = trial.data; 
 
         console.log("[RIGHT] Correlation: " + trial.data.right_correlation);
         console.log("[LEFT] Correlation: " + trial.data.left_correlation);

@@ -1,11 +1,11 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import Index from "./components/Index";
-import JsPsych from './components/JsPsych';
+import ExternalScripts from './components/ExternalScripts';
 
 const e = (
     <div>
-        <JsPsych />
+        <ExternalScripts />
         <Index />
     </div>
 );
