@@ -145,13 +145,7 @@ export default class JND {
     var trial = {
       type:'html-keyboard-response',
       // url: LOCAL_HOST + "/jnd_trial",
-      stimulus: ReactDOMServer.renderToString(
-        <JNDTrialDisplay
-          leftCoordinates={this.left_coordinates} 
-          rightCoordinates={this.right_coordinates}
-          distributionSize={this.distribution_size}
-          />
-      ),
+      stimulus: "<div>UBC, I love you!</div>",
       choices:['z', 'm', 'q'], //q is exit button (for debugging)
       execute_script: true,
       response_ends_trial: true,
@@ -204,14 +198,23 @@ export default class JND {
         //                                           adjusted_correlation);
 
         // Set up D3 variables for plotting
-        this.left_coordinates = result.left;
-        this.right_coordinates = result.right;
-        this.distribution_size = constants.num_points;   
-        this.trial_data = trial.data; 
+        jnd_exp.left_coordinates = result.left;
+        jnd_exp.right_coordinates = result.right;
+        jnd_exp.distribution_size = constants.num_points;   
+        jnd_exp.trial_data = trial.data; 
 
         console.log("[RIGHT] Correlation: " + trial.data.right_correlation);
         console.log("[LEFT] Correlation: " + trial.data.left_correlation);
         
+        trial.stimulus = ReactDOMServer.renderToString(
+          <JNDTrialDisplay
+            leftCoordinates={jnd_exp.left_coordinates} 
+            rightCoordinates={jnd_exp.right_coordinates}
+            distributionSize={jnd_exp.distribution_size}
+            graphType="scatter"
+            trialData={jnd_exp.trial_data}
+            />
+        );
       },
       on_finish: function(data){ // NOTE: on_finish takes in data var 
         jnd_exp.check_response(data);
@@ -248,7 +251,7 @@ export default class JND {
 
     // Block specific saves 
     if (block_type == "test"){
-      jnd_exp.adjusted_quantity_matrix[index].push(adjusted_correlation);
+      this.adjusted_quantity_matrix[index].push(adjusted_correlation);
       trial.data.run_type = "test";
     }
     else{

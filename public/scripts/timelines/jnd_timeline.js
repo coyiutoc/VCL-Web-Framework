@@ -7,7 +7,6 @@ export const ExecJsPsych = (jnd_exp) => {
   // CONSTANTS
 
   var timeline = [];
-  var multiplier = 1; // Sets how much the data should be scaled by.
 
   // =========================================================
   // INSTANTIATE JND EXPERIMENT OBJECT

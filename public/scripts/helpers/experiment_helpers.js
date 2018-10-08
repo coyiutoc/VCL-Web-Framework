@@ -12,7 +12,7 @@ function prepare_coordinates(coordinates, num_points){
   var array = [];
   var reorganized_coordinates = [];
 
-  for (i = 0; i < coordinates.x_values.length; i++){
+  for (let i = 0; i < coordinates.x_values.length; i++){
     array.push(coordinates.x_values[i]);
     array.push(coordinates.y_values[i]);
 
@@ -36,7 +36,7 @@ function prepare_coordinates(coordinates, num_points){
 function sample_coordinates(coordinates, num_points){
   var output_coordinates = [];
 
-  for (coordinates, i = num_points; i--; ) {
+  for (let i = num_points; i > 0; i-- ) {
     var random_coordinate = coordinates.splice(Math.floor(Math.random() * (i + 1)), 1)[0];
     output_coordinates.push(random_coordinate);
   }
