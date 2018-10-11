@@ -1,0 +1,39 @@
+{
+  "name": "huh",
+  "version": "1.0.0",
+  "description": "This is a Node.js application that runs proof of concept experiments for the following:",
+  "main": "app.js",
+  "dependencies": {
+    "@babel/core": "^7.1.2",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.4",
+    "body-parser": "^1.18.3",
+    "d3": "^5.7.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "gaussian": "^1.1.0",
+    "html-webpack-plugin": "^3.2.0",
+    "latin-square": "^2.0.4",
+    "nodemon": "^1.18.4",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "webpack": "^4.20.2",
+    "webpack-dev-middleware": "^3.4.0",
+    "webpack-hot-middleware": "^2.24.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coyiutoc/VCL_Correlation_POC.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/coyiutoc/VCL_Correlation_POC/issues"
+  },
+  "homepage": "https://github.com/coyiutoc/VCL_Correlation_POC#readme"
+}
