@@ -3,10 +3,19 @@ class Stevens {
   /**
    * Initializes a Stevens experiment object. 
    *
+   * @param  range          {string}    Range type (foundational or design)
    * @param  condition_name {string}    Name of condition (i.e foundational)
    * @param  graph_type     {string}    Name of graph_type
    */
-  constructor(condition_name, graph_type) {
+  constructor(range, condition_name, graph_type) {
+
+    if ((range !== "foundational") && (range !== "design")) {
+      throw Error(range + " is not supported.") }
+    else{
+      this.range = range;
+    }  
+    
+    this.condition_name = condition_name; 
 
     if ((graph_type !== "scatter") && (graph_type !== "strip")) {
       throw Error(graph_type + " is not supported.")} 
@@ -85,9 +94,8 @@ class Stevens {
    * @param  balancing_type {string}                           Type of balancing. Currently only latin_square
    *                                                           is supported.
    *         data_set {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. 
-   *         practice_set {[{assoc array}, {assoc array}, ... ]} The practice data. 
    */
-  prepare_experiment(balancing_type, data_set, practice_set) {
+  prepare_experiment(balancing_type, data_set) {
 
     if (balancing_type == 'latin_square'){
 
@@ -104,7 +112,7 @@ class Stevens {
       this.experiment_conditions_constants = ordered_data_set;
       
       // Set experiment variables to the practice first
-      this.sub_conditions_constants = practice_set;
+      this.sub_conditions_constants = data_set;
       this.current_sub_condition_index = 0; 
       this.input_count_array = new Array(this.sub_conditions_constants[0].trials_per_round).fill(0);
 

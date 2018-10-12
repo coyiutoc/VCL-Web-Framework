@@ -10,6 +10,7 @@ const localhost = "http://localhost:8080";
 var left_coordinates;
 var right_coordinates;
 var distribution_size;
+var distractor_coordinates;
 var trial_data;  
 
 var multiplier = 1; // Sets how much the data should be scaled by.
@@ -18,11 +19,9 @@ var multiplier = 1; // Sets how much the data should be scaled by.
 // INSTANTIATE JND EXPERIMENT OBJECT
 
 var use_all_data = false;
+const JND_EXCEL = get_data("jnd", jnd_exp.range, jnd_exp.condition_name, use_all_data);
 
-const JND_EXCEL = get_jnd_data("test", use_all_data);
-const JND_PRACTICE = get_jnd_data("practice", use_all_data);
-
-jnd_exp.prepare_experiment("latin_square", JND_EXCEL, JND_PRACTICE);
+jnd_exp.prepare_experiment("latin_square", JND_EXCEL);
 
 // =========================================================
 // WELCOME TRIAL BLOCK

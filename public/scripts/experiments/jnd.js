@@ -3,10 +3,19 @@ class JND {
   /**
    * Initializes a JND experiment object. 
    *
+   * @param  range          {string}    Range type (foundational or design)
    * @param  condition_name {string}    Name of condition (i.e foundational)
    * @param  graph_type     {string}    Name of graph_type
    */
-  constructor(condition_name, graph_type) {
+  constructor(range, condition_name, graph_type) {
+
+    if ((range !== "foundational") && (range !== "design")) {
+      throw Error(range + " is not supported.") }
+    else{
+      this.range = range;
+    }  
+    
+    this.condition_name = condition_name; 
 
     if ((graph_type !== "scatter") && (graph_type !== "strip")) {
       throw Error(graph_type + " is not supported.")} 
@@ -35,49 +44,12 @@ class JND {
     // ========================================
     // TEST EXPERIMENT VARIABLES
 
-    this.condition_name = condition_name; 
     this.first_trial_of_sub_condition = true;
     this.sub_condition_order;
     this.sub_conditions_constants;
     this.current_sub_condition_index;
     this.adjusted_quantity_matrix = {};   // The matrix is in this format:
                                           // { sub_condition_index : [adjusted_quantity1, adjusted_quantity2 ... ] }
-
-    // ========================================
-    // JSPSYCH TRIAL VARIABLES
-
-    // Variables that are meant to help run experiment (can be deleted before exporting)
-    this.trial_variables =         
-          {type: 'jnd',
-          run_type: '',
-          left_correlation: '',
-          right_correlation: '',
-          };
-
-    // Variables that will be exported into final CSV       
-    this.export_variables = 
-          {condition: this.condition_name,
-           sub_condition: '',           // Chronological ordering of sub_condition [1, 2, 3 ... ]
-           balanced_sub_condition: '',  // Index of sub_condition according to balancing order
-           jnd: '',
-           base_correlation: '',
-           adjusted_correlation: '',
-           correct: '',
-           error: '',
-           max_step_size: '',
-           converge_from_above: '',
-           initial_difference: '',
-           num_points: '',
-           mean: '',
-           SD: '',
-           num_SD: '',
-           point_color: '',
-           axis_color: '',
-           text_color: '',
-           feedback_background_color: '',
-           background_color: '',
-           point_size: ''
-          };
   }
 
   /**
@@ -89,7 +61,7 @@ class JND {
    *         data_set {[{assoc array}, {assoc array}, ... ]}     The data to be ordered. 
    *         practice_set {[{assoc array}, {assoc array}, ... ]} The practice data. 
    */ 
-  prepare_experiment(balancing_type, data_set, practice_set) {
+  prepare_experiment(balancing_type, data_set) {
 
     if (balancing_type == 'latin_square'){
 
@@ -109,7 +81,7 @@ class JND {
       this.current_sub_condition_index = 0; 
 
       // Set practice trials (note does not need balancing)
-      this.practice_conditions_constants = practice_set;
+      this.practice_conditions_constants = data_set;
       this.current_practice_condition_index = 0;
 
     }
@@ -135,9 +107,6 @@ class JND {
       choices:['z', 'm', 'q'], //q is exit button (for debugging)
       execute_script: true,
       response_ends_trial: true,
-      data: function(){
-        return Object.assign({},jnd_exp.trial_variables, jnd_exp.export_variables);
-      },
       on_start: function(trial){ // NOTE: on_start takes in trial var 
 
         // Set the constants to be used:
@@ -170,6 +139,23 @@ class JND {
                                                         constants.num_SD, 
                                                         constants.mean,
                                                         constants.SD);
+
+        if (jnd_exp.condition_name.split('_')[0] === "distractor"){
+          var left_dist_coordinates = generateDistribution(constants.dist_base,
+                                                           constants.dist_error,
+                                                           constants.dist_num_points,
+                                                           constants.num_SD,
+                                                           constants.mean,
+                                                           constants.SD);
+
+          var right_dist_coordinates = generateDistribution(constants.dist_base,
+                                                           constants.dist_error,
+                                                           constants.dist_num_points,
+                                                           constants.num_SD,
+                                                           constants.mean,
+                                                           constants.SD);
+          distractor_coordinates = [left_dist_coordinates, right_dist_coordinates];
+        }
 
         // Randomize position of the base and adjusted graphs
         var result = randomize_position(trial, 
@@ -206,6 +192,25 @@ class JND {
   /**
    * Handles saving the relevant data on a given trial.
    *
+   * For reference, these are the helper variables created to assist in trial logic (i.e not present in excel)
+   * trial_variables =         
+   *       {type: 'jnd',
+   *       run_type: '',
+   *       left_correlation: '',
+   *       right_correlation: '',
+   *       };
+   *
+   * These are variables created WITHIN the trial logic that were not present in excel (but need to be
+   * outputted to results).     
+   * export_variables = 
+   *       {sub_condition: '',           // Chronological ordering of sub_condition [1, 2, 3 ... ]
+   *        balanced_sub_condition: '',  // Index of sub_condition according to balancing order
+   *        jnd: '',
+   *        base_correlation: '',
+   *        adjusted_correlation: '',
+   *        correct: '',
+   *       };
+   *
    * @param trial {object}
    *        block_type {string}           "test" or "practice"
    *        constants {assoc array}
@@ -214,15 +219,12 @@ class JND {
    */
   handle_data_saving(trial, block_type, constants, index, adjusted_correlation) {
 
-    // Extract relevant data from constants and save into trial data
-    for (var key in trial.data){
-      if (constants[key]){
-        trial.data[key] = constants[key];
-      }
-    }
+    // Add all constants from excel
+    trial.data = constants;
 
+    // Adding constants that required computation (not from excel)
+    trial.data.type = "jnd";
     trial.data.adjusted_correlation = adjusted_correlation;
-    trial.data.converge_from_above = constants.converge_from_above; //Since is boolean check, cannot do in loop
     trial.data.jnd = Math.abs(adjusted_correlation - constants.base_correlation);
     trial.data.sub_condition = index; 
     trial.data.balanced_sub_condition = this.sub_condition_order[index];
@@ -326,7 +328,7 @@ class JND {
       console.log("F: " + F);
       // Convergence if the F value is < 1 - convergenceThreshold
       // if the F is greater than 0.25, then converge 
-      converged = F < (1 - this.CONVERGENCE_THRESHOLD);
+      converged = F < (1 - 0.1);//this.CONVERGENCE_THRESHOLD);
     }
 
     if (converged) {console.log("CONVERGED!!!!")};
@@ -535,10 +537,18 @@ class JND {
     var right_dataset = prepare_coordinates(right_coordinates, distribution_size);
 
     var datasets = [left_dataset, right_dataset];
+    var options = [];
+
+    if (this.condition_name.split("_")[0] === "distractor"){
+      var left_dist_dataset = prepare_coordinates(distractor_coordinates[0], distribution_size);
+      var right_dist_dataset = prepare_coordinates(distractor_coordinates[1], distribution_size);
+
+      var options = [left_dist_dataset, right_dist_dataset];
+    }
 
     switch(this.graph_type){
       case "scatter":
-        this.plot_scatter(datasets);
+        this.plot_scatter(datasets, options);
         break;
       case "strip":
         this.plot_strip(datasets);
@@ -549,9 +559,10 @@ class JND {
   /**
    * Plots distributions using scatter plots. 
    *
-   * @ param  datasets   {array}
+   * @ param  datasets    {array}      Dataset of data
+   *          distractors {array}     Dataset of distractors, if any
    */
-  plot_scatter(datasets) {
+  plot_scatter(datasets, distractors) {
 
     var height = window.innerHeight/1.5; 
     var width = height/2;
@@ -587,7 +598,7 @@ class JND {
                    .tickSize([0]);
 
     // Create/append the SVG for both graphs: 
-    for (var data of datasets){
+    for (let i in datasets){
 
       var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
                     .append("svg") 
@@ -607,9 +618,24 @@ class JND {
                                 .attr("transform", "translate(50, " + xAxisTranslate  +")")
                                 .call(x_axis)
 
+      // If there is a distractor, plot it FIRST to avoid occluding the actual data
+      if (this.condition_name.split("_")[0] === "distractor"){
+        chart.selectAll("circle_distractors") // Technically no circles inside div yet, but will be creating it
+             .data(distractors[i])
+              .enter()
+              .append("circle") // Creating the circles for each entry in data set 
+              .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
+                return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
+              })
+              .attr("cy", function (d) {
+                return yscale(d[1]);
+              })
+              .attr("r", trial_data.dist_point_size).style("fill", trial_data.dist_color);
+      }
+
       // Populating data: 
-      chart.selectAll("circle") // Technically no circles inside div yet, but will be creating it
-           .data(data)
+      chart.selectAll("circle_data") // Technically no circles inside div yet, but will be creating it
+           .data(datasets[i])
               .enter()
               .append("circle") // Creating the circles for each entry in data set 
               .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
