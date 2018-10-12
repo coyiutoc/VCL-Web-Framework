@@ -328,7 +328,7 @@ class JND {
       console.log("F: " + F);
       // Convergence if the F value is < 1 - convergenceThreshold
       // if the F is greater than 0.25, then converge 
-      converged = F < (1 - 0.1);//this.CONVERGENCE_THRESHOLD);
+      converged = F < (1 - this.CONVERGENCE_THRESHOLD);
     }
 
     if (converged) {console.log("CONVERGED!!!!")};
