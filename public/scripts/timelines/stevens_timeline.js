@@ -82,6 +82,7 @@ var practice = {
     if (81 == data.values()[0].key_press){
       practice_end = true;
       round_end = false;
+      console.log("!!!!!!!!!! Practice trials finished ");
       return false;
     }
 

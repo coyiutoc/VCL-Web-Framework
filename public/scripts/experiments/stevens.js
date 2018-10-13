@@ -4,7 +4,7 @@ class Stevens {
    * Initializes a Stevens experiment object. 
    *
    * @param  range          {string}    Range type (foundational or design)
-   * @param  condition_name {string}    Name of condition (i.e foundational)
+   * @param  condition_name {string}    Name of condition (i.e distractor_rainbow)
    * @param  graph_type     {string}    Name of graph_type
    */
   constructor(range, condition_name, graph_type) {
@@ -48,43 +48,6 @@ class Stevens {
     this.experiment_conditions_constants;
     this.sub_condition_order;
 
-    // ========================================
-    // JSPSYCH TRIAL VARIABLES
-
-    // Variables that are meant to help run experiment (can be deleted before exporting)
-    this.trial_variables =         
-          {type: 'stevens',
-          run_type: '',
-          left_correlation: '',
-          right_correlation: '',
-          round_refreshes: 0,      // Number of times there is a refresh for a given round 
-          high_ref_is_right: false     
-          };
-
-    // Variables that will be exported into final CSV       
-    this.export_variables = 
-          {condition: this.condition_name,
-           trial_num: 0,                // Round index trial is currently on (aka trial_num from excel)
-           sub_condition: '',           // Chronological ordering of sub_condition [1, 2, 3 ... ]
-           balanced_sub_condition: '',  // Index of sub_condition according to balancing order
-           high_ref: '',
-           estimated_mid: '',
-           low_ref: '',
-           num_adjustments: 0,          // Number of inputs for a given round (aka num_adjustments from excel)
-           trials_per_round: '',
-           error: '',
-           num_points: '',
-           mean: '',
-           SD: '',
-           num_SD: '',
-           round_type: '',
-           regen_rate: '',
-           point_color: '',
-           axis_color: '',
-           text_color: '',
-           background_color: '',
-           point_size: ''
-          };
   }
 
   /**
@@ -152,10 +115,8 @@ class Stevens {
         url: localhost + "/stevens_trial",
         choices:[77, 90, 32, 81], //m = 77 (up), z = 90 (down), 32 = spacebar, 81 = q (exit button for debugging)
         execute_script: true,
-        response_ends_trial: false, 
-        data: function(){
-          return Object.assign({},stevens_exp.trial_variables, stevens_exp.export_variables);
-        },
+        response_ends_trial: true, 
+        data: {},
         on_start: function(trial){ // NOTE: on_start takes in trial var 
 
           // Reset the variables to use the experiment if we have just ended
@@ -253,7 +214,8 @@ class Stevens {
   get_last_trial(trial, block_type, index) {
 
     var last_stevens_trial; 
-
+    trial.data.type = "stevens";
+    
     // Set trial run_type depending on block type
     // (we need to set trial's run_type so we can do the filter in the
     // next if block)
@@ -281,6 +243,27 @@ class Stevens {
   /**
    * Handles saving the relevant data on a given trial.
    *
+   * For reference, these are the helper variables created to assist in trial logic (i.e not present in excel)
+   * this.trial_variables =         
+   *       {type: 'stevens',
+   *       run_type: '',
+   *       left_correlation: '',
+   *       right_correlation: '',
+   *       round_refreshes: 0,      // Number of times there is a refresh for a given round 
+   *       high_ref_is_right: false     
+   *       };
+   *
+   * These are variables created WITHIN the trial logic that were not present in excel (but need to be
+   * outputted to results).         
+   * this.export_variables = 
+   *       {trial_num: 0,                // Round index trial is currently on (aka trial_num from excel)
+   *        sub_condition: '',           // Chronological ordering of sub_condition [1, 2, 3 ... ]
+   *        balanced_sub_condition: '',  // Index of sub_condition according to balancing order
+   *        estimated_mid: '',
+   *        num_adjustments: 0,          // Number of inputs for a given round (aka num_adjustments from excel)
+   *        trials_per_round: '',
+   *       };
+   *
    * @param trial {object}
    *        block_type {string}               "test" or "practice"
    *        constants {assoc array}
@@ -290,12 +273,7 @@ class Stevens {
    */
   handle_data_saving(trial, block_type, constants, estimated_correlation, last_stevens_trial, index) {
 
-    // Extract relevant data from constants and save into trial data
-    for (var key in trial.data){
-      if (constants[key] || key == 'high_ref' || key == 'low_ref' || key == 'estimated_mid'){ //Force for high_ref etc. or else
-        trial.data[key] = constants[key];                                                     //js detects 0.0 values as null
-      }
-    }
+    trial.data = Object.assign({}, trial.data, constants);
 
     trial.data.sub_condition = index;
     trial.data.balanced_sub_condition = this.sub_condition_order[index];
@@ -315,6 +293,7 @@ class Stevens {
       // reset the refresh number (only applies for test trials)
       if (round_end == true && trial.data.run_type == "test"){
         trial.data.trial_num = last_stevens_trial.trial_num + 1;
+        trial.data.num_adjustments = 0;
         trial.data.round_refreshes = 1;
         round_end = false; //Reset flag
       }
@@ -327,6 +306,7 @@ class Stevens {
     }
     // Else this is the first refresh of a given trial 
     else{
+      trial.data.trial_num = 0;
       trial.data.num_adjustments = 0;
       trial.data.round_refreshes = 1; 
     }

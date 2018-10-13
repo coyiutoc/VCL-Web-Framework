@@ -4,7 +4,7 @@ class JND {
    * Initializes a JND experiment object. 
    *
    * @param  range          {string}    Range type (foundational or design)
-   * @param  condition_name {string}    Name of condition (i.e foundational)
+   * @param  condition_name {string}    Name of condition (i.e distractor_rainbow)
    * @param  graph_type     {string}    Name of graph_type
    */
   constructor(range, condition_name, graph_type) {
