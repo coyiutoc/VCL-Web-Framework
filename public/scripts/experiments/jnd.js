@@ -537,18 +537,18 @@ class JND {
     var right_dataset = prepare_coordinates(right_coordinates, distribution_size);
 
     var datasets = [left_dataset, right_dataset];
-    var options = [];
+    var distractors = [];
 
     if (this.condition_name.split("_")[0] === "distractor"){
       var left_dist_dataset = prepare_coordinates(distractor_coordinates[0], distribution_size);
       var right_dist_dataset = prepare_coordinates(distractor_coordinates[1], distribution_size);
 
-      var options = [left_dist_dataset, right_dist_dataset];
+      distractors = [left_dist_dataset, right_dist_dataset];
     }
 
     switch(this.graph_type){
       case "scatter":
-        this.plot_scatter(datasets, options);
+        this.plot_scatter(datasets, distractors);
         break;
       case "strip":
         this.plot_strip(datasets);
@@ -559,7 +559,7 @@ class JND {
   /**
    * Plots distributions using scatter plots. 
    *
-   * @ param  datasets    {array}      Dataset of data
+   * @ param  datasets    {array}     Dataset of data
    *          distractors {array}     Dataset of distractors, if any
    */
   plot_scatter(datasets, distractors) {
@@ -617,34 +617,57 @@ class JND {
       var xAxisElements = chart.append("g")
                                 .attr("transform", "translate(50, " + xAxisTranslate  +")")
                                 .call(x_axis)
+           
+      // TODO: Different handling for distractor - needs to be abstracted out somehow in future     
+      if (this.condition_name.split("_")[0] === "distractor"){ 
+           
+        let dataset = datasets[i];
+        let distractor = distractors[i];
 
-      // If there is a distractor, plot it FIRST to avoid occluding the actual data
-      if (this.condition_name.split("_")[0] === "distractor"){
-        chart.selectAll("circle_distractors") // Technically no circles inside div yet, but will be creating it
-             .data(distractors[i])
-              .enter()
-              .append("circle") // Creating the circles for each entry in data set 
-              .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
-                return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
-              })
-              .attr("cy", function (d) {
-                return yscale(d[1]);
-              })
-              .attr("r", trial_data.dist_point_size).style("fill", trial_data.dist_color);
-      }
+        // Alternate plotting of distractor and main dataset points - want equal chance of one
+        // getting occluded over the other
+        for (let j in dataset) {
 
-      // Populating data: 
-      chart.selectAll("circle_data") // Technically no circles inside div yet, but will be creating it
-           .data(datasets[i])
-              .enter()
-              .append("circle") // Creating the circles for each entry in data set 
-              .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
-                return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
-              })
-              .attr("cy", function (d) {
-                return yscale(d[1]);
-              })
-              .attr("r", trial_data.point_size).style("fill", trial_data.point_color);
+          let point = dataset[j];
+          let dist_point = distractor[j];
+
+          chart.selectAll("circle_data")
+               .data([point])
+                .enter()
+                .append("circle") // Creating the circles for each entry in data set 
+                .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
+                  return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
+                })
+                .attr("cy", function (d) {
+                  return yscale(d[1]);
+                })
+                .attr("r", trial_data.point_size).style("fill", trial_data.point_color);
+
+          chart.selectAll("circle_data")
+               .data([dist_point])
+                .enter()
+                .append("circle") // Creating the circles for each entry in data set 
+                .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
+                  return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
+                })
+                .attr("cy", function (d) {
+                  return yscale(d[1]);
+                })
+                .attr("r", trial_data.dist_point_size).style("fill", trial_data.dist_color);
+        }
+      } else {
+          chart.selectAll("circle_data") // Technically no circles inside div yet, but will be creating it
+               .data(datasets[i])
+                .enter()
+                .append("circle") // Creating the circles for each entry in data set 
+                .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
+                  return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
+                })
+                .attr("cy", function (d) {
+                  return yscale(d[1]);
+                })
+                .attr("r", trial_data.point_size).style("fill", trial_data.point_color);
+      }     
 
       // Set axis color
       chart.selectAll("path")
