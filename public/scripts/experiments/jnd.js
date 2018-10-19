@@ -5,23 +5,32 @@ import JNDTrialDisplay from '../../components/JNDTrialDisplay';
 import { randomize_position } from '../helpers/experiment_helpers';
 import { generateDistribution } from '../generators/gaussian_distribution_generator';
 import { initialize_latin_square } from '../generators/latin_square_generator';
-import { LOCAL_HOST } from '../../constants';
 
 export default class JND {
 
   /**
    * Initializes a JND experiment object. 
    *
-   * @param  condition_name {string}    Name of condition (i.e foundational)
+   * @param  range          {string}    Range type (foundational or design)
+   * @param  condition_name {string}    Name of condition (i.e distractor_rainbow)
    * @param  graph_type     {string}    Name of graph_type
    */
-  constructor(condition_name, graph_type) {
+  constructor(range, condition_name, graph_type) {
+
+    if ((range !== "foundational") && (range !== "design")) {
+      throw Error(range + " is not supported.") }
+    else{
+      this.range = range;
+    }  
 
     if ((graph_type !== "scatter") && (graph_type !== "strip")) {
       throw Error(graph_type + " is not supported.")} 
     else { 
       this.graph_type = graph_type;
     };  
+
+    this.condition_name = condition_name;
+    this.condition_group = condition_name.split('_')[0];
 
     // ========================================
     // EXPERIMENT CONSTANTS
@@ -44,7 +53,6 @@ export default class JND {
     // ========================================
     // TEST EXPERIMENT VARIABLES
 
-    this.condition_name = condition_name; 
     this.first_trial_of_sub_condition = true;
     this.sub_condition_order;
     this.sub_conditions_constants;
@@ -52,45 +60,8 @@ export default class JND {
     this.adjusted_quantity_matrix = {};   // The matrix is in this format:
                                           // { sub_condition_index : [adjusted_quantity1, adjusted_quantity2 ... ] }
 
-    // ========================================
-    // JSPSYCH TRIAL VARIABLES
-
-    // Variables that are meant to help run experiment (can be deleted before exporting)
-    this.trial_variables =         
-          {type: 'jnd',
-          run_type: '',
-          left_correlation: '',
-          right_correlation: '',
-          };
-
-    // Variables that will be exported into final CSV       
-    this.export_variables = 
-          {condition: this.condition_name,
-           sub_condition: '',           // Chronological ordering of sub_condition [1, 2, 3 ... ]
-           balanced_sub_condition: '',  // Index of sub_condition according to balancing order
-           jnd: '',
-           base_correlation: '',
-           adjusted_correlation: '',
-           correct: '',
-           error: '',
-           max_step_size: '',
-           converge_from_above: '',
-           initial_difference: '',
-           num_points: '',
-           mean: '',
-           SD: '',
-           num_SD: '',
-           point_color: '',
-           axis_color: '',
-           text_color: '',
-           feedback_background_color: '',
-           background_color: '',
-           point_size: ''
-          };
-
-      // originally floated in "jnd_timeline"
-      this.left_coordinates, this.right_coordinates, this.distribution_size = null;
-      this.trial_data = null;
+    // originally floated in "jnd_timeline"
+    this.left_coordinates, this.right_coordinates, this.distribution_size, this.trial_data, this.distractor_coordinates = null;
   }
 
   /**
@@ -102,7 +73,7 @@ export default class JND {
    *         data_set {[{assoc array}, {assoc array}, ... ]}     The data to be ordered. 
    *         practice_set {[{assoc array}, {assoc array}, ... ]} The practice data. 
    */ 
-  prepare_experiment(balancing_type, data_set, practice_set) {
+  prepare_experiment(balancing_type, data_set) {
 
     if (balancing_type == 'latin_square'){
 
@@ -122,7 +93,7 @@ export default class JND {
       this.current_sub_condition_index = 0; 
 
       // Set practice trials (note does not need balancing)
-      this.practice_conditions_constants = practice_set;
+      this.practice_conditions_constants = data_set;
       this.current_practice_condition_index = 0;
 
     }
@@ -149,9 +120,6 @@ export default class JND {
       choices:['z', 'm', 'q'], //q is exit button (for debugging)
       execute_script: true,
       response_ends_trial: true,
-      data: function(){
-        return Object.assign({},jnd_exp.trial_variables, jnd_exp.export_variables);
-      },
       on_start: function(trial){ // NOTE: on_start takes in trial var 
         // Set the constants to be used:
         if (block_type == "test"){ 
@@ -184,6 +152,23 @@ export default class JND {
                                                         constants.mean,
                                                         constants.SD);
 
+        if (jnd_exp.condition_group === "distractor"){
+          var left_dist_coordinates = generateDistribution(constants.dist_base,
+                                                           constants.dist_error,
+                                                           constants.dist_num_points,
+                                                           constants.num_SD,
+                                                           constants.mean,
+                                                           constants.SD);
+
+          var right_dist_coordinates = generateDistribution(constants.dist_base,
+                                                           constants.dist_error,
+                                                           constants.dist_num_points,
+                                                           constants.num_SD,
+                                                           constants.mean,
+                                                           constants.SD);
+          jnd_exp.distractor_coordinates = [left_dist_coordinates, right_dist_coordinates];
+        }
+
         // Randomize position of the base and adjusted graphs
         var result = randomize_position(trial, 
                                        base_coordinates,
@@ -201,7 +186,7 @@ export default class JND {
         jnd_exp.left_coordinates = result.left;
         jnd_exp.right_coordinates = result.right;
         jnd_exp.distribution_size = constants.num_points;   
-        jnd_exp.trial_data = trial.data; 
+        jnd_exp.trial_data = trial.data;
 
         console.log("[RIGHT] Correlation: " + trial.data.right_correlation);
         console.log("[LEFT] Correlation: " + trial.data.left_correlation);
@@ -213,6 +198,7 @@ export default class JND {
             distributionSize={jnd_exp.distribution_size}
             graphType="scatter"
             trialData={jnd_exp.trial_data}
+            distractorCoordinates={jnd_exp.distractor_coordinates}
             />
         );
       },
@@ -228,6 +214,25 @@ export default class JND {
   /**
    * Handles saving the relevant data on a given trial.
    *
+   * For reference, these are the helper variables created to assist in trial logic (i.e not present in excel)
+   * trial_variables =         
+   *       {type: 'jnd',
+   *       run_type: '',
+   *       left_correlation: '',
+   *       right_correlation: '',
+   *       };
+   *
+   * These are variables created WITHIN the trial logic that were not present in excel (but need to be
+   * outputted to results).     
+   * export_variables = 
+   *       {sub_condition: '',           // Chronological ordering of sub_condition [1, 2, 3 ... ]
+   *        balanced_sub_condition: '',  // Index of sub_condition according to balancing order
+   *        jnd: '',
+   *        base_correlation: '',
+   *        adjusted_correlation: '',
+   *        correct: '',
+   *       };
+   *
    * @param trial {object}
    *        block_type {string}           "test" or "practice"
    *        constants {assoc array}
@@ -236,15 +241,12 @@ export default class JND {
    */
   handle_data_saving(trial, block_type, constants, index, adjusted_correlation) {
 
-    // Extract relevant data from constants and save into trial data
-    for (var key in trial.data){
-      if (constants[key]){
-        trial.data[key] = constants[key];
-      }
-    }
+    // Add all constants from excel
+    trial.data = constants;
 
+    // Adding constants that required computation (not from excel)
+    trial.data.type = "jnd";
     trial.data.adjusted_correlation = adjusted_correlation;
-    trial.data.converge_from_above = constants.converge_from_above; //Since is boolean check, cannot do in loop
     trial.data.jnd = Math.abs(adjusted_correlation - constants.base_correlation);
     trial.data.sub_condition = index; 
     trial.data.balanced_sub_condition = this.sub_condition_order[index];
@@ -337,7 +339,7 @@ export default class JND {
 
       var variance = [];
       var mean = [];
-      for (i = 0; i < adjusted_quantity_windows.length; i++){
+      for (let i = 0; i < adjusted_quantity_windows.length; i++){
         variance.push(math.var(adjusted_quantity_windows[i]));
         mean.push(math.mean(adjusted_quantity_windows[i]));
       }

@@ -11,7 +11,7 @@ export default class JndExperiment extends React.Component {
     }
 
     componentWillMount() {
-        let experiment = new JND("foundational", this.props.graphType);
+        let experiment = new JND("foundational", this.props.condition, this.props.graphType);
         ExecJsPsych(experiment);
     }
 

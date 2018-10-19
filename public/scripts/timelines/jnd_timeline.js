@@ -1,22 +1,18 @@
 import * as React from "react";
 import ReactDOMServer from 'react-dom/server';
-import { get_jnd_data } from '../generators/foundational_data_generator';
+import { get_data_subset } from '../generators/data_generator';
 
 export const ExecJsPsych = (jnd_exp) => {
   // =========================================================
   // CONSTANTS
-
   var timeline = [];
 
   // =========================================================
   // INSTANTIATE JND EXPERIMENT OBJECT
 
-  var use_all_data = false;
+  const JND_EXCEL = get_data_subset("jnd", jnd_exp.range, jnd_exp.condition_name);
 
-  const JND_EXCEL = get_jnd_data("test", use_all_data);
-  const JND_PRACTICE = get_jnd_data("practice", use_all_data);
-
-  jnd_exp.prepare_experiment("latin_square", JND_EXCEL, JND_PRACTICE);
+  jnd_exp.prepare_experiment("latin_square", JND_EXCEL);
 
   // =========================================================
   // WELCOME TRIAL BLOCK

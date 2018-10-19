@@ -18,12 +18,9 @@ var trial_data;
 // =========================================================
 // INSTANTIATE STEVENS EXPERIMENT OBJECT
 
-var use_all_data = false;
+const STEVENS_EXCEL = get_data_subset("stevens", stevens_exp.range, stevens_exp.condition_name);
 
-const STEVENS_EXCEL = get_stevens_data(use_all_data);
-const STEVENS_PRACTICE = get_stevens_data(use_all_data);
-
-stevens_exp.prepare_experiment("latin_square", STEVENS_EXCEL, STEVENS_PRACTICE);
+stevens_exp.prepare_experiment("latin_square", STEVENS_EXCEL);
 
 // =========================================================
 // WELCOME TRIAL BLOCK
@@ -82,6 +79,7 @@ var practice = {
     if (81 == data.values()[0].key_press){
       practice_end = true;
       round_end = false;
+      console.log("!!!!!!!!!! Practice trials finished ");
       return false;
     }
 
