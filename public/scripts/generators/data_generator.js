@@ -142,12 +142,10 @@ const STEVENS_CONDITIONS = {
 
 /**
  * Retrieves the data given experiment, range, and condition.
- * Creates a shortened version if is_full_set = false.
  *
  * @param  experiment  {string}            "jnd" or "stevens"   
  *         range       {string}            "foundational" or "design"         
  *         condition   {string}            Name of condition
- *         is_full_set {boolean}           If true, will use entire data set
  *
  * @return dataset     [{assoc}, {assoc}, .... ]         
  */
@@ -159,7 +157,12 @@ function get_data(experiment, range, condition, is_full_set){
     dataset = JND_BASE[range];
 
     if (condition !== "base") {
-      dataset = append_condition_data(dataset, JND_CONDITIONS, condition);
+
+      if (!JND_CONDITIONS[condition]) {
+        throw new Error(condition + " not supported.");
+      }
+
+      dataset = create_condition_dataset(dataset, JND_CONDITIONS[condition]);
     }
   }
   else if (experiment === "stevens"){
@@ -167,7 +170,12 @@ function get_data(experiment, range, condition, is_full_set){
     dataset = STEVENS_BASE[range];
 
     if (condition !== "base") {
-      dataset = append_condition_data(dataset, STEVENS_CONDITIONS, condition);
+
+      if (!STEVENS_CONDITIONS[condition]) {
+        throw new Error(condition + " not supported.");
+      }
+
+      dataset = create_condition_dataset(dataset, STEVENS_CONDITIONS[condition]);
     }
   }
   else {
@@ -183,24 +191,35 @@ function get_data(experiment, range, condition, is_full_set){
 }
 
 /**
+ * Retrieves a smaller dataset (4 subconditions) given experiment, range and condition.
+ *
+ * @param  experiment  {string}            "jnd" or "stevens"   
+ *         range       {string}            "foundational" or "design"         
+ *         condition   {string}            Name of condition
+ *
+ * @return dataset     [{assoc}, {assoc}, .... ]         
+ */
+function get_data_subset(experiment, range, condition) {
+
+  var dataset = get_data(experiment, range, condition);
+
+  return dataset.slice(0, 4);
+}
+
+/**
  * Appends condition-specific data to the dataset.
  *
- * @param  dataset           [{assoc}, {assoc}, .... ]               dataset with base experiment constants   
- *         condition_data    {condition: [], condition2: []... }     condition set for that experiment         
- *         condition         {string}                                Name of condition
+ * @param  dataset           [{assoc}, {assoc}, .... ]     dataset with base experiment constants   
+ *         condition_data    [{assoc}, {assoc}, .... ]     condition set for that experiment         
  *
  * @return dataset           [{assoc}, {assoc}, .... ]  
  **/
-function append_condition_data(dataset, condition_data, condition){
-
-  if (!condition_data[condition]) {
-    throw new Error(condition + " not supported.");
-  }
+function create_condition_dataset(dataset, condition_data){
 
   var condition_dataset = [];
 
   for (let i in dataset) {
-    let obj = Object.assign({}, dataset[i], condition_data[condition][i]);
+    let obj = Object.assign({}, dataset[i], condition_data[i]);
     condition_dataset.push(obj);
   }
 

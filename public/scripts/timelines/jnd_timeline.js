@@ -18,8 +18,7 @@ var multiplier = 1; // Sets how much the data should be scaled by.
 // =========================================================
 // INSTANTIATE JND EXPERIMENT OBJECT
 
-var use_all_data = false;
-const JND_EXCEL = get_data("jnd", jnd_exp.range, jnd_exp.condition_name, use_all_data);
+const JND_EXCEL = get_data_subset("jnd", jnd_exp.range, jnd_exp.condition_name);
 
 jnd_exp.prepare_experiment("latin_square", JND_EXCEL);
 

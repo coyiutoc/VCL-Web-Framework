@@ -14,14 +14,15 @@ class JND {
     else{
       this.range = range;
     }  
-    
-    this.condition_name = condition_name; 
 
     if ((graph_type !== "scatter") && (graph_type !== "strip")) {
       throw Error(graph_type + " is not supported.")} 
     else { 
       this.graph_type = graph_type;
     };  
+
+    this.condition_name = condition_name; 
+    this.condition_group = condition_name.split('_')[0];
 
     // ========================================
     // EXPERIMENT CONSTANTS
@@ -140,7 +141,7 @@ class JND {
                                                         constants.mean,
                                                         constants.SD);
 
-        if (jnd_exp.condition_name.split('_')[0] === "distractor"){
+        if (jnd_exp.condition_group === "distractor"){
           var left_dist_coordinates = generateDistribution(constants.dist_base,
                                                            constants.dist_error,
                                                            constants.dist_num_points,
@@ -539,11 +540,11 @@ class JND {
     var datasets = [left_dataset, right_dataset];
     var distractors = [];
 
-    if (this.condition_name.split("_")[0] === "distractor"){
-      var left_dist_dataset = prepare_coordinates(distractor_coordinates[0], distribution_size);
-      var right_dist_dataset = prepare_coordinates(distractor_coordinates[1], distribution_size);
+    if (this.condition_group === "distractor"){
+      left_dataset = prepare_coordinates(distractor_coordinates[0], distribution_size);
+      right_dataset = prepare_coordinates(distractor_coordinates[1], distribution_size);
 
-      distractors = [left_dist_dataset, right_dist_dataset];
+      distractors = [left_dataset, right_dataset];
     }
 
     switch(this.graph_type){
@@ -554,6 +555,24 @@ class JND {
         this.plot_strip(datasets);
         break;
     }
+  }
+
+  /**
+   * D3 code for appending data into the graph. 
+   */
+  plot_scatter_data(chart, xscale, yscale, data, point_size, point_color) {
+
+    chart.selectAll("circle_data")
+               .data(data)
+                .enter()
+                .append("circle") // Creating the circles for each entry in data set 
+                .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
+                  return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
+                })
+                .attr("cy", function (d) {
+                  return yscale(d[1]);
+                })
+                .attr("r", point_size).style("fill", point_color);
   }
 
   /**
@@ -619,7 +638,7 @@ class JND {
                                 .call(x_axis)
            
       // TODO: Different handling for distractor - needs to be abstracted out somehow in future     
-      if (this.condition_name.split("_")[0] === "distractor"){ 
+      if (this.condition_group === "distractor"){ 
            
         let dataset = datasets[i];
         let distractor = distractors[i];
@@ -631,42 +650,15 @@ class JND {
           let point = dataset[j];
           let dist_point = distractor[j];
 
-          chart.selectAll("circle_data")
-               .data([point])
-                .enter()
-                .append("circle") // Creating the circles for each entry in data set 
-                .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
-                  return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
-                })
-                .attr("cy", function (d) {
-                  return yscale(d[1]);
-                })
-                .attr("r", trial_data.point_size).style("fill", trial_data.point_color);
+          // Distractor point
+          this.plot_scatter_data(chart, xscale, yscale, [point], trial_data.point_size, trial_data.point_color);  
 
-          chart.selectAll("circle_data")
-               .data([dist_point])
-                .enter()
-                .append("circle") // Creating the circles for each entry in data set 
-                .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
-                  return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
-                })
-                .attr("cy", function (d) {
-                  return yscale(d[1]);
-                })
-                .attr("r", trial_data.dist_point_size).style("fill", trial_data.dist_color);
+          // Target point    
+          this.plot_scatter_data(chart, xscale, yscale, [dist_point], trial_data.dist_point_size, trial_data.dist_color);
+
         }
       } else {
-          chart.selectAll("circle_data") // Technically no circles inside div yet, but will be creating it
-               .data(datasets[i])
-                .enter()
-                .append("circle") // Creating the circles for each entry in data set 
-                .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
-                  return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
-                })
-                .attr("cy", function (d) {
-                  return yscale(d[1]);
-                })
-                .attr("r", trial_data.point_size).style("fill", trial_data.point_color);
+          this.plot_scatter_data(chart, xscale, yscale, datasets[i], trial_data.point_size, trial_data.point_color);        
       }     
 
       // Set axis color
