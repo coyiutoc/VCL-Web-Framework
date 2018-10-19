@@ -1,4 +1,12 @@
-class JND {
+import * as React from 'react';
+import ReactDOMServer from 'react-dom/server';
+
+import JNDTrialDisplay from '../../components/JNDTrialDisplay';
+import { randomize_position } from '../helpers/experiment_helpers';
+import { generateDistribution } from '../generators/gaussian_distribution_generator';
+import { initialize_latin_square } from '../generators/latin_square_generator';
+
+export default class JND {
 
   /**
    * Initializes a JND experiment object. 
@@ -21,7 +29,7 @@ class JND {
       this.graph_type = graph_type;
     };  
 
-    this.condition_name = condition_name; 
+    this.condition_name = condition_name;
     this.condition_group = condition_name.split('_')[0];
 
     // ========================================
@@ -51,6 +59,9 @@ class JND {
     this.current_sub_condition_index;
     this.adjusted_quantity_matrix = {};   // The matrix is in this format:
                                           // { sub_condition_index : [adjusted_quantity1, adjusted_quantity2 ... ] }
+
+    // originally floated in "jnd_timeline"
+    this.left_coordinates, this.right_coordinates, this.distribution_size, this.trial_data, this.distractor_coordinates = null;
   }
 
   /**
@@ -100,16 +111,16 @@ class JND {
     if ((block_type !== "test") && (block_type !== "practice")) {throw Error(block_type + " is not supported.")};
 
     // Initialize a variable for this so it is usable inside on_start
-    var jnd_exp = this; 
+    var jnd_exp = this;
 
     var trial = {
-      type:'external-html-keyboard-response',
-      url: localhost + "/jnd_trial",
+      type:'html-keyboard-response',
+      // url: LOCAL_HOST + "/jnd_trial",
+      stimulus: "<div>UBC, I love you!</div>",
       choices:['z', 'm', 'q'], //q is exit button (for debugging)
       execute_script: true,
       response_ends_trial: true,
       on_start: function(trial){ // NOTE: on_start takes in trial var 
-
         // Set the constants to be used:
         if (block_type == "test"){ 
           var index = jnd_exp.current_sub_condition_index; 
@@ -155,7 +166,7 @@ class JND {
                                                            constants.num_SD,
                                                            constants.mean,
                                                            constants.SD);
-          distractor_coordinates = [left_dist_coordinates, right_dist_coordinates];
+          jnd_exp.distractor_coordinates = [left_dist_coordinates, right_dist_coordinates];
         }
 
         // Randomize position of the base and adjusted graphs
@@ -172,14 +183,24 @@ class JND {
         //                                           adjusted_correlation);
 
         // Set up D3 variables for plotting
-        left_coordinates = result.left;
-        right_coordinates = result.right;
-        distribution_size = constants.num_points;   
-        trial_data = trial.data; 
+        jnd_exp.left_coordinates = result.left;
+        jnd_exp.right_coordinates = result.right;
+        jnd_exp.distribution_size = constants.num_points;   
+        jnd_exp.trial_data = trial.data;
 
         console.log("[RIGHT] Correlation: " + trial.data.right_correlation);
         console.log("[LEFT] Correlation: " + trial.data.left_correlation);
         
+        trial.stimulus = ReactDOMServer.renderToString(
+          <JNDTrialDisplay
+            leftCoordinates={jnd_exp.left_coordinates} 
+            rightCoordinates={jnd_exp.right_coordinates}
+            distributionSize={jnd_exp.distribution_size}
+            graphType="scatter"
+            trialData={jnd_exp.trial_data}
+            distractorCoordinates={jnd_exp.distractor_coordinates}
+            />
+        );
       },
       on_finish: function(data){ // NOTE: on_finish takes in data var 
         jnd_exp.check_response(data);
@@ -232,7 +253,7 @@ class JND {
 
     // Block specific saves 
     if (block_type == "test"){
-      jnd_exp.adjusted_quantity_matrix[index].push(adjusted_correlation);
+      this.adjusted_quantity_matrix[index].push(adjusted_correlation);
       trial.data.run_type = "test";
     }
     else{
@@ -318,7 +339,7 @@ class JND {
 
       var variance = [];
       var mean = [];
-      for (i = 0; i < adjusted_quantity_windows.length; i++){
+      for (let i = 0; i < adjusted_quantity_windows.length; i++){
         variance.push(math.var(adjusted_quantity_windows[i]));
         mean.push(math.mean(adjusted_quantity_windows[i]));
       }
@@ -527,216 +548,4 @@ class JND {
     hiddenElement.download = this.condition_name + "_jnd_summary_results.csv";
     hiddenElement.click();
   }
-
-
-  /**
-   * Performs the necessary D3 operations to plot distributions depending on graph type.
-   */
-  plot_distributions() {
-
-    var left_dataset = prepare_coordinates(left_coordinates, distribution_size);
-    var right_dataset = prepare_coordinates(right_coordinates, distribution_size);
-
-    var datasets = [left_dataset, right_dataset];
-    var distractors = [];
-
-    if (this.condition_group === "distractor"){
-      left_dataset = prepare_coordinates(distractor_coordinates[0], distribution_size);
-      right_dataset = prepare_coordinates(distractor_coordinates[1], distribution_size);
-
-      distractors = [left_dataset, right_dataset];
-    }
-
-    switch(this.graph_type){
-      case "scatter":
-        this.plot_scatter(datasets, distractors);
-        break;
-      case "strip":
-        this.plot_strip(datasets);
-        break;
-    }
-  }
-
-  /**
-   * D3 code for appending data into the graph. 
-   */
-  plot_scatter_data(chart, xscale, yscale, data, point_size, point_color) {
-
-    chart.selectAll("circle_data")
-               .data(data)
-                .enter()
-                .append("circle") // Creating the circles for each entry in data set 
-                .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
-                  return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
-                })
-                .attr("cy", function (d) {
-                  return yscale(d[1]);
-                })
-                .attr("r", point_size).style("fill", point_color);
-  }
-
-  /**
-   * Plots distributions using scatter plots. 
-   *
-   * @ param  datasets    {array}     Dataset of data
-   *          distractors {array}     Dataset of distractors, if any
-   */
-  plot_scatter(datasets, distractors) {
-
-    var height = window.innerHeight/1.5; 
-    var width = height/2;
-
-    var buffer = d3.select("#graph") // Insert into the div w/ id = "graph"
-                   .append("svg") 
-                      .attr("width", height) 
-                      .attr("height", width)
-                      .style("display", "block");
-
-    // Create scales:
-    // ** D3 creates a function that takes in input between [0, 100] and 
-    //    outputs between [0, width].
-    //    Basically, domain = input, range = ouput. 
-    var xscale = d3.scaleLinear()
-                   .domain([0, multiplier]) 
-                   .range([0, width]);
-
-    var yscale = d3.scaleLinear()
-                   .domain([multiplier * -1, 0]) // !!! NOTE: this is the hack b/c we flipped the y-values 
-                                                 //     to be negative --> graph is now positive correlation
-                                                 //     but on 4th quadrant --> force domain to be from 
-                                                 //     [-1, 0] to move it to 1st quadrant 
-                   .range([height/2, 0]);
-
-    // Create axes: 
-    var x_axis = d3.axisBottom()
-                   .scale(xscale)
-                   .tickSize([0]);
-
-    var y_axis = d3.axisLeft()
-                   .scale(yscale)
-                   .tickSize([0]);
-
-    // Create/append the SVG for both graphs: 
-    for (let i in datasets){
-
-      var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
-                    .append("svg") 
-                      .attr("width", width + 60) // Width and height of the SVG viewpoint
-                      .attr("height", height)   // +40 is for buffer (points going -x)
-                      .attr("style", "margin-right: " + width/2);
-
-      // Creating transform SVG elements + append to SVG: 
-      var yAxisElements = chart.append("g")
-                               .attr("transform", "translate(50, 10)")
-                               //.attr("transform", "translate(50, " + height/2 + ")")
-                               .call(y_axis);
-
-      var xAxisTranslate = height/2 + 10;
-      //var xAxisTranslate = height - 1;
-      var xAxisElements = chart.append("g")
-                                .attr("transform", "translate(50, " + xAxisTranslate  +")")
-                                .call(x_axis)
-           
-      // TODO: Different handling for distractor - needs to be abstracted out somehow in future     
-      if (this.condition_group === "distractor"){ 
-           
-        let dataset = datasets[i];
-        let distractor = distractors[i];
-
-        // Alternate plotting of distractor and main dataset points - want equal chance of one
-        // getting occluded over the other
-        for (let j in dataset) {
-
-          let point = dataset[j];
-          let dist_point = distractor[j];
-
-          // Distractor point
-          this.plot_scatter_data(chart, xscale, yscale, [point], trial_data.point_size, trial_data.point_color);  
-
-          // Target point    
-          this.plot_scatter_data(chart, xscale, yscale, [dist_point], trial_data.dist_point_size, trial_data.dist_color);
-
-        }
-      } else {
-          this.plot_scatter_data(chart, xscale, yscale, datasets[i], trial_data.point_size, trial_data.point_color);        
-      }     
-
-      // Set axis color
-      chart.selectAll("path")
-           .attr("stroke", trial_data.axis_color);
-
-      // Remove tick labels
-      chart.selectAll("text").remove();     
-
-    }
-
-    // Set background color
-    document.body.style.backgroundColor = trial_data.background_color;
-  }
-
-  /**
-   * Plots distributions using strip plots. 
-   *
-   * @ param  datasets   {array}
-   */
-  plot_strip(datasets) {
-
-    var width = window.innerWidth * 0.7;
-    var height = window.innerHeight * 0.5;
-
-    var xscale = d3.scaleLinear()
-                   .domain([0, multiplier]) 
-                   .range([0, width]);
-
-    var yscale = d3.scaleLinear()
-                   .domain([multiplier * -1, 0])
-                   .range([height/2, 0]);
-
-    // Create axes: 
-    var x_axis = d3.axisBottom()
-                   .scale(xscale)
-                   .tickSize([0]);
-
-    var y_axis = d3.axisLeft()
-                   .scale(yscale)
-                   .tickSize([0]);
-
-    // Create/append the SVG for both graphs: 
-    for (var data of datasets){
-      
-      var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
-                    .append("svg") 
-                      .attr("width", width) 
-                      .attr("height", height);   
-
-      var xAxisTranslate = height/2;
-      var xAxisElements = chart.append("g")
-                                .attr("transform", "translate(50, " + xAxisTranslate  +")")
-                                .call(x_axis)
-
-      // Populating data: 
-      chart.selectAll("strip") // Technically no circles inside div yet, but will be creating it
-            .data(data)
-              .enter()
-              .append("rect") // Creating the circles for each entry in data set 
-              .attr("x", function (d) {
-                return xscale(d[0]);
-              })
-              .attr("transform", "translate(50, " + height/4 + ")")
-              .style("width", 2)
-              .style("height", height/2);
-
-      // Set axis color
-      chart.selectAll("path")
-           .attr("stroke", trial_data.axis_color);
-
-      // Remove tick labels
-      chart.selectAll("text").remove();     
-
-    }
-
-    // Set background color
-    document.body.style.backgroundColor = trial_data.background_color;
-  }
-
 }

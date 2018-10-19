@@ -225,3 +225,9 @@ function create_condition_dataset(dataset, condition_data){
 
   return condition_dataset;
 }
+
+export {
+  get_data,
+  get_data_subset,
+  create_condition_dataset
+}
