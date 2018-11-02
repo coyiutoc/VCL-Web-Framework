@@ -15,6 +15,8 @@ var middle_coordinates;
 var distribution_size;
 var trial_data; 
 
+var multiplier = 1; // Sets how much the data should be scaled by.
+
 // =========================================================
 // INSTANTIATE STEVENS EXPERIMENT OBJECT
 
