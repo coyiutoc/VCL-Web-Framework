@@ -5,21 +5,6 @@ var body_parser = require('body-parser');
 // --- INSTANTIATE THE APP
 var app = express();
 
-var webpack = require('webpack');
-var webpackConfig = require('./webpack.config');
-
-var compiler = webpack(webpackConfig);
-
-// webpack hmr
-app.use(
-    require('webpack-dev-middleware')(compiler, {
-        noInfo: true,
-        publicPath: webpackConfig.output.publicPath
-    })
-);
-
-app.use(require('webpack-hot-middleware')(compiler));
-
 // Configure body-parser for express
 app.use(body_parser.urlencoded({extended:false}));
 app.use(body_parser.json());
@@ -28,12 +13,12 @@ app.use(body_parser.json());
 app.use(express.static(__dirname + '/public'));
 app.use('/jspsych', express.static(__dirname + "/jspsych"));
 
-app.use('/dist', express.static(__dirname + "/dist"));
-
 // --- VIEW LOCATION, SET UP SERVING STATIC HTML
-app.set('views', __dirname + '/dist');
+app.set('views', __dirname + '/public/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
+
+// app.disable('view cache');
 
 // --- ROUTING
 // Home page
