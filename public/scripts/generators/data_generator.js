@@ -1,3 +1,15 @@
+const SUBCONDITION_REPEATS = {
+    foundational : {
+        base : 0
+    },
+    design : {
+        distractor_rainbow: 0
+    },
+    design_multi : {
+        distractor_multi: 4
+    }
+}
+
 // =========================================================
 // JND DATA
 
@@ -71,8 +83,35 @@ const JND_BASE = {
     {distribution_type: "gaussian", base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
 
     {distribution_type: "gaussian", base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
-    ]
+    ],
+
+  design_multi: 
+    [
+    {distribution_type: "gaussian", base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#cd4c32', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
+
+    {distribution_type: "gaussian", base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#cd4c32', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
+
+    {distribution_type: "gaussian", base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#cd4c32', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
+
+    {distribution_type: "gaussian", base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#007ebc', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
+
+    {distribution_type: "gaussian", base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#007ebc', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
+
+    {distribution_type: "gaussian", base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#007ebc', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
     
+    {distribution_type: "gaussian", base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#20874a', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
+
+    {distribution_type: "gaussian", base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#20874a', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
+
+    {distribution_type: "gaussian", base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#20874a', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
+    
+    {distribution_type: "gaussian", base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#dbc667', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
+
+    {distribution_type: "gaussian", base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#dbc667', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
+
+    {distribution_type: "gaussian", base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#dbc667', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3}
+    
+    ]
 }
 
 const JND_CONDITIONS = {
@@ -108,6 +147,33 @@ const JND_CONDITIONS = {
     {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'YELLOW', target_color: 'BLACK', dist_point_size: 3},
 
     {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'YELLOW', target_color: 'BLACK', dist_point_size: 3}
+    ],
+
+  distractor_multi: 
+    [
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: '#cd4c32', target_color: 'BLACK', dist_point_size: 3},
+
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: '#cd4c32', target_color: 'BLACK', dist_point_size: 3},
+
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: '#cd4c32', target_color: 'BLACK', dist_point_size: 3},
+
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: '#007ebc', target_color: 'BLACK', dist_point_size: 3},
+
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: '#007ebc', target_color: 'BLACK', dist_point_size: 3},
+
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: '#007ebc', target_color: 'BLACK', dist_point_size: 3}, 
+    
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: '#20874a', target_color: 'BLACK', dist_point_size: 3},
+
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: '#20874a', target_color: 'BLACK', dist_point_size: 3},
+
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: '#20874a', target_color: 'BLACK', dist_point_size: 3}, 
+
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: '#dbc667', target_color: 'BLACK', dist_point_size: 3},
+
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: '#dbc667', target_color: 'BLACK', dist_point_size: 3},
+
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: '#dbc667', target_color: 'BLACK', dist_point_size: 3} 
     ]
 }
 
@@ -182,12 +248,24 @@ function get_data(experiment, range, condition, is_full_set){
     throw new Error(experiment + " not supported.");
   }
 
+  // Repeat subconditions if specified
+  let result = [];
+  let repeats = SUBCONDITION_REPEATS[range][condition];
+
+  if (repeats > 0) {
+      for (let i = 0; i < repeats; i++) {
+        result = result.concat(dataset);
+      }
+  } else {
+    result = dataset;
+  }    
+
   // Splice out only 4 subconditions if don't want full set
   if (!is_full_set){
-    dataset = dataset.slice(0,4);
+    result = result.slice(0,1);
   }
 
-  return dataset;
+  return result;
 }
 
 /**
@@ -201,7 +279,7 @@ function get_data(experiment, range, condition, is_full_set){
  */
 function get_data_subset(experiment, range, condition) {
 
-  var dataset = get_data(experiment, range, condition);
+  var dataset = get_data(experiment, range, condition, false);
 
   return dataset.slice(0, 4);
 }

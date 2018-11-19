@@ -29,7 +29,7 @@ stevens_exp.prepare_experiment("latin_square", STEVENS_EXCEL);
 
 var welcome = {
   type: 'html-keyboard-response',
-  stimulus: '<div align = "center">' + '<img src="../img/VCL_lab_logo.png"></img> <br>' +
+  stimulus: '<div align = "center">' + `<img src="${localhost}/img/VCL_lab_logo.png"></img> <br>` +
             'This is a <b>Proof of Concept</b> for a <b>Foundational Stevens Experiment</b>.' + 
             '<br><br><p><font size = 15>Press any key to begin.<p></font>' +
             '</div>',
@@ -47,7 +47,7 @@ var instructions = {
       " the <u>midpoint</u> between the left and right graphs. <br><br>" +
       " <b>m</b> increases the correlation. <br>" +
       " <b>z</b> decreases the correlation. <br><br>" + 
-      "<div style='float: left; margin-bottom: 25px;'><img src='../img/sample_stevens.png'></img></div>" +
+      `<div style='float: left; margin-bottom: 25px;'><img src='${localhost}/img/sample_stevens.png'></img></div>` +
       "<br> <br> <br> When you are done adjusting the center graph, hit the <b>spacebar</b>." + 
       "<br> Press any key to continue. </div>"          
 };

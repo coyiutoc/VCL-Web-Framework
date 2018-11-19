@@ -9,7 +9,7 @@ class JND {
    */
   constructor(range, condition_name, graph_type) {
 
-    if ((range !== "foundational") && (range !== "design")) {
+    if ((range !== "foundational") && (range !== "design") && (range !== "design_multi")) {
       throw Error(range + " is not supported.") }
     else{
       this.range = range;

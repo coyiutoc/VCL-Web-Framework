@@ -18,44 +18,35 @@ app.set('views', __dirname + '/public/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
-// app.disable('view cache');
-
 // --- ROUTING
 // Home page
 app.get('/', function(request, response) {
     response.render('index.html');
 });
 
-// JND Experiment (Scatter)
-app.get('/jnd_scatter', function(request, response) {
-    response.render('jnd/jnd_experiment.html', {range: 'foundational', condition: 'base', graph_type: 'scatter'});
+// Experiment Routing
+app.get('/experiment/:experiment/graph_type/:graph_type/range/:range/condition/:condition', function(request, response) {
+	
+	console.log(request.params);
+
+	let keys = {
+		range: request.params.range,
+		condition: request.params.condition, 
+		graph_type: request.params.graph_type
+	}
+
+	if (request.params.experiment === "jnd") {
+    	response.render('jnd/jnd_experiment.html', keys);
+    } else if (request.params.experiment === "stevens") {
+    	response.render('stevens/stevens_experiment.html', keys);
+    }	
 });
 
-// JND Experiment (Scatter: Distractor Rainbow)
-app.get('/jnd_scatter_distractor_rainbow', function(request, response) {
-    response.render('jnd/jnd_experiment.html', {range: 'design', condition: 'distractor_rainbow', graph_type: 'scatter'});
-});
-
-// JND Experiment (Strip)
-app.get('/jnd_strip', function(request, response) {
-    response.render('jnd/jnd_experiment.html', {range: 'foundational', condition: 'base', graph_type: 'strip'});
-});
 
 // JND Trial Display
 app.get('/jnd_trial', function(request, response) {
     response.render('jnd/jnd_trial_display.html');
 });
-
-// Stevens Experiment (Scatter)
-app.get('/stevens_scatter', function(request, response) {
-    response.render('stevens/stevens_experiment.html', {range: 'foundational', condition: 'base', graph_type: 'scatter'});
-});
-
-// Stevens Experiment (Strip)
-app.get('/stevens_strip', function(request, response) {
-    response.render('stevens/stevens_experiment.html', {range: 'foundational', condition: 'base', graph_type: 'strip'});
-});
-
 
 // Stevens Trial Display
 app.get('/stevens_trial', function(request, response) {
