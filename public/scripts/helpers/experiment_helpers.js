@@ -78,6 +78,29 @@ function randomize_position(trial, base_coordinates, adjusted_coordinates, base_
   return result;
 }
 
+function randomize_radius_position(trial, base_radius, adjusted_radius) {
+
+  var result = {left: 0, right: 0, base_is_right: true};
+
+  if (Math.random() < 0.5){
+    result.left = base_radius;
+    result.base_is_right = false; 
+    trial.data.left_radius = base_radius;
+
+    result.right = adjusted_radius;
+    trial.data.right_radius = adjusted_radius;
+    }
+  else{
+    result.left = adjusted_radius;
+    trial.data.left_radius = adjusted_radius;
+
+    result.right = base_radius;
+    trial.data.right_radius = base_radius;
+  }
+
+  return result;
+}
+
 /** 
  * Forces the right graph to always have the greater correlation.
  * Used for testing purposes.
