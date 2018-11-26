@@ -539,10 +539,15 @@ class JND_Slice {
       arcs.append("path")
           .attr("fill", function(d, i) {
               if (i === 0) {
-                  return "#0000ff";
+                  return trial_data.fill_color;
               } else {
                   return "#ffffff";
               }    
+          })
+          .attr("stroke", function(d, i) {
+            if (i === 0) {
+              return trial_data.outline_color;
+            }
           })
           .attr("d", arc);
       }
