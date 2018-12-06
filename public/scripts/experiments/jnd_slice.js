@@ -505,10 +505,16 @@ class JND_Slice {
 
     var radii = [left_radius * this.PIXELS_PER_CM, right_radius * this.PIXELS_PER_CM];
 
+    console.log(this.PIXELS_PER_CM);
+
+    // To make it appear as ONE HORIZONTAL LINE, replace this with
+    // var data = [0, 0, 50, 50];
     var data = [25, 25, 25, 25];
 
     var height = window.innerHeight/1.5; 
     var width = window.innerWidth/3;
+
+    let count = 0;
 
     for (let radius of radii) {
 
@@ -516,9 +522,19 @@ class JND_Slice {
                     .append("svg") 
                       .attr("width", width) // Width and height of the SVG viewpoint
                       .attr("height", height);   // +40 is for buffer (points going -x)
-                      
-      var g = chart.append("g")
-                   .attr("transform", "translate(" + width/3 + "," + height/1.5 + ")");
+            
+      if (count === 0){
+
+        // Move 1 CM UP
+        var g = chart.append("g")
+                     .attr("transform", "translate(" + width/3 + "," + (height/1.5 - this.PIXELS_PER_CM) + ")");
+
+      } else {
+
+        // Move 2 CM UP
+         var g = chart.append("g")
+                     .attr("transform", "translate(" + width/3 + "," + (height/1.5 - 2*this.PIXELS_PER_CM) + ")");
+      }
 
       // Generate the pie
       var pie = d3.pie();
@@ -549,11 +565,18 @@ class JND_Slice {
               return trial_data.outline_color;
             }
           })
+          .attr("stroke-width", function(d, i) {
+            if (i === 0) {
+              return 2;
+            }
+          })
           .attr("d", arc);
+
+        count++;
+            
       }
 
       document.body.style.backgroundColor = trial_data.background_color;
-
   }
 
 }
