@@ -1,5 +1,5 @@
 {
-  "name": "VCL POC",
+  "name": "huh",
   "version": "1.0.0",
   "description": "This is a Node.js application that runs proof of concept experiments for the following:",
   "main": "app.js",
@@ -37,3 +37,4 @@
     "url": "https://github.com/coyiutoc/VCL_Correlation_POC/issues"
   },
   "homepage": "https://github.com/coyiutoc/VCL_Correlation_POC#readme"
+}
