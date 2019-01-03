@@ -22,8 +22,6 @@ npm install
 
 ## Running the Experiment
 
-Navigate into the folder, then do:
-
 ```
 node app.js
 ```
