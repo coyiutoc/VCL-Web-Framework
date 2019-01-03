@@ -12,30 +12,12 @@ This is a Node.js application that runs proof of concept experiments for the fol
 
 Visit the following link to download Node: [here.](https://nodejs.org/en/)
 
-Navigate into repository folder, then run:
-```
-npm init
-```
-
 #### (3) Install Dependencies
+
+Navigate into the folder then run:
 
 ```
 npm install
-```
-
-If it is still giving errors on not being able to find ejs or express npm modules, manually install:
-
-```
-npm install ejs
-npm install --save express
-```
-
-#### (4) Install nodemon [optional]
-
-Nodemon is an npm module that restarts the server every time there is changes to the source code (otherwise we always have to restart our server manually whenever a change is made). 
-
-```
-npm install nodemon
 ```
 
 ## Running the Experiment
@@ -46,13 +28,13 @@ Navigate into the folder, then do:
 node app.js
 ```
 
-Or alternatively, if you have nodemon:
+Or alternatively, with nodemon:
 
 ```
 nodemon app.js
 ```
 
-The app is available at [localhost:8080](localhost:8080). If you want to access it at a different port, change the port number in app.js (line 47). 
+The app is available at [localhost:8080](localhost:8080). If you want to access it at a different port, change the port number in app.js (line 57). 
 
 ## Testing the POC
 
