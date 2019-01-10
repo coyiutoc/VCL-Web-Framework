@@ -503,79 +503,91 @@ class JND_Slice {
    */
   plot_distributions() {
 
-    var radii = [left_radius * this.PIXELS_PER_CM, right_radius * this.PIXELS_PER_CM];
+    let radii = [left_radius * this.PIXELS_PER_CM, right_radius * this.PIXELS_PER_CM];
 
-    console.log(this.PIXELS_PER_CM);
+    let window_width = window.innerWidth;
+    let width_diff = (3/4)*window_width - (1/4)*window_width;
 
-    // Represents the % that each slice takes up - so this is a pie with 4 "parts".
-    var data = [25, 25, 25, 25];
-
-    var height = window.innerHeight/1.5; 
-    var width = window.innerWidth/2.5;
-
+    // Set up for randomizing position of circle or rect
     let count = 0;
     let random = Math.floor(Math.random() * Math.floor(2));
+    let order = random <= 0.5 ? ["rectangle", "circle"] : ["circle", "rectangle"];
 
     for (let radius of radii) {
 
-      var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
-                    .append("svg") 
-                      .attr("width", width) // Width and height of the SVG viewpoint
-                      .attr("height", height);   // +40 is for buffer (points going -x)
-                             
-      // Right side is higher      
-      if (random === 0) {      
-        if (count === 0){
-          // Move 1 CM UP
-          var g = chart.append("g")
-                       .attr("transform", "translate(" + width/2 + "," + (height/1.5 - this.PIXELS_PER_CM) + ")");
-        } else {
-          // Move 2 CM UP
-           var g = chart.append("g")
-                       .attr("transform", "translate(" + width/2 + "," + (height/1.5 - 2*this.PIXELS_PER_CM) + ")");
-        }
+      // SVG dimensions
+      let height = radius*2; 
+      let width = radius*2;
+
+      if (count === 0) {
+
+        // Margin = difference between 3/4 and 1/4 of view width - width of one svg
+        let margin = width_diff - width;
+
+        var chart = d3.select("#graph") 
+                       .append("svg") 
+                        .attr("width", width) 
+                        .attr("height", height)
+                        .attr("style", "margin-right:" + margin + "px"); // Spacing between graphs
+
+      } else {
+         var chart = d3.select("#graph") 
+                       .append("svg") 
+                        .attr("width", width) 
+                        .attr("height", height)
+                        .attr("id", "right_graph");  
+      }  
+
+      if (order[count] === "circle") {
+
+        // Move the origin to center of SVG
+        let g = chart.append("g")
+                     .attr("transform", "translate(" + radius + "," + radius + ")");
+
+        // Generate the pie
+        let pie = d3.pie();
+
+        // Generate the arcs
+        let arc = d3.arc()
+                    .innerRadius(0)
+                    .outerRadius(radius);
+
+        // Represents the % that each slice takes up - so this is a pie with 4 "parts".
+        let data = [25, 25, 25, 25];
+        
+        // Generate groups
+        let arcs = g.selectAll("arc")
+                    .data(pie(data))
+                    .enter()
+                    .append("g")
+                    .attr("class", "arc")
+
+        //Draw arc paths
+        arcs.append("path")
+            .attr("fill", function(d, i) {
+              return trial_data.fill_color;
+            })
+            .attr("stroke", function(d, i) {
+              return trial_data.fill_color;
+            })
+            .attr("d", arc);
+
+      } else if (order[count] === "rectangle") {
+
+        let g = chart.append("g");
+
+        let dimension = radius * 2;               
+        let rect = g.append("rect")
+                       .attr("x", 0)
+                       .attr("y", 0)
+                       .attr("width", dimension)
+                       .attr("height", dimension)
+                       .attr("fill", trial_data.fill_color);
       }
-      // Left side is higher 
-      else {
-        if (count === 0){
-          // Move 2 CM UP
-          var g = chart.append("g")
-                       .attr("transform", "translate(" + width/2 + "," + (height/1.5 - 2*this.PIXELS_PER_CM) + ")");
-        } else {
-          // Move 1 CM UP
-           var g = chart.append("g")
-                       .attr("transform", "translate(" + width/2 + "," + (height/1.5 - this.PIXELS_PER_CM) + ")");
-        }
-      }
 
-      // Generate the pie
-      var pie = d3.pie();
+      count++;
 
-      // Generate the arcs
-      var arc = d3.arc()
-                  .innerRadius(0)
-                  .outerRadius(radius);
-
-      //Generate groups
-      var arcs = g.selectAll("arc")
-                  .data(pie(data))
-                  .enter()
-                  .append("g")
-                  .attr("class", "arc")
-
-      //Draw arc paths
-      arcs.append("path")
-          .attr("fill", function(d, i) {
-            return trial_data.fill_color;
-          })
-          .attr("stroke", function(d, i) {
-            return trial_data.fill_color;
-          })
-          .attr("d", arc);
-
-        count++;
-
-      }
+    }
 
       document.body.style.backgroundColor = trial_data.background_color;
   }
