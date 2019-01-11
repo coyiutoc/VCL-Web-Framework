@@ -505,8 +505,8 @@ class JND_Slice {
 
     let radii = [left_radius * this.PIXELS_PER_CM, right_radius * this.PIXELS_PER_CM];
 
-    let window_width = window.innerWidth;
-    let width_diff = (3/4)*window_width - (1/4)*window_width;
+    // Margin calculations
+    let width_diff = (3/4)*window.innerWidth - (1/4)*window.innerWidth;
 
     // Set up for randomizing position of circle or rect
     let count = 0;
@@ -521,14 +521,20 @@ class JND_Slice {
 
       if (count === 0) {
 
-        // Margin = difference between 3/4 and 1/4 of view width - width of one svg
-        let margin = width_diff - width;
+        let margin_right = width_diff - width; // Margin = difference between 3/4 and 1/4 of view width - width of one svg
+        
+        // Firefox check (doesn't handle JsPsych formatting well)
+        if (typeof InstallTrigger !== 'undefined') {
+          var margin_top = window.innerHeight/2 - radius;
+        } else {
+          var margin_top = 0;
+        }
 
         var chart = d3.select("#graph") 
                        .append("svg") 
                         .attr("width", width) 
                         .attr("height", height)
-                        .attr("style", "margin-right:" + margin + "px"); // Spacing between graphs
+                        .attr("style", "margin-right:" + margin_right + "px; margin-top: " + margin_top + "px");
 
       } else {
          var chart = d3.select("#graph") 
