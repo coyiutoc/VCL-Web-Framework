@@ -1,4 +1,4 @@
-class JND_Slice {
+class JND_Radius {
 
   /**
    * Initializes a JND experiment object. 
@@ -16,14 +16,13 @@ class JND_Slice {
       this.range = range;
     }  
 
-    if (graph_type !== "pie") {
+    if (graph_type !== "shape") {
       throw Error(graph_type + " is not supported.")} 
     else { 
       this.graph_type = graph_type;
     };  
 
     this.condition_name = condition_name; 
-    this.condition_group = condition_name.split('_')[0];
 
     // ========================================
     // EXPERIMENT CONSTANTS
@@ -504,6 +503,7 @@ class JND_Slice {
   plot_distributions() {
 
     let radii = [left_radius * this.PIXELS_PER_CM, right_radius * this.PIXELS_PER_CM];
+    let shapes = this.condition_name.split("_");
 
     // Margin calculations
     let width_diff = (3/4)*window.innerWidth - (1/4)*window.innerWidth;
@@ -511,7 +511,7 @@ class JND_Slice {
     // Set up for randomizing position of circle or rect
     let count = 0;
     let random = Math.floor(Math.random() * Math.floor(2));
-    let order = random <= 0.5 ? ["rectangle", "circle"] : ["circle", "rectangle"];
+    let order = random <= 0.5 ? [shapes[0], shapes[1]] : [shapes[1], shapes[0]];
 
     for (let radius of radii) {
 
@@ -544,51 +544,27 @@ class JND_Slice {
                         .attr("id", "right_graph");  
       }  
 
+      // Circle shape
       if (order[count] === "circle") {
 
-        // Move the origin to center of SVG
-        let g = chart.append("g")
-                     .attr("transform", "translate(" + radius + "," + radius + ")");
+        this.plot_circle(chart, radius);
 
-        // Generate the pie
-        let pie = d3.pie();
+      // Rectangle shape
+      } else if (order[count] === "square") {
 
-        // Generate the arcs
-        let arc = d3.arc()
-                    .innerRadius(0)
-                    .outerRadius(radius);
+        this.plot_square(chart, radius);
 
-        // Represents the % that each slice takes up - so this is a pie with 4 "parts".
-        let data = [25, 25, 25, 25];
-        
-        // Generate groups
-        let arcs = g.selectAll("arc")
-                    .data(pie(data))
-                    .enter()
-                    .append("g")
-                    .attr("class", "arc")
+      } else if (order[count] === "rotSquare") {
 
-        //Draw arc paths
-        arcs.append("path")
-            .attr("fill", function(d, i) {
-              return trial_data.fill_color;
-            })
-            .attr("stroke", function(d, i) {
-              return trial_data.fill_color;
-            })
-            .attr("d", arc);
+        this.plot_rotated_square(chart, radius);
 
-      } else if (order[count] === "rectangle") {
+      } else if (order[count] === "triangle") {
 
-        let g = chart.append("g");
+        this.plot_triangle(chart, radius);
 
-        let dimension = radius * 2;               
-        let rect = g.append("rect")
-                       .attr("x", 0)
-                       .attr("y", 0)
-                       .attr("width", dimension)
-                       .attr("height", dimension)
-                       .attr("fill", trial_data.fill_color);
+      } else if (order[count] === "rotTriangle") {
+
+        this.plot_rotated_triangle(chart, radius);
       }
 
       count++;
@@ -596,6 +572,125 @@ class JND_Slice {
     }
 
       document.body.style.backgroundColor = trial_data.background_color;
+  }
+
+  /**
+   * D3 code for plotting a circle.
+   *
+   * @param  chart    {svg object}
+   *         radius   {double}         
+   */ 
+  plot_circle(chart, radius) {
+
+    // Move the origin to center of SVG
+    let g = chart.append("g")
+                 .attr("transform", "translate(" + radius + "," + radius + ")");
+
+    // Generate the pie
+    let pie = d3.pie();
+
+    // Generate the arcs
+    let arc = d3.arc()
+                .innerRadius(0)
+                .outerRadius(radius/2);
+
+    // Represents the % that each slice takes up - so this is a pie with 4 "parts".
+    let data = [25, 25, 25, 25];
+    
+    // Generate groups
+    let arcs = g.selectAll("arc")
+                .data(pie(data))
+                .enter()
+                .append("g")
+                .attr("class", "arc")
+
+    //Draw arc paths
+    arcs.append("path")
+        .attr("fill", function(d, i) {
+          return trial_data.fill_color;
+        })
+        .attr("stroke", function(d, i) {
+          return trial_data.fill_color;
+        })
+        .attr("d", arc);
+  }
+
+  /**
+   * D3 code for plotting a square.
+   *
+   * @param  chart    {svg object}
+   *         radius   {double}         
+   */ 
+  plot_square(chart, radius) {
+
+    let g = chart.append("g");
+
+    let rect = g.append("rect")
+                   .attr("x", 0)
+                   .attr("y", 0)
+                   .attr("width", radius)
+                   .attr("height", radius)
+                   .attr("fill", trial_data.fill_color)
+                   .attr("transform", "translate(" + (0.5*radius) + "," + (0.5*radius) + ")");
+  }
+
+  /**
+   * D3 code for plotting a rotated square AKA diamond.
+   *
+   * @param  chart    {svg object}
+   *         radius   {double}         
+   */ 
+  plot_rotated_square(chart, radius) {
+
+    let g = chart.append("g");
+              
+    let rect = g.append("rect")
+                   .attr("x", 0)
+                   .attr("y", 0)
+                   .attr("width", radius)
+                   .attr("height", radius)
+                   .attr("fill", trial_data.fill_color)
+                   .attr("transform", "translate(" + (radius) + "," + (0.25*radius) + ") rotate(45)");
+  }
+
+  /**
+   * D3 code for plotting a triangle.
+   *
+   * @param  chart    {svg object}
+   *         radius   {double}         
+   */ 
+  plot_triangle(chart, radius) {
+
+    let poly = [{"x":(0.5*radius), "y":(0.5*radius)},
+                {"x":(0.5*radius), "y":(1.5*radius)},
+                {"x":(1.5*radius),"y":(1.5*radius)}];
+
+    chart.selectAll("polygon")
+         .data([poly])
+         .enter().append("polygon")
+         .attr("points",function(d) { 
+            return d.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
+         .attr("fill", trial_data.fill_color);
+  }
+
+  /**
+   * D3 code for plotting a rotated triangle.
+   *
+   * @param  chart    {svg object}
+   *         radius   {double}         
+   */ 
+  plot_rotated_triangle(chart, radius) {
+
+    let poly = [{"x":(1.5*radius), "y":(0.5*radius)},
+                {"x":(0.5*radius), "y":(radius)},
+                {"x":(1.5*radius),"y":(1.5*radius)}];
+
+    chart.selectAll("polygon")
+         .data([poly])
+         .enter().append("polygon")
+         .attr("points",function(d) { 
+            return d.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
+         .attr("fill", trial_data.fill_color);        
   }
 
 }

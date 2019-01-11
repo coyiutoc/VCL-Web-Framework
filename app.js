@@ -34,13 +34,13 @@ app.get('/experiment/:experiment/graph_type/:graph_type/range/:range/condition/:
 		condition: request.params.condition, 
 		graph_type: request.params.graph_type
 	}
-
+    debugger;
 	if (request.params.experiment === "jnd") {
     	response.render('jnd/jnd_experiment.html', keys);
     } else if (request.params.experiment === "stevens") {
     	response.render('stevens/stevens_experiment.html', keys);
-    } else if (request.params.experiment === "jnd_slice") {
-    	response.render('jnd/jnd_slice_experiment.html', keys);
+    } else if (request.params.experiment === "jnd_radius") {
+    	response.render('jnd/jnd_radius_experiment.html', keys);
     }	
 });
 

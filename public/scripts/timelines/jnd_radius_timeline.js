@@ -12,7 +12,7 @@ var trial_data;
 // =========================================================
 // INSTANTIATE JND EXPERIMENT OBJECT
 
-const JND_EXCEL = get_data("jnd_slice", jnd_exp.range, jnd_exp.condition_name, true);
+const JND_EXCEL = get_data("jnd_radius", jnd_exp.range, jnd_exp.condition_name, true);
 
 jnd_exp.prepare_experiment("random", JND_EXCEL);
 

@@ -114,7 +114,7 @@ const JND_BASE = {
     ]
 }
 
-const JND_SLICE = {
+const JND_RADIUS = {
 
   foundational:
     [
@@ -247,9 +247,9 @@ function get_data(experiment, range, condition, is_full_set){
       dataset = create_condition_dataset(dataset, JND_CONDITIONS[condition]);
     }
   }
-  else if (experiment === "jnd_slice"){
+  else if (experiment === "jnd_radius"){
 
-    dataset = JND_SLICE[range];
+    dataset = JND_RADIUS[range];
 
   }
   else if (experiment === "stevens"){
