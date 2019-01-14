@@ -126,7 +126,7 @@ const JND_RADIUS = {
 
     {base_radius: 5, initial_difference: 0.02, converge_from_above: true, text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', outline_color: 'BLACK', fill_color: 'BLUE'},
 
-    {base_radius: 6, initial_difference: 0.02, converge_from_above: true, text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', outline_color: 'BLACK', fill_color: 'BLUE'},
+    {base_radius: 6, initial_difference: 0.02, converge_from_above: true, text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', outline_color: 'BLACK', fill_color: 'BLUE'}
     ] 
 }
 

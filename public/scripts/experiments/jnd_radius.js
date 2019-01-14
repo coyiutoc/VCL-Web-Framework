@@ -137,6 +137,7 @@ class JND_Radius {
         //                                           constants.base_correlation,
         //                                           adjusted_correlation);
 
+        // !!!!! REFACTOR THIS DEPENDENCY
         // Set up D3 variables for plotting
         left_radius = result.left;
         right_radius = result.right;
@@ -544,17 +545,21 @@ class JND_Radius {
                         .attr("id", "right_graph");  
       }  
 
-      // Circle shape
+      // Plot depending on shape specified
       if (order[count] === "circle") {
 
         this.plot_circle(chart, radius);
 
-      // Rectangle shape
+      } else if (order[count].includes("slice")) {
+
+        let degrees = order[count].split("-")[1];
+        this.plot_slice(chart, radius, degrees);
+
       } else if (order[count] === "square") {
 
         this.plot_square(chart, radius);
 
-      } else if (order[count] === "rotSquare") {
+      } else if (order[count] === "rotSquare") { //Diamond position
 
         this.plot_rotated_square(chart, radius);
 
@@ -562,7 +567,7 @@ class JND_Radius {
 
         this.plot_triangle(chart, radius);
 
-      } else if (order[count] === "rotTriangle") {
+      } else if (order[count] === "rotTriangle") { //Like 1/2 of a diamond
 
         this.plot_rotated_triangle(chart, radius);
       }
@@ -604,7 +609,7 @@ class JND_Radius {
                 .append("g")
                 .attr("class", "arc")
 
-    //Draw arc paths
+    // Draw arc paths
     arcs.append("path")
         .attr("fill", function(d, i) {
           return trial_data.fill_color;
@@ -613,6 +618,49 @@ class JND_Radius {
           return trial_data.fill_color;
         })
         .attr("d", arc);
+  }
+
+  /**
+   * D3 code for plotting a slice (1/4 of circle).
+   *
+   * @param  chart    {svg object}
+   *         radius   {double}
+   *         rotation {int}         Degrees of rotation in the counterclockwise direction.         
+   */ 
+  plot_slice(chart, radius, rotation) {
+
+    // Move the origin to center of SVG
+    let g = chart.append("g")
+                 .attr("transform", "translate(" + radius + "," + (1.5*radius) + ")");
+
+    // Generate the pie
+    let pie = d3.pie();
+
+    // Generate the arcs
+    let arc = d3.arc()
+                .innerRadius(0)
+                .outerRadius(radius);
+
+    // Represents the % that each slice takes up - so this is a pie with 4 "parts".
+    let data = [25, 25, 25, 25];
+    
+    // Generate groups
+    let arcs = g.selectAll("arc")
+                .data(pie(data))
+                .enter()
+                .append("g")
+                .attr("class", "arc")
+
+    arcs.append("path")
+        .attr("fill", function(d, i) {
+            if (i === 0) {
+                return trial_data.fill_color;
+            } else {
+                return "#ffffff";
+            }    
+        })
+        .attr("d", arc)
+        .attr("transform", "rotate(" + (-1)*rotation + ")");
   }
 
   /**

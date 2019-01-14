@@ -4,6 +4,14 @@
 var timeline = [];
 const localhost = "http://localhost:8080";
 
+// Firefox check for formatting
+if (typeof InstallTrigger !== 'undefined') {
+  var isFirefox = true;
+} else {
+  var isFirefox = false;
+}
+
+// !!! REFACTOR THIS DEPENDENCY - inside generate_trial() of experiment
 // Variables used to generate D3 jnd_trial_display.html:
 var left_radius;
 var right_radius;
@@ -19,11 +27,14 @@ jnd_exp.prepare_experiment("random", JND_EXCEL);
 // =========================================================
 // WELCOME TRIAL BLOCK
 
+let shape_names = jnd_exp.condition_name.split("_");
+
 var welcome = {
   type: 'html-keyboard-response',
-  stimulus: '<div align = "center">' + `<img src="${localhost}/img/VCL_lab_logo.png"></img> <br>` +
-            'This is a <b>Proof of Concept</b> for a <b>Foundational JND Slice Experiment</b>.' + 
-            '<br><br><p><font size = 15>Press any key to begin.<p></font>' +
+  stimulus: `<div align = "center" style="margin-top: ${isFirefox ? "25vh" : "0"}">` + `<img src="${localhost}/img/VCL_lab_logo.png"></img><br><br>` +
+            '<b>Experiment:</b> Foundational JND Radius' + '<br>' + 
+            `<b>Condition:</b> ${shape_names[0]} degrees, ${shape_names[1]}` + 
+            '<br><br><br><p><font size = 15>Press any key to begin.<p></font>' +
             '</div>',
   data: {type: 'instruction'}
 };
@@ -34,15 +45,27 @@ timeline.push(welcome);
 
 var instructions = {
   type: "html-keyboard-response",
-  stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear side-by-side." + 
-      "<br> Indicate which graph is has a <b>greater area</b> by pressing the Z or M key. </p><p>" +
-      "<div style='height: 190px; width: auto; display: block;'>"+
-      `<div style='float: left;'><img src='${localhost}/img/sample_jnd_slice_1.png'></img>` +
-      "<p class='small'><strong>Press the Z key</strong></p></div>" +
-      `<div style='float: right;'><img src='${localhost}/img/sample_jnd_slice_2.png'></img>` +
-      "<p class='small'><strong>Press the M key</strong></p></div>" +
-      "</div>" + "<div> <p>Press any key to continue.</div>" + 
-      "</div>"          
+  stimulus:       
+      `
+      <div align = 'center' style = 'margin-top: ${isFirefox ? "35vh" : "0"}; height: 35vh; display: block'>
+        <p>In this experiment, two shapes will appear side-by-side.
+        <br>
+        Indicate which graph is has a <b>greater area</b> by pressing the Z or M key. </p><p>
+        <div style='height: auto;'>
+          <div style='float: left;'>
+            <img src="${localhost}/img/sample_${shape_names[0]}.png"></img> 
+            <p class='small'><strong>Press the Z key</strong></p>
+          </div>
+
+          <div style='float: right;'>
+            <img src="${localhost}/img/sample_${shape_names[1]}.png"></img>
+            <p class='small'><strong>Press the M key</strong></p>
+          </div>
+        </div>
+      </div>  
+      <br>
+      <div style='text-align: center; display: block'><br><br><br><p>Press any key to continue.</div>
+      ` 
 };
 
 timeline.push(instructions);
@@ -80,16 +103,16 @@ var feedback = {
     // For debugging purposes:
     if (last_trial_correct == -1){
       return '<p>' + 
-             '<font style="font-size:50px; color:blue">Exiting from experiment.<p></font>'
+             `<div style = "margin-top: ${isFirefox ? "45vh" : "0"};"><font style="font-size:50px; color:blue">Exiting from experiment.<p></font></div>`
     }
 
     else if (last_trial_correct){
-      return '<p><i class="fa fa-check-circle" style="font-size:50px; color:green; margin-right: 10px;"></i>' + 
-             '<font style="font-size:50px; color:green">Correct!<p></font>'
+      return `<p><div style = "margin-top: ${isFirefox ? "45vh" : "0"};"><i class="fa fa-check-circle" style="font-size:50px; color:green; margin-right: 10px;"></i>` + 
+             '<font style="font-size:50px; color:green">Correct!<p></font></div>'
     }
     else{
-      return '<p><i class="fa fa-close" style="font-size:50px; color:red; margin-right: 10px;"></i>' + 
-             '<font style="font-size:50px; color:red;"">Incorrect!<p></font>'
+      return `<p><div style = "margin-top: ${isFirefox ? "45vh" : "0"};"><i class="fa fa-close" style="font-size:50px; color:red; margin-right: 10px;"></i>` + 
+             '<font style="font-size:50px; color:red;"">Incorrect!<p></font></div>'
     }
   }
 };
@@ -207,7 +230,7 @@ console.log("======================");
 
 var experiment_end = {
   type: 'html-keyboard-response',
-  stimulus: '<div align = "center">' + 
+  stimulus: `<div align = "center" style = "margin-top: ${isFirefox ? "45vh" : "0"};">` + 
             '<p><font size = 10>You have completed the experiment!<p></font>' +
             '<br>' +
             '<a href="#" onclick="jnd_exp.export_trial_data();" class="btn btn-info btn-block" role="button" style="width: 300px; font-size: 20px">Download Trial Data</a>' +
