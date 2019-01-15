@@ -4,18 +4,12 @@ This is a Node.js application that will serve as the modernization of the origin
 
 Currently supported experiments:
 
-- JND
-  - Foundational
-    - Scatter : Base
-    - Strip : Base
-  - Design
-    - Scatter : Distractor Rainbow
-  - Design-Multi
-    - Scatter : Multi-Phase [Task 1]
-- Stevens
-    - Foundational
-      - Scatter : Base
-      - Strip : Base
+| Name                   | Base Experiment | Trial Type      | Graph Type(s)   | Balancing       |
+| ---------------------- | --------------- | --------------- | --------------- | --------------- |
+| Base                   | JND             | Foundational    | Scatter, Strip  | Latin Square    |
+| Distractor Rainbow     | JND             | Design          | Scatter         | Latin Square    |
+| Multi-Phase [Task 1]   | JND             | Design-Multi    | Scatter         | Latin Square    |
+| Base                   | Stevens         | Foundational    | Scatter, Strip  | Latin Square    |
       
 1/2/2019 - Madison's Visual Search + Numerosity experiments from December 2018 can be found [here.](https://github.com/Wongelawit/Correlation_MultipleEnsemble/tree/Numerosity-Task)
   
