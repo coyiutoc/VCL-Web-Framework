@@ -94,6 +94,7 @@ class Stevens {
 
   /**
    * Orders the input dataset by randomizing it, and initializes the practice variables.
+   * Only utilizes FOUR subconditions.
    *
    * @param  dataset {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. 
    */
@@ -102,8 +103,7 @@ class Stevens {
     this.sub_condition_order = initialize_random_order(dataset.length);
     let practice_dataset = [];
 
-    // Order the data set according to the latin square
-    for (let i=0; i < this.sub_condition_order.length; i++){
+    for (let i=0; i < 4; i++){
       practice_dataset[i] = dataset[this.sub_condition_order[i]];
       this.practice_trial_data[i] = [];
     }
