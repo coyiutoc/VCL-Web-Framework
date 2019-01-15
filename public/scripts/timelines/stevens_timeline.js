@@ -116,8 +116,12 @@ var practice = {
       return false;
     }
 
+    let last_trial = jsPsych.data.get().last(1).values()[0];
+    let curr_num_adjustments = last_trial.num_adjustments;
+
+    // If user has 4 inputs, end trial OR
     // If spacebar is pressed and we can end the round (there was at least 1 input)
-    if (32 == data.values()[0].key_press && stevens_exp.end_round()){
+    if ((curr_num_adjustments === 4) || (32 == data.values()[0].key_press && stevens_exp.end_round())){
       
       // !!!!!!!! TODO: 
       // This hack throws off the trial variables like input_count_array and trial_num.
@@ -135,13 +139,14 @@ var practice = {
         round_end = true; 
         console.log("!!!!!!!!!! Moved to new sub condition at index " 
                      + stevens_exp.current_sub_condition_index);
-        return true; 
+           return true; 
       }
       // Else end experiment
       else{
         console.log("!!!!!!!!!! Practice trials finished ");
         practice_end = true;
         round_end = false;
+        console.log(JSON.stringify(stevens_exp.practice_trial_data));
         return false;
       }
     }
@@ -159,7 +164,11 @@ timeline.push(practice);
 
 var stop = {
   type: 'html-keyboard-response',
-  stimulus: "<div align = 'center'> <font size = 20><p>This concludes the practice trials.<p>" + "<br><br><p><b>Any questions?</b></p></font></div>",
+  stimulus: function() {
+    let results = stevens_exp.calculate_exclusion_criteria();
+
+    return results + "<div align = 'center'> <font size = 20><p>This concludes the practice trials.<p>" + "<br><br><p><b>Any questions?</b></p></font></div>";
+  },
   data: {type: 'instruction'},
   on_start: function(stop){
     // Reset background color to feedback

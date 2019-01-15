@@ -59,34 +59,59 @@ class JND {
    *
    * @param  balancing_type {string}                             Type of balancing. Currently only latin_square
    *                                                             is supported.
-   *         data_set {[{assoc array}, {assoc array}, ... ]}     The data to be ordered. 
-   *         practice_set {[{assoc array}, {assoc array}, ... ]} The practice data. 
+   *         dataset {[{assoc array}, {assoc array}, ... ]}      The data to be ordered. 
    */ 
-  prepare_experiment(balancing_type, data_set) {
+  prepare_experiment(balancing_type, dataset) {
 
-    if (balancing_type == 'latin_square'){
+    switch(balancing_type) {
 
-      // Balancing on data_set
-      this.sub_condition_order = initialize_latin_square(data_set.length);
-      var ordered_data_set = [];
+      case 'latin_square':
+        this.sub_condition_order = initialize_latin_square(dataset.length);
+        break;
 
-      // Order the data set according to the latin square
-      // Initialize adjusted_quantity_matrix size 
-      for (let i=0; i < this.sub_condition_order.length; i++){
-        ordered_data_set[i] = data_set[this.sub_condition_order[i]];
-        this.adjusted_quantity_matrix[i] = [];
-      }
+      case 'random':
+        this.sub_condition_order = initialize_random_order(dataset.length);
+        break;
 
-      // Set experiment trials 
-      this.sub_conditions_constants = ordered_data_set;
-      this.current_sub_condition_index = 0; 
-
-      // Set practice trials (note does not need balancing)
-      this.practice_conditions_constants = data_set;
-      this.current_practice_condition_index = 0;
-
+      default:
+        throw Error(balancing_type + " balancing type is not supported.");
     }
-    else {throw Error(balancing_type + " balancing type is not supported.")};
+
+    var ordered_dataset = [];
+
+    // Order the data set according to the latin square
+    // Initialize adjusted_quantity_matrix size 
+    for (let i=0; i < this.sub_condition_order.length; i++){
+      ordered_dataset[i] = dataset[this.sub_condition_order[i]];
+      this.adjusted_quantity_matrix[i] = [];
+    }
+
+    // Set experiment trials 
+    this.sub_conditions_constants = ordered_dataset;
+    this.current_sub_condition_index = 0; 
+
+    this.prepare_practice(dataset);    
+  }
+
+  /**
+   * Orders the input dataset by randomizing it, and initializes the practice variables.
+   *
+   * @param  dataset {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. 
+   */
+  prepare_practice(dataset) {
+
+    this.sub_condition_order = initialize_random_order(dataset.length);
+    let practice_dataset = [];
+
+    // Order the data set according to the latin square
+    // Initialize adjusted_quantity_matrix size 
+    for (let i=0; i < this.sub_condition_order.length; i++){
+      practice_dataset[i] = dataset[this.sub_condition_order[i]];
+    }
+
+    // Set practice trials
+    this.practice_conditions_constants = practice_dataset;
+    this.current_practice_condition_index = 0;
   }
 
   /**

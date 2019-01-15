@@ -81,7 +81,7 @@ class JND_Radius {
       // Set experiment trials 
       this.sub_conditions_constants = ordered_data_set;
       this.current_sub_condition_index = 0; 
-      console.log(ordered_data_set);
+
       // Set practice trials (note does not need balancing)
       this.practice_conditions_constants = data_set;
       this.current_practice_condition_index = 0;

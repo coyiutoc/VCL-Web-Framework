@@ -40,6 +40,8 @@ class Stevens {
     // PRACTICE EXPERIMENT VARIABLES
 
     this.practice_conditions_constants;
+    this.adjusted_midpoint_matrix = {}; 
+    this.practice_trial_data = {};
 
     // ========================================
     // TEST EXPERIMENT VARIABLES
@@ -56,32 +58,59 @@ class Stevens {
    *
    * @param  balancing_type {string}                           Type of balancing. Currently only latin_square
    *                                                           is supported.
-   *         data_set {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. 
+   *         dataset {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. 
    */
-  prepare_experiment(balancing_type, data_set) {
+  prepare_experiment(balancing_type, dataset) {
 
-    if (balancing_type == 'latin_square'){
+    switch(balancing_type) {
 
-      this.sub_condition_order = initialize_latin_square(data_set.length);
-      var ordered_data_set = [];
+      case 'latin_square':
+        this.sub_condition_order = initialize_latin_square(dataset.length);
+        break;
 
-      // Order the data set according to the latin square
-      // Initialize adjusted_quantity_matrix size 
-      for (let i=0; i < this.sub_condition_order.length; i++){
-        ordered_data_set[i] = data_set[this.sub_condition_order[i]];
-      }
+      case 'random':
+        this.sub_condition_order = initialize_random_order(dataset.length);
+        break;
 
-      // Set experiment trials
-      this.experiment_conditions_constants = ordered_data_set;
-      
-      // Set experiment variables to the practice first
-      this.sub_conditions_constants = data_set;
-      this.current_sub_condition_index = 0; 
-      this.input_count_array = new Array(this.sub_conditions_constants[0].trials_per_round).fill(0);
-
-      console.log(this.sub_conditions_constants);   
+      default:
+        throw Error(balancing_type + " balancing type is not supported.");
     }
-    else {throw Error(balancing_type + " balancing type is not supported.")};
+
+    var ordered_dataset = [];
+
+    // Order the data set according to the latin square
+    for (let i=0; i < this.sub_condition_order.length; i++){
+      ordered_dataset[i] = dataset[this.sub_condition_order[i]];
+    }
+
+    // Set experiment trials
+    this.experiment_conditions_constants = ordered_dataset;
+    
+    // Set experiment variables to the practice first
+    this.prepare_practice(dataset);    
+    
+    console.log(this.sub_conditions_constants);    
+  }
+
+  /**
+   * Orders the input dataset by randomizing it, and initializes the practice variables.
+   *
+   * @param  dataset {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. 
+   */
+  prepare_practice(dataset) {
+
+    this.sub_condition_order = initialize_random_order(dataset.length);
+    let practice_dataset = [];
+
+    // Order the data set according to the latin square
+    for (let i=0; i < this.sub_condition_order.length; i++){
+      practice_dataset[i] = dataset[this.sub_condition_order[i]];
+      this.practice_trial_data[i] = [];
+    }
+
+    this.sub_conditions_constants = practice_dataset;
+    this.current_sub_condition_index = 0; 
+    this.input_count_array = new Array(this.sub_conditions_constants[0].trials_per_round).fill(0);
   }
 
   /**
@@ -95,6 +124,140 @@ class Stevens {
       this.sub_conditions_constants = this.experiment_conditions_constants;
       this.input_count_array = new Array(this.sub_conditions_constants[0].trials_per_round).fill(0);
       this.current_sub_condition_index = 0;
+  }
+
+  /**
+   * Calculates exclusion criteria using standard deviation and variance.
+   * Subcondition is flagged if:
+   * - Standard deviation > 0.2
+   * - Anchoring > 0.6
+   *
+   * @ return     HTML of values and # of flags
+   */
+  calculate_exclusion_criteria() {
+
+    let std_devs = this.get_standard_deviations();
+    let anchoring_values = this.get_anchoring_values();
+
+    let flag_std = 0;
+    for (let std of std_devs) {
+      if (std > 0.2) {
+        flag_std++;
+      }
+    }
+
+    let flag_anchor = 0;
+    for (let anchor of anchoring_values) {
+      if (anchor > 0.6) {
+        flag_anchor++;
+      }
+    }
+
+    console.log(std_devs);
+    console.log(anchoring_values);
+    
+    return `
+    Standard Deviation Flags: ${flag_std} / ${std_devs.length}
+    <br>
+    Standard Deviations: ${std_devs} 
+    <br>
+    <br>
+    Anchoring Flags: ${flag_anchor} / ${anchoring_values.length}
+    <br>
+    Anchoring Values: ${anchoring_values} 
+    <br>
+    <br>
+    <br>
+    `
+  }
+
+  /**
+   * Calculates the standard deviation for each subcondition.
+   *
+   * @ return {array}  of standard deviations
+   */
+  get_standard_deviations() {
+
+    let values = [];
+
+    for (let i = 0; i < Object.keys(this.practice_trial_data).length; i++) {
+
+      let subcondition_data = this.practice_trial_data[i];
+      let estimated_mids = this.get_estimated_mids(subcondition_data);
+
+      // Calculate mean:
+      let mean = 0;
+      for (let mid of estimated_mids) {
+        mean += mid;
+      }
+      mean = mean / estimated_mids.length;
+
+      // Calculate variance:
+      let variance = 0;
+      for (let mid of estimated_mids) {
+        variance += Math.pow(mid - mean, 2);
+      }
+      variance = variance / (estimated_mids.length - 1);
+
+      values.push(Math.sqrt(variance));
+    }
+
+    return values;
+  }
+
+  /**
+   * Calculates the anchoring value for each subcondition.
+   *
+   * @ return {array}  of anchoring values
+   */
+  get_anchoring_values() {
+
+    let values = [];
+    let high_ref_trial_sum = 0;
+    let low_ref_trial_sum = 0;
+
+    // Iterate through each subcondition in assoc array
+    for (let i = 0; i < Object.keys(this.practice_trial_data).length; i++) {
+      let subcondition_data = this.practice_trial_data[i];
+      let estimated_mids = this.get_estimated_mids(subcondition_data);
+
+      // Iterate through each estimated mid of a given subcondition
+      for (let j = 0; j < estimated_mids.length; j++) {
+        if (j === 1 || j === 3) {
+          high_ref_trial_sum += estimated_mids[j];
+        } else {
+          low_ref_trial_sum += estimated_mids[j];
+        }
+      }
+
+      values.push(Math.abs(high_ref_trial_sum - low_ref_trial_sum));
+    }
+
+    return values;
+  }
+
+
+  /**
+   * Retrieves the estimated midpoints for the subcondition.
+   *
+   * @ return {array}  of estimated mids 
+   */
+  get_estimated_mids(subcondition_data) {
+
+    let estimated_mids = {};
+    let result = [];
+
+    for (let trial of subcondition_data) {
+      if (trial.num_adjustments > 0) {
+        estimated_mids[trial.num_adjustments] = trial.estimated_mid;
+      }
+    }
+
+    for (let i = 1; i <= Object.keys(estimated_mids).length; i++) {
+      result[i-1] = estimated_mids[i];
+    }
+
+    return result;
   }
 
   /**
@@ -191,6 +354,11 @@ class Stevens {
           middle_coordinates = estimated_coordinates;  
           distribution_size = constants.num_points; 
           trial_data = trial.data; 
+
+          // Save trial data for practice so can calculate exclusion criteria
+          if (trial.data.run_type === "practice") {
+            stevens_exp.practice_trial_data[index].push(trial.data);
+          }
 
           console.log("[RIGHT] Correlation: " + trial.data.right_correlation);
           console.log("[MIDPOINT] Correlation: " + trial.data.estimated_mid);
