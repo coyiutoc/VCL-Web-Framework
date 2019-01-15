@@ -39,6 +39,8 @@ app.get('/experiment/:experiment/graph_type/:graph_type/range/:range/condition/:
     	response.render('jnd/jnd_experiment.html', keys);
     } else if (request.params.experiment === "stevens") {
     	response.render('stevens/stevens_experiment.html', keys);
+    } else if (request.params.experiment === "jnd_radius") {
+    	response.render('jnd/jnd_radius_experiment.html', keys);
     }	
 });
 

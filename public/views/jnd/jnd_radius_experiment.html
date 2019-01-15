@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>VCL: JND Experiment</title>
+
+    <%- include('../header'); %>
+
+    <div id="cm_conversion" style = "visibility: hidden; width: 100cm; height: 100cm;"></div>
+
+    <script type="text/javascript" src="/scripts/experiments/jnd_radius.js" ></script>
+
+    <script type="text/javascript">
+
+          // Extract conversion factor
+          const PIXELS_PER_CM = document.getElementById("cm_conversion").getBoundingClientRect().height/100;
+          var jnd_exp = new JND_Radius("<%= range %>", "<%= condition %>", "<%= graph_type %>", PIXELS_PER_CM);
+
+    </script>
+
+    <script type="text/javascript" src="/scripts/timelines/jnd_radius_timeline.js" ></script>
+
+  </head>
+
+  <body>
+  </body>
+
+</html>

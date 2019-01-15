@@ -13,8 +13,7 @@ body {
 .box {
   color: #000000;
   height: auto;
-  left: 40%;
-  margin: -50px 0 0 -100px;
+  margin-left: 30vw;
   position: absolute;
   text-align: center;
   top: 30%;

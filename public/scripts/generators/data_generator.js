@@ -114,6 +114,22 @@ const JND_BASE = {
     ]
 }
 
+const JND_RADIUS = {
+
+  foundational:
+    [
+    {base_radius: 2, initial_difference: 0.02, converge_from_above: true, text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', outline_color: 'BLACK', fill_color: 'BLUE'},
+
+    {base_radius: 3, initial_difference: 0.02, converge_from_above: true, text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', outline_color: 'BLACK', fill_color: 'BLUE'},
+
+    {base_radius: 4, initial_difference: 0.02, converge_from_above: true, text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', outline_color: 'BLACK', fill_color: 'BLUE'},
+
+    {base_radius: 5, initial_difference: 0.02, converge_from_above: true, text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', outline_color: 'BLACK', fill_color: 'BLUE'},
+
+    {base_radius: 6, initial_difference: 0.02, converge_from_above: true, text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', outline_color: 'BLACK', fill_color: 'BLUE'}
+    ] 
+}
+
 const JND_CONDITIONS = {
 
   distractor_rainbow : 
@@ -231,6 +247,11 @@ function get_data(experiment, range, condition, is_full_set){
       dataset = create_condition_dataset(dataset, JND_CONDITIONS[condition]);
     }
   }
+  else if (experiment === "jnd_radius"){
+
+    dataset = JND_RADIUS[range];
+
+  }
   else if (experiment === "stevens"){
 
     dataset = STEVENS_BASE[range];
@@ -262,7 +283,7 @@ function get_data(experiment, range, condition, is_full_set){
 
   // Splice out only 4 subconditions if don't want full set
   if (!is_full_set){
-    result = result.slice(0,1);
+    result = result.slice(0,4);
   }
 
   return result;
