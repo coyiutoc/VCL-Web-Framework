@@ -190,7 +190,41 @@ const JND_CONDITIONS = {
     {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: '#dbc667', target_color: 'BLACK', dist_point_size: 3},
 
     {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: '#dbc667', target_color: 'BLACK', dist_point_size: 3} 
+    ],
+
+  strip_ring_size:
+    [
+    {ring_size: 10, ring_thickness: 2},
+
+    {ring_size: 10, ring_thickness: 2},
+
+    {ring_size: 10, ring_thickness: 2},
+
+    {ring_size: 20, ring_thickness: 2},
+
+    {ring_size: 20, ring_thickness: 2},
+
+    {ring_size: 20, ring_thickness: 2},
+
+    {ring_size: 40, ring_thickness: 2},
+
+    {ring_size: 40, ring_thickness: 2},
+
+    {ring_size: 40, ring_thickness: 2},
+
+    {ring_size: 80, ring_thickness: 2},
+
+    {ring_size: 80, ring_thickness: 2},
+
+    {ring_size: 80, ring_thickness: 2},
+
+    {ring_size: 160, ring_thickness: 2},
+
+    {ring_size: 160, ring_thickness: 2},
+
+    {ring_size: 160, ring_thickness: 2}
     ]
+
 }
 
 // =========================================================
@@ -215,11 +249,34 @@ const STEVENS_BASE = {
     {distribution_type: "gaussian", round_type: 'test', trials_per_round: 4, high_ref: 1, low_ref: 0.75, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000}
     ],
 
-  design: []
+  design: 
+    [
+    {distribution_type: "gaussian", round_type: 'design', trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 5, regen_rate: 1000},
+
+    {distribution_type: "gaussian", round_type: 'design', trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 5, regen_rate: 1000},
+
+    {distribution_type: "gaussian", round_type: 'design', trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 5, regen_rate: 1000},
+
+    {distribution_type: "gaussian", round_type: 'design', trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 5, regen_rate: 1000},
+
+    {distribution_type: "gaussian", round_type: 'design', trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 5, regen_rate: 1000}
+    ]
 }
 
 const STEVENS_CONDITIONS = {
 
+  strip_ring_size:
+    [
+    {ring_size: 10, ring_thickness: 2},
+
+    {ring_size: 20, ring_thickness: 2},
+
+    {ring_size: 40, ring_thickness: 2},
+
+    {ring_size: 80, ring_thickness: 2},
+
+    {ring_size: 160, ring_thickness: 2}
+    ]
 }
 
 /**
@@ -231,7 +288,7 @@ const STEVENS_CONDITIONS = {
  *
  * @return dataset     [{assoc}, {assoc}, .... ]         
  */
-function get_data(experiment, range, condition, is_full_set){
+function get_data(experiment, range, condition){
   var dataset;
 
   if (experiment === "jnd"){
@@ -281,11 +338,6 @@ function get_data(experiment, range, condition, is_full_set){
     result = dataset;
   }    
 
-  // Splice out only 4 subconditions if don't want full set
-  if (!is_full_set){
-    result = result.slice(0,4);
-  }
-
   return result;
 }
 
@@ -300,7 +352,7 @@ function get_data(experiment, range, condition, is_full_set){
  */
 function get_data_subset(experiment, range, condition) {
 
-  var dataset = get_data(experiment, range, condition, false);
+  var dataset = get_data(experiment, range, condition);
 
   return dataset.slice(0, 4);
 }

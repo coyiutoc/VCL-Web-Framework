@@ -15,7 +15,7 @@ class JND {
       this.range = range;
     }  
 
-    if ((graph_type !== "scatter") && (graph_type !== "strip")) {
+    if ((graph_type !== "scatter") && (graph_type !== "strip") && (graph_type !== "ring")) {
       throw Error(graph_type + " is not supported.")} 
     else { 
       this.graph_type = graph_type;
@@ -554,25 +554,10 @@ class JND {
       case "strip":
         this.plot_strip(datasets);
         break;
+      case "ring":
+        this.plot_ring(datasets);
+        break;  
     }
-  }
-
-  /**
-   * D3 code for appending data into the graph. 
-   */
-  plot_scatter_data(chart, xscale, yscale, data, point_size, point_color) {
-
-    chart.selectAll("circle_data")
-               .data(data)
-                .enter()
-                .append("circle") // Creating the circles for each entry in data set 
-                .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
-                  return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
-                })
-                .attr("cy", function (d) {
-                  return yscale(d[1]);
-                })
-                .attr("r", point_size).style("fill", point_color);
   }
 
   /**
@@ -675,6 +660,24 @@ class JND {
   }
 
   /**
+   * D3 code for appending data into the graph. 
+   */
+  plot_scatter_data(chart, xscale, yscale, data, point_size, point_color) {
+
+    chart.selectAll("circle_data")
+               .data(data)
+                .enter()
+                .append("circle") // Creating the circles for each entry in data set 
+                .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
+                  return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
+                })
+                .attr("cy", function (d) {
+                  return yscale(d[1]);
+                })
+                .attr("r", point_size).style("fill", point_color);
+  }
+
+  /**
    * Plots distributions using strip plots. 
    *
    * @ param  datasets   {array}
@@ -725,6 +728,80 @@ class JND {
               .attr("transform", "translate(50, " + height/4 + ")")
               .style("width", 2)
               .style("height", height/2);
+
+      // Set axis color
+      chart.selectAll("path")
+           .attr("stroke", trial_data.axis_color);
+
+      // Remove tick labels
+      chart.selectAll("text").remove();     
+
+    }
+
+    // Set background color
+    document.body.style.backgroundColor = trial_data.background_color;
+  }
+
+  /**
+   * Plots distributions using ring plots. 
+   *
+   * @ param  datasets   {array}
+   */
+  plot_ring(datasets) {
+
+    var width = window.innerWidth * 0.7;
+    var height = window.innerHeight * 0.5;
+
+    // Scale for data slightly smaller than full width of axes to account for outliers.
+    var xscale_for_data = d3.scaleLinear()
+                   .domain([0, multiplier]) 
+                   .range([window.innerWidth * 0.15, window.innerWidth * 0.55]);
+
+    var xscale = d3.scaleLinear()
+                   .domain([0, multiplier])
+                   .range([0, width]);
+
+    var yscale = d3.scaleLinear()
+                   .domain([multiplier * -1, 0])
+                   .range([height/2, 0]);
+
+    // Create axes: 
+    var x_axis = d3.axisBottom()
+                   .scale(xscale)
+                   .tickSize([0]);
+
+    var y_axis = d3.axisLeft()
+                   .scale(yscale)
+                   .tickSize([0]);
+
+    // Create/append the SVG for both graphs: 
+    for (var data of datasets){
+      
+      var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
+                    .append("svg") 
+                      .attr("width", width) 
+                      .attr("height", height);   
+
+      var xAxisTranslate = height/2;
+      var xAxisElements = chart.append("g")
+                                .attr("transform", "translate(0, " + xAxisTranslate  +")")
+                                .call(x_axis);
+
+      // Populating data: 
+      chart.selectAll("strip") // Technically no circles inside div yet, but will be creating it
+            .data(data)
+              .enter()
+                .append("circle") // Creating the circles for each entry in data set 
+                .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
+                  return xscale_for_data(d[0]);
+                })
+                .attr("cy", function (d) {
+                  return height/2;
+                })
+                .attr("r", trial_data.ring_size)
+                .attr("stroke", "black")
+                .attr("stroke-width", trial_data.ring_thickness)
+                .attr("fill", "none");
 
       // Set axis color
       chart.selectAll("path")

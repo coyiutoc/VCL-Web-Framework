@@ -29,9 +29,12 @@ stevens_exp.prepare_experiment("latin_square", STEVENS_EXCEL);
 
 var welcome = {
   type: 'html-keyboard-response',
-  stimulus: '<div align = "center">' + `<img src="${localhost}/img/VCL_lab_logo.png"></img> <br>` +
-            'This is a <b>Proof of Concept</b> for a <b>Foundational Stevens Experiment</b>.' + 
-            '<br><br><p><font size = 15>Press any key to begin.<p></font>' +
+  stimulus: `<div align = "center">` + `<img src="${localhost}/img/VCL_lab_logo.png"></img><br><br>` +
+            `<b>Base:</b> stevens` + '<br>' + 
+            `<b>Trial Type:</b> ${stevens_exp.range}` + '<br>' + 
+            `<b>Graph Type:</b> ${stevens_exp.graph_type}` + '<br>' + 
+            `<b>Condition:</b> ${stevens_exp.condition_name}` + 
+            '<br><br><br><p><font size = 15>Press any key to begin.<p></font>' +
             '</div>',
   data: {type: 'instruction'}
 };
@@ -40,16 +43,44 @@ timeline.push(welcome);
 // =========================================================
 // INSTRUCTION TRIAL BLOCKS
 
-var instructions = {
-  type: "html-keyboard-response",
-  stimulus: "<div align = 'center'> <p>In this experiment, you will be using the <b>m</b>" +
-      " and <b>z</b> keys to adjust the center graph <br> so that its correlation is roughly" +
-      " the <u>midpoint</u> between the left and right graphs. <br><br>" +
-      " <b>m</b> increases the correlation. <br>" +
-      " <b>z</b> decreases the correlation. <br><br>" + 
-      `<div style='float: left; margin-bottom: 25px;'><img src='${localhost}/img/sample_stevens.png'></img></div>` +
-      "<br> <br> <br> When you are done adjusting the center graph, hit the <b>spacebar</b>." + 
-      "<br> Press any key to continue. </div>"          
+switch(stevens_exp.graph_type){
+  case "scatter":
+    var instructions = {
+      type: "html-keyboard-response",
+      stimulus: "<div align = 'center'> <p>In this experiment, you will be using the <b>m</b>" +
+          " and <b>z</b> keys to adjust the center graph <br> so that its correlation is roughly" +
+          " the <u>midpoint</u> between the left and right graphs. <br><br>" +
+          " <b>m</b> increases the correlation. <br>" +
+          " <b>z</b> decreases the correlation. <br><br>" + 
+          `<div style='float: left; margin-bottom: 25px;'><img src='${localhost}/img/stevens/scatter.png'></img></div>` +
+          "<br> <br> <br> When you are done adjusting the center graph, hit the <b>spacebar</b>." + 
+          "<br> Press any key to continue. </div>"      
+    }    
+    break;
+  case "strip":
+    var instructions = {
+      type: "html-keyboard-response",
+      stimulus: "<div align = 'center'> <p>In this experiment, you will be using the <b>m</b>" +
+          " and <b>z</b> keys to adjust the center graph <br> so that its correlation is roughly" +
+          " the <u>midpoint</u> between the left and right graphs. <br><br>" +
+          " <b>m</b> increases the correlation. <br>" +
+          " <b>z</b> decreases the correlation. <br><br>" + 
+          `<div style='float: left; margin-bottom: 25px;'><img src='${localhost}/img/stevens/strip.png'></img></div>` +
+          "<br> <br> <br> When you are done adjusting the center graph, hit the <b>spacebar</b>." + 
+          "<br> Press any key to continue. </div>"      
+    }
+  case "ring":  
+    var instructions = {
+      type: "html-keyboard-response",
+      stimulus: "<div align = 'center'> <p>In this experiment, you will be using the <b>m</b>" +
+          " and <b>z</b> keys to adjust the center graph <br> so that its correlation is roughly" +
+          " the <u>midpoint</u> between the left and right graphs. <br><br>" +
+          " <b>m</b> increases the correlation. <br>" +
+          " <b>z</b> decreases the correlation. <br><br>" + 
+          `<div style='float: left; margin-bottom: 25px;'><img src='${localhost}/img/stevens/ring_strip_size.png'></img></div>` +
+          "<br> <br> <br> When you are done adjusting the center graph, hit the <b>spacebar</b>." + 
+          "<br> Press any key to continue. </div>"      
+    }
 };
 
 var ready = {
