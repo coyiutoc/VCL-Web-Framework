@@ -11,11 +11,11 @@ body {
 }
 
 .box {
-  color: #000000;
+  width: 70vw;
   height: auto;
-  margin-left: 30vw;
   position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
-  top: 30%;
-  width: auto;
 }
