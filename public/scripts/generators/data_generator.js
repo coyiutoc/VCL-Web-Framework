@@ -261,6 +261,8 @@ const JND_CONDITIONS = {
 
     {point_color: "BLACK", strip_width: 1},
 
+    {point_color: "BLACK", strip_width: 1},
+
     {point_color: "BLACK", strip_width: 1}
     ]  
 

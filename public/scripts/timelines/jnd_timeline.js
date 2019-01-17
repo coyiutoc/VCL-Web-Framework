@@ -74,7 +74,7 @@ switch(jnd_exp.graph_type){
     break;
 
   case "strip":
-    if (jnd_exp.condition === "line_length_strip") {
+    if (jnd_exp.condition_name === "line_length_strip") {
       var instructions = {
       type: "html-keyboard-response",
       stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear one on top of the other." + 
