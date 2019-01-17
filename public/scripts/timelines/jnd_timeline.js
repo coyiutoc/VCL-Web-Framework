@@ -74,14 +74,25 @@ switch(jnd_exp.graph_type){
     break;
 
   case "strip":
-    var instructions = {
-    type: "html-keyboard-response",
-    stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear one on top of the other." + 
-        "<br> Indicate which graph is more correlated by pressing the Z or M key. </p><p>" +
-        "<strong>Press the Z key if the graph <u>above</u> is more correlated.</strong>" +
-        `<div style='float: center; display: block;'><img src='${localhost}/img/sample_jnd_strip.png'></img></div>` +
-        "<strong>Press the M key if the graph <u>below</u> is more correlated.</strong>"
-    };
+    if (jnd_exp.condition === "line_length_strip") {
+      var instructions = {
+      type: "html-keyboard-response",
+      stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear one on top of the other." + 
+          "<br> Indicate which graph is more correlated by pressing the Z or M key. </p><p>" +
+          "<strong>Press the Z key if the graph <u>above</u> is more correlated.</strong>" +
+          `<div style='float: center; display: block;'><img src='${localhost}/img/sample_line_length_strip.png'></img></div>` +
+          "<strong>Press the M key if the graph <u>below</u> is more correlated.</strong>"
+      };
+    } else {
+      var instructions = {
+      type: "html-keyboard-response",
+      stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear one on top of the other." + 
+          "<br> Indicate which graph is more correlated by pressing the Z or M key. </p><p>" +
+          "<strong>Press the Z key if the graph <u>above</u> is more correlated.</strong>" +
+          `<div style='float: center; display: block;'><img src='${localhost}/img/sample_jnd_strip.png'></img></div>` +
+          "<strong>Press the M key if the graph <u>below</u> is more correlated.</strong>"
+      };
+    }
     break;
 
   case "ring":
@@ -116,8 +127,8 @@ timeline.push(instruction_trials);
 
 var feedback = {
   type: 'html-keyboard-response',
-  choices: jsPsych.NO_KEYS, //No responses will be accepted as a valid response.
-  trial_duration: 500,
+  // choices: jsPsych.NO_KEYS, //No responses will be accepted as a valid response.
+  // trial_duration: 500,
   data: {type: 'feedback'},
   stimulus: function(){
 

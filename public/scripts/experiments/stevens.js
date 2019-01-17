@@ -93,18 +93,15 @@ class Stevens {
   }
 
   /**
-   * Orders the input dataset by randomizing it, and initializes the practice variables.
-   * Only utilizes FOUR subconditions.
+   * Creates the practice dataset by taking the first FOUR subconditions.
    *
    * @param  dataset {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. 
    */
   prepare_practice(dataset) {
 
-    this.sub_condition_order = initialize_random_order(dataset.length);
-    let practice_dataset = [];
+    let practice_dataset = dataset.slice(0, 4);
 
     for (let i=0; i < 4; i++){
-      practice_dataset[i] = dataset[this.sub_condition_order[i]];
       this.practice_trial_data[i] = [];
     }
 
@@ -136,109 +133,94 @@ class Stevens {
    */
   calculate_exclusion_criteria() {
 
-    let std_devs = this.get_standard_deviations();
-    let anchoring_values = this.get_anchoring_values();
-
-    let flag_std = 0;
-    for (let std of std_devs) {
-      if (std > 0.2) {
-        flag_std++;
-      }
-    }
-
-    let flag_anchor = 0;
-    for (let anchor of anchoring_values) {
-      if (anchor > 0.6) {
-        flag_anchor++;
-      }
-    }
-
-    console.log(std_devs);
-    console.log(anchoring_values);
-    
-    return `
-    Standard Deviation Flags: ${flag_std} / ${std_devs.length}
-    <br>
-    Standard Deviations: ${std_devs} 
-    <br>
-    <br>
-    Anchoring Flags: ${flag_anchor} / ${anchoring_values.length}
-    <br>
-    Anchoring Values: ${anchoring_values} 
-    <br>
-    <br>
-    <br>
-    `
-  }
-
-  /**
-   * Calculates the standard deviation for each subcondition.
-   *
-   * @ return {array}  of standard deviations
-   */
-  get_standard_deviations() {
-
-    let values = [];
+    let string = "";
+    let flags = 0;
 
     for (let i = 0; i < Object.keys(this.practice_trial_data).length; i++) {
-
+      debugger;
       let subcondition_data = this.practice_trial_data[i];
-      let estimated_mids = this.get_estimated_mids(subcondition_data);
 
-      // Calculate mean:
-      let mean = 0;
-      for (let mid of estimated_mids) {
-        mean += mid;
+      let std_dev = this.get_standard_deviation(subcondition_data);
+      let anchoring_value = this.get_anchoring_value(subcondition_data);
+
+      if (anchoring_value > 0.5 && std_dev > 0.2) {
+        flags ++;
+      } else if (std_dev > 0.2) {
+        flags ++;
       }
-      mean = mean / estimated_mids.length;
 
-      // Calculate variance:
-      let variance = 0;
-      for (let mid of estimated_mids) {
-        variance += Math.pow(mid - mean, 2);
-      }
-      variance = variance / (estimated_mids.length - 1);
-
-      values.push(Math.sqrt(variance));
+      string += `
+        <b> Subcondition: ${i+1} </b>
+        <br>
+        Standard Deviation: ${std_dev} 
+        <br>
+        Anchoring Value: ${anchoring_value} 
+        <br>
+        <br>
+        `
     }
 
-    return values;
+    if (flags >= 2) {
+      string += `MORE THAN 2 SUBCONDITIONS FLAGGED.`
+    }
+    
+    return string;
   }
 
   /**
-   * Calculates the anchoring value for each subcondition.
+   * Calculates the standard deviation for the specified subcondition.
    *
-   * @ return {array}  of anchoring values
+   * @ return {double}  standard deviation
    */
-  get_anchoring_values() {
+  get_standard_deviation(subcondition_data) {
 
     let values = [];
+
+    let estimated_mids = this.get_estimated_mids(subcondition_data);
+
+    // Calculate mean:
+    let mean = 0;
+    for (let mid of estimated_mids) {
+      mean += mid;
+    }
+    mean = mean / estimated_mids.length;
+
+    // Calculate variance:
+    let variance = 0;
+    for (let mid of estimated_mids) {
+      variance += Math.pow(mid - mean, 2);
+    }
+    variance = variance / (estimated_mids.length - 1);
+
+    return Math.sqrt(variance);
+  }
+
+  /**
+   * Calculates the anchoring value for the specified subcondition.
+   *
+   * @ return {double} anchoring value
+   */
+  get_anchoring_value(subcondition_data) {
+
     let high_ref_trial_sum = 0;
     let low_ref_trial_sum = 0;
 
-    // Iterate through each subcondition in assoc array
-    for (let i = 0; i < Object.keys(this.practice_trial_data).length; i++) {
-      let subcondition_data = this.practice_trial_data[i];
-      let estimated_mids = this.get_estimated_mids(subcondition_data);
+    let estimated_mids = this.get_estimated_mids(subcondition_data);
 
-      // Iterate through each estimated mid of a given subcondition
-      for (let j = 0; j < estimated_mids.length; j++) {
-        if (j === 1 || j === 3) {
-          high_ref_trial_sum += estimated_mids[j];
-        } else {
-          low_ref_trial_sum += estimated_mids[j];
-        }
+    // Iterate through each estimated mid (trial) of a given subcondition
+    for (let i = 0; i < estimated_mids.length; i++) {
+      if (i === 1 || i === 3) {
+        high_ref_trial_sum += estimated_mids[i];
+      } else {
+        low_ref_trial_sum += estimated_mids[i];
       }
-
-      values.push(Math.abs(high_ref_trial_sum - low_ref_trial_sum));
     }
 
-    return values;
+    return Math.abs(high_ref_trial_sum - low_ref_trial_sum);
   }
 
-
   /**
-   * Retrieves the estimated midpoints for the subcondition.
+   * Retrieves the estimated midpoints of each trial for the subcondition.
    *
    * @ return {array}  of estimated mids 
    */
@@ -827,8 +809,14 @@ class Stevens {
    */
   plot_strip(datasets) {
 
+    var stevens_exp = this;
     var width = window.innerWidth * 0.7;
     var height = window.innerHeight * 0.25;
+
+    // Scale for data slightly smaller than full width of axes to account for outliers.
+    var xscale_for_data = d3.scaleLinear()
+                   .domain([0, multiplier]) 
+                   .range([window.innerWidth * 0.1, window.innerWidth * 0.6]);
 
     var xscale = d3.scaleLinear()
                    .domain([0, multiplier]) 
@@ -854,7 +842,9 @@ class Stevens {
                     .append("svg") 
                       .attr("width", width) 
                       .attr("height", height)
-                      .attr("style", "display: block");   
+                      .attr("style", "display: block")
+                      .attr("transform", "scale(-1,1)"); // Flip horizontally so cone is
+                                                         // is going left -> right (like orig. version)     
 
       var xAxisTranslate = height/2;
       var xAxisElements = chart.append("g")
@@ -867,11 +857,30 @@ class Stevens {
               .enter()
               .append("rect") // Creating the circles for each entry in data set 
               .attr("x", function (d) {
-                return xscale(d[0]);
+                return xscale_for_data(d[0]);
               })
-              .attr("transform", "translate(50, " + height/4 + ")")
-              .style("width", 2)
-              .style("height", height/2);
+              .attr("transform", function (d) {
+                if (stevens_exp.condition_name === "line_length_strip") {
+                  let ytranslation = height/2 - (yscale(d[1]) * 0.5);
+                  return "translate(0, " + ytranslation + ")";
+                } else {
+                return "translate(0, " + height/4 + ")";
+                }
+              })
+              .style("width", function () {
+                if (trial_data.strip_width !== undefined) {
+                  return trial_data.strip_width;
+                } else {
+                  return 2;
+                }
+              })
+              .style("height", function (d) {
+                if (stevens_exp.condition_name === "line_length_strip") {
+                  return yscale(d[1]);
+                } else {
+                  return height/2;
+                }
+              });
 
       // Set axis color
       chart.selectAll("path")
@@ -899,7 +908,7 @@ class Stevens {
     // Scale for data slightly smaller than full width of axes to account for outliers.
     var xscale_for_data = d3.scaleLinear()
                    .domain([0, multiplier]) 
-                   .range([window.innerWidth * 0.15, window.innerWidth * 0.55]);
+                   .range([window.innerWidth * 0.1, window.innerWidth * 0.6]);
 
     var xscale = d3.scaleLinear()
                    .domain([0, multiplier]) 
@@ -925,14 +934,16 @@ class Stevens {
                     .append("svg") 
                       .attr("width", width) 
                       .attr("height", height)
-                      .attr("style", "display: block");   
+                      .attr("style", "display: block")
+                      .attr("transform", "scale(-1,1)"); // Flip horizontally so cone is
+                                                         // is going left -> right (like orig. version)     
 
       var xAxisTranslate = height/2;
       var xAxisElements = chart.append("g")
                                 .attr("transform", "translate(0, " + xAxisTranslate  +")")
                                 .call(x_axis)
 
-      // Populating data: 
+       // Populating data: 
       chart.selectAll("strip") // Technically no circles inside div yet, but will be creating it
             .data(data)
               .enter()
@@ -943,7 +954,9 @@ class Stevens {
                 .attr("cy", function (d) {
                   return height/2;
                 })
-                .attr("r", trial_data.ring_size)
+                .attr("r", function (d) {
+                  return yscale(d[1])
+                })
                 .attr("stroke", "black")
                 .attr("stroke-width", trial_data.ring_thickness)
                 .attr("fill", "none");

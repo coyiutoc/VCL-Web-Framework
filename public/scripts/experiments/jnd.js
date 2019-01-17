@@ -709,8 +709,14 @@ class JND {
    */
   plot_strip(datasets) {
 
+    var jnd_exp = this;
     var width = window.innerWidth * 0.7;
     var height = window.innerHeight * 0.5;
+
+    // Scale for data slightly smaller than full width of axes to account for outliers.
+    var xscale_for_data = d3.scaleLinear()
+                   .domain([0, multiplier]) 
+                   .range([window.innerWidth * 0.1, window.innerWidth * 0.6]);
 
     var xscale = d3.scaleLinear()
                    .domain([0, multiplier]) 
@@ -735,11 +741,13 @@ class JND {
       var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
                     .append("svg") 
                       .attr("width", width) 
-                      .attr("height", height);   
+                      .attr("height", height)
+                      .attr("transform", "scale(-1,1)"); // Flip horizontally so cone is
+                                                         // is going left -> right (like orig. version)  
 
       var xAxisTranslate = height/2;
       var xAxisElements = chart.append("g")
-                                .attr("transform", "translate(50, " + xAxisTranslate  +")")
+                                .attr("transform", "translate(0, " + xAxisTranslate  +")")
                                 .call(x_axis)
 
       // Populating data: 
@@ -748,11 +756,30 @@ class JND {
               .enter()
               .append("rect") // Creating the circles for each entry in data set 
               .attr("x", function (d) {
-                return xscale(d[0]);
+                return xscale_for_data(d[0]);
               })
-              .attr("transform", "translate(50, " + height/4 + ")")
-              .style("width", 2)
-              .style("height", height/2);
+              .attr("transform", function (d) {
+                if (jnd_exp.condition_name === "line_length_strip") {
+                  let ytranslation = height/2 - (yscale(d[1]) * 0.5);
+                  return "translate(0, " + ytranslation + ")";
+                } else {
+                return "translate(0, " + height/4 + ")";
+                }
+              })
+              .style("width", function () {
+                if (trial_data.strip_width !== undefined) {
+                  return trial_data.strip_width;
+                } else {
+                  return 2;
+                }
+              })
+              .style("height", function (d) {
+                if (jnd_exp.condition_name === "line_length_strip") {
+                  return yscale(d[1]);
+                } else {
+                  return height/2;
+                }
+              });
 
       // Set axis color
       chart.selectAll("path")
@@ -775,12 +802,12 @@ class JND {
   plot_ring(datasets) {
 
     var width = window.innerWidth * 0.7;
-    var height = window.innerHeight * 0.5;
+    var height = window.innerHeight * 0.3;
 
     // Scale for data slightly smaller than full width of axes to account for outliers.
     var xscale_for_data = d3.scaleLinear()
                    .domain([0, multiplier]) 
-                   .range([window.innerWidth * 0.15, window.innerWidth * 0.55]);
+                   .range([window.innerWidth * 0.1, window.innerWidth * 0.6]);
 
     var xscale = d3.scaleLinear()
                    .domain([0, multiplier])
@@ -805,7 +832,9 @@ class JND {
       var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
                     .append("svg") 
                       .attr("width", width) 
-                      .attr("height", height);   
+                      .attr("height", height)
+                      .attr("transform", "scale(-1,1)"); // Flip horizontally so cone is
+                                                         // is going left -> right (like orig. version)  
 
       var xAxisTranslate = height/2;
       var xAxisElements = chart.append("g")
@@ -823,7 +852,9 @@ class JND {
                 .attr("cy", function (d) {
                   return height/2;
                 })
-                .attr("r", trial_data.ring_size)
+                .attr("r", function (d) {
+                  return yscale(d[1]);
+                })
                 .attr("stroke", "black")
                 .attr("stroke-width", trial_data.ring_thickness)
                 .attr("fill", "none");

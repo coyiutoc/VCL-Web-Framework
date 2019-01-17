@@ -58,17 +58,32 @@ switch(stevens_exp.graph_type){
     }    
     break;
   case "strip":
-    var instructions = {
-      type: "html-keyboard-response",
-      stimulus: "<div align = 'center'> <p>In this experiment, you will be using the <b>m</b>" +
-          " and <b>z</b> keys to adjust the center graph <br> so that its correlation is roughly" +
-          " the <u>midpoint</u> between the left and right graphs. <br><br>" +
-          " <b>m</b> increases the correlation. <br>" +
-          " <b>z</b> decreases the correlation. <br><br>" + 
-          `<div style='float: left; margin-bottom: 25px;'><img src='${localhost}/img/stevens/strip.png'></img></div>` +
-          "<br> <br> <br> When you are done adjusting the center graph, hit the <b>spacebar</b>." + 
-          "<br> Press any key to continue. </div>"      
+    if (stevens_exp.condition_name === "line_length_strip") {
+      var instructions = {
+        type: "html-keyboard-response",
+        stimulus: "<div align = 'center'> <p>In this experiment, you will be using the <b>m</b>" +
+            " and <b>z</b> keys to adjust the center graph <br> so that its correlation is roughly" +
+            " the <u>midpoint</u> between the left and right graphs. <br><br>" +
+            " <b>m</b> increases the correlation. <br>" +
+            " <b>z</b> decreases the correlation. <br><br>" + 
+            `<div style='float: left; margin-bottom: 25px;'><img src='${localhost}/img/stevens/line_length_strip.png'></img></div>` +
+            "<br> <br> <br> When you are done adjusting the center graph, hit the <b>spacebar</b>." + 
+            "<br> Press any key to continue. </div>"      
+      }
+    } else {
+      var instructions = {
+        type: "html-keyboard-response",
+        stimulus: "<div align = 'center'> <p>In this experiment, you will be using the <b>m</b>" +
+            " and <b>z</b> keys to adjust the center graph <br> so that its correlation is roughly" +
+            " the <u>midpoint</u> between the left and right graphs. <br><br>" +
+            " <b>m</b> increases the correlation. <br>" +
+            " <b>z</b> decreases the correlation. <br><br>" + 
+            `<div style='float: left; margin-bottom: 25px;'><img src='${localhost}/img/stevens/strip.png'></img></div>` +
+            "<br> <br> <br> When you are done adjusting the center graph, hit the <b>spacebar</b>." + 
+            "<br> Press any key to continue. </div>"      
+      }
     }
+    break;
   case "ring":  
     var instructions = {
       type: "html-keyboard-response",
@@ -81,6 +96,7 @@ switch(stevens_exp.graph_type){
           "<br> <br> <br> When you are done adjusting the center graph, hit the <b>spacebar</b>." + 
           "<br> Press any key to continue. </div>"      
     }
+    break;
 };
 
 var ready = {
