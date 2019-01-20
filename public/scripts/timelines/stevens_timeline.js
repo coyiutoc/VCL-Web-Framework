@@ -183,7 +183,7 @@ var stop = {
   stimulus: function() {
     let results = stevens_exp.calculate_exclusion_criteria();
 
-    return results + "<div align = 'center'> <font size = 20><p>This concludes the practice trials.<p>" + "<br><br><p><b>Any questions?</b></p></font></div>";
+    return "<div>" + results + "</div>" + "<div align = 'center'> <font size = 6><p>This concludes the practice trials.<p>" + "<p><b>Any questions?</b></p></font></div>";
   },
   data: {type: 'instruction'},
   on_start: function(stop){

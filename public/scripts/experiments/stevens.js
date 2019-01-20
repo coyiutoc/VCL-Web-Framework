@@ -81,6 +81,13 @@ class Stevens {
     // Order the data set according to the latin square
     for (let i=0; i < this.sub_condition_order.length; i++){
       ordered_dataset[i] = dataset[this.sub_condition_order[i]];
+
+      // Alternate the start ref to be low or high for each subcondition
+      if (i%2 === 0) {
+        ordered_dataset[i]["start_ref"] = ordered_dataset[i]["low_ref"];
+      } else {
+        ordered_dataset[i]["start_ref"] = ordered_dataset[i]["high_ref"];
+      }
     }
 
     // Set experiment trials
@@ -99,10 +106,18 @@ class Stevens {
    */
   prepare_practice(dataset) {
 
-    let practice_dataset = dataset.slice(0, 4);
+    let practice_dataset = [];
 
     for (let i=0; i < 4; i++){
+      practice_dataset[i] = dataset[i];
       this.practice_trial_data[i] = [];
+
+      // Alternate the start ref to be low or high for each subcondition
+      if (i%2 === 0) {
+        practice_dataset[i]["start_ref"] = dataset[i]["low_ref"];
+      } else {
+        practice_dataset[i]["start_ref"] = dataset[i]["high_ref"];
+      }
     }
 
     this.sub_conditions_constants = practice_dataset;
@@ -129,41 +144,50 @@ class Stevens {
    * - Standard deviation > 0.2
    * - Anchoring > 0.6
    *
-   * @ return     HTML of values and # of flags
+   * @ return     HTML of subcondition data to print onto screen
    */
   calculate_exclusion_criteria() {
 
     let string = "";
-    let flags = 0;
 
     for (let i = 0; i < Object.keys(this.practice_trial_data).length; i++) {
-      debugger;
-      let subcondition_data = this.practice_trial_data[i];
 
+      let subcondition_data = this.practice_trial_data[i];
       let std_dev = this.get_standard_deviation(subcondition_data);
       let anchoring_value = this.get_anchoring_value(subcondition_data);
+      let mids = this.get_estimated_mids(subcondition_data);
 
-      if (anchoring_value > 0.5 && std_dev > 0.2) {
-        flags ++;
-      } else if (std_dev > 0.2) {
-        flags ++;
+      let rounded_mids = [];
+      for (let mid of mids) {
+        rounded_mids.push(mid.toFixed(3));
+      }
+
+      let anchoring_color = "BLACK";
+      if (anchoring_value > 0.5) {
+        anchoring_color = "RED";
+      }
+
+      let std_dev_color = "BLACK";
+      if (std_dev > 0.2) {
+        std_dev_color = "RED";
       }
 
       string += `
-        <b> Subcondition: ${i+1} </b>
+        <div align = "center" style = "text-align: left; float:left; width: 20vw">
+        <font size = 2><b> Subcondition: ${i+1} </b>
         <br>
-        Standard Deviation: ${std_dev} 
+        Midpoint values: ${rounded_mids}
         <br>
-        Anchoring Value: ${anchoring_value} 
+        <font color = ${std_dev_color}> Standard Deviation: ${std_dev} </font>
+        <br>
+        <font color = ${anchoring_color}> Anchoring Value: ${anchoring_value} </font>
         <br>
         <br>
+        </font>
+        </div>
         `
     }
 
-    if (flags >= 2) {
-      string += `MORE THAN 2 SUBCONDITIONS FLAGGED.`
-    }
-    
     return string;
   }
 
@@ -192,7 +216,7 @@ class Stevens {
     }
     variance = variance / (estimated_mids.length - 1);
 
-    return Math.sqrt(variance);
+    return Math.sqrt(variance).toFixed(3);
   }
 
   /**
@@ -209,14 +233,15 @@ class Stevens {
 
     // Iterate through each estimated mid (trial) of a given subcondition
     for (let i = 0; i < estimated_mids.length; i++) {
-      if (i === 1 || i === 3) {
-        high_ref_trial_sum += estimated_mids[i];
-      } else {
+      // Evens have the low ref as their starter 
+      if (i % 2 === 0) {
         low_ref_trial_sum += estimated_mids[i];
+      } else {
+        high_ref_trial_sum += estimated_mids[i];
       }
     }
 
-    return Math.abs(high_ref_trial_sum - low_ref_trial_sum);
+    return Math.abs(high_ref_trial_sum - low_ref_trial_sum).toFixed(3);
   }
 
   /**
@@ -481,11 +506,14 @@ class Stevens {
 
     var estimated_correlation;
     var index = this.current_sub_condition_index;
+
     // If first trial (estimated_correlation is null), so initialize
     // estimated midpoint and set step size:
     if (trial.data.round_refreshes == 1){
+  
       //Initialize the estimated midpoint correlation:
-      estimated_correlation = Math.random() < 0.5 ? constants.low_ref : constants.high_ref;
+      //estimated_correlation = Math.random() < 0.5 ? constants.low_ref : constants.high_ref;
+      estimated_correlation = trial.data.start_ref;
       trial.data.estimated_mid = estimated_correlation;
       trial.data.step_size = (constants.high_ref - constants.low_ref) / this.MAX_STEP_INTERVAL;
 
@@ -499,19 +527,36 @@ class Stevens {
     // at the last_trials's estimated_correlation and step size.)
     else if (last_trial.key_press && (last_trial.key_press == trial.choices[0] || last_trial.key_press == trial.choices[1])){
 
-      switch (last_trial.key_press){
+      // Need to check that if hits either high or low ref, it DOESN'T count as a num_adjustment
+      let is_unchanged = false;
 
+      switch (last_trial.key_press){
         case trial.choices[0]: // up
+
           estimated_correlation = Math.min(constants.high_ref, last_trial.estimated_mid + (Math.random() * last_trial.step_size));
+          //estimated_correlation = Math.min(constants.high_ref, last_trial.estimated_mid + last_trial.step_size);
+          
+          if (estimated_correlation === constants.high_ref) {
+            is_unchanged = true;
+          }
           break;
 
         case trial.choices[1]: // down
+
           estimated_correlation = Math.max(constants.low_ref, last_trial.estimated_mid - (Math.random() * last_trial.step_size));
+          //estimated_correlation = Math.max(constants.low_ref, last_trial.estimated_mid - last_trial.step_size);
+          
+          if (estimated_correlation === constants.low_ref) {
+            is_unchanged = true;
+          }
           break;
       }
 
-      trial.data.num_adjustments = last_trial.num_adjustments + 1;
-      this.input_count_array[trial.data.trial_num]++;
+      if (!is_unchanged){
+        trial.data.num_adjustments = last_trial.num_adjustments + 1;
+        this.input_count_array[trial.data.trial_num]++;
+      }  
+
     }
 
     // Else use the previous trial's midpoint
