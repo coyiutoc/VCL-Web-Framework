@@ -92,7 +92,7 @@ class Stevens {
 
     // Set experiment trials
     this.experiment_conditions_constants = ordered_dataset;
-    
+
     // Set experiment variables to the practice first
     this.prepare_practice(dataset);    
     
@@ -283,7 +283,15 @@ class Stevens {
     var trial = {
         type:'external-html-keyboard-response',
         url: localhost + "/stevens_trial",
-        choices:[77, 90, 32, 81], //m = 77 (up), z = 90 (down), 32 = spacebar, 81 = q (exit button for debugging)
+        choices: function(block_type){ // m = 77 (up), z = 90 (down), 32 = spacebar, 81 = q (exit button for debugging)
+
+          if (block_type === "practice") {
+            return [77, 90, 81]; // Note disabled spacebar on practice to ensure they do all 4 inputs.
+          } else {
+            return [77, 90, 32, 81]; 
+          }
+
+        },
         execute_script: true,
         response_ends_trial: true, 
         data: {},
@@ -315,7 +323,7 @@ class Stevens {
           console.log("round refreshes: " + trial.data.round_refreshes);
           console.log("trial/round num: " + trial.data.trial_num);
           console.log("num adjustments: " + trial.data.num_adjustments);
-          console.log("input count array: " + stevens_exp.input_count_array);
+          console.log("input count per trial: " + stevens_exp.input_count_array);
 
           // Generate distributions
           var high_coordinates = generateDistribution(constants.high_ref, 
@@ -425,7 +433,8 @@ class Stevens {
    *       left_correlation: '',
    *       right_correlation: '',
    *       round_refreshes: 0,      // Number of times there is a refresh for a given round 
-   *       high_ref_is_right: false     
+   *       high_ref_is_right: false
+   *       start_ref: ''
    *       };
    *
    * These are variables created WITHIN the trial logic that were not present in excel (but need to be
@@ -464,26 +473,37 @@ class Stevens {
       trial.data.left_correlation = last_stevens_trial.left_correlation;
       trial.data.high_ref_is_right = last_stevens_trial.high_ref_is_right;
 
-      // If a round has just ended, increment the trial_num and
-      // reset the refresh number (only applies for test trials)
+      // If a round has just ended:
+      // - increment the trial_num
+      // - reset the refresh number (only applies for test trials)
+      // - swap the start ref to be high/low depending on the previous round's start ref
       if (round_end == true && trial.data.run_type == "test"){
+
         trial.data.trial_num = last_stevens_trial.trial_num + 1;
         trial.data.num_adjustments = 0;
         trial.data.round_refreshes = 1;
+
+        if (last_stevens_trial.start_ref === constants.high_ref) {
+          trial.data.start_ref = constants.low_ref;
+        } else {
+          trial.data.start_ref = constants.high_ref;
+        }
+
         round_end = false; //Reset flag
       }
-      // Else trial_num and num_adjustments is the same, but round_refresh ++ 
+      // Else trial_num, num_adjustments and start_ref is the same, but round_refresh ++ 
       else{
         trial.data.trial_num = last_stevens_trial.trial_num;
-        trial.data.round_refreshes = last_stevens_trial.round_refreshes + 1;
         trial.data.num_adjustments = last_stevens_trial.num_adjustments;
+        trial.data.start_ref = last_stevens_trial.start_ref;
+        trial.data.round_refreshes = last_stevens_trial.round_refreshes + 1;
       }
     }
     // Else this is the first refresh of a given trial 
     else{
       trial.data.trial_num = 0;
       trial.data.num_adjustments = 0;
-      trial.data.round_refreshes = 1; 
+      trial.data.round_refreshes = 1;
     }
   }
 
@@ -531,11 +551,12 @@ class Stevens {
       let is_unchanged = false;
 
       switch (last_trial.key_press){
+
         case trial.choices[0]: // up
 
           estimated_correlation = Math.min(constants.high_ref, last_trial.estimated_mid + (Math.random() * last_trial.step_size));
-          //estimated_correlation = Math.min(constants.high_ref, last_trial.estimated_mid + last_trial.step_size);
           
+          // If they've hit the max (high_ref)
           if (estimated_correlation === constants.high_ref) {
             is_unchanged = true;
           }
@@ -544,14 +565,16 @@ class Stevens {
         case trial.choices[1]: // down
 
           estimated_correlation = Math.max(constants.low_ref, last_trial.estimated_mid - (Math.random() * last_trial.step_size));
-          //estimated_correlation = Math.max(constants.low_ref, last_trial.estimated_mid - last_trial.step_size);
           
+          // If they've hit the min (low_ref)
           if (estimated_correlation === constants.low_ref) {
             is_unchanged = true;
           }
           break;
       }
 
+      // For valid changes (i.e not going beyond max or below min), can then 
+      // increment num_adjustments
       if (!is_unchanged){
         trial.data.num_adjustments = last_trial.num_adjustments + 1;
         this.input_count_array[trial.data.trial_num]++;
@@ -585,17 +608,26 @@ class Stevens {
   }
 
   /**
-   * Determines whether the round can end or not. A round can end ONLY if 
-   * there has been at least 1 input from the user on the given round. 
+   * Determines whether the round can end or not. A round can end ONLY if:
+   * - test     : there has been at least 1 input from the user on the given round 
+   * - practice : user has done 4 adjustments in that given round
+   *
+   * @param  block_type {string}  "test" or "practice"
    *
    * @return {boolean}            True if sub condition should end.
    */
-  end_round() {
+  end_round(block_type) {
 
-    var last_trial = jsPsych.data.get().last(1).values()[0];
+    let last_trial = jsPsych.data.get().last(1).values()[0];
 
     // If there is no num_adjustment count, we shouldn't end round 
-    return !(last_trial.num_adjustments == 0);
+    if (block_type === "test") {
+      return !(last_trial.num_adjustments === 0);
+    }
+    // For practice, only end round when they have done 4 inputs
+    else {
+      return (last_trial.num_adjustments === 4);
+    }
   }
 
   /**
@@ -855,13 +887,13 @@ class Stevens {
   plot_strip(datasets) {
 
     var stevens_exp = this;
-    var width = window.innerWidth * 0.7;
-    var height = window.innerHeight * 0.25;
+    var width = window.innerWidth * 0.8;
+    var height = window.innerHeight * 0.3;
 
     // Scale for data slightly smaller than full width of axes to account for outliers.
     var xscale_for_data = d3.scaleLinear()
                    .domain([0, multiplier]) 
-                   .range([window.innerWidth * 0.1, window.innerWidth * 0.6]);
+                   .range([window.innerWidth * 0.05, window.innerWidth * 0.75]);
 
     var xscale = d3.scaleLinear()
                    .domain([0, multiplier]) 
@@ -947,13 +979,13 @@ class Stevens {
    */
   plot_ring(datasets) {
 
-    var width = window.innerWidth * 0.7;
-    var height = window.innerHeight * 0.25;
+    var width = window.innerWidth * 0.8;
+    var height = window.innerHeight * 0.3;
 
     // Scale for data slightly smaller than full width of axes to account for outliers.
     var xscale_for_data = d3.scaleLinear()
                    .domain([0, multiplier]) 
-                   .range([window.innerWidth * 0.1, window.innerWidth * 0.6]);
+                   .range([window.innerWidth * 0.05, window.innerWidth * 0.75]);
 
     var xscale = d3.scaleLinear()
                    .domain([0, multiplier]) 

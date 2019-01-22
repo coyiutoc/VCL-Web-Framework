@@ -137,7 +137,7 @@ var practice = {
 
     // If user has 4 inputs, end trial OR
     // If spacebar is pressed and we can end the round (there was at least 1 input)
-    if ((curr_num_adjustments === 4) || (32 == data.values()[0].key_press && stevens_exp.end_round())){
+    if ((curr_num_adjustments === 4) || (32 == data.values()[0].key_press && stevens_exp.end_round("practice"))){
       
       // !!!!!!!! TODO: 
       // This hack throws off the trial variables like input_count_array and trial_num.
@@ -183,7 +183,9 @@ var stop = {
   stimulus: function() {
     let results = stevens_exp.calculate_exclusion_criteria();
 
-    return "<div>" + results + "</div>" + "<div align = 'center'> <font size = 6><p>This concludes the practice trials.<p>" + "<p><b>Any questions?</b></p></font></div>";
+    return "<div>" + results + "</div>" + 
+           "<div align = 'center'> <font size = 6><p>This concludes the practice trials.<p>" + 
+           "<p><b>Any questions?</b></p></font></div>";
   },
   data: {type: 'instruction'},
   on_start: function(stop){
@@ -221,7 +223,7 @@ var experiment = {
     }
 
     // If spacebar is pressed and we can end the round (there was at least 1 input)
-    if (32 == data.values()[0].key_press && stevens_exp.end_round()){
+    if (32 == data.values()[0].key_press && stevens_exp.end_round("test")){
 
       // If there are still more rounds for this sub condition
       if (!stevens_exp.end_sub_condition()){
@@ -261,8 +263,8 @@ var experiment_end = {
   stimulus: '<div align = "center">' + 
             '<p><font size = 10>You have completed the experiment!<p></font>' +
             '<br>' +
-            '<a href="#" onclick="stevens_exp.export_trial_data();" class="btn btn-info btn-block" role="button" style="width: 300px; font-size: 20px">Download Trial Data</a>' +
-            '<a href="#" onclick="stevens_exp.export_summary_data();" class="btn btn-info btn-block" role="button" style="width: 300px; font-size: 20px">Download Summary Data</a>' +
+            `<a href="#" onclick="stevens_exp.export_trial_data();" class="btn btn-info btn-block" role="button" style="width: 300px; font-size: 20px">Download Trial Data</a>` +
+            `<a href="#" onclick="stevens_exp.export_summary_data();" class="btn btn-info btn-block" role="button" style="width: 300px; font-size: 20px">Download Summary Data</a>` +
             '</div>',
   on_start: function(stop){
     // Reset background color to feedback
