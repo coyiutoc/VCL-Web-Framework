@@ -17,7 +17,7 @@ class Stevens {
     
     this.condition_name = condition_name; 
 
-    if ((graph_type !== "scatter") && (graph_type !== "strip")) {
+    if ((graph_type !== "scatter") && (graph_type !== "strip") && (graph_type !== "ring")) {
       throw Error(graph_type + " is not supported.")} 
     else { 
       this.graph_type = graph_type;
@@ -40,6 +40,8 @@ class Stevens {
     // PRACTICE EXPERIMENT VARIABLES
 
     this.practice_conditions_constants;
+    this.adjusted_midpoint_matrix = {}; 
+    this.practice_trial_data = {};
 
     // ========================================
     // TEST EXPERIMENT VARIABLES
@@ -56,32 +58,71 @@ class Stevens {
    *
    * @param  balancing_type {string}                           Type of balancing. Currently only latin_square
    *                                                           is supported.
-   *         data_set {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. 
+   *         dataset {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. 
    */
-  prepare_experiment(balancing_type, data_set) {
+  prepare_experiment(balancing_type, dataset) {
 
-    if (balancing_type == 'latin_square'){
+    switch(balancing_type) {
 
-      this.sub_condition_order = initialize_latin_square(data_set.length);
-      var ordered_data_set = [];
+      case 'latin_square':
+        this.sub_condition_order = initialize_latin_square(dataset.length);
+        break;
 
-      // Order the data set according to the latin square
-      // Initialize adjusted_quantity_matrix size 
-      for (let i=0; i < this.sub_condition_order.length; i++){
-        ordered_data_set[i] = data_set[this.sub_condition_order[i]];
-      }
+      case 'random':
+        this.sub_condition_order = initialize_random_order(dataset.length);
+        break;
 
-      // Set experiment trials
-      this.experiment_conditions_constants = ordered_data_set;
-      
-      // Set experiment variables to the practice first
-      this.sub_conditions_constants = data_set;
-      this.current_sub_condition_index = 0; 
-      this.input_count_array = new Array(this.sub_conditions_constants[0].trials_per_round).fill(0);
-
-      console.log(this.sub_conditions_constants);   
+      default:
+        throw Error(balancing_type + " balancing type is not supported.");
     }
-    else {throw Error(balancing_type + " balancing type is not supported.")};
+
+    var ordered_dataset = [];
+
+    // Order the data set according to the latin square
+    for (let i=0; i < this.sub_condition_order.length; i++){
+      ordered_dataset[i] = dataset[this.sub_condition_order[i]];
+
+      // Alternate the start ref to be low or high for each subcondition
+      if (i%2 === 0) {
+        ordered_dataset[i]["start_ref"] = ordered_dataset[i]["low_ref"];
+      } else {
+        ordered_dataset[i]["start_ref"] = ordered_dataset[i]["high_ref"];
+      }
+    }
+
+    // Set experiment trials
+    this.experiment_conditions_constants = ordered_dataset;
+
+    // Set experiment variables to the practice first
+    this.prepare_practice(dataset);    
+    
+    console.log(this.sub_conditions_constants);    
+  }
+
+  /**
+   * Creates the practice dataset by taking the first FOUR subconditions.
+   *
+   * @param  dataset {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. 
+   */
+  prepare_practice(dataset) {
+
+    let practice_dataset = [];
+
+    for (let i=0; i < 4; i++){
+      practice_dataset[i] = dataset[i];
+      this.practice_trial_data[i] = [];
+
+      // Alternate the start ref to be low or high for each subcondition
+      if (i%2 === 0) {
+        practice_dataset[i]["start_ref"] = dataset[i]["low_ref"];
+      } else {
+        practice_dataset[i]["start_ref"] = dataset[i]["high_ref"];
+      }
+    }
+
+    this.sub_conditions_constants = practice_dataset;
+    this.current_sub_condition_index = 0; 
+    this.input_count_array = new Array(this.sub_conditions_constants[0].trials_per_round).fill(0);
   }
 
   /**
@@ -95,6 +136,135 @@ class Stevens {
       this.sub_conditions_constants = this.experiment_conditions_constants;
       this.input_count_array = new Array(this.sub_conditions_constants[0].trials_per_round).fill(0);
       this.current_sub_condition_index = 0;
+  }
+
+  /**
+   * Calculates exclusion criteria using standard deviation and variance.
+   * Subcondition is flagged if:
+   * - Standard deviation > 0.2
+   * - Anchoring > 0.6
+   *
+   * @ return     HTML of subcondition data to print onto screen
+   */
+  calculate_exclusion_criteria() {
+
+    let string = "";
+
+    for (let i = 0; i < Object.keys(this.practice_trial_data).length; i++) {
+
+      let subcondition_data = this.practice_trial_data[i];
+      let std_dev = this.get_standard_deviation(subcondition_data);
+      let anchoring_value = this.get_anchoring_value(subcondition_data);
+      let mids = this.get_estimated_mids(subcondition_data);
+
+      let rounded_mids = [];
+      for (let mid of mids) {
+        rounded_mids.push(mid.toFixed(3));
+      }
+
+      let anchoring_color = "BLACK";
+      if (anchoring_value > 0.5) {
+        anchoring_color = "RED";
+      }
+
+      let std_dev_color = "BLACK";
+      if (std_dev > 0.2) {
+        std_dev_color = "RED";
+      }
+
+      string += `
+        <div align = "center" style = "text-align: left; float:left; width: 20vw">
+        <font size = 2><b> Subcondition: ${i+1} </b>
+        <br>
+        Midpoint values: ${rounded_mids}
+        <br>
+        <font color = ${std_dev_color}> Standard Deviation: ${std_dev} </font>
+        <br>
+        <font color = ${anchoring_color}> Anchoring Value: ${anchoring_value} </font>
+        <br>
+        <br>
+        </font>
+        </div>
+        `
+    }
+
+    return string;
+  }
+
+  /**
+   * Calculates the standard deviation for the specified subcondition.
+   *
+   * @ return {double}  standard deviation
+   */
+  get_standard_deviation(subcondition_data) {
+
+    let values = [];
+
+    let estimated_mids = this.get_estimated_mids(subcondition_data);
+
+    // Calculate mean:
+    let mean = 0;
+    for (let mid of estimated_mids) {
+      mean += mid;
+    }
+    mean = mean / estimated_mids.length;
+
+    // Calculate variance:
+    let variance = 0;
+    for (let mid of estimated_mids) {
+      variance += Math.pow(mid - mean, 2);
+    }
+    variance = variance / (estimated_mids.length - 1);
+
+    return Math.sqrt(variance).toFixed(3);
+  }
+
+  /**
+   * Calculates the anchoring value for the specified subcondition.
+   *
+   * @ return {double} anchoring value
+   */
+  get_anchoring_value(subcondition_data) {
+
+    let high_ref_trial_sum = 0;
+    let low_ref_trial_sum = 0;
+
+    let estimated_mids = this.get_estimated_mids(subcondition_data);
+
+    // Iterate through each estimated mid (trial) of a given subcondition
+    for (let i = 0; i < estimated_mids.length; i++) {
+      // Evens have the low ref as their starter 
+      if (i % 2 === 0) {
+        low_ref_trial_sum += estimated_mids[i];
+      } else {
+        high_ref_trial_sum += estimated_mids[i];
+      }
+    }
+
+    return Math.abs(high_ref_trial_sum - low_ref_trial_sum).toFixed(3);
+  }
+
+  /**
+   * Retrieves the estimated midpoints of each trial for the subcondition.
+   *
+   * @ return {array}  of estimated mids 
+   */
+  get_estimated_mids(subcondition_data) {
+
+    let estimated_mids = {};
+    let result = [];
+
+    for (let trial of subcondition_data) {
+      if (trial.num_adjustments > 0) {
+        estimated_mids[trial.num_adjustments] = trial.estimated_mid;
+      }
+    }
+
+    for (let i = 1; i <= Object.keys(estimated_mids).length; i++) {
+      result[i-1] = estimated_mids[i];
+    }
+
+    return result;
   }
 
   /**
@@ -113,7 +283,15 @@ class Stevens {
     var trial = {
         type:'external-html-keyboard-response',
         url: localhost + "/stevens_trial",
-        choices:[77, 90, 32, 81], //m = 77 (up), z = 90 (down), 32 = spacebar, 81 = q (exit button for debugging)
+        choices: function(block_type){ // m = 77 (up), z = 90 (down), 32 = spacebar, 81 = q (exit button for debugging)
+
+          if (block_type === "practice") {
+            return [77, 90, 81]; // Note disabled spacebar on practice to ensure they do all 4 inputs.
+          } else {
+            return [77, 90, 32, 81]; 
+          }
+
+        },
         execute_script: true,
         response_ends_trial: true, 
         data: {},
@@ -145,7 +323,7 @@ class Stevens {
           console.log("round refreshes: " + trial.data.round_refreshes);
           console.log("trial/round num: " + trial.data.trial_num);
           console.log("num adjustments: " + trial.data.num_adjustments);
-          console.log("input count array: " + stevens_exp.input_count_array);
+          console.log("input count per trial: " + stevens_exp.input_count_array);
 
           // Generate distributions
           var high_coordinates = generateDistribution(constants.high_ref, 
@@ -191,6 +369,11 @@ class Stevens {
           middle_coordinates = estimated_coordinates;  
           distribution_size = constants.num_points; 
           trial_data = trial.data; 
+
+          // Save trial data for practice so can calculate exclusion criteria
+          if (trial.data.run_type === "practice") {
+            stevens_exp.practice_trial_data[index].push(trial.data);
+          }
 
           console.log("[RIGHT] Correlation: " + trial.data.right_correlation);
           console.log("[MIDPOINT] Correlation: " + trial.data.estimated_mid);
@@ -250,7 +433,8 @@ class Stevens {
    *       left_correlation: '',
    *       right_correlation: '',
    *       round_refreshes: 0,      // Number of times there is a refresh for a given round 
-   *       high_ref_is_right: false     
+   *       high_ref_is_right: false
+   *       start_ref: ''
    *       };
    *
    * These are variables created WITHIN the trial logic that were not present in excel (but need to be
@@ -289,26 +473,37 @@ class Stevens {
       trial.data.left_correlation = last_stevens_trial.left_correlation;
       trial.data.high_ref_is_right = last_stevens_trial.high_ref_is_right;
 
-      // If a round has just ended, increment the trial_num and
-      // reset the refresh number (only applies for test trials)
+      // If a round has just ended:
+      // - increment the trial_num
+      // - reset the refresh number (only applies for test trials)
+      // - swap the start ref to be high/low depending on the previous round's start ref
       if (round_end == true && trial.data.run_type == "test"){
+
         trial.data.trial_num = last_stevens_trial.trial_num + 1;
         trial.data.num_adjustments = 0;
         trial.data.round_refreshes = 1;
+
+        if (last_stevens_trial.start_ref === constants.high_ref) {
+          trial.data.start_ref = constants.low_ref;
+        } else {
+          trial.data.start_ref = constants.high_ref;
+        }
+
         round_end = false; //Reset flag
       }
-      // Else trial_num and num_adjustments is the same, but round_refresh ++ 
+      // Else trial_num, num_adjustments and start_ref is the same, but round_refresh ++ 
       else{
         trial.data.trial_num = last_stevens_trial.trial_num;
-        trial.data.round_refreshes = last_stevens_trial.round_refreshes + 1;
         trial.data.num_adjustments = last_stevens_trial.num_adjustments;
+        trial.data.start_ref = last_stevens_trial.start_ref;
+        trial.data.round_refreshes = last_stevens_trial.round_refreshes + 1;
       }
     }
     // Else this is the first refresh of a given trial 
     else{
       trial.data.trial_num = 0;
       trial.data.num_adjustments = 0;
-      trial.data.round_refreshes = 1; 
+      trial.data.round_refreshes = 1;
     }
   }
 
@@ -331,11 +526,14 @@ class Stevens {
 
     var estimated_correlation;
     var index = this.current_sub_condition_index;
+
     // If first trial (estimated_correlation is null), so initialize
     // estimated midpoint and set step size:
     if (trial.data.round_refreshes == 1){
+  
       //Initialize the estimated midpoint correlation:
-      estimated_correlation = Math.random() < 0.5 ? constants.low_ref : constants.high_ref;
+      //estimated_correlation = Math.random() < 0.5 ? constants.low_ref : constants.high_ref;
+      estimated_correlation = trial.data.start_ref;
       trial.data.estimated_mid = estimated_correlation;
       trial.data.step_size = (constants.high_ref - constants.low_ref) / this.MAX_STEP_INTERVAL;
 
@@ -349,19 +547,39 @@ class Stevens {
     // at the last_trials's estimated_correlation and step size.)
     else if (last_trial.key_press && (last_trial.key_press == trial.choices[0] || last_trial.key_press == trial.choices[1])){
 
+      // Need to check that if hits either high or low ref, it DOESN'T count as a num_adjustment
+      let is_unchanged = false;
+
       switch (last_trial.key_press){
 
         case trial.choices[0]: // up
+
           estimated_correlation = Math.min(constants.high_ref, last_trial.estimated_mid + (Math.random() * last_trial.step_size));
+          
+          // If they've hit the max (high_ref)
+          if (estimated_correlation === constants.high_ref) {
+            is_unchanged = true;
+          }
           break;
 
         case trial.choices[1]: // down
+
           estimated_correlation = Math.max(constants.low_ref, last_trial.estimated_mid - (Math.random() * last_trial.step_size));
+          
+          // If they've hit the min (low_ref)
+          if (estimated_correlation === constants.low_ref) {
+            is_unchanged = true;
+          }
           break;
       }
 
-      trial.data.num_adjustments = last_trial.num_adjustments + 1;
-      this.input_count_array[trial.data.trial_num]++;
+      // For valid changes (i.e not going beyond max or below min), can then 
+      // increment num_adjustments
+      if (!is_unchanged){
+        trial.data.num_adjustments = last_trial.num_adjustments + 1;
+        this.input_count_array[trial.data.trial_num]++;
+      }  
+
     }
 
     // Else use the previous trial's midpoint
@@ -390,17 +608,26 @@ class Stevens {
   }
 
   /**
-   * Determines whether the round can end or not. A round can end ONLY if 
-   * there has been at least 1 input from the user on the given round. 
+   * Determines whether the round can end or not. A round can end ONLY if:
+   * - test     : there has been at least 1 input from the user on the given round 
+   * - practice : user has done 4 adjustments in that given round
+   *
+   * @param  block_type {string}  "test" or "practice"
    *
    * @return {boolean}            True if sub condition should end.
    */
-  end_round() {
+  end_round(block_type) {
 
-    var last_trial = jsPsych.data.get().last(1).values()[0];
+    let last_trial = jsPsych.data.get().last(1).values()[0];
 
     // If there is no num_adjustment count, we shouldn't end round 
-    return !(last_trial.num_adjustments == 0);
+    if (block_type === "test") {
+      return !(last_trial.num_adjustments === 0);
+    }
+    // For practice, only end round when they have done 4 inputs
+    else {
+      return (last_trial.num_adjustments === 4);
+    }
   }
 
   /**
@@ -555,6 +782,9 @@ class Stevens {
       case "strip":
         this.plot_strip(datasets);
         break;
+      case "ring":
+        this.plot_ring(datasets);
+        break;
     }
   }
 
@@ -649,15 +879,21 @@ class Stevens {
     document.body.style.backgroundColor = trial_data.background_color;
   }
 
-    /**
+  /**
    * Plots distributions using strip plots. 
    *
    * @ param  datasets   {array}
    */
   plot_strip(datasets) {
 
-    var width = window.innerWidth * 0.7;
-    var height = window.innerHeight * 0.25;
+    var stevens_exp = this;
+    var width = window.innerWidth * 0.8;
+    var height = window.innerHeight * 0.3;
+
+    // Scale for data slightly smaller than full width of axes to account for outliers.
+    var xscale_for_data = d3.scaleLinear()
+                   .domain([0, multiplier]) 
+                   .range([window.innerWidth * 0.05, window.innerWidth * 0.75]);
 
     var xscale = d3.scaleLinear()
                    .domain([0, multiplier]) 
@@ -683,7 +919,9 @@ class Stevens {
                     .append("svg") 
                       .attr("width", width) 
                       .attr("height", height)
-                      .attr("style", "display: block");   
+                      .attr("style", "display: block")
+                      .attr("transform", "scale(-1,1)"); // Flip horizontally so cone is
+                                                         // is going left -> right (like orig. version)     
 
       var xAxisTranslate = height/2;
       var xAxisElements = chart.append("g")
@@ -696,11 +934,109 @@ class Stevens {
               .enter()
               .append("rect") // Creating the circles for each entry in data set 
               .attr("x", function (d) {
-                return xscale(d[0]);
+                return xscale_for_data(d[0]);
               })
-              .attr("transform", "translate(50, " + height/4 + ")")
-              .style("width", 2)
-              .style("height", height/2);
+              .attr("transform", function (d) {
+                if (stevens_exp.condition_name === "line_length_strip") {
+                  let ytranslation = height/2 - (yscale(d[1]) * 0.5);
+                  return "translate(0, " + ytranslation + ")";
+                } else {
+                return "translate(0, " + height/4 + ")";
+                }
+              })
+              .style("width", function () {
+                if (trial_data.strip_width !== undefined) {
+                  return trial_data.strip_width;
+                } else {
+                  return 2;
+                }
+              })
+              .style("height", function (d) {
+                if (stevens_exp.condition_name === "line_length_strip") {
+                  return yscale(d[1]);
+                } else {
+                  return height/2;
+                }
+              });
+
+      // Set axis color
+      chart.selectAll("path")
+           .attr("stroke", trial_data.axis_color);
+
+      // Remove tick labels
+      chart.selectAll("text").remove();     
+
+    }
+
+    // Set background color
+    document.body.style.backgroundColor = trial_data.background_color;
+  }
+
+  /**
+   * Plots distributions using strip plots. 
+   *
+   * @ param  datasets   {array}
+   */
+  plot_ring(datasets) {
+
+    var width = window.innerWidth * 0.8;
+    var height = window.innerHeight * 0.3;
+
+    // Scale for data slightly smaller than full width of axes to account for outliers.
+    var xscale_for_data = d3.scaleLinear()
+                   .domain([0, multiplier]) 
+                   .range([window.innerWidth * 0.05, window.innerWidth * 0.75]);
+
+    var xscale = d3.scaleLinear()
+                   .domain([0, multiplier]) 
+                   .range([0, width]);
+
+    var yscale = d3.scaleLinear()
+                   .domain([multiplier * -1, 0])
+                   .range([height/2, 0]);
+
+    // Create axes: 
+    var x_axis = d3.axisBottom()
+                   .scale(xscale)
+                   .tickSize([0]);
+
+    var y_axis = d3.axisLeft()
+                   .scale(yscale)
+                   .tickSize([0]);
+
+    // Create/append the SVG for both graphs: 
+    for (var data of datasets){
+
+      var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
+                    .append("svg") 
+                      .attr("width", width) 
+                      .attr("height", height)
+                      .attr("style", "display: block")
+                      .attr("transform", "scale(-1,1)"); // Flip horizontally so cone is
+                                                         // is going left -> right (like orig. version)     
+
+      var xAxisTranslate = height/2;
+      var xAxisElements = chart.append("g")
+                                .attr("transform", "translate(0, " + xAxisTranslate  +")")
+                                .call(x_axis)
+
+       // Populating data: 
+      chart.selectAll("strip") // Technically no circles inside div yet, but will be creating it
+            .data(data)
+              .enter()
+                .append("circle") // Creating the circles for each entry in data set 
+                .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
+                  return xscale_for_data(d[0]);
+                })
+                .attr("cy", function (d) {
+                  return height/2;
+                })
+                .attr("r", function (d) {
+                  return yscale(d[1])
+                })
+                .attr("stroke", "black")
+                .attr("stroke-width", trial_data.ring_thickness)
+                .attr("fill", "none");
 
       // Set axis color
       chart.selectAll("path")

@@ -18,7 +18,7 @@ var multiplier = 1; // Sets how much the data should be scaled by.
 // =========================================================
 // INSTANTIATE JND EXPERIMENT OBJECT
 
-const JND_EXCEL = get_data_subset("jnd", jnd_exp.range, jnd_exp.condition_name);
+const JND_EXCEL = get_data("jnd", jnd_exp.range, jnd_exp.condition_name);
 
 jnd_exp.prepare_experiment("latin_square", JND_EXCEL);
 
@@ -27,9 +27,12 @@ jnd_exp.prepare_experiment("latin_square", JND_EXCEL);
 
 var welcome = {
   type: 'html-keyboard-response',
-  stimulus: '<div align = "center">' + `<img src="${localhost}/img/VCL_lab_logo.png"></img> <br>` +
-            'This is a <b>Proof of Concept</b> for a <b>Foundational JND Experiment</b>.' + 
-            '<br><br><p><font size = 15>Press any key to begin.<p></font>' +
+  stimulus: `<div align = "center">` + `<img src="${localhost}/img/VCL_lab_logo.png"></img><br><br>` +
+            `<b>Base:</b> JND` + '<br>' + 
+            `<b>Trial Type:</b> ${jnd_exp.range}` + '<br>' + 
+            `<b>Graph Type:</b> ${jnd_exp.graph_type}` + '<br>' + 
+            `<b>Condition:</b> ${jnd_exp.condition_name}` + 
+            '<br><br><br><p><font size = 15>Press any key to begin.<p></font>' +
             '</div>',
   data: {type: 'instruction'}
 };
@@ -71,12 +74,34 @@ switch(jnd_exp.graph_type){
     break;
 
   case "strip":
+    if (jnd_exp.condition_name === "line_length_strip") {
+      var instructions = {
+      type: "html-keyboard-response",
+      stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear one on top of the other." + 
+          "<br> Indicate which graph is more correlated by pressing the Z or M key. </p><p>" +
+          "<strong>Press the Z key if the graph <u>above</u> is more correlated.</strong>" +
+          `<div style='float: center; display: block;'><img src='${localhost}/img/sample_line_length_strip.png'></img></div>` +
+          "<strong>Press the M key if the graph <u>below</u> is more correlated.</strong>"
+      };
+    } else {
+      var instructions = {
+      type: "html-keyboard-response",
+      stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear one on top of the other." + 
+          "<br> Indicate which graph is more correlated by pressing the Z or M key. </p><p>" +
+          "<strong>Press the Z key if the graph <u>above</u> is more correlated.</strong>" +
+          `<div style='float: center; display: block;'><img src='${localhost}/img/sample_jnd_strip.png'></img></div>` +
+          "<strong>Press the M key if the graph <u>below</u> is more correlated.</strong>"
+      };
+    }
+    break;
+
+  case "ring":
     var instructions = {
     type: "html-keyboard-response",
     stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear one on top of the other." + 
         "<br> Indicate which graph is more correlated by pressing the Z or M key. </p><p>" +
         "<strong>Press the Z key if the graph <u>above</u> is more correlated.</strong>" +
-        `<div style='float: center; display: block;'><img src='${localhost}/img/sample_jnd_strip.png'></img></div>` +
+        `<div style='float: center; display: block;'><img src='${localhost}/img/sample_jnd_ring.png'></img></div>` +
         "<strong>Press the M key if the graph <u>below</u> is more correlated.</strong>"
     };
     break;  
@@ -102,8 +127,8 @@ timeline.push(instruction_trials);
 
 var feedback = {
   type: 'html-keyboard-response',
-  choices: jsPsych.NO_KEYS, //No responses will be accepted as a valid response.
-  trial_duration: 500,
+  // choices: jsPsych.NO_KEYS, //No responses will be accepted as a valid response.
+  // trial_duration: 500,
   data: {type: 'feedback'},
   stimulus: function(){
 

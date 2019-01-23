@@ -15,7 +15,7 @@ class JND {
       this.range = range;
     }  
 
-    if ((graph_type !== "scatter") && (graph_type !== "strip")) {
+    if ((graph_type !== "scatter") && (graph_type !== "strip") && (graph_type !== "ring")) {
       throw Error(graph_type + " is not supported.")} 
     else { 
       this.graph_type = graph_type;
@@ -59,34 +59,59 @@ class JND {
    *
    * @param  balancing_type {string}                             Type of balancing. Currently only latin_square
    *                                                             is supported.
-   *         data_set {[{assoc array}, {assoc array}, ... ]}     The data to be ordered. 
-   *         practice_set {[{assoc array}, {assoc array}, ... ]} The practice data. 
+   *         dataset {[{assoc array}, {assoc array}, ... ]}      The data to be ordered. 
    */ 
-  prepare_experiment(balancing_type, data_set) {
+  prepare_experiment(balancing_type, dataset) {
 
-    if (balancing_type == 'latin_square'){
+    switch(balancing_type) {
 
-      // Balancing on data_set
-      this.sub_condition_order = initialize_latin_square(data_set.length);
-      var ordered_data_set = [];
+      case 'latin_square':
+        this.sub_condition_order = initialize_latin_square(dataset.length);
+        break;
 
-      // Order the data set according to the latin square
-      // Initialize adjusted_quantity_matrix size 
-      for (let i=0; i < this.sub_condition_order.length; i++){
-        ordered_data_set[i] = data_set[this.sub_condition_order[i]];
-        this.adjusted_quantity_matrix[i] = [];
-      }
+      case 'random':
+        this.sub_condition_order = initialize_random_order(dataset.length);
+        break;
 
-      // Set experiment trials 
-      this.sub_conditions_constants = ordered_data_set;
-      this.current_sub_condition_index = 0; 
-
-      // Set practice trials (note does not need balancing)
-      this.practice_conditions_constants = data_set;
-      this.current_practice_condition_index = 0;
-
+      default:
+        throw Error(balancing_type + " balancing type is not supported.");
     }
-    else {throw Error(balancing_type + " balancing type is not supported.")};
+
+    var ordered_dataset = [];
+
+    // Order the data set according to the latin square
+    // Initialize adjusted_quantity_matrix size 
+    for (let i=0; i < this.sub_condition_order.length; i++){
+      ordered_dataset[i] = dataset[this.sub_condition_order[i]];
+      this.adjusted_quantity_matrix[i] = [];
+    }
+
+    // Set experiment trials 
+    this.sub_conditions_constants = ordered_dataset;
+    this.current_sub_condition_index = 0; 
+
+    this.prepare_practice(dataset);    
+  }
+
+  /**
+   * Orders the input dataset by randomizing it, and initializes the practice variables.
+   *
+   * @param  dataset {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. 
+   */
+  prepare_practice(dataset) {
+
+    this.sub_condition_order = initialize_random_order(dataset.length);
+    let practice_dataset = [];
+
+    // Order the data set according to the latin square
+    // Initialize adjusted_quantity_matrix size 
+    for (let i=0; i < this.sub_condition_order.length; i++){
+      practice_dataset[i] = dataset[this.sub_condition_order[i]];
+    }
+
+    // Set practice trials
+    this.practice_conditions_constants = practice_dataset;
+    this.current_practice_condition_index = 0;
   }
 
   /**
@@ -554,25 +579,10 @@ class JND {
       case "strip":
         this.plot_strip(datasets);
         break;
+      case "ring":
+        this.plot_ring(datasets);
+        break;  
     }
-  }
-
-  /**
-   * D3 code for appending data into the graph. 
-   */
-  plot_scatter_data(chart, xscale, yscale, data, point_size, point_color) {
-
-    chart.selectAll("circle_data")
-               .data(data)
-                .enter()
-                .append("circle") // Creating the circles for each entry in data set 
-                .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
-                  return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
-                })
-                .attr("cy", function (d) {
-                  return yscale(d[1]);
-                })
-                .attr("r", point_size).style("fill", point_color);
   }
 
   /**
@@ -675,14 +685,38 @@ class JND {
   }
 
   /**
+   * D3 code for appending data into the graph. 
+   */
+  plot_scatter_data(chart, xscale, yscale, data, point_size, point_color) {
+
+    chart.selectAll("circle_data")
+               .data(data)
+                .enter()
+                .append("circle") // Creating the circles for each entry in data set 
+                .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
+                  return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
+                })
+                .attr("cy", function (d) {
+                  return yscale(d[1]);
+                })
+                .attr("r", point_size).style("fill", point_color);
+  }
+
+  /**
    * Plots distributions using strip plots. 
    *
    * @ param  datasets   {array}
    */
   plot_strip(datasets) {
 
+    var jnd_exp = this;
     var width = window.innerWidth * 0.7;
     var height = window.innerHeight * 0.5;
+
+    // Scale for data slightly smaller than full width of axes to account for outliers.
+    var xscale_for_data = d3.scaleLinear()
+                   .domain([0, multiplier]) 
+                   .range([window.innerWidth * 0.1, window.innerWidth * 0.6]);
 
     var xscale = d3.scaleLinear()
                    .domain([0, multiplier]) 
@@ -707,11 +741,13 @@ class JND {
       var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
                     .append("svg") 
                       .attr("width", width) 
-                      .attr("height", height);   
+                      .attr("height", height)
+                      .attr("transform", "scale(-1,1)"); // Flip horizontally so cone is
+                                                         // is going left -> right (like orig. version)  
 
       var xAxisTranslate = height/2;
       var xAxisElements = chart.append("g")
-                                .attr("transform", "translate(50, " + xAxisTranslate  +")")
+                                .attr("transform", "translate(0, " + xAxisTranslate  +")")
                                 .call(x_axis)
 
       // Populating data: 
@@ -720,11 +756,108 @@ class JND {
               .enter()
               .append("rect") // Creating the circles for each entry in data set 
               .attr("x", function (d) {
-                return xscale(d[0]);
+                return xscale_for_data(d[0]);
               })
-              .attr("transform", "translate(50, " + height/4 + ")")
-              .style("width", 2)
-              .style("height", height/2);
+              .attr("transform", function (d) {
+                if (jnd_exp.condition_name === "line_length_strip") {
+                  let ytranslation = height/2 - (yscale(d[1]) * 0.5);
+                  return "translate(0, " + ytranslation + ")";
+                } else {
+                return "translate(0, " + height/4 + ")";
+                }
+              })
+              .style("width", function () {
+                if (trial_data.strip_width !== undefined) {
+                  return trial_data.strip_width;
+                } else {
+                  return 2;
+                }
+              })
+              .style("height", function (d) {
+                if (jnd_exp.condition_name === "line_length_strip") {
+                  return yscale(d[1]);
+                } else {
+                  return height/2;
+                }
+              });
+
+      // Set axis color
+      chart.selectAll("path")
+           .attr("stroke", trial_data.axis_color);
+
+      // Remove tick labels
+      chart.selectAll("text").remove();     
+
+    }
+
+    // Set background color
+    document.body.style.backgroundColor = trial_data.background_color;
+  }
+
+  /**
+   * Plots distributions using ring plots. 
+   *
+   * @ param  datasets   {array}
+   */
+  plot_ring(datasets) {
+
+    var width = window.innerWidth * 0.7;
+    var height = window.innerHeight * 0.3;
+
+    // Scale for data slightly smaller than full width of axes to account for outliers.
+    var xscale_for_data = d3.scaleLinear()
+                   .domain([0, multiplier]) 
+                   .range([window.innerWidth * 0.1, window.innerWidth * 0.6]);
+
+    var xscale = d3.scaleLinear()
+                   .domain([0, multiplier])
+                   .range([0, width]);
+
+    var yscale = d3.scaleLinear()
+                   .domain([multiplier * -1, 0])
+                   .range([height/2, 0]);
+
+    // Create axes: 
+    var x_axis = d3.axisBottom()
+                   .scale(xscale)
+                   .tickSize([0]);
+
+    var y_axis = d3.axisLeft()
+                   .scale(yscale)
+                   .tickSize([0]);
+
+    // Create/append the SVG for both graphs: 
+    for (var data of datasets){
+      
+      var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
+                    .append("svg") 
+                      .attr("width", width) 
+                      .attr("height", height)
+                      .attr("transform", "scale(-1,1)"); // Flip horizontally so cone is
+                                                         // is going left -> right (like orig. version)  
+
+      var xAxisTranslate = height/2;
+      var xAxisElements = chart.append("g")
+                                .attr("transform", "translate(0, " + xAxisTranslate  +")")
+                                .call(x_axis);
+
+      // Populating data: 
+      chart.selectAll("strip") // Technically no circles inside div yet, but will be creating it
+            .data(data)
+              .enter()
+                .append("circle") // Creating the circles for each entry in data set 
+                .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
+                  return xscale_for_data(d[0]);
+                })
+                .attr("cy", function (d) {
+                  return height/2;
+                })
+                .attr("r", function (d) {
+                  return yscale(d[1]);
+                })
+                .attr("stroke", "black")
+                .attr("stroke-width", trial_data.ring_thickness)
+                .attr("fill", "none");
 
       // Set axis color
       chart.selectAll("path")
