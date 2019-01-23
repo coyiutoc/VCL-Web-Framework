@@ -4,7 +4,7 @@ This is a Node.js application that will serve as the modernization of the origin
 
 Currently supported experiments:
 
-## JND
+### JND
 
 | Name                           | Trial Type      | Graph Type(s)   | Balancing       |
 | ------------------------------ | --------------- | --------------- | --------------- |
@@ -15,7 +15,7 @@ Currently supported experiments:
 | Multi-Phase [Task 1]           | Design-Multi    | Scatter         | Latin Square    |
 
 
-## JND Radius
+### JND Radius
 
 | Name                           | Trial Type      | Graph Type(s)   | Balancing       |
 | ------------------------------ | --------------- | --------------- | --------------- |
@@ -27,7 +27,7 @@ Currently supported experiments:
 | Slice-45, Triangle             | Foundational    | Shape           | Random          |
 | Slice-90, Triangle             | Foundational    | Shape           | Random          |
 
-## Stevens
+### Stevens
 
 | Name                           | Trial Type      | Graph Type(s)   | Balancing       |
 | ------------------------------ | --------------- | --------------- | --------------- |
