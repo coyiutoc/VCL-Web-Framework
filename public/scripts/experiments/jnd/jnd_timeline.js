@@ -1,22 +1,12 @@
-// =========================================================
-// CONSTANTS
+export const localhost = "http://localhost:8080";
+import JND from "/scripts/experiments/jnd/jnd.js";
 
-const MATHJS_URL = "https://unpkg.com/mathjs@4.4.2/dist/math.min.js";
+export var jnd_exp = new JND(params["range"], params["condition"], params["graph_type"]);
+
+// =========================================================
+// JND SET UP
 
 var timeline = [];
-const localhost = "http://localhost:8080";
-
-// Variables used to generate D3 jnd_trial_display.html:
-var left_coordinates;
-var right_coordinates;
-var distribution_size;
-var distractor_coordinates;
-var trial_data;  
-
-var multiplier = 1; // Sets how much the data should be scaled by.
-
-// =========================================================
-// INSTANTIATE JND EXPERIMENT OBJECT
 
 const JND_EXCEL = get_data("jnd", jnd_exp.range, jnd_exp.condition_name);
 
@@ -132,7 +122,7 @@ var feedback = {
   data: {type: 'feedback'},
   stimulus: function(){
 
-    document.body.style.backgroundColor = trial_data.feedback_background_color;
+    document.body.style.backgroundColor = jnd_exp.trial_data.feedback_background_color;
 
     var last_trial = JSON.parse(jsPsych.data.getLastTrialData().json());
     var last_trial_correct = last_trial[0]["correct"];
@@ -202,7 +192,7 @@ var stop = {
   data: {type: 'instruction'},
   on_start: function(stop){
     // Reset background color to feedback
-    document.body.style.backgroundColor = trial_data.feedback_background_color;
+    document.body.style.backgroundColor = jnd_exp.trial_data.feedback_background_color;
   }
 }
 
@@ -270,12 +260,14 @@ var experiment_end = {
   stimulus: '<div align = "center">' + 
             '<p><font size = 10>You have completed the experiment!<p></font>' +
             '<br>' +
-            '<a href="#" onclick="jnd_exp.export_trial_data();" class="btn btn-info btn-block" role="button" style="width: 300px; font-size: 20px">Download Trial Data</a>' +
-            '<a href="#" onclick="jnd_exp.export_summary_data();" class="btn btn-info btn-block" role="button" style="width: 300px; font-size: 20px">Download Summary Data</a>' +
+            'Trial and summary data files will now automatically download.' + 
             '</div>' ,
   on_start: function(stop){
+    jnd_exp.export_trial_data();
+    jnd_exp.export_summary_data();
+    
     // Reset background color to feedback
-    document.body.style.backgroundColor = trial_data.feedback_background_color;
+    document.body.style.backgroundColor = jnd_exp.trial_data.feedback_background_color;
   }
 };
 timeline.push(experiment_end);

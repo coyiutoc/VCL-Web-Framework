@@ -1,4 +1,6 @@
-class JND {
+import {localhost} from "/scripts/experiments/jnd/jnd_timeline.js";
+
+export default class JND {
 
   /**
    * Initializes a JND experiment object. 
@@ -51,6 +53,15 @@ class JND {
     this.current_sub_condition_index;
     this.adjusted_quantity_matrix = {};   // The matrix is in this format:
                                           // { sub_condition_index : [adjusted_quantity1, adjusted_quantity2 ... ] }
+
+    // ========================================
+    // CURRENT TRIAL DATA
+
+    this.left_coordinates = "";
+    this.right_coordinates = "";
+    this.distribution_size = "";
+    this.distractor_coordinates = "";
+    this.trial_data = "";
   }
 
   /**
@@ -180,7 +191,7 @@ class JND {
                                                            constants.num_SD,
                                                            constants.mean,
                                                            constants.SD);
-          distractor_coordinates = [left_dist_coordinates, right_dist_coordinates];
+          jnd_exp.distractor_coordinates = [left_dist_coordinates, right_dist_coordinates];
         }
 
         // Randomize position of the base and adjusted graphs
@@ -197,10 +208,10 @@ class JND {
         //                                           adjusted_correlation);
 
         // Set up D3 variables for plotting
-        left_coordinates = result.left;
-        right_coordinates = result.right;
-        distribution_size = constants.num_points;   
-        trial_data = trial.data; 
+        jnd_exp.left_coordinates = result.left;
+        jnd_exp.right_coordinates = result.right;
+        jnd_exp.distribution_size = constants.num_points;   
+        jnd_exp.trial_data = trial.data; 
 
         console.log("[RIGHT] Correlation: " + trial.data.right_correlation);
         console.log("[LEFT] Correlation: " + trial.data.left_correlation);
@@ -257,7 +268,7 @@ class JND {
 
     // Block specific saves 
     if (block_type == "test"){
-      jnd_exp.adjusted_quantity_matrix[index].push(adjusted_correlation);
+      this.adjusted_quantity_matrix[index].push(adjusted_correlation);
       trial.data.run_type = "test";
     }
     else{
@@ -559,15 +570,15 @@ class JND {
    */
   plot_distributions() {
 
-    var left_dataset = prepare_coordinates(left_coordinates, distribution_size);
-    var right_dataset = prepare_coordinates(right_coordinates, distribution_size);
+    var left_dataset = prepare_coordinates(this.left_coordinates, this.distribution_size);
+    var right_dataset = prepare_coordinates(this.right_coordinates, this.distribution_size);
 
     var datasets = [left_dataset, right_dataset];
     var distractors = [];
 
     if (this.condition_group === "distractor"){
-      left_dataset = prepare_coordinates(distractor_coordinates[0], distribution_size);
-      right_dataset = prepare_coordinates(distractor_coordinates[1], distribution_size);
+      left_dataset = prepare_coordinates(this.distractor_coordinates[0], this.distribution_size);
+      right_dataset = prepare_coordinates(this.distractor_coordinates[1], this.distribution_size);
 
       distractors = [left_dataset, right_dataset];
     }
@@ -595,6 +606,7 @@ class JND {
 
     var height = window.innerHeight/1.5; 
     var width = height/2;
+    var multiplier = 1; // Sets how much the data should be scaled by.
 
     var buffer = d3.select("#graph") // Insert into the div w/ id = "graph"
                    .append("svg") 
@@ -661,19 +673,19 @@ class JND {
           let dist_point = distractor[j];
 
           // Distractor point
-          this.plot_scatter_data(chart, xscale, yscale, [point], trial_data.point_size, trial_data.point_color);  
+          this.plot_scatter_data(chart, xscale, yscale, [point], this.trial_data.point_size, this.trial_data.point_color);  
 
           // Target point    
-          this.plot_scatter_data(chart, xscale, yscale, [dist_point], trial_data.dist_point_size, trial_data.dist_color);
+          this.plot_scatter_data(chart, xscale, yscale, [dist_point], this.trial_data.dist_point_size, this.trial_data.dist_color);
 
         }
       } else {
-          this.plot_scatter_data(chart, xscale, yscale, datasets[i], trial_data.point_size, trial_data.point_color);        
+          this.plot_scatter_data(chart, xscale, yscale, datasets[i], this.trial_data.point_size, this.trial_data.point_color);        
       }     
 
       // Set axis color
       chart.selectAll("path")
-           .attr("stroke", trial_data.axis_color);
+           .attr("stroke", this.trial_data.axis_color);
 
       // Remove tick labels
       chart.selectAll("text").remove();     
@@ -681,7 +693,7 @@ class JND {
     }
 
     // Set background color
-    document.body.style.backgroundColor = trial_data.background_color;
+    document.body.style.backgroundColor = this.trial_data.background_color;
   }
 
   /**
@@ -712,6 +724,7 @@ class JND {
     var jnd_exp = this;
     var width = window.innerWidth * 0.7;
     var height = window.innerHeight * 0.5;
+    var multiplier = 1; // Sets how much the data should be scaled by.
 
     // Scale for data slightly smaller than full width of axes to account for outliers.
     var xscale_for_data = d3.scaleLinear()
@@ -767,8 +780,8 @@ class JND {
                 }
               })
               .style("width", function () {
-                if (trial_data.strip_width !== undefined) {
-                  return trial_data.strip_width;
+                if (jnd_exp.trial_data.strip_width !== undefined) {
+                  return jnd_exp.trial_data.strip_width;
                 } else {
                   return 2;
                 }
@@ -783,7 +796,7 @@ class JND {
 
       // Set axis color
       chart.selectAll("path")
-           .attr("stroke", trial_data.axis_color);
+           .attr("stroke", jnd_exp.trial_data.axis_color);
 
       // Remove tick labels
       chart.selectAll("text").remove();     
@@ -791,7 +804,7 @@ class JND {
     }
 
     // Set background color
-    document.body.style.backgroundColor = trial_data.background_color;
+    document.body.style.backgroundColor = jnd_exp.trial_data.background_color;
   }
 
   /**
@@ -803,6 +816,7 @@ class JND {
 
     var width = window.innerWidth * 0.7;
     var height = window.innerHeight * 0.3;
+    var multiplier = 1; // Sets how much the data should be scaled by.
 
     // Scale for data slightly smaller than full width of axes to account for outliers.
     var xscale_for_data = d3.scaleLinear()
@@ -856,12 +870,12 @@ class JND {
                   return yscale(d[1]);
                 })
                 .attr("stroke", "black")
-                .attr("stroke-width", trial_data.ring_thickness)
+                .attr("stroke-width", this.trial_data.ring_thickness)
                 .attr("fill", "none");
 
       // Set axis color
       chart.selectAll("path")
-           .attr("stroke", trial_data.axis_color);
+           .attr("stroke", this.trial_data.axis_color);
 
       // Remove tick labels
       chart.selectAll("text").remove();     
@@ -869,7 +883,7 @@ class JND {
     }
 
     // Set background color
-    document.body.style.backgroundColor = trial_data.background_color;
+    document.body.style.backgroundColor = this.trial_data.background_color;
   }
 
 }
