@@ -1,4 +1,3 @@
-
 const TRIAL_LIMIT = 250;
 
 function generateDistribution(correlation, error, size, numsd, mean, sd){
@@ -27,7 +26,7 @@ function generateDistribution(correlation, error, size, numsd, mean, sd){
   // so that origin as at the top left (this makes the distribution negative instead
   // of positive). To force it to be positive, we flip the whole distribution 
   // across y axis. 
-  for (i = 0; i<coordinates.y_values.length; i++) {
+  for (let i = 0; i<coordinates.y_values.length; i++) {
     coordinates.y_values[i] = coordinates.y_values[i] * (-1);
   }
 
@@ -39,7 +38,7 @@ function initializePoints(coordinates, correlation, size, numsd, mean, sd){
   var x2Val;
   var yVal;
 
-  for (i = 0; i < size; i++) {
+  for (let i = 0; i < size; i++) {
     do {
         xVal = random_bm();
         x2Val = random_bm();
@@ -69,7 +68,7 @@ function adjustPointsForError(coordinates, correlation, error, size, numsd, mean
       x = random_bm();
       x2 = random_bm();
       y = (correlation * x) + (Math.sqrt(1 - (correlation * correlation)) * x2);
-    } while (pointNotWithinRequiredStdDevs(x, y, numsd));
+    } while (pointNotWithinRequiredStdDevs2(x, y, numsd));
     coordinates.x_values.push(x);
     coordinates.y_values.push(y);
   }
@@ -82,7 +81,7 @@ function readjustPoints(coordinates, correlation, error, size, numsd, mean, sd) 
   var temp_coordinates = {x_values: [], y_values: []};
   var max_iterations = 500;
 
-  for (i = 0; i<size; i++) {
+  for (let i = 0; i<size; i++) {
     if (pointNotWithinRequiredStdDevs(coordinates.x_values[i], coordinates.y_values[i], numsd, mean, sd)){
       coordinates.x_values.splice(i, 1);
       coordinates.y_values.splice(i, 1);
@@ -101,6 +100,7 @@ function readjustPoints(coordinates, correlation, error, size, numsd, mean, sd) 
         if (i > 0) {
           temp_coordinates.x_values = coordinates.x_values[i-1];
           temp_coordinates.y_values = coordinates.y_values[i-1];
+
           temp_coordinates.x_values[i] = x;
           temp_coordinates.y_values[i] = y;
         }
@@ -128,8 +128,8 @@ function readjustPoints(coordinates, correlation, error, size, numsd, mean, sd) 
   //}
 }
 
-function pointNotWithinRequiredStdDevs(x, y, numsd){
-  return pointNotWithinRequiredStdDevs2(x, y, numsd, 0, 1);
+function pointNotWithinRequiredStdDevs2(x, y, numsd){
+  return pointNotWithinRequiredStdDevs(x, y, numsd, 0, 1);
 }
 
 function pointNotWithinRequiredStdDevs(x, y, numsd, mean, sd){
@@ -161,7 +161,7 @@ function transformPoints(coordinates, mean, sd) {
 
 // Scales the points in a distribution with the given x and y scale values.
 function scalePoints(coordinates, scaleX, scaleY) {
-  for (i = 0; i<coordinates.x_values.length; i++) {
+  for (let i = 0; i<coordinates.x_values.length; i++) {
     coordinates.x_values[i] = coordinates.x_values[i] * scaleX;
     coordinates.y_values[i] = coordinates.y_values[i] * scaleY;
   }
@@ -169,7 +169,7 @@ function scalePoints(coordinates, scaleX, scaleY) {
 
 // Translates the points in a distribution with the given x and y translate values.
 function translatePoints(coordinates, x, y) {
-  for (i = 0; i<coordinates.x_values.length; i++) {
+  for (let i = 0; i<coordinates.x_values.length; i++) {
     coordinates.x_values[i] = coordinates.x_values[i] + x;
     coordinates.y_values[i] = 1 - (coordinates.y_values[i] + y);
   }
@@ -194,7 +194,7 @@ function getPearsonCorrelation(x, y) {
   var x2 = [];
   var y2 = [];
 
-  for(var i=0; i<shortestArrayLength; i++) {
+  for(let i=0; i<shortestArrayLength; i++) {
       xy.push(x[i] * y[i]);
       x2.push(x[i] * x[i]);
       y2.push(y[i] * y[i]);
@@ -206,7 +206,7 @@ function getPearsonCorrelation(x, y) {
   var sum_x2 = 0;
   var sum_y2 = 0;
 
-  for(var i=0; i< shortestArrayLength; i++) {
+  for(let i=0; i< shortestArrayLength; i++) {
       sum_x += x[i];
       sum_y += y[i];
       sum_xy += xy[i];

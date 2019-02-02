@@ -1,16 +1,16 @@
 export const localhost = "http://localhost:8080";
-import JND from "/scripts/experiments/jnd/jnd.js";
 
-export var jnd_exp = new JND(params["range"], params["condition"], params["graph_type"]);
+import JND from "/scripts/experiments/jnd/jnd.js";
+export var jnd_exp = new JND(params["range"], params["condition"], params["graph_type"], params["balancing"]);
 
 // =========================================================
 // JND SET UP
 
 var timeline = [];
 
-const JND_EXCEL = get_data("jnd", jnd_exp.range, jnd_exp.condition_name);
+// const JND_EXCEL = get_data("jnd", jnd_exp.range, jnd_exp.condition_name);
 
-jnd_exp.prepare_experiment("latin_square", JND_EXCEL);
+// jnd_exp.prepare_experiment("latin_square", JND_EXCEL);
 
 // =========================================================
 // WELCOME TRIAL BLOCK

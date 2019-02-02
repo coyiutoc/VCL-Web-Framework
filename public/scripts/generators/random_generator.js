@@ -1,6 +1,8 @@
+export {initialize_random_order}
+
 function initialize_random_order(length) {
 
-	order = [];
+	let order = [];
 
 	for (let i = 0; i < length; i++) {
 		order.push(i);

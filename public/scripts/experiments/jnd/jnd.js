@@ -1,4 +1,13 @@
 import {localhost} from "/scripts/experiments/jnd/jnd_timeline.js";
+// import {generateDistribution} from "/scripts/generators/gaussian_distribution_generator.js";
+import {initialize_latin_square} from "/scripts/generators/latin_square_generator.js";
+import {initialize_random_order} from "/scripts/generators/random_generator.js";
+import {get_data, 
+        get_data_subset} from "/scripts/generators/data_generator.js";
+import {prepare_coordinates,
+        randomize_position,
+        randomize_radius_position,
+        force_greater_right_position} from "/scripts/helpers/experiment_helpers.js";
 
 export default class JND {
 
@@ -8,12 +17,16 @@ export default class JND {
    * @param  range          {string}    Range type (foundational or design)
    * @param  condition_name {string}    Name of condition (i.e distractor_rainbow)
    * @param  graph_type     {string}    Name of graph_type
+   * @param  balancing_type {string}    Type of balancing
    */
-  constructor(range, condition_name, graph_type) {
+  constructor(range, condition_name, graph_type, balancing_type) {
+
+    // ========================================
+    // PARAMETER CHECKING
 
     if ((range !== "foundational") && (range !== "design") && (range !== "design_multi")) {
       throw Error(range + " is not supported.") }
-    else{
+    else {
       this.range = range;
     }  
 
@@ -22,6 +35,12 @@ export default class JND {
     else { 
       this.graph_type = graph_type;
     };  
+
+    if ((balancing_type !== "random") && (balancing_type !== "latin_square")) {
+      throw Error(balancing + " is not supported.") }
+    else {
+      this.balancing_type = balancing_type;
+    }  
 
     this.condition_name = condition_name; 
     this.condition_group = condition_name.split('_')[0];
@@ -62,6 +81,16 @@ export default class JND {
     this.distribution_size = "";
     this.distractor_coordinates = "";
     this.trial_data = "";
+
+    // ========================================
+    // PREPARE EXPERIMENT
+
+    // Extract raw constants
+    this.raw_constants = get_data(this);
+    
+    // Prepare experiment + practice data
+    this.prepare_experiment();
+    this.prepare_practice();   
   }
 
   /**
@@ -72,9 +101,11 @@ export default class JND {
    *                                                             is supported.
    *         dataset {[{assoc array}, {assoc array}, ... ]}      The data to be ordered. 
    */ 
-  prepare_experiment(balancing_type, dataset) {
+  prepare_experiment() {
 
-    switch(balancing_type) {
+    let dataset = this.raw_constants;
+
+    switch(this.balancing_type) {
 
       case 'latin_square':
         this.sub_condition_order = initialize_latin_square(dataset.length);
@@ -85,7 +116,7 @@ export default class JND {
         break;
 
       default:
-        throw Error(balancing_type + " balancing type is not supported.");
+        throw Error(this.balancing_type + " balancing type is not supported.");
     }
 
     var ordered_dataset = [];
@@ -99,9 +130,7 @@ export default class JND {
 
     // Set experiment trials 
     this.sub_conditions_constants = ordered_dataset;
-    this.current_sub_condition_index = 0; 
-
-    this.prepare_practice(dataset);    
+    this.current_sub_condition_index = 0;  
   }
 
   /**
@@ -109,7 +138,9 @@ export default class JND {
    *
    * @param  dataset {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. 
    */
-  prepare_practice(dataset) {
+  prepare_practice() {
+
+    let dataset = this.raw_constants;
 
     this.sub_condition_order = initialize_random_order(dataset.length);
     let practice_dataset = [];
