@@ -3,14 +3,7 @@ export const localhost = "http://localhost:8080";
 import JND from "/scripts/experiments/jnd/jnd.js";
 export var jnd_exp = new JND(params["range"], params["condition"], params["graph_type"], params["balancing"]);
 
-// =========================================================
-// JND SET UP
-
 var timeline = [];
-
-// const JND_EXCEL = get_data("jnd", jnd_exp.range, jnd_exp.condition_name);
-
-// jnd_exp.prepare_experiment("latin_square", JND_EXCEL);
 
 // =========================================================
 // WELCOME TRIAL BLOCK
@@ -260,9 +253,10 @@ var experiment_end = {
   stimulus: '<div align = "center">' + 
             '<p><font size = 10>You have completed the experiment!<p></font>' +
             '<br>' +
-            'Trial and summary data files will now automatically download.' + 
+            'Trial and summary data files will now automatically download locally.' + 
             '</div>' ,
-  on_start: function(stop){
+  on_start: function(){
+
     jnd_exp.export_trial_data();
     jnd_exp.export_summary_data();
     
