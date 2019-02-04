@@ -408,8 +408,9 @@ function get_data(experiment){
 
   var range = experiment.range;
   var condition = experiment.condition_name;
+  var experiment_name = experiment.constructor.name;
 
-  if (experiment.constructor.name === "JND"){
+  if (experiment_name === "JND"){
 
     dataset = JND_BASE[range];
 
@@ -422,12 +423,12 @@ function get_data(experiment){
       dataset = create_condition_dataset(dataset, JND_CONDITIONS[condition]);
     }
   }
-  else if (experiment === "jnd_radius"){
+  else if (experiment_name === "JND_Radius"){
 
     dataset = JND_RADIUS[range];
 
   }
-  else if (experiment === "stevens"){
+  else if (experiment_name === "Stevens"){
 
     dataset = STEVENS_BASE[range];
 

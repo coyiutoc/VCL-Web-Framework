@@ -6,13 +6,16 @@
 
     <%- include('../header'); %>
 
-    <script type="text/javascript" src="/scripts/experiments/stevens/stevens.js" ></script>
-
     <script type="text/javascript">
-        var stevens_exp = new Stevens("<%= range %>", "<%= condition %>", "<%= graph_type %>"); 
+
+      var params = {"range": "<%= range %>",
+                    "condition": "<%= condition %>",
+                    "graph_type": "<%= graph_type %>",
+                    "balancing": "<%= balancing %>"};
+
     </script> 
 
-    <script type="text/javascript" src="/scripts/experiments/stevens/stevens_timeline.js" ></script>
+    <script type="module" src="/scripts/experiments/stevens/stevens_timeline.js" ></script>
 
   </head>
 

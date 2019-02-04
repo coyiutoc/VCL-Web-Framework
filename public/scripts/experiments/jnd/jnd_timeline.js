@@ -1,16 +1,15 @@
-export const localhost = "http://localhost:8080";
-
 import JND from "/scripts/experiments/jnd/jnd.js";
 export var jnd_exp = new JND(params["range"], params["condition"], params["graph_type"], params["balancing"]);
 
 var timeline = [];
+var address = location.protocol + "//" + location.hostname + ":" + location.port; 
 
 // =========================================================
 // WELCOME TRIAL BLOCK
 
 var welcome = {
   type: 'html-keyboard-response',
-  stimulus: `<div align = "center">` + `<img src="${localhost}/img/VCL_lab_logo.png"></img><br><br>` +
+  stimulus: `<div align = "center">` + `<img src="${address}/img/VCL_lab_logo.png"></img><br><br>` +
             `<b>Base:</b> JND` + '<br>' + 
             `<b>Trial Type:</b> ${jnd_exp.range}` + '<br>' + 
             `<b>Graph Type:</b> ${jnd_exp.graph_type}` + '<br>' + 
@@ -33,9 +32,9 @@ switch(jnd_exp.graph_type){
       stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear side-by-side." + 
           "<br> Indicate which graph is more correlated by pressing the Z or M key. </p><p>" +
           "<div style='height: 290px; width: 700px; display: block;'>"+
-          `<div style='float: left;'><img src='${localhost}/img/sample_multi_distractor_1.png'></img>` +
+          `<div style='float: left;'><img src='${address}/img/sample_multi_distractor_1.png'></img>` +
           "<p class='small'><strong>Press the Z key</strong></p></div>" +
-          `<div style='float: right;'><img src='${localhost}/img/sample_multi_distractor_2.png'></img>` +
+          `<div style='float: right;'><img src='${address}/img/sample_multi_distractor_2.png'></img>` +
           "<p class='small'><strong>Press the M key</strong></p></div>" +
           "</div>" + "<div> <br><p>Press any key to continue.</p> </div>" + 
           "</div>"          
@@ -46,9 +45,9 @@ switch(jnd_exp.graph_type){
       stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear side-by-side." + 
           "<br> Indicate which graph is more correlated by pressing the Z or M key. </p><p>" +
           "<div style='height: 290px; width: 700px; display: block;'>"+
-          `<div style='float: left;'><img src='${localhost}/img/sample_scatter_1.png'></img>` +
+          `<div style='float: left;'><img src='${address}/img/sample_scatter_1.png'></img>` +
           "<p class='small'><strong>Press the Z key</strong></p></div>" +
-          `<div style='float: right;'><img src='${localhost}/img/sample_scatter_2.png'></img>` +
+          `<div style='float: right;'><img src='${address}/img/sample_scatter_2.png'></img>` +
           "<p class='small'><strong>Press the M key</strong></p></div>" +
           "</div>" + "<div> <br><p>Press any key to continue.</p> </div>" + 
           "</div>"          
@@ -63,7 +62,7 @@ switch(jnd_exp.graph_type){
       stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear one on top of the other." + 
           "<br> Indicate which graph is more correlated by pressing the Z or M key. </p><p>" +
           "<strong>Press the Z key if the graph <u>above</u> is more correlated.</strong>" +
-          `<div style='float: center; display: block;'><img src='${localhost}/img/sample_line_length_strip.png'></img></div>` +
+          `<div style='float: center; display: block;'><img src='${address}/img/sample_line_length_strip.png'></img></div>` +
           "<strong>Press the M key if the graph <u>below</u> is more correlated.</strong>"
       };
     } else {
@@ -72,7 +71,7 @@ switch(jnd_exp.graph_type){
       stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear one on top of the other." + 
           "<br> Indicate which graph is more correlated by pressing the Z or M key. </p><p>" +
           "<strong>Press the Z key if the graph <u>above</u> is more correlated.</strong>" +
-          `<div style='float: center; display: block;'><img src='${localhost}/img/sample_jnd_strip.png'></img></div>` +
+          `<div style='float: center; display: block;'><img src='${address}/img/sample_jnd_strip.png'></img></div>` +
           "<strong>Press the M key if the graph <u>below</u> is more correlated.</strong>"
       };
     }
@@ -84,7 +83,7 @@ switch(jnd_exp.graph_type){
     stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear one on top of the other." + 
         "<br> Indicate which graph is more correlated by pressing the Z or M key. </p><p>" +
         "<strong>Press the Z key if the graph <u>above</u> is more correlated.</strong>" +
-        `<div style='float: center; display: block;'><img src='${localhost}/img/sample_jnd_ring.png'></img></div>` +
+        `<div style='float: center; display: block;'><img src='${address}/img/sample_jnd_ring.png'></img></div>` +
         "<strong>Press the M key if the graph <u>below</u> is more correlated.</strong>"
     };
     break;  

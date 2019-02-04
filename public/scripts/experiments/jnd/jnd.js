@@ -1,4 +1,3 @@
-import {localhost} from "/scripts/experiments/jnd/jnd_timeline.js";
 // import {generateDistribution} from "/scripts/generators/gaussian_distribution_generator.js";
 import {initialize_latin_square} from "/scripts/generators/latin_square_generator.js";
 import {initialize_random_order} from "/scripts/generators/random_generator.js";
@@ -21,6 +20,9 @@ export default class JND {
    */
   constructor(range, condition_name, graph_type, balancing_type) {
 
+    this.condition_name = condition_name; 
+    this.condition_group = condition_name.split('_')[0];
+
     // ========================================
     // PARAMETER CHECKING
 
@@ -41,9 +43,6 @@ export default class JND {
     else {
       this.balancing_type = balancing_type;
     }  
-
-    this.condition_name = condition_name; 
-    this.condition_group = condition_name.split('_')[0];
 
     // ========================================
     // EXPERIMENT CONSTANTS
@@ -168,10 +167,11 @@ export default class JND {
 
     // Initialize a variable for this so it is usable inside on_start
     var jnd_exp = this; 
+    var address = location.protocol + "//" + location.hostname + ":" + location.port + "/jnd_trial"; 
 
     var trial = {
       type:'external-html-keyboard-response',
-      url: localhost + "/jnd_trial",
+      url: address,
       choices:['z', 'm', 'q'], //q is exit button (for debugging)
       execute_script: true,
       response_ends_trial: true,
