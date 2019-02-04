@@ -25,14 +25,15 @@ app.get('/', function(request, response) {
 });
 
 // Experiment Routing
-app.get('/experiment/:experiment/graph_type/:graph_type/range/:range/condition/:condition', function(request, response) {
+app.get('/experiment/:experiment/graph_type/:graph_type/range/:range/condition/:condition/balancing/:balancing', function(request, response) {
 	
 	console.log(request.params);
 
 	let keys = {
 		range: request.params.range,
 		condition: request.params.condition, 
-		graph_type: request.params.graph_type
+		graph_type: request.params.graph_type,
+        balancing: request.params.balancing
 	}
 
 	if (request.params.experiment === "jnd") {
@@ -40,7 +41,7 @@ app.get('/experiment/:experiment/graph_type/:graph_type/range/:range/condition/:
     } else if (request.params.experiment === "stevens") {
     	response.render('stevens/stevens_experiment.html', keys);
     } else if (request.params.experiment === "jnd_radius") {
-    	response.render('jnd/jnd_radius_experiment.html', keys);
+    	response.render('jnd_radius/jnd_radius_experiment.html', keys);
     }	
 });
 
@@ -48,6 +49,11 @@ app.get('/experiment/:experiment/graph_type/:graph_type/range/:range/condition/:
 // JND Trial Display
 app.get('/jnd_trial', function(request, response) {
     response.render('jnd/jnd_trial_display.html');
+});
+
+// JND Radius Display
+app.get('/jnd_radius_trial', function(request, response) {
+    response.render('jnd_radius/jnd_radius_trial_display.html');
 });
 
 // Stevens Trial Display

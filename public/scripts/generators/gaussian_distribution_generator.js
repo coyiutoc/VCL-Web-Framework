@@ -1,9 +1,8 @@
-
 const TRIAL_LIMIT = 250;
 
 function generateDistribution(correlation, error, size, numsd, mean, sd){
 
-  dynamicallyLoadScript(MATHJS_URL);
+  // dynamicallyLoadScript(MATHJS_URL);
   var coordinates = {x_values: [], y_values: []};
   var overshootSize = size + 20; // Generating > size will guarantee we have
                                  // a distribution of the speciied size later. 

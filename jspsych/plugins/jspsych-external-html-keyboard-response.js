@@ -152,6 +152,7 @@ jsPsych.plugins['external-html-keyboard-response'] = (function() {
         for (const scriptElement of display_element.getElementsByTagName("script")) {
           const relocatedScript = document.createElement("script");
           relocatedScript.text = scriptElement.text;
+          relocatedScript.type = "module";
           scriptElement.parentNode.replaceChild(relocatedScript, scriptElement);
         };
       }

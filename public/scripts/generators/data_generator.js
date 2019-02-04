@@ -1,3 +1,9 @@
+export { get_data,
+         get_data_subset };
+
+// =========================================================
+// DEFINING SUBCONDITION REPEATS
+
 const SUBCONDITION_REPEATS = {
     foundational : {
         base : 0
@@ -390,18 +396,21 @@ const STEVENS_CONDITIONS = {
 }
 
 /**
- * Retrieves the data given experiment, range, and condition.
+ * Retrieves the data for the corresponding experiment object.
  *
- * @param  experiment  {string}            "jnd" or "stevens"   
- *         range       {string}            "foundational" or "design"         
- *         condition   {string}            Name of condition
+ * @param  experiment  {object}       Model object of the experiment 
  *
  * @return dataset     [{assoc}, {assoc}, .... ]         
  */
-function get_data(experiment, range, condition){
+function get_data(experiment){
+
   var dataset;
 
-  if (experiment === "jnd"){
+  var range = experiment.range;
+  var condition = experiment.condition_name;
+  var experiment_name = experiment.constructor.name;
+
+  if (experiment_name === "JND"){
 
     dataset = JND_BASE[range];
 
@@ -414,12 +423,12 @@ function get_data(experiment, range, condition){
       dataset = create_condition_dataset(dataset, JND_CONDITIONS[condition]);
     }
   }
-  else if (experiment === "jnd_radius"){
+  else if (experiment_name === "JND_Radius"){
 
     dataset = JND_RADIUS[range];
 
   }
-  else if (experiment === "stevens"){
+  else if (experiment_name === "Stevens"){
 
     dataset = STEVENS_BASE[range];
 

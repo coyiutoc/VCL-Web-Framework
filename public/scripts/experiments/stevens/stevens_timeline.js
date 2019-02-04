@@ -1,35 +1,15 @@
-// =========================================================
-// CONSTANTS
-
-const MATHJS_URL = "https://unpkg.com/mathjs@4.4.2/dist/math.min.js";
+import Stevens from "/scripts/experiments/stevens/stevens.js";
+export var stevens_exp = new Stevens(params["range"], params["condition"], params["graph_type"], params["balancing"]);
 
 var timeline = [];
-const localhost = "http://localhost:8080";
-var round_end = false; // Flag to check when a round for a given subcondition has ended
-var practice_end = false; // Flag to check when practice trials have ended
-
-// Variables used to generate D3 stevens_trial_display.html:
-var left_coordinates;
-var right_coordinates;
-var middle_coordinates;
-var distribution_size;
-var trial_data; 
-
-var multiplier = 1; // Sets how much the data should be scaled by.
-
-// =========================================================
-// INSTANTIATE STEVENS EXPERIMENT OBJECT
-
-const STEVENS_EXCEL = get_data("stevens", stevens_exp.range, stevens_exp.condition_name);
-
-stevens_exp.prepare_experiment("latin_square", STEVENS_EXCEL);
+var address = location.protocol + "//" + location.hostname + ":" + location.port; 
 
 // =========================================================
 // WELCOME TRIAL BLOCK
 
 var welcome = {
   type: 'html-keyboard-response',
-  stimulus: `<div align = "center">` + `<img src="${localhost}/img/VCL_lab_logo.png"></img><br><br>` +
+  stimulus: `<div align = "center">` + `<img src="${address}/img/VCL_lab_logo.png"></img><br><br>` +
             `<b>Base:</b> stevens` + '<br>' + 
             `<b>Trial Type:</b> ${stevens_exp.range}` + '<br>' + 
             `<b>Graph Type:</b> ${stevens_exp.graph_type}` + '<br>' + 
@@ -52,7 +32,7 @@ switch(stevens_exp.graph_type){
           " the <u>midpoint</u> between the left and right graphs. <br><br>" +
           " <b>m</b> increases the correlation. <br>" +
           " <b>z</b> decreases the correlation. <br><br>" + 
-          `<div style='float: left; margin-bottom: 25px;'><img src='${localhost}/img/stevens/scatter.png'></img></div>` +
+          `<div style='float: left; margin-bottom: 25px;'><img src='${address}/img/stevens/scatter.png'></img></div>` +
           "<br> <br> <br> When you are done adjusting the center graph, hit the <b>spacebar</b>." + 
           "<br> Press any key to continue. </div>"      
     }    
@@ -66,7 +46,7 @@ switch(stevens_exp.graph_type){
             " the <u>midpoint</u> between the left and right graphs. <br><br>" +
             " <b>m</b> increases the correlation. <br>" +
             " <b>z</b> decreases the correlation. <br><br>" + 
-            `<div style='float: left; margin-bottom: 25px;'><img src='${localhost}/img/stevens/line_length_strip.png'></img></div>` +
+            `<div style='float: left; margin-bottom: 25px;'><img src='${address}/img/stevens/line_length_strip.png'></img></div>` +
             "<br> <br> <br> When you are done adjusting the center graph, hit the <b>spacebar</b>." + 
             "<br> Press any key to continue. </div>"      
       }
@@ -78,7 +58,7 @@ switch(stevens_exp.graph_type){
             " the <u>midpoint</u> between the left and right graphs. <br><br>" +
             " <b>m</b> increases the correlation. <br>" +
             " <b>z</b> decreases the correlation. <br><br>" + 
-            `<div style='float: left; margin-bottom: 25px;'><img src='${localhost}/img/stevens/strip.png'></img></div>` +
+            `<div style='float: left; margin-bottom: 25px;'><img src='${address}/img/stevens/strip.png'></img></div>` +
             "<br> <br> <br> When you are done adjusting the center graph, hit the <b>spacebar</b>." + 
             "<br> Press any key to continue. </div>"      
       }
@@ -92,7 +72,7 @@ switch(stevens_exp.graph_type){
           " the <u>midpoint</u> between the left and right graphs. <br><br>" +
           " <b>m</b> increases the correlation. <br>" +
           " <b>z</b> decreases the correlation. <br><br>" + 
-          `<div style='float: left; margin-bottom: 25px;'><img src='${localhost}/img/stevens/ring_strip_size.png'></img></div>` +
+          `<div style='float: left; margin-bottom: 25px;'><img src='${address}/img/stevens/ring_strip_size.png'></img></div>` +
           "<br> <br> <br> When you are done adjusting the center graph, hit the <b>spacebar</b>." + 
           "<br> Press any key to continue. </div>"      
     }
@@ -126,8 +106,8 @@ var practice = {
 
     // For debugging, if you want to exit out of experiment, press q:
     if (81 == data.values()[0].key_press){
-      practice_end = true;
-      round_end = false;
+      stevens_exp.practice_end = true;
+      stevens_exp.round_end = false;
       console.log("!!!!!!!!!! Practice trials finished ");
       return false;
     }
@@ -152,7 +132,7 @@ var practice = {
       if (stevens_exp.current_sub_condition_index < (stevens_exp.sub_conditions_constants.length-1))
       { 
         stevens_exp.current_sub_condition_index++;
-        round_end = true; 
+        stevens_exp.round_end = true; 
         console.log("!!!!!!!!!! Moved to new sub condition at index " 
                      + stevens_exp.current_sub_condition_index);
            return true; 
@@ -160,9 +140,9 @@ var practice = {
       // Else end experiment
       else{
         console.log("!!!!!!!!!! Practice trials finished ");
-        practice_end = true;
-        round_end = false;
-        console.log(JSON.stringify(stevens_exp.practice_trial_data));
+        stevens_exp.practice_end = true;
+        stevens_exp.round_end = false;
+
         return false;
       }
     }
@@ -228,7 +208,7 @@ var experiment = {
       // If there are still more rounds for this sub condition
       if (!stevens_exp.end_sub_condition()){
         console.log("!!!!!!!! GO TO NEXT ROUND ");
-        round_end = true;
+        stevens_exp.round_end = true;
         return true;
       }
       // If there are still more subconditions, increment current index
@@ -263,10 +243,13 @@ var experiment_end = {
   stimulus: '<div align = "center">' + 
             '<p><font size = 10>You have completed the experiment!<p></font>' +
             '<br>' +
-            `<a href="#" onclick="stevens_exp.export_trial_data();" class="btn btn-info btn-block" role="button" style="width: 300px; font-size: 20px">Download Trial Data</a>` +
-            `<a href="#" onclick="stevens_exp.export_summary_data();" class="btn btn-info btn-block" role="button" style="width: 300px; font-size: 20px">Download Summary Data</a>` +
-            '</div>',
-  on_start: function(stop){
+            'Trial and summary data files will now automatically download locally.' + 
+            '</div>' ,
+  on_start: function(){
+
+    stevens_exp.export_trial_data();
+    stevens_exp.export_summary_data();
+
     // Reset background color to feedback
     document.body.style.backgroundColor = 'WHITE';
   }

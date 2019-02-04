@@ -1,4 +1,14 @@
-class JND {
+// import {generateDistribution} from "/scripts/generators/gaussian_distribution_generator.js";
+import {initialize_latin_square} from "/scripts/generators/latin_square_generator.js";
+import {initialize_random_order} from "/scripts/generators/random_generator.js";
+import {get_data, 
+        get_data_subset} from "/scripts/generators/data_generator.js";
+import {prepare_coordinates,
+        randomize_position,
+        randomize_radius_position,
+        force_greater_right_position} from "/scripts/helpers/experiment_helpers.js";
+
+export default class JND {
 
   /**
    * Initializes a JND experiment object. 
@@ -6,12 +16,19 @@ class JND {
    * @param  range          {string}    Range type (foundational or design)
    * @param  condition_name {string}    Name of condition (i.e distractor_rainbow)
    * @param  graph_type     {string}    Name of graph_type
+   * @param  balancing_type {string}    Type of balancing
    */
-  constructor(range, condition_name, graph_type) {
+  constructor(range, condition_name, graph_type, balancing_type) {
+
+    this.condition_name = condition_name; 
+    this.condition_group = condition_name.split('_')[0];
+
+    // ========================================
+    // PARAMETER CHECKING
 
     if ((range !== "foundational") && (range !== "design") && (range !== "design_multi")) {
       throw Error(range + " is not supported.") }
-    else{
+    else {
       this.range = range;
     }  
 
@@ -21,8 +38,11 @@ class JND {
       this.graph_type = graph_type;
     };  
 
-    this.condition_name = condition_name; 
-    this.condition_group = condition_name.split('_')[0];
+    if ((balancing_type !== "random") && (balancing_type !== "latin_square")) {
+      throw Error(balancing + " is not supported.") }
+    else {
+      this.balancing_type = balancing_type;
+    }  
 
     // ========================================
     // EXPERIMENT CONSTANTS
@@ -51,6 +71,25 @@ class JND {
     this.current_sub_condition_index;
     this.adjusted_quantity_matrix = {};   // The matrix is in this format:
                                           // { sub_condition_index : [adjusted_quantity1, adjusted_quantity2 ... ] }
+
+    // ========================================
+    // CURRENT TRIAL DATA
+
+    this.left_coordinates = "";
+    this.right_coordinates = "";
+    this.distribution_size = "";
+    this.distractor_coordinates = "";
+    this.trial_data = "";
+
+    // ========================================
+    // PREPARE EXPERIMENT
+
+    // Extract raw constants
+    this.raw_constants = get_data(this);
+    
+    // Prepare experiment + practice data
+    this.prepare_experiment();
+    this.prepare_practice();   
   }
 
   /**
@@ -61,9 +100,11 @@ class JND {
    *                                                             is supported.
    *         dataset {[{assoc array}, {assoc array}, ... ]}      The data to be ordered. 
    */ 
-  prepare_experiment(balancing_type, dataset) {
+  prepare_experiment() {
 
-    switch(balancing_type) {
+    let dataset = this.raw_constants;
+
+    switch(this.balancing_type) {
 
       case 'latin_square':
         this.sub_condition_order = initialize_latin_square(dataset.length);
@@ -74,7 +115,7 @@ class JND {
         break;
 
       default:
-        throw Error(balancing_type + " balancing type is not supported.");
+        throw Error(this.balancing_type + " balancing type is not supported.");
     }
 
     var ordered_dataset = [];
@@ -88,9 +129,7 @@ class JND {
 
     // Set experiment trials 
     this.sub_conditions_constants = ordered_dataset;
-    this.current_sub_condition_index = 0; 
-
-    this.prepare_practice(dataset);    
+    this.current_sub_condition_index = 0;  
   }
 
   /**
@@ -98,7 +137,9 @@ class JND {
    *
    * @param  dataset {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. 
    */
-  prepare_practice(dataset) {
+  prepare_practice() {
+
+    let dataset = this.raw_constants;
 
     this.sub_condition_order = initialize_random_order(dataset.length);
     let practice_dataset = [];
@@ -126,10 +167,11 @@ class JND {
 
     // Initialize a variable for this so it is usable inside on_start
     var jnd_exp = this; 
+    var address = location.protocol + "//" + location.hostname + ":" + location.port + "/jnd_trial"; 
 
     var trial = {
       type:'external-html-keyboard-response',
-      url: localhost + "/jnd_trial",
+      url: address,
       choices:['z', 'm', 'q'], //q is exit button (for debugging)
       execute_script: true,
       response_ends_trial: true,
@@ -180,7 +222,7 @@ class JND {
                                                            constants.num_SD,
                                                            constants.mean,
                                                            constants.SD);
-          distractor_coordinates = [left_dist_coordinates, right_dist_coordinates];
+          jnd_exp.distractor_coordinates = [left_dist_coordinates, right_dist_coordinates];
         }
 
         // Randomize position of the base and adjusted graphs
@@ -197,10 +239,10 @@ class JND {
         //                                           adjusted_correlation);
 
         // Set up D3 variables for plotting
-        left_coordinates = result.left;
-        right_coordinates = result.right;
-        distribution_size = constants.num_points;   
-        trial_data = trial.data; 
+        jnd_exp.left_coordinates = result.left;
+        jnd_exp.right_coordinates = result.right;
+        jnd_exp.distribution_size = constants.num_points;   
+        jnd_exp.trial_data = trial.data; 
 
         console.log("[RIGHT] Correlation: " + trial.data.right_correlation);
         console.log("[LEFT] Correlation: " + trial.data.left_correlation);
@@ -257,7 +299,7 @@ class JND {
 
     // Block specific saves 
     if (block_type == "test"){
-      jnd_exp.adjusted_quantity_matrix[index].push(adjusted_correlation);
+      this.adjusted_quantity_matrix[index].push(adjusted_correlation);
       trial.data.run_type = "test";
     }
     else{
@@ -329,7 +371,7 @@ class JND {
 
         // Collect the adjusted quantity values from the trials into the double[]
         var adjusted_quantities = [];
-        for (i = 0; i < current_interval_size; ++i) {
+        for (let i = 0; i < current_interval_size; ++i) {
           var adjusted_quantity = this.adjusted_quantity_matrix[this.current_sub_condition_index][i + window_start];
           adjusted_quantities.push(adjusted_quantity);
         }
@@ -343,7 +385,7 @@ class JND {
 
       var variance = [];
       var mean = [];
-      for (i = 0; i < adjusted_quantity_windows.length; i++){
+      for (let i = 0; i < adjusted_quantity_windows.length; i++){
         variance.push(math.var(adjusted_quantity_windows[i]));
         mean.push(math.mean(adjusted_quantity_windows[i]));
       }
@@ -559,15 +601,15 @@ class JND {
    */
   plot_distributions() {
 
-    var left_dataset = prepare_coordinates(left_coordinates, distribution_size);
-    var right_dataset = prepare_coordinates(right_coordinates, distribution_size);
+    var left_dataset = prepare_coordinates(this.left_coordinates, this.distribution_size);
+    var right_dataset = prepare_coordinates(this.right_coordinates, this.distribution_size);
 
     var datasets = [left_dataset, right_dataset];
     var distractors = [];
 
     if (this.condition_group === "distractor"){
-      left_dataset = prepare_coordinates(distractor_coordinates[0], distribution_size);
-      right_dataset = prepare_coordinates(distractor_coordinates[1], distribution_size);
+      left_dataset = prepare_coordinates(this.distractor_coordinates[0], this.distribution_size);
+      right_dataset = prepare_coordinates(this.distractor_coordinates[1], this.distribution_size);
 
       distractors = [left_dataset, right_dataset];
     }
@@ -595,6 +637,7 @@ class JND {
 
     var height = window.innerHeight/1.5; 
     var width = height/2;
+    var multiplier = 1; // Sets how much the data should be scaled by.
 
     var buffer = d3.select("#graph") // Insert into the div w/ id = "graph"
                    .append("svg") 
@@ -661,19 +704,19 @@ class JND {
           let dist_point = distractor[j];
 
           // Distractor point
-          this.plot_scatter_data(chart, xscale, yscale, [point], trial_data.point_size, trial_data.point_color);  
+          this.plot_scatter_data(chart, xscale, yscale, [point], this.trial_data.point_size, this.trial_data.point_color);  
 
           // Target point    
-          this.plot_scatter_data(chart, xscale, yscale, [dist_point], trial_data.dist_point_size, trial_data.dist_color);
+          this.plot_scatter_data(chart, xscale, yscale, [dist_point], this.trial_data.dist_point_size, this.trial_data.dist_color);
 
         }
       } else {
-          this.plot_scatter_data(chart, xscale, yscale, datasets[i], trial_data.point_size, trial_data.point_color);        
+          this.plot_scatter_data(chart, xscale, yscale, datasets[i], this.trial_data.point_size, this.trial_data.point_color);        
       }     
 
       // Set axis color
       chart.selectAll("path")
-           .attr("stroke", trial_data.axis_color);
+           .attr("stroke", this.trial_data.axis_color);
 
       // Remove tick labels
       chart.selectAll("text").remove();     
@@ -681,7 +724,7 @@ class JND {
     }
 
     // Set background color
-    document.body.style.backgroundColor = trial_data.background_color;
+    document.body.style.backgroundColor = this.trial_data.background_color;
   }
 
   /**
@@ -712,6 +755,7 @@ class JND {
     var jnd_exp = this;
     var width = window.innerWidth * 0.7;
     var height = window.innerHeight * 0.5;
+    var multiplier = 1; // Sets how much the data should be scaled by.
 
     // Scale for data slightly smaller than full width of axes to account for outliers.
     var xscale_for_data = d3.scaleLinear()
@@ -767,8 +811,8 @@ class JND {
                 }
               })
               .style("width", function () {
-                if (trial_data.strip_width !== undefined) {
-                  return trial_data.strip_width;
+                if (jnd_exp.trial_data.strip_width !== undefined) {
+                  return jnd_exp.trial_data.strip_width;
                 } else {
                   return 2;
                 }
@@ -783,7 +827,7 @@ class JND {
 
       // Set axis color
       chart.selectAll("path")
-           .attr("stroke", trial_data.axis_color);
+           .attr("stroke", jnd_exp.trial_data.axis_color);
 
       // Remove tick labels
       chart.selectAll("text").remove();     
@@ -791,7 +835,7 @@ class JND {
     }
 
     // Set background color
-    document.body.style.backgroundColor = trial_data.background_color;
+    document.body.style.backgroundColor = jnd_exp.trial_data.background_color;
   }
 
   /**
@@ -803,6 +847,7 @@ class JND {
 
     var width = window.innerWidth * 0.7;
     var height = window.innerHeight * 0.3;
+    var multiplier = 1; // Sets how much the data should be scaled by.
 
     // Scale for data slightly smaller than full width of axes to account for outliers.
     var xscale_for_data = d3.scaleLinear()
@@ -856,12 +901,12 @@ class JND {
                   return yscale(d[1]);
                 })
                 .attr("stroke", "black")
-                .attr("stroke-width", trial_data.ring_thickness)
+                .attr("stroke-width", this.trial_data.ring_thickness)
                 .attr("fill", "none");
 
       // Set axis color
       chart.selectAll("path")
-           .attr("stroke", trial_data.axis_color);
+           .attr("stroke", this.trial_data.axis_color);
 
       // Remove tick labels
       chart.selectAll("text").remove();     
@@ -869,7 +914,7 @@ class JND {
     }
 
     // Set background color
-    document.body.style.backgroundColor = trial_data.background_color;
+    document.body.style.backgroundColor = this.trial_data.background_color;
   }
 
 }

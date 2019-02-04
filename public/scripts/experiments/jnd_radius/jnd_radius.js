@@ -1,14 +1,30 @@
-class JND_Radius {
+// import {generateDistribution} from "/scripts/generators/gaussian_distribution_generator.js";
+import {initialize_latin_square} from "/scripts/generators/latin_square_generator.js";
+import {initialize_random_order} from "/scripts/generators/random_generator.js";
+import {get_data, 
+        get_data_subset} from "/scripts/generators/data_generator.js";
+import {prepare_coordinates,
+        randomize_position,
+        randomize_radius_position,
+        force_greater_right_position} from "/scripts/helpers/experiment_helpers.js";
+
+export default class JND_Radius {
 
   /**
-   * Initializes a JND experiment object. 
+   * Initializes a JND_Radius experiment object. 
    *
    * @param  range              {string}    Range type (foundational or design)
    * @param  condition_name     {string}    Name of condition (i.e distractor_rainbow)
    * @param  graph_type         {string}    Name of graph_type
-   * @param  pixels_conversion  {string}    No. of pixels per cm
+   * @param  balancing_type     {string}    Type of balancing
+   * @param  conversion_factor  {string}    No. of pixels per cm
    */
-  constructor(range, condition_name, graph_type, pixels_conversion) {
+  constructor(range, condition_name, graph_type, balancing_type, conversion_factor) {
+
+    this.condition_name = condition_name; 
+
+    // ========================================
+    // PARAMETER CHECKING
 
     if (range !== "foundational") {
       throw Error(range + " is not supported.") }
@@ -22,12 +38,16 @@ class JND_Radius {
       this.graph_type = graph_type;
     };  
 
-    this.condition_name = condition_name; 
+    if (balancing_type !== "random") {
+      throw Error(balancing + " is not supported.") }
+    else {
+      this.balancing_type = balancing_type;
+    }  
 
     // ========================================
     // EXPERIMENT CONSTANTS
 
-    this.PIXELS_PER_CM = pixels_conversion;
+    this.PIXELS_PER_CM = conversion_factor;
     this.MIN_RADIUS = 2;
     this.MAX_RADIUS = 6;
     this.MIN_TRIALS = 24;
@@ -52,6 +72,22 @@ class JND_Radius {
     this.current_sub_condition_index;
     this.adjusted_quantity_matrix = {};   // The matrix is in this format:
                                           // { sub_condition_index : [adjusted_quantity1, adjusted_quantity2 ... ] }
+
+    // ========================================
+    // CURRENT TRIAL DATA
+
+    this.left_radius = "";
+    this.right_radius = "";
+    this.trial_data = "";
+
+    // ========================================
+    // PREPARE EXPERIMENT
+
+    // Extract raw constants
+    this.raw_constants = get_data(this);
+
+    // Prepare experiment
+    this.prepare_experiment();
   }
 
   /**
@@ -63,31 +99,33 @@ class JND_Radius {
    *         data_set {[{assoc array}, {assoc array}, ... ]}     The data to be ordered. 
    *         practice_set {[{assoc array}, {assoc array}, ... ]} The practice data. 
    */ 
-  prepare_experiment(balancing_type, data_set) {
+  prepare_experiment() {
 
-    if (balancing_type === 'random'){
+    let dataset = this.raw_constants;
 
-      // Balancing on data_set
-      this.sub_condition_order = initialize_random_order(data_set.length);
-      var ordered_data_set = [];
+    switch(this.balancing_type) {
 
-      // Order the data set according to the latin square
-      // Initialize adjusted_quantity_matrix size 
-      for (let i=0; i < this.sub_condition_order.length; i++){
-        ordered_data_set[i] = data_set[this.sub_condition_order[i]];
-        this.adjusted_quantity_matrix[i] = [];
-      }
+      case 'random':
+        this.sub_condition_order = initialize_random_order(dataset.length);
+        break;
 
-      // Set experiment trials 
-      this.sub_conditions_constants = ordered_data_set;
-      this.current_sub_condition_index = 0; 
-
-      // Set practice trials (note does not need balancing)
-      this.practice_conditions_constants = data_set;
-      this.current_practice_condition_index = 0;
-
+      default:
+        throw Error(this.balancing_type + " balancing type is not supported.");
     }
-    else {throw Error(balancing_type + " balancing type is not supported.")};
+
+    var ordered_data_set = [];
+
+    // Order the data set according to the latin square
+    // Initialize adjusted_quantity_matrix size 
+    for (let i=0; i < this.sub_condition_order.length; i++){
+      ordered_data_set[i] = dataset[this.sub_condition_order[i]];
+      this.adjusted_quantity_matrix[i] = [];
+    }
+
+    // Set experiment trials 
+    this.sub_conditions_constants = ordered_data_set;
+    this.current_sub_condition_index = 0; 
+
   }
 
   /**
@@ -101,11 +139,12 @@ class JND_Radius {
     if ((block_type !== "test") && (block_type !== "practice")) {throw Error(block_type + " is not supported.")};
 
     // Initialize a variable for this so it is usable inside on_start
-    var jnd_exp = this; 
+    var jnd_radius_exp = this; 
+    var address = location.protocol + "//" + location.hostname + ":" + location.port + "/jnd_radius_trial"; 
 
     var trial = {
       type:'external-html-keyboard-response',
-      url: localhost + "/jnd_trial",
+      url: address,
       choices:['z', 'm', 'q'], //q is exit button (for debugging)
       execute_script: true,
       response_ends_trial: true,
@@ -113,19 +152,19 @@ class JND_Radius {
 
         // Set the constants to be used:
         if (block_type == "test"){ 
-          var index = jnd_exp.current_sub_condition_index; 
-          var constants = jnd_exp.sub_conditions_constants[index];
+          var index = jnd_radius_exp.current_sub_condition_index; 
+          var constants = jnd_radius_exp.sub_conditions_constants[index];
         }
         else { 
-          var index = jnd_exp.current_practice_condition_index; 
-          var constants = jnd_exp.practice_conditions_constants[index];
+          var index = jnd_radius_exp.current_practice_condition_index; 
+          var constants = jnd_radius_exp.practice_conditions_constants[index];
         }
 
         // Calculate adjusted radius
-        var adjusted_radius = jnd_exp.calculate_adjusted_radius(constants);
+        var adjusted_radius = jnd_radius_exp.calculate_adjusted_radius(constants);
 
         // Handling saving this trial's data: 
-        jnd_exp.handle_data_saving(trial, block_type, constants, index, adjusted_radius);
+        jnd_radius_exp.handle_data_saving(trial, block_type, constants, index, adjusted_radius);
 
         // Randomize position of the base and adjusted graphs
         var result = randomize_radius_position(trial, constants.base_radius, adjusted_radius);
@@ -137,18 +176,16 @@ class JND_Radius {
         //                                           constants.base_correlation,
         //                                           adjusted_correlation);
 
-        // !!!!! REFACTOR THIS DEPENDENCY
-        // Set up D3 variables for plotting
-        left_radius = result.left;
-        right_radius = result.right;
-        trial_data = trial.data; 
+        jnd_radius_exp.left_radius = result.left;
+        jnd_radius_exp.right_radius = result.right;
+        jnd_radius_exp.trial_data = trial.data; 
 
         console.log("[RIGHT] Radius: " + trial.data.right_radius);
         console.log("[LEFT] Radius: " + trial.data.left_radius);
         
       },
       on_finish: function(data){ // NOTE: on_finish takes in data var 
-        jnd_exp.check_response(data);
+        jnd_radius_exp.check_response(data);
         console.log("RESPONSE: " + data.correct);
       } 
     };
@@ -198,7 +235,7 @@ class JND_Radius {
 
     // Block specific saves 
     if (block_type == "test"){
-      jnd_exp.adjusted_quantity_matrix[index].push(adjusted_radius);
+      this.adjusted_quantity_matrix[index].push(adjusted_radius);
       trial.data.run_type = "test";
     }
     else{
@@ -405,8 +442,8 @@ class JND_Radius {
       return -1; 
     }
 
-    let right_area = 0.25*Math.PI*(data.right_radius * data.right_radius);
-    let left_area = 0.25*Math.PI*(data.left_radius * data.left_radius);
+    let right_area = 0.25*Math.PI*(this.right_radius * this.right_radius);
+    let left_area = 0.25*Math.PI*(this.left_radius * this.left_radius);
 
     if ((right_area > left_area) 
           && data.key_press == jsPsych.pluginAPI.convertKeyCharacterToKeyCode('m') ||
@@ -503,7 +540,7 @@ class JND_Radius {
    */
   plot_distributions() {
 
-    let radii = [left_radius * this.PIXELS_PER_CM, right_radius * this.PIXELS_PER_CM];
+    let radii = [this.left_radius * this.PIXELS_PER_CM, this.right_radius * this.PIXELS_PER_CM];
     let shapes = this.condition_name.split("_");
 
     // Margin calculations
@@ -579,7 +616,7 @@ class JND_Radius {
 
     }
 
-      document.body.style.backgroundColor = trial_data.background_color;
+      document.body.style.backgroundColor = this.trial_data.background_color;
   }
 
   /**
@@ -592,6 +629,7 @@ class JND_Radius {
    */ 
   plot_circle(chart, radius, max_radius, diff) {
 
+    let jnd_radius_exp = this;
     let translation = radius;
 
     // If radius is the smaller one, need to adjust translation
@@ -624,10 +662,10 @@ class JND_Radius {
     // Draw arc paths
     arcs.append("path")
         .attr("fill", function(d, i) {
-          return trial_data.fill_color;
+          return jnd_radius_exp.trial_data.fill_color;
         })
         .attr("stroke", function(d, i) {
-          return trial_data.fill_color;
+          return jnd_radius_exp.trial_data.fill_color;
         })
         .attr("d", arc);
   }
@@ -644,6 +682,7 @@ class JND_Radius {
   plot_slice(chart, radius, rotation, max_radius, diff) {
 
     let translation = 0;
+    let jnd_radius_exp = this;
 
     // If radius is the smaller one, need to adjust translation
     if (radius !== max_radius) {
@@ -675,7 +714,7 @@ class JND_Radius {
     arcs.append("path")
         .attr("fill", function(d, i) {
             if (i === 0) {
-                return trial_data.fill_color;
+                return jnd_radius_exp.trial_data.fill_color;
             } else {
                 return "#ffffff";
             }    
@@ -695,6 +734,7 @@ class JND_Radius {
   plot_square(chart, radius, max_radius, diff) {
 
     let translation = 0.5*max_radius;
+    let jnd_radius_exp = this;
 
     // If radius is the smaller one, need to adjust translation
     if (radius !== max_radius) {
@@ -708,7 +748,7 @@ class JND_Radius {
                    .attr("y", 0)
                    .attr("width", radius)
                    .attr("height", radius)
-                   .attr("fill", trial_data.fill_color)
+                   .attr("fill", jnd_radius_exp.trial_data.fill_color)
                    .attr("transform", "translate(" + translation + "," + translation + ")");
   }
 
@@ -724,6 +764,7 @@ class JND_Radius {
 
     let xtranslation = radius;
     let ytranslation = 0.25*radius;
+    let jnd_radius_exp = this;
 
     // If radius is the smaller one, need to adjust translation
     if (radius !== max_radius) {
@@ -738,7 +779,7 @@ class JND_Radius {
                    .attr("y", 0)
                    .attr("width", radius)
                    .attr("height", radius)
-                   .attr("fill", trial_data.fill_color)
+                   .attr("fill", jnd_radius_exp.trial_data.fill_color)
                    .attr("transform", "translate(" + xtranslation + "," + ytranslation + ") rotate(45)");
   }
 
@@ -753,6 +794,7 @@ class JND_Radius {
   plot_triangle(chart, radius, max_radius, diff) {
 
     let translation = 0;
+    let jnd_radius_exp = this;
 
     // If radius is the smaller one, need to shift by the 0.5*diff
     if (radius !== max_radius) {
@@ -768,7 +810,7 @@ class JND_Radius {
          .enter().append("polygon")
          .attr("points",function(d) { 
             return d.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
-         .attr("fill", trial_data.fill_color);
+         .attr("fill", jnd_radius_exp.trial_data.fill_color);
   }
 
   /**
@@ -782,6 +824,7 @@ class JND_Radius {
   plot_rotated_triangle(chart, radius, max_radius, diff) {
 
     let translation = 0;
+    let jnd_radius_exp = this;
 
     // If radius is the smaller one, need to shift by the 0.5*diff
     if (radius !== max_radius) {
@@ -797,7 +840,7 @@ class JND_Radius {
          .enter().append("polygon")
          .attr("points",function(d) { 
             return d.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
-         .attr("fill", trial_data.fill_color);        
+         .attr("fill", jnd_radius_exp.trial_data.fill_color);        
   }
 
 }

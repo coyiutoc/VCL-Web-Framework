@@ -1,33 +1,15 @@
-// =========================================================
-// CONSTANTS
-
-const MATHJS_URL = "https://unpkg.com/mathjs@4.4.2/dist/math.min.js";
+import JND from "/scripts/experiments/jnd/jnd.js";
+export var jnd_exp = new JND(params["range"], params["condition"], params["graph_type"], params["balancing"]);
 
 var timeline = [];
-const localhost = "http://localhost:8080";
-
-// Variables used to generate D3 jnd_trial_display.html:
-var left_coordinates;
-var right_coordinates;
-var distribution_size;
-var distractor_coordinates;
-var trial_data;  
-
-var multiplier = 1; // Sets how much the data should be scaled by.
-
-// =========================================================
-// INSTANTIATE JND EXPERIMENT OBJECT
-
-const JND_EXCEL = get_data("jnd", jnd_exp.range, jnd_exp.condition_name);
-
-jnd_exp.prepare_experiment("latin_square", JND_EXCEL);
+var address = location.protocol + "//" + location.hostname + ":" + location.port; 
 
 // =========================================================
 // WELCOME TRIAL BLOCK
 
 var welcome = {
   type: 'html-keyboard-response',
-  stimulus: `<div align = "center">` + `<img src="${localhost}/img/VCL_lab_logo.png"></img><br><br>` +
+  stimulus: `<div align = "center">` + `<img src="${address}/img/VCL_lab_logo.png"></img><br><br>` +
             `<b>Base:</b> JND` + '<br>' + 
             `<b>Trial Type:</b> ${jnd_exp.range}` + '<br>' + 
             `<b>Graph Type:</b> ${jnd_exp.graph_type}` + '<br>' + 
@@ -50,9 +32,9 @@ switch(jnd_exp.graph_type){
       stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear side-by-side." + 
           "<br> Indicate which graph is more correlated by pressing the Z or M key. </p><p>" +
           "<div style='height: 290px; width: 700px; display: block;'>"+
-          `<div style='float: left;'><img src='${localhost}/img/sample_multi_distractor_1.png'></img>` +
+          `<div style='float: left;'><img src='${address}/img/sample_multi_distractor_1.png'></img>` +
           "<p class='small'><strong>Press the Z key</strong></p></div>" +
-          `<div style='float: right;'><img src='${localhost}/img/sample_multi_distractor_2.png'></img>` +
+          `<div style='float: right;'><img src='${address}/img/sample_multi_distractor_2.png'></img>` +
           "<p class='small'><strong>Press the M key</strong></p></div>" +
           "</div>" + "<div> <br><p>Press any key to continue.</p> </div>" + 
           "</div>"          
@@ -63,9 +45,9 @@ switch(jnd_exp.graph_type){
       stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear side-by-side." + 
           "<br> Indicate which graph is more correlated by pressing the Z or M key. </p><p>" +
           "<div style='height: 290px; width: 700px; display: block;'>"+
-          `<div style='float: left;'><img src='${localhost}/img/sample_scatter_1.png'></img>` +
+          `<div style='float: left;'><img src='${address}/img/sample_scatter_1.png'></img>` +
           "<p class='small'><strong>Press the Z key</strong></p></div>" +
-          `<div style='float: right;'><img src='${localhost}/img/sample_scatter_2.png'></img>` +
+          `<div style='float: right;'><img src='${address}/img/sample_scatter_2.png'></img>` +
           "<p class='small'><strong>Press the M key</strong></p></div>" +
           "</div>" + "<div> <br><p>Press any key to continue.</p> </div>" + 
           "</div>"          
@@ -80,7 +62,7 @@ switch(jnd_exp.graph_type){
       stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear one on top of the other." + 
           "<br> Indicate which graph is more correlated by pressing the Z or M key. </p><p>" +
           "<strong>Press the Z key if the graph <u>above</u> is more correlated.</strong>" +
-          `<div style='float: center; display: block;'><img src='${localhost}/img/sample_line_length_strip.png'></img></div>` +
+          `<div style='float: center; display: block;'><img src='${address}/img/sample_line_length_strip.png'></img></div>` +
           "<strong>Press the M key if the graph <u>below</u> is more correlated.</strong>"
       };
     } else {
@@ -89,7 +71,7 @@ switch(jnd_exp.graph_type){
       stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear one on top of the other." + 
           "<br> Indicate which graph is more correlated by pressing the Z or M key. </p><p>" +
           "<strong>Press the Z key if the graph <u>above</u> is more correlated.</strong>" +
-          `<div style='float: center; display: block;'><img src='${localhost}/img/sample_jnd_strip.png'></img></div>` +
+          `<div style='float: center; display: block;'><img src='${address}/img/sample_jnd_strip.png'></img></div>` +
           "<strong>Press the M key if the graph <u>below</u> is more correlated.</strong>"
       };
     }
@@ -101,7 +83,7 @@ switch(jnd_exp.graph_type){
     stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear one on top of the other." + 
         "<br> Indicate which graph is more correlated by pressing the Z or M key. </p><p>" +
         "<strong>Press the Z key if the graph <u>above</u> is more correlated.</strong>" +
-        `<div style='float: center; display: block;'><img src='${localhost}/img/sample_jnd_ring.png'></img></div>` +
+        `<div style='float: center; display: block;'><img src='${address}/img/sample_jnd_ring.png'></img></div>` +
         "<strong>Press the M key if the graph <u>below</u> is more correlated.</strong>"
     };
     break;  
@@ -132,7 +114,7 @@ var feedback = {
   data: {type: 'feedback'},
   stimulus: function(){
 
-    document.body.style.backgroundColor = trial_data.feedback_background_color;
+    document.body.style.backgroundColor = jnd_exp.trial_data.feedback_background_color;
 
     var last_trial = JSON.parse(jsPsych.data.getLastTrialData().json());
     var last_trial_correct = last_trial[0]["correct"];
@@ -202,7 +184,7 @@ var stop = {
   data: {type: 'instruction'},
   on_start: function(stop){
     // Reset background color to feedback
-    document.body.style.backgroundColor = trial_data.feedback_background_color;
+    document.body.style.backgroundColor = jnd_exp.trial_data.feedback_background_color;
   }
 }
 
@@ -270,12 +252,15 @@ var experiment_end = {
   stimulus: '<div align = "center">' + 
             '<p><font size = 10>You have completed the experiment!<p></font>' +
             '<br>' +
-            '<a href="#" onclick="jnd_exp.export_trial_data();" class="btn btn-info btn-block" role="button" style="width: 300px; font-size: 20px">Download Trial Data</a>' +
-            '<a href="#" onclick="jnd_exp.export_summary_data();" class="btn btn-info btn-block" role="button" style="width: 300px; font-size: 20px">Download Summary Data</a>' +
+            'Trial and summary data files will now automatically download locally.' + 
             '</div>' ,
-  on_start: function(stop){
+  on_start: function(){
+
+    jnd_exp.export_trial_data();
+    jnd_exp.export_summary_data();
+    
     // Reset background color to feedback
-    document.body.style.backgroundColor = trial_data.feedback_background_color;
+    document.body.style.backgroundColor = jnd_exp.trial_data.feedback_background_color;
   }
 };
 timeline.push(experiment_end);

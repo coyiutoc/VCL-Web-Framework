@@ -6,15 +6,16 @@
 
     <%- include('../header'); %>
 
-    <script type="text/javascript" src="/scripts/experiments/jnd/jnd.js" ></script>
-
     <script type="text/javascript">
 
-      var jnd_exp = new JND("<%= range %>", "<%= condition %>", "<%= graph_type %>");
+      var params = {"range": "<%= range %>",
+                    "condition": "<%= condition %>",
+                    "graph_type": "<%= graph_type %>",
+                    "balancing": "<%= balancing %>"};
 
     </script>
 
-    <script type="text/javascript" src="/scripts/experiments/jnd/jnd_timeline.js" ></script>
+    <script type="module" src="/scripts/experiments/jnd/jnd_timeline.js" ></script>
 
   </head>
 

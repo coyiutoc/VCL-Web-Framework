@@ -1,4 +1,14 @@
-class Stevens {
+// import {generateDistribution} from "/scripts/generators/gaussian_distribution_generator.js";
+import {initialize_latin_square} from "/scripts/generators/latin_square_generator.js";
+import {initialize_random_order} from "/scripts/generators/random_generator.js";
+import {get_data, 
+        get_data_subset} from "/scripts/generators/data_generator.js";
+import {prepare_coordinates,
+        randomize_position,
+        randomize_radius_position,
+        force_greater_right_position} from "/scripts/helpers/experiment_helpers.js";
+
+export default class Stevens {
 
   /**
    * Initializes a Stevens experiment object. 
@@ -6,22 +16,32 @@ class Stevens {
    * @param  range          {string}    Range type (foundational or design)
    * @param  condition_name {string}    Name of condition (i.e distractor_rainbow)
    * @param  graph_type     {string}    Name of graph_type
+   * @param  balancing_type {string}    Type of balancing
    */
-  constructor(range, condition_name, graph_type) {
+  constructor(range, condition_name, graph_type, balancing_type) {
+
+    this.condition_name = condition_name; 
+
+    // ========================================
+    // PARAMETER CHECKING
 
     if ((range !== "foundational") && (range !== "design")) {
       throw Error(range + " is not supported.") }
     else{
       this.range = range;
     }  
-    
-    this.condition_name = condition_name; 
 
     if ((graph_type !== "scatter") && (graph_type !== "strip") && (graph_type !== "ring")) {
       throw Error(graph_type + " is not supported.")} 
     else { 
       this.graph_type = graph_type;
     };  
+
+    if (balancing_type !== "latin_square") {
+      throw Error(balancing + " is not supported.") }
+    else {
+      this.balancing_type = balancing_type;
+    }  
 
     // ========================================
     // EXPERIMENT CONSTANTS
@@ -35,6 +55,7 @@ class Stevens {
                             // for a given sub condition
     this.sub_conditions_constants;
     this.current_sub_condition_index;
+    this.round_end = true;
 
     // ========================================
     // PRACTICE EXPERIMENT VARIABLES
@@ -42,13 +63,32 @@ class Stevens {
     this.practice_conditions_constants;
     this.adjusted_midpoint_matrix = {}; 
     this.practice_trial_data = {};
+    this.practice_end = false;
 
     // ========================================
     // TEST EXPERIMENT VARIABLES
 
-    this.condition_name = condition_name; 
     this.experiment_conditions_constants;
     this.sub_condition_order;
+
+    // ========================================
+    // CURRENT TRIAL DATA
+
+    this.left_coordinates = "";
+    this.right_coordinates = "";
+    this.middle_coordinates = "";
+    this.distribution_size = "";
+    this.trial_data = "";
+
+    // ========================================
+    // PREPARE EXPERIMENT
+
+    // Extract raw constants
+    this.raw_constants = get_data(this);
+    
+    // Prepare experiment + practice data
+    this.prepare_experiment();
+    this.prepare_practice();  
 
   }
 
@@ -60,9 +100,11 @@ class Stevens {
    *                                                           is supported.
    *         dataset {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. 
    */
-  prepare_experiment(balancing_type, dataset) {
+  prepare_experiment() {
 
-    switch(balancing_type) {
+    let dataset = this.raw_constants;
+
+    switch(this.balancing_type) {
 
       case 'latin_square':
         this.sub_condition_order = initialize_latin_square(dataset.length);
@@ -73,7 +115,7 @@ class Stevens {
         break;
 
       default:
-        throw Error(balancing_type + " balancing type is not supported.");
+        throw Error(this.balancing_type + " balancing type is not supported.");
     }
 
     var ordered_dataset = [];
@@ -91,12 +133,7 @@ class Stevens {
     }
 
     // Set experiment trials
-    this.experiment_conditions_constants = ordered_dataset;
-
-    // Set experiment variables to the practice first
-    this.prepare_practice(dataset);    
-    
-    console.log(this.sub_conditions_constants);    
+    this.experiment_conditions_constants = ordered_dataset;    
   }
 
   /**
@@ -104,8 +141,9 @@ class Stevens {
    *
    * @param  dataset {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. 
    */
-  prepare_practice(dataset) {
+  prepare_practice() {
 
+    let dataset = this.raw_constants;
     let practice_dataset = [];
 
     for (let i=0; i < 4; i++){
@@ -279,10 +317,11 @@ class Stevens {
 
     // Initialize a variable for this so it is usable inside on_start
     var stevens_exp = this; 
+    var address = location.protocol + "//" + location.hostname + ":" + location.port + "/stevens_trial"; 
 
     var trial = {
         type:'external-html-keyboard-response',
-        url: localhost + "/stevens_trial",
+        url: address,
         choices: function(block_type){ // m = 77 (up), z = 90 (down), 32 = spacebar, 81 = q (exit button for debugging)
 
           if (block_type === "practice") {
@@ -302,9 +341,9 @@ class Stevens {
           // !!!! TODO: There should be a more elegant way to do this...
           //            JsPsych is likely operating async so difficult
           //            to set boolean outside this object. 
-          if (practice_end == true){
+          if (stevens_exp.practice_end == true){
             stevens_exp.set_variables_to_experiment();
-            practice_end = false;
+            stevens_exp.practice_end = false;
           }
 
           // Set the constants to be used:
@@ -358,17 +397,17 @@ class Stevens {
           }
 
           if (trial.data.high_ref_is_right){
-            right_coordinates = high_coordinates;
-            left_coordinates = low_coordinates;
+            stevens_exp.right_coordinates = high_coordinates;
+            stevens_exp.left_coordinates = low_coordinates;
           }
           else{
-            right_coordinates = low_coordinates;
-            left_coordinates = high_coordinates;
+            stevens_exp.right_coordinates = low_coordinates;
+            stevens_exp.left_coordinates = high_coordinates;
           }
 
-          middle_coordinates = estimated_coordinates;  
-          distribution_size = constants.num_points; 
-          trial_data = trial.data; 
+          stevens_exp.middle_coordinates = estimated_coordinates;  
+          stevens_exp.distribution_size = constants.num_points; 
+          stevens_exp.trial_data = trial.data; 
 
           // Save trial data for practice so can calculate exclusion criteria
           if (trial.data.run_type === "practice") {
@@ -477,7 +516,7 @@ class Stevens {
       // - increment the trial_num
       // - reset the refresh number (only applies for test trials)
       // - swap the start ref to be high/low depending on the previous round's start ref
-      if (round_end == true && trial.data.run_type == "test"){
+      if (this.round_end == true && trial.data.run_type == "test"){
 
         trial.data.trial_num = last_stevens_trial.trial_num + 1;
         trial.data.num_adjustments = 0;
@@ -489,7 +528,7 @@ class Stevens {
           trial.data.start_ref = constants.high_ref;
         }
 
-        round_end = false; //Reset flag
+        this.round_end = false; //Reset flag
       }
       // Else trial_num, num_adjustments and start_ref is the same, but round_refresh ++ 
       else{
@@ -769,9 +808,9 @@ class Stevens {
    */
   plot_distributions() {
 
-    var left_dataset = prepare_coordinates(left_coordinates, distribution_size);
-    var right_dataset = prepare_coordinates(right_coordinates, distribution_size);
-    var middle_dataset = prepare_coordinates(middle_coordinates, distribution_size);
+    var left_dataset = prepare_coordinates(this.left_coordinates, this.distribution_size);
+    var right_dataset = prepare_coordinates(this.right_coordinates, this.distribution_size);
+    var middle_dataset = prepare_coordinates(this.middle_coordinates, this.distribution_size);
 
     var datasets = [left_dataset, middle_dataset, right_dataset];
 
@@ -795,8 +834,11 @@ class Stevens {
    */
   plot_scatter(datasets) {
 
+    var stevens_exp = this;
+
     var height = window.innerHeight/1.5; 
     var width = height/2;
+    var multiplier = 1;
 
     // Create scales:
     // ** D3 creates a function that takes in input between [0, 100] and 
@@ -863,11 +905,11 @@ class Stevens {
                 return yscale(d[1]);
               })
               .attr("r", 2)
-              .attr("r", trial_data.point_size).style("fill", trial_data.point_color);
+              .attr("r", stevens_exp.trial_data.point_size).style("fill", stevens_exp.trial_data.point_color);
 
       // Set axis color
       chart.selectAll("path")
-           .attr("stroke", trial_data.axis_color);
+           .attr("stroke", stevens_exp.trial_data.axis_color);
 
       // Remove tick labels
       chart.selectAll("text").remove();   
@@ -876,7 +918,7 @@ class Stevens {
     }
 
     // Set background color
-    document.body.style.backgroundColor = trial_data.background_color;
+    document.body.style.backgroundColor = stevens_exp.trial_data.background_color;
   }
 
   /**
@@ -887,8 +929,10 @@ class Stevens {
   plot_strip(datasets) {
 
     var stevens_exp = this;
+
     var width = window.innerWidth * 0.8;
     var height = window.innerHeight * 0.3;
+    var multiplier = 1;
 
     // Scale for data slightly smaller than full width of axes to account for outliers.
     var xscale_for_data = d3.scaleLinear()
@@ -945,8 +989,8 @@ class Stevens {
                 }
               })
               .style("width", function () {
-                if (trial_data.strip_width !== undefined) {
-                  return trial_data.strip_width;
+                if (stevens_exp.trial_data.strip_width !== undefined) {
+                  return stevens_exp.trial_data.strip_width;
                 } else {
                   return 2;
                 }
@@ -961,7 +1005,7 @@ class Stevens {
 
       // Set axis color
       chart.selectAll("path")
-           .attr("stroke", trial_data.axis_color);
+           .attr("stroke", stevens_exp.trial_data.axis_color);
 
       // Remove tick labels
       chart.selectAll("text").remove();     
@@ -969,7 +1013,7 @@ class Stevens {
     }
 
     // Set background color
-    document.body.style.backgroundColor = trial_data.background_color;
+    document.body.style.backgroundColor = stevens_exp.trial_data.background_color;
   }
 
   /**
@@ -979,8 +1023,11 @@ class Stevens {
    */
   plot_ring(datasets) {
 
+    var stevens_exp = this;
+
     var width = window.innerWidth * 0.8;
     var height = window.innerHeight * 0.3;
+    var multiplier = 1;
 
     // Scale for data slightly smaller than full width of axes to account for outliers.
     var xscale_for_data = d3.scaleLinear()
@@ -1035,12 +1082,12 @@ class Stevens {
                   return yscale(d[1])
                 })
                 .attr("stroke", "black")
-                .attr("stroke-width", trial_data.ring_thickness)
+                .attr("stroke-width", stevens_exp.trial_data.ring_thickness)
                 .attr("fill", "none");
 
       // Set axis color
       chart.selectAll("path")
-           .attr("stroke", trial_data.axis_color);
+           .attr("stroke", stevens_exp.trial_data.axis_color);
 
       // Remove tick labels
       chart.selectAll("text").remove();     
@@ -1048,7 +1095,7 @@ class Stevens {
     }
 
     // Set background color
-    document.body.style.backgroundColor = trial_data.background_color;
+    document.body.style.backgroundColor = stevens_exp.trial_data.background_color;
   }
 
 }
