@@ -35,7 +35,7 @@ app.get('/experiment/:experiment/graph_type/:graph_type/range/:range/condition/:
 		graph_type: request.params.graph_type,
         balancing: request.params.balancing
 	}
-    debugger;
+
 	if (request.params.experiment === "jnd") {
     	response.render('jnd/jnd_experiment.html', keys);
     } else if (request.params.experiment === "stevens") {
