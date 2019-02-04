@@ -371,7 +371,7 @@ export default class JND {
 
         // Collect the adjusted quantity values from the trials into the double[]
         var adjusted_quantities = [];
-        for (i = 0; i < current_interval_size; ++i) {
+        for (let i = 0; i < current_interval_size; ++i) {
           var adjusted_quantity = this.adjusted_quantity_matrix[this.current_sub_condition_index][i + window_start];
           adjusted_quantities.push(adjusted_quantity);
         }
@@ -385,7 +385,7 @@ export default class JND {
 
       var variance = [];
       var mean = [];
-      for (i = 0; i < adjusted_quantity_windows.length; i++){
+      for (let i = 0; i < adjusted_quantity_windows.length; i++){
         variance.push(math.var(adjusted_quantity_windows[i]));
         mean.push(math.mean(adjusted_quantity_windows[i]));
       }
