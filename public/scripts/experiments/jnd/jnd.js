@@ -13,15 +13,19 @@ export default class JND {
   /**
    * Initializes a JND experiment object. 
    *
-   * @param  range          {string}    Range type (foundational or design)
-   * @param  condition_name {string}    Name of condition (i.e distractor_rainbow)
-   * @param  graph_type     {string}    Name of graph_type
-   * @param  balancing_type {string}    Type of balancing
+   * @param  params {assoc array}  Parameters passed from routing.
    */
-  constructor(range, condition_name, graph_type, balancing_type) {
+  constructor(params) {
+
+    let range = params["range"];
+    let condition_name = params["condition"];
+    let graph_type = params["graph_type"];
+    let balancing_type = params["balancing"];
 
     this.condition_name = condition_name; 
-    this.condition_group = condition_name.split('_')[0];
+    this.condition_group = this.condition_name.split('_')[0];
+    this.subject_id = params["subject_id"];
+    this.subject_initials = params["subject_initials"];
 
     // ========================================
     // PARAMETER CHECKING
@@ -39,7 +43,7 @@ export default class JND {
     };  
 
     if ((balancing_type !== "random") && (balancing_type !== "latin_square")) {
-      throw Error(balancing + " is not supported.") }
+      throw Error(balancing_type + " is not supported.") }
     else {
       this.balancing_type = balancing_type;
     }  
@@ -552,7 +556,7 @@ export default class JND {
     //  trial_data.ignore(key);
     // }
 
-    var string = this.condition_name + "_jnd_trial_results.csv";
+    var string = "S" + this.subject_id + "_" + this.condition_name + "_jnd_trial_results.csv";
 
     trial_data.localSave('csv', string);
   }
@@ -561,13 +565,13 @@ export default class JND {
    * When called, will save aggregated trial data into a CSV.     
    */
   export_summary_data() {
-    var csv = 'PLOT,BASE,ABOVE,JND,TRIALS\n';
+    var csv = 'SUBJECT_ID,SUBJECT_INITIALS,PLOT,BASE,ABOVE,JND,TRIALS\n';
 
     var data = [];
     
     // Organize each row of the csv
     for (let i = 0; i<this.sub_conditions_constants.length; i++){
-      var row = [this.condition_name];
+      var row = [this.subject_id, this.subject_initials, this.condition_name];
       var constants = this.sub_conditions_constants[i];
       var condition_data = jsPsych.data.get().filter({type: 'jnd', run_type: 'test', balanced_sub_condition: this.sub_condition_order[i]})
                                              .filterCustom(function(x){ //Don't include the exit trials
@@ -591,7 +595,7 @@ export default class JND {
     var hiddenElement = document.createElement('a');
     hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
     hiddenElement.target = '_blank';
-    hiddenElement.download = this.condition_name + "_jnd_summary_results.csv";
+    hiddenElement.download = "S" + this.subject_id + "_" + this.condition_name + "_jnd_summary_results.csv";
     hiddenElement.click();
   }
 
