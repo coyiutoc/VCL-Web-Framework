@@ -5,13 +5,11 @@ import {JND_RADIUS_BASE} from "/scripts/experiment-properties/data/constants/jnd
 export { get_data,
          get_data_subset };
 
+// Add the subcondition name + how many subcondition repeats.
+// Otherwise default is zero for any condition.
 const SUBCONDITION_REPEATS = {
-    foundational : {
-        base : 0
-    },
-    design : {
-        distractor_rainbow: 0
-    },
+    foundational : {},
+    design : {},
     design_multi : {
         distractor_multi: 4
     }
