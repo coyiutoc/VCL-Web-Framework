@@ -50,11 +50,6 @@ Navigate into the folder:
 ```
 cd VCL-Web-Framework
 ```
-Pull THIS branch then move into it:
-```
-git fetch origin users/coyiutoc/fixes:users/coyiutoc/fixes
-git checkout users/coyiutoc/fixes
-```
 Then run:
 ```
 npm install
