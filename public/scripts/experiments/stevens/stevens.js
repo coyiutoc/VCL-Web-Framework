@@ -13,14 +13,18 @@ export default class Stevens {
   /**
    * Initializes a Stevens experiment object. 
    *
-   * @param  range          {string}    Range type (foundational or design)
-   * @param  condition_name {string}    Name of condition (i.e distractor_rainbow)
-   * @param  graph_type     {string}    Name of graph_type
-   * @param  balancing_type {string}    Type of balancing
+   * @param  params {assoc array}  Parameters passed from routing.
    */
-  constructor(range, condition_name, graph_type, balancing_type) {
+  constructor(params) {
+
+    let range = params["range"];
+    let condition_name = params["condition"];
+    let graph_type = params["graph_type"];
+    let balancing_type = params["balancing"];
 
     this.condition_name = condition_name; 
+    this.subject_id = params["subject_id"];
+    this.subject_initials = params["subject_initials"];
 
     // ========================================
     // PARAMETER CHECKING
@@ -38,7 +42,7 @@ export default class Stevens {
     };  
 
     if (balancing_type !== "latin_square") {
-      throw Error(balancing + " is not supported.") }
+      throw Error(balancing_type + " is not supported.") }
     else {
       this.balancing_type = balancing_type;
     }  
@@ -55,7 +59,7 @@ export default class Stevens {
                             // for a given sub condition
     this.sub_conditions_constants;
     this.current_sub_condition_index;
-    this.round_end = true;
+    this.round_end = false;
 
     // ========================================
     // PRACTICE EXPERIMENT VARIABLES
@@ -164,16 +168,16 @@ export default class Stevens {
   }
 
   /**
-   * Resets all relevant variables to use that of the experiment.
+   * Resets all relevant variables to now use the test version.
    * (input_count_array, sub_conditions_constants, and current_sub_condition_index
    * are shared variables between the practice and test trials).
    *
    * This function is called once all the practice trials have run. 
    */
-  set_variables_to_experiment() {
-      this.sub_conditions_constants = this.experiment_conditions_constants;
-      this.input_count_array = new Array(this.sub_conditions_constants[0].trials_per_round).fill(0);
-      this.current_sub_condition_index = 0;
+  end_practice_experiment() {
+    this.sub_conditions_constants = this.experiment_conditions_constants;
+    this.input_count_array = new Array(this.sub_conditions_constants[0].trials_per_round).fill(0);
+    this.current_sub_condition_index = 0;
   }
 
   /**
@@ -191,9 +195,10 @@ export default class Stevens {
     for (let i = 0; i < Object.keys(this.practice_trial_data).length; i++) {
 
       let subcondition_data = this.practice_trial_data[i];
-      let std_dev = this.get_standard_deviation(subcondition_data);
-      let anchoring_value = this.get_anchoring_value(subcondition_data);
       let mids = this.get_estimated_mids(subcondition_data);
+
+      let std_dev = this.get_standard_deviation(mids);
+      let anchoring_value = this.get_anchoring_value(mids);
 
       let rounded_mids = [];
       for (let mid of mids) {
@@ -231,14 +236,13 @@ export default class Stevens {
 
   /**
    * Calculates the standard deviation for the specified subcondition.
+   * @ param  {array}   array of estimated mids for that trial
    *
    * @ return {double}  standard deviation
    */
-  get_standard_deviation(subcondition_data) {
+  get_standard_deviation(estimated_mids) {
 
     let values = [];
-
-    let estimated_mids = this.get_estimated_mids(subcondition_data);
 
     // Calculate mean:
     let mean = 0;
@@ -259,15 +263,14 @@ export default class Stevens {
 
   /**
    * Calculates the anchoring value for the specified subcondition.
+   * @ param  {array}   array of estimated mids for that trial
    *
    * @ return {double} anchoring value
    */
-  get_anchoring_value(subcondition_data) {
+  get_anchoring_value(estimated_mids) {
 
     let high_ref_trial_sum = 0;
     let low_ref_trial_sum = 0;
-
-    let estimated_mids = this.get_estimated_mids(subcondition_data);
 
     // Iterate through each estimated mid (trial) of a given subcondition
     for (let i = 0; i < estimated_mids.length; i++) {
@@ -289,20 +292,13 @@ export default class Stevens {
    */
   get_estimated_mids(subcondition_data) {
 
-    let estimated_mids = {};
-    let result = [];
+    let estimated_mids = [];
 
     for (let trial of subcondition_data) {
-      if (trial.num_adjustments > 0) {
-        estimated_mids[trial.num_adjustments] = trial.estimated_mid;
-      }
+      estimated_mids.push(trial.estimated_mid);
     }
 
-    for (let i = 1; i <= Object.keys(estimated_mids).length; i++) {
-      result[i-1] = estimated_mids[i];
-    }
-
-    return result;
+    return estimated_mids;
   }
 
   /**
@@ -322,29 +318,11 @@ export default class Stevens {
     var trial = {
         type:'external-html-keyboard-response',
         url: address,
-        choices: function(block_type){ // m = 77 (up), z = 90 (down), 32 = spacebar, 81 = q (exit button for debugging)
-
-          if (block_type === "practice") {
-            return [77, 90, 81]; // Note disabled spacebar on practice to ensure they do all 4 inputs.
-          } else {
-            return [77, 90, 32, 81]; 
-          }
-
-        },
+        choices: [77, 90, 32, 81],  // m = 77 (up), z = 90 (down), 32 = spacebar, 81 = q (exit button for debugging)
         execute_script: true,
         response_ends_trial: true, 
         data: {},
         on_start: function(trial){ // NOTE: on_start takes in trial var 
-
-          // Reset the variables to use the experiment if we have just ended
-          // the practice trials
-          // !!!! TODO: There should be a more elegant way to do this...
-          //            JsPsych is likely operating async so difficult
-          //            to set boolean outside this object. 
-          if (stevens_exp.practice_end == true){
-            stevens_exp.set_variables_to_experiment();
-            stevens_exp.practice_end = false;
-          }
 
           // Set the constants to be used:
           var index = stevens_exp.current_sub_condition_index; 
@@ -408,11 +386,6 @@ export default class Stevens {
           stevens_exp.middle_coordinates = estimated_coordinates;  
           stevens_exp.distribution_size = constants.num_points; 
           stevens_exp.trial_data = trial.data; 
-
-          // Save trial data for practice so can calculate exclusion criteria
-          if (trial.data.run_type === "practice") {
-            stevens_exp.practice_trial_data[index].push(trial.data);
-          }
 
           console.log("[RIGHT] Correlation: " + trial.data.right_correlation);
           console.log("[MIDPOINT] Correlation: " + trial.data.estimated_mid);
@@ -514,9 +487,10 @@ export default class Stevens {
 
       // If a round has just ended:
       // - increment the trial_num
-      // - reset the refresh number (only applies for test trials)
+      // - set refresh number back to 1
+      // - reset the number of adjustments to 0
       // - swap the start ref to be high/low depending on the previous round's start ref
-      if (this.round_end == true && trial.data.run_type == "test"){
+      if (this.round_end == true){
 
         trial.data.trial_num = last_stevens_trial.trial_num + 1;
         trial.data.num_adjustments = 0;
@@ -576,10 +550,6 @@ export default class Stevens {
       trial.data.estimated_mid = estimated_correlation;
       trial.data.step_size = (constants.high_ref - constants.low_ref) / this.MAX_STEP_INTERVAL;
 
-      if (trial.data.run_type == "practice"){
-        last_trial = jsPsych.data.get().filter({type: "stevens", run_type: "practice"}).last(1).values()[0];
-        trial.data.trial_num = last_trial ? (last_trial.trial_num+1) : 0; 
-      }
     }
     // If there is input on PREVIOUS trial, change the midpoint + increment trial number
     // (Since we are plotting the new middle graph based on PREVIOUS input, we look
@@ -647,32 +617,21 @@ export default class Stevens {
   }
 
   /**
-   * Determines whether the round can end or not. A round can end ONLY if:
-   * - test     : there has been at least 1 input from the user on the given round 
-   * - practice : user has done 4 adjustments in that given round
-   *
-   * @param  block_type {string}  "test" or "practice"
+   * Determines whether the round can end or not. A round can end ONLY if
+   * there has been at least 1 input from the user on the given round 
    *
    * @return {boolean}            True if sub condition should end.
    */
-  end_round(block_type) {
+  end_round() {
 
     let last_trial = jsPsych.data.get().last(1).values()[0];
 
-    // If there is no num_adjustment count, we shouldn't end round 
-    if (block_type === "test") {
-      return !(last_trial.num_adjustments === 0);
-    }
-    // For practice, only end round when they have done 4 inputs
-    else {
-      return (last_trial.num_adjustments === 4);
-    }
+    return !(last_trial.num_adjustments === 0);
   }
 
   /**
    * Determines whether the current sub condition can end or not.
    * 
-   *
    * @return {boolean}            True if sub condition should end.
    */
   end_sub_condition() {
@@ -757,7 +716,7 @@ export default class Stevens {
     var hiddenElement = document.createElement('a');
     hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
     hiddenElement.target = '_blank';
-    hiddenElement.download = this.condition_name + "_stevens_trial_results.csv";
+    hiddenElement.download = "S" + this.subject_id + "_" +this.condition_name + "_stevens_trial_results.csv";
     hiddenElement.click();
   }
 
@@ -765,7 +724,7 @@ export default class Stevens {
    * When called, will save aggregated trial data into a CSV.     
    */
   export_summary_data() {
-    var csv = 'ROUND_TYPE,NUM_TRIALS,HIGH_REF,ESTIMATED_MIDPOINT,LOW_REF\n';
+    var csv = 'SUBJECT_ID,SUBJECT_INITIALS,ROUND_TYPE,NUM_TRIALS,HIGH_REF,ESTIMATED_MIDPOINT,LOW_REF\n';
 
     var data = [];
     
@@ -781,6 +740,8 @@ export default class Stevens {
                                                 return x.rt != null;
                                              });
 
+      row.push(this.subject_id);
+      row.push(this.subject_initials);
       row.push(constants.round_type);
       row.push(constants.trials_per_round);
       row.push(constants.high_ref);
@@ -799,7 +760,7 @@ export default class Stevens {
     var hiddenElement = document.createElement('a');
     hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
     hiddenElement.target = '_blank';
-    hiddenElement.download = this.condition_name + "_stevens_summary_results.csv";
+    hiddenElement.download = "S" + this.subject_id + "_" + this.condition_name + "_stevens_summary_results.csv";
     hiddenElement.click();
   }
 

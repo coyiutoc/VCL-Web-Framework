@@ -46,8 +46,16 @@ Visit the following link to download Node: [here.](https://nodejs.org/en/)
 
 #### (3) Install Dependencies
 
-Navigate into the folder then run:
-
+Navigate into the folder:
+```
+cd VCL-Web-Framework
+```
+Pull THIS branch then move into it:
+```
+git fetch origin users/coyiutoc/fixes:users/coyiutoc/fixes
+git checkout users/coyiutoc/fixes
+```
+Then run:
 ```
 npm install
 ```

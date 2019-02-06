@@ -1,5 +1,5 @@
 import Stevens from "/scripts/experiments/stevens/stevens.js";
-export var stevens_exp = new Stevens(params["range"], params["condition"], params["graph_type"], params["balancing"]);
+export var stevens_exp = new Stevens(params);
 
 var timeline = [];
 var address = location.protocol + "//" + location.hostname + ":" + location.port; 
@@ -97,59 +97,55 @@ timeline.push(instruction_trials);
 // ---------------------------------------------------------
 // PRACTICE TIMELINE
 
-var practice_stevens = stevens_exp.generate_trial("practice");
+var practice_trial = stevens_exp.generate_trial("practice");
 
 var practice = {
-  timeline: [practice_stevens],
+  timeline: [practice_trial],
   loop_function: function(data){ // Return true if timeline should continue
                                  // Return false if timeline should end
 
     // For debugging, if you want to exit out of experiment, press q:
-    if (81 == data.values()[0].key_press){
-      stevens_exp.practice_end = true;
+    if (jsPsych.pluginAPI.convertKeyCharacterToKeyCode('q') == data.values()[0].key_press){
+      stevens_exp.end_practice_experiment();
       stevens_exp.round_end = false;
       console.log("!!!!!!!!!! Practice trials finished ");
       return false;
     }
 
-    let last_trial = jsPsych.data.get().last(1).values()[0];
-    let curr_num_adjustments = last_trial.num_adjustments;
-
-    // If user has 4 inputs, end trial OR
     // If spacebar is pressed and we can end the round (there was at least 1 input)
-    if ((curr_num_adjustments === 4) || (32 == data.values()[0].key_press && stevens_exp.end_round("practice"))){
-      
-      // !!!!!!!! TODO: 
-      // This hack throws off the trial variables like input_count_array and trial_num.
+    if (32 == data.values()[0].key_press && stevens_exp.end_round()){
+
+      // Save the midpoint for exclusion criteria calculations later
+      let curr_index = stevens_exp.current_sub_condition_index;    
+      stevens_exp.practice_trial_data[curr_index].push(stevens_exp.trial_data);
 
       // If there are still more rounds for this sub condition
-      // if (!stevens_exp.end_sub_condition()){
-      //   console.log("!!!!!!!! GO TO NEXT ROUND ");
-      //   round_end = true;
-      //   return true;
-      // }
-
-      if (stevens_exp.current_sub_condition_index < (stevens_exp.sub_conditions_constants.length-1))
-      { 
-        stevens_exp.current_sub_condition_index++;
-        stevens_exp.round_end = true; 
+      if (!stevens_exp.end_sub_condition()){
+        console.log("!!!!!!!! GO TO NEXT ROUND ");
+        stevens_exp.round_end = true;
+        return true;
+      }
+      // If there are still more subconditions, increment current index
+      else if (stevens_exp.current_sub_condition_index < (stevens_exp.sub_conditions_constants.length-1)){ 
+        stevens_exp.current_sub_condition_index++; 
         console.log("!!!!!!!!!! Moved to new sub condition at index " 
                      + stevens_exp.current_sub_condition_index);
-           return true; 
+        return true; 
       }
       // Else end experiment
       else{
         console.log("!!!!!!!!!! Practice trials finished ");
-        stevens_exp.practice_end = true;
+        stevens_exp.end_practice_experiment();
         stevens_exp.round_end = false;
 
         return false;
       }
-    }
+    } 
     // Else continue w/ current subcondition:
-    else{
+    else {
       return true;
     }
+
   }
 };
 
@@ -203,7 +199,7 @@ var experiment = {
     }
 
     // If spacebar is pressed and we can end the round (there was at least 1 input)
-    if (32 == data.values()[0].key_press && stevens_exp.end_round("test")){
+    if (32 == data.values()[0].key_press && stevens_exp.end_round()){
 
       // If there are still more rounds for this sub condition
       if (!stevens_exp.end_sub_condition()){

@@ -1,5 +1,5 @@
 import JND_Radius from "/scripts/experiments/jnd_radius/jnd_radius.js";
-export var jnd_radius_exp = new JND_Radius(params["range"], params["condition"], params["graph_type"], params["balancing"], params["conversion_factor"]);
+export var jnd_radius_exp = new JND_Radius(params);
 
 var timeline = [];
 var address = location.protocol + "//" + location.hostname + ":" + location.port; 
@@ -142,7 +142,7 @@ var experiment_end = {
   stimulus: `<div align = "center" style = "margin-top: ${isFirefox ? "45vh" : "0"};">` + 
             '<p><font size = 10>You have completed the experiment!<p></font>' +
             '<br>' +
-            'Trial and summary data files will now automaticaly download locally.' + 
+            'Trial and summary data files will now automatically download locally.' + 
             '</div>' ,
   on_start: function(){
 

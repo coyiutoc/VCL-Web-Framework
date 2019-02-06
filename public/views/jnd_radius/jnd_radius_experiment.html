@@ -10,14 +10,17 @@
 
     <script type="text/javascript">
 
-          // Extract conversion factor
-          const PIXELS_PER_CM = document.getElementById("cm_conversion").getBoundingClientRect().height/100;
-          
-          var params = {"range": "<%= range %>",
-                        "condition": "<%= condition %>",
-                        "graph_type": "<%= graph_type %>",
-                        "balancing": "<%= balancing %>",
-                        "conversion_factor": PIXELS_PER_CM};
+      // Extract conversion factor
+      const PIXELS_PER_CM = document.getElementById("cm_conversion").getBoundingClientRect().height/100;
+      
+      // Routing params from EJS:
+      var params = {"range": "<%= range %>",
+                    "condition": "<%= condition %>",
+                    "graph_type": "<%= graph_type %>",
+                    "balancing": "<%= balancing %>",
+                    "conversion_factor": PIXELS_PER_CM,
+                    "subject_id": "<%= subject_id %>",
+                    "subject_initials": "<%= subject_initials %>"};
 
     </script>
 

@@ -1,5 +1,5 @@
 import JND from "/scripts/experiments/jnd/jnd.js";
-export var jnd_exp = new JND(params["range"], params["condition"], params["graph_type"], params["balancing"]);
+export var jnd_exp = new JND(params);
 
 var timeline = [];
 var address = location.protocol + "//" + location.hostname + ":" + location.port; 
