@@ -44,7 +44,9 @@ app.get('/experiment/:experiment/graph_type/:graph_type/range/:range/condition/:
     	response.render('stevens/stevens_experiment.html', keys);
     } else if (request.params.experiment === "jnd_radius") {
     	response.render('jnd_radius/jnd_radius_experiment.html', keys);
-    }	
+    } else if (request.params.experiment === "shape_estimation") {
+	    response.render('estimation/shape_estimation_experiment.html', keys);
+    }
 });
 
 
@@ -61,6 +63,11 @@ app.get('/jnd_radius_trial', function(request, response) {
 // Stevens Trial Display
 app.get('/stevens_trial', function(request, response) {
     response.render('stevens/stevens_trial_display.html');
+});
+
+// Estimation Trial Display
+app.get('/estimation_trial', function(request, response) {
+    response.render('estimation/estimation_trial_display.html');
 });
 
 // --- START THE SERVER 
