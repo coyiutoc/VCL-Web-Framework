@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="icon" href="./img/VCL_favicon.png">
+
+    <!-- Scripts: -->
+
+    <!-- D3: -->
+    <script src = "https://d3js.org/d3.v4.min.js"></script>
+    <script src = "https://d3js.org/d3-selection-multi.v0.4.min.js"></script>
+
+</head>
+<body>
+  <div align = "center">
+    
+    <!-- D3 graph goes here: -->
+    <div id="graph">
+    </div>
+
+    <script type="module">
+    
+        import { estimation_exp } from "/scripts/experiments/estimation/estimation_timeline.js";
+        estimation_exp.plot_distributions();
+
+    </script>
+  </div>
+</body>
+</html>

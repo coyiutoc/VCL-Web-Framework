@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>VCL: Estimation Experiment</title>
+
+  <%- include('../header'); %>
+
+  <script type="text/javascript">
+
+      // Routing params from EJS:
+      var params = {"range": "<%= range %>",
+          "condition": "<%= condition %>",
+          "graph_type": "<%= graph_type %>",
+          "balancing": "<%= balancing %>",
+          "subject_id": "<%= subject_id %>",
+          "subject_initials": "<%= subject_initials %>"};
+
+  </script>
+
+  <script type="module" src="/scripts/experiments/estimation/estimation_timeline.js" ></script>
+
+</head>
+
+<body>
+</body>
+
+</html>
