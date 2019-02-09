@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <link rel="icon" href="./img/VCL_favicon.png">
     <title>VCL Web Framework</title>
 
-    <!-- Scripts: -->  
+    <!-- Scripts: -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
@@ -14,145 +14,144 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     <!-- Routing helper: -->
-    <script type="text/javascript" src="/scripts/helpers/routing_helper.js" ></script> 
+    <script type="text/javascript" src="/scripts/helpers/routing_helper.js" ></script>
 
-  </head>
+</head>
 
-  <body>
-    <div class = "box">
-      <img src="../img/VCL_lab_logo.png"></img>
+<body>
+<div class = "box">
+    <img src="../img/VCL_lab_logo.png"></img>
 
-      <h1>Web Framework Experiments</h1>
+    <h1>Web Framework Experiments</h1>
 
-      <span style="display: block; background-color: #d0d5db">
+    <span style="display: block; background-color: #d0d5db">
         <div id = "feedback"><p><h5>Select an experiment from one of the dropdowns.</h5></p></div>
       </span>
 
-      <div id = "form" class="form-row" style="margin: 20px">
+    <div id = "form" class="form-row" style="margin: 20px">
         <label for="subjectID_input">Subject ID:</label>
         <input type="text" class="form-control" id="subjectID_input" placeholder="---" style="text-align: center">
-      </div>
+    </div>
 
-      <div class="form-row" style="margin: 20px">
+    <div class="form-row" style="margin: 20px">
         <label for="subjectInitials_input">Subject Initials:</label>
         <input type="text" class="form-control" id="subjectInitials_input" placeholder="---" style="text-align: center">
-      </div>
-      <br>
+    </div>
+    <br>
 
-      <div class="btn-group">
+    <div class="btn-group">
 
         <button class="btn btn-info btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 15vw">
-          JND
+            JND
         </button>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenu1" style="">
-          
+
             <a href="#" onclick='set_condition("JND", "Scatter: Base");' class="dropdown-item" >
-              Scatter: Base
+                Scatter: Base
             </a>
             <a href="#" onclick='set_condition("JND", "Strip: Base");' class="dropdown-item" >
-              Strip: Base
+                Strip: Base
             </a>
             <a href="#" onclick='set_condition("JND", "Ring: Strip Ring Size");' class="dropdown-item" >
-              Ring: Strip Ring Size
+                Ring: Strip Ring Size
             </a>
             <a href="#" onclick='set_condition("JND", "Strip: Line Length Strip");' class="dropdown-item" >
-              Strip: Line Length Strip
+                Strip: Line Length Strip
             </a>
             <a href="#" onclick='set_condition("JND", "Scatter: Distractor Rainbow");' class="dropdown-item" >
-              Scatter: Distractor Rainbow
+                Scatter: Distractor Rainbow
             </a>
             <a href="#" onclick='set_condition("JND", "Scatter: Multi-Phase");' class="dropdown-item" >
-              Scatter: Multi-Phase
+                Scatter: Multi-Phase
             </a>
 
         </div>
 
-      </div>
+    </div>
 
-      <div class="btn-group">
+    <div class="btn-group">
 
         <button class="btn btn-info btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 15vw; margin-left: 20px; word-wrap: break-word;">
-          JND Radius
+            JND Radius
         </button>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenu2" style="">
-          
+
             <a href="#" onclick='set_condition("JND Radius", "Shape: Circle, Square");' class="dropdown-item" >
-              Shape: Circle, Square
+                Shape: Circle, Square
             </a>
             <a href="#" onclick='set_condition("JND Radius", "Shape: Circle, Triangle");' class="dropdown-item" >
-              Shape: Circle, Triangle
+                Shape: Circle, Triangle
             </a>
             <a href="#" onclick='set_condition("JND Radius", "Shape: Square, Triangle");' class="dropdown-item" >
-              Shape: Square, Triangle
+                Shape: Square, Triangle
             </a>
             <a href="#" onclick='set_condition("JND Radius", "Shape: Rotated Square, Rotated Triangle");' class="dropdown-item" >
-              Shape: Rotated Square, Rotated Triangle
+                Shape: Rotated Square, Rotated Triangle
             </a>
             <a href="#" onclick='set_condition("JND Radius", "Shape: Slice, Triangle");' class="dropdown-item" >
-              Shape: Slice, Triangle
+                Shape: Slice, Triangle
             </a>
             <a href="#" onclick='set_condition("JND Radius", "Shape: Slice-45 Degrees, Triangle");' class="dropdown-item" >
-             Shape: Slice-45 Degrees, Triangle
+                Shape: Slice-45 Degrees, Triangle
             </a>
             <a href="#" onclick='set_condition("JND Radius", "Shape: Slice-90 Degrees, Triangle");' class="dropdown-item" >
-             Shape: Slice-90 Degrees, Triangle
+                Shape: Slice-90 Degrees, Triangle
             </a>
 
         </div>
 
-      </div>
+    </div>
 
-      <div class="btn-group">
+    <div class="btn-group">
 
         <button class="btn btn-info btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="width: 15vw; margin-left: 20px">
-          Stevens
+            Stevens
         </button>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenu3" style="">
-          
+
             <a href="#" onclick='set_condition("Stevens", "Scatter: Base");' class="dropdown-item" >
-              Scatter: Base
+                Scatter: Base
             </a>
             <a href="#" onclick='set_condition("Stevens", "Strip: Base");' class="dropdown-item" >
-              Strip: Base
+                Strip: Base
             </a>
             <a href="#" onclick='set_condition("Stevens", "Strip: Line Length Strip");' class="dropdown-item" >
-              Strip: Line Length Strip
+                Strip: Line Length Strip
             </a>
             <a href="#" onclick='set_condition("Stevens", "Ring: Strip Ring Size");' class="dropdown-item" >
-              Ring: Strip Ring Size
+                Ring: Strip Ring Size
             </a>
 
         </div>
 
-      </div>
-
-      <br> 
-      <br>
-
-      <input id = "start" type="button" onclick="" class="btn btn-success" style="display: none; width: 31vw; " value = "S T A R T">
-      </div>
-
     </div>
-  </body>
+
+    <br>
+    <br>
+
+    <input id = "start" type="button" onclick="" class="btn btn-success" style="display: none; width: 31vw; " value = "S T A R T">
+</div>
+
+</body>
 
   <script = "text/javascript">
 
-    // Helper to set condition given drop down input
-    function set_condition(experiment, condition_name){
+// Helper to set condition given drop down input
+function set_condition(experiment, condition_name){
 
-      // Set feedback HTML
-      document.getElementById("feedback").innerHTML = " <h5>Experiment set to: " + 
-                                                        `<font color = 'BLUE'>` +
-                                                        experiment + "</font><br>" + 
-                                                        "Condition: " + 
-                                                        `<font color = 'BLUE'>` +
-                                                        condition_name + "</h5><p>";
- 
-      // Set URL upon start button click
-      document.getElementById("start").onclick = function () {
+    // Set feedback HTML
+    document.getElementById("feedback").innerHTML = " <h5>Experiment set to: " +
+        `<font color = 'BLUE'>` +
+        experiment + "</font><br>" +
+        "Condition: " +
+        `<font color = 'BLUE'>` +
+        condition_name + "</h5><p>";
+
+    // Set URL upon start button click
+    document.getElementById("start").onclick = function () {
 
         // Check if want the shortened version or not
         let subject_initials = document.getElementById("subjectInitials_input").value;
@@ -163,21 +162,21 @@
 
         if (!subject_initials && !subject_id) {
 
-          document.getElementById("feedback").innerHTML = "<h5><font color = '#b71d1d'>Set subject's ID and initials.</font></h5><p>";
+            document.getElementById("feedback").innerHTML = "<h5><font color = '#b71d1d'>Set subject's ID and initials.</font></h5><p>";
 
         } else {
 
-          let url = retrieve_route(experiment, condition_name, subject_id, subject_initials);
-          location.href = url;
+            let url = retrieve_route(experiment, condition_name, subject_id, subject_initials);
+            location.href = url;
 
         }
 
-      };
+    };
 
-      // Make button visible
-      document.getElementById("start").style = "display:inline-block; width: 31vw";
+    // Make button visible
+    document.getElementById("start").style = "display:inline-block; width: 31vw";
 
-    }
-  </script>
+}
+</script>
 
 </html>
