@@ -36,7 +36,7 @@ app.get('/experiment/:experiment/graph_type/:graph_type/range/:range/condition/:
         balancing: request.params.balancing,
         subject_id: request.params.subject_id,
         subject_initials: request.params.subject_initials
-	}
+	};
 
 	if (request.params.experiment === "jnd") {
     	response.render('jnd/jnd_experiment.html', keys);
