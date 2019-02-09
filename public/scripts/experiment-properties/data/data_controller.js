@@ -1,7 +1,7 @@
 import {JND_BASE, JND_CONDITIONS} from "/scripts/experiment-properties/data/constants/jnd_data.js";
 import {STEVENS_BASE, STEVENS_CONDITIONS} from "/scripts/experiment-properties/data/constants/stevens_data.js";
 import {JND_RADIUS_BASE} from "/scripts/experiment-properties/data/constants/jnd_radius_data.js";
-import {ESTIMATION_BASE, ESTIMATION_CONDITIONS} from "./constants/estimation_data";
+import {ESTIMATION_BASE, ESTIMATION_CONDITIONS} from "/scripts/experiment-properties/data/constants/estimation_data.js";
 
 export { get_data,
          get_data_subset };
@@ -13,8 +13,11 @@ const SUBCONDITION_REPEATS = {
     design : {},
     design_multi : {
         distractor_multi: 4
+    },
+    estimation: {
+      shape_estimation: 4
     }
-}
+};
 
 /**
  * Retrieves the data for the corresponding experiment object.
