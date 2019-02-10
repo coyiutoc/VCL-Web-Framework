@@ -148,7 +148,7 @@ export default class Estimation {
     /**
      * Generates a Estimation object for use in the JsPsych timeline.
      *
-     * @param  block_type {string}                             "test" or "practice"
+     * @param  block_type {string}     "test" or "practice"
      * @return trial {object}
      */
     generate_trial(block_type) {
@@ -157,8 +157,8 @@ export default class Estimation {
         }
 
         // Initialize a variable for this so it is usable inside on_start
-        let estimation_exp = this;
-        let address = location.protocol + "//" + location.hostname + ":" + location.port + "/estimation_trial";
+        var estimation_exp = this;
+        var address = location.protocol + "//" + location.hostname + ":" + location.port + "/estimation_trial";
 
         let trial = {
             type:'external-html-keyboard-response',
@@ -166,22 +166,13 @@ export default class Estimation {
             choices: ['m','z','q'],
             execute_script: true,
             response_ends_trial: true,
+            trial_duration:1000,
             data: {
                 trial_num: 0,
                 estimated_size: -1,
                 adjustments: [] // array of numbers representing the adjustments made to the shape
             },
             on_start: function(trial) {
-                // NOTE: on_start takes in trial var
-                // Reset the variables to use the experiment if we have just ended
-                // the practice trials
-                // !!!! TODO: There should be a more elegant way to do this...
-                //            JsPsych is likely operating async so difficult
-                //            to set boolean outside this object.
-                if (estimation_exp.practice_end === true){
-                    estimation_exp.set_variables_to_experiment();
-                    estimation_exp.practice_end = false;
-                }
 
                 // Set the constants to be used:
                 let index = estimation_exp.current_sub_condition_index;
@@ -204,8 +195,6 @@ export default class Estimation {
                 if (trial.data.run_type === "practice") {
                     estimation_exp.practice_trial_data[index].push(trial.data);
                 }
-
-                console.log("[LEFT] Correlation: " + trial.data.left_correlation);
             },
             on_finish: function(data){ // NOTE: on_finish takes in data var
                 console.log("RESPONSE: " + data.correct);
@@ -213,6 +202,7 @@ export default class Estimation {
         };
         return trial;
     }
+
     /**
      * Handles saving the relevant data on a given trial.
      *
@@ -366,47 +356,30 @@ export default class Estimation {
     // }
     plot_trial(sub_cond, trial_num) {
         let estimation_exp = this;
-        const address = location.protocol + "//" + location.hostname + ":" + location.port;
 
         let width = window.innerWidth * 0.8;
         let height = window.innerHeight * 0.3;
 
-        let graph = d3.select("#graph") // Insert into the div w/ id = "graph"
+        let chart = d3.select("#graph") // Insert into the div w/ id = "graph"
                     .append("svg")
                     .attr("width", width)
                     .attr("height", height)
                     .attr("style", "display: block");
 
-        let ref_img_path = address + '/img/sample_' + sub_cond.base_shape;
         let ref_x = 0;
         let ref_y = Math.random() * estimation_exp.MAX_Y_POS_JITTER * sub_cond.base_size;
-        let ref_obj = {
-            'xlink:href':ref_img_path,
-            x: ref_x,
-            y: ref_y,
-            width: sub_cond.base_size,
-            height: sub_cond.base_size
-        };
 
-        let mod_img_path = address + '/img/sample_' + sub_cond.mod_shape;
         let mod_x = 0;
         let mod_y = Math.random() * estimation_exp.MAX_Y_POS_JITTER * sub_cond.base_size;
         // the size of the modifiable shape start from min_size for trial 0 and 2, max_size for 1 and 3;
         let mod_size = (trial_num % 2 === 1)? sub_cond.max_size: sub_cond.min_size;
-        let mod_obj = {
-            'xlink:href':mod_img_path,
-            x: mod_x,
-            y: mod_y,
-            width: mod_size,
-            height: mod_size
-        };
 
         if (Math.floor(Math.random()) < 0.5) {
-            graph.append('svg').attr(mod_obj);
-            graph.append('svg').attr(ref_obj);
+            this.plot_shape(sub_cond.base_shape, chart, sub_cond.base_size, ref_y, ref_x);
+            this.plot_shape(sub_cond.mod_shape, chart, mod_size, mod_y, mod_x);
         } else {
-            graph.append('svg').attr(ref_obj);
-            graph.append('svg').attr(mod_obj);
+            this.plot_shape(sub_cond.mod_shape, chart, sub_cond.base_size, mod_y, mod_x);
+            this.plot_shape(sub_cond.base_shape, chart, mod_size, ref_y, ref_x);
         }
 
     }
@@ -420,4 +393,108 @@ export default class Estimation {
             });
         });
     }
+
+    plot_shape(shape, chart, radius, y_pos, x_pos) {
+        switch (shape) {
+            case "circle":
+                this.plot_circle(chart, radius, y_pos, x_pos);
+                break;
+            case "triangle":
+                this.plot_triangle(chart, radius, y_pos, x_pos);
+                break;
+            case "sqaure":
+                this.plot_square(chart, radius, y_pos, x_pos);
+                break;
+        }
+    }
+  /**
+   * D3 code for plotting a circle.
+   *
+   * @param  chart      {svg object}
+   * @param        radius     {number}
+   * @param        y_pos {number}     Largest radius of the given trial
+   * @param        x_pos      {number}     Difference between max and min radius of given trial
+   */
+  plot_circle(chart, radius, y_pos, x_pos) {
+
+    let translation = radius;
+
+    // If radius is the smaller one, need to adjust translation
+
+    // Move the origin to center of SVG
+    let g = chart.append("g")
+                 .attr("transform", "translate(" + translation + "," + translation + ")");
+
+    // Generate the pie
+    let pie = d3.pie();
+
+    // Generate the arcs
+    let arc = d3.arc()
+                .innerRadius(0)
+                .outerRadius(radius/2);
+
+    // Represents the % that each slice takes up - so this is a pie with 4 "parts".
+    let data = [25, 25, 25, 25];
+
+    // Generate groups
+    let arcs = g.selectAll("arc")
+                .data(pie(data))
+                .enter()
+                .append("g")
+                .attr("class", "arc");
+
+    // Draw arc paths
+    arcs.append("path")
+        .attr("fill", function(d, i) {
+          return this.trial_data.fill_color;
+        })
+        .attr("stroke", function(d, i) {
+          return this.trial_data.fill_color;
+        })
+        .attr("d", arc);
+  }
+
+  /**
+   * D3 code for plotting a square.
+   *
+   * @param  chart      {svg object}
+   *         radius     {double}
+   *         max_radius {double}     Largest radius of the given trial
+   *         diff       {double}     Difference between max and min radius of given trial
+   */
+  plot_square(chart, radius ,y_pos, x_pos) {
+
+    let rect = chart.append("rect")
+                   .attr("x", x_pos)
+                   .attr("y", y_pos)
+                   .attr("width", radius)
+                   .attr("height", radius)
+                   .attr("fill", this.trial_data.fill_color)
+                   .attr("transform", "translate(" + translation + "," + translation + ")");
+  }
+
+  /**
+   * D3 code for plotting a triangle.
+   *
+   * @param  chart      {svg object}
+   *         radius     {double}
+   *         max_radius {double}     Largest radius of the given trial
+   *         diff       {double}     Difference between max and min radius of given trial
+   */
+  plot_triangle(chart, radius, y_pos, x_pos) {
+
+    let translation = 0;
+    let estimation_exp = this;
+
+    let poly = [{"x":(0.5*radius + translation), "y":(0.5*radius + translation)},
+                {"x":(0.5*radius + translation), "y":(1.5*radius + translation)},
+                {"x":(1.5*radius + translation), "y":(1.5*radius + translation)}];
+
+    chart.selectAll("polygon")
+         .data([poly])
+         .enter().append("polygon")
+         .attr("points",function(d) {
+            return d.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
+         .attr("fill", estimation_exp.trial_data.fill_color);
+  }
 }
