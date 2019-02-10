@@ -40,13 +40,13 @@ switch(estimation_exp.graph_type){
             };
         }
         break;
-};
+}
 
 var ready = {
     type: 'html-keyboard-response',
     stimulus: "<div align = 'center'> <font size = 20><p>Ready? We will first do some practice trials. <p>" + "<br> <br> <p><b>Press any key to begin.</b></p></font></div>",
     data: {type: 'instruction'}
-}
+};
 
 var instruction_trials = {
     timeline: [instructions, ready]
@@ -64,11 +64,11 @@ var practice_estimation = estimation_exp.generate_trial("practice");
 
 var practice = {
     timeline: [practice_estimation],
-    loop_function: function(data){ // Return true if timeline should continue
-        // Return false if timeline should end
+    loop_function: function(data){
+        // Return true if timeline should continue false if timeline should end
 
         // For debugging, if you want to exit out of experiment, press q:
-        if (81 == data.values()[0].key_press){
+        if (jsPsych.pluginAPI.convertKeyCharacterToKeyCode('q') === data.values()[0].key_press){
             estimation_exp.practice_end = true;
             estimation_exp.round_end = false;
             console.log("!!!!!!!!!! Practice trials finished ");
@@ -80,17 +80,8 @@ var practice = {
 
         // If user has 4 inputs, end trial OR
         // If spacebar is pressed and we can end the round (there was at least 1 input)
-        if ((curr_num_adjustments === 4) || (32 == data.values()[0].key_press && estimation_exp.end_round("practice"))){
-
-            // !!!!!!!! TODO:
-            // This hack throws off the trial variables like input_count_array and trial_num.
-
-            // If there are still more rounds for this sub condition
-            // if (!estimation_exp.end_sub_condition()){
-            //   console.log("!!!!!!!! GO TO NEXT ROUND ");
-            //   round_end = true;
-            //   return true;
-            // }
+        if (jsPsych.pluginAPI.convertKeyCharacterToKeyCode('space') === data.values()[0].key_press
+                && estimation_exp.end_round("practice")){
 
             if (estimation_exp.current_sub_condition_index < (estimation_exp.sub_conditions_constants.length-1))
             {
@@ -105,7 +96,6 @@ var practice = {
                 console.log("!!!!!!!!!! Practice trials finished ");
                 estimation_exp.practice_end = true;
                 estimation_exp.round_end = false;
-
                 return false;
             }
         }
@@ -135,13 +125,13 @@ var stop = {
         // Reset background color to feedback
         document.body.style.backgroundColor = 'WHITE';
     }
-}
+};
 
 var ready_experiment = {
     type: 'html-keyboard-response',
     stimulus: "<div align = 'center'> <font size = 20><p>Ready?<p>" + "<br><br><p><b>Press any key to begin.</b></p></font></div>",
     data: {type: 'instruction'}
-}
+};
 
 var stop_trials = {
     timeline: [stop, ready_experiment]
@@ -157,16 +147,16 @@ var trial = estimation_exp.generate_trial("test");
 
 var experiment = {
     timeline: [trial],
-    loop_function: function(data){ // Return true if timeline should continue
+    loop_function: function(data) { // Return true if timeline should continue
         // Return false if timeline should end
 
         // For debugging, if you want to exit out of experiment, press q:
-        if (jsPsych.pluginAPI.convertKeyCharacterToKeyCode('q') == data.values()[0].key_press){
+        if (jsPsych.pluginAPI.convertKeyCharacterToKeyCode('q') === data.values()[0].key_press){
             return false;
         }
 
         // If spacebar is pressed and we can end the round (there was at least 1 input)
-        if (32 == data.values()[0].key_press && estimation_exp.end_round("test")){
+        if (32 === data.values()[0].key_press && estimation_exp.end_round("test")){
 
             // If there are still more rounds for this sub condition
             if (!estimation_exp.end_sub_condition()){
@@ -209,10 +199,8 @@ var experiment_end = {
     'Trial and summary data files will now automatically download locally.' +
     '</div>' ,
     on_start: function(){
-
         estimation_exp.export_trial_data();
         estimation_exp.export_summary_data();
-
         // Reset background color to feedback
         document.body.style.backgroundColor = 'WHITE';
     }
