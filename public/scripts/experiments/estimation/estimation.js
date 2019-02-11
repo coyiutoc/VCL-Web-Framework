@@ -46,11 +46,12 @@ export default class Estimation {
         this.SMALL_REF_RADIUS = 2;
         this.MID_REF_RADIUS = 4;
         this.LARGE_REF_RADIUS = 6;
-        this.TRIALS_PER_ROUND = 4;
+        this.TRIALS_PER_COND = 4;
         this.SQUARE = "public/img/sample_square.png";
         this.CIRCLE = "public/img/sample_circle.png";
         this.TRIANGLE = "public/img/sample_triangle.png";
         this.MAX_Y_POS_JITTER = 0.1; // y axis can be shifted away from default (0) by at most 0.1 * ImageHeight;
+        this.MAX_STEP_SIZE = 0.01; // how much can the size of shapes can be changed at one keypress
 
         // ========================================
         // EXPERIMENT VARIABLES
@@ -58,6 +59,7 @@ export default class Estimation {
         this.input_count_array= [0, 0, 0, 0];
         // input_count_array has length equals to trials_per_round, each index representing num inputs per round
         // for a given sub condition
+
         this.sub_conditions_constants; // array of sub-conditions
         this.current_sub_condition_index;
         this.round_end = true;
@@ -79,6 +81,7 @@ export default class Estimation {
         // CURRENT TRIAL DATA
         this.trial_data = {};
 
+        this.results = []; // trials are pushed to results at the end of trial;
         // ========================================
         // PREPARE EXPERIMENT
 
@@ -165,43 +168,55 @@ export default class Estimation {
         let trial = {
             type:'external-html-keyboard-response',
             url: address,
-            choices: ['m','z','q'],
+            choices: [32, 81],  // 32 = spacebar, 81 = q (exit button for debugging)
             execute_script: true,
             response_ends_trial: true,
-
             data: {
                 trial_num: 0,
-                estimated_size: -1,
-                adjustments: [] // array of numbers representing the adjustments made to the shape
+                estimated_radius: -1,
+                adjustments: [], // array of numbers representing the adjustments made to the shape
+                is_ref_left: false, // is the reference shape on the left
+                sub_condition_index: 0,
+                block_type: block_type
             },
             on_start: function(trial) {
-
                 // Set the constants to be used:
                 let index = estimation_exp.current_sub_condition_index;
-                let constants = estimation_exp.sub_conditions_constants[index];
-                // Retrieve data from last trial:
-                let last_estimation_trial = estimation_exp.get_last_trial(trial, block_type, index);
+                trial.data.sub_condition_index = index;
+                trial.data.trial_num = estimation_exp.current_trial_num;
 
-                // Handling saving the data:
-                estimation_exp.handle_data_saving(trial, block_type, constants, last_estimation_trial, index);
+                console.log(JSON.stringify(trial.data));
 
-                console.log("round refreshes: " + trial.data.round_refreshes);
-                console.log("trial/round num: " + trial.data.trial_num);
-                console.log("num adjustments: " + trial.data.adjustments.length);
-                console.log("input count per trial: " + estimation_exp.input_count_array);
-
-                estimation_exp.trial_data = trial.data;
-
+                estimation_exp.curr_trial_data = trial.data;
                 // Save trial data for practice so can calculate exclusion criteria
                 if (trial.data.run_type === "practice") {
                     estimation_exp.practice_trial_data[index].push(trial.data);
                 }
             },
-            on_finish: function(data){ // NOTE: on_finish takes in data var
-                console.log("RESPONSE: " + data.correct);
+            on_finish: function(data) { // NOTE: on_finish takes in data var
+                // save data here
+                let curr_trail_data = JSON.parse(JSON.stringify((data)));
+                estimation_exp.results.push(curr_trail_data);
+                estimation_exp.update_curr_trial_number(data);
+                estimation_exp.update_curr_cond_idx(data);
+                console.log("RESULTS: " + JSON.stringify(estimation_exp.results));
             }
         };
         return trial;
+    }
+
+    update_curr_trial_number(trial_data) {
+        if (trial_data.trial_num === this.TRIALS_PER_COND - 1) {
+            this.current_trial_num  = 0;
+        } else {
+            this.current_trial_num++;
+        }
+    }
+
+    update_curr_cond_idx(trial_data) {
+        if (trial_data.trial_num === this.TRIALS_PER_COND - 1) {
+            this.current_sub_condition_index++;
+        }
     }
 
     /**
@@ -330,11 +345,11 @@ export default class Estimation {
 
         // If there is no num_adjustment count, we shouldn't end round
         if (block_type === "test") {
-            return !(last_trial.num_adjustments === 0);
+            return !(last_trial.adjustments.length === 0);
         }
         // For practice, only end round when they have done 4 inputs
         else {
-            return (last_trial.num_adjustments >= 4);
+            return (last_trial.adjustments.length >= 4);
         }
     }
 
@@ -361,8 +376,8 @@ export default class Estimation {
             .attr("height", height)
             .attr("style", "display: block");
 
-        let left_x = window.innerWidth * 0.3;
-        let right_x = window.innerWidth * 0.7;
+        let left_x = window.innerWidth * 0.2;
+        let right_x = window.innerWidth * 0.8;
         let base_y = window.innerHeight * 0.5;
 
         let ref_x = 0;
@@ -374,33 +389,33 @@ export default class Estimation {
         let mod_size = (trial_num % 2 === 1)? sub_cond.max_size: sub_cond.min_size * 50;
 
         if (Math.floor(Math.random()) < 0.5) {
-            this.plot_shape(sub_cond.base_shape, chart, ref_size , base_y + ref_y, left_x + ref_x);
-            this.plot_shape(sub_cond.mod_shape, chart, mod_size, base_y + mod_y, right_x + mod_x);
+            this.plot_shape(sub_cond.base_shape, chart, ref_size , base_y + ref_y, left_x + ref_x, true);
+            this.plot_shape(sub_cond.mod_shape, chart, mod_size, base_y + mod_y, right_x + mod_x, false);
+            this.trial_data.is_ref_left = true;
         } else {
-            this.plot_shape(sub_cond.mod_shape, chart, ref_size, base_y + mod_y, left_x + mod_x);
-            this.plot_shape(sub_cond.base_shape, chart, mod_size, base_y + ref_y, right_x + ref_x);
+            this.plot_shape(sub_cond.mod_shape, chart, ref_size, base_y + mod_y, left_x + mod_x, false);
+            this.plot_shape(sub_cond.base_shape, chart, mod_size, base_y + ref_y, right_x + ref_x, true);
+            this.trial_data.is_ref_left = false;
         }
 
     }
 
-    plot_distribution() {
-        plot_trial(this.sub_conditions_constants[this.current_sub_condition_index], this.trial_data.trial_num);
-    }
 
     plot_trials(){
         this.plot_trial(this.sub_conditions_constants[this.current_sub_condition_index], this.trial_data.trial_num);
     }
 
-    plot_shape(shape, chart, radius, y_pos, x_pos) {
+
+    plot_shape(shape, chart, radius, y_pos, x_pos, is_ref) {
         switch (shape) {
             case "circle":
-                this.plot_circle(chart, radius, y_pos, x_pos);
+                this.plot_circle(chart, radius, y_pos, x_pos, is_ref);
                 break;
             case "triangle":
-                this.plot_triangle(chart, radius, y_pos, x_pos);
+                this.plot_triangle(chart, radius, y_pos, x_pos, is_ref);
                 break;
             case "rectangle":
-                this.plot_rectangle(chart, radius, y_pos, x_pos);
+                this.plot_rectangle(chart, radius, y_pos, x_pos, is_ref);
                 break;
         }
     }
@@ -412,12 +427,29 @@ export default class Estimation {
      * @param  y_pos      {number}
      * @param  x_pos      {number}
      */
-    plot_circle(chart, radius, y_pos, x_pos) {
+    plot_circle(chart, radius, y_pos, x_pos, is_ref) {
         chart.append("circle")
             .attr("cx", x_pos)
             .attr("cy", y_pos)
             .attr("r", radius)
+            .attr("id", "circle_shape")
+            .attr("is_ref", is_ref)
             .style("fill", "blue");
+        let exp = this;
+        if (is_ref === false) {
+            d3.select("body")
+                .on("keydown", function () {
+                    let event = d3.event;
+                    if (event.key === "m" || event.key === 'z') {
+                        let sign = event.key === "m" ? 1 : -1;
+                        let change = Math.random() * 10 * exp.MAX_STEP_SIZE;
+                        let new_radius = radius + sign * change;
+                        exp.curr_trial_data.adjustments.push(change * sign);
+                        d3.select("#circle_shape")
+                            .attr("r", new_radius);
+                    }
+                });
+        }
     }
 
     /**
@@ -428,13 +460,34 @@ export default class Estimation {
      *         max_radius {double}     Largest radius of the given trial
      *         diff       {double}     Difference between max and min radius of given trial
      */
-    plot_rectangle(chart, radius ,y_pos, x_pos) {
+    plot_rectangle(chart, radius ,y_pos, x_pos, is_ref) {
         var rect = chart.append("rect")
+            .attr("id", "rect_shape")
             .attr("x", x_pos)
             .attr("y", y_pos)
             .attr("width", radius)
             .attr("height", radius)
             .attr("fill", "blue");
+        let exp = this;
+        if (is_ref === false) {
+                d3.select("body")
+                    .on("keydown", function () {
+                        let event = d3.event;
+                        console.log("d3 event fired");
+                        console.log(d3.event);
+                        if (event.key === "m" || event.key === 'z') {
+                            let sign = event.key === "m" ? 1 : -1;
+                            let change = Math.random() * 1000 * exp.MAX_STEP_SIZE;
+                            let new_radius = radius + sign * change;
+                            radius = new_radius;
+                            exp.curr_trial_data.adjustments.push(change * sign);
+                            d3.select("#rect_shape")
+                                .attr("width", new_radius)
+                                .attr("height", new_radius);
+                        }
+                    });
+        }
+
     }
 
     /**
@@ -445,7 +498,7 @@ export default class Estimation {
      *         max_radius {double}     Largest radius of the given trial
      *         diff       {double}     Difference between max and min radius of given trial
      */
-    plot_triangle(chart, radius, y_pos, x_pos) {
+    plot_triangle(chart, radius, y_pos, x_pos, is_ref) {
 
         let translation = 0;
         let estimation_exp = this;
@@ -459,7 +512,7 @@ export default class Estimation {
             .enter().append("polygon")
             .attr("points",function(d) {
                 return d.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
-            .attr("fill", estimation_exp.trial_data.fill_color);
+            .attr("fill", estimation_exp.curr_trial_data.fill_color);
 
     }
     /**
