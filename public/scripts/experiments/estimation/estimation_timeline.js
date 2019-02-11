@@ -96,9 +96,8 @@ var practice = {
 */
 var practice = {
     timeline: [practice_estimation],
-    loop_function: function(data){
+    loop_function: function(data) {
         // Return true if timeline should continue false if timeline should end
-
         // For debugging, if you want to exit out of experiment, press q:
         if (jsPsych.pluginAPI.convertKeyCharacterToKeyCode('q') === data.values()[0].key_press){
             estimation_exp.practice_end = true;
