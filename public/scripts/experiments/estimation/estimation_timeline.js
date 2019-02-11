@@ -61,7 +61,39 @@ timeline.push(instruction_trials);
 // PRACTICE TIMELINE
 
 var practice_estimation = estimation_exp.generate_trial("practice");
+/*
+var practice = {
+  timeline: [practice_estimation], // We use same feedback block as that used in practice
+  loop_function: function(data){ // Return true if timeline should continue
+                                 // Return false if timeline should end
 
+    // Flag is always true for each trial since we display one trial for
+    // each condition on the practice
+    estimation_exp.first_trial_of_sub_condition = true;
+
+    // For debugging, if you want to exit out of experiment, press q:
+    if (jsPsych.pluginAPI.convertKeyCharacterToKeyCode('q') === data.values()[0].key_press){
+      // Turn flag on
+      estimation_exp.first_trial_of_sub_condition = true;
+      return false;
+    }
+
+    // If there are still more practice conditions, increment current index
+    if (estimation_exp.current_practice_condition_index < (estimation_exp.practice_conditions_constants.length-1)){
+      estimation_exp.current_practice_condition_index++;
+      console.log("!!!!!!!!!! Moved to new practice condition at index "
+                  + estimation_exp.current_practice_condition_index);
+      return true;
+    }
+    // Else end experiment
+    else{
+      // Turn flag on
+      estimation_exp.first_trial_of_sub_condition = true;
+      return false;
+    }
+  }
+};
+*/
 var practice = {
     timeline: [practice_estimation],
     loop_function: function(data){
