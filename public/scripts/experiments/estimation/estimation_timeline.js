@@ -180,7 +180,6 @@ var experiment = {
     timeline: [trial],
     loop_function: function(data) { // Return true if timeline should continue
         // Return false if timeline should end
-
         // For debugging, if you want to exit out of experiment, press q:
         if (jsPsych.pluginAPI.convertKeyCharacterToKeyCode('q') === data.values()[0].key_press){
             return false;
@@ -188,7 +187,6 @@ var experiment = {
 
         // If spacebar is pressed and we can end the round (there was at least 1 input)
         if (32 === data.values()[0].key_press && estimation_exp.end_round("test")){
-
             // If there are still more rounds for this sub condition
             if (!estimation_exp.end_sub_condition()){
                 console.log("!!!!!!!! GO TO NEXT ROUND ");
@@ -197,7 +195,7 @@ var experiment = {
             }
             // If there are still more subconditions, increment current index
             else if (estimation_exp.current_sub_condition_index < (estimation_exp.sub_conditions_constants.length-1)){
-                estimation_exp.current_sub_condition_index++;
+                // estimation_exp.current_sub_condition_index++;
                 console.log("!!!!!!!!!! Moved to new sub condition at index "
                     + estimation_exp.current_sub_condition_index);
                 return true;
@@ -211,7 +209,6 @@ var experiment = {
         else {
             return true;
         }
-
     }
 };
 

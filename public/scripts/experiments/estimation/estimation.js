@@ -57,11 +57,15 @@ export default class Estimation {
         // EXPERIMENT VARIABLES
 
         this.input_count_array= [0, 0, 0, 0];
+        this.current_trial_num = -1;
+        this.current_sub_condition_index = -1;
         // input_count_array has length equals to trials_per_round, each index representing num inputs per round
         // for a given sub condition
 
-        this.sub_conditions_constants; // array of sub-conditions
-        this.current_sub_condition_index;
+        this.sub_conditions_constants; // array of sub-conditions currently running
+        this.raw_sub_conds; // subconditions in estimation_data.js
+
+        this.current_sub_condition_index; // pointing to positions in this.sub_conditions_constants
         this.round_end = true;
 
         // ========================================
@@ -181,12 +185,21 @@ export default class Estimation {
             },
             on_start: function(trial) {
                 // Set the constants to be used:
-                let index = estimation_exp.current_sub_condition_index;
-                trial.data.sub_condition_index = index;
-                trial.data.trial_num = estimation_exp.current_trial_num;
-
+                if (estimation_exp.current_sub_condition_index === -1) {
+                    // no subconditions has been run before
+                    trial.data.sub_condition_index = 0;
+                    estimation_exp.current_sub_condition_index = 0;
+                } else {
+                    trial.data.sub_condition_index = estimation_exp.current_sub_condition_index;
+                }
+                if (estimation_exp.current_trial_num === -1) {
+                    // no trials has been run before
+                    trial.data.trial_num = 0;
+                    estimation_exp.current_trial_num = 0;
+                } else {
+                    trial.data.trial_num = estimation_exp.current_trial_num;
+                }
                 console.log(JSON.stringify(trial.data));
-
                 estimation_exp.curr_trial_data = trial.data;
                 // Save trial data for practice so can calculate exclusion criteria
                 if (trial.data.run_type === "practice") {
@@ -199,10 +212,18 @@ export default class Estimation {
                 estimation_exp.results.push(curr_trail_data);
                 estimation_exp.update_curr_trial_number(data);
                 estimation_exp.update_curr_cond_idx(data);
+                estimation_exp.update_input_array(data);
                 console.log("RESULTS: " + JSON.stringify(estimation_exp.results));
             }
         };
         return trial;
+    }
+
+    update_input_array(data) {
+        if (data.trial_num < 0 || data.trial_num > 3) {
+            throw Error("trail number : " + data.trial_num + " is out of range");
+        }
+        this.input_count_array[data.trial_num] = data.adjustments.length;
     }
 
     update_curr_trial_number(trial_data) {
@@ -353,6 +374,23 @@ export default class Estimation {
         }
     }
 
+    /**
+     * Determines whether the current sub condition can end or not.
+     *
+     * @return {boolean}            True if sub condition should end.
+     */
+    end_sub_condition() {
+        let trials_per_round = this.TRIALS_PER_COND;
+        if (this.input_count_array[trials_per_round - 1] === 0){
+            return false;
+        }
+        else{
+            // Reset array
+            this.input_count_array = new Array(this.sub_conditions_constants[0].trials_per_round).fill(0);
+            return true;
+        }
+    }
+
     // {
     //  base_shape: "circle",
     //  mod_shape: "rectangle",
@@ -470,22 +508,22 @@ export default class Estimation {
             .attr("fill", "blue");
         let exp = this;
         if (is_ref === false) {
-                d3.select("body")
-                    .on("keydown", function () {
-                        let event = d3.event;
-                        console.log("d3 event fired");
-                        console.log(d3.event);
-                        if (event.key === "m" || event.key === 'z') {
-                            let sign = event.key === "m" ? 1 : -1;
-                            let change = Math.random() * 1000 * exp.MAX_STEP_SIZE;
-                            let new_radius = radius + sign * change;
-                            radius = new_radius;
-                            exp.curr_trial_data.adjustments.push(change * sign);
-                            d3.select("#rect_shape")
-                                .attr("width", new_radius)
-                                .attr("height", new_radius);
-                        }
-                    });
+            d3.select("body")
+                .on("keydown", function () {
+                    let event = d3.event;
+                    console.log("d3 event fired");
+                    console.log(d3.event);
+                    if (event.key === "m" || event.key === 'z') {
+                        let sign = event.key === "m" ? 1 : -1;
+                        let change = Math.random() * 1000 * exp.MAX_STEP_SIZE;
+                        let new_radius = radius + sign * change;
+                        radius = new_radius;
+                        exp.curr_trial_data.adjustments.push(change * sign);
+                        d3.select("#rect_shape")
+                            .attr("width", new_radius)
+                            .attr("height", new_radius);
+                    }
+                });
         }
 
     }
@@ -499,21 +537,52 @@ export default class Estimation {
      *         diff       {double}     Difference between max and min radius of given trial
      */
     plot_triangle(chart, radius, y_pos, x_pos, is_ref) {
-
         let translation = 0;
         let estimation_exp = this;
 
-        let poly = [{"x":(0.5*radius + translation), "y":(0.5*radius + translation)},
-            {"x":(0.5*radius + translation), "y":(1.5*radius + translation)},
-            {"x":(1.5*radius + translation), "y":(1.5*radius + translation)}];
+        let poly = [
+            {"x":(-0.5*radius + x_pos), "y":(-0.5*radius + y_pos)},
+            {"x":(-0.5*radius + x_pos), "y":(-0.5*radius + y_pos)},
+            {"x":(0.5*radius + x_pos), "y":(0.5*radius + y_pos)}];
 
         chart.selectAll("polygon")
             .data([poly])
             .enter().append("polygon")
             .attr("points",function(d) {
                 return d.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
-            .attr("fill", estimation_exp.curr_trial_data.fill_color);
+            .attr("fill", estimation_exp.curr_trial_data.fill_color)
+            .attr("id", "triangle_shape");
 
+        let exp = this;
+        if (is_ref === false) {
+            d3.select("body")
+                .on("keydown", function () {
+                    let event = d3.event;
+                    console.log("d3 event fired");
+                    console.log(d3.event);
+
+                    if (event.key === "m" || event.key === 'z') {
+                        let sign = event.key === "m" ? 1 : -1;
+                        let change = Math.random() * 1000 * exp.MAX_STEP_SIZE;
+                        let new_radius = radius + sign * change;
+                        radius = new_radius;
+                        poly = [
+                            {"x":(-0.5 * new_radius + x_pos), "y":(-0.5 * new_radius + y_pos)},
+                            {"x":(-0.5 * new_radius + x_pos), "y":(-0.5 * new_radius + y_pos)},
+                            {"x":(0.5 * new_radius + x_pos), "y":(0.5 * new_radius + y_pos)}];
+
+                        exp.curr_trial_data.adjustments.push(change * sign);
+                        chart.selectAll("polygon").remove();
+                        chart.selectAll("polygon")
+                            .data([poly])
+                            .enter().append("polygon")
+                            .attr("points",function(d) {
+                                return d.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
+                            .attr("fill", estimation_exp.curr_trial_data.fill_color)
+                            .attr("id", "triangle_shape");
+                    }
+                });
+        }
     }
     /**
      * Calculates exclusion criteria using standard deviation and variance.
