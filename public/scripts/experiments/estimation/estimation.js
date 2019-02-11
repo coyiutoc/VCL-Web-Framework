@@ -2,9 +2,9 @@ import {initialize_random_order} from "/scripts/experiment-properties/balancing/
 
 import {get_data, get_data_subset} from "/scripts/experiment-properties/data/data_controller.js";
 import {prepare_coordinates,
-        randomize_position,
-        randomize_radius_position,
-        force_greater_right_position} from "/scripts/helpers/experiment_helpers.js";
+    randomize_position,
+    randomize_radius_position,
+    force_greater_right_position} from "/scripts/helpers/experiment_helpers.js";
 
 export default class Estimation {
     /**
@@ -127,8 +127,10 @@ export default class Estimation {
             this.practice_trial_data[i] = [];
         }
         // set variables to practice
+        this.practice_conditions_constants = practice_dataset;
         this.sub_conditions_constants = practice_dataset;
         this.current_sub_condition_index = 0;
+        this.current_practice_condition_index=0;
         this.input_count_array = new Array(this.sub_conditions_constants[0].trials_per_round).fill(0);
     }
 
@@ -166,7 +168,7 @@ export default class Estimation {
             choices: ['m','z','q'],
             execute_script: true,
             response_ends_trial: true,
-            trial_duration:1000,
+
             data: {
                 trial_num: 0,
                 estimated_size: -1,
@@ -177,7 +179,6 @@ export default class Estimation {
                 // Set the constants to be used:
                 let index = estimation_exp.current_sub_condition_index;
                 let constants = estimation_exp.sub_conditions_constants[index];
-
                 // Retrieve data from last trial:
                 let last_estimation_trial = estimation_exp.get_last_trial(trial, block_type, index);
 
@@ -240,7 +241,7 @@ export default class Estimation {
         trial.data.sub_condition = index;
         trial.data.balanced_sub_condition = this.sub_condition_order[index];
 
-        trial.trial_duration = trial.data.regen_rate;
+        // trial.trial_duration = trial.data.regen_rate;
 
         // If trial is still part of same sub-condition, carry over constants from
         // the previous trial
@@ -260,12 +261,6 @@ export default class Estimation {
                 trial.data.trial_num = last_trial.trial_num + 1;
                 trial.data.num_adjustments = 0;
                 trial.data.round_refreshes = 1;
-
-                if (last_trial.start_ref === constants.high_ref) {
-                    trial.data.start_ref = constants.low_ref;
-                } else {
-                    trial.data.start_ref = constants.high_ref;
-                }
 
                 this.round_end = false; //Reset flag
             }
@@ -357,41 +352,43 @@ export default class Estimation {
     plot_trial(sub_cond, trial_num) {
         let estimation_exp = this;
 
-        let width = window.innerWidth * 0.8;
-        let height = window.innerHeight * 0.3;
+        let width = window.innerWidth;
+        let height = window.innerHeight;
 
         let chart = d3.select("#graph") // Insert into the div w/ id = "graph"
-                    .append("svg")
-                    .attr("width", width)
-                    .attr("height", height)
-                    .attr("style", "display: block");
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .attr("style", "display: block");
+
+        let left_x = window.innerWidth * 0.3;
+        let right_x = window.innerWidth * 0.7;
+        let base_y = window.innerHeight * 0.5;
 
         let ref_x = 0;
         let ref_y = Math.random() * estimation_exp.MAX_Y_POS_JITTER * sub_cond.base_size;
-
+        let ref_size = sub_cond.base_size * 50;
         let mod_x = 0;
-        let mod_y = Math.random() * estimation_exp.MAX_Y_POS_JITTER * sub_cond.base_size;
+        let mod_y = Math.random() * (window.innerHeight / 2) * estimation_exp.MAX_Y_POS_JITTER * sub_cond.base_size;
         // the size of the modifiable shape start from min_size for trial 0 and 2, max_size for 1 and 3;
-        let mod_size = (trial_num % 2 === 1)? sub_cond.max_size: sub_cond.min_size;
+        let mod_size = (trial_num % 2 === 1)? sub_cond.max_size: sub_cond.min_size * 50;
 
         if (Math.floor(Math.random()) < 0.5) {
-            this.plot_shape(sub_cond.base_shape, chart, sub_cond.base_size, ref_y, ref_x);
-            this.plot_shape(sub_cond.mod_shape, chart, mod_size, mod_y, mod_x);
+            this.plot_shape(sub_cond.base_shape, chart, ref_size , base_y + ref_y, left_x + ref_x);
+            this.plot_shape(sub_cond.mod_shape, chart, mod_size, base_y + mod_y, right_x + mod_x);
         } else {
-            this.plot_shape(sub_cond.mod_shape, chart, sub_cond.base_size, mod_y, mod_x);
-            this.plot_shape(sub_cond.base_shape, chart, mod_size, ref_y, ref_x);
+            this.plot_shape(sub_cond.mod_shape, chart, ref_size, base_y + mod_y, left_x + mod_x);
+            this.plot_shape(sub_cond.base_shape, chart, mod_size, base_y + ref_y, right_x + ref_x);
         }
 
     }
 
+    plot_distribution() {
+        plot_trial(this.sub_conditions_constants[this.current_sub_condition_index], this.trial_data.trial_num);
+    }
+
     plot_trials(){
-        let sub_conds = this.sub_conditions_constants;
-        sub_conds.forEach((sub_cond) => {
-            let trial_nums = [0, 1, 2, 3];
-            trial_nums.forEach((num) => {
-                this.plot_trial(sub_cond, num);
-            });
-        });
+        this.plot_trial(this.sub_conditions_constants[this.current_sub_condition_index], this.trial_data.trial_num);
     }
 
     plot_shape(shape, chart, radius, y_pos, x_pos) {
@@ -402,99 +399,123 @@ export default class Estimation {
             case "triangle":
                 this.plot_triangle(chart, radius, y_pos, x_pos);
                 break;
-            case "sqaure":
-                this.plot_square(chart, radius, y_pos, x_pos);
+            case "rectangle":
+                this.plot_rectangle(chart, radius, y_pos, x_pos);
                 break;
         }
     }
-  /**
-   * D3 code for plotting a circle.
-   *
-   * @param  chart      {svg object}
-   * @param        radius     {number}
-   * @param        y_pos {number}     Largest radius of the given trial
-   * @param        x_pos      {number}     Difference between max and min radius of given trial
-   */
-  plot_circle(chart, radius, y_pos, x_pos) {
+    /**
+     * D3 code for plotting a circle.
+     *
+     * @param  chart      {object}
+     * @param  radius     {number}
+     * @param  y_pos      {number}
+     * @param  x_pos      {number}
+     */
+    plot_circle(chart, radius, y_pos, x_pos) {
+        chart.append("circle")
+            .attr("cx", x_pos)
+            .attr("cy", y_pos)
+            .attr("r", radius)
+            .style("fill", "blue");
+    }
 
-    let translation = radius;
+    /**
+     * D3 code for plotting a square.
+     *
+     * @param  chart      {svg object}
+     *         radius     {double}
+     *         max_radius {double}     Largest radius of the given trial
+     *         diff       {double}     Difference between max and min radius of given trial
+     */
+    plot_rectangle(chart, radius ,y_pos, x_pos) {
+        var rect = chart.append("rect")
+            .attr("x", x_pos)
+            .attr("y", y_pos)
+            .attr("width", radius)
+            .attr("height", radius)
+            .attr("fill", "blue");
+    }
 
-    // If radius is the smaller one, need to adjust translation
+    /**
+     * D3 code for plotting a triangle.
+     *
+     * @param  chart      {svg object}
+     *         radius     {double}
+     *         max_radius {double}     Largest radius of the given trial
+     *         diff       {double}     Difference between max and min radius of given trial
+     */
+    plot_triangle(chart, radius, y_pos, x_pos) {
 
-    // Move the origin to center of SVG
-    let g = chart.append("g")
-                 .attr("transform", "translate(" + translation + "," + translation + ")");
+        let translation = 0;
+        let estimation_exp = this;
 
-    // Generate the pie
-    let pie = d3.pie();
+        let poly = [{"x":(0.5*radius + translation), "y":(0.5*radius + translation)},
+            {"x":(0.5*radius + translation), "y":(1.5*radius + translation)},
+            {"x":(1.5*radius + translation), "y":(1.5*radius + translation)}];
 
-    // Generate the arcs
-    let arc = d3.arc()
-                .innerRadius(0)
-                .outerRadius(radius/2);
+        chart.selectAll("polygon")
+            .data([poly])
+            .enter().append("polygon")
+            .attr("points",function(d) {
+                return d.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
+            .attr("fill", estimation_exp.trial_data.fill_color);
 
-    // Represents the % that each slice takes up - so this is a pie with 4 "parts".
-    let data = [25, 25, 25, 25];
+    }
+    /**
+     * Calculates exclusion criteria using standard deviation and variance.
+     * Subcondition is flagged if:
+     * - Standard deviation > 0.2
+     * - Anchoring > 0.6
+     *
+     * @ return     HTML of subcondition data to print onto screen
+     */
+    calculate_exclusion_criteria() {
+        /*
+        let string = "";
 
-    // Generate groups
-    let arcs = g.selectAll("arc")
-                .data(pie(data))
-                .enter()
-                .append("g")
-                .attr("class", "arc");
+        for (let i = 0; i < Object.keys(this.practice_trial_data).length; i++) {
 
-    // Draw arc paths
-    arcs.append("path")
-        .attr("fill", function(d, i) {
-          return this.trial_data.fill_color;
-        })
-        .attr("stroke", function(d, i) {
-          return this.trial_data.fill_color;
-        })
-        .attr("d", arc);
-  }
+          let subcondition_data = this.practice_trial_data[i];
+          let mids = this.get_estimated_mids(subcondition_data);
 
-  /**
-   * D3 code for plotting a square.
-   *
-   * @param  chart      {svg object}
-   *         radius     {double}
-   *         max_radius {double}     Largest radius of the given trial
-   *         diff       {double}     Difference between max and min radius of given trial
-   */
-  plot_square(chart, radius ,y_pos, x_pos) {
+          let std_dev = this.get_standard_deviation(mids);
+          let anchoring_value = this.get_anchoring_value(mids);
 
-    let rect = chart.append("rect")
-                   .attr("x", x_pos)
-                   .attr("y", y_pos)
-                   .attr("width", radius)
-                   .attr("height", radius)
-                   .attr("fill", this.trial_data.fill_color)
-                   .attr("transform", "translate(" + translation + "," + translation + ")");
-  }
+          let rounded_mids = [];
+          for (let mid of mids) {
+            rounded_mids.push(mid.toFixed(3));
+          }
 
-  /**
-   * D3 code for plotting a triangle.
-   *
-   * @param  chart      {svg object}
-   *         radius     {double}
-   *         max_radius {double}     Largest radius of the given trial
-   *         diff       {double}     Difference between max and min radius of given trial
-   */
-  plot_triangle(chart, radius, y_pos, x_pos) {
+          let anchoring_color = "BLACK";
+          if (anchoring_value > 0.5) {
+            anchoring_color = "RED";
+          }
 
-    let translation = 0;
-    let estimation_exp = this;
+          let std_dev_color = "BLACK";
+          if (std_dev > 0.2) {
+            std_dev_color = "RED";
+          }
 
-    let poly = [{"x":(0.5*radius + translation), "y":(0.5*radius + translation)},
-                {"x":(0.5*radius + translation), "y":(1.5*radius + translation)},
-                {"x":(1.5*radius + translation), "y":(1.5*radius + translation)}];
+          string += `
+            <div align = "center" style = "text-align: left; float:left; width: 20vw">
+            <font size = 2><b> Subcondition: ${i+1} </b>
+            <br>
+            Midpoint values: ${rounded_mids}
+            <br>
+            <font color = ${std_dev_color}> Standard Deviation: ${std_dev} </font>
+            <br>
+            <font color = ${anchoring_color}> Anchoring Value: ${anchoring_value} </font>
+            <br>
+            <br>
+            </font>
+            </div>
+            `
+        }
 
-    chart.selectAll("polygon")
-         .data([poly])
-         .enter().append("polygon")
-         .attr("points",function(d) {
-            return d.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
-         .attr("fill", estimation_exp.trial_data.fill_color);
-  }
+        return string;
+        */
+        return "";
+    }
+
 }
