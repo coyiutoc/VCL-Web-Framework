@@ -15,7 +15,7 @@ const SUBCONDITION_REPEATS = {
         distractor_multi: 4
     },
     estimation: {
-      shape_estimation: 4
+      shape_estimation: 0
     }
 };
 
@@ -66,13 +66,7 @@ function get_data(experiment){
     }
   }
   else if (experiment_name === "Estimation") {
-    dataset = ESTIMATION_BASE[range];
-      if (condition !== "base") {
-        if (!ESTIMATION_CONDITIONS[condition]) {
-            throw new Error(condition + " not supported.");
-        }
-        dataset = create_condition_dataset(dataset, ESTIMATION_CONDITIONS[condition]);
-      }
+      dataset = ESTIMATION_BASE[range];
   }
   else {
     throw new Error(experiment + " not supported.");
