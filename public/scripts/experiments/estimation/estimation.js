@@ -42,6 +42,7 @@ export default class Estimation {
         this.MAX_Y_POS_JITTER = 0.1; // y axis can be shifted away from default (window / 2) by at most 0.1 * ImageHeight;
         this.MAX_STEP_SIZE = 0.01; // how much can the size of shapes can be changed at one keypress
 
+        this.MULTIPLIER = 20;
         // ========================================
         // EXPERIMENT VARIABLES
         this.input_count_array= [0, 0, 0, 0];
@@ -79,7 +80,6 @@ export default class Estimation {
         // Extract raw constants
         this.raw_sub_conds = get_data(this);
         console.log("raw sub conds");
-        console.log(JSON.stringify(this.raw_sub_conds));
         // Prepare experiment + practice data
         this.practice_conditions_constants = [];
         this.curr_conditions_constants = []; // array of sub-conditions currently running
@@ -113,8 +113,6 @@ export default class Estimation {
         }
         // Set experiment trials
         this.experiment_conditions_constants = ordered_dataset;
-        console.log("experiment_conditions_constants");
-        console.log(JSON.stringify(this.experiment_conditions_constants));
     }
 
     /**
@@ -132,8 +130,6 @@ export default class Estimation {
         // set variables to practice
         this.practice_conditions_constants = practice_dataset;
         this.curr_conditions_constants = practice_dataset;
-        console.log("practice_conditions_constants");
-        console.log(JSON.stringify(practice_dataset));
         this.curr_condition_index = 0;
         this.current_practice_condition_index=0;
         this.input_count_array = new Array(this.curr_conditions_constants[0].trials_per_round).fill(0);
@@ -189,12 +185,13 @@ export default class Estimation {
                 trial.data.round_num = estimation_exp.curr_round_num;
                 trial.data = Object.assign(estimation_exp.curr_conditions_constants[estimation_exp.curr_condition_index],
                     trial.data);
-                console.log(JSON.stringify(trial.data));
                 estimation_exp.curr_trial_data = trial.data;
                 // Save trial data for practice so can calculate exclusion criteria
                 if (trial.data.run_type === "practice") {
                     estimation_exp.practice_trial_data[index].push(trial.data);
                 }
+                console.log(JSON.stringify(trial.data));
+                console.log(JSON.stringify(trial));
             },
             on_finish: function(data) { // NOTE: on_finish takes in data var
                 // save data here
@@ -405,17 +402,20 @@ export default class Estimation {
             .attr("height", height)
             .attr("style", "display: block");
 
-        let left_x = window.innerWidth * 0.2;
-        let right_x = window.innerWidth * 0.8;
+        let left_x = window.innerWidth * 0.3;
+        let right_x = window.innerWidth * 0.7;
         let base_y = window.innerHeight * 0.5;
 
         let ref_x = 0;
-        let ref_y = Math.random() * estimation_exp.MAX_Y_POS_JITTER * sub_cond.base_size;
-        let ref_size = sub_cond.base_size * 50;
+        let ref_y = Math.random() * (window.innerHeight - sub_cond.base_size * 2 * estimation_exp.MULTIPLIER)
+            + (sub_cond.base_size + 1) * estimation_exp.MULTIPLIER;
+        let ref_size = sub_cond.base_size * estimation_exp.MULTIPLIER ;
         let mod_x = 0;
-        let mod_y = Math.random() * (window.innerHeight / 2) * estimation_exp.MAX_Y_POS_JITTER * sub_cond.base_size;
+        let mod_y = Math.random() * (window.innerHeight - sub_cond.max_size * 2 * estimation_exp.MULTIPLIER)
+            + (sub_cond.max_size + 1) * estimation_exp.MULTIPLIER;
         // the size of the modifiable shape start from min_size for trial 0 and 2, max_size for 1 and 3;
-        let mod_size = (round_num % 2 === 1)? sub_cond.max_size * 50 : sub_cond.min_size * 50;
+        let mod_size = (round_num % 2 === 1)?
+            sub_cond.max_size * estimation_exp.MULTIPLIER  : sub_cond.min_size * estimation_exp.MULTIPLIER ;
         this.curr_trial_data.is_ref_smaller = (round_num % 2 === 1);
 
         if (Math.floor(Math.random()) < 0.5) {
@@ -460,14 +460,14 @@ export default class Estimation {
      * @param  x_pos      {number}
      */
     plot_circle(chart, radius, y_pos, x_pos, is_ref) {
+        let exp = this;
         chart.append("circle")
             .attr("cx", x_pos)
             .attr("cy", y_pos)
             .attr("r", radius)
             .attr("id", "circle_shape")
             .attr("is_ref", is_ref)
-            .style("fill", "blue");
-        let exp = this;
+            .style("fill", exp.curr_trial_data.fill_color);
         if (is_ref === false) {
             d3.select("body")
                 .on("keydown", function () {
@@ -493,14 +493,14 @@ export default class Estimation {
      *         diff       {double}     Difference between max and min radius of given trial
      */
     plot_rectangle(chart, radius ,y_pos, x_pos, is_ref) {
+        let exp = this;
         var rect = chart.append("rect")
             .attr("id", "rect_shape")
             .attr("x", x_pos)
             .attr("y", y_pos)
             .attr("width", radius)
             .attr("height", radius)
-            .attr("fill", "blue");
-        let exp = this;
+            .attr("fill", exp.curr_trial_data.fill_color);
         if (is_ref === false) {
             d3.select("body")
                 .on("keydown", function () {
@@ -531,38 +531,32 @@ export default class Estimation {
      *         diff       {double}     Difference between max and min radius of given trial
      */
     plot_triangle(chart, radius, y_pos, x_pos, is_ref) {
-        let translation = 0;
-        let estimation_exp = this;
-
+        let exp = this;
         let poly = [
-            {"x":(-0.5*radius + x_pos), "y":(-0.5*radius + y_pos)},
-            {"x":(-0.5*radius + x_pos), "y":(-0.5*radius + y_pos)},
-            {"x":(0.5*radius + x_pos), "y":(0.5*radius + y_pos)}];
+            {"x":x_pos, "y":(-0.5 * radius + y_pos)},
+            {"x":(-0.5 * radius + x_pos), "y":(0.5 * radius + y_pos)},
+            {"x":(0.5 * radius + x_pos), "y":(0.5 * radius + y_pos)}];
 
         chart.selectAll("polygon")
             .data([poly])
             .enter().append("polygon")
             .attr("points",function(d) {
                 return d.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
-            .attr("fill", estimation_exp.curr_trial_data.fill_color)
+            .attr("fill", exp.curr_trial_data.fill_color)
             .attr("id", "triangle_shape");
 
-        let exp = this;
         if (is_ref === false) {
             d3.select("body")
                 .on("keydown", function () {
                     let event = d3.event;
-                    console.log("d3 event fired");
-                    console.log(d3.event);
-
                     if (event.key === "m" || event.key === 'z') {
                         let sign = event.key === "m" ? 1 : -1;
                         let change = Math.random() * 1000 * exp.MAX_STEP_SIZE;
                         let new_radius = radius + sign * change;
                         radius = new_radius;
                         poly = [
-                            {"x":(-0.5 * new_radius + x_pos), "y":(-0.5 * new_radius + y_pos)},
-                            {"x":(-0.5 * new_radius + x_pos), "y":(-0.5 * new_radius + y_pos)},
+                            {"x":(x_pos), "y":(-0.5 * new_radius + y_pos)},
+                            {"x":(-0.5 * new_radius + x_pos), "y":(0.5 * new_radius + y_pos)},
                             {"x":(0.5 * new_radius + x_pos), "y":(0.5 * new_radius + y_pos)}];
 
                         exp.curr_trial_data.adjustments.push(change * sign);
@@ -572,7 +566,7 @@ export default class Estimation {
                             .enter().append("polygon")
                             .attr("points",function(d) {
                                 return d.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
-                            .attr("fill", estimation_exp.curr_trial_data.fill_color)
+                            .attr("fill", exp.curr_trial_data.fill_color)
                             .attr("id", "triangle_shape");
                     }
                 });
