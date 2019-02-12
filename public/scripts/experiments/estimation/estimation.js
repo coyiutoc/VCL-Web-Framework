@@ -42,7 +42,8 @@ export default class Estimation {
         this.MAX_Y_POS_JITTER = 0.1; // y axis can be shifted away from default (window / 2) by at most 0.1 * ImageHeight;
         this.MAX_STEP_SIZE = 0.01; // how much can the size of shapes can be changed at one keypress
 
-        this.MULTIPLIER = 20;
+        // 1cm is 37.7952755906 pixels
+        this.PIXEL_TO_CM = 37.7952755906;
         // ========================================
         // EXPERIMENT VARIABLES
         this.input_count_array= [0, 0, 0, 0];
@@ -172,7 +173,7 @@ export default class Estimation {
             response_ends_trial: true,
             data: {
                 round_num: 0,
-                estimated_radius: -1,
+                estimated_size: -1,
                 adjustments: [], // array of numbers representing the adjustments made to the shape
                 is_ref_left: false, // is the reference shape on the left
                 sub_condition_index: 0,
@@ -407,15 +408,15 @@ export default class Estimation {
         let base_y = window.innerHeight * 0.5;
 
         let ref_x = 0;
-        let ref_y = Math.random() * (window.innerHeight - sub_cond.base_size * 2 * estimation_exp.MULTIPLIER)
-            + (sub_cond.base_size + 1) * estimation_exp.MULTIPLIER;
-        let ref_size = sub_cond.base_size * estimation_exp.MULTIPLIER ;
+        let ref_y = Math.random() * (window.innerHeight - sub_cond.base_size * 2 * estimation_exp.PIXEL_TO_CM)
+            + (sub_cond.base_size + 1) * estimation_exp.PIXEL_TO_CM;
+        let ref_size = sub_cond.base_size * estimation_exp.PIXEL_TO_CM ;
         let mod_x = 0;
-        let mod_y = Math.random() * (window.innerHeight - sub_cond.max_size * 2 * estimation_exp.MULTIPLIER)
-            + (sub_cond.max_size + 1) * estimation_exp.MULTIPLIER;
+        let mod_y = Math.random() * (window.innerHeight - sub_cond.max_size * 2 * estimation_exp.PIXEL_TO_CM)
+            + (sub_cond.max_size + 1) * estimation_exp.PIXEL_TO_CM;
         // the size of the modifiable shape start from min_size for trial 0 and 2, max_size for 1 and 3;
         let mod_size = (round_num % 2 === 1)?
-            sub_cond.max_size * estimation_exp.MULTIPLIER  : sub_cond.min_size * estimation_exp.MULTIPLIER ;
+            sub_cond.max_size * estimation_exp.PIXEL_TO_CM  : sub_cond.min_size * estimation_exp.PIXEL_TO_CM ;
         this.curr_trial_data.is_ref_smaller = (round_num % 2 === 1);
 
         if (Math.floor(Math.random()) < 0.5) {
@@ -455,16 +456,17 @@ export default class Estimation {
      * D3 code for plotting a circle.
      *
      * @param  chart      {object}
-     * @param  radius     {number}
+     * @param  diameter     {number}
      * @param  y_pos      {number}
      * @param  x_pos      {number}
      */
-    plot_circle(chart, radius, y_pos, x_pos, is_ref) {
+    plot_circle(chart, diameter, y_pos, x_pos, is_ref) {
         let exp = this;
+        let radius = diameter / 2;
         chart.append("circle")
             .attr("cx", x_pos)
             .attr("cy", y_pos)
-            .attr("r", radius)
+            .attr("r", diameter / 2)
             .attr("id", "circle_shape")
             .attr("is_ref", is_ref)
             .style("fill", exp.curr_trial_data.fill_color);
@@ -474,9 +476,12 @@ export default class Estimation {
                     let event = d3.event;
                     if (event.key === "m" || event.key === 'z') {
                         let sign = event.key === "m" ? 1 : -1;
-                        let change = Math.random() * 10 * exp.MAX_STEP_SIZE;
+                        let change = Math.random() * 10 * exp.MAX_STEP_SIZE / 2;
+                        // divided by 2 because we are changing radius (which is half of diameter)
+                        // for example when we do this for rectangles we will be chaning width and height
                         let new_radius = radius + sign * change;
                         exp.curr_trial_data.adjustments.push(change * sign);
+                        exp.curr_trial_data.estimated_size = new_radius;
                         d3.select("#circle_shape")
                             .attr("r", new_radius);
                     }
@@ -492,14 +497,14 @@ export default class Estimation {
      *         max_radius {double}     Largest radius of the given trial
      *         diff       {double}     Difference between max and min radius of given trial
      */
-    plot_rectangle(chart, radius ,y_pos, x_pos, is_ref) {
+    plot_rectangle(chart, width,y_pos, x_pos, is_ref) {
         let exp = this;
         var rect = chart.append("rect")
             .attr("id", "rect_shape")
             .attr("x", x_pos)
             .attr("y", y_pos)
-            .attr("width", radius)
-            .attr("height", radius)
+            .attr("width", width)
+            .attr("height", width)
             .attr("fill", exp.curr_trial_data.fill_color);
         if (is_ref === false) {
             d3.select("body")
@@ -510,9 +515,10 @@ export default class Estimation {
                     if (event.key === "m" || event.key === 'z') {
                         let sign = event.key === "m" ? 1 : -1;
                         let change = Math.random() * 1000 * exp.MAX_STEP_SIZE;
-                        let new_radius = radius + sign * change;
-                        radius = new_radius;
+                        let new_radius = width + sign * change;
+                        width = new_radius;
                         exp.curr_trial_data.adjustments.push(change * sign);
+                        exp.curr_trial_data.estimated_size = new_radius;
                         d3.select("#rect_shape")
                             .attr("width", new_radius)
                             .attr("height", new_radius);
@@ -560,6 +566,7 @@ export default class Estimation {
                             {"x":(0.5 * new_radius + x_pos), "y":(0.5 * new_radius + y_pos)}];
 
                         exp.curr_trial_data.adjustments.push(change * sign);
+                        exp.curr_trial_data.estimated_size = new_radius;
                         chart.selectAll("polygon").remove();
                         chart.selectAll("polygon")
                             .data([poly])
