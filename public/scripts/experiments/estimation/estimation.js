@@ -13,24 +13,20 @@ export default class Estimation {
      * @param  params          {object}    Parameters passed in from routing
      */
     constructor(params) {
+        // Validate fields of params
         if (params.condition !== 'shape_estimation') {
             throw  Error("unexpected condition name " + params.condition);
         }
         this.condition_name = params.condition;
-
         if (params.range !== "estimation") {
             throw  Error("unexpected range " + params.range);
         }
         this.range = params.range;
-
-        // ========================================
-        // PARAMETER CHECKING
         if (params.graph_type !== "shapes") {
             throw Error("graph type: " + params.graph_type + " is not supported.")}
         else {
             this.graph_type = params.graph_type;
         }
-
         if (params.balancing !== "random") {
             throw Error("balancing: "+ params.balancing + " is not supported.") }
         else {
@@ -41,44 +37,35 @@ export default class Estimation {
 
         // ========================================
         // EXPERIMENT CONSTANTS
-
         this.MAX_STEP_INTERVAL = 10;
-        this.SMALL_REF_RADIUS = 2;
-        this.MID_REF_RADIUS = 4;
-        this.LARGE_REF_RADIUS = 6;
-        this.TRIALS_PER_COND = 4;
-        this.SQUARE = "public/img/sample_square.png";
-        this.CIRCLE = "public/img/sample_circle.png";
-        this.TRIANGLE = "public/img/sample_triangle.png";
-        this.MAX_Y_POS_JITTER = 0.1; // y axis can be shifted away from default (0) by at most 0.1 * ImageHeight;
+        this.ROUNDS_PER_COND = 4;
+        this.MAX_Y_POS_JITTER = 0.1; // y axis can be shifted away from default (window / 2) by at most 0.1 * ImageHeight;
         this.MAX_STEP_SIZE = 0.01; // how much can the size of shapes can be changed at one keypress
 
         // ========================================
         // EXPERIMENT VARIABLES
-
         this.input_count_array= [0, 0, 0, 0];
-        this.current_trial_num = -1;
-        this.current_sub_condition_index = -1;
+        this.curr_round_num = 0;
+        this.curr_condition_index = 0; // pointing to positions in this.curr_conditions_constants
+
         // input_count_array has length equals to trials_per_round, each index representing num inputs per round
         // for a given sub condition
 
-        this.sub_conditions_constants; // array of sub-conditions currently running
+        this.curr_conditions_constants; // array of sub-conditions currently running
         this.raw_sub_conds; // subconditions in estimation_data.js
 
-        this.current_sub_condition_index; // pointing to positions in this.sub_conditions_constants
+        this.curr_condition_index; // pointing to positions in this.curr_conditions_constants
         this.round_end = true;
 
         // ========================================
         // PRACTICE EXPERIMENT VARIABLES
 
-        this.practice_conditions_constants;
         this.adjusted_midpoint_matrix = {};
         this.practice_trial_data = {};
         this.practice_end = false;
 
         // ========================================
         // TEST EXPERIMENT VARIABLES
-        this.experiment_conditions_constants;
         this.sub_condition_order;
 
         // ========================================
@@ -91,10 +78,17 @@ export default class Estimation {
 
         // Extract raw constants
         this.raw_sub_conds = get_data(this);
+        console.log("raw sub conds");
+        console.log(JSON.stringify(this.raw_sub_conds));
         // Prepare experiment + practice data
+        this.practice_conditions_constants = [];
+        this.curr_conditions_constants = []; // array of sub-conditions currently running
+
+        this.experiment_conditions_constants = [];
         this.prepare_experiment();
         this.prepare_practice();
     }
+
 
 
     /**
@@ -119,6 +113,8 @@ export default class Estimation {
         }
         // Set experiment trials
         this.experiment_conditions_constants = ordered_dataset;
+        console.log("experiment_conditions_constants");
+        console.log(JSON.stringify(this.experiment_conditions_constants));
     }
 
     /**
@@ -135,23 +131,26 @@ export default class Estimation {
         }
         // set variables to practice
         this.practice_conditions_constants = practice_dataset;
-        this.sub_conditions_constants = practice_dataset;
-        this.current_sub_condition_index = 0;
+        this.curr_conditions_constants = practice_dataset;
+        console.log("practice_conditions_constants");
+        console.log(JSON.stringify(practice_dataset));
+        this.curr_condition_index = 0;
         this.current_practice_condition_index=0;
-        this.input_count_array = new Array(this.sub_conditions_constants[0].trials_per_round).fill(0);
+        this.input_count_array = new Array(this.curr_conditions_constants[0].trials_per_round).fill(0);
     }
 
     /**
      * Resets all relevant variables to use that of the experiment.
-     * (input_count_array, sub_conditions_constants, and current_sub_condition_index
+     * (input_count_array, curr_conditions_constants, and curr_condition_index
      * are shared variables between the practice and test trials).
      *
      * This function is called once all the practice trials have run.
      */
     set_variables_to_experiment() {
-        this.sub_conditions_constants = this.experiment_conditions_constants;
-        this.current_sub_condition_index = 0;
-        this.input_count_array = new Array(this.sub_conditions_constants[0].trials_per_round).fill(0);
+        this.curr_conditions_constants = this.experiment_conditions_constants;
+        this.curr_condition_index = 0;
+        this.curr_round_num = 0;
+        this.input_count_array = new Array(this.curr_conditions_constants[0].trials_per_round).fill(0);
     }
 
     /**
@@ -176,7 +175,7 @@ export default class Estimation {
             execute_script: true,
             response_ends_trial: true,
             data: {
-                trial_num: 0,
+                round_num: 0,
                 estimated_radius: -1,
                 adjustments: [], // array of numbers representing the adjustments made to the shape
                 is_ref_left: false, // is the reference shape on the left
@@ -184,21 +183,12 @@ export default class Estimation {
                 block_type: block_type
             },
             on_start: function(trial) {
+                console.log("====================on_start=======================");
                 // Set the constants to be used:
-                if (estimation_exp.current_sub_condition_index === -1) {
-                    // no subconditions has been run before
-                    trial.data.sub_condition_index = 0;
-                    estimation_exp.current_sub_condition_index = 0;
-                } else {
-                    trial.data.sub_condition_index = estimation_exp.current_sub_condition_index;
-                }
-                if (estimation_exp.current_trial_num === -1) {
-                    // no trials has been run before
-                    trial.data.trial_num = 0;
-                    estimation_exp.current_trial_num = 0;
-                } else {
-                    trial.data.trial_num = estimation_exp.current_trial_num;
-                }
+                trial.data.sub_condition_index = estimation_exp.curr_condition_index;
+                trial.data.round_num = estimation_exp.curr_round_num;
+                trial.data = Object.assign(estimation_exp.curr_conditions_constants[estimation_exp.curr_condition_index],
+                    trial.data);
                 console.log(JSON.stringify(trial.data));
                 estimation_exp.curr_trial_data = trial.data;
                 // Save trial data for practice so can calculate exclusion criteria
@@ -208,9 +198,10 @@ export default class Estimation {
             },
             on_finish: function(data) { // NOTE: on_finish takes in data var
                 // save data here
+                console.log("====================on_finish=======================");
                 let curr_trail_data = JSON.parse(JSON.stringify((data)));
                 estimation_exp.results.push(curr_trail_data);
-                estimation_exp.update_curr_trial_number(data);
+                estimation_exp.update_curr_round_number(data);
                 estimation_exp.update_curr_cond_idx(data);
                 estimation_exp.update_input_array(data);
                 console.log("RESULTS: " + JSON.stringify(estimation_exp.results));
@@ -220,23 +211,23 @@ export default class Estimation {
     }
 
     update_input_array(data) {
-        if (data.trial_num < 0 || data.trial_num > 3) {
-            throw Error("trail number : " + data.trial_num + " is out of range");
+        if (data.round_num < 0 || data.round_num > 3) {
+            throw Error("trail number : " + data.round_num + " is out of range");
         }
-        this.input_count_array[data.trial_num] = data.adjustments.length;
+        this.input_count_array[data.round_num] = data.adjustments.length;
     }
 
-    update_curr_trial_number(trial_data) {
-        if (trial_data.trial_num === this.TRIALS_PER_COND - 1) {
-            this.current_trial_num  = 0;
+    update_curr_round_number(trial_data) {
+        if (trial_data.round_num === this.ROUNDS_PER_COND - 1) {
+            this.curr_round_num  = 0;
         } else {
-            this.current_trial_num++;
+            this.curr_round_num++;
         }
     }
 
     update_curr_cond_idx(trial_data) {
-        if (trial_data.trial_num === this.TRIALS_PER_COND - 1) {
-            this.current_sub_condition_index++;
+        if (trial_data.round_num === this.ROUNDS_PER_COND - 1) {
+            this.curr_condition_index++;
         }
     }
 
@@ -289,20 +280,20 @@ export default class Estimation {
             trial.data.high_ref_is_right = last_trial.high_ref_is_right;
 
             // If a round has just ended:
-            // - increment the trial_num
+            // - increment the round_num
             // - reset the refresh number (only applies for test trials)
             // - swap the start ref to be high/low depending on the previous round's start ref
             if (this.round_end === true && trial.data.run_type === "test"){
 
-                trial.data.trial_num = last_trial.trial_num + 1;
+                trial.data.round_num = last_trial.round_num + 1;
                 trial.data.num_adjustments = 0;
                 trial.data.round_refreshes = 1;
 
                 this.round_end = false; //Reset flag
             }
-            // Else trial_num, num_adjustments and start_ref is the same, but round_refresh ++
+            // Else round_num, num_adjustments and start_ref is the same, but round_refresh ++
             else{
-                trial.data.trial_num = last_trial.trial_num;
+                trial.data.round_num = last_trial.round_num;
                 trial.data.num_adjustments = last_trial.num_adjustments;
                 trial.data.start_ref = last_trial.start_ref;
                 trial.data.round_refreshes = last_trial.round_refreshes + 1;
@@ -310,7 +301,7 @@ export default class Estimation {
         }
         // Else this is the first refresh of a given trial
         else{
-            trial.data.trial_num = 0;
+            trial.data.round_num = 0;
             trial.data.num_adjustments = 0;
             trial.data.round_refreshes = 1;
         }
@@ -380,13 +371,13 @@ export default class Estimation {
      * @return {boolean}            True if sub condition should end.
      */
     end_sub_condition() {
-        let trials_per_round = this.TRIALS_PER_COND;
+        let trials_per_round = this.ROUNDS_PER_COND;
         if (this.input_count_array[trials_per_round - 1] === 0){
             return false;
         }
         else{
             // Reset array
-            this.input_count_array = new Array(this.sub_conditions_constants[0].trials_per_round).fill(0);
+            this.input_count_array = new Array(this.curr_conditions_constants[0].trials_per_round).fill(0);
             return true;
         }
     }
@@ -402,7 +393,7 @@ export default class Estimation {
     //  line_color: '#000000',
     //  fill_color: '#4a77dd'
     // }
-    plot_trial(sub_cond, trial_num) {
+    plot_trial(sub_cond, round_num) {
         let estimation_exp = this;
 
         let width = window.innerWidth;
@@ -424,23 +415,26 @@ export default class Estimation {
         let mod_x = 0;
         let mod_y = Math.random() * (window.innerHeight / 2) * estimation_exp.MAX_Y_POS_JITTER * sub_cond.base_size;
         // the size of the modifiable shape start from min_size for trial 0 and 2, max_size for 1 and 3;
-        let mod_size = (trial_num % 2 === 1)? sub_cond.max_size: sub_cond.min_size * 50;
+        let mod_size = (round_num % 2 === 1)? sub_cond.max_size * 50 : sub_cond.min_size * 50;
+        this.curr_trial_data.is_ref_smaller = (round_num % 2 === 1);
 
         if (Math.floor(Math.random()) < 0.5) {
             this.plot_shape(sub_cond.base_shape, chart, ref_size , base_y + ref_y, left_x + ref_x, true);
             this.plot_shape(sub_cond.mod_shape, chart, mod_size, base_y + mod_y, right_x + mod_x, false);
-            this.trial_data.is_ref_left = true;
+            this.curr_trial_data.is_ref_left = true;
         } else {
             this.plot_shape(sub_cond.mod_shape, chart, ref_size, base_y + mod_y, left_x + mod_x, false);
             this.plot_shape(sub_cond.base_shape, chart, mod_size, base_y + ref_y, right_x + ref_x, true);
-            this.trial_data.is_ref_left = false;
+            this.curr_trial_data.is_ref_left = false;
         }
 
     }
 
 
     plot_trials(){
-        this.plot_trial(this.sub_conditions_constants[this.current_sub_condition_index], this.trial_data.trial_num);
+        console.log("plot_trials with index = " + this.curr_condition_index +
+            "round number" + this.curr_round_num);
+        this.plot_trial(this.curr_conditions_constants[this.curr_condition_index], this.curr_round_num);
     }
 
 
@@ -512,7 +506,7 @@ export default class Estimation {
                 .on("keydown", function () {
                     let event = d3.event;
                     console.log("d3 event fired");
-                    console.log(d3.event);
+                    // console.log(d3.event);
                     if (event.key === "m" || event.key === 'z') {
                         let sign = event.key === "m" ? 1 : -1;
                         let change = Math.random() * 1000 * exp.MAX_STEP_SIZE;

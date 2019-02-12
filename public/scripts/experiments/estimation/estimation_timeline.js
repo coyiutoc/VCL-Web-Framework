@@ -61,82 +61,44 @@ timeline.push(instruction_trials);
 // PRACTICE TIMELINE
 
 var practice_estimation = estimation_exp.generate_trial("practice");
-/*
-var practice = {
-  timeline: [practice_estimation], // We use same feedback block as that used in practice
-  loop_function: function(data){ // Return true if timeline should continue
-                                 // Return false if timeline should end
-
-    // Flag is always true for each trial since we display one trial for
-    // each condition on the practice
-    estimation_exp.first_trial_of_sub_condition = true;
-
-    // For debugging, if you want to exit out of experiment, press q:
+var trial_loop_function = function (data) {
+    console.log("====================loop_function=======================");
     if (jsPsych.pluginAPI.convertKeyCharacterToKeyCode('q') === data.values()[0].key_press){
-      // Turn flag on
-      estimation_exp.first_trial_of_sub_condition = true;
-      return false;
+        estimation_exp.set_variables_to_experiment();
+        console.log("Practice trials finished with key = q, set variables to experiment");
+        return false;
     }
-
-    // If there are still more practice conditions, increment current index
-    if (estimation_exp.current_practice_condition_index < (estimation_exp.practice_conditions_constants.length-1)){
-      estimation_exp.current_practice_condition_index++;
-      console.log("!!!!!!!!!! Moved to new practice condition at index "
-                  + estimation_exp.current_practice_condition_index);
-      return true;
-    }
-    // Else end experiment
-    else{
-      // Turn flag on
-      estimation_exp.first_trial_of_sub_condition = true;
-      return false;
-    }
-  }
-};
-*/
-var practice = {
-    timeline: [practice_estimation],
-    loop_function: function(data) {
-        // Return true if timeline should continue false if timeline should end
-        // For debugging, if you want to exit out of experiment, press q:
-        if (jsPsych.pluginAPI.convertKeyCharacterToKeyCode('q') === data.values()[0].key_press){
-            estimation_exp.practice_end = true;
-            estimation_exp.round_end = false;
-            console.log("!!!!!!!!!! Practice trials finished ");
-            return false;
-        }
-
+    if (jsPsych.pluginAPI.convertKeyCharacterToKeyCode('space') === data.values()[0].key_press) {
         let last_trial = jsPsych.data.get().last(1).values()[0];
-        let curr_num_adjustments = last_trial.num_adjustments;
-
-        // If user has 4 inputs, end trial OR
-        // If spacebar is pressed and we can end the round (there was at least 1 input)
-        if (jsPsych.pluginAPI.convertKeyCharacterToKeyCode('space') === data.values()[0].key_press
-                && estimation_exp.end_round("practice")){
-
-            if (estimation_exp.current_sub_condition_index < (estimation_exp.sub_conditions_constants.length-1))
-            {
-                estimation_exp.current_sub_condition_index++;
-                estimation_exp.round_end = true;
-                console.log("!!!!!!!!!! Moved to new sub condition at index "
-                    + estimation_exp.current_sub_condition_index);
+        let num_adjustments = last_trial.adjustments.length;
+        if (num_adjustments === 0) {
+            window.alert("Please make adjustments before pressing space bar");
+            // repeat previous round
+            // if curr_round_num > 0, go back to previous round
+            if (estimation_exp.curr_round_num !== 0) {
+                estimation_exp.curr_round_num--;
+            }
+            // else go back to last round of previous condition
+            else if (estimation_exp.curr_round_num) {
+                estimation_exp.current_sub_condition_index--;
+                estimation_exp.curr_round_num = estimation_exp.ROUNDS_PER_COND - 1;
+            }
+            return true;
+        } else {
+            if (estimation_exp.current_sub_condition_index === estimation_exp.curr_conditions_constants.length) {
+                // all rounds of all sub_conditions has finished
+                console.log("Practice/experiment finished");
+                return false;
+            } else {
                 return true;
             }
-            // Else end experiment
-            else{
-                console.log("!!!!!!!!!! Practice trials finished ");
-                estimation_exp.practice_end = true;
-                estimation_exp.round_end = false;
-                return false;
-            }
-        }
-        // Else continue w/ current subcondition:
-        else{
-            return true;
         }
     }
 };
-
+var practice = {
+    timeline: [practice_estimation],
+    loop_function: trial_loop_function
+};
 timeline.push(practice);
 
 // ---------------------------------------------------------
@@ -175,40 +137,12 @@ timeline.push(stop_trials);
 // EXPERIMENT TRIAL BLOCKS
 
 var trial = estimation_exp.generate_trial("test");
-
 var experiment = {
     timeline: [trial],
-    loop_function: function(data) { // Return true if timeline should continue
-        // Return false if timeline should end
-        // For debugging, if you want to exit out of experiment, press q:
-        if (jsPsych.pluginAPI.convertKeyCharacterToKeyCode('q') === data.values()[0].key_press){
-            return false;
-        }
-
-        // If spacebar is pressed and we can end the round (there was at least 1 input)
-        if (32 === data.values()[0].key_press && estimation_exp.end_round("test")){
-            // If there are still more rounds for this sub condition
-            if (!estimation_exp.end_sub_condition()){
-                console.log("!!!!!!!! GO TO NEXT ROUND ");
-                estimation_exp.round_end = true;
-                return true;
-            }
-            // If there are still more subconditions, increment current index
-            else if (estimation_exp.current_sub_condition_index < (estimation_exp.sub_conditions_constants.length-1)){
-                // estimation_exp.current_sub_condition_index++;
-                console.log("!!!!!!!!!! Moved to new sub condition at index "
-                    + estimation_exp.current_sub_condition_index);
-                return true;
-            }
-            // Else end experiment
-            else{
-                return false;
-            }
-        }
-        // Else continue w/ current subcondition:
-        else {
-            return true;
-        }
+    loop_function: trial_loop_function,
+    on_start: function (data) {
+        console.log("Should only be excuted before all experiments");
+        estimation_exp.set_variables_to_experiment();
     }
 };
 
