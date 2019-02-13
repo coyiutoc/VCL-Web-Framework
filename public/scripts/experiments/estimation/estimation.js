@@ -82,7 +82,7 @@ export default class Estimation {
 
         // Extract raw constants
         this.raw_sub_conds = get_data(this);
-        console.log("raw sub conds");
+        // console.log("raw sub conds");
         // Prepare experiment + practice data
         this.practice_conditions_constants = [];
         this.curr_conditions_constants = []; // array of sub-conditions currently running
@@ -193,7 +193,7 @@ export default class Estimation {
                 if (trial.data.run_type === "practice") {
                     estimation_exp.practice_trial_data[index].push(trial.data);
                 }
-                console.log(JSON.stringify(trial.data));
+                // console.log(JSON.stringify(trial.data));
                 console.log(JSON.stringify(trial));
             },
             on_finish: function(data) { // NOTE: on_finish takes in data var
@@ -204,7 +204,7 @@ export default class Estimation {
                 estimation_exp.update_curr_round_number(data);
                 estimation_exp.update_curr_cond_idx(data);
                 estimation_exp.update_input_array(data);
-                console.log("RESULTS: " + JSON.stringify(estimation_exp.results));
+                // console.log("RESULTS: " + JSON.stringify(estimation_exp.results));
             }
         };
         return trial;
@@ -333,7 +333,7 @@ export default class Estimation {
             d3.select("body")
                 .on("keydown", function () {
                     let event = d3.event;
-                    console.log(event);
+                    // console.log(event);
                     if (event.key === "m" || event.key === "z") {
                         let sign = event.key === "m" ? 1 : -1;
                         let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE / 2;
