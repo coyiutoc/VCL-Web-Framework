@@ -40,16 +40,18 @@ export default class Estimation {
         this.MAX_STEP_INTERVAL = 10;
         this.ROUNDS_PER_COND = 4;
         this.MAX_Y_POS_JITTER = 0.1; // y axis can be shifted away from default (window / 2) by at most 0.1 * ImageHeight;
-        this.MAX_STEP_SIZE = 0.01; // how much can the size of shapes can be changed at one keypress
+        this.MAX_STEP_SIZE = 0.05; // how much can the size of shapes can be changed at one keypress
 
         // 1cm is 37.7952755906 pixels
         this.PIXEL_TO_CM = 37.7952755906;
+        // Margin from top and bottom of screen is set to at least 5cm
+        this.MARGIN = 5;
         // ========================================
         // EXPERIMENT VARIABLES
         this.input_count_array= [0, 0, 0, 0];
         this.curr_round_num = 0;
         this.curr_condition_index = 0; // pointing to positions in this.curr_conditions_constants
-
+        this.is_practice = true;
         // input_count_array has length equals to trials_per_round, each index representing num inputs per round
         // for a given sub condition
 
@@ -90,8 +92,6 @@ export default class Estimation {
         this.prepare_practice();
     }
 
-
-
     /**
      * Orders the input data according to balancing type and
      * initializes the Estimation object's variables.
@@ -124,7 +124,7 @@ export default class Estimation {
         let dataset = this.raw_sub_conds;
         let practice_dataset = [];
 
-        for (let i = 0; i < 4; i++){
+        for (let i = 0; i < 1; i++){
             practice_dataset[i] = dataset[i];
             this.practice_trial_data[i] = [];
         }
@@ -132,8 +132,9 @@ export default class Estimation {
         this.practice_conditions_constants = practice_dataset;
         this.curr_conditions_constants = practice_dataset;
         this.curr_condition_index = 0;
-        this.current_practice_condition_index=0;
+        this.current_practice_condition_index = 0;
         this.input_count_array = new Array(this.curr_conditions_constants[0].trials_per_round).fill(0);
+        this.is_practice = true;
     }
 
     /**
@@ -148,6 +149,7 @@ export default class Estimation {
         this.curr_condition_index = 0;
         this.curr_round_num = 0;
         this.input_count_array = new Array(this.curr_conditions_constants[0].trials_per_round).fill(0);
+        this.is_practice = false;
     }
 
     /**
@@ -229,156 +231,6 @@ export default class Estimation {
         }
     }
 
-    /**
-     * Handles saving the relevant data on a given trial.
-     *
-     * For reference, these are the helper variables created to assist in trial logic (i.e not present in excel)
-     * this.trial_variables =
-     *       {type: 'stevens',
-     *       run_type: '',
-     *       left_correlation: '',
-     *       right_correlation: '',
-     *       round_refreshes: 0,      // Number of times there is a refresh for a given round
-     *       high_ref_is_right: false
-     *       start_ref: ''
-     *       };
-     *
-     * These are variables created WITHIN the trial logic that were not present in excel (but need to be
-     * outputted to results).
-     * this.export_variables =
-     *       {trial_num: 0,                // Round index trial is currently on (aka trial_num from excel)
-     *        sub_condition: '',           // Chronological ordering of sub_condition [1, 2, 3 ... ]
-     *        balanced_sub_condition: '',  // Index of sub_condition according to balancing order
-     *        estimated_mid: '',
-     *        num_adjustments: 0,          // Number of inputs for a given round (aka num_adjustments from excel)
-     *        trials_per_round: '',
-     *       };
-     *
-     * @param trial {object}
-     * @param block_type {string}               "test" or "practice"
-     * @param constants {array}
-     * @param last_trial {object}
-     * @param index {int}
-     */
-    handle_data_saving(trial, block_type, constants, last_trial, index) {
-        trial.data = Object.assign({}, trial.data, constants);
-
-        trial.data.sub_condition = index;
-        trial.data.balanced_sub_condition = this.sub_condition_order[index];
-
-        // trial.trial_duration = trial.data.regen_rate;
-
-        // If trial is still part of same sub-condition, carry over constants from
-        // the previous trial
-        if (last_trial){
-
-            trial.data.step_size = last_trial.step_size;
-            trial.data.right_correlation = last_trial.right_correlation;
-            trial.data.left_correlation = last_trial.left_correlation;
-            trial.data.high_ref_is_right = last_trial.high_ref_is_right;
-
-            // If a round has just ended:
-            // - increment the round_num
-            // - reset the refresh number (only applies for test trials)
-            // - swap the start ref to be high/low depending on the previous round's start ref
-            if (this.round_end === true && trial.data.run_type === "test"){
-
-                trial.data.round_num = last_trial.round_num + 1;
-                trial.data.num_adjustments = 0;
-                trial.data.round_refreshes = 1;
-
-                this.round_end = false; //Reset flag
-            }
-            // Else round_num, num_adjustments and start_ref is the same, but round_refresh ++
-            else{
-                trial.data.round_num = last_trial.round_num;
-                trial.data.num_adjustments = last_trial.num_adjustments;
-                trial.data.start_ref = last_trial.start_ref;
-                trial.data.round_refreshes = last_trial.round_refreshes + 1;
-            }
-        }
-        // Else this is the first refresh of a given trial
-        else{
-            trial.data.round_num = 0;
-            trial.data.num_adjustments = 0;
-            trial.data.round_refreshes = 1;
-        }
-    }
-    /**
-     * Retrieves the last stevens trial depending on block_type for a
-     * given sub condition index.
-     * If this is the first trial of a given block_type, returns null.
-     *
-     * @param  trial {object}
-     * @param  block_type {string}          "test" or "practice"
-     * @param  index {int}
-     * @return last_stevens_trial {object}
-     */
-    get_last_trial(trial, block_type, index) {
-        let last_stevens_trial;
-        trial.data.type = "estimation";
-
-        // Set trial run_type depending on block type
-        // (we need to set trial's run_type so we can do the filter in the
-        // next if block)
-        if (block_type === "test"){
-            trial.data.run_type = "test";
-        }
-        else{
-            trial.data.run_type = "practice";
-        }
-
-        // Retrieve previous stevens trial if it exists
-        if (block_type === "practice" && jsPsych.data.get().filter({type: "estimation", run_type: "practice", sub_condition: index}).last(1).values()[0]){
-            last_stevens_trial = jsPsych.data.get().filter({type: "estimation", run_type: "practice", sub_condition: index}).last(1).values()[0];
-        }
-        else if (block_type === "test" && jsPsych.data.get().filter({type: "estimation", run_type: "test", sub_condition: index}).last(1).values()[0]){
-            last_stevens_trial = jsPsych.data.get().filter({type: "estimation", run_type: "test", sub_condition: index}).last(1).values()[0];
-        }
-        else{
-            last_stevens_trial = null;
-        }
-        return last_stevens_trial;
-    }
-
-    /**
-     * Determines whether the round can end or not. A round can end ONLY if:
-     * - test     : there has been at least 1 input from the user on the given round
-     * - practice : user has done 4 adjustments in that given round
-     *
-     * @param  block_type {string}  "test" or "practice"
-     *
-     * @return {boolean}            True if sub condition should end.
-     */
-    end_round(block_type) {
-        let last_trial = jsPsych.data.get().last(1).values()[0];
-
-        // If there is no num_adjustment count, we shouldn't end round
-        if (block_type === "test") {
-            return !(last_trial.adjustments.length === 0);
-        }
-        // For practice, only end round when they have done 4 inputs
-        else {
-            return (last_trial.adjustments.length >= 4);
-        }
-    }
-
-    /**
-     * Determines whether the current sub condition can end or not.
-     *
-     * @return {boolean}            True if sub condition should end.
-     */
-    end_sub_condition() {
-        let trials_per_round = this.ROUNDS_PER_COND;
-        if (this.input_count_array[trials_per_round - 1] === 0){
-            return false;
-        }
-        else{
-            // Reset array
-            this.input_count_array = new Array(this.curr_conditions_constants[0].trials_per_round).fill(0);
-            return true;
-        }
-    }
 
     // {
     //  base_shape: "circle",
@@ -388,8 +240,7 @@ export default class Estimation {
     //  max_size: 3.0,
     //  max_step_size: 0.01,
     //  start_low: true ,
-    //  line_color: '#000000',
-    //  fill_color: '#4a77dd'
+    //  fill_color: '#0000ff'
     // }
     plot_trial(sub_cond, round_num) {
         let estimation_exp = this;
@@ -407,30 +258,38 @@ export default class Estimation {
         let right_x = window.innerWidth * 0.7;
         let base_y = window.innerHeight * 0.5;
 
-        let ref_x = 0;
-        let ref_y = Math.random() * (window.innerHeight - sub_cond.base_size * 2 * estimation_exp.PIXEL_TO_CM)
-            + (sub_cond.base_size + 1) * estimation_exp.PIXEL_TO_CM;
         let ref_size = sub_cond.base_size * estimation_exp.PIXEL_TO_CM ;
-        let mod_x = 0;
-        let mod_y = Math.random() * (window.innerHeight - sub_cond.max_size * 2 * estimation_exp.PIXEL_TO_CM)
-            + (sub_cond.max_size + 1) * estimation_exp.PIXEL_TO_CM;
+        let ref_y = estimation_exp.calculate_y_position(ref_size);
+
         // the size of the modifiable shape start from min_size for trial 0 and 2, max_size for 1 and 3;
         let mod_size = (round_num % 2 === 1)?
-            sub_cond.max_size * estimation_exp.PIXEL_TO_CM  : sub_cond.min_size * estimation_exp.PIXEL_TO_CM ;
+            sub_cond.max_size * estimation_exp.PIXEL_TO_CM  : sub_cond.min_size * estimation_exp.PIXEL_TO_CM;
+        let mod_y = estimation_exp.calculate_y_position(mod_size);
+
         this.curr_trial_data.is_ref_smaller = (round_num % 2 === 1);
 
-        if (Math.floor(Math.random()) < 0.5) {
-            this.plot_shape(sub_cond.base_shape, chart, ref_size , base_y + ref_y, left_x + ref_x, true);
-            this.plot_shape(sub_cond.mod_shape, chart, mod_size, base_y + mod_y, right_x + mod_x, false);
+        if (Math.random() < 0.5) {
+            this.plot_shape(sub_cond.base_shape, chart, ref_size , ref_y, left_x, true);
+            this.plot_shape(sub_cond.mod_shape, chart, mod_size, mod_y, right_x, false);
             this.curr_trial_data.is_ref_left = true;
         } else {
-            this.plot_shape(sub_cond.mod_shape, chart, ref_size, base_y + mod_y, left_x + mod_x, false);
-            this.plot_shape(sub_cond.base_shape, chart, mod_size, base_y + ref_y, right_x + ref_x, true);
+            this.plot_shape(sub_cond.mod_shape, chart, mod_size, mod_y, left_x, false);
+            this.plot_shape(sub_cond.base_shape, chart, ref_size, ref_y, right_x, true);
             this.curr_trial_data.is_ref_left = false;
         }
 
     }
 
+    calculate_y_position(radius) {
+        let estimation_exp = this;
+        // y_margin is the distance from
+        let y_margin = estimation_exp.MARGIN * estimation_exp.PIXEL_TO_CM;
+        let range = [y_margin + radius / 2, window.innerHeight - y_margin - radius / 2];
+        console.log("radius: " + radius);
+        console.log(JSON.stringify(range));
+        let y_pos = Math.random() * (range[1] - range[0]) + range[0];
+        return y_pos;
+    }
 
     plot_trials(){
         console.log("plot_trials with index = " + this.curr_condition_index +
@@ -474,14 +333,17 @@ export default class Estimation {
             d3.select("body")
                 .on("keydown", function () {
                     let event = d3.event;
-                    if (event.key === "m" || event.key === 'z') {
+                    console.log(event);
+                    if (event.key === "m" || event.key === "z") {
                         let sign = event.key === "m" ? 1 : -1;
-                        let change = Math.random() * 10 * exp.MAX_STEP_SIZE / 2;
+                        let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE / 2;
                         // divided by 2 because we are changing radius (which is half of diameter)
                         // for example when we do this for rectangles we will be chaning width and height
                         let new_radius = radius + sign * change;
-                        exp.curr_trial_data.adjustments.push(change * sign);
-                        exp.curr_trial_data.estimated_size = new_radius;
+                        console.log(new_radius);
+                        exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
+                        exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM ;
+                        radius = new_radius;
                         d3.select("#circle_shape")
                             .attr("r", new_radius);
                     }
@@ -510,15 +372,13 @@ export default class Estimation {
             d3.select("body")
                 .on("keydown", function () {
                     let event = d3.event;
-                    console.log("d3 event fired");
-                    // console.log(d3.event);
-                    if (event.key === "m" || event.key === 'z') {
+                    if (event.key === "m" || event.key === "z") {
                         let sign = event.key === "m" ? 1 : -1;
-                        let change = Math.random() * 1000 * exp.MAX_STEP_SIZE;
+                        let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE;
                         let new_radius = width + sign * change;
                         width = new_radius;
-                        exp.curr_trial_data.adjustments.push(change * sign);
-                        exp.curr_trial_data.estimated_size = new_radius;
+                        exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
+                        exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM;
                         d3.select("#rect_shape")
                             .attr("width", new_radius)
                             .attr("height", new_radius);
@@ -555,9 +415,9 @@ export default class Estimation {
             d3.select("body")
                 .on("keydown", function () {
                     let event = d3.event;
-                    if (event.key === "m" || event.key === 'z') {
+                    if (event.key === "m" || event.key === "z") {
                         let sign = event.key === "m" ? 1 : -1;
-                        let change = Math.random() * 1000 * exp.MAX_STEP_SIZE;
+                        let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE;
                         let new_radius = radius + sign * change;
                         radius = new_radius;
                         poly = [
@@ -565,8 +425,8 @@ export default class Estimation {
                             {"x":(-0.5 * new_radius + x_pos), "y":(0.5 * new_radius + y_pos)},
                             {"x":(0.5 * new_radius + x_pos), "y":(0.5 * new_radius + y_pos)}];
 
-                        exp.curr_trial_data.adjustments.push(change * sign);
-                        exp.curr_trial_data.estimated_size = new_radius;
+                        exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
+                        exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM ;
                         chart.selectAll("polygon").remove();
                         chart.selectAll("polygon")
                             .data([poly])
@@ -579,60 +439,27 @@ export default class Estimation {
                 });
         }
     }
-    /**
-     * Calculates exclusion criteria using standard deviation and variance.
-     * Subcondition is flagged if:
-     * - Standard deviation > 0.2
-     * - Anchoring > 0.6
-     *
-     * @ return     HTML of subcondition data to print onto screen
-     */
-    calculate_exclusion_criteria() {
-        /*
-        let string = "";
 
-        for (let i = 0; i < Object.keys(this.practice_trial_data).length; i++) {
+    /*
+    * Saves experiment data as csv
+    * */
+    export_trial_data() {
+        let trial_data = jsPsych.data.get().filterCustom(function (row) {
+            return row.block_type === "practice" || row.block_type === "test";
+        })
+            // These are variables forced on by jsPsych
+            .ignore('stimulus')
+            .ignore('key_press')
+            .ignore('choices')
+            .ignore('trial_type')
+            .ignore('trial_index')
+            .ignore('time_elapsed')
+            .ignore('internal_node_id')
+            .ignore('rt');
 
-          let subcondition_data = this.practice_trial_data[i];
-          let mids = this.get_estimated_mids(subcondition_data);
+        let fileName = "S" + this.subject_id + "_" + this.condition_name + "_shape_estimation_trial_results.csv";
 
-          let std_dev = this.get_standard_deviation(mids);
-          let anchoring_value = this.get_anchoring_value(mids);
-
-          let rounded_mids = [];
-          for (let mid of mids) {
-            rounded_mids.push(mid.toFixed(3));
-          }
-
-          let anchoring_color = "BLACK";
-          if (anchoring_value > 0.5) {
-            anchoring_color = "RED";
-          }
-
-          let std_dev_color = "BLACK";
-          if (std_dev > 0.2) {
-            std_dev_color = "RED";
-          }
-
-          string += `
-            <div align = "center" style = "text-align: left; float:left; width: 20vw">
-            <font size = 2><b> Subcondition: ${i+1} </b>
-            <br>
-            Midpoint values: ${rounded_mids}
-            <br>
-            <font color = ${std_dev_color}> Standard Deviation: ${std_dev} </font>
-            <br>
-            <font color = ${anchoring_color}> Anchoring Value: ${anchoring_value} </font>
-            <br>
-            <br>
-            </font>
-            </div>
-            `
-        }
-
-        return string;
-        */
-        return "";
+        trial_data.localSave('csv', fileName);
     }
 
 }
