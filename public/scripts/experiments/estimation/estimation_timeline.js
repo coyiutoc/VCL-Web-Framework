@@ -29,8 +29,8 @@ switch(estimation_exp.graph_type){
             var instructions = {
                 type: "html-keyboard-response",
                 stimulus: "<div align = 'center'> <p>In this experiment, you will be using the <b>m</b>" +
-                " and <b>z</b> keys to adjust the size of the shape on the right <br> so that it's size is roughly" +
-                " the <u>same</u> as the shape on the left. <br><br>" +
+                " and <b>z</b> keys to adjust the size of the modifiable shape<br> so that it's size is roughly" +
+                " the <u>same</u> as the reference shape. <br><br>" +
                 `<div><img src='${address}/img/sample_circle.png'></img><img src='${address}/img/sample_triangle.png'></img></div>` +
                 " <b>m</b> increases the size. <br>" +
                 " <b>z</b> decreases the size. <br><br>" +
@@ -80,14 +80,20 @@ var trial_loop_function = function (data) {
             }
             // else go back to last round of previous condition
             else if (estimation_exp.curr_round_num) {
-                estimation_exp.current_sub_condition_index--;
+                estimation_exp.curr_condition_index--;
                 estimation_exp.curr_round_num = estimation_exp.ROUNDS_PER_COND - 1;
             }
             return true;
         } else {
-            if (estimation_exp.current_sub_condition_index === estimation_exp.curr_conditions_constants.length) {
+            if (estimation_exp.curr_condition_index === estimation_exp.curr_conditions_constants.length) {
                 // all rounds of all sub_conditions has finished
-                console.log("Practice/experiment finished");
+                if (estimation_exp.is_practice === false) {
+                    estimation_exp.export_trial_data();
+                    console.log("Experiment finished");
+                } else {
+                    console.log("Practice finished");
+                }
+                estimation_exp.set_variables_to_experiment();
                 return false;
             } else {
                 return true;
@@ -97,7 +103,9 @@ var trial_loop_function = function (data) {
 };
 var practice = {
     timeline: [practice_estimation],
-    loop_function: trial_loop_function
+    loop_function: trial_loop_function,
+    on_finish: function (data) {
+    }
 };
 timeline.push(practice);
 
@@ -107,10 +115,7 @@ timeline.push(practice);
 var stop = {
     type: 'html-keyboard-response',
     stimulus: function() {
-        let results = estimation_exp.calculate_exclusion_criteria();
-
-        return "<div>" + results + "</div>" +
-            "<div align = 'center'> <font size = 6><p>This concludes the practice trials.<p>" +
+        return "<div align = 'center'> <font size = 6><p>This concludes the practice trials.<p>" +
             "<p><b>Any questions?</b></p></font></div>";
     },
     data: {type: 'instruction'},
@@ -142,7 +147,6 @@ var experiment = {
     loop_function: trial_loop_function,
     on_start: function (data) {
         console.log("Should only be excuted before all experiments");
-        estimation_exp.set_variables_to_experiment();
     }
 };
 
@@ -162,7 +166,7 @@ var experiment_end = {
     '</div>' ,
     on_start: function(){
         estimation_exp.export_trial_data();
-        estimation_exp.export_summary_data();
+        // estimation_exp.export_summary_data();
         // Reset background color to feedback
         document.body.style.backgroundColor = 'WHITE';
     }
