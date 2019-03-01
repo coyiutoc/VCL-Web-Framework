@@ -65,7 +65,7 @@ export default class Estimation {
         // PRACTICE EXPERIMENT VARIABLES
 
         this.adjusted_midpoint_matrix = {};
-        this.practice_trial_data = {};
+        this.practice_trial_data = [];
         this.practice_end = false;
 
         // ========================================
@@ -191,7 +191,7 @@ export default class Estimation {
                 estimation_exp.curr_trial_data = trial.data;
                 // Save trial data for practice so can calculate exclusion criteria
                 if (trial.data.run_type === "practice") {
-                    estimation_exp.practice_trial_data[index].push(trial.data);
+                    estimation_exp.practice_trial_data[estimation_exp.curr_condition_index].push(trial.data);
                 }
                 // console.log(JSON.stringify(trial.data));
                 console.log(JSON.stringify(trial));
@@ -284,6 +284,7 @@ export default class Estimation {
         let estimation_exp = this;
         // y_margin is the distance from
         let y_margin = estimation_exp.MARGIN * estimation_exp.PIXEL_TO_CM;
+        // TODO: explain why it is calculated like this
         let range = [y_margin + radius / 2, window.innerHeight - y_margin - radius / 2];
         console.log("radius: " + radius);
         console.log(JSON.stringify(range));
@@ -314,10 +315,11 @@ export default class Estimation {
     /**
      * D3 code for plotting a circle.
      *
-     * @param  chart      {object}
-     * @param  diameter     {number}
-     * @param  y_pos      {number}
-     * @param  x_pos      {number}
+     * @param chart {object}
+     * @param diameter {number}
+     * @param y_pos {number}
+     * @param x_pos {number}
+     * @param is_ref {boolean}
      */
     plot_circle(chart, diameter, y_pos, x_pos, is_ref) {
         let exp = this;
