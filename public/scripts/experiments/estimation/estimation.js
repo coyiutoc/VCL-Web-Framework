@@ -210,6 +210,10 @@ export default class Estimation {
         return trial;
     }
 
+    /**
+     * Set the current trial's number of inputs in the input_count_array
+     * @param data {object} the trial.data object from jsPsych
+     * */
     update_input_array(data) {
         if (data.round_num < 0 || data.round_num > 3) {
             throw Error("trail number : " + data.round_num + " is out of range");
@@ -217,6 +221,10 @@ export default class Estimation {
         this.input_count_array[data.round_num] = data.adjustments.length;
     }
 
+    /**
+     * Update the current round number
+     * @param trial_data {object} the trial.data object from jsPsych
+     * */
     update_curr_round_number(trial_data) {
         if (trial_data.round_num === this.ROUNDS_PER_COND - 1) {
             this.curr_round_num  = 0;
@@ -225,6 +233,10 @@ export default class Estimation {
         }
     }
 
+    /**
+     * Update the index of the condition that is being referred to
+     * @param trial_data {object} the trail.data object from jsPsych
+     * */
     update_curr_cond_idx(trial_data) {
         if (trial_data.round_num === this.ROUNDS_PER_COND - 1) {
             this.curr_condition_index++;
@@ -232,16 +244,11 @@ export default class Estimation {
     }
 
 
-    // {
-    //  base_shape: "circle",
-    //  mod_shape: "rectangle",
-    //  base_size : 2,
-    //  min_size : 1.2,
-    //  max_size: 3.0,
-    //  max_step_size: 0.01,
-    //  start_low: true ,
-    //  fill_color: '#0000ff'
-    // }
+    /**
+     * plot a trial
+     * @param sub_cond {object} a sub_condition object, refer to estimation_data.js for details
+     * @param round_num {number} current round number
+     */
     plot_trial(sub_cond, round_num) {
         let estimation_exp = this;
 
@@ -280,6 +287,11 @@ export default class Estimation {
 
     }
 
+    /**
+     * calculate the y value of the position where the shape should be plotted
+     * @param radius the radius of the shape
+     * @returns {number}
+     */
     calculate_y_position(radius) {
         let estimation_exp = this;
         // y_margin is the distance from
@@ -298,7 +310,16 @@ export default class Estimation {
         this.plot_trial(this.curr_conditions_constants[this.curr_condition_index], this.curr_round_num);
     }
 
-
+    /**
+     * plot a shape
+     *
+     * @param shape {string}
+     * @param chart {object}
+     * @param radius {object}
+     * @param y_pos {number}
+     * @param x_pos {number}
+     * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape
+     */
     plot_shape(shape, chart, radius, y_pos, x_pos, is_ref) {
         switch (shape) {
             case "circle":
@@ -319,7 +340,7 @@ export default class Estimation {
      * @param diameter {number}
      * @param y_pos {number}
      * @param x_pos {number}
-     * @param is_ref {boolean}
+     * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape
      */
     plot_circle(chart, diameter, y_pos, x_pos, is_ref) {
         let exp = this;
@@ -354,12 +375,13 @@ export default class Estimation {
     }
 
     /**
-     * D3 code for plotting a square.
      *
-     * @param  chart      {svg object}
-     *         radius     {double}
-     *         max_radius {double}     Largest radius of the given trial
-     *         diff       {double}     Difference between max and min radius of given trial
+     * @param chart {object}
+     * @param width {number}
+     * @param y_pos {number}
+     * @param x_pos {number}
+     * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape,
+     *                         is_ref === true if the shape is a reference shape
      */
     plot_rectangle(chart, width,y_pos, x_pos, is_ref) {
         let exp = this;
@@ -390,13 +412,14 @@ export default class Estimation {
 
     }
 
-    /**
-     * D3 code for plotting a triangle.
+     /**
      *
-     * @param  chart      {svg object}
-     *         radius     {double}
-     *         max_radius {double}     Largest radius of the given trial
-     *         diff       {double}     Difference between max and min radius of given trial
+     * @param chart {object}
+     * @param radius {number}
+     * @param y_pos {number}
+     * @param x_pos {number}
+     * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape,
+     *                         is_ref === true if the shape is a reference shape
      */
     plot_triangle(chart, radius, y_pos, x_pos, is_ref) {
         let exp = this;
