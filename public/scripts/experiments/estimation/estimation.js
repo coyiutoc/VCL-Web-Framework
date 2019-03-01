@@ -376,6 +376,34 @@ export default class Estimation {
 
     /**
      *
+     * @param exp {object} an Experiment object
+     * @param radius {number}
+     * @param shape_id {string}
+     * @param shape_type {string}
+     */
+     static append_adjustments_listener(exp, radius, shape_id, shape_type) {
+        d3.select("body")
+            .on("keydown", function () {
+                let event = d3.event;
+                // console.log(event);
+                if (event.key === "m" || event.key === "z") {
+                    let sign = event.key === "m" ? 1 : -1;
+                    let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE / 2;
+                    // divided by 2 because we are changing radius (which is half of diameter)
+                    // for example when we do this for rectangles we will be chaning width and height
+                    let new_radius = radius + sign * change;
+                    console.log(new_radius);
+                    exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
+                    exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM ;
+                    radius = new_radius;
+                    d3.select(shape_id)
+                        .attr("r", new_radius);
+                }
+            });
+    }
+
+    /**
+     *
      * @param chart {object}
      * @param width {number}
      * @param y_pos {number}
