@@ -42,8 +42,15 @@ export default class Estimation {
         this.MAX_Y_POS_JITTER = 0.1; // y axis can be shifted away from default (window / 2) by at most 0.1 * ImageHeight;
         this.MAX_STEP_SIZE = 0.05; // how much can the size of shapes can be changed at one keypress
 
-        // 1cm is 37.7952755906 pixels
-        this.PIXEL_TO_CM = 37.7952755906;
+        // PIXELS_PER_CM is defined in estimation_experiment.html
+        if (PIXELS_PER_CM) {
+            this.PIXEL_TO_CM = PIXELS_PER_CM;
+        } else {
+            // 1cm is 37.7952755906 pixels
+            this.PIXEL_TO_CM = 37.7952755906;
+            throw Error("PIXELS_PER_CM is not defined");
+        }
+
         // Margin from top and bottom of screen is set to at least 5cm
         this.MARGIN = 5;
         // ========================================
@@ -381,7 +388,7 @@ export default class Estimation {
      * @param shape_id {string}
      * @param shape_type {string}
      */
-     static append_adjustments_listener(exp, radius, shape_id, shape_type) {
+    static append_adjustments_listener(exp, radius, shape_id, shape_type) {
         d3.select("body")
             .on("keydown", function () {
                 let event = d3.event;
@@ -440,7 +447,7 @@ export default class Estimation {
 
     }
 
-     /**
+    /**
      *
      * @param chart {object}
      * @param radius {number}
@@ -514,5 +521,4 @@ export default class Estimation {
 
         trial_data.localSave('csv', fileName);
     }
-
 }
