@@ -37,6 +37,8 @@ export default class Estimation {
 
         // ========================================
         // EXPERIMENT CONSTANTS
+        this.X_DISTANCE_BETWEEN_SHAPES = 9.5;
+        this.Y_DIVIATION_FROM_X_AXIS = 3;
         this.MAX_STEP_INTERVAL = 10;
         this.ROUNDS_PER_COND = 4;
         this.MAX_Y_POS_JITTER = 0.1; // y axis can be shifted away from default (window / 2) by at most 0.1 * ImageHeight;
@@ -262,23 +264,32 @@ export default class Estimation {
         let width = window.innerWidth;
         let height = window.innerHeight;
 
+        let mid_width = width / 2;
+        let mid_height = height / 2;
+
         let chart = d3.select("#graph") // Insert into the div w/ id = "graph"
             .append("svg")
             .attr("width", width)
             .attr("height", height)
             .attr("style", "display: block");
 
-        let left_x = window.innerWidth * 0.3;
-        let right_x = window.innerWidth * 0.7;
+        let left_x = mid_width - this.X_DISTANCE_BETWEEN_SHAPES / 2;
+        let right_x = mid_height + this.X_DISTANCE_BETWEEN_SHAPES / 2;
         let base_y = window.innerHeight * 0.5;
 
         let ref_size = sub_cond.base_size * estimation_exp.PIXEL_TO_CM ;
-        let ref_y = estimation_exp.calculate_y_position(ref_size);
+        // let ref_y = estimation_exp.calculate_y_position(ref_size);
+        // there was a change in the spec
+        // the reference shape will be displayed at (left_x, base_y) or (right_x, base_y); i.e. no jitter
+        let ref_y = base_y;
 
         // the size of the modifiable shape start from min_size for trial 0 and 2, max_size for 1 and 3;
         let mod_size = (round_num % 2 === 1)?
             sub_cond.max_size * estimation_exp.PIXEL_TO_CM  : sub_cond.min_size * estimation_exp.PIXEL_TO_CM;
-        let mod_y = estimation_exp.calculate_y_position(mod_size);
+        // let mod_y = estimation_exp.calculate_y_position(mod_size);
+        // there was a change in the spec, Tina wanted the modifiable shape to be centered +/- 3cm from the x axis.
+        let is_above = Math.random() > 0.5 ? 1 : -1;
+        let mod_y = is_above * this.Y_DIVIATION_FROM_X_AXIS + base_y;
 
         this.curr_trial_data.is_ref_smaller = (round_num % 2 === 1);
 
