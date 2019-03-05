@@ -220,8 +220,7 @@ export default class Estimation {
                 if (trial.data.run_type === "practice") {
                     estimation_exp.practice_trial_data[estimation_exp.curr_condition_index].push(trial.data);
                 }
-                // console.log(JSON.stringify(trial.data));
-                console.log(JSON.stringify(trial));
+                // console.log(JSON.stringify(trial));
             },
             on_finish: function(data) { // NOTE: on_finish takes in data var
                 // save data here
@@ -231,7 +230,7 @@ export default class Estimation {
                 estimation_exp.update_curr_round_number(data);
                 estimation_exp.update_curr_cond_idx(data);
                 estimation_exp.update_input_array(data);
-                console.log("RESULTS: " + JSON.stringify(estimation_exp.results));
+                // console.log("RESULTS: " + JSON.stringify(estimation_exp.results));
             }
         };
         group.timeline = [ready, trial];
