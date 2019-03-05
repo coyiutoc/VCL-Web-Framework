@@ -63,7 +63,6 @@ export default class Estimation {
         this.is_practice = true;
         // input_count_array has length equals to trials_per_round, each index representing num inputs per round
         // for a given sub condition
-
         this.curr_conditions_constants; // array of sub-conditions currently running
         this.raw_sub_conds; // subconditions in estimation_data.js
 
@@ -171,8 +170,7 @@ export default class Estimation {
         if ((block_type !== "test") && (block_type !== "practice")) {
             throw Error(block_type + " is not supported.")
         }
-
-        // Initialize a variable for this so it is usable inside on_start
+       // Initialize a variable for this so it is usable inside on_start
         var estimation_exp = this;
         var address = location.protocol + "//" + location.hostname + ":" + location.port + "/estimation_trial";
 
@@ -252,7 +250,6 @@ export default class Estimation {
         }
     }
 
-
     /**
      * plot a trial
      * @param sub_cond {object} a sub_condition object, refer to estimation_data.js for details
@@ -273,9 +270,9 @@ export default class Estimation {
             .attr("height", height)
             .attr("style", "display: block");
 
-        let left_x = mid_width - this.X_DISTANCE_BETWEEN_SHAPES / 2;
-        let right_x = mid_height + this.X_DISTANCE_BETWEEN_SHAPES / 2;
-        let base_y = window.innerHeight * 0.5;
+        let left_x = mid_width - this.X_DISTANCE_BETWEEN_SHAPES * this.PIXEL_TO_CM / 2;
+        let right_x = mid_width + this.X_DISTANCE_BETWEEN_SHAPES * this.PIXEL_TO_CM / 2;
+        let base_y = mid_height;
 
         let ref_size = sub_cond.base_size * estimation_exp.PIXEL_TO_CM ;
         // let ref_y = estimation_exp.calculate_y_position(ref_size);
@@ -289,7 +286,7 @@ export default class Estimation {
         // let mod_y = estimation_exp.calculate_y_position(mod_size);
         // there was a change in the spec, Tina wanted the modifiable shape to be centered +/- 3cm from the x axis.
         let is_above = Math.random() > 0.5 ? 1 : -1;
-        let mod_y = is_above * this.Y_DIVIATION_FROM_X_AXIS + base_y;
+        let mod_y = is_above * this.Y_DIVIATION_FROM_X_AXIS * this.PIXEL_TO_CM + base_y;
 
         this.curr_trial_data.is_ref_smaller = (round_num % 2 === 1);
 
@@ -302,7 +299,6 @@ export default class Estimation {
             this.plot_shape(sub_cond.base_shape, chart, ref_size, ref_y, right_x, true);
             this.curr_trial_data.is_ref_left = false;
         }
-
     }
 
     /**
@@ -349,8 +345,30 @@ export default class Estimation {
             case "rectangle":
                 this.plot_rectangle(chart, radius, y_pos, x_pos, is_ref);
                 break;
+            case "instruction":
+                this.plot_instruction(chart, y_pos, x_pos, trial);
         }
     }
+
+    /**
+     *
+     * @param chart {object} svg object
+     * @param y_pos {number} position on the y axis
+     * @param x_pos {number} position on the x axis
+     * @param trial {object}
+     */
+    plot_instruction(chart, y_pos, x_pos, trial) {
+        chart.append("text")
+            .attr("x", x_pos)
+            .attr("y", y_pos)
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "28px")
+            .attr("fill", "black")
+            .text(()=>{
+                return trial.is_ref_left? "The modifiable shape is on the right" :  "The modifiable shape is on the left";
+            });
+    }
+
     /**
      * D3 code for plotting a circle.
      *
@@ -469,10 +487,12 @@ export default class Estimation {
      */
     plot_triangle(chart, radius, y_pos, x_pos, is_ref) {
         let exp = this;
+        // for equilateral triangles, height = side * sqrt(3) / 2;
+        let height = radius * Math.sqrt(3)/2;
         let poly = [
-            {"x":x_pos, "y":(-0.5 * radius + y_pos)},
-            {"x":(-0.5 * radius + x_pos), "y":(0.5 * radius + y_pos)},
-            {"x":(0.5 * radius + x_pos), "y":(0.5 * radius + y_pos)}];
+            {"x":x_pos, "y":(-0.5 * height + y_pos)},
+            {"x":(-0.5 * radius + x_pos), "y":(0.5 * height + y_pos)},
+            {"x":(0.5 * radius + x_pos), "y":(0.5 * height + y_pos)}];
 
         chart.selectAll("polygon")
             .data([poly])
@@ -491,10 +511,11 @@ export default class Estimation {
                         let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE;
                         let new_radius = radius + sign * change;
                         radius = new_radius;
+                        height = radius * Math.sqrt(3) / 2;
                         poly = [
-                            {"x":(x_pos), "y":(-0.5 * new_radius + y_pos)},
-                            {"x":(-0.5 * new_radius + x_pos), "y":(0.5 * new_radius + y_pos)},
-                            {"x":(0.5 * new_radius + x_pos), "y":(0.5 * new_radius + y_pos)}];
+                            {"x":(x_pos), "y":(-0.5 * height + y_pos)},
+                            {"x":(-0.5 * new_radius + x_pos), "y":(0.5 * height + y_pos)},
+                            {"x":(0.5 * new_radius + x_pos), "y":(0.5 * height + y_pos)}];
 
                         exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
                         exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM ;
@@ -518,7 +539,7 @@ export default class Estimation {
         let trial_data = jsPsych.data.get().filterCustom(function (row) {
             return row.block_type === "practice" || row.block_type === "test";
         })
-            // These are variables forced on by jsPsych
+        // These are variables forced on by jsPsych
             .ignore('stimulus')
             .ignore('key_press')
             .ignore('choices')
