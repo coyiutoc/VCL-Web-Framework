@@ -122,6 +122,8 @@ export default class Estimation {
         }
         // Set experiment trials
         this.experiment_conditions_constants = ordered_dataset;
+        console.log("experiment_conditions_constants");
+        console.log(JSON.stringify(this.experiment_conditions_constants));
     }
 
     /**
@@ -153,6 +155,7 @@ export default class Estimation {
      * This function is called once all the practice trials have run.
      */
     set_variables_to_experiment() {
+        console.log("set_variables_to_experiment");
         this.curr_conditions_constants = this.experiment_conditions_constants;
         this.curr_condition_index = 0;
         this.curr_round_num = 0;
@@ -174,6 +177,23 @@ export default class Estimation {
         var estimation_exp = this;
         var address = location.protocol + "//" + location.hostname + ":" + location.port + "/estimation_trial";
 
+        let group = {};
+        let is_ref_left = false;
+        let ready = {
+            type: 'html-keyboard-response',
+            choices: [jsPsych.pluginAPI.convertKeyCharacterToKeyCode('space')],
+            stimulus: "",
+            on_start: function(trial) {
+                is_ref_left = Math.random() > 0.5;
+                trial.stimulus = is_ref_left? "<div align = 'center'><font size = 20>" +
+                    "<p>The Modifiable shape will be on the right" +
+                    "<p></font></div>" :
+                    "<div align = 'center'><font size = 20>" +
+                    "<p>The Modifiable shape will be on the left" +
+                    "<p></font></div>" ;
+            },
+            data: {type: 'instruction'}
+        };
         let trial = {
             type:'external-html-keyboard-response',
             url: address,
@@ -184,7 +204,6 @@ export default class Estimation {
                 round_num: 0,
                 estimated_size: -1,
                 adjustments: [], // array of numbers representing the adjustments made to the shape
-                is_ref_left: false, // is the reference shape on the left
                 sub_condition_index: 0,
                 block_type: block_type
             },
@@ -195,6 +214,7 @@ export default class Estimation {
                 trial.data.round_num = estimation_exp.curr_round_num;
                 trial.data = Object.assign(estimation_exp.curr_conditions_constants[estimation_exp.curr_condition_index],
                     trial.data);
+                trial.data.is_ref_left = is_ref_left; // is the reference shape on the left
                 estimation_exp.curr_trial_data = trial.data;
                 // Save trial data for practice so can calculate exclusion criteria
                 if (trial.data.run_type === "practice") {
@@ -211,10 +231,12 @@ export default class Estimation {
                 estimation_exp.update_curr_round_number(data);
                 estimation_exp.update_curr_cond_idx(data);
                 estimation_exp.update_input_array(data);
-                // console.log("RESULTS: " + JSON.stringify(estimation_exp.results));
+                console.log("RESULTS: " + JSON.stringify(estimation_exp.results));
             }
         };
-        return trial;
+        group.timeline = [ready, trial];
+        console.log(JSON.stringify(group));
+        return group;
     }
 
     /**
@@ -290,7 +312,7 @@ export default class Estimation {
 
         this.curr_trial_data.is_ref_smaller = (round_num % 2 === 1);
 
-        if (Math.random() < 0.5) {
+        if (this.curr_trial_data.is_ref_left) {
             this.plot_shape(sub_cond.base_shape, chart, ref_size , ref_y, left_x, true);
             this.plot_shape(sub_cond.mod_shape, chart, mod_size, mod_y, right_x, false);
             this.curr_trial_data.is_ref_left = true;

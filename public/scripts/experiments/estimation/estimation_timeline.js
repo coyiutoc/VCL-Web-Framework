@@ -64,12 +64,13 @@ var practice_estimation = estimation_exp.generate_trial("practice");
 var trial_loop_function = function (data) {
     console.log("====================loop_function=======================");
     let last_trial = jsPsych.data.get().last(1).values()[0];
+    console.log(JSON.stringify(last_trial));
     if (jsPsych.pluginAPI.convertKeyCharacterToKeyCode('q') === data.values()[0].key_press){
         estimation_exp.set_variables_to_experiment();
         console.log("Practice trials finished with key = q, set variables to experiment");
         return false;
     }
-    if (jsPsych.pluginAPI.convertKeyCharacterToKeyCode('space') === data.values()[0].key_press) {
+    else if (jsPsych.pluginAPI.convertKeyCharacterToKeyCode('space') === data.values()[0].key_press) {
         let num_adjustments = last_trial.adjustments.length;
         if (num_adjustments === 0) {
             window.alert("Please make adjustments before pressing space bar");
@@ -96,9 +97,12 @@ var trial_loop_function = function (data) {
                 estimation_exp.set_variables_to_experiment();
                 return false;
             } else {
+                console.log("Continue Experiment");
                 return true;
             }
         }
+    } else {
+        console.log("error estimation_timeline.js 105")
     }
 };
 var practice = {
