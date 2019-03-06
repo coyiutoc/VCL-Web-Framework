@@ -470,10 +470,12 @@ export default class Estimation {
      */
     plot_rectangle(chart, width,y_pos, x_pos, is_ref) {
         let exp = this;
-        var rect = chart.append("rect")
+        chart.append("rect")
             .attr("id", "rect_shape")
-            .attr("x", x_pos)
-            .attr("y", y_pos)
+            .attr("x", x_pos - width / 2)
+            .attr("y", y_pos - width / 2) // the x and y attributes for rectangle
+                                          // refers to the position of the upper left corner
+                                          // however x_pos and y_pos specifies the center of the shape
             .attr("width", width)
             .attr("height", width)
             .attr("fill", exp.curr_trial_data.fill_color);
