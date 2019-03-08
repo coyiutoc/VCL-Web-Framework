@@ -64,7 +64,7 @@ var practice_estimation = estimation_exp.generate_trial("practice");
 var trial_loop_function = function (data) {
     console.log("====================loop_function=======================");
     let last_trial = jsPsych.data.get().last(1).values()[0];
-    console.log(JSON.stringify(last_trial));
+    // console.log(JSON.stringify(last_trial));
     if (jsPsych.pluginAPI.convertKeyCharacterToKeyCode('q') === data.values()[0].key_press){
         estimation_exp.set_variables_to_experiment();
         console.log("Practice trials finished with key = q, set variables to experiment");

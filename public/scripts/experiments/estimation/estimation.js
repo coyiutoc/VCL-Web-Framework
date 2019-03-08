@@ -181,7 +181,7 @@ export default class Estimation {
         let is_ref_left = false;
         let ready = {
             type: 'html-keyboard-response',
-            choices: [jsPsych.pluginAPI.convertKeyCharacterToKeyCode('space')],
+            choices: [32],
             stimulus: "",
             on_start: function(trial) {
                 is_ref_left = Math.random() > 0.5;
@@ -299,15 +299,14 @@ export default class Estimation {
         // let ref_y = estimation_exp.calculate_y_position(ref_size);
         // there was a change in the spec
         // the reference shape will be displayed at (left_x, base_y) or (right_x, base_y); i.e. no jitter
-        let ref_y = base_y;
+        let ref_y = estimation_exp.calculate_y_position(ref_size);
 
         // the size of the modifiable shape start from min_size for trial 0 and 2, max_size for 1 and 3;
         let mod_size = (round_num % 2 === 1)?
             sub_cond.max_size * estimation_exp.PIXEL_TO_CM  : sub_cond.min_size * estimation_exp.PIXEL_TO_CM;
-        // let mod_y = estimation_exp.calculate_y_position(mod_size);
-        // there was a change in the spec, Tina wanted the modifiable shape to be centered +/- 3cm from the x axis.
-        let is_above = Math.random() > 0.5 ? 1 : -1;
-        let mod_y = is_above * this.Y_DIVIATION_FROM_X_AXIS * this.PIXEL_TO_CM + base_y;
+        let mod_y = estimation_exp.calculate_y_position(mod_size);
+        // let is_above = Math.random() > 0.5 ? 1 : -1;
+        // let mod_y = is_above * this.Y_DIVIATION_FROM_X_AXIS * this.PIXEL_TO_CM + base_y;
 
         this.curr_trial_data.is_ref_smaller = (round_num % 2 === 1);
 
@@ -339,6 +338,9 @@ export default class Estimation {
         return y_pos;
     }
 
+    /**
+     * function to display the experiment trials
+     */
     plot_trials(){
         console.log("plot_trials with index = " + this.curr_condition_index +
             "round number" + this.curr_round_num);
@@ -433,6 +435,14 @@ export default class Estimation {
 
     /**
      *
+     * @param size {number} dimension in cm
+     * @returns {string} "size.cm"
+     */
+    static cm_size_to_string(size) {
+        return size.toString() + "cm";
+    }
+    /**
+     *
      * @param exp {object} an Experiment object
      * @param radius {number}
      * @param shape_id {string}
@@ -468,7 +478,7 @@ export default class Estimation {
      * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape,
      *                         is_ref === true if the shape is a reference shape
      */
-    plot_rectangle(chart, width,y_pos, x_pos, is_ref) {
+    plot_rectangle(chart, width, y_pos, x_pos, is_ref) {
         let exp = this;
         chart.append("rect")
             .attr("id", "rect_shape")
