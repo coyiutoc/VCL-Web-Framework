@@ -65,8 +65,17 @@ function get_JND_route(condition_name) {
         case 'Scatter: Distractor Rainbow':
             return "/experiment/jnd/graph_type/scatter/range/design/condition/distractor_rainbow/balancing/latin_square";
 
-        case 'Scatter: Multi-Phase':
-            return "/experiment/jnd/graph_type/scatter/range/design_multi/condition/distractor_multi/balancing/latin_square";
+		case 'Scatter: Multi-Phase':
+			return "/experiment/jnd/graph_type/scatter/range/design_multi/condition/distractor_multi/balancing/latin_square";
+
+		case 'Scatter: Distractor Square Red Hue':
+			return "/experiment/jnd/graph_type/scatter/range/design/condition/distractor_square_red_hue/balancing/latin_square";	
+
+		case 'Scatter: Distractor Square Red Lum':
+			return "/experiment/jnd/graph_type/scatter/range/design/condition/distractor_square_red_lum/balancing/latin_square";				
+
+		case 'Scatter: Distractor Square Red Chrom':
+			return "/experiment/jnd/graph_type/scatter/range/design/condition/distractor_square_red_chrom/balancing/latin_square";		
 
         default:
             throw Error(condition_name + " condition is not supported for JND.");

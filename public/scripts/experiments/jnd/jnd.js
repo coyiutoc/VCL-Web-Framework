@@ -94,6 +94,7 @@ export default class JND {
     // Prepare experiment + practice data
     this.prepare_experiment();
     this.prepare_practice();   
+
   }
 
   /**
@@ -708,14 +709,14 @@ export default class JND {
           let dist_point = distractor[j];
 
           // Distractor point
-          this.plot_scatter_data(chart, xscale, yscale, [point], this.trial_data.point_size, this.trial_data.point_color);  
+          this.plot_scatter_data(chart, xscale, yscale, [point], this.trial_data.point_size, this.trial_data.target_color, this.trial_data.target_shape);  
 
           // Target point    
-          this.plot_scatter_data(chart, xscale, yscale, [dist_point], this.trial_data.dist_point_size, this.trial_data.dist_color);
+          this.plot_scatter_data(chart, xscale, yscale, [dist_point], this.trial_data.dist_point_size, this.trial_data.dist_color, this.trial_data.dist_shape);
 
         }
       } else {
-          this.plot_scatter_data(chart, xscale, yscale, datasets[i], this.trial_data.point_size, this.trial_data.point_color);        
+          this.plot_scatter_data(chart, xscale, yscale, datasets[i], this.trial_data.point_size, this.trial_data.point_color, "none");        
       }     
 
       // Set axis color
@@ -734,19 +735,40 @@ export default class JND {
   /**
    * D3 code for appending data into the graph. 
    */
-  plot_scatter_data(chart, xscale, yscale, data, point_size, point_color) {
+  plot_scatter_data(chart, xscale, yscale, data, point_size, point_color, point_type) {
 
-    chart.selectAll("circle_data")
-               .data(data)
-                .enter()
-                .append("circle") // Creating the circles for each entry in data set 
-                .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
-                  return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
-                })
-                .attr("cy", function (d) {
-                  return yscale(d[1]);
-                })
-                .attr("r", point_size).style("fill", point_color);
+    switch(point_type){
+
+      case "square":
+        chart.selectAll("square_data")
+                   .data(data)
+                    .enter()
+                    .append("rect") 
+                    .attr("x", function (d){
+                      return xscale(d[0]) + 60;
+                    })
+                    .attr("y", function (d){
+                      return yscale(d[1]);
+                    })
+                    .attr("width", point_size)
+                    .attr("height", point_size)
+                    .style('fill', point_color);
+        break;
+
+      default:
+        chart.selectAll("circle_data")
+                   .data(data)
+                    .enter()
+                    .append("circle") // Creating the circles for each entry in data set 
+                    .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
+                      return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
+                    })
+                    .attr("cy", function (d) {
+                      return yscale(d[1]);
+                    })
+                    .attr("r", point_size).style("fill", point_color);
+        break;
+    }
   }
 
   /**

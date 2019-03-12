@@ -136,6 +136,105 @@ const JND_CONDITIONS = {
     {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'YELLOW', target_color: 'BLACK', dist_point_size: 3}
     ],
 
+  distractor_square_red_hue :
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d83862', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'hue'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d83862', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'hue'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d83862', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'hue'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d54049', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'hue'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d54049', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'hue'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d54049', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'hue'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#c05819', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'hue'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#c05819', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'hue'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#c05819', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'hue'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#ae6500', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'hue'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#ae6500', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'hue'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#ae6500', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'hue'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'hue'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'hue'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'hue'}
+    ],
+
+  distractor_square_red_lum :
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9e210f', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9e210f', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9e210f', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#b63821', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#b63821', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#b63821', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#e45f43', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#e45f43', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#e45f43', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#e45f43', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#e45f43', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#e45f43', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'}
+    ],
+
+  distractor_square_red_chrom:
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#aa6453', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'chro'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#aa6453', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'chro'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#aa6453', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'chro'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#bc5942', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'chro'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#bc5942', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'chro'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#bc5942', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'chro'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#dc391f', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'chro'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#dc391f', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'chro'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#dc391f', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'chro'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#eb1607', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'chro'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#eb1607', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'chro'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#eb1607', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'chro'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'chro'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'chro'},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'chro'}
+    ], 
+
   distractor_multi: 
     [
     {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: '#cd4c32', target_color: 'BLACK', dist_point_size: 3},
