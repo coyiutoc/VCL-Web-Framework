@@ -12,6 +12,9 @@ Currently supported experiments:
 | Strip Ring Size                | Foundational    | Ring            | Latin Square    |
 | Line Length Strip              | Foundational    | Strip           | Latin Square    |
 | Distractor Rainbow             | Design          | Scatter         | Latin Square    |
+| Distractor Square Red Hue      | Design          | Scatter         | Latin Square    |
+| Distractor Square Red Lum      | Design          | Scatter         | Latin Square    |
+| Distractor Square Red Chro     | Design          | Scatter         | Latin Square    |
 | Multi-Phase [Task 1]           | Design-Multi    | Scatter         | Latin Square    |
 
 
