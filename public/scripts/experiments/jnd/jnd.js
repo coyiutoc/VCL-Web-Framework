@@ -23,7 +23,8 @@ export default class JND {
     let balancing_type = params["balancing"];
 
     this.condition_name = condition_name; 
-    this.condition_group = this.condition_name.split('_')[0];
+    this.condition_group = this.condition_name.split('_')[0]; // Mostly to handle "distractor" conditions.
+                                                              // TODO: Should have a better flag for it.
     this.subject_id = params["subject_id"];
     this.subject_initials = params["subject_initials"];
 
@@ -656,7 +657,7 @@ export default class JND {
     //    Basically, domain = input, range = ouput. 
     var xscale = d3.scaleLinear()
                    .domain([0, multiplier]) 
-                   .range([0, width]);
+                   .range([0, width-10]); // Make range slightly smaller to account for points getting cut off
 
     var yscale = d3.scaleLinear()
                    .domain([multiplier * -1, 0]) // !!! NOTE: this is the hack b/c we flipped the y-values 
@@ -733,11 +734,19 @@ export default class JND {
   }
 
   /**
-   * D3 code for appending data into the graph. 
+   * D3 code for appending data to the graph.
+   *
+   * @param {object}   chart
+   * @param {function} xscale
+   * @param {function} yscale
+   * @param {array}    data ([x_value, y_value])
+   * @param {integer}  point_size
+   * @param {string}   point_color
+   * @param {string}   point_shape
    */
-  plot_scatter_data(chart, xscale, yscale, data, point_size, point_color, point_type) {
+  plot_scatter_data(chart, xscale, yscale, data, point_size, point_color, point_shape) {
 
-    switch(point_type){
+    switch(point_shape){
 
       case "square":
         chart.selectAll("square_data")

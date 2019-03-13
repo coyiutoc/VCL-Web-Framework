@@ -143,6 +143,15 @@ function get_stevens_route(condition_name) {
         case 'Ring: Strip Ring Size':
             return "/experiment/stevens/graph_type/ring/range/foundational/condition/strip_ring_size/balancing/latin_square";
 
+        case 'Scatter: Distractor Square Red Hue':
+            return "/experiment/stevens/graph_type/scatter/range/design/condition/distractor_square_red_hue/balancing/latin_square";    
+
+        case 'Scatter: Distractor Square Red Lum':
+            return "/experiment/stevens/graph_type/scatter/range/design/condition/distractor_square_red_lum/balancing/latin_square";                
+
+        case 'Scatter: Distractor Square Red Chrom':
+            return "/experiment/stevens/graph_type/scatter/range/design/condition/distractor_square_red_chrom/balancing/latin_square";        
+  
         default:
             throw Error(condition_name + " condition is not supported for Stevens.");
     }
@@ -166,5 +175,4 @@ function get_estimation_route(condition_name) {
             return "/experiment/estimation/graph_type/shapes/range/estimation/condition/triangle/balancing/random";
         default:
             throw Error(condition_name + " condition is not supported for Estimation.");
-    }
 }

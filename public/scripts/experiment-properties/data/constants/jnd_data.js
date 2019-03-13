@@ -189,11 +189,11 @@ const JND_CONDITIONS = {
 
     {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#e45f43', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#e45f43', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#fe7657', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#e45f43', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#fe7657', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#e45f43', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#fe7657', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
 
     {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', dist_shape: 'square', target_color: '#cd4c32', target_shape: 'square', point_size: 8, dimension: 'lum'},
 
