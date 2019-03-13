@@ -37,6 +37,9 @@ Currently supported experiments:
 | Base                           | Foundational    | Scatter, Strip  | Latin Square    |
 | Strip Ring Size                | Foundational    | Ring            | Latin Square    |
 | Line Length Strip              | Foundational    | Strip           | Latin Square    |
+| Distractor Square Red Hue      | Design          | Scatter         | Latin Square    |
+| Distractor Square Red Lum      | Design          | Scatter         | Latin Square    |
+| Distractor Square Red Chro     | Design          | Scatter         | Latin Square    |
 
 ### Estimation
 
