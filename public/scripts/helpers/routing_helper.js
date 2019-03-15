@@ -77,9 +77,45 @@ function get_JND_route(condition_name) {
 		case 'Scatter: Distractor Square Red Chrom':
 			return "/experiment/jnd/graph_type/scatter/range/design/condition/distractor_square_red_chrom/balancing/latin_square";		
 
-        default:
-            throw Error(condition_name + " condition is not supported for JND.");
-    }
+		case 'Scatter: Distractor Square Yellow Hue':
+			return "/experiment/jnd/graph_type/scatter/range/design/condition/distractor_square_yellow_hue/balancing/latin_square";	
+
+		case 'Scatter: Distractor Square Yellow Lum':
+			return "/experiment/jnd/graph_type/scatter/range/design/condition/distractor_square_yellow_lum/balancing/latin_square";				
+
+		case 'Scatter: Distractor Square Yellow Chrom':
+			return "/experiment/jnd/graph_type/scatter/range/design/condition/distractor_square_yellow_chrom/balancing/latin_square";		
+
+		case 'Scatter: Distractor Square Blue Hue':
+			return "/experiment/jnd/graph_type/scatter/range/design/condition/distractor_square_blue_hue/balancing/latin_square";	
+
+		case 'Scatter: Distractor Square Blue Lum':
+			return "/experiment/jnd/graph_type/scatter/range/design/condition/distractor_square_blue_lum/balancing/latin_square";				
+
+		case 'Scatter: Distractor Square Blue Chrom':
+			return "/experiment/jnd/graph_type/scatter/range/design/condition/distractor_square_blue_chrom/balancing/latin_square";		
+
+		case 'Scatter: Distractor Square Green Hue':
+			return "/experiment/jnd/graph_type/scatter/range/design/condition/distractor_square_green_hue/balancing/latin_square";	
+
+		case 'Scatter: Distractor Square Green Lum':
+			return "/experiment/jnd/graph_type/scatter/range/design/condition/distractor_square_green_lum/balancing/latin_square";				
+
+		case 'Scatter: Distractor Square Green Chrom':
+			return "/experiment/jnd/graph_type/scatter/range/design/condition/distractor_square_green_chrom/balancing/latin_square";		
+
+		case 'Scatter: Distractor Diamond Square Red Hue':
+			return "/experiment/jnd/graph_type/scatter/range/design/condition/distractor_diamond_square_red_hue/balancing/latin_square";	
+
+		case 'Scatter: Distractor Diamond Square Red Lum':
+			return "/experiment/jnd/graph_type/scatter/range/design/condition/distractor_diamond_square_red_lum/balancing/latin_square";				
+
+		case 'Scatter: Distractor Diamond Square Red Chrom':
+			return "/experiment/jnd/graph_type/scatter/range/design/condition/distractor_diamond_square_red_chrom/balancing/latin_square";		
+
+		default:
+			throw Error(condition_name + " condition is not supported for JND.");	
+	}
 }
 
 /**
@@ -151,6 +187,42 @@ function get_stevens_route(condition_name) {
 
         case 'Scatter: Distractor Square Red Chrom':
             return "/experiment/stevens/graph_type/scatter/range/design/condition/distractor_square_red_chrom/balancing/latin_square";        
+
+        case 'Scatter: Distractor Square Yellow Hue':
+            return "/experiment/stevens/graph_type/scatter/range/design/condition/distractor_square_yellow_hue/balancing/latin_square";    
+
+        case 'Scatter: Distractor Square Yellow Lum':
+            return "/experiment/stevens/graph_type/scatter/range/design/condition/distractor_square_yellow_lum/balancing/latin_square";                
+
+        case 'Scatter: Distractor Square Yellow Chrom':
+            return "/experiment/stevens/graph_type/scatter/range/design/condition/distractor_square_yellow_chrom/balancing/latin_square";        
+
+        case 'Scatter: Distractor Square Blue Hue':
+            return "/experiment/stevens/graph_type/scatter/range/design/condition/distractor_square_blue_hue/balancing/latin_square";    
+
+        case 'Scatter: Distractor Square Blue Lum':
+            return "/experiment/stevens/graph_type/scatter/range/design/condition/distractor_square_blue_lum/balancing/latin_square";                
+
+        case 'Scatter: Distractor Square Blue Chrom':
+            return "/experiment/stevens/graph_type/scatter/range/design/condition/distractor_square_blue_chrom/balancing/latin_square";        
+
+        case 'Scatter: Distractor Square Green Hue':
+            return "/experiment/stevens/graph_type/scatter/range/design/condition/distractor_square_green_hue/balancing/latin_square";    
+
+        case 'Scatter: Distractor Square Green Lum':
+            return "/experiment/stevens/graph_type/scatter/range/design/condition/distractor_square_green_lum/balancing/latin_square";                
+
+        case 'Scatter: Distractor Square Green Chrom':
+            return "/experiment/stevens/graph_type/scatter/range/design/condition/distractor_square_green_chrom/balancing/latin_square";        
+
+        case 'Scatter: Distractor Diamond Square Red Hue':
+            return "/experiment/stevens/graph_type/scatter/range/design/condition/distractor_diamond_square_red_hue/balancing/latin_square";    
+
+        case 'Scatter: Distractor Diamond Square Red Lum':
+            return "/experiment/stevens/graph_type/scatter/range/design/condition/distractor_diamond_square_red_lum/balancing/latin_square";                
+
+        case 'Scatter: Distractor Diamond Square Red Chrom':
+            return "/experiment/stevens/graph_type/scatter/range/design/condition/distractor_diamond_square_red_chrom/balancing/latin_square";                  
   
         default:
             throw Error(condition_name + " condition is not supported for Stevens.");
@@ -175,4 +247,5 @@ function get_estimation_route(condition_name) {
             return "/experiment/estimation/graph_type/shapes/range/estimation/condition/triangle/balancing/random";
         default:
             throw Error(condition_name + " condition is not supported for Estimation.");
+	}
 }

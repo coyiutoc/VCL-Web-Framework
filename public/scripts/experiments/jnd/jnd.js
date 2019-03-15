@@ -713,7 +713,7 @@ export default class JND {
           this.plot_scatter_data(chart, xscale, yscale, [point], this.trial_data.point_size, this.trial_data.target_color, this.trial_data.target_shape);  
 
           // Target point    
-          this.plot_scatter_data(chart, xscale, yscale, [dist_point], this.trial_data.dist_point_size, this.trial_data.dist_color, this.trial_data.dist_shape);
+          this.plot_scatter_data(chart, xscale, yscale, [dist_point], this.trial_data.point_size, this.trial_data.dist_color, this.trial_data.dist_shape);
 
         }
       } else {
@@ -762,6 +762,29 @@ export default class JND {
                     .attr("width", point_size)
                     .attr("height", point_size)
                     .style('fill', point_color);
+        break;
+
+      case "diamond":
+        chart.selectAll("square_data")
+                   .data(data)
+                    .enter()
+                    .append("rect") 
+                    .attr("x", function (d){
+                      return xscale(d[0]) + 60;
+                    })
+                    .attr("y", function (d){
+                      return yscale(d[1]);
+                    })
+                    .attr("width", point_size)
+                    .attr("height", point_size)
+                    .style('fill', point_color)
+                    .attr('transform', function(d){
+                      // Adapted from: https://stackoverflow.com/questions/44817414/rotate-svg-in-place-using-d3-js
+                      var x1 = xscale(d[0]) + 60 + point_size/2; //the center x about which you want to rotate
+                      var y1 = yscale(d[1]) + point_size/2; //the center y about which you want to rotate
+
+                      return `rotate(45, ${x1}, ${y1})`; //rotate 180 degrees about x and y
+                  }); 
         break;
 
       default:
