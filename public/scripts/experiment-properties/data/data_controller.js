@@ -66,7 +66,7 @@ function get_data(experiment){
     }
   }
   else if (experiment_name === "Estimation") {
-      dataset = ESTIMATION_BASE[range];
+      dataset = ESTIMATION_CONDITIONS[condition];
   }
   else {
     throw new Error(experiment + " not supported.");
