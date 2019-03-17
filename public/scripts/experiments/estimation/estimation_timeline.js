@@ -25,7 +25,7 @@ timeline.push(welcome);
 
 switch(estimation_exp.graph_type){
     case "shapes":
-        if (estimation_exp.condition_name === "shape_estimation") {
+        if (/*estimation_exp.condition_name === "shape_estimation"*/true) {
             var instructions = {
                 type: "html-keyboard-response",
                 stimulus: "<div align = 'center'> <p>In this experiment, you will be using the <b>m</b>" +
@@ -40,6 +40,8 @@ switch(estimation_exp.graph_type){
             };
         }
         break;
+    default:
+        throw Error("unexpected condition name");
 }
 
 var ready = {
