@@ -362,8 +362,8 @@ export default class Estimation {
             case "triangle":
                 this.plot_triangle(chart, radius, y_pos, x_pos, is_ref);
                 break;
-            case "rectangle":
-                this.plot_rectangle(chart, radius, y_pos, x_pos, is_ref);
+            case "square":
+                this.plot_square(chart, radius, y_pos, x_pos, is_ref);
                 break;
             case "instruction":
                 this.plot_instruction(chart, y_pos, x_pos, trial);
@@ -417,7 +417,7 @@ export default class Estimation {
                         let sign = event.key === "m" ? 1 : -1;
                         let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE / 2;
                         // divided by 2 because we are changing radius (which is half of diameter)
-                        // for example when we do this for rectangles we will be chaning width and height
+                        // for example when we do this for squares we will be chaning width and height
                         let new_radius = radius + sign * change;
                         console.log(new_radius);
                         exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
@@ -454,7 +454,7 @@ export default class Estimation {
                     let sign = event.key === "m" ? 1 : -1;
                     let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE / 2;
                     // divided by 2 because we are changing radius (which is half of diameter)
-                    // for example when we do this for rectangles we will be chaning width and height
+                    // for example when we do this for squares we will be chaning width and height
                     let new_radius = radius + sign * change;
                     console.log(new_radius);
                     exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
@@ -475,12 +475,12 @@ export default class Estimation {
      * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape,
      *                         is_ref === true if the shape is a reference shape
      */
-    plot_rectangle(chart, width, y_pos, x_pos, is_ref) {
+    plot_square(chart, width, y_pos, x_pos, is_ref) {
         let exp = this;
         chart.append("rect")
             .attr("id", "rect_shape")
             .attr("x", x_pos - width / 2)
-            .attr("y", y_pos - width / 2) // the x and y attributes for rectangle
+            .attr("y", y_pos - width / 2) // the x and y attributes for square
                                           // refers to the position of the upper left corner
                                           // however x_pos and y_pos specifies the center of the shape
             .attr("width", width)
