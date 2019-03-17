@@ -15,9 +15,9 @@ export default class Estimation {
     constructor(params) {
         // Validate fields of params
         if (params.condition !== 'shape_estimation'
-            || params.condition !== 'line_length'
-            || params.condition !== 'rectangle_square'
-            || params.condition !== 'triangle') {
+            && params.condition !== 'line_length'
+            && params.condition !== 'rectangle_square'
+            && params.condition !== 'triangle') {
             throw  Error("unexpected condition name " + params.condition);
         }
         this.condition_name = params.condition;
@@ -40,7 +40,7 @@ export default class Estimation {
 
         // ========================================
         // EXPERIMENT CONSTANTS
-        this.X_DISTANCE_BETWEEN_SHAPES = 9.5;
+        this.X_DISTANCE_BETWEEN_SHAPES = 10;
         this.Y_DIVIATION_FROM_X_AXIS = 3;
         this.MAX_STEP_INTERVAL = 10;
         this.ROUNDS_PER_COND = 4;
@@ -349,7 +349,7 @@ export default class Estimation {
      *
      * @param shape {string}
      * @param chart {object}
-     * @param radius {object}
+     * @param radius {number}
      * @param y_pos {number}
      * @param x_pos {number}
      * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape
@@ -367,6 +367,13 @@ export default class Estimation {
                 break;
             case "instruction":
                 this.plot_instruction(chart, y_pos, x_pos, trial);
+                break;
+            case "line":
+                this.plot_line(chart, radius, y_pos, x_pos, is_ref);
+                break;
+            case "rectangle":
+                this.plot_rectangle(chart, radius, y_pos, x_pos, is_ref);
+                break;
         }
     }
 
@@ -478,7 +485,7 @@ export default class Estimation {
     plot_square(chart, width, y_pos, x_pos, is_ref) {
         let exp = this;
         chart.append("rect")
-            .attr("id", "rect_shape")
+            .attr("id", "square_shape")
             .attr("x", x_pos - width / 2)
             .attr("y", y_pos - width / 2) // the x and y attributes for square
                                           // refers to the position of the upper left corner
@@ -497,7 +504,7 @@ export default class Estimation {
                         width = new_radius;
                         exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
                         exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM;
-                        d3.select("#rect_shape")
+                        d3.select("#squre_shape")
                             .attr("width", new_radius)
                             .attr("height", new_radius);
                     }
@@ -518,6 +525,15 @@ export default class Estimation {
     plot_triangle(chart, radius, y_pos, x_pos, is_ref) {
         let exp = this;
         // for equilateral triangles, height = side * sqrt(3) / 2;
+        let side_length  = 0;
+        if (exp.curr_trial_data.width_height_ratio) {
+            side_length = radius * exp.curr_trial_data.width_height_ratio;
+        }
+        if (exp.curr_trial_data.rotate) {
+            let temp = side_length ;
+            side_length = width;
+            width = temp;
+        }
         let height = radius * Math.sqrt(3)/2;
         let poly = [
             {"x":x_pos, "y":(-0.5 * height + y_pos)},
@@ -560,6 +576,108 @@ export default class Estimation {
                     }
                 });
         }
+    }
+
+    /**
+     *
+     * @param chart {object}
+     * @param size {number}
+     * @param y_pos {number}
+     * @param x_pos {number}
+     * @param is_ref {boolean}
+     */
+    plot_rectangle(chart, size, y_pos, x_pos, is_ref) {
+        let exp = this;
+        let short_side = size;
+        let long_side = size;
+        let height = 0, width = 0;
+        if (exp.curr_trial_data.width_height_ratio) {
+            long_side = short_side * exp.curr_trial_data.width_height_ratio;
+        }
+        if (exp.curr_trial_data.rotate && exp.curr_trial_data.rotate === 90) {
+            width = long_side;
+            height = short_side;
+        } else {
+            width = short_side;
+            height = long_side
+        }
+        chart.append("rect")
+            .attr("id", "rect_shape")
+            .attr("x", x_pos - width / 2)
+            .attr("y", y_pos - height / 2) // the x and y attributes for square
+            // refers to the position of the upper left corner
+            // however x_pos and y_pos specifies the center of the shape
+            .attr("width", width)
+            .attr("height", height)
+            .attr("fill", exp.curr_trial_data.fill_color);
+        if (is_ref === false) {
+            d3.select("body")
+                .on("keydown", function () {
+                    let event = d3.event;
+                    if (event.key === "m" || event.key === "z") {
+                        let sign = event.key === "m" ? 1 : -1;
+                        let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE;
+                        let new_radius = size + sign * change;
+                        size = new_radius;
+                        exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
+                        exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM;
+                        let short_side = new_radius;
+                        let long_side = exp.curr_trial_data.width_height_ratio * short_side;
+                        let new_width = 0, new_height = 0;
+                        if (exp.curr_trial_data.rotate && exp.curr_trial_data.rotate === 90) {
+                            new_width = long_side;
+                            new_height = short_side;
+                        } else {
+                            new_width = short_side;
+                            new_height = long_side
+                        }
+                        d3.select("#rect_shape")
+                            .attr("width", new_width)
+                            .attr("height", new_height);
+                    }
+                });
+        }
+
+    }
+
+
+    /**
+     *
+     * @param chart {object}
+     * @param width {number}
+     * @param y_pos {number}
+     * @param x_pos {number}
+     * @param is_ref {boolean}
+     */
+    plot_line(chart, width, y_pos, x_pos, is_ref) {
+        let exp = this;
+        chart.append("rect")
+            .attr("id", "line_shape")
+            .attr("x", x_pos - width / 2)
+            .attr("y", y_pos - width / 2) // the x and y attributes for square
+            // refers to the position of the upper left corner
+            // however x_pos and y_pos specifies the center of the shape
+            .attr("width", width)
+            .attr("height", width)
+            .attr("fill", exp.curr_trial_data.fill_color);
+        if (is_ref === false) {
+            d3.select("body")
+                .on("keydown", function () {
+                    let event = d3.event;
+                    if (event.key === "m" || event.key === "z") {
+                        let sign = event.key === "m" ? 1 : -1;
+                        let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE;
+                        let new_radius = width + sign * change;
+                        width = new_radius;
+                        exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
+                        exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM;
+                        d3.select("#line_shape")
+                            .attr("width", new_radius)
+                            .attr("height", new_radius);
+                    }
+                });
+        }
+
     }
 
     /*
