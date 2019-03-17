@@ -296,20 +296,14 @@ export default class Estimation {
 
         let left_x = mid_width - this.X_DISTANCE_BETWEEN_SHAPES * this.PIXEL_TO_CM / 2;
         let right_x = mid_width + this.X_DISTANCE_BETWEEN_SHAPES * this.PIXEL_TO_CM / 2;
-        let base_y = mid_height;
 
         let ref_size = sub_cond.base_size * estimation_exp.PIXEL_TO_CM ;
-        // let ref_y = estimation_exp.calculate_y_position(ref_size);
-        // there was a change in the spec
-        // the reference shape will be displayed at (left_x, base_y) or (right_x, base_y); i.e. no jitter
         let ref_y = estimation_exp.calculate_y_position(ref_size);
 
         // the size of the modifiable shape start from min_size for trial 0 and 2, max_size for 1 and 3;
         let mod_size = (round_num % 2 === 1)?
             sub_cond.max_size * estimation_exp.PIXEL_TO_CM  : sub_cond.min_size * estimation_exp.PIXEL_TO_CM;
         let mod_y = estimation_exp.calculate_y_position(mod_size);
-        // let is_above = Math.random() > 0.5 ? 1 : -1;
-        // let mod_y = is_above * this.Y_DIVIATION_FROM_X_AXIS * this.PIXEL_TO_CM + base_y;
 
         this.curr_trial_data.is_ref_smaller = (round_num % 2 === 1);
 
