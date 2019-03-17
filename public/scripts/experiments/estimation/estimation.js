@@ -651,15 +651,33 @@ export default class Estimation {
      */
     plot_line(chart, width, y_pos, x_pos, is_ref) {
         let exp = this;
-        chart.append("rect")
-            .attr("id", "line_shape")
-            .attr("x", x_pos - width / 2)
-            .attr("y", y_pos - width / 2) // the x and y attributes for square
-            // refers to the position of the upper left corner
-            // however x_pos and y_pos specifies the center of the shape
-            .attr("width", width)
-            .attr("height", width)
-            .attr("fill", exp.curr_trial_data.fill_color);
+        let x1, x2, y1, y2;
+        if (!is_ref) {
+            if (this.curr_trial_data.rotate === 45) {
+                x1 = x_pos - width * Math.sqrt(2)/ 4;
+                x2 = x_pos + width * Math.sqrt(2)/ 4;
+                y1 = y_pos - width * Math.sqrt(2)/ 4;
+                y2 = y_pos + width * Math.sqrt(2)/ 4;
+            } else {
+                x1 = x_pos;
+                x2 = x_pos;
+                y1 = y_pos + width / 2;
+                y2 = y_pos + width / 2;
+            }
+        } else {
+            x1 = x_pos - width / 2;
+            x2 = x_pos + width / 2;
+            y1 = y_pos;
+            y2 = y_pos;
+        }
+        chart.append("line")
+            .style("stroke", exp.curr_trial_data.fill_color)
+            .style("stroke-width", exp.curr_trial_data.stroke_width)
+            .attr("id", is_ref? "line_shape_ref": "line_shape_mod")
+            .attr("x1", x1)
+            .attr("x2", x2)
+            .attr("y1", y1)
+            .attr("y2", y2);
         if (is_ref === false) {
             d3.select("body")
                 .on("keydown", function () {
@@ -669,11 +687,31 @@ export default class Estimation {
                         let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE;
                         let new_radius = width + sign * change;
                         width = new_radius;
+                        if (!is_ref) {
+                            if (exp.curr_trial_data.rotate === 45) {
+                                x1 = x_pos - width * Math.sqrt(2)/ 4;
+                                x2 = x_pos + width * Math.sqrt(2)/ 4;
+                                y1 = y_pos - width * Math.sqrt(2)/ 4;
+                                y2 = y_pos + width * Math.sqrt(2)/ 4;
+                            } else {
+                                x1 = x_pos;
+                                x2 = x_pos;
+                                y1 = y_pos + width / 2;
+                                y2 = y_pos + width / 2;
+                            }
+                        } else {
+                            x1 = x_pos - width / 2;
+                            x2 = x_pos + width / 2;
+                            y1 = y_pos;
+                            y2 = y_pos;
+                        }
                         exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
                         exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM;
-                        d3.select("#line_shape")
-                            .attr("width", new_radius)
-                            .attr("height", new_radius);
+                        d3.select("#line_shape_mod")
+                            .attr("x1", x1)
+                            .attr("x2", x2)
+                            .attr("y1", y1)
+                            .attr("y2", y2);
                     }
                 });
         }
