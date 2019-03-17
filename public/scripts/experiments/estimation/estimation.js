@@ -14,7 +14,10 @@ export default class Estimation {
      */
     constructor(params) {
         // Validate fields of params
-        if (params.condition !== 'shape_estimation') {
+        if (params.condition !== 'shape_estimation'
+            || params.condition !== 'line_length'
+            || params.condition !== 'rectangle_square'
+            || params.condition !== 'triangle') {
             throw  Error("unexpected condition name " + params.condition);
         }
         this.condition_name = params.condition;

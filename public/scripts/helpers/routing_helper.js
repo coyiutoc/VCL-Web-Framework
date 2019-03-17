@@ -147,9 +147,14 @@ function get_stevens_route(condition_name) {
  */
 function get_estimation_route(condition_name) {
     switch(condition_name) {
-        case 'Shape Estimation':
+        case 'Shape: Circle, Square, Triangle':
             return "/experiment/estimation/graph_type/shapes/range/estimation/condition/shape_estimation/balancing/random";
-
+        case 'Line Length':
+            return "/experiment/estimation/graph_type/shapes/range/estimation/condition/line_length/balancing/random";
+        case 'Shape: Rectangle, Square':
+            return "/experiment/estimation/graph_type/shapes/range/estimation/condition/rectangle_square/balancing/random";
+        case 'Shape: Triangle':
+            return "/experiment/estimation/graph_type/shapes/range/estimation/condition/triangle/balancing/random";
         default:
             throw Error(condition_name + " condition is not supported for Estimation.");
     }
