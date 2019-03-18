@@ -485,7 +485,7 @@ export default class Estimation {
     plot_square(chart, width, y_pos, x_pos, is_ref) {
         let exp = this;
         chart.append("rect")
-            .attr("id", "square_shape")
+            .attr("id", is_ref? "square_shape_ref": "square_shape_mod")
             .attr("x", x_pos - width / 2)
             .attr("y", y_pos - width / 2) // the x and y attributes for square
                                           // refers to the position of the upper left corner
@@ -495,7 +495,7 @@ export default class Estimation {
             .attr("fill", exp.curr_trial_data.fill_color);
         if (is_ref === false) {
             d3.select("body")
-                .on("keydown", function () {
+                .on("keydown", () => {
                     let event = d3.event;
                     if (event.key === "m" || event.key === "z") {
                         let sign = event.key === "m" ? 1 : -1;
@@ -504,7 +504,7 @@ export default class Estimation {
                         width = new_radius;
                         exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
                         exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM;
-                        d3.select("#squre_shape")
+                        d3.select("#square_shape_mod")
                             .attr("width", new_radius)
                             .attr("height", new_radius);
                     }
@@ -525,54 +525,87 @@ export default class Estimation {
     plot_triangle(chart, radius, y_pos, x_pos, is_ref) {
         let exp = this;
         // for equilateral triangles, height = side * sqrt(3) / 2;
-        let side_length  = 0;
-        if (exp.curr_trial_data.width_height_ratio) {
-            side_length = radius * exp.curr_trial_data.width_height_ratio;
-        }
-        if (exp.curr_trial_data.rotate) {
-            let temp = side_length ;
-            side_length = width;
-            width = temp;
-        }
-        let height = radius * Math.sqrt(3)/2;
-        let poly = [
-            {"x":x_pos, "y":(-0.5 * height + y_pos)},
-            {"x":(-0.5 * radius + x_pos), "y":(0.5 * height + y_pos)},
-            {"x":(0.5 * radius + x_pos), "y":(0.5 * height + y_pos)}];
+        let short_side = radius;
+        let long_side = radius;
+        let height = 0, width = 0;
 
-        chart.selectAll("polygon")
-            .data([poly])
-            .enter().append("polygon")
-            .attr("points",function(d) {
-                return d.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
+        let poly = [];
+        if (!is_ref) {
+            if (exp.curr_trial_data.width_height_ratio) {
+                long_side = short_side * exp.curr_trial_data.width_height_ratio;
+                height = Math.sqrt(Math.pow(long_side, 2) - Math.pow(short_side / 2, 2));
+                width = short_side;
+                if (exp.curr_trial_data.rotate) {
+                    poly = [
+                        {"x":(0.5 * height + x_pos), "y":(y_pos)},
+                        {"x":(-0.5 * height + x_pos), "y":(-0.5 * width + y_pos)},
+                        {"x":(-0.5 * height + x_pos), "y":(0.5 * width + y_pos)}];
+                } else {
+                    poly = [
+                        {"x":(x_pos), "y":(-0.5 * height + y_pos)},
+                        {"x":(-0.5 * width + x_pos), "y":(0.5 * height + y_pos)},
+                        {"x":(0.5 * width + x_pos), "y":(0.5 * height + y_pos)}];
+                }
+            } else {
+                height = radius * Math.sqrt(3)/2;
+                poly = [
+                    {"x":x_pos, "y":(-0.5 * height + y_pos)},
+                    {"x":(-0.5 * radius + x_pos), "y":(0.5 * height + y_pos)},
+                    {"x":(0.5 * radius + x_pos), "y":(0.5 * height + y_pos)}];
+            }
+        } else {
+            height = radius * Math.sqrt(3)/2;
+            poly = [
+                {"x":x_pos, "y":(-0.5 * height + y_pos)},
+                {"x":(-0.5 * radius + x_pos), "y":(0.5 * height + y_pos)},
+                {"x":(0.5 * radius + x_pos), "y":(0.5 * height + y_pos)}];
+        }
+        chart.append("polygon")
+            .attr("points",function() {
+                return poly.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
             .attr("fill", exp.curr_trial_data.fill_color)
-            .attr("id", "triangle_shape");
+            .attr("id", is_ref? "triangle_shape_ref" : "triangle_shape_mod");
 
         if (is_ref === false) {
             d3.select("body")
                 .on("keydown", function () {
                     let event = d3.event;
                     if (event.key === "m" || event.key === "z") {
-                        let sign = event.key === "m" ? 1 : -1;
+                        // decide the amount of change;
+                        let sign = (event.key === "m") ? 1 : -1;
                         let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE;
                         let new_radius = radius + sign * change;
                         radius = new_radius;
-                        height = radius * Math.sqrt(3) / 2;
-                        poly = [
-                            {"x":(x_pos), "y":(-0.5 * height + y_pos)},
-                            {"x":(-0.5 * new_radius + x_pos), "y":(0.5 * height + y_pos)},
-                            {"x":(0.5 * new_radius + x_pos), "y":(0.5 * height + y_pos)}];
+                        // plot the changed shape
+                        short_side = new_radius;
+                        if (exp.curr_trial_data.width_height_ratio) {
+                            long_side = short_side * exp.curr_trial_data.width_height_ratio;
+                            height = Math.sqrt(Math.pow(long_side, 2) - Math.pow(short_side / 2, 2));
+                            width = short_side;
+                            if (exp.curr_trial_data.rotate) {
+                                poly = [
+                                    {"x":(0.5 * height + x_pos), "y":(y_pos)},
+                                    {"x":(-0.5 * height + x_pos), "y":(-0.5 * width + y_pos)},
+                                    {"x":(-0.5 * height + x_pos), "y":(0.5 * width + y_pos)}];
+                            } else {
+                                poly = [
+                                    {"x":(x_pos), "y":(-0.5 * height + y_pos)},
+                                    {"x":(-0.5 * width + x_pos), "y":(0.5 * height + y_pos)},
+                                    {"x":(0.5 * width + x_pos), "y":(0.5 * height + y_pos)}];
+                            }
+                        } else {
+                            height = short_side * Math.sqrt(3)/2;
+                            poly = [
+                                {"x":x_pos, "y":(-0.5 * height + y_pos)},
+                                {"x":(-0.5 * short_side + x_pos), "y":(0.5 * height + y_pos)},
+                                {"x":(0.5 * short_side + x_pos), "y":(0.5 * height + y_pos)}];
+                        }
 
                         exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
                         exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM ;
-                        chart.selectAll("polygon").remove();
-                        chart.selectAll("polygon")
-                            .data([poly])
-                            .enter().append("polygon")
-                            .attr("points",function(d) {
-                                return d.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
-                            .attr("fill", exp.curr_trial_data.fill_color)
-                            .attr("id", "triangle_shape");
+                        chart.select("#triangle_shape_mod")
+                            .attr("points",function() {
+                                return poly.map(function(d) { return [d.x, d.y].join(","); }).join(" ");});
                     }
                 });
         }
@@ -602,7 +635,7 @@ export default class Estimation {
             height = long_side
         }
         chart.append("rect")
-            .attr("id", "rect_shape")
+            .attr("id", is_ref? "rect_shape_ref": "rect_shape_mod")
             .attr("x", x_pos - width / 2)
             .attr("y", y_pos - height / 2) // the x and y attributes for square
             // refers to the position of the upper left corner
@@ -631,7 +664,7 @@ export default class Estimation {
                             new_width = short_side;
                             new_height = long_side
                         }
-                        d3.select("#rect_shape")
+                        d3.select("#rect_shape_mod")
                             .attr("width", new_width)
                             .attr("height", new_height);
                     }
