@@ -26,22 +26,22 @@ app.get('/', function(request, response) {
 
 // Experiment Routing
 app.get('/experiment/:experiment/graph_type/:graph_type/range/:range/condition/:condition/balancing/:balancing/subject_id/:subject_id/subject_initials/:subject_initials', function(request, response) {
-	
-	console.log(request.params);
+    
+    console.log(request.params);
 
-	let keys = {
-		range: request.params.range,
-		condition: request.params.condition, 
-		graph_type: request.params.graph_type,
+    let keys = {
+        range: request.params.range,
+        condition: request.params.condition, 
+        graph_type: request.params.graph_type,
         balancing: request.params.balancing,
         subject_id: request.params.subject_id,
         subject_initials: request.params.subject_initials
 	};
 
-	if (request.params.experiment === "jnd") {
-    	response.render('jnd/jnd_experiment.html', keys);
+    if (request.params.experiment === "jnd") {
+        response.render('jnd/jnd_experiment.html', keys);
     } else if (request.params.experiment === "stevens") {
-    	response.render('stevens/stevens_experiment.html', keys);
+        response.render('stevens/stevens_experiment.html', keys);
     } else if (request.params.experiment === "jnd_radius") {
     	response.render('jnd_radius/jnd_radius_experiment.html', keys);
     } else if (request.params.experiment === "estimation") {
