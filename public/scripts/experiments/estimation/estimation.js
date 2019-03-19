@@ -189,11 +189,11 @@ export default class Estimation {
             on_start: function(trial) {
                 is_ref_left = Math.random() > 0.5;
                 trial.stimulus = is_ref_left? "<div align = 'center'><font size = 20>" +
-                    "<p>The Modifiable shape will be on the right" +
-                    "<p></font></div>" :
+                    "<p>The Modifiable shape will be on the right<p>" +
+                    "<br> <br> <p><b>Press space to continue.</b></p></font></div>" :
                     "<div align = 'center'><font size = 20>" +
-                    "<p>The Modifiable shape will be on the left" +
-                    "<p></font></div>" ;
+                    "<p>The Modifiable shape will be on the left<p>" +
+                    "<br> <br> <p><b>Press space to continue.</b></p></font></div>" ;
             },
             data: {type: 'instruction'}
         };
@@ -233,7 +233,6 @@ export default class Estimation {
                 estimation_exp.update_curr_round_number(data);
                 estimation_exp.update_curr_cond_idx(data);
                 estimation_exp.update_input_array(data);
-                // console.log("RESULTS: " + JSON.stringify(estimation_exp.results));
             }
         };
         group.timeline = [ready, trial];
@@ -327,7 +326,7 @@ export default class Estimation {
         let estimation_exp = this;
         // y_margin is the distance from
         let y_margin = estimation_exp.MARGIN * estimation_exp.PIXEL_TO_CM;
-        // TODO: explain why it is calculated like this
+        // pick a random position inside the screen such the the shapes will not be displayed outside of the border
         let range = [y_margin + radius / 2, window.innerHeight - y_margin - radius / 2];
         console.log("radius: " + radius);
         console.log(JSON.stringify(range));
