@@ -51,10 +51,10 @@ function get_JND_route(condition_name) {
     switch(condition_name) {
 
         case 'Scatter: Base':
-            return "/experiment/jnd/graph_type/scatter/range/foundational/condition/base/balancing/latin_square";
+            return "/experiment/jnd/graph_type/scatter/range/foundational/condition/jnd_base/balancing/latin_square";
 
         case 'Strip: Base':
-            return "/experiment/jnd/graph_type/strip/range/foundational/condition/base/balancing/latin_square";
+            return "/experiment/jnd/graph_type/strip/range/foundational/condition/jnd_base/balancing/latin_square";
 
         case 'Ring: Strip Ring Size':
             return "/experiment/jnd/graph_type/ring/range/foundational/condition/strip_ring_size/balancing/latin_square";
@@ -167,11 +167,11 @@ function get_stevens_route(condition_name) {
 
     switch(condition_name) {
 
-        case 'Scatter: Base':
-            return "/experiment/stevens/graph_type/scatter/range/foundational/condition/base/balancing/latin_square";
+		case 'Scatter: Base':
+			return "/experiment/stevens/graph_type/scatter/range/foundational/condition/stevens_base/balancing/latin_square";
 
         case 'Strip: Base':
-            return "/experiment/stevens/graph_type/strip/range/foundational/condition/base/balancing/latin_square";
+            return "/experiment/stevens/graph_type/strip/range/foundational/condition/stevens_base/balancing/latin_square";
 
         case 'Strip: Line Length Strip':
             return "/experiment/stevens/graph_type/strip/range/foundational/condition/line_length_strip/balancing/latin_square";

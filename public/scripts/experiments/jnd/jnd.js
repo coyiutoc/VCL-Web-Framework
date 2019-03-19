@@ -747,7 +747,6 @@ export default class JND {
   plot_scatter_data(chart, xscale, yscale, data, point_size, point_color, point_shape) {
 
     switch(point_shape){
-
       case "square":
         chart.selectAll("square_data")
                    .data(data)

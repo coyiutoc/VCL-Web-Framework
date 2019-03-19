@@ -57,7 +57,7 @@ function get_data(experiment){
   }
 
   // If not a base condition
-  if (condition !== "base"){
+  if (condition !== "jnd_base" && condition !== "stevens_base"){
 
     // Check that a condition exists
     if (!EXPERIMENT_CONDITIONS[experiment_name][condition] || !EXPERIMENT_BASES[experiment_name][range]){
@@ -66,7 +66,7 @@ function get_data(experiment){
 
     // Get subconditions then append to the base 
     let subconditions = EXPERIMENT_CONDITIONS[experiment_name][condition];
-    dataset = create_condition_dataset(subconditions, EXPERIMENT_BASES[experiment_name][range]);
+    dataset = create_condition_dataset(EXPERIMENT_BASES[experiment_name][range], subconditions);
 
   // If a base condition
   } else {
