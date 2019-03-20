@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<div id="cm_conversion" style = "visibility: hidden; width: 1cm; height: 1cm;"></div>
+<head>
+
+  <title>VCL: Estimation Experiment</title>
+
+  <%- include('../header'); %>
+
+  <script type="text/javascript">
+
+      var PIXELS_PER_CM = document.getElementById("cm_conversion").getBoundingClientRect().height;
+      // Routing params from EJS:
+      var params = {"range": "<%= range %>",
+          "condition": "<%= condition %>",
+          "graph_type": "<%= graph_type %>",
+          "balancing": "<%= balancing %>",
+          "subject_id": "<%= subject_id %>",
+          "subject_initials": "<%= subject_initials %>"};
+
+  </script>
+
+  <script type="module" src="/scripts/experiments/estimation/estimation_timeline.js" ></script>
+
+</head>
+
+<body>
+</body>
+
+</html>

@@ -1,6 +1,7 @@
 import {JND_BASE, JND_CONDITIONS} from "/scripts/experiment-properties/data/constants/jnd_data.js";
 import {STEVENS_BASE, STEVENS_CONDITIONS} from "/scripts/experiment-properties/data/constants/stevens_data.js";
 import {JND_RADIUS_BASE} from "/scripts/experiment-properties/data/constants/jnd_radius_data.js";
+import {ESTIMATION_BASE, ESTIMATION_CONDITIONS} from "/scripts/experiment-properties/data/constants/estimation_data.js";
 
 export { get_data,
          get_data_subset };
@@ -12,8 +13,11 @@ const SUBCONDITION_REPEATS = {
     design : {},
     design_multi : {
         distractor_multi: 4
+    },
+    estimation: {
+      shape_estimation: 0
     }
-}
+};
 
 /**
  * Retrieves the data for the corresponding experiment object.
@@ -61,6 +65,9 @@ function get_data(experiment){
       dataset = create_condition_dataset(dataset, STEVENS_CONDITIONS[condition]);
     }
   }
+  else if (experiment_name === "Estimation") {
+      dataset = ESTIMATION_CONDITIONS[condition];
+  }
   else {
     throw new Error(experiment + " not supported.");
   }
@@ -100,7 +107,7 @@ function get_data_subset(experiment, range, condition) {
  * Appends condition-specific data to the dataset.
  *
  * @param  dataset           [{assoc}, {assoc}, .... ]     dataset with base experiment constants   
- *         condition_data    [{assoc}, {assoc}, .... ]     condition set for that experiment         
+ * @param  condition_data    [{assoc}, {assoc}, .... ]     condition set for that experiment
  *
  * @return dataset           [{assoc}, {assoc}, .... ]  
  **/

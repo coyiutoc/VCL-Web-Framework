@@ -34,7 +34,13 @@ Currently supported experiments:
 | Base                           | Foundational    | Scatter, Strip  | Latin Square    |
 | Strip Ring Size                | Foundational    | Ring            | Latin Square    |
 | Line Length Strip              | Foundational    | Strip           | Latin Square    |
-      
+
+### Estimation
+
+| Name                           | Trial Type      | Graph Type(s)   | Balancing       |
+| ------------------------------ | --------------- | --------------- | --------------- |
+| Shape Estimation               | Estimation      | Shape           | Random          |
+
 1/2/2019 - Madison's Visual Search + Numerosity experiments from December 2018 can be found [here.](https://github.com/Wongelawit/Correlation_MultipleEnsemble/tree/Numerosity-Task)
   
 ## Prerequisites
