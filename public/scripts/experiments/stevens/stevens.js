@@ -73,7 +73,7 @@ export default class Stevens {
     // TEST EXPERIMENT VARIABLES
 
     this.experiment_conditions_constants;
-    this.sub_condition_order;
+    this.sub_condition_order = [];
 
     // ========================================
     // CURRENT TRIAL DATA
@@ -108,19 +108,48 @@ export default class Stevens {
 
     let dataset = this.raw_constants;
 
+    // To hold individual data sets according to round type
+    var test_dataset = [];
+    var consistency_dataset = [];
+
+    // To hold balanced indexes
+    var test_order = []; 
+    var consistency_order = [];
+
+    // Extract dataset according to test or consistency round type
+    for (let subcondition of dataset) {
+
+      if (subcondition["round_type"] === "test") {
+        test_dataset.push(subcondition);
+      } else {
+        consistency_dataset.push(subcondition);
+      }
+    }
+
+    // Get balancing order for EACH round type dataset individually
     switch(this.balancing_type) {
 
       case 'latin_square':
-        this.sub_condition_order = initialize_latin_square(dataset.length);
+        test_order = initialize_latin_square(test_dataset.length);
+        consistency_order = initialize_latin_square(consistency_dataset.length);
         break;
 
       case 'random':
-        this.sub_condition_order = initialize_random_order(dataset.length);
+        test_order = initialize_latin_square(test_dataset.length);
+        consistency_order = initialize_latin_square(consistency_dataset.length);
         break;
 
       default:
         throw Error(this.balancing_type + " balancing type is not supported.");
     }
+
+    // Since test dataset will run first, add index length of it to consistency order
+    for (let i = 0; i < consistency_order.length; i++) {
+      consistency_order[i] += test_dataset.length;
+    }
+
+    //  Merge the two orders 
+    this.sub_condition_order = test_order.concat(consistency_order);
 
     var ordered_dataset = [];
 
