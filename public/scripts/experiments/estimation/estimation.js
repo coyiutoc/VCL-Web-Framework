@@ -693,7 +693,7 @@ export default class Estimation {
             } else {
                 x1 = x_pos;
                 x2 = x_pos;
-                y1 = y_pos + width / 2;
+                y1 = y_pos - width / 2;
                 y2 = y_pos + width / 2;
             }
         } else {
@@ -728,7 +728,7 @@ export default class Estimation {
                             } else {
                                 x1 = x_pos;
                                 x2 = x_pos;
-                                y1 = y_pos + width / 2;
+                                y1 = y_pos - width / 2;
                                 y2 = y_pos + width / 2;
                             }
                         } else {
