@@ -700,22 +700,30 @@ export default class JND {
       if (this.condition_group === "distractor"){ 
            
         let dataset = datasets[i];
-        let distractor = distractors[i];
 
-        // Alternate plotting of distractor and main dataset points - want equal chance of one
-        // getting occluded over the other
-        for (let j in dataset) {
+        // If color is WHITE on square condition, just plot TARGET dataset (no distractor)
+        if (this.trial_data.dist_color === "WHITE" && this.trial_data.dist_shape === "square"){
 
-          let point = dataset[j];
-          let dist_point = distractor[j];
+          this.plot_scatter_data(chart, xscale, yscale, datasets[i], this.trial_data.point_size, this.trial_data.target_color, this.trial_data.target_shape);  
 
-          // Distractor point
-          this.plot_scatter_data(chart, xscale, yscale, [point], this.trial_data.point_size, this.trial_data.target_color, this.trial_data.target_shape);  
+        } else {
+          let distractor = distractors[i];
 
-          // Target point    
-          this.plot_scatter_data(chart, xscale, yscale, [dist_point], this.trial_data.point_size, this.trial_data.dist_color, this.trial_data.dist_shape);
+          // Alternate plotting of distractor and main dataset points - want equal chance of one
+          // getting occluded over the other
+          for (let j in dataset) {
 
+            let point = dataset[j];
+            let dist_point = distractor[j];
+
+            // Distractor point
+            this.plot_scatter_data(chart, xscale, yscale, [point], this.trial_data.point_size, this.trial_data.target_color, this.trial_data.target_shape);  
+
+            // Target point    
+            this.plot_scatter_data(chart, xscale, yscale, [dist_point], this.trial_data.point_size, this.trial_data.dist_color, this.trial_data.dist_shape);
+          }
         }
+
       } else {
           this.plot_scatter_data(chart, xscale, yscale, datasets[i], this.trial_data.point_size, this.trial_data.point_color, "none");        
       }     

@@ -45,9 +45,29 @@ function generate_distractor_diamond_square_subconditions(experiment) {
 	let range = experiment.range;
 
 	let subconditions = create_condition_dataset(EXPERIMENT_BASES[experiment_name][range], EXPERIMENT_CONDITIONS[experiment_name][square_name]);
-	
+
 	for (let c of subconditions) {
 		c["dist_shape"] = "diamond";
+
+		// Overwrite to opposing colors when dist_color = white
+		if (c["dist_color"] === "WHITE"){
+			// If RED
+			if (c["target_color"] === "#cd4c32"){
+				c["dist_color"] = "#007ebc";
+			} 
+			// If BLUE
+			else if (c["target_color"] === "#007ebc"){
+				c["dist_color"] = "#cd4c32";
+			}
+			// If YELLOW
+			else if (c["target_color"] === "#dbc667"){
+				c["dist_color"] = "#20874a";
+			}
+			// If GREEN
+			else {
+				c["dist_color"] = "#dbc667";
+			}
+		}
 	}
 
 	return subconditions;
