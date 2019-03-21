@@ -420,17 +420,10 @@ export default class Estimation {
                     let event = d3.event;
                     // console.log(event);
                     if (event.key === "m" || event.key === "z") {
-                        let sign = event.key === "m" ? 1 : -1;
-                        let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE / 2;
-                        // divided by 2 because we are changing radius (which is half of diameter)
-                        // for example when we do this for squares we will be chaning width and height
-                        let new_radius = radius + sign * change;
-                        console.log(new_radius);
-                        exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
-                        exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM ;
-                        radius = new_radius;
+                        diameter = exp.calculate_size_change(event.key, diameter);
+                        radius = diameter / 2;
                         d3.select("#circle_shape")
-                            .attr("r", new_radius);
+                            .attr("r", radius);
                     }
                 });
         }
@@ -497,15 +490,10 @@ export default class Estimation {
                 .on("keydown", () => {
                     let event = d3.event;
                     if (event.key === "m" || event.key === "z") {
-                        let sign = event.key === "m" ? 1 : -1;
-                        let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE;
-                        let new_radius = width + sign * change;
-                        width = new_radius;
-                        exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
-                        exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM;
+                        width = exp.calculate_size_change(event.key, width);
                         d3.select("#square_shape_mod")
-                            .attr("width", new_radius)
-                            .attr("height", new_radius);
+                            .attr("width", width)
+                            .attr("height", width);
                     }
                 });
         }
@@ -571,12 +559,9 @@ export default class Estimation {
                     let event = d3.event;
                     if (event.key === "m" || event.key === "z") {
                         // decide the amount of change;
-                        let sign = (event.key === "m") ? 1 : -1;
-                        let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE;
-                        let new_radius = radius + sign * change;
-                        radius = new_radius;
+                        radius = exp.calculate_size_change(event.key, radius);
                         // plot the changed shape
-                        short_side = new_radius;
+                        short_side = radius;
                         if (exp.curr_trial_data.width_height_ratio) {
                             long_side = short_side * exp.curr_trial_data.width_height_ratio;
                             height = Math.sqrt(Math.pow(long_side, 2) - Math.pow(short_side / 2, 2));
@@ -599,10 +584,7 @@ export default class Estimation {
                                 {"x":(-0.5 * short_side + x_pos), "y":(0.5 * height + y_pos)},
                                 {"x":(0.5 * short_side + x_pos), "y":(0.5 * height + y_pos)}];
                         }
-
-                        exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
-                        exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM ;
-                        chart.select("#triangle_shape_mod")
+                       chart.select("#triangle_shape_mod")
                             .attr("points",function() {
                                 return poly.map(function(d) { return [d.x, d.y].join(","); }).join(" ");});
                     }
@@ -647,13 +629,8 @@ export default class Estimation {
                 .on("keydown", function () {
                     let event = d3.event;
                     if (event.key === "m" || event.key === "z") {
-                        let sign = event.key === "m" ? 1 : -1;
-                        let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE;
-                        let new_radius = size + sign * change;
-                        size = new_radius;
-                        exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
-                        exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM;
-                        let short_side = new_radius;
+                        size = exp.calculate_size_change(event.key, size);
+                        let short_side = size;
                         let long_side = exp.curr_trial_data.width_height_ratio * short_side;
                         let new_width = 0, new_height = 0;
                         if (exp.curr_trial_data.rotate && exp.curr_trial_data.rotate === 90) {
@@ -685,17 +662,10 @@ export default class Estimation {
         let exp = this;
         let x1, x2, y1, y2;
         if (!is_ref) {
-            if (this.curr_trial_data.rotate === 45) {
-                x1 = x_pos - width * Math.sqrt(2)/ 4;
-                x2 = x_pos + width * Math.sqrt(2)/ 4;
-                y1 = y_pos - width * Math.sqrt(2)/ 4;
-                y2 = y_pos + width * Math.sqrt(2)/ 4;
-            } else {
-                x1 = x_pos;
-                x2 = x_pos;
-                y1 = y_pos - width / 2;
-                y2 = y_pos + width / 2;
-            }
+            x1 = x_pos - (width / 2) * Math.sin(exp.curr_trial_data.rotate * Math.PI / 180);
+            x2 = x_pos + (width / 2) * Math.sin(exp.curr_trial_data.rotate * Math.PI / 180);
+            y1 = y_pos - (width / 2) * Math.cos(exp.curr_trial_data.rotate * Math.PI / 180);
+            y2 = y_pos + (width / 2) * Math.cos(exp.curr_trial_data.rotate * Math.PI / 180);
         } else {
             x1 = x_pos - width / 2;
             x2 = x_pos + width / 2;
@@ -715,30 +685,18 @@ export default class Estimation {
                 .on("keydown", function () {
                     let event = d3.event;
                     if (event.key === "m" || event.key === "z") {
-                        let sign = event.key === "m" ? 1 : -1;
-                        let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE;
-                        let new_radius = width + sign * change;
-                        width = new_radius;
+                        width = exp.calculate_size_change(event.key, width);
                         if (!is_ref) {
-                            if (exp.curr_trial_data.rotate === 45) {
-                                x1 = x_pos - width * Math.sqrt(2)/ 4;
-                                x2 = x_pos + width * Math.sqrt(2)/ 4;
-                                y1 = y_pos - width * Math.sqrt(2)/ 4;
-                                y2 = y_pos + width * Math.sqrt(2)/ 4;
-                            } else {
-                                x1 = x_pos;
-                                x2 = x_pos;
-                                y1 = y_pos - width / 2;
-                                y2 = y_pos + width / 2;
-                            }
+                            x1 = x_pos - (width / 2) * Math.sin(exp.curr_trial_data.rotate * Math.PI / 180);
+                            x2 = x_pos + (width / 2) * Math.sin(exp.curr_trial_data.rotate * Math.PI / 180);
+                            y1 = y_pos - (width / 2) * Math.cos(exp.curr_trial_data.rotate * Math.PI / 180);
+                            y2 = y_pos + (width / 2) * Math.cos(exp.curr_trial_data.rotate * Math.PI / 180);
                         } else {
                             x1 = x_pos - width / 2;
                             x2 = x_pos + width / 2;
                             y1 = y_pos;
                             y2 = y_pos;
                         }
-                        exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
-                        exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM;
                         d3.select("#line_shape_mod")
                             .attr("x1", x1)
                             .attr("x2", x2)
@@ -747,7 +705,22 @@ export default class Estimation {
                     }
                 });
         }
+    }
 
+    /**
+     *
+     * @param event_key m to increase the size and z to decrease the size
+     * @param size the previous size of the shape
+     * @returns number
+     */
+    calculate_size_change(event_key, size) {
+        let sign = event_key === "m" ? 1 : -1;
+        let change = Math.random() * this.PIXEL_TO_CM * this.MAX_STEP_SIZE;
+        let new_radius = size + sign * change;
+        size = new_radius;
+        this.curr_trial_data.adjustments.push(change * sign / this.PIXEL_TO_CM);
+        this.curr_trial_data.estimated_size = new_radius / this.PIXEL_TO_CM;
+        return size;
     }
 
     /*
