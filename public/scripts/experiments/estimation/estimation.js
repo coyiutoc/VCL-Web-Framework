@@ -25,7 +25,7 @@ export default class Estimation {
             throw  Error("unexpected range " + params.range);
         }
         this.range = params.range;
-        if (params.graph_type !== "shapes") {
+        if (params.graph_type !== "shape" && params.graph_type !== "line") {
             throw Error("graph type: " + params.graph_type + " is not supported.")}
         else {
             this.graph_type = params.graph_type;
