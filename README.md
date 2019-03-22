@@ -39,10 +39,13 @@ Currently supported experiments:
 
 | Name                           | Trial Type      | Graph Type(s)   | Balancing       |
 | ------------------------------ | --------------- | --------------- | --------------- |
-| Shape Estimation               | Estimation      | Shape           | Random          |
+| Shape: Circle, Square, Triangle| Estimation      | Shape           | Random          |
+| Line Length                    | Estimation      | Line            | Random          |
+| Shape: Rectangle, Square       | Estimation      | Shape           | Random          |
+| Shape: Triangle                | Estimation      | Shape           | Random          |
 
 1/2/2019 - Madison's Visual Search + Numerosity experiments from December 2018 can be found [here.](https://github.com/Wongelawit/Correlation_MultipleEnsemble/tree/Numerosity-Task)
-  
+
 ## Prerequisites
 
 #### (1) Git clone the repository
@@ -73,4 +76,4 @@ Or alternatively, with nodemon:
 nodemon app.js
 ```
 
-The app is available at [localhost:8080](localhost:8080). If you want to access it at a different port, change the port number in app.js (line 57). 
+The app is available at [localhost:8080](localhost:8080). If you want to access it at a different port, change the port number in app.js (line 57).
