@@ -42,7 +42,7 @@ export default class Estimation {
 
         // ========================================
         // EXPERIMENT CONSTANTS
-        this.X_DISTANCE_BETWEEN_SHAPES = 10;
+        this.X_DISTANCE_BETWEEN_SHAPES = 12;
         this.Y_DIVIATION_FROM_X_AXIS = 3;
         this.MAX_STEP_INTERVAL = 10;
         this.ROUNDS_PER_COND = 4;
@@ -636,6 +636,15 @@ export default class Estimation {
             .attr("height", height)
             .attr("fill", exp.curr_trial_data.fill_color)
             .attr("stroke", exp.curr_trial_data.outline? exp.curr_trial_data.outline : exp.curr_trial_data.fill_color);
+        if (is_ref === false && exp.curr_trial_data.mod_rotate_by) {
+            let transform = "rotate(";
+            transform = transform + exp.curr_trial_data.mod_rotate_by.toString();
+            transform = transform + " " + (x_pos - width / 2).toString();
+            transform = transform + " " + (y_pos - width / 2).toString();
+            transform = transform + ")";
+            d3.select("#rect_shape_mod").attr("transform", transform);
+        }
+
         if (is_ref === false) {
             d3.select("body")
                 .on("keydown", function () {
