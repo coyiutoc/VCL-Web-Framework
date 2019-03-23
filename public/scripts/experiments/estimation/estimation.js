@@ -522,7 +522,7 @@ export default class Estimation {
                 long_side = short_side * exp.curr_trial_data.width_height_ratio;
                 height = Math.sqrt(Math.pow(long_side, 2) - Math.pow(short_side / 2, 2));
                 width = short_side;
-                if (exp.curr_trial_data.rotate) {
+                if (exp.curr_trial_data.mod_rotate_by) {
                     poly = [
                         {"x":(0.5 * height + x_pos), "y":(y_pos)},
                         {"x":(-0.5 * height + x_pos), "y":(-0.5 * width + y_pos)},
@@ -566,7 +566,7 @@ export default class Estimation {
                             long_side = short_side * exp.curr_trial_data.width_height_ratio;
                             height = Math.sqrt(Math.pow(long_side, 2) - Math.pow(short_side / 2, 2));
                             width = short_side;
-                            if (exp.curr_trial_data.rotate) {
+                            if (exp.curr_trial_data.mod_rotate_by) {
                                 poly = [
                                     {"x":(0.5 * height + x_pos), "y":(y_pos)},
                                     {"x":(-0.5 * height + x_pos), "y":(-0.5 * width + y_pos)},
@@ -608,7 +608,7 @@ export default class Estimation {
         if (exp.curr_trial_data.width_height_ratio) {
             long_side = short_side * exp.curr_trial_data.width_height_ratio;
         }
-        if (exp.curr_trial_data.rotate && exp.curr_trial_data.rotate === 90) {
+        if (exp.curr_trial_data.mod_rotate_by && exp.curr_trial_data.mod_rotate_by === 90) {
             width = long_side;
             height = short_side;
         } else {
@@ -633,7 +633,7 @@ export default class Estimation {
                         let short_side = size;
                         let long_side = exp.curr_trial_data.width_height_ratio * short_side;
                         let new_width = 0, new_height = 0;
-                        if (exp.curr_trial_data.rotate && exp.curr_trial_data.rotate === 90) {
+                        if (exp.curr_trial_data.mod_rotate_by && exp.curr_trial_data.mod_rotate_by === 90) {
                             new_width = long_side;
                             new_height = short_side;
                         } else {
@@ -662,10 +662,10 @@ export default class Estimation {
         let exp = this;
         let x1, x2, y1, y2;
         if (!is_ref) {
-            x1 = x_pos - (width / 2) * Math.sin(exp.curr_trial_data.rotate * Math.PI / 180);
-            x2 = x_pos + (width / 2) * Math.sin(exp.curr_trial_data.rotate * Math.PI / 180);
-            y1 = y_pos - (width / 2) * Math.cos(exp.curr_trial_data.rotate * Math.PI / 180);
-            y2 = y_pos + (width / 2) * Math.cos(exp.curr_trial_data.rotate * Math.PI / 180);
+            x1 = x_pos - (width / 2) * Math.sin(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
+            x2 = x_pos + (width / 2) * Math.sin(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
+            y1 = y_pos - (width / 2) * Math.cos(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
+            y2 = y_pos + (width / 2) * Math.cos(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
         } else {
             x1 = x_pos - width / 2;
             x2 = x_pos + width / 2;
@@ -687,10 +687,10 @@ export default class Estimation {
                     if (event.key === "m" || event.key === "z") {
                         width = exp.calculate_size_change(event.key, width);
                         if (!is_ref) {
-                            x1 = x_pos - (width / 2) * Math.sin(exp.curr_trial_data.rotate * Math.PI / 180);
-                            x2 = x_pos + (width / 2) * Math.sin(exp.curr_trial_data.rotate * Math.PI / 180);
-                            y1 = y_pos - (width / 2) * Math.cos(exp.curr_trial_data.rotate * Math.PI / 180);
-                            y2 = y_pos + (width / 2) * Math.cos(exp.curr_trial_data.rotate * Math.PI / 180);
+                            x1 = x_pos - (width / 2) * Math.sin(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
+                            x2 = x_pos + (width / 2) * Math.sin(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
+                            y1 = y_pos - (width / 2) * Math.cos(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
+                            y2 = y_pos + (width / 2) * Math.cos(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
                         } else {
                             x1 = x_pos - width / 2;
                             x2 = x_pos + width / 2;
