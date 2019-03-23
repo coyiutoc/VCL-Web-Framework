@@ -42,6 +42,8 @@ Currently supported experiments:
 | Shape: Circle, Square, Triangle| Estimation      | Shape           | Random          |
 | Line Length                    | Estimation      | Line            | Random          |
 | Shape: Rectangle, Square       | Estimation      | Shape           | Random          |
+| Shape: Rectangle, Rotated Square (Solid)       | Estimation      | Shape           | Random          |
+| Shape: Rectangle, Rotated Square (Outline)     | Estimation      | Shape           | Random          |
 | Shape: Triangle                | Estimation      | Shape           | Random          |
 
 1/2/2019 - Madison's Visual Search + Numerosity experiments from December 2018 can be found [here.](https://github.com/Wongelawit/Correlation_MultipleEnsemble/tree/Numerosity-Task)
