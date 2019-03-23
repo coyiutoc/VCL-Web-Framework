@@ -17,7 +17,9 @@ export default class Estimation {
         if (params.condition !== 'shape_estimation'
             && params.condition !== 'line_length'
             && params.condition !== 'rectangle_square'
-            && params.condition !== 'triangle') {
+            && params.condition !== 'triangle'
+            && params.condition !== 'rectangle_rotated_square_solid'
+            && params.condition !== 'rectangle_rotated_square_outline') {
             throw  Error("unexpected condition name " + params.condition);
         }
         this.condition_name = params.condition;
@@ -484,7 +486,16 @@ export default class Estimation {
                                           // however x_pos and y_pos specifies the center of the shape
             .attr("width", width)
             .attr("height", width)
-            .attr("fill", exp.curr_trial_data.fill_color);
+            .attr("fill", exp.curr_trial_data.fill_color)
+            .attr("stroke", exp.curr_trial_data.outline? exp.curr_trial_data.outline : exp.curr_trial_data.fill_color)
+        if (is_ref === true && exp.curr_trial_data.ref_rotate_by) {
+            let transform = "rotate(";
+            transform = transform + exp.curr_trial_data.ref_rotate_by.toString();
+            transform = transform + " " + (x_pos - width / 2).toString();
+            transform = transform + " " + (y_pos - width / 2).toString();
+            transform = transform + ")";
+            d3.select("#square_shape_ref").attr("transform", transform);
+        }
         if (is_ref === false) {
             d3.select("body")
                 .on("keydown", () => {
@@ -623,7 +634,8 @@ export default class Estimation {
             // however x_pos and y_pos specifies the center of the shape
             .attr("width", width)
             .attr("height", height)
-            .attr("fill", exp.curr_trial_data.fill_color);
+            .attr("fill", exp.curr_trial_data.fill_color)
+            .attr("stroke", exp.curr_trial_data.outline? exp.curr_trial_data.outline : exp.curr_trial_data.fill_color);
         if (is_ref === false) {
             d3.select("body")
                 .on("keydown", function () {

@@ -153,8 +153,10 @@ function get_estimation_route(condition_name) {
             return "/experiment/estimation/graph_type/line/range/estimation/condition/line_length/balancing/random";
         case 'Shape: Rectangle, Square':
             return "/experiment/estimation/graph_type/shape/range/estimation/condition/rectangle_square/balancing/random";
-        case 'Shape: Rectangle, Rotated Square':
-            return "/experiment/estimation/graph_type/shape/range/estimation/condition/rectangle_rotated_square/balancing/random";
+        case 'Shape: Rectangle, Rotated Square (Solid)':
+            return "/experiment/estimation/graph_type/shape/range/estimation/condition/rectangle_rotated_square_solid/balancing/random";
+        case 'Shape: Rectangle, Rotated Square (Outline)':
+            return "/experiment/estimation/graph_type/shape/range/estimation/condition/rectangle_rotated_square_outline/balancing/random";
         case 'Shape: Triangle':
             return "/experiment/estimation/graph_type/shape/range/estimation/condition/triangle/balancing/random";
         default:
