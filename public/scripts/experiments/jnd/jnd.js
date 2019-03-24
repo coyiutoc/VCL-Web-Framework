@@ -23,7 +23,8 @@ export default class JND {
     let balancing_type = params["balancing"];
 
     this.condition_name = condition_name; 
-    this.condition_group = this.condition_name.split('_')[0];
+    this.condition_group = this.condition_name.split('_')[0]; // Mostly to handle "distractor" conditions.
+                                                              // TODO: Should have a better flag for it.
     this.subject_id = params["subject_id"];
     this.subject_initials = params["subject_initials"];
 
@@ -94,6 +95,7 @@ export default class JND {
     // Prepare experiment + practice data
     this.prepare_experiment();
     this.prepare_practice();   
+
   }
 
   /**
@@ -655,7 +657,7 @@ export default class JND {
     //    Basically, domain = input, range = ouput. 
     var xscale = d3.scaleLinear()
                    .domain([0, multiplier]) 
-                   .range([0, width]);
+                   .range([0, width-10]); // Make range slightly smaller to account for points getting cut off
 
     var yscale = d3.scaleLinear()
                    .domain([multiplier * -1, 0]) // !!! NOTE: this is the hack b/c we flipped the y-values 
@@ -698,24 +700,32 @@ export default class JND {
       if (this.condition_group === "distractor"){ 
            
         let dataset = datasets[i];
-        let distractor = distractors[i];
 
-        // Alternate plotting of distractor and main dataset points - want equal chance of one
-        // getting occluded over the other
-        for (let j in dataset) {
+        // If color is WHITE on square condition, just plot TARGET dataset (no distractor)
+        if (this.trial_data.dist_color === "WHITE" && this.trial_data.dist_shape === "square"){
 
-          let point = dataset[j];
-          let dist_point = distractor[j];
+          this.plot_scatter_data(chart, xscale, yscale, datasets[i], this.trial_data.point_size, this.trial_data.target_color, this.trial_data.target_shape);  
 
-          // Distractor point
-          this.plot_scatter_data(chart, xscale, yscale, [point], this.trial_data.point_size, this.trial_data.point_color);  
+        } else {
+          let distractor = distractors[i];
 
-          // Target point    
-          this.plot_scatter_data(chart, xscale, yscale, [dist_point], this.trial_data.dist_point_size, this.trial_data.dist_color);
+          // Alternate plotting of distractor and main dataset points - want equal chance of one
+          // getting occluded over the other
+          for (let j in dataset) {
 
+            let point = dataset[j];
+            let dist_point = distractor[j];
+
+            // Distractor point
+            this.plot_scatter_data(chart, xscale, yscale, [point], this.trial_data.point_size, this.trial_data.target_color, this.trial_data.target_shape);  
+
+            // Target point    
+            this.plot_scatter_data(chart, xscale, yscale, [dist_point], this.trial_data.point_size, this.trial_data.dist_color, this.trial_data.dist_shape);
+          }
         }
+
       } else {
-          this.plot_scatter_data(chart, xscale, yscale, datasets[i], this.trial_data.point_size, this.trial_data.point_color);        
+          this.plot_scatter_data(chart, xscale, yscale, datasets[i], this.trial_data.point_size, this.trial_data.point_color, "none");        
       }     
 
       // Set axis color
@@ -732,21 +742,72 @@ export default class JND {
   }
 
   /**
-   * D3 code for appending data into the graph. 
+   * D3 code for appending data to the graph.
+   *
+   * @param {object}   chart
+   * @param {function} xscale
+   * @param {function} yscale
+   * @param {array}    data ([x_value, y_value])
+   * @param {integer}  point_size
+   * @param {string}   point_color
+   * @param {string}   point_shape
    */
-  plot_scatter_data(chart, xscale, yscale, data, point_size, point_color) {
+  plot_scatter_data(chart, xscale, yscale, data, point_size, point_color, point_shape) {
 
-    chart.selectAll("circle_data")
-               .data(data)
-                .enter()
-                .append("circle") // Creating the circles for each entry in data set 
-                .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
-                  return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
-                })
-                .attr("cy", function (d) {
-                  return yscale(d[1]);
-                })
-                .attr("r", point_size).style("fill", point_color);
+    switch(point_shape){
+      case "square":
+        chart.selectAll("square_data")
+                   .data(data)
+                    .enter()
+                    .append("rect") 
+                    .attr("x", function (d){
+                      return xscale(d[0]) + 60;
+                    })
+                    .attr("y", function (d){
+                      return yscale(d[1]);
+                    })
+                    .attr("width", point_size)
+                    .attr("height", point_size)
+                    .style('fill', point_color);
+        break;
+
+      case "diamond":
+        chart.selectAll("square_data")
+                   .data(data)
+                    .enter()
+                    .append("rect") 
+                    .attr("x", function (d){
+                      return xscale(d[0]) + 60;
+                    })
+                    .attr("y", function (d){
+                      return yscale(d[1]);
+                    })
+                    .attr("width", point_size)
+                    .attr("height", point_size)
+                    .style('fill', point_color)
+                    .attr('transform', function(d){
+                      // Adapted from: https://stackoverflow.com/questions/44817414/rotate-svg-in-place-using-d3-js
+                      var x1 = xscale(d[0]) + 60 + point_size/2; //the center x about which you want to rotate
+                      var y1 = yscale(d[1]) + point_size/2; //the center y about which you want to rotate
+
+                      return `rotate(45, ${x1}, ${y1})`; //rotate 180 degrees about x and y
+                  }); 
+        break;
+
+      default:
+        chart.selectAll("circle_data")
+                   .data(data)
+                    .enter()
+                    .append("circle") // Creating the circles for each entry in data set 
+                    .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
+                      return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
+                    })
+                    .attr("cy", function (d) {
+                      return yscale(d[1]);
+                    })
+                    .attr("r", point_size).style("fill", point_color);
+        break;
+    }
   }
 
   /**

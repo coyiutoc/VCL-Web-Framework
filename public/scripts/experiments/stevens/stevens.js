@@ -23,6 +23,8 @@ export default class Stevens {
     let balancing_type = params["balancing"];
 
     this.condition_name = condition_name; 
+    this.condition_group = this.condition_name.split('_')[0]; // Mostly to handle "distractor" conditions.
+                                                              // TODO: Should have a better flag for it.
     this.subject_id = params["subject_id"];
     this.subject_initials = params["subject_initials"];
 
@@ -81,6 +83,7 @@ export default class Stevens {
     this.left_coordinates = "";
     this.right_coordinates = "";
     this.middle_coordinates = "";
+    this.distractor_coordinates = "";
     this.distribution_size = "";
     this.trial_data = "";
 
@@ -108,50 +111,18 @@ export default class Stevens {
 
     let dataset = this.raw_constants;
 
-    // To hold individual data sets according to round type
-    var test_dataset = [];
-    var consistency_dataset = [];
-
-    // To hold balanced indexes
-    var test_order = []; 
-    var consistency_order = [];
-
-    // Extract dataset according to test or consistency round type
-    for (let subcondition of dataset) {
-
-      if (subcondition["round_type"] === "test") {
-        test_dataset.push(subcondition);
-      } else {
-        consistency_dataset.push(subcondition);
-      }
-    }
-
-    // Get balancing order for EACH round type dataset individually
-    switch(this.balancing_type) {
-
-      case 'latin_square':
-        test_order = initialize_latin_square(test_dataset.length);
-        consistency_order = initialize_latin_square(consistency_dataset.length);
-        break;
-
-      case 'random':
-        test_order = initialize_latin_square(test_dataset.length);
-        consistency_order = initialize_latin_square(consistency_dataset.length);
-        break;
-
-      default:
-        throw Error(this.balancing_type + " balancing type is not supported.");
-    }
-
-    // Since test dataset will run first, add index length of it to consistency order
-    for (let i = 0; i < consistency_order.length; i++) {
-      consistency_order[i] += test_dataset.length;
-    }
-
-    //  Merge the two orders 
-    this.sub_condition_order = test_order.concat(consistency_order);
-
     var ordered_dataset = [];
+
+    switch (this.range) {
+
+      case "foundational":
+        this.set_foundational_dataset_order(dataset);
+        break;
+
+      case "design":
+        this.set_design_dataset_order(dataset);
+        break;
+    }
 
     // Order the data set according to the latin square
     for (let i=0; i < this.sub_condition_order.length; i++){
@@ -194,6 +165,81 @@ export default class Stevens {
     this.sub_conditions_constants = practice_dataset;
     this.current_sub_condition_index = 0; 
     this.input_count_array = new Array(this.sub_conditions_constants[0].trials_per_round).fill(0);
+  }
+
+  /**
+   * Sets the subcondition order for design range.
+   *
+   * @param  dataset {[{assoc array}, {assoc array}, ... ]}   The data used to be ordered. 
+   */
+  set_design_dataset_order(dataset) {
+
+    switch(this.balancing_type) {
+
+      case 'latin_square':
+        this.sub_condition_order = initialize_latin_square(dataset.length);
+        break;
+
+      case 'random':
+        this.sub_condition_order = initialize_random_order(dataset.length);
+        break;
+
+      default:
+        throw Error(this.balancing_type + " balancing type is not supported.");
+    }
+  }
+
+  /**
+   * Sets the subcondition order for foundational range.
+   * Needs to balance INDIVIDUALLY the round and test type conditions,
+   * then maintain that order (e.g. all test goes first, then consistency)
+   *
+   * @param  dataset {[{assoc array}, {assoc array}, ... ]}   The data used to be ordered. 
+   */
+  set_foundational_dataset_order(dataset) {
+
+    // To hold individual data sets according to round type
+    var test_dataset = [];
+    var consistency_dataset = [];
+
+    // To hold balanced indexes
+    var test_order = []; 
+    var consistency_order = [];
+
+    // Extract dataset according to test or consistency round type
+    for (let subcondition of dataset) {
+
+      if (subcondition["round_type"] === "test") {
+        test_dataset.push(subcondition);
+      } else {
+        consistency_dataset.push(subcondition);
+      }
+    }
+
+    // Get balancing order for EACH round type dataset individually
+    switch(this.balancing_type) {
+
+      case 'latin_square':
+        test_order = initialize_latin_square(test_dataset.length);
+        consistency_order = initialize_latin_square(consistency_dataset.length);
+        break;
+
+      case 'random':
+        test_order = initialize_random_order(test_dataset.length);
+        consistency_order = initialize_random_order(consistency_dataset.length);
+        break;
+
+      default:
+        throw Error(this.balancing_type + " balancing type is not supported.");
+    }
+
+    // Since test dataset will run first, add index length of it to consistency order
+    for (let i = 0; i < consistency_order.length; i++) {
+      consistency_order[i] += test_dataset.length;
+    }
+
+    //  Merge the two orders 
+    this.sub_condition_order = test_order.concat(consistency_order);
   }
 
   /**
@@ -393,6 +439,11 @@ export default class Stevens {
                                                         constants.mean, 
                                                         constants.SD);
 
+          // If there is a distractor population, generate it:
+          if (stevens_exp.condition_group === "distractor") {
+            stevens_exp.generate_distractor_coordinates(constants);
+          }
+
           // Randomize position of the high and low correlated graphs for a given round
           if (trial.data.round_refreshes == 1){
             var result = randomize_position(trial, 
@@ -413,6 +464,7 @@ export default class Stevens {
           }
 
           stevens_exp.middle_coordinates = estimated_coordinates;  
+
           stevens_exp.distribution_size = constants.num_points; 
           stevens_exp.trial_data = trial.data; 
 
@@ -423,6 +475,38 @@ export default class Stevens {
       };
 
     return trial; 
+  }
+
+  /**
+   * Will generate the distractor coordinates and save them to the instance.
+   *
+   * @param  {object}  constants (for the given trial)       
+   */
+  generate_distractor_coordinates(constants) {
+
+    let left_dist_coordinates = generateDistribution(constants.dist_base,
+                                                           constants.dist_error,
+                                                           constants.dist_num_points,
+                                                           constants.num_SD,
+                                                           constants.mean,
+                                                           constants.SD);
+
+    
+    let middle_dist_coordinates = generateDistribution(constants.dist_base,
+                                                           constants.dist_error,
+                                                           constants.dist_num_points,
+                                                           constants.num_SD,
+                                                           constants.mean,
+                                                           constants.SD);
+
+    let right_dist_coordinates = generateDistribution(constants.dist_base,
+                                                           constants.dist_error,
+                                                           constants.dist_num_points,
+                                                           constants.num_SD,
+                                                           constants.mean,
+                                                           constants.SD);
+
+    this.distractor_coordinates = [left_dist_coordinates, middle_dist_coordinates, right_dist_coordinates];
   }
 
   /**
@@ -803,10 +887,19 @@ export default class Stevens {
     var middle_dataset = prepare_coordinates(this.middle_coordinates, this.distribution_size);
 
     var datasets = [left_dataset, middle_dataset, right_dataset];
+    var distractors = [];
+
+    if (this.condition_group === "distractor"){
+      var left_dist_dataset = prepare_coordinates(this.distractor_coordinates[0], this.distribution_size);
+      var middle_dist_dataset = prepare_coordinates(this.distractor_coordinates[1], this.distribution_size);
+      var right_dist_dataset = prepare_coordinates(this.distractor_coordinates[2], this.distribution_size);
+
+      distractors = [left_dist_dataset, middle_dist_dataset, right_dist_dataset];
+    }
 
     switch(this.graph_type){
       case "scatter":
-        this.plot_scatter(datasets);
+        this.plot_scatter(datasets, distractors);
         break;
       case "strip":
         this.plot_strip(datasets);
@@ -820,9 +913,10 @@ export default class Stevens {
   /**
    * Plots distributions using scatter plots. 
    *
-   * @ param  datasets   {array}
+   * @ param  datasets    {array}
+   * @ param  distractors {array}
    */
-  plot_scatter(datasets) {
+  plot_scatter(datasets, distractors) {
 
     var stevens_exp = this;
 
@@ -836,7 +930,7 @@ export default class Stevens {
     //    Basically, domain = input, range = ouput. 
     var xscale = d3.scaleLinear()
                    .domain([0, multiplier]) 
-                   .range([0, width]);
+                   .range([0, width - 10]);
 
     var yscale = d3.scaleLinear()
                    .domain([multiplier * -1, 0]) // !!! NOTE: this is the hack b/c we flipped the y-values 
@@ -856,7 +950,7 @@ export default class Stevens {
 
     var count = 0;
     // Create/append the SVG for both graphs: 
-    for (var data of datasets){
+    for (let i in datasets){
       
       if (count > 0){
         var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
@@ -883,19 +977,29 @@ export default class Stevens {
                                 .attr("transform", "translate(50, " + xAxisTranslate  +")")
                                 .call(x_axis)
 
-      // Populating data: 
-      chart.selectAll("circle") // Technically no circles inside div yet, but will be creating it
-            .data(data)
-              .enter()
-              .append("circle") // Creating the circles for each entry in data set 
-              .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
-                return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
-              })
-              .attr("cy", function (d) {
-                return yscale(d[1]);
-              })
-              .attr("r", 2)
-              .attr("r", stevens_exp.trial_data.point_size).style("fill", stevens_exp.trial_data.point_color);
+      // TODO: Different handling for distractor - needs to be abstracted out somehow in future    
+      if (this.condition_group === "distractor"){ 
+           
+        let dataset = datasets[i];
+        let distractor = distractors[i];
+
+        // Alternate plotting of distractor and main dataset points - want equal chance of one
+        // getting occluded over the other
+        for (let j in dataset) {
+
+          let point = dataset[j];
+          let dist_point = distractor[j];
+
+          // Distractor point
+          this.plot_scatter_data(chart, xscale, yscale, [point], this.trial_data.point_size, this.trial_data.target_color, this.trial_data.target_shape);  
+
+          // Target point    
+          this.plot_scatter_data(chart, xscale, yscale, [dist_point], this.trial_data.point_size, this.trial_data.dist_color, this.trial_data.dist_shape);
+
+        }
+      } else {
+          this.plot_scatter_data(chart, xscale, yscale, datasets[i], this.trial_data.point_size, this.trial_data.point_color, "none");        
+      }     
 
       // Set axis color
       chart.selectAll("path")
@@ -909,6 +1013,76 @@ export default class Stevens {
 
     // Set background color
     document.body.style.backgroundColor = stevens_exp.trial_data.background_color;
+  }
+
+ /**
+   * D3 code for appending data to the graph.
+   *
+   * @param {object}   chart
+   * @param {function} xscale
+   * @param {function} yscale
+   * @param {array}    data ([x_value, y_value])
+   * @param {integer}  point_size
+   * @param {string}   point_color
+   * @param {string}   point_shape
+   */
+  plot_scatter_data(chart, xscale, yscale, data, point_size, point_color, point_shape) {
+
+    switch(point_shape){
+
+      case "square":
+        chart.selectAll("square_data")
+                   .data(data)
+                    .enter()
+                    .append("rect") 
+                    .attr("x", function (d){
+                      return xscale(d[0]) + 60;
+                    })
+                    .attr("y", function (d){
+                      return yscale(d[1]);
+                    })
+                    .attr("width", point_size)
+                    .attr("height", point_size)
+                    .style('fill', point_color);
+        break;
+
+      case "diamond":
+        chart.selectAll("square_data")
+                   .data(data)
+                    .enter()
+                    .append("rect") 
+                    .attr("x", function (d){
+                      return xscale(d[0]) + 60;
+                    })
+                    .attr("y", function (d){
+                      return yscale(d[1]);
+                    })
+                    .attr("width", point_size)
+                    .attr("height", point_size)
+                    .style('fill', point_color)
+                    .attr('transform', function(d){
+                      // Adapted from: https://stackoverflow.com/questions/44817414/rotate-svg-in-place-using-d3-js
+                      var x1 = xscale(d[0]) + 60 + point_size/2; //the center x about which you want to rotate
+                      var y1 = yscale(d[1]) + point_size/2; //the center y about which you want to rotate
+
+                      return `rotate(45, ${x1}, ${y1})`; //rotate 180 degrees about x and y
+                  }); 
+        break;
+        
+      default:
+        chart.selectAll("circle_data")
+                   .data(data)
+                    .enter()
+                    .append("circle") // Creating the circles for each entry in data set 
+                    .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
+                      return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
+                    })
+                    .attr("cy", function (d) {
+                      return yscale(d[1]);
+                    })
+                    .attr("r", point_size).style("fill", point_color);
+        break;
+    }
   }
 
   /**

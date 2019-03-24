@@ -4,8 +4,9 @@
     <link rel="icon" href="./img/VCL_favicon.png">
     <title>VCL Web Framework</title>
 
-    <!-- Scripts: -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Scripts: -->  
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<!--     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 
@@ -45,7 +46,7 @@
             JND
         </button>
 
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu1" style="">
+        <div id = "JND-dropdown" class="dropdown-menu" aria-labelledby="dropdownMenu1" style="">
 
             <a href="#" onclick='set_condition("JND", "Scatter: Base");' class="dropdown-item" >
                 Scatter: Base
@@ -65,7 +66,78 @@
             <a href="#" onclick='set_condition("JND", "Scatter: Multi-Phase");' class="dropdown-item" >
                 Scatter: Multi-Phase
             </a>
-
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Square Red Hue");' class="dropdown-item" >
+              Scatter: Distractor Square Red Hue
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Square Red Lum");' class="dropdown-item" >
+              Scatter: Distractor Square Red Lum
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Square Red Chrom");' class="dropdown-item" >
+              Scatter: Distractor Square Red Chrom
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Square Yellow Hue");' class="dropdown-item" >
+              Scatter: Distractor Square Yellow Hue
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Square Yellow Lum");' class="dropdown-item" >
+              Scatter: Distractor Square Yellow Lum
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Square Yellow Chrom");' class="dropdown-item" >
+              Scatter: Distractor Square Yellow Chrom
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Square Blue Hue");' class="dropdown-item" >
+              Scatter: Distractor Square Blue Hue
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Square Blue Lum");' class="dropdown-item" >
+              Scatter: Distractor Square Blue Lum
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Square Blue Chrom");' class="dropdown-item" >
+              Scatter: Distractor Square Blue Chrom
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Square Green Hue");' class="dropdown-item" >
+              Scatter: Distractor Square Green Hue
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Square Green Lum");' class="dropdown-item" >
+              Scatter: Distractor Square Green Lum
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Square Green Chrom");' class="dropdown-item" >
+              Scatter: Distractor Square Green Chrom
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Diamond Square Red Hue");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Red Hue
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Diamond Square Red Lum");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Red Lum
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Diamond Square Red Chrom");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Red Chrom
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Diamond Square Yellow Hue");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Yellow Hue
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Diamond Square Yellow Lum");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Yellow Lum
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Diamond Square Yellow Chrom");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Yellow Chrom
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Diamond Square Blue Hue");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Blue Hue
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Diamond Square Blue Lum");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Blue Lum
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Diamond Square Blue Chrom");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Blue Chrom
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Diamond Square Green Hue");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Green Hue
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Diamond Square Green Lum");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Green Lum
+            </a>
+            <a href="#" onclick='set_condition("JND", "Scatter: Distractor Diamond Square Green Chrom");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Green Chrom
+            </a>
         </div>
 
     </div>
@@ -124,7 +196,78 @@
             <a href="#" onclick='set_condition("Stevens", "Ring: Strip Ring Size");' class="dropdown-item" >
                 Ring: Strip Ring Size
             </a>
-
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Square Red Hue");' class="dropdown-item" >
+              Scatter: Distractor Square Red Hue
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Square Red Lum");' class="dropdown-item" >
+              Scatter: Distractor Square Red Lum
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Square Red Chrom");' class="dropdown-item" >
+              Scatter: Distractor Square Red Chrom
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Square Yellow Hue");' class="dropdown-item" >
+              Scatter: Distractor Square Yellow Hue
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Square Yellow Lum");' class="dropdown-item" >
+              Scatter: Distractor Square Yellow Lum
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Square Yellow Chrom");' class="dropdown-item" >
+              Scatter: Distractor Square Yellow Chrom
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Square Blue Hue");' class="dropdown-item" >
+              Scatter: Distractor Square Blue Hue
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Square Blue Lum");' class="dropdown-item" >
+              Scatter: Distractor Square Blue Lum
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Square Blue Chrom");' class="dropdown-item" >
+              Scatter: Distractor Square Blue Chrom
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Square Green Hue");' class="dropdown-item" >
+              Scatter: Distractor Square Blue Hue
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Square Green Lum");' class="dropdown-item" >
+              Scatter: Distractor Square Blue Lum
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Square Green Chrom");' class="dropdown-item" >
+              Scatter: Distractor Square Blue Chrom
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Diamond Square Red Hue");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Red Hue
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Diamond Square Red Lum");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Red Lum
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Diamond Square Red Chrom");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Red Chrom
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Diamond Square Yellow Hue");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Yellow Hue
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Diamond Square Yellow Lum");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Yellow Lum
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Diamond Square Yellow Chrom");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Yellow Chrom
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Diamond Square Blue Hue");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Blue Hue
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Diamond Square Blue Lum");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Blue Lum
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Diamond Square Blue Chrom");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Blue Chrom
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Diamond Square Green Hue");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Green Hue
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Diamond Square Green Lum");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Green Lum
+            </a>
+            <a href="#" onclick='set_condition("Stevens", "Scatter: Distractor Diamond Square Green Chrom");' class="dropdown-item" >
+              Scatter: Distractor Diamond Square Green Chrom
+            </a>
         </div>
 
     </div>

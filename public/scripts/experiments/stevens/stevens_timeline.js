@@ -25,16 +25,31 @@ timeline.push(welcome);
 
 switch(stevens_exp.graph_type){
   case "scatter":
-    var instructions = {
-      type: "html-keyboard-response",
-      stimulus: "<div align = 'center'> <p>In this experiment, you will be using the <b>m</b>" +
-          " and <b>z</b> keys to adjust the center graph <br> so that its correlation is roughly" +
-          " the <u>midpoint</u> between the left and right graphs. <br><br>" +
-          " <b>m</b> increases the correlation. <br>" +
-          " <b>z</b> decreases the correlation. <br><br>" + 
-          `<div style='float: left; margin-bottom: 25px;'><img src='${address}/img/stevens/scatter.png'></img></div>` +
-          "<br> <br> <br> When you are done adjusting the center graph, hit the <b>spacebar</b>." + 
-          "<br> Press any key to continue. </div>"      
+
+    if (stevens_exp.condition_group === "distractor") {
+      var instructions = {
+        type: "html-keyboard-response",
+        stimulus: "<div align = 'center'> <p>In this experiment, you will be using the <b>m</b>" +
+            " and <b>z</b> keys to adjust the center graph <br> so that its correlation is roughly" +
+            " the <u>midpoint</u> between the left and right graphs. <br><br>" +
+            " <b>m</b> increases the correlation. <br>" +
+            " <b>z</b> decreases the correlation. <br><br>" + 
+            `<div style='float: left; margin-bottom: 25px;'><img src='${address}/img/stevens/distractor_square.png'></img></div>` +
+            "<br> <br> <br> When you are done adjusting the center graph, hit the <b>spacebar</b>." + 
+            "<br> Press any key to continue. </div>"     
+      }
+    } else {
+      var instructions = {
+        type: "html-keyboard-response",
+        stimulus: "<div align = 'center'> <p>In this experiment, you will be using the <b>m</b>" +
+            " and <b>z</b> keys to adjust the center graph <br> so that its correlation is roughly" +
+            " the <u>midpoint</u> between the left and right graphs. <br><br>" +
+            " <b>m</b> increases the correlation. <br>" +
+            " <b>z</b> decreases the correlation. <br><br>" + 
+            `<div style='float: left; margin-bottom: 25px;'><img src='${address}/img/stevens/scatter.png'></img></div>` +
+            "<br> <br> <br> When you are done adjusting the center graph, hit the <b>spacebar</b>." + 
+            "<br> Press any key to continue. </div>"     
+       } 
     }    
     break;
   case "strip":
