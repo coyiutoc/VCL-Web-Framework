@@ -553,7 +553,8 @@ export default class JND_Radius {
     // Set up for randomizing position of circle or rect
     let count = 0;
     let random = Math.floor(Math.random() * Math.floor(2));
-    let order = random <= 0.5 ? [shapes[0], shapes[1]] : [shapes[1], shapes[0]];
+    //let order = random <= 0.5 ? [shapes[0], shapes[1]] : [shapes[1], shapes[0]];
+    let order = random <= 0.5 ? [this.trial_data.shape_1, this.trial_data.shape_2] : [this.trial_data.shape_2, this.trial_data.shape_1];
 
     let max_radius = Math.max(...radii);
     let diff = max_radius - Math.min(...radii);
@@ -596,7 +597,8 @@ export default class JND_Radius {
 
       } else if (order[count].includes("slice")) {
 
-        let degrees = order[count].split("-")[1];
+        //let degrees = order[count].split("-")[1];
+        let degrees = this.trial_data.slice_rotation;
         this.plot_slice(chart, radius, degrees, max_radius, diff);
 
       } else if (order[count] === "square") {

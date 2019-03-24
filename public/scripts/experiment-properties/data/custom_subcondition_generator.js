@@ -16,7 +16,8 @@ export var CUSTOM_CONDITIONS = {
     	"distractor_diamond_square_green_lum",
     	"distractor_diamond_square_green_chrom"
     ],
-    design_multi : []
+    design_multi : [],
+    estimation: []
 }
 
 export function get_subconditions(experiment) {

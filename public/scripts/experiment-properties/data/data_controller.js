@@ -1,7 +1,7 @@
 import {CUSTOM_CONDITIONS, get_subconditions} from "/scripts/experiment-properties/data/custom_subcondition_generator.js";
 import {JND_BASE, JND_CONDITIONS} from "/scripts/experiment-properties/data/constants/jnd_data.js";
 import {STEVENS_BASE, STEVENS_CONDITIONS} from "/scripts/experiment-properties/data/constants/stevens_data.js";
-import {JND_RADIUS_BASE} from "/scripts/experiment-properties/data/constants/jnd_radius_data.js";
+import {JND_RADIUS_BASE, JND_RADIUS_CONDITIONS} from "/scripts/experiment-properties/data/constants/jnd_radius_data.js";
 import {ESTIMATION_BASE, ESTIMATION_CONDITIONS} from "/scripts/experiment-properties/data/constants/estimation_data.js";
 
 export { get_data,
@@ -13,13 +13,15 @@ export { get_data,
 const EXPERIMENT_BASES = {
   "JND" : JND_BASE,
   "Stevens" : STEVENS_BASE,
-  "JND_Radius" : JND_RADIUS_BASE
+  "JND_Radius" : JND_RADIUS_BASE,
+  "Estimation" : ESTIMATION_BASE
 }
 
 const EXPERIMENT_CONDITIONS = {
   "JND" : JND_CONDITIONS,
   "Stevens" : STEVENS_CONDITIONS,
-  "JND_Radius" : []
+  "JND_Radius" : JND_RADIUS_CONDITIONS,
+  "Estimation" : ESTIMATION_CONDITIONS
 }
 
 // Add the subcondition name + how many subcondition repeats.

@@ -169,13 +169,13 @@ function get_JND_radius_route(condition_name) {
             return "/experiment/jnd_radius/graph_type/shape/range/foundational/condition/rotSquare_rotTriangle/balancing/random";
 
         case 'Shape: Slice, Triangle':
-            return "/experiment/jnd_radius/graph_type/shape/range/foundational/condition/slice-0_triangle/balancing/random";
+            return "/experiment/jnd_radius/graph_type/shape/range/foundational/condition/slice0_triangle/balancing/random";
 
         case 'Shape: Slice-45 Degrees, Triangle':
-            return "/experiment/jnd_radius/graph_type/shape/range/foundational/condition/slice-45_triangle/balancing/random";
+            return "/experiment/jnd_radius/graph_type/shape/range/foundational/condition/slice45_triangle/balancing/random";
 
         case 'Shape: Slice-90 Degrees, Triangle':
-            return "/experiment/jnd_radius/graph_type/shape/range/foundational/condition/slice-90_triangle/balancing/random";
+            return "/experiment/jnd_radius/graph_type/shape/range/foundational/condition/slice90_triangle/balancing/random";
 
         default:
             throw Error(condition_name + " condition is not supported for JND Radius.");

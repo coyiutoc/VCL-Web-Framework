@@ -6,19 +6,18 @@ Currently supported experiments:
 
 ### JND
 
-| Name                           | Trial Type      | Graph Type(s)   | Balancing       |
-| ------------------------------ | --------------- | --------------- | --------------- |
-| Base                           | Foundational    | Scatter, Strip  | Latin Square    |
-| Strip Ring Size                | Foundational    | Ring            | Latin Square    |
-| Line Length Strip              | Foundational    | Strip           | Latin Square    |
-| Distractor Rainbow             | Design          | Scatter         | Latin Square    |
-| Distractor Square Red Hue      | Design          | Scatter         | Latin Square    |
-| Distractor Square Red Lum      | Design          | Scatter         | Latin Square    |
-| Distractor Square Red Chro     | Design          | Scatter         | Latin Square    |
-| Multi-Phase [Task 1]           | Design-Multi    | Scatter         | Latin Square    |
+| Name                           				    		    | Trial Type      | Graph Type(s)   | Balancing       |
+| --------------------------------------------------------------| --------------- | --------------- | --------------- |
+| Base                           				   			    | Foundational    | Scatter, Strip  | Latin Square    |
+| Strip Ring Size                				   			    | Foundational    | Ring            | Latin Square    |
+| Line Length Strip              				   			    | Foundational    | Strip           | Latin Square    |
+| Distractor Rainbow             				   			    | Design          | Scatter         | Latin Square    |
+| Distractor Square Red/Blue/Green/Yellow Hue/Lum/Chro          | Design          | Scatter         | Latin Square    |
+| Distractor Square Diamond Red/Blue/Green/Yellow Hue/Lum/Chro  | Design          | Scatter         | Latin Square    |
+| Multi-Phase [Task 1]           				                | Design-Multi    | Scatter         | Latin Square    |
 
 
-### JND Radius
+### JND Radius 
 
 | Name                           | Trial Type      | Graph Type(s)   | Balancing       |
 | ------------------------------ | --------------- | --------------- | --------------- |
@@ -32,14 +31,13 @@ Currently supported experiments:
 
 ### Stevens
 
-| Name                           | Trial Type      | Graph Type(s)   | Balancing       |
-| ------------------------------ | --------------- | --------------- | --------------- |
-| Base                           | Foundational    | Scatter, Strip  | Latin Square    |
-| Strip Ring Size                | Foundational    | Ring            | Latin Square    |
-| Line Length Strip              | Foundational    | Strip           | Latin Square    |
-| Distractor Square Red Hue      | Design          | Scatter         | Latin Square    |
-| Distractor Square Red Lum      | Design          | Scatter         | Latin Square    |
-| Distractor Square Red Chro     | Design          | Scatter         | Latin Square    |
+| Name                           								| Trial Type      | Graph Type(s)   | Balancing       |
+| ------------------------------------------------------------- | --------------- | --------------- | --------------- |
+| Base                           								| Foundational    | Scatter, Strip  | Latin Square    |
+| Strip Ring Size                								| Foundational    | Ring            | Latin Square    |
+| Line Length Strip              								| Foundational    | Strip           | Latin Square    |
+| Distractor Square Red/Blue/Green/Yellow Hue/Lum/Chro          | Design          | Scatter         | Latin Square    |
+| Distractor Square Diamond Red/Blue/Green/Yellow Hue/Lum/Chro  | Design          | Scatter         | Latin Square    |
 
 ### Estimation
 
