@@ -38,19 +38,6 @@ switch(estimation_exp.graph_type){
                 "<br> <br> <br> When you are done adjusting the size, hit the <b>spacebar</b>." +
                 "<br> Press any key to continue. </div>"
             };
-        } else if (estimation_exp.condition_name === "line_length"){
-            var instructions = {
-                type: "html-keyboard-response",
-                stimulus: "<div align = 'center'> <p>In this experiment, you will be using the <b>m</b>" +
-                " and <b>z</b> keys to adjust the size of the modifiable shape<br> so that it's size is roughly" +
-                " the <u>same</u> as the reference shape. <br><br>" +
-                `<div><img src='${address}/img/sample_line_1.png'></img><img src='${address}/img/sample_line_2.png'></img></div>` +
-                " <b>m</b> increases the size. <br>" +
-                " <b>z</b> decreases the size. <br><br>" +
-                `<div style='float: left; margin-bottom: 25px;'></div>` +
-                "<br> <br> <br> When you are done adjusting the size, hit the <b>spacebar</b>." +
-                "<br> Press any key to continue. </div>"
-            };
         } else if (estimation_exp.condition_name === "triangle") {
             var instructions = {
                 type: "html-keyboard-response",
@@ -105,6 +92,23 @@ switch(estimation_exp.graph_type){
             };
         }
         break;
+    case 'line': {
+        if (estimation_exp.condition_name === "line_length"){
+            var instructions = {
+                type: "html-keyboard-response",
+                stimulus: "<div align = 'center'> <p>In this experiment, you will be using the <b>m</b>" +
+                " and <b>z</b> keys to adjust the size of the modifiable shape<br> so that it's size is roughly" +
+                " the <u>same</u> as the reference shape. <br><br>" +
+                `<div><img src='${address}/img/sample_line_1.png'></img><img src='${address}/img/sample_line_2.png'></img></div>` +
+                " <b>m</b> increases the size. <br>" +
+                " <b>z</b> decreases the size. <br><br>" +
+                `<div style='float: left; margin-bottom: 25px;'></div>` +
+                "<br> <br> <br> When you are done adjusting the size, hit the <b>spacebar</b>." +
+                "<br> Press any key to continue. </div>"
+            };
+        }
+        break;
+    }
     default:
         throw Error("unexpected condition name");
 }
