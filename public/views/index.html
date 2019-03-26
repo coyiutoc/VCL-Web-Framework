@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
     <!-- Routing helper: -->
-    <script type="text/javascript" src="/scripts/helpers/routing_helper.js" ></script>
     <script type="text/javascript" src="/scripts/routing/conditions.js"></script>
 
 </head>
@@ -24,12 +23,7 @@
       <img src="../img/VCL_favicon.png"></img>
       <br>
       <h1><b>Visual Cognition Lab</b></h1> 
-      <h2>Web Framework</h2>
-      <br>
-      <span style="display: block; background-color: #d0d5db; padding: 1px">
-        <div id = "feedback"><p><h6>Input the experiment parameters below.</h6></p></div>
-      </span>
-      <br>
+      <hr>
       <form>
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -49,8 +43,8 @@
               <div class="form-group col-md-12">
                 <label for="experiment-label"><b>Experiment:</b></label>
                 <select id = "experiment-select" class="custom-select">
-                  <option selected>---</option>
-                  <option value="jnd">JND</option>
+                  <!-- <option selected>---</option> -->
+                  <option value="jnd" selected>JND</option>
                   <option value="jnd_radius">JND Radius</option>
                   <option value="stevens">Stevens</option>
                   <option value="estimation">Estimation</option>
@@ -62,8 +56,8 @@
               <div class="form-group col-md-12">
                 <label for="trial-struct-label"><b>Trial Structure:</b></label>
                 <select id = "trial-struct-select" class="custom-select">
-                  <option selected>---</option>
-                  <option value="foundational">Foundational</option>
+                  <!-- <option selected>---</option> -->
+                  <option value="foundational" selected>Foundational</option>
                   <option value="design">Design</option>
                   <option value="design_multi">Design Multi</option>
                   <option value="estimation">Estimation</option>
@@ -75,11 +69,11 @@
               <div class="form-group col-md-12">
                 <label for="graph-label"><b>Graph Type:</b></label>
                 <select id = "graph-select" class="custom-select">
-                  <option selected>---</option>
-                  <option value="scatter">Scatter</option>
+                  <!-- <option selected>---</option> -->
+                  <option value="scatter" selected>Scatter</option>
                   <option value="strip">Strip</option>
                   <option value="ring">Ring</option>
-                  <option value="shape">Shape</option>
+                  <option value="shapes">Shapes</option>
                 </select>
               </div>
             </div>
@@ -90,26 +84,6 @@
               <div class="form-group col-md-12">
                 <label for="sub-menu-label"><b>Supported Conditions:</b></label>
                 <ul id = "conditions-list" class="sub-menu">
-<!--                     <li>This is option one.</li>
-                    <li>This is a second option.</li>
-                    <li>We'll need three.</li>
-                    <li>And now these are out of view.</li>
-                    <li>I'm the last option.</li>
-                    <li>This is option one.</li>
-                    <li>This is a second option.</li>
-                    <li>We'll need three.</li>
-                    <li>And now these are out of view.</li>
-                    <li>I'm the last option.</li>
-                    <li>This is option one.</li>
-                    <li>This is a second option.</li>
-                    <li>We'll need three.</li>
-                    <li>And now these are out of view.</li>
-                    <li>I'm the last option.</li>
-                    <li>This is option one.</li>
-                    <li>This is a second option.</li>
-                    <li>We'll need three.</li>
-                    <li>And now these are out of view.</li>
-                    <li>I'm the last option.</li> -->
                 </ul>
               </div>
             </div>
@@ -119,10 +93,7 @@
 
         <br>
         <div class="form-row">
-          <div class="form-group col-md-6">
-            <input id = "save" type="button" onclick="" class="form-control btn btn-info" style="display: span;" value = "S A V E"></input>
-          </div>
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-12">
             <input id = "start" type="button" onclick="" class="form-control btn btn-success" style="display: block;" value = "S T A R T" disabled="true"></input>
           </div>
         </div>
@@ -133,45 +104,124 @@
 
   </body> 
 
-  <script type = "text/javascript">
+  <script type = "module">
 
-    // import {CONDITIONS} from "/scripts/routing/conditions.js";
+    import {CONDITIONS} from "/scripts/routing/conditions.js";
 
-    var experiment = "";
-    var trial_structure = "";
-    var graph_type = "";
+    var experiment = "jnd";
+    var trial_structure = "foundational";
+    var graph_type = "scatter";
 
     var DISPLAYED_CONDITIONS = {};
 
+    var selected_elem = null;
+
+    // Update the list on startup
+    update_conditions_list();
+
+    //////////////////////////////////////////////////////////
+    // JQuery UI Change Events
+
+    // Triggered on change of experiment selection drop down
     $('#experiment-select').change(function(){ 
         experiment = $(this).val();
         update_conditions_list();
     });
 
+    // Triggered on change of trial structure drop down
     $('#trial-struct-select').change(function(){ 
         trial_structure = $(this).val();
         update_conditions_list();
     });
 
+    // Triggered on change of graph type selection drop down
     $('#graph-select').change(function(){ 
         graph_type = $(this).val();
         update_conditions_list();
     });
 
+    // Triggered on click of start button
+    // Responsible for constructing the route 
+    $( "#start").click(function(){
+
+      let address = location.protocol + "//" + location.hostname + ":" + location.port;
+
+      let condition_name = selected_elem.id;
+
+      if (CONDITIONS[condition_name]){
+
+        if (!CONDITIONS[condition_name]["experiment"].includes(experiment)){
+          throw Error("Condition " + condition_name + " does not support experiment " + experiment);
+        }
+
+        if (!CONDITIONS[condition_name]["trial_structure"].includes(trial_structure)){
+          throw Error("Condition " + condition_name + " does not support trial structure " + trial_structure);
+        }
+
+        if (!CONDITIONS[condition_name]["graph_type"].includes(graph_type)){
+          throw Error("Condition " + condition_name + " does not support graph type " + graph_type);
+        }
+
+        address += `/experiment/${experiment}/graph_type/${graph_type}/trial_structure/${trial_structure}/condition/${condition_name}/balancing/${CONDITIONS[condition_name]["balancing"]}`;
+
+        let subject_initials = document.getElementById("subjectInitials_input").value;
+        let subject_id = document.getElementById("subjectID_input").value;
+
+        if (!subject_initials){
+          subject_initials = "test";
+        }
+
+        if (!subject_id){
+          subject_id = "test";
+        }
+
+        address += `/subject_id/${subject_id}/subject_initials/${subject_initials}`;
+        location.href = address;
+
+      } else {
+        throw Error("Condition name " + condition_name + " is not supported.");
+      }
+
+    });
+
+    //////////////////////////////////////////////////////////
+    // Helper functions
+
+    // Will update the conditions displayed upon change on any of the dropdowns 
     function update_conditions_list(){
 
+      // Iterate through every valid condition
       for (let key in CONDITIONS) {
 
           let condition = CONDITIONS[key];
-          let obj = {};
-          obj[key] = condition;
 
+          // If there is a valid condition matching the identifiers, append a li element for it
           if (check_condition(condition) && !DISPLAYED_CONDITIONS[key]) {
+
             $( "#conditions-list" ).append( `<li id = ${key}>${condition["display_name"]}</li>` );
             DISPLAYED_CONDITIONS[key] = condition;
-          }
-      }
 
+            let elem = document.getElementById(key);
+
+            // Adding a click event listener when an element is selected
+            elem.addEventListener("click", function(){
+              $("#start").attr("disabled", false);
+
+              // If previously selected element is not the same as currently selected,
+              // revert the highlight
+              if (selected_elem && elem !== selected_elem) { 
+                selected_elem.style.backgroundColor = "#ffffff";
+              }
+
+              elem.style.backgroundColor = "#ffbf80";
+              selected_elem = elem; 
+
+              });
+          }
+        }
+
+      // Checking for all conditions displayed, they are all valid conditions
+      // given the identifiers
       for (let key in DISPLAYED_CONDITIONS) {
 
         let condition = DISPLAYED_CONDITIONS[key];
@@ -182,8 +232,14 @@
         }
       }
 
+      // If nothing displayed, disable the start button
+      if (Object.keys(DISPLAYED_CONDITIONS).length === 0){
+        $("#start").attr("disabled", true);
+      }     
+
     }
 
+    // Validates if a condition has the selected identifiers
     function check_condition(condition){
       if (experiment !== "" && !condition["experiment"].includes(experiment)){
         return false;
@@ -199,36 +255,6 @@
 
       return true;
     }
-
-    $( "#save" ).click(function() {
-
-      var html = "";
-
-      if (experiment === "" || trial_structure === "" || graph_type === ""){
-        html = "<p><h6><font color = 'red'>Please select an item from each field.</font></h6></p>";
-      } else {
-        let text = "BLAH";
-        html = `<p><h6><b>Experiment set to: </b> ${text} </h6></p>`
-        debugger;
-        $("#start").attr("disabled", false);
-      }
-
-      $("#feedback").html(html);
-    });
-
-    $( "#start").click(function(){
-
-      let address = location.protocol + "//" + location.hostname + ":" + location.port;
-
-      let condition_name = "distractor_" + distractor + "_" + color + "_" + axis;
-
-      let route = `/experiment/jnd/graph_type/scatter/range/design/condition/${condition_name}/balancing/latin_square`;
-
-      route += "/subject_id/1/subject_initials/test";
-      address += route;
-
-      location.href = address;
-    });
    
   </script>
 

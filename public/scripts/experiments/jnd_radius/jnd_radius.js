@@ -17,7 +17,7 @@ export default class JND_Radius {
    */
   constructor(params) {
 
-    let range = params["range"];
+    let trial_structure = params["trial_structure"];
     let condition_name = params["condition"];
     let graph_type = params["graph_type"];
     let balancing_type = params["balancing"];
@@ -30,13 +30,13 @@ export default class JND_Radius {
     // ========================================
     // PARAMETER CHECKING
 
-    if (range !== "foundational") {
-      throw Error(range + " is not supported.") }
+    if (trial_structure !== "foundational") {
+      throw Error(trial_structure + " is not supported.") }
     else{
-      this.range = range;
+      this.trial_structure = trial_structure;
     }  
 
-    if (graph_type !== "shape") {
+    if (graph_type !== "shapes") {
       throw Error(graph_type + " is not supported.")} 
     else { 
       this.graph_type = graph_type;

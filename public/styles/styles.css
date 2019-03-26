@@ -12,7 +12,7 @@ body {
 
 .box {
   height: 80vh;
-  width: 60vw;
+  width: 50vw;
   left: 30%;
 /*  margin: -50px 0 0 -100px;*/
   position: absolute;
@@ -29,6 +29,8 @@ body {
     max-height: 13em;
     height: 13em;
     overflow-y: auto;
+    background-color: white;
+    text-align: left;
 }
 
 .sub-menu li {
