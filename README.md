@@ -39,6 +39,7 @@ Currently supported experiments:
 | Line Length Strip              								| Foundational    | Strip           | Latin Square    |
 | Distractor Square Red/Blue/Green/Yellow Hue/Lum/Chro          | Design          | Scatter         | Latin Square    |
 | Distractor Square Diamond Red/Blue/Green/Yellow Hue/Lum/Chro  | Design          | Scatter         | Latin Square    |
+| Distractor Blue/Red/Yellow/Control Shades           		    | Custom          | Scatter         | Latin Square    |
 
 ### Estimation
 
