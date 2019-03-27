@@ -11,7 +11,7 @@ var welcome = {
     type: 'html-keyboard-response',
     stimulus: `<div align = "center">` + `<img src="${address}/img/VCL_lab_logo.png"></img><br><br>` +
     `<b>Base:</b> estimation` + '<br>' +
-    `<b>Trial Type:</b> ${estimation_exp.range}` + '<br>' +
+    `<b>Trial Type:</b> ${estimation_exp.trial_structure}` + '<br>' +
     `<b>Graph Type:</b> ${estimation_exp.graph_type}` + '<br>' +
     `<b>Condition:</b> ${estimation_exp.condition_name}` +
     '<br><br><br><p><font size = 15>Press any key to begin.<p></font>' +

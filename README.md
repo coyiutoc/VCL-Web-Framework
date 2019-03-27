@@ -43,7 +43,11 @@ Currently supported experiments:
 
 | Name                           | Trial Type      | Graph Type(s)   | Balancing       |
 | ------------------------------ | --------------- | --------------- | --------------- |
-| Shape Estimation               | Estimation      | Shape           | Random          |
+| Circle, Square, Triangle       | Estimation      | Shape           | Random          |
+| Line Length                    | Estimation      | Shape           | Random          |
+| Rectangle, Square              | Estimation      | Shape           | Random          |
+| Triangle                       | Estimation      | Shape           | Random          |
+
 
 1/2/2019 - Madison's Visual Search + Numerosity experiments from December 2018 can be found [here.](https://github.com/Wongelawit/Correlation_MultipleEnsemble/tree/Numerosity-Task)
   

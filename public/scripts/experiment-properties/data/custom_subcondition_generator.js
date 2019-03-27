@@ -43,9 +43,9 @@ function generate_distractor_diamond_square_subconditions(experiment) {
 	
 	let square_name = array[0] + "_" + array[2] + "_" + array[3] + "_" + array[4];
 	let experiment_name = experiment.constructor.name;
-	let range = experiment.range;
+	let trial_structure = experiment.trial_structure;
 
-	let subconditions = create_condition_dataset(EXPERIMENT_BASES[experiment_name][range], EXPERIMENT_CONDITIONS[experiment_name][square_name]);
+	let subconditions = create_condition_dataset(EXPERIMENT_BASES[experiment_name][trial_structure], EXPERIMENT_CONDITIONS[experiment_name][square_name]);
 
 	for (let c of subconditions) {
 		c["dist_shape"] = "diamond";

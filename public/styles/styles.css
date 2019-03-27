@@ -11,7 +11,8 @@ body {
 }
 
 .box {
-  height: auto;
+  height: 80vh;
+  width: 50vw;
   left: 30%;
 /*  margin: -50px 0 0 -100px;*/
   position: absolute;
@@ -19,4 +20,32 @@ body {
   top: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+}
+
+.sub-menu {
+    padding: 0;
+    border: 1px solid #d0d5db;
+    border-radius: 5px;
+    max-height: 13em;
+    height: 13em;
+    overflow-y: auto;
+    background-color: white;
+    text-align: left;
+}
+
+.sub-menu li {
+    font-size: 1em;
+    padding: .25em 1em;
+    line-height: 1em;
+}
+
+.sub-menu li:hover {
+    background: #ace8ec;
+}
+
+.form-background {
+  background-color: rgb(172, 232, 236, 0.3);
+  border-radius: 5px;
+  padding: 5px;
+  padding-top: 20px;
 }

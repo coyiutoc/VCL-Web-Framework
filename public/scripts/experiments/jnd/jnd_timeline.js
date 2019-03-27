@@ -11,7 +11,7 @@ var welcome = {
   type: 'html-keyboard-response',
   stimulus: `<div align = "center">` + `<img src="${address}/img/VCL_lab_logo.png"></img><br><br>` +
             `<b>Base:</b> JND` + '<br>' + 
-            `<b>Trial Type:</b> ${jnd_exp.range}` + '<br>' + 
+            `<b>Trial Type:</b> ${jnd_exp.trial_structure}` + '<br>' + 
             `<b>Graph Type:</b> ${jnd_exp.graph_type}` + '<br>' + 
             `<b>Condition:</b> ${jnd_exp.condition_name}` + 
             '<br><br><br><p><font size = 15>Press any key to begin.<p></font>' +
@@ -26,7 +26,7 @@ timeline.push(welcome);
 switch(jnd_exp.graph_type){
   case "scatter":
 
-    if (jnd_exp.condition_name === "distractor_multi") {
+    if (jnd_exp.condition_name === "distractor_multi" || jnd_exp.condition_name === "distractor_rainbow") {
       var instructions = {
       type: "html-keyboard-response",
       stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear side-by-side." + 
