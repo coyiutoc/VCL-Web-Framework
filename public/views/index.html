@@ -12,6 +12,8 @@
     <!-- Style: -->
     <link rel="stylesheet" href="../styles/styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/balloon-css/0.5.0/balloon.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Routing helper: -->
     <script type="text/javascript" src="/scripts/routing/conditions.js"></script>
@@ -37,7 +39,7 @@
         </div>
         <br>
         <div class = "form-row form-background">
-          <div class = "form-group col-md-6">
+          <div class = "form-group col-md-4">
 
             <div class = "form-row">
               <div class="form-group col-md-12">
@@ -76,7 +78,7 @@
             </div>
 
           </div>
-          <div class = "form-group col-md-6">
+          <div class = "form-group col-md-8">
             <div class = "form-row">
               <div class="form-group col-md-12">
                 <label for="sub-menu-label"><b>Supported Conditions:</b></label>
@@ -96,14 +98,37 @@
         </div>
       </form>
       <br>
+    </div>
+
+<!--     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+      Launch demo modal
+    </button> -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modal-title">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body" id="modal-body">
+            ...
+          </div>
+<!--           <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div> -->
+        </div>
       </div>
     </div>
 
   </body> 
 
-  <script type = "module">
+  <script type = "text/javascript">
 
-    import {CONDITIONS} from "/scripts/routing/conditions.js";
+    //import {CONDITIONS} from "/scripts/routing/conditions.js";
 
     var experiment = "jnd";
     var trial_structure = "foundational";
@@ -195,25 +220,19 @@
           // If there is a valid condition matching the identifiers, append a li element for it
           if (check_condition(condition) && !DISPLAYED_CONDITIONS[key]) {
 
-            $( "#conditions-list" ).append( `<li id = ${key}>${condition["display_name"]}</li>` );
+            // Add key to displayed conditions
             DISPLAYED_CONDITIONS[key] = condition;
 
-            let elem = document.getElementById(key);
+            // Append li html to the list
+            $( "#conditions-list" ).append(generate_li_html(key));
 
             // Adding a click event listener when an element is selected
-            elem.addEventListener("click", function(){
-              $("#start").attr("disabled", false);
+            add_li_click_listener(key);
 
-              // If previously selected element is not the same as currently selected,
-              // revert the highlight
-              if (selected_elem && elem !== selected_elem) { 
-                selected_elem.style.backgroundColor = "#ffffff";
-              }
-
-              elem.style.backgroundColor = "#ffbf80";
-              selected_elem = elem; 
-
-              });
+            // If there is condition info, add listener for modal
+            if (condition["info"]) {
+              add_question_click_listener(key);
+            }
           }
         }
 
@@ -251,6 +270,74 @@
       }
 
       return true;
+    }
+
+    function generate_li_html(key){
+
+      let condition = CONDITIONS[key];
+
+      let question_id = key + "_question_icon";
+      let question_html = "";
+
+      if (condition["info"]){
+        question_html = `
+        <span style="float:right;"> 
+          <i id = ${question_id} class="fa fa-question-circle question-icon" data-toggle="modal" data-target="#modal" aria-hidden="true"></i>
+        </span>`;
+      }
+
+      let html = `
+      <li id = ${key}>
+        ${condition["display_name"]}
+        ${question_html}
+      </li> 
+      `;
+
+      return html;
+    }
+
+    function add_li_click_listener(key){
+      let li_elem = document.getElementById(key);
+
+      // Adding a click event listener when an element is selected
+      li_elem.addEventListener("click", function(){
+        $("#start").attr("disabled", false);
+
+        // If previously selected element is not the same as currently selected,
+        // revert the highlight
+        if (selected_elem && li_elem !== selected_elem) { 
+          selected_elem.style.backgroundColor = "#ffffff";
+        }
+
+        li_elem.style.backgroundColor = "#ffbf80";
+        selected_elem = li_elem; 
+
+        });
+    }
+
+    function add_question_click_listener(key){
+
+      let question_id = key + "_question_icon";
+      let i_elem = document.getElementById(question_id);
+
+      let condition = CONDITIONS[key];
+
+      i_elem.addEventListener("click", function(){
+        $("#modal-title").text(`${condition["display_name"]}`);
+
+        let html = `
+        <b>Experiment:</b> ${$('#experiment-select option:selected').text()}
+        <br>
+        <b>Trial Structure:</b> ${$('#trial-struct-select option:selected').text()}
+        <br>
+        <b>Graph Type:</b> ${$('#graph-select option:selected').text()}
+        <br>
+        <br>
+        ${condition["info"]["description"]}
+        `;
+
+        $("#modal-body").html(html);
+      })
     }
    
   </script>

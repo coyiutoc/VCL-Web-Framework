@@ -1,11 +1,15 @@
-export var CONDITIONS = {
+var CONDITIONS = {
 
 	base: {
 		experiment: ["jnd", "stevens"],
 		graph_type: ["scatter", "strip"],
 		trial_structure: "foundational",
 		balancing: "latin_square",
-		display_name: "Base"
+		display_name: "Base",
+		info: {
+			description: "The standard foundational base condition with no additional manipulation on how distributions are displayed or generated.",
+			developer: "Caitlin Coyiuto"
+		}
 	},
 
 	strip_ring_size: {
