@@ -16,8 +16,14 @@ export var CUSTOM_CONDITIONS = {
     	"distractor_diamond_square_green_lum",
     	"distractor_diamond_square_green_chrom"
     ],
-    design_multi : [],
-    estimation: []
+    estimation: [],
+    custom : [
+    	"distractor_multi",
+    	"distractor_blue_shades",
+    	"distractor_red_shades",
+    	"distractor_yellow_shades",
+    	"distractor_control_shades"
+    ]
 }
 
 export function get_subconditions(experiment) {
@@ -25,6 +31,15 @@ export function get_subconditions(experiment) {
 	if (is_distractor_diamond_square(experiment.condition_name)){
 		return generate_distractor_diamond_square_subconditions(experiment);
 	} 
+	else if (experiment.condition_name === "distractor_multi"){
+		return generate_distractor_multi_subconditions(experiment);
+	}
+	else if (experiment.condition_name === "distractor_blue_shades"   ||
+		     experiment.condition_name === "distractor_red_shades"    ||
+		     experiment.condition_name === "distractor_yellow_shades" ||
+		     experiment.condition_name === "distractor_control_shades"){
+		return generate_distractor_shades_subconditions(experiment);
+	}
 }
 
 function is_distractor_diamond_square(condition_name) {
@@ -72,4 +87,39 @@ function generate_distractor_diamond_square_subconditions(experiment) {
 	}
 
 	return subconditions;
+}
+
+function generate_distractor_multi_subconditions(experiment) {
+
+	let condition_name = experiment.condition_name;
+	let experiment_name = experiment.constructor.name;
+	let subconditions = EXPERIMENT_CONDITIONS[experiment_name][condition_name];
+
+	// Using the first 12 subconditions from the JND design:
+	let jnd_base_subconditions = EXPERIMENT_BASES[experiment_name]["design"].slice(1,13);
+
+	let dataset = create_condition_dataset(jnd_base_subconditions, subconditions);
+
+	let result = []
+
+	// Doing each set 4 times
+	for (let i = 0; i < 4; i++) {
+		result = result.concat(dataset);
+	}
+
+	return result;
+}
+
+function generate_distractor_shades_subconditions(experiment) {
+
+	let condition_name = experiment.condition_name;
+	let experiment_name = experiment.constructor.name;
+	let subconditions = EXPERIMENT_CONDITIONS[experiment_name][condition_name];
+
+	// Using the first 12 subconditions from the JND design:
+	let jnd_base_subconditions = EXPERIMENT_BASES[experiment_name]["design"].slice(1,13);
+
+	let dataset = create_condition_dataset(jnd_base_subconditions, subconditions);
+
+	return dataset;
 }

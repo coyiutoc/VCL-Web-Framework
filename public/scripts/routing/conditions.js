@@ -35,7 +35,7 @@ export var CONDITIONS = {
 	distractor_multi: {
 		experiment: ["jnd"],
 		graph_type: ["scatter"],
-		trial_structure: ["design_multi"],
+		trial_structure: ["custom"],
 		balancing: "latin_square",
 		display_name: "Multi-Phase (Task 1)"
 	},
@@ -318,5 +318,37 @@ export var CONDITIONS = {
 		trial_structure: ["estimation"],
 		balancing: "random",
 		display_name: "Triangle"
+	},
+
+	distractor_blue_shades: {
+		experiment: ["jnd"],
+		graph_type: ["scatter"],
+		trial_structure: ["custom"],
+		balancing: "latin_square",
+		display_name: "Distractor Blue Shades"
+	},
+
+	distractor_red_shades: {
+		experiment: ["jnd"],
+		graph_type: ["scatter"],
+		trial_structure: ["custom"],
+		balancing: "latin_square",
+		display_name: "Distractor Red Shades"
+	},
+
+	distractor_yellow_shades: {
+		experiment: ["jnd"],
+		graph_type: ["scatter"],
+		trial_structure: ["custom"],
+		balancing: "latin_square",
+		display_name: "Distractor Yellow Shades"
+	},
+
+	distractor_control_shades: {
+		experiment: ["jnd"],
+		graph_type: ["scatter"],
+		trial_structure: ["custom"],
+		balancing: "latin_square",
+		display_name: "Distractor Control Shades"
 	},
 };
