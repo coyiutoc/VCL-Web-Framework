@@ -350,5 +350,5 @@ export var CONDITIONS = {
 		trial_structure: ["custom"],
 		balancing: "latin_square",
 		display_name: "Distractor Control Shades"
-	},
+	}
 };

@@ -657,7 +657,7 @@ export default class JND {
     //    Basically, domain = input, range = ouput. 
     var xscale = d3.scaleLinear()
                    .domain([0, multiplier]) 
-                   .range([0, width-10]); // Make range slightly smaller to account for points getting cut off
+                   .range([0, width-15]); // Make range slightly smaller to account for points getting cut off
 
     var yscale = d3.scaleLinear()
                    .domain([multiplier * -1, 0]) // !!! NOTE: this is the hack b/c we flipped the y-values 
