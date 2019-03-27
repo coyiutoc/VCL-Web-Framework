@@ -117,9 +117,17 @@ function generate_distractor_shades_subconditions(experiment) {
 	let subconditions = EXPERIMENT_CONDITIONS[experiment_name][condition_name];
 
 	// Using the first 12 subconditions from the JND design:
-	let jnd_base_subconditions = EXPERIMENT_BASES[experiment_name]["design"].slice(1,13);
+	if (experiment_name === "JND"){
+		let jnd_base_subconditions = EXPERIMENT_BASES["JND"]["design"].slice(1,13);
 
-	let dataset = create_condition_dataset(jnd_base_subconditions, subconditions);
+		let dataset = create_condition_dataset(jnd_base_subconditions, subconditions);
 
-	return dataset;
+		return dataset;
+	} else {
+		let stevens_base_subconditions = EXPERIMENT_BASES["Stevens"]["design"].slice(1,5);
+
+		let dataset = create_condition_dataset(stevens_base_subconditions, subconditions);
+
+		return dataset;
+	}
 }

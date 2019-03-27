@@ -230,7 +230,7 @@
             add_li_click_listener(key);
 
             // If there is condition info, add listener for modal
-            if (condition["info"]) {
+            if (condition["display_info"]) {
               add_question_click_listener(key);
             }
           }
@@ -279,7 +279,7 @@
       let question_id = key + "_question_icon";
       let question_html = "";
 
-      if (condition["info"]){
+      if (condition["display_info"]){
         question_html = `
         <span style="float:right;"> 
           <i id = ${question_id} class="fa fa-question-circle question-icon" data-toggle="modal" data-target="#modal" aria-hidden="true"></i>
@@ -332,8 +332,17 @@
         <br>
         <b>Graph Type:</b> ${$('#graph-select option:selected').text()}
         <br>
+        <b>Balancing:</b> ${condition["balancing"]}
+        <hr>
+        ${condition["display_info"]["description"]}
         <br>
-        ${condition["info"]["description"]}
+        <hr>
+        <font size = "2px" color = "#808080">
+        <b>Researcher(s):</b> ${condition["display_info"]["researcher"]} 
+        <span style = "float:right">
+          <b>Developer:</b> ${condition["display_info"]["developer"]}
+        </span>
+        </font>
         `;
 
         $("#modal-body").html(html);

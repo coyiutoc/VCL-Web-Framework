@@ -31,7 +31,7 @@ export default class Stevens {
     // ========================================
     // PARAMETER CHECKING
 
-    if ((trial_structure !== "foundational") && (trial_structure !== "design")) {
+    if ((trial_structure !== "foundational") && (trial_structure !== "design") && (trial_structure !== "custom")) {
       throw Error(trial_structure + " is not supported.") }
     else{
       this.trial_structure = trial_structure;
@@ -121,6 +121,10 @@ export default class Stevens {
 
       case "design":
         this.set_design_dataset_order(dataset);
+        break;
+
+      case "custom":
+        ordered_dataset = dataset;
         break;
     }
 
@@ -978,7 +982,11 @@ export default class Stevens {
                                 .call(x_axis)
 
       // TODO: Different handling for distractor - needs to be abstracted out somehow in future    
-      if (this.condition_group === "distractor"){ 
+      if (this.condition_name === "distractor_control_shades"){
+
+          this.plot_scatter_data(chart, xscale, yscale, datasets[i], this.trial_data.point_size, this.trial_data.target_color, this.trial_data.target_shape);  
+      }
+      else if (this.condition_group === "distractor"){ 
            
         let dataset = datasets[i];
         let distractor = distractors[i];
