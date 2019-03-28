@@ -40,6 +40,20 @@ switch(jnd_exp.graph_type){
           "</div>"          
       };
     }
+    else if (jnd_exp.condition_group === "distractor" && jnd_exp.condition_name.split("_")[2] === "shades"){
+      var instructions = {
+      type: "html-keyboard-response",
+      stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear side-by-side." + 
+          "<br> Indicate which graph is more correlated by pressing the Z or M key. </p><p>" +
+          "<div style='height: 290px; width: 700px; display: block;'>"+
+          `<div style='float: left;'><img src='${address}/img/sample_distractor_shades_1.png'></img>` +
+          "<p class='small'><strong>Press the Z key</strong></p></div>" +
+          `<div style='float: right;'><img src='${address}/img/sample_distractor_shades_2.png'></img>` +
+          "<p class='small'><strong>Press the M key</strong></p></div>" +
+          "</div>" + "<div> <br><p>Press any key to continue.</p> </div>" + 
+          "</div>"          
+      };
+    }
     else if (jnd_exp.condition_group === "distractor") {
 
       let name_split_array = jnd_exp.condition_name.split("_");

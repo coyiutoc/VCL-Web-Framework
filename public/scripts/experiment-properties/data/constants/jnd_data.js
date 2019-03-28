@@ -71,34 +71,6 @@ const JND_BASE = {
 
     {distribution_type: "gaussian", base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
     ],
-
-  design_multi: 
-    [
-    {distribution_type: "gaussian", base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#cd4c32', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
-
-    {distribution_type: "gaussian", base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#cd4c32', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
-
-    {distribution_type: "gaussian", base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#cd4c32', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
-
-    {distribution_type: "gaussian", base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#007ebc', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
-
-    {distribution_type: "gaussian", base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#007ebc', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
-
-    {distribution_type: "gaussian", base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#007ebc', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
-    
-    {distribution_type: "gaussian", base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#20874a', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
-
-    {distribution_type: "gaussian", base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#20874a', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
-
-    {distribution_type: "gaussian", base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#20874a', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
-    
-    {distribution_type: "gaussian", base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#dbc667', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
-
-    {distribution_type: "gaussian", base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#dbc667', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3},
-
-    {distribution_type: "gaussian", base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: '#dbc667', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 3}
-    
-    ]
 }
 
 const JND_CONDITIONS = {
@@ -557,6 +529,141 @@ const JND_CONDITIONS = {
     {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: '#dbc667', target_color: 'BLACK', dist_point_size: 3},
 
     {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: '#dbc667', target_color: 'BLACK', dist_point_size: 3} 
+    ],
+
+  distractor_blue_shades: 
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#004078', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#004078', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#004078', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#2c6fad', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#2c6fad', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#2c6fad', target_color: '#699938', dist_point_size: 3}, 
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#69a3e5', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#69a3e5', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#69a3e5', target_color: '#699938', dist_point_size: 3}, 
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#a2d9ff', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#a2d9ff', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#a2d9ff', target_color: '#699938', dist_point_size: 3} 
+    ],
+
+  distractor_red_shades: 
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9f2b2a', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9f2b2a', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9f2b2a', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#bc4740', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#bc4740', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#bc4740', target_color: '#699938', dist_point_size: 3}, 
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#db6158', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#db6158', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#db6158', target_color: '#699938', dist_point_size: 3}, 
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#ff988a', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#ff988a', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#ff988a', target_color: '#699938', dist_point_size: 3} 
+    ],
+
+  distractor_yellow_shades: 
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 3}, 
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 3}, 
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 3} 
+    ],
+
+  distractor_yellow_shades: 
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 3}, 
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 3}, 
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 3} 
+    ],
+
+  distractor_control_shades: 
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3}, 
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3}, 
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3} 
     ],
 
   strip_ring_size:

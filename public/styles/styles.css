@@ -22,6 +22,10 @@ body {
   text-align: center;
 }
 
+.question-icon:hover {
+  color: #218a91;
+}
+
 .sub-menu {
     padding: 0;
     border: 1px solid #d0d5db;
@@ -37,6 +41,8 @@ body {
     font-size: 1em;
     padding: .25em 1em;
     line-height: 1em;
+    text-align: left; 
+    width: 100%
 }
 
 .sub-menu li:hover {
