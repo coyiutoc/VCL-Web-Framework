@@ -615,5 +615,19 @@ var CONDITIONS = {
 			researcher: "Tina Qi",
 			developer: "Caitlin Coyiuto"
 		}
-	}
+	},
+
+	large_dot_size: {
+		experiment: ["jnd", "stevens"],
+		graph_type: ["scatter"],
+		trial_structure: ["design"],
+		balancing: "latin_square",
+		display_name: "Large Dot Size",
+		display_info: {
+			description: "Basic Discrimination and Bisection Task with varying dot sizes.",
+			researcher: "Matyas Barta",
+			developer: "Caitlin Coyiuto"
+		}
+	},
+
 };

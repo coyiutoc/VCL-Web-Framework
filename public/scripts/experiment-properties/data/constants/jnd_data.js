@@ -705,39 +705,55 @@ const JND_CONDITIONS = {
 
   line_length_strip:
     [
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1}
-    ]  
-
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false}
+    ], 
+large_dot_size:
+  [ {point_size: 1, point_color: "RED"},
+    {point_size: 1},
+    {point_size: 1},
+    {point_size: 2},
+    {point_size: 2},
+    {point_size: 2},
+    {point_size: 3},
+    {point_size: 3},
+    {point_size: 3},
+    {point_size: 4},
+    {point_size: 4},
+    {point_size: 4},
+    {point_size: 5},
+    {point_size: 5},
+    {point_size: 5}, 
+  ]
 }

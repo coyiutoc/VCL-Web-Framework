@@ -20,28 +20,28 @@ const JND_RADIUS_CONDITIONS = {
 
   circle_square:
   	[
-	{shape_1: "circle", shape_2: "square"},
+  	{shape_1: "circle", shape_2: "square"},
 
-	{shape_1: "circle", shape_2: "square"},
+  	{shape_1: "circle", shape_2: "square"},
 
-	{shape_1: "circle", shape_2: "square"},
+  	{shape_1: "circle", shape_2: "square"},
 
-	{shape_1: "circle", shape_2: "square"},
+  	{shape_1: "circle", shape_2: "square"},
 
-	{shape_1: "circle", shape_2: "square"}
+  	{shape_1: "circle", shape_2: "square"}
   	],
 
   circle_triangle:
   	[
-	{shape_1: "circle", shape_2: "triangle"},
+  	{shape_1: "circle", shape_2: "triangle"},
 
-	{shape_1: "circle", shape_2: "triangle"},
+  	{shape_1: "circle", shape_2: "triangle"},
 
-	{shape_1: "circle", shape_2: "triangle"},
+  	{shape_1: "circle", shape_2: "triangle"},
 
-	{shape_1: "circle", shape_2: "triangle"},
+  	{shape_1: "circle", shape_2: "triangle"},
 
-	{shape_1: "circle", shape_2: "triangle"}
+  	{shape_1: "circle", shape_2: "triangle"}
   	],
 
   square_triangle:
