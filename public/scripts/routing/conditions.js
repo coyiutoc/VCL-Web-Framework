@@ -615,5 +615,19 @@ var CONDITIONS = {
 			researcher: "Tina Qi",
 			developer: "Caitlin Coyiuto"
 		}
+	},
+
+    test: {
+		experiment: ["jnd", "stevens"],
+		graph_type: ["scatter"],
+		trial_structure: ["custom"],
+		balancing: "latin_square",
+		display_name: "test",
+		display_info: {
+			description: "Part of series of Distractor Shade experiments for Blue/Red/Yellow. No distractor population for these presentations, only " + 
+						 "the target population with color #699938 (green). Draws on the first 12 subconditions of Design for base values.",
+			researcher: "Tina Qi",
+			developer: "Caitlin Coyiuto"
+		}
 	}
 };
