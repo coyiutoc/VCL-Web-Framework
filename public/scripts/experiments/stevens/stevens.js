@@ -774,7 +774,7 @@ export default class Stevens {
    */
   export_trial_data() {
 
-    var csv = 'condition,trial_num,sub_condition,balanced_sub_condition,high_ref,estimated_mid,low_ref,num_adjustments,trials_per_round,error,average_rt,num_points,mean,SD,num_SD,round_type,step_size,point_color,background_color,text_color,axis_color,point_size,regen_rate\n';
+    var csv = 'condition,trial_num,sub_condition,balanced_sub_condition,high_ref,estimated_mid,low_ref,num_adjustments,trials_per_round,error,sum_rt,num_points,mean,SD,num_SD,round_type,step_size,point_color,background_color,text_color,axis_color,point_size,regen_rate\n';
     // Get most recent subcondition - will have the max subcondition value
     var max_sub_condition = jsPsych.data.get().filter({type: 'stevens', run_type: 'test'}).last(1).values()[0].sub_condition;
     var data = [];
@@ -797,7 +797,7 @@ export default class Stevens {
         var last_num_adjustments = trial_data.last(1).values()[0].num_adjustments;
         var average_rt = trial_data.filterCustom(function(x){ return x.key_press != 81 }) //Don't use the exit trial rt
                                    .select('rt')
-                                   .mean();
+                                   .sum();
                                               
         var row = [this.condition_name];
 

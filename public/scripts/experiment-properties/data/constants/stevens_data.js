@@ -329,12 +329,4 @@ const STEVENS_CONDITIONS = {
     {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3}
     ],
 
-  large_dot_size:
-    [
-    {point_size: 1},
-    {point_size: 2},
-    {point_size: 3},
-    {point_size: 4},
-    {point_size: 5},
-    ]
 }
