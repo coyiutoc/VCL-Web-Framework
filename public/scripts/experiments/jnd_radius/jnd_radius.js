@@ -3,8 +3,7 @@ import {initialize_latin_square} from "/scripts/experiment-properties/balancing/
 import {initialize_random_order} from "/scripts/experiment-properties/balancing/random_generator.js";
 import {get_data, 
         get_data_subset} from "/scripts/experiment-properties/data/data_controller.js";
-import {prepare_coordinates,
-        randomize_position,
+import {randomize_position,
         randomize_radius_position,
         force_greater_right_position} from "/scripts/helpers/experiment_helpers.js";
 

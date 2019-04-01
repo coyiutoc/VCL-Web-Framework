@@ -8,7 +8,7 @@ export { get_data,
          get_data_subset,
          create_condition_dataset,
          EXPERIMENT_BASES,
-         EXPERIMENT_CONDITIONS};
+         EXPERIMENT_CONDITIONS };
 
 const EXPERIMENT_BASES = {
   "JND" : JND_BASE,
@@ -97,6 +97,10 @@ function get_data_subset(experiment, trial_structure, condition) {
 function create_condition_dataset(base_data, condition_data){
 
   var condition_dataset = [];
+
+  if (base_data.length != condition_data.length) {
+    throw Error("Base dataset length is not equal to condition dataset length.");
+  }
 
   for (let i in base_data) {
     let obj = Object.assign({}, base_data[i], condition_data[i]);
