@@ -5,6 +5,7 @@ import {prepare_coordinates,
     randomize_position,
     randomize_radius_position,
     force_greater_right_position} from "/scripts/helpers/experiment_helpers.js";
+import {generate_estimation_experiment_data} from "/scripts/experiment-properties/data/constants/refactor_estimation_data.js";
 
 export default class Estimation {
     /**
@@ -22,6 +23,7 @@ export default class Estimation {
             && params.condition !== 'rectangle_rotated_square_outline') {
             throw  Error("unexpected condition name " + params.condition);
         }
+        generate_estimation_experiment_data(params.condition);
         this.condition_name = params.condition;
         if (params.range !== "estimation") {
             throw  Error("unexpected range " + params.range);
