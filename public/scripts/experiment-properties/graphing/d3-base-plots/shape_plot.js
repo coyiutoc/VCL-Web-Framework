@@ -1,9 +1,16 @@
-export function create_shape_plot(attributes) {
+export {create_shape_plot};
 
-  let radius = attributes["target"]["curr_radius"];
-  let max_radius = attributes["target"]["max_radius"];
-  let min_radius = attributes["target"]["min_radius"];
-  let target_properties = attributes["target"]["graph_attributes"];
+/**
+ * D3 code for setting up shape plot chart area
+ *
+ * @param {object}   attributes
+ */
+function create_shape_plot(attributes) {
+
+  let radius = attributes["curr_radius"];
+  let max_radius = attributes["max_radius"];
+  let min_radius = attributes["min_radius"];
+  let properties = attributes["graph_attributes"];
 
   let diff = max_radius - min_radius;
 
@@ -30,31 +37,31 @@ export function create_shape_plot(attributes) {
                   .attr("style", `margin-right: ${width_diff}; margin-left: ${width_diff}; margin-top: ${margin_top}`);
 
   // Plot depending on shape specified
-  switch (target_properties["shape_type"]){
+  switch (properties["shape_type"]){
     
     case "slice":
-      let degrees = target_properties["slice_rotation"];
-      plot_slice(chart, radius, degrees, max_radius, diff, target_properties);
+      let degrees = properties["slice_rotation"];
+      plot_slice(chart, radius, degrees, max_radius, diff, properties);
       break;
 
     case "square":
-      plot_square(chart, radius, max_radius, diff, target_properties);
+      plot_square(chart, radius, max_radius, diff, properties);
       break;
 
     case "rotSquare":
-      plot_rotated_square(chart, radius, max_radius, diff, target_properties);
+      plot_rotated_square(chart, radius, max_radius, diff, properties);
       break;
 
     case "triangle":
-      plot_triangle(chart, radius, max_radius, diff, target_properties);
+      plot_triangle(chart, radius, max_radius, diff, properties);
       break;
 
     case "rotTriangle":
-      plot_rotated_triangle(chart, radius, max_radius, diff, target_properties);
+      plot_rotated_triangle(chart, radius, max_radius, diff, properties);
       break;
 
     default:
-      plot_circle(chart, radius, max_radius, diff, target_properties);
+      plot_circle(chart, radius, max_radius, diff, properties);
       break;
   }
 
@@ -68,7 +75,7 @@ export function create_shape_plot(attributes) {
  *         max_radius {double}     Largest radius of the given trial
  *         diff       {double}     Difference between max and min radius of given trial        
  */ 
-function plot_circle(chart, radius, max_radius, diff, target_properties) {
+function plot_circle(chart, radius, max_radius, diff, properties) {
 
   let translation = radius;
 
@@ -102,10 +109,10 @@ function plot_circle(chart, radius, max_radius, diff, target_properties) {
   // Draw arc paths
   arcs.append("path")
       .attr("fill", function(d, i) {
-        return target_properties["fill_color"];
+        return properties["fill_color"];
       })
       .attr("stroke", function(d, i) {
-        return target_properties["stroke_color"];
+        return properties["stroke_color"];
       })
       .attr("d", arc);
 }
@@ -115,11 +122,12 @@ function plot_circle(chart, radius, max_radius, diff, target_properties) {
  *      
  * @param  chart      {svg object}
  *         radius     {double} 
- *         rotation {int}         Degrees of rotation in the counterclockwise direction.        
+ *         rotation   {int}        Degrees of rotation in the counterclockwise direction.        
  *         max_radius {double}     Largest radius of the given trial
- *         diff       {double}     Difference between max and min radius of given trial      
+ *         diff       {double}     Difference between max and min radius of given trial  
+ *         properties {object}     Graph attributes extracted from constants
  */ 
-function plot_slice(chart, radius, rotation, max_radius, diff, target_properties) {
+function plot_slice(chart, radius, rotation, max_radius, diff, properties) {
 
   let translation = 0;
 
@@ -164,13 +172,13 @@ function plot_slice(chart, radius, rotation, max_radius, diff, target_properties
   arcs.append("path")
       .attr("fill", function(d, i) {
           if (i === 0) {
-              return target_properties["fill_color"];
+              return properties["fill_color"];
           } else {
               return "#ffffff";
           }    
       })
       .attr("stroke", function(d, i) {
-        return target_properties["stroke_color"];
+        return properties["stroke_color"];
       })
       .attr("d", arc)
       .attr("transform", "rotate(" + (-1)*rotation + ")");
@@ -182,9 +190,10 @@ function plot_slice(chart, radius, rotation, max_radius, diff, target_properties
  * @param  chart      {svg object}
  *         radius     {double} 
  *         max_radius {double}     Largest radius of the given trial
- *         diff       {double}     Difference between max and min radius of given trial         
+ *         diff       {double}     Difference between max and min radius of given trial  
+ *         properties {object}     Graph attributes extracted from constants       
  */ 
-function plot_square(chart, radius, max_radius, diff, target_properties) {
+function plot_square(chart, radius, max_radius, diff, properties) {
 
   let translation = 0.5*max_radius;
 
@@ -200,8 +209,8 @@ function plot_square(chart, radius, max_radius, diff, target_properties) {
                  .attr("y", 0)
                  .attr("width", radius)
                  .attr("height", radius)
-                 .attr("fill", target_properties["fill_color"])
-                 .attr("stroke", target_properties["stroke_color"])
+                 .attr("fill", properties["fill_color"])
+                 .attr("stroke", properties["stroke_color"])
                  .attr("transform", "translate(" + translation + "," + translation + ")");
 }
 
@@ -211,9 +220,10 @@ function plot_square(chart, radius, max_radius, diff, target_properties) {
  * @param  chart      {svg object}
  *         radius     {double} 
  *         max_radius {double}     Largest radius of the given trial
- *         diff       {double}     Difference between max and min radius of given trial        
+ *         diff       {double}     Difference between max and min radius of given trial   
+ *         properties {object}     Graph attributes extracted from constants     
  */ 
-function plot_rotated_square(chart, radius, max_radius, diff, target_properties) {
+function plot_rotated_square(chart, radius, max_radius, diff, properties) {
 
   let xtranslation = radius;
   let ytranslation = 0.25*radius;
@@ -231,8 +241,8 @@ function plot_rotated_square(chart, radius, max_radius, diff, target_properties)
                  .attr("y", 0)
                  .attr("width", radius)
                  .attr("height", radius)
-                 .attr("fill", target_properties["fill_color"])
-                 .attr("stroke", target_properties["stroke_color"])
+                 .attr("fill", properties["fill_color"])
+                 .attr("stroke", properties["stroke_color"])
                  .attr("transform", "translate(" + xtranslation + "," + ytranslation + ") rotate(45)");
 }
 
@@ -242,9 +252,10 @@ function plot_rotated_square(chart, radius, max_radius, diff, target_properties)
  * @param  chart      {svg object}
  *         radius     {double} 
  *         max_radius {double}     Largest radius of the given trial
- *         diff       {double}     Difference between max and min radius of given trial        
+ *         diff       {double}     Difference between max and min radius of given trial   
+ *         properties {object}     Graph attributes extracted from constants     
  */ 
-function plot_triangle(chart, radius, max_radius, diff, target_properties) {
+function plot_triangle(chart, radius, max_radius, diff, properties) {
 
   let translation = 0;
 
@@ -262,8 +273,8 @@ function plot_triangle(chart, radius, max_radius, diff, target_properties) {
        .enter().append("polygon")
        .attr("points",function(d) { 
           return d.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
-       .attr("fill", target_properties["fill_color"])
-       .attr("stroke", target_properties["stroke_color"]);
+       .attr("fill", properties["fill_color"])
+       .attr("stroke", properties["stroke_color"]);
 }
 
 /**
@@ -272,9 +283,10 @@ function plot_triangle(chart, radius, max_radius, diff, target_properties) {
  * @param  chart      {svg object}
  *         radius     {double} 
  *         max_radius {double}     Largest radius of the given trial
- *         diff       {double}     Difference between max and min radius of given trial        
+ *         diff       {double}     Difference between max and min radius of given trial 
+ *         properties {object}     Graph attributes extracted from constants       
  */ 
-function plot_rotated_triangle(chart, radius, max_radius, diff, target_properties) {
+function plot_rotated_triangle(chart, radius, max_radius, diff, properties) {
 
   let translation = 0;
 
@@ -292,6 +304,6 @@ function plot_rotated_triangle(chart, radius, max_radius, diff, target_propertie
        .enter().append("polygon")
        .attr("points",function(d) { 
           return d.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
-       .attr("fill", target_properties["fill_color"])
-       .attr("stroke", target_properties["stroke_color"]);      
+       .attr("fill", properties["fill_color"])
+       .attr("stroke", properties["stroke_color"]);      
 }

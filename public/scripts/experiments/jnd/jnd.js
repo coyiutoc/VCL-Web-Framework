@@ -3,8 +3,7 @@ import {initialize_latin_square} from "/scripts/experiment-properties/balancing/
 import {initialize_random_order} from "/scripts/experiment-properties/balancing/random_generator.js";
 import {get_data, 
         get_data_subset} from "/scripts/experiment-properties/data/data_controller.js";
-import {prepare_coordinates,
-        randomize_position,
+import {randomize_position,
         randomize_radius_position,
         force_greater_right_position} from "/scripts/helpers/experiment_helpers.js";
 
@@ -80,10 +79,12 @@ export default class JND {
     // ========================================
     // CURRENT TRIAL DATA
 
+    // Plotting-related vars
     this.left_coordinates = "";
     this.right_coordinates = "";
-    this.distribution_size = "";
     this.distractor_coordinates = "";
+    
+    // JsPsych trial_data for the current trial
     this.trial_data = "";
 
     // ========================================
@@ -229,9 +230,7 @@ export default class JND {
                                                            constants.mean,
                                                            constants.SD);
 
-          let left_prep_coordinates = prepare_coordinates(left_dist_coordinates, constants.num_points);
-          let right_prep_coordinates = prepare_coordinates(right_dist_coordinates, constants.num_points);
-          jnd_exp.distractor_coordinates = [left_prep_coordinates, right_prep_coordinates];
+          jnd_exp.distractor_coordinates = [left_dist_coordinates, right_dist_coordinates];
         }
 
         // Randomize position of the base and adjusted graphs
@@ -248,9 +247,7 @@ export default class JND {
         //                                           adjusted_correlation);
 
         // Set up D3 variables for plotting
-        let left_prep_coordinates = prepare_coordinates(result.left, constants.num_points);
-        let right_prep_coordinates = prepare_coordinates(result.right, constants.num_points);
-        jnd_exp.coordinates = [left_prep_coordinates, right_prep_coordinates];
+        jnd_exp.coordinates = [result.left, result.right];
          
         jnd_exp.trial_data = trial.data; 
 

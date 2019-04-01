@@ -80,8 +80,11 @@ export default class JND_Radius {
     // ========================================
     // CURRENT TRIAL DATA
 
+    // Plotting-related vars
     this.left_radius = "";
     this.right_radius = "";
+
+    // JsPsych trial_data for the current trial
     this.trial_data = "";
 
     // ========================================

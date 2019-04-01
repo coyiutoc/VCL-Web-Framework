@@ -3,8 +3,7 @@ import {initialize_latin_square} from "/scripts/experiment-properties/balancing/
 import {initialize_random_order} from "/scripts/experiment-properties/balancing/random_generator.js";
 import {get_data, 
         get_data_subset} from "/scripts/experiment-properties/data/data_controller.js";
-import {prepare_coordinates,
-        randomize_position,
+import {randomize_position,
         randomize_radius_position,
         force_greater_right_position} from "/scripts/helpers/experiment_helpers.js";
 
@@ -80,11 +79,13 @@ export default class Stevens {
     // ========================================
     // CURRENT TRIAL DATA
 
+    // Plotting-related vars
     this.left_coordinates = "";
     this.right_coordinates = "";
     this.middle_coordinates = "";
     this.distractor_coordinates = "";
-    this.distribution_size = "";
+
+    // JsPsych trial_data for the current trial
     this.trial_data = "";
 
     // ========================================
@@ -428,24 +429,21 @@ export default class Stevens {
                                                       constants.num_SD, 
                                                       constants.mean, 
                                                       constants.SD);
-          high_coordinates = prepare_coordinates(high_coordinates, constants.num_points);
-
+          
           var low_coordinates = generateDistribution(constants.low_ref, 
                                                      constants.error, 
                                                      constants.num_points, 
                                                      constants.num_SD, 
                                                      constants.mean,
                                                      constants.SD);
-          low_coordinates = prepare_coordinates(low_coordinates, constants.num_points);
-
+          
           var estimated_coordinates = generateDistribution(estimated_correlation, 
                                                         constants.error, 
                                                         constants.num_points, 
                                                         constants.num_SD, 
                                                         constants.mean, 
                                                         constants.SD);
-          estimated_coordinates = prepare_coordinates(estimated_coordinates, constants.num_points);
-
+          
           // If there is a distractor population, generate it:
           if (stevens_exp.condition_group === "distractor") {
             stevens_exp.generate_distractor_coordinates(constants);
@@ -496,7 +494,6 @@ export default class Stevens {
                                                            constants.num_SD,
                                                            constants.mean,
                                                            constants.SD);
-    left_dist_coordinates = prepare_coordinates(left_dist_coordinates, constants.dist_num_points);
     
     let middle_dist_coordinates = generateDistribution(constants.dist_base,
                                                            constants.dist_error,
@@ -504,7 +501,6 @@ export default class Stevens {
                                                            constants.num_SD,
                                                            constants.mean,
                                                            constants.SD);
-    middle_dist_coordinates = prepare_coordinates(middle_dist_coordinates, constants.dist_num_points);
 
     let right_dist_coordinates = generateDistribution(constants.dist_base,
                                                            constants.dist_error,
@@ -512,7 +508,6 @@ export default class Stevens {
                                                            constants.num_SD,
                                                            constants.mean,
                                                            constants.SD);
-    right_dist_coordinates = prepare_coordinates(right_dist_coordinates, constants.dist_num_points);
 
     this.distractor_coordinates = [left_dist_coordinates, middle_dist_coordinates, right_dist_coordinates];
   }
@@ -795,7 +790,7 @@ export default class Stevens {
         //Take the last trial's estimated mid since we want the most recent value
         var last_estimated_mid = trial_data.last(1).values()[0].estimated_mid;
         var last_num_adjustments = trial_data.last(1).values()[0].num_adjustments;
-        var average_rt = trial_data.filterCustom(function(x){ return x.key_press != 81 }) //Don't use the exit trial rt
+        var sum_rt = trial_data.filterCustom(function(x){ return x.key_press != 81 }) //Don't use the exit trial rt
                                    .select('rt')
                                    .sum();
                                               

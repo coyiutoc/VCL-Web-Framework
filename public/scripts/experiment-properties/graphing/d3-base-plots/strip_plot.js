@@ -1,12 +1,14 @@
+export {create_strip_plot};
+
 /**
  * D3 code for plotting a strip plot.
  *
  * @param {object}   attributes
  */
-export function create_strip_plot(attributes) {
+function create_strip_plot(attributes) {
 
-	let target_dataset = attributes["target"]["dataset"];
-    let target_properties = attributes["target"]["graph_attributes"];
+	let dataset = attributes["dataset"];
+    let properties = attributes["graph_attributes"];
 
     let width = window.innerWidth * 0.8;
     let height = window.innerHeight * 0.3;
@@ -47,7 +49,7 @@ export function create_strip_plot(attributes) {
 
 	// Populating data: 
 	chart.selectAll("strip")
-	     .data(target_dataset)
+	     .data(dataset)
 	      .enter()
 	      .append("rect")
 	      .attr("x", function (d) {
@@ -55,7 +57,7 @@ export function create_strip_plot(attributes) {
 	      })
 	      .attr("transform", function (d) {
 
-	        if (target_properties["fixed_strip_height"]) {
+	        if (properties["fixed_strip_height"]) {
 	          return "translate(0, " + height/4 + ")";
 	        } else {
 	          let ytranslation = height/2 - (yscale(d[1]) * 0.5);
@@ -64,22 +66,22 @@ export function create_strip_plot(attributes) {
 
 	      })
 	      .style("width", function () {
-	          return target_properties["strip_width"];
+	          return properties["strip_width"];
 	      })
 	      .style("height", function (d) {
 
-	        if (target_properties["fixed_strip_height"]) {
+	        if (properties["fixed_strip_height"]) {
 	          return height/2;
 	        } else {
 	          return yscale(d[1]);
 	      	}
 
 	      })
-	      .attr("fill", target_properties["fill_color"]);
+	      .attr("fill", properties["fill_color"]);
 
 	// Set axis color
 	chart.selectAll("path")
-	   .attr("stroke", target_properties["axis_color"]);
+	   .attr("stroke", properties["axis_color"]);
 
 	// Remove tick labels
 	chart.selectAll("text").remove();     

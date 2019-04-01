@@ -1,12 +1,14 @@
+export {create_ring_plot};
+
 /**
  * D3 code for plotting a ring plot.
  *
  * @param {object}   attributes
  */
-export function create_ring_plot(attributes) {
+function create_ring_plot(attributes) {
 
-  let target_dataset = attributes["target"]["dataset"];
-  let target_properties = attributes["target"]["graph_attributes"];
+  let dataset = attributes["dataset"];
+  let properties = attributes["graph_attributes"];
 
   let width = window.innerWidth * 0.8;
   let height = window.innerHeight * 0.3;
@@ -47,7 +49,7 @@ export function create_ring_plot(attributes) {
 
   // Populating data: 
   chart.selectAll("ring") // Technically no circles inside div yet, but will be creating it
-        .data(target_dataset)
+        .data(dataset)
           .enter()
             .append("circle") // Creating the circles for each entry in data set 
             .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
@@ -59,13 +61,13 @@ export function create_ring_plot(attributes) {
             .attr("r", function (d) {
               return yscale(d[1]);
             })
-            .attr("stroke", target_properties["stroke_color"])
-            .attr("stroke-width", target_properties["ring_thickness"])
-            .attr("fill", target_properties["fill_color"]);
+            .attr("stroke", properties["stroke_color"])
+            .attr("stroke-width", properties["ring_thickness"])
+            .attr("fill", properties["fill_color"]);
 
   // Set axis color
   chart.selectAll("path")
-       .attr("stroke", target_properties["axis_color"]);
+       .attr("stroke", properties["axis_color"]);
 
   // Remove tick labels
   chart.selectAll("text").remove();     

@@ -1,3 +1,5 @@
+export {create_scatter_plot, plot_scatter_points};
+
 var BUFFER = 60;
 var RANGE_ADJUSTMENT = 15;
 
@@ -6,14 +8,10 @@ var RANGE_ADJUSTMENT = 15;
  *
  * @param {object}   attributes
  */
-export function create_scatter_plot(attributes) {
+function create_scatter_plot(attributes) {
 
-    let target_dataset = attributes["target"]["dataset"];
-    let target_properties = attributes["target"]["graph_attributes"];
-
-    let is_distractor = attributes["distractor"] ? true : false;
-    let distractor_dataset = is_distractor ? attributes["distractor"]["dataset"] : null;
-    let distractor_properties = is_distractor ? attributes["distractor"]["graph_attributes"] : null;
+    let dataset = attributes["dataset"];
+    let properties = attributes["graph_attributes"];
 
     // Size of the graph
     let height = window.innerHeight * 0.65;
@@ -60,37 +58,12 @@ export function create_scatter_plot(attributes) {
     let xAxisElements = chart.append("g")
                               .attr("transform", "translate(50, " + xAxisTranslate  +")")
                               .call(x_axis)
-         
-    // TODO: Different handling for distractor - needs to be abstracted out somehow in future     
-    if (is_distractor){ 
-      
-      // If dist point color is WHITE, only plot the targets 
-      if (distractor_properties["point_color"] === "WHITE") {
-        plot_scatter_points(chart, xscale, yscale, target_dataset, target_properties["point_size"], target_properties["point_color"], target_properties["point_shape"]);        
-      } 
-      else {
-        // Alternate plotting of distractor and main dataset points - want equal chance of one
-        // getting occluded over the other
-        for (let j in target_dataset) {
 
-          let point = target_dataset[j];
-          let dist_point = distractor_dataset[j];
-
-          // Distractor point
-          plot_scatter_points(chart, xscale, yscale, [point], target_properties["point_size"], target_properties["point_color"], target_properties["point_shape"]);  
-
-          // Target point    
-          plot_scatter_points(chart, xscale, yscale, [dist_point], distractor_properties["point_size"], distractor_properties["point_color"], distractor_properties["point_shape"]);
-        }
-      }
-
-    } else {
-        plot_scatter_points(chart, xscale, yscale, target_dataset, target_properties["point_size"], target_properties["point_color"], target_properties["point_shape"]);        
-    }     
-
+    plot_scatter_points(chart, xscale, yscale, dataset, properties["point_size"], properties["point_color"], properties["point_shape"]);        
+ 
     // Set axis color
     chart.selectAll("path")
-         .attr("stroke", target_properties["axis_color"]);
+         .attr("stroke", properties["axis_color"]);
 
     // Remove tick labels
     chart.selectAll("text").remove();     

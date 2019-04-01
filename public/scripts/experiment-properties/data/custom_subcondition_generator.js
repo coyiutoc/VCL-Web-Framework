@@ -1,6 +1,6 @@
 import {EXPERIMENT_BASES, EXPERIMENT_CONDITIONS, create_condition_dataset} from "/scripts/experiment-properties/data/data_controller.js";
 
-export var CUSTOM_CONDITIONS = {
+export var CUSTOM_TRIAL_STRUCTURE_CONDITIONS = {
 	foundational : [],
     design : [
     	"distractor_diamond_square_red_hue",
