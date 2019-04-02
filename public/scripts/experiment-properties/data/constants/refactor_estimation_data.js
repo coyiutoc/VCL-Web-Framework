@@ -158,7 +158,7 @@ const generate_estimation_experiment_data = (condition) => {
                     curr_sub_cond.mod_rotate_by = angle;
                     curr_sub_cond.mod_fill = mod_shapes.fill;
                     curr_sub_cond.mod_outline = mod_shapes.outline;
-                    condition.width_height_ratio = mod_shapes.width_height_ratio;
+                    curr_sub_cond.width_height_ratio = mod_shapes.width_height_ratio;
                     result.push(curr_sub_cond);
                 });
 
