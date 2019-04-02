@@ -126,6 +126,7 @@ let ESTIMATION_BASE = {
             types: [["triangle"]],
             sizes: [[1.2, 3.0], [3.1, 5.3], [5.0, 6.5]],
             fill: FILL_COLOR,
+            width_height_ratio: 2,
             outline: OUTLINE_COLOR,
             rotate_by: [[0, 90]]
         }
@@ -157,6 +158,7 @@ const generate_estimation_experiment_data = (condition) => {
                     curr_sub_cond.mod_rotate_by = angle;
                     curr_sub_cond.mod_fill = mod_shapes.fill;
                     curr_sub_cond.mod_outline = mod_shapes.outline;
+                    condition.width_height_ratio = mod_shapes.width_height_ratio;
                     result.push(curr_sub_cond);
                 });
 

@@ -300,23 +300,23 @@ export default class Estimation {
         let left_x = mid_width - this.X_DISTANCE_BETWEEN_SHAPES * this.PIXEL_TO_CM / 2;
         let right_x = mid_width + this.X_DISTANCE_BETWEEN_SHAPES * this.PIXEL_TO_CM / 2;
 
-        let ref_size = sub_cond.base_size * estimation_exp.PIXEL_TO_CM ;
+        let ref_size = sub_cond.ref_size * estimation_exp.PIXEL_TO_CM ;
         let ref_y = estimation_exp.calculate_y_position(ref_size);
 
-        // the size of the modifiable shape start from min_size for trial 0 and 2, max_size for 1 and 3;
+        // the size of the modifiable shape start from mod_min_size for trial 0 and 2, mod_max_size for 1 and 3;
         let mod_size = (round_num % 2 === 1)?
-            sub_cond.max_size * estimation_exp.PIXEL_TO_CM  : sub_cond.min_size * estimation_exp.PIXEL_TO_CM;
+            sub_cond.mod_max_size * estimation_exp.PIXEL_TO_CM  : sub_cond.mod_min_size * estimation_exp.PIXEL_TO_CM;
         let mod_y = estimation_exp.calculate_y_position(mod_size);
 
         this.curr_trial_data.is_ref_smaller = (round_num % 2 === 1);
 
         if (this.curr_trial_data.is_ref_left) {
-            this.plot_shape(sub_cond.base_shape, chart, ref_size , ref_y, left_x, true);
+            this.plot_shape(sub_cond.ref_shape, chart, ref_size , ref_y, left_x, true);
             this.plot_shape(sub_cond.mod_shape, chart, mod_size, mod_y, right_x, false);
             this.curr_trial_data.is_ref_left = true;
         } else {
             this.plot_shape(sub_cond.mod_shape, chart, mod_size, mod_y, left_x, false);
-            this.plot_shape(sub_cond.base_shape, chart, ref_size, ref_y, right_x, true);
+            this.plot_shape(sub_cond.ref_shape, chart, ref_size, ref_y, right_x, true);
             this.curr_trial_data.is_ref_left = false;
         }
     }
