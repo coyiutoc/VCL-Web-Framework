@@ -23,7 +23,7 @@ export default class Estimation {
             && params.condition !== 'rectangle_rotated_square_outline') {
             throw  Error("unexpected condition name " + params.condition);
         }
-        generate_estimation_experiment_data(params.condition);
+
         this.condition_name = params.condition;
         if (params.range !== "estimation") {
             throw  Error("unexpected range " + params.range);
@@ -96,7 +96,7 @@ export default class Estimation {
         // PREPARE EXPERIMENT
 
         // Extract raw constants
-        this.raw_sub_conds = get_data(this);
+        this.raw_sub_conds = generate_estimation_experiment_data(params.condition);
         // console.log("raw sub conds");
         // Prepare experiment + practice data
         this.practice_conditions_constants = [];
@@ -311,12 +311,12 @@ export default class Estimation {
         this.curr_trial_data.is_ref_smaller = (round_num % 2 === 1);
 
         if (this.curr_trial_data.is_ref_left) {
-            this.plot_shape(sub_cond.ref_shape, chart, ref_size , ref_y, left_x, true);
-            this.plot_shape(sub_cond.mod_shape, chart, mod_size, mod_y, right_x, false);
+            this.plot_shape(sub_cond.ref_shape, chart, ref_size , ref_y, left_x, true, sub_cond.ref_outline, sub_cond.ref_fill);
+            this.plot_shape(sub_cond.mod_shape, chart, mod_size, mod_y, right_x, false, sub_cond.mod_outline, sub_cond.mod_fill);
             this.curr_trial_data.is_ref_left = true;
         } else {
-            this.plot_shape(sub_cond.mod_shape, chart, mod_size, mod_y, left_x, false);
-            this.plot_shape(sub_cond.ref_shape, chart, ref_size, ref_y, right_x, true);
+            this.plot_shape(sub_cond.mod_shape, chart, mod_size, mod_y, left_x, false, sub_cond.mod_outline, sub_cond.mod_fill);
+            this.plot_shape(sub_cond.ref_shape, chart, ref_size, ref_y, right_x, true, sub_cond.ref_outline, sub_cond.ref_fill);
             this.curr_trial_data.is_ref_left = false;
         }
     }
@@ -356,26 +356,28 @@ export default class Estimation {
      * @param y_pos {number}
      * @param x_pos {number}
      * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape
+     * @param outline {string} outline color
+     * @param fill {string} fill color
      */
-    plot_shape(shape, chart, radius, y_pos, x_pos, is_ref) {
+    plot_shape(shape, chart, radius, y_pos, x_pos, is_ref, outline, fill) {
         switch (shape) {
             case "circle":
-                this.plot_circle(chart, radius, y_pos, x_pos, is_ref);
+                this.plot_circle(chart, radius, y_pos, x_pos, is_ref, outline, fill);
                 break;
             case "triangle":
-                this.plot_triangle(chart, radius, y_pos, x_pos, is_ref);
+                this.plot_triangle(chart, radius, y_pos, x_pos, is_ref, outline, fill);
                 break;
             case "square":
-                this.plot_square(chart, radius, y_pos, x_pos, is_ref);
+                this.plot_square(chart, radius, y_pos, x_pos, is_ref, outline, fill);
                 break;
             case "instruction":
                 this.plot_instruction(chart, y_pos, x_pos, trial);
                 break;
             case "line":
-                this.plot_line(chart, radius, y_pos, x_pos, is_ref);
+                this.plot_line(chart, radius, y_pos, x_pos, is_ref, outline);
                 break;
             case "rectangle":
-                this.plot_rectangle(chart, radius, y_pos, x_pos, is_ref);
+                this.plot_rectangle(chart, radius, y_pos, x_pos, is_ref, outline, fill);
                 break;
         }
     }
@@ -407,8 +409,10 @@ export default class Estimation {
      * @param y_pos {number}
      * @param x_pos {number}
      * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape
+     * @param outline {string}
+     * @param fill {string}
      */
-    plot_circle(chart, diameter, y_pos, x_pos, is_ref) {
+    plot_circle(chart, diameter, y_pos, x_pos, is_ref, outline, fill) {
         let exp = this;
         let radius = diameter / 2;
         chart.append("circle")
@@ -417,7 +421,8 @@ export default class Estimation {
             .attr("r", diameter / 2)
             .attr("id", "circle_shape")
             .attr("is_ref", is_ref)
-            .style("fill", exp.curr_trial_data.fill_color);
+            .attr("fill", fill)
+            .attr("stroke", outline);
         if (is_ref === false) {
             d3.select("body")
                 .on("keydown", function () {
@@ -433,14 +438,6 @@ export default class Estimation {
         }
     }
 
-    /**
-     *
-     * @param size {number} dimension in cm
-     * @returns {string} "size.cm"
-     */
-    static cm_size_to_string(size) {
-        return size.toString() + "cm";
-    }
     /**
      *
      * @param exp {object} an Experiment object
@@ -477,8 +474,10 @@ export default class Estimation {
      * @param x_pos {number}
      * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape,
      *                         is_ref === true if the shape is a reference shape
+     * @param outline {string}
+     * @param fill {string}
      */
-    plot_square(chart, width, y_pos, x_pos, is_ref) {
+    plot_square(chart, width, y_pos, x_pos, is_ref, outline, fill) {
         let exp = this;
         chart.append("rect")
             .attr("id", is_ref? "square_shape_ref": "square_shape_mod")
@@ -488,8 +487,8 @@ export default class Estimation {
                                           // however x_pos and y_pos specifies the center of the shape
             .attr("width", width)
             .attr("height", width)
-            .attr("fill", exp.curr_trial_data.fill_color)
-            .attr("stroke", exp.curr_trial_data.outline? exp.curr_trial_data.outline : exp.curr_trial_data.fill_color)
+            .attr("fill", fill)
+            .attr("stroke", outline);
         if (is_ref === true && exp.curr_trial_data.ref_rotate_by) {
             let transform = "rotate(";
             transform = transform + exp.curr_trial_data.ref_rotate_by.toString();
@@ -522,7 +521,7 @@ export default class Estimation {
      * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape,
      *                         is_ref === true if the shape is a reference shape
      */
-    plot_triangle(chart, radius, y_pos, x_pos, is_ref) {
+    plot_triangle(chart, radius, y_pos, x_pos, is_ref, outline, fill) {
         let exp = this;
         // for equilateral triangles, height = side * sqrt(3) / 2;
         let short_side = radius;
@@ -563,7 +562,8 @@ export default class Estimation {
         chart.append("polygon")
             .attr("points",function() {
                 return poly.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
-            .attr("fill", exp.curr_trial_data.fill_color)
+            .attr("fill", fill)
+            .attr("stroke", outline)
             .attr("id", is_ref? "triangle_shape_ref" : "triangle_shape_mod");
 
         if (is_ref === false) {
@@ -612,8 +612,10 @@ export default class Estimation {
      * @param y_pos {number}
      * @param x_pos {number}
      * @param is_ref {boolean}
+     * @param outline {string}
+     * @param fill {string}
      */
-    plot_rectangle(chart, size, y_pos, x_pos, is_ref) {
+    plot_rectangle(chart, size, y_pos, x_pos, is_ref, outline, fill) {
         let exp = this;
         let short_side = size;
         let long_side = size;
@@ -636,14 +638,15 @@ export default class Estimation {
             // however x_pos and y_pos specifies the center of the shape
             .attr("width", width)
             .attr("height", height)
-            .attr("fill", exp.curr_trial_data.fill_color)
-            .attr("stroke", exp.curr_trial_data.outline? exp.curr_trial_data.outline : exp.curr_trial_data.fill_color);
+            .attr("fill", fill)
+            .attr("stroke", outline);
         if (is_ref === false && exp.curr_trial_data.mod_rotate_by) {
             let transform = "rotate(";
             transform = transform + exp.curr_trial_data.mod_rotate_by.toString();
-            transform = transform + " " + (x_pos - width / 2).toString();
-            transform = transform + " " + (y_pos - width / 2).toString();
+            transform = transform + " " + (x_pos).toString();
+            transform = transform + " " + (y_pos).toString();
             transform = transform + ")";
+            console.log(transform);
             d3.select("#rect_shape_mod").attr("transform", transform);
         }
 
@@ -680,8 +683,9 @@ export default class Estimation {
      * @param y_pos {number}
      * @param x_pos {number}
      * @param is_ref {boolean}
+     * @param outline
      */
-    plot_line(chart, width, y_pos, x_pos, is_ref) {
+    plot_line(chart, width, y_pos, x_pos, is_ref, outline) {
         let exp = this;
         let x1, x2, y1, y2;
         if (!is_ref) {
@@ -696,7 +700,7 @@ export default class Estimation {
             y2 = y_pos;
         }
         chart.append("line")
-            .style("stroke", exp.curr_trial_data.fill_color)
+            .style("stroke", outline)
             .style("stroke-width", exp.curr_trial_data.stroke_width)
             .attr("id", is_ref? "line_shape_ref": "line_shape_mod")
             .attr("x1", x1)
