@@ -655,7 +655,7 @@ export default class Estimation {
                         let long_side = exp.curr_trial_data.width_height_ratio * short_side;
                         let new_width = 0, new_height = 0;
                         new_width = short_side;
-                        new_height = long_side
+                        new_height = long_side;
                         d3.select("#rect_shape_mod")
                             .attr("width", new_width)
                             .attr("height", new_height);
