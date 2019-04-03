@@ -705,39 +705,39 @@ const JND_CONDITIONS = {
 
   line_length_strip:
     [
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1}
-    ]  
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false}
+    ], 
 
 }

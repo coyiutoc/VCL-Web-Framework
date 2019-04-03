@@ -20,7 +20,9 @@
     <script type="module">
     
         import { stevens_exp } from "/scripts/experiments/stevens/stevens_timeline.js";
-        stevens_exp.plot_distributions();
+        import { plot_distributions } from "/scripts/experiment-properties/graphing/graphing_controller.js";
+        
+        plot_distributions(stevens_exp);
 
     </script>
   </div>

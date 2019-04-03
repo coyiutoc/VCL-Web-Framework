@@ -1,6 +1,7 @@
 import {EXPERIMENT_BASES, EXPERIMENT_CONDITIONS, create_condition_dataset} from "/scripts/experiment-properties/data/data_controller.js";
+export {CUSTOM_TRIAL_STRUCTURE_CONDITIONS, get_subconditions};
 
-export var CUSTOM_CONDITIONS = {
+var CUSTOM_TRIAL_STRUCTURE_CONDITIONS = {
 	foundational : [],
     design : [
     	"distractor_diamond_square_red_hue",
@@ -26,7 +27,12 @@ export var CUSTOM_CONDITIONS = {
     ]
 }
 
-export function get_subconditions(experiment) {
+/**
+ * Controls which helper method to access depending on condition name.
+ *
+ * @param {object}   experiment
+ */
+function get_subconditions(experiment) {
 
 	if (is_distractor_diamond_square(experiment.condition_name)){
 		return generate_distractor_diamond_square_subconditions(experiment);
@@ -42,6 +48,12 @@ export function get_subconditions(experiment) {
 	}
 }
 
+/**
+ * Checks if the condition name is a "distractor_diamond_square" one.
+ *
+ * @param   {object}   experiment
+ * @return  {boolean}
+ */
 function is_distractor_diamond_square(condition_name) {
 
 	let array = condition_name.split("_");
@@ -51,6 +63,15 @@ function is_distractor_diamond_square(condition_name) {
 	return false;
 }
 
+////////////////////////////////////////////////////////////////////////////////////////
+// GENERATORS HERE 
+////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Generates subconditions for distractor_diamond_square conditions
+ *
+ * @param   {object}   experiment
+ */
 function generate_distractor_diamond_square_subconditions(experiment) {
 
 	let array = experiment.condition_name.split("_");
@@ -89,6 +110,11 @@ function generate_distractor_diamond_square_subconditions(experiment) {
 	return subconditions;
 }
 
+/**
+ * Generates subconditions for distractor_multi condition.
+ *
+ * @param   {object}   experiment
+ */
 function generate_distractor_multi_subconditions(experiment) {
 
 	let condition_name = experiment.condition_name;
@@ -110,6 +136,11 @@ function generate_distractor_multi_subconditions(experiment) {
 	return result;
 }
 
+/**
+ * Generates subconditions for distractor_shade conditions.
+ *
+ * @param   {object}   experiment
+ */
 function generate_distractor_shades_subconditions(experiment) {
 
 	let condition_name = experiment.condition_name;

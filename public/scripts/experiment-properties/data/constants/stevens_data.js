@@ -86,35 +86,35 @@ const STEVENS_CONDITIONS = {
 
   line_length_strip:
   [
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1},
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false},
 
-    {point_color: "BLACK", strip_width: 1}
+    {point_color: "BLACK", strip_width: 1, fixed_strip_height: false}
   ],
 
   distractor_square_red_hue:
@@ -328,4 +328,5 @@ const STEVENS_CONDITIONS = {
 
     {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3}
     ],
+
 }

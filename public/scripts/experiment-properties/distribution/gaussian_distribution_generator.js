@@ -30,7 +30,54 @@ function generateDistribution(correlation, error, size, numsd, mean, sd){
     coordinates.y_values[i] = coordinates.y_values[i] * (-1);
   }
 
-  return coordinates; 
+  let prepared_coordinates = prepare_coordinates(coordinates, size);
+  return prepared_coordinates; 
+}
+
+/**
+* Converts the coordinates into this format for d3:
+* [ [x1, y1], [x2, y2] ... [xn, yn] ]
+* And samples the distribution for the specified num_points.
+*
+* @param coordinates { {x_values: [], y_values: []} }
+*        num_points {integer}
+* @return output_coordinates { [x1, y1], [x2, y2] ... }
+*/
+function prepare_coordinates(coordinates, num_points){
+
+  var array = [];
+  var reorganized_coordinates = [];
+
+  for (let i = 0; i < coordinates.x_values.length; i++){
+    array.push(coordinates.x_values[i]);
+    array.push(coordinates.y_values[i]);
+
+    reorganized_coordinates.push(array);
+    array = [];
+  }
+  
+  var output_coordinates = sample_coordinates(reorganized_coordinates, num_points);
+
+  return output_coordinates;
+}
+
+/**
+* Randomly picks x number of points from the distribution
+* where x = num_points.
+*
+* @param coordinates { [x1, y1], [x2, y2] ... }
+*        num_points {integer}
+* @return output_coordinates with size num_points { [x1, y1], [x2, y2] ... }
+*/
+function sample_coordinates(coordinates, num_points){
+  var output_coordinates = [];
+
+  for (let i = num_points; i > 0; i-- ) {
+    var random_coordinate = coordinates.splice(Math.floor(Math.random() * (i + 1)), 1)[0];
+    output_coordinates.push(random_coordinate);
+  }
+
+  return output_coordinates;
 }
 
 function initializePoints(coordinates, correlation, size, numsd, mean, sd){

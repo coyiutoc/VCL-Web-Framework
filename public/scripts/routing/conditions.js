@@ -615,5 +615,6 @@ var CONDITIONS = {
 			researcher: "Tina Qi",
 			developer: "Caitlin Coyiuto"
 		}
-	}
+	},
+
 };
