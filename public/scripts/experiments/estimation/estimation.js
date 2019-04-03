@@ -492,8 +492,8 @@ export default class Estimation {
         if (is_ref === true && exp.curr_trial_data.ref_rotate_by) {
             let transform = "rotate(";
             transform = transform + exp.curr_trial_data.ref_rotate_by.toString();
-            transform = transform + " " + (x_pos - width / 2).toString();
-            transform = transform + " " + (y_pos - width / 2).toString();
+            transform = transform + " " + (x_pos - width).toString();
+            transform = transform + " " + (y_pos - width).toString();
             transform = transform + ")";
             d3.select("#square_shape_ref").attr("transform", transform);
         }
@@ -623,13 +623,8 @@ export default class Estimation {
         if (exp.curr_trial_data.width_height_ratio) {
             long_side = short_side * exp.curr_trial_data.width_height_ratio;
         }
-        if (exp.curr_trial_data.mod_rotate_by && exp.curr_trial_data.mod_rotate_by === 90) {
-            width = long_side;
-            height = short_side;
-        } else {
-            width = short_side;
-            height = long_side
-        }
+        width = short_side;
+        height = long_side;
         chart.append("rect")
             .attr("id", is_ref? "rect_shape_ref": "rect_shape_mod")
             .attr("x", x_pos - width / 2)
@@ -659,13 +654,8 @@ export default class Estimation {
                         let short_side = size;
                         let long_side = exp.curr_trial_data.width_height_ratio * short_side;
                         let new_width = 0, new_height = 0;
-                        if (exp.curr_trial_data.mod_rotate_by && exp.curr_trial_data.mod_rotate_by === 90) {
-                            new_width = long_side;
-                            new_height = short_side;
-                        } else {
-                            new_width = short_side;
-                            new_height = long_side
-                        }
+                        new_width = short_side;
+                        new_height = long_side
                         d3.select("#rect_shape_mod")
                             .attr("width", new_width)
                             .attr("height", new_height);
