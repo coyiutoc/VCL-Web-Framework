@@ -1,11 +1,10 @@
 import {initialize_random_order} from "/scripts/experiment-properties/balancing/random_generator.js";
 
-import {get_data, get_data_subset} from "/scripts/experiment-properties/data/data_controller.js";
 import {prepare_coordinates,
     randomize_position,
     randomize_radius_position,
     force_greater_right_position} from "/scripts/helpers/experiment_helpers.js";
-import {generate_estimation_experiment_data} from "/scripts/experiment-properties/data/constants/refactor_estimation_data.js";
+import {generate_estimation_experiment_data} from "/scripts/experiment-properties/data/constants/estimation_data.js";
 
 export default class Estimation {
     /**

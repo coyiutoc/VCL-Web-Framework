@@ -1,7 +1,7 @@
 import {JND_BASE, JND_CONDITIONS} from "/scripts/experiment-properties/data/constants/jnd_data.js";
 import {STEVENS_BASE, STEVENS_CONDITIONS} from "/scripts/experiment-properties/data/constants/stevens_data.js";
 import {JND_RADIUS_BASE} from "/scripts/experiment-properties/data/constants/jnd_radius_data.js";
-import {ESTIMATION_BASE, ESTIMATION_CONDITIONS} from "/scripts/experiment-properties/data/constants/estimation_data.js";
+import {generate_estimation_experiment_data} from "/scripts/experiment-properties/data/constants/estimation_data";
 
 export { get_data,
          get_data_subset };
@@ -66,7 +66,7 @@ function get_data(experiment){
     }
   }
   else if (experiment_name === "Estimation") {
-      dataset = ESTIMATION_CONDITIONS[condition];
+    return generate_estimation_experiment_data(condition);
   }
   else {
     throw new Error(experiment + " not supported.");
