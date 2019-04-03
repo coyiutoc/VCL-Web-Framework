@@ -91,8 +91,6 @@ switch(estimation_exp.graph_type){
                 "<br> Press any key to continue. </div>"
             };
         }
-        break;
-    case 'line': {
         if (estimation_exp.condition_name === "line_length"){
             var instructions = {
                 type: "html-keyboard-response",
@@ -108,7 +106,6 @@ switch(estimation_exp.graph_type){
             };
         }
         break;
-    }
     default:
         throw Error("unexpected condition name");
 }
