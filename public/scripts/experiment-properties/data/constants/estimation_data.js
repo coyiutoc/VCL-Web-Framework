@@ -1,125 +1,121 @@
-export {ESTIMATION_BASE, ESTIMATION_CONDITIONS};
+export {ESTIMATION_BASE};
+
+const TRIALS_PER_ROUND = 4;
+const MAX_STEP_SIZE = 0.05;
+const FILL_COLOR = '#0000FF';
+const OUTLINE_COLOR = '#0000FF';
 
 const ESTIMATION_BASE = {
-    estimation : [
-        {base_shape: "triangle", mod_shape: "square", base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "triangle", mod_shape: "square", base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "triangle", mod_shape: "square", base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-
-        {base_shape: "square", mod_shape: "triangle", base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "square", mod_shape: "triangle", base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "square", mod_shape: "triangle", base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-
-        {base_shape: "circle", mod_shape: "square", base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "circle", mod_shape: "square", base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "circle", mod_shape: "square", base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-
-        {base_shape: "circle", mod_shape: "triangle", base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "circle", mod_shape: "triangle", base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "circle", mod_shape: "triangle", base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-
-        {base_shape: "triangle", mod_shape: "circle", base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "triangle", mod_shape: "circle", base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "triangle", mod_shape: "circle", base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-
-        {base_shape: "square", mod_shape: "circle", base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "square", mod_shape: "circle", base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "square", mod_shape: "circle", base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-
-    ],
-};
-
-const ESTIMATION_CONDITIONS = {
-    shape_estimation: [
-        {base_shape: "circle", mod_shape: "square", base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "circle", mod_shape: "square", base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "circle", mod_shape: "square", base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-
-        {base_shape: "circle", mod_shape: "triangle", base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "circle", mod_shape: "triangle", base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "circle", mod_shape: "triangle", base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-
-        {base_shape: "triangle", mod_shape: "square", base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "triangle", mod_shape: "square", base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "triangle", mod_shape: "square", base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-
-        {base_shape: "triangle", mod_shape: "circle", base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "triangle", mod_shape: "circle", base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "triangle", mod_shape: "circle", base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-
-        {base_shape: "square", mod_shape: "triangle", base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "square", mod_shape: "triangle", base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "square", mod_shape: "triangle", base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-
-        {base_shape: "square", mod_shape: "circle", base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "square", mod_shape: "circle", base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-        {base_shape: "square", mod_shape: "circle", base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF'},
-    ],
-    line_length: [
-        {base_shape: "line", mod_shape: "line", base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', stroke_width: 1.5, rotate: 45},
-        {base_shape: "line", mod_shape: "line", base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', stroke_width: 1.5, rotate: 45},
-        {base_shape: "line", mod_shape: "line", base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', stroke_width: 1.5, rotate: 45},
-        {base_shape: "line", mod_shape: "line", base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', stroke_width: 1.5, rotate: 0},
-        {base_shape: "line", mod_shape: "line", base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', stroke_width: 1.5, rotate: 0},
-        {base_shape: "line", mod_shape: "line", base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', stroke_width: 1.5, rotate: 0},
-
-        {base_shape: "line", mod_shape: "line", base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', stroke_width: 1.5, rotate: 45},
-        {base_shape: "line", mod_shape: "line", base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', stroke_width: 1.5, rotate: 45},
-        {base_shape: "line", mod_shape: "line", base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', stroke_width: 1.5, rotate: 45},
-        {base_shape: "line", mod_shape: "line", base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', stroke_width: 1.5, rotate: 0},
-        {base_shape: "line", mod_shape: "line", base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', stroke_width: 1.5, rotate: 0},
-        {base_shape: "line", mod_shape: "line", base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', stroke_width: 1.5, rotate: 0},
-
-        {base_shape: "line", mod_shape: "line", base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', stroke_width: 1.5, rotate: 45},
-        {base_shape: "line", mod_shape: "line", base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', stroke_width: 1.5, rotate: 45},
-        {base_shape: "line", mod_shape: "line", base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', stroke_width: 1.5, rotate: 45},
-        {base_shape: "line", mod_shape: "line", base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', stroke_width: 1.5, rotate: 0},
-        {base_shape: "line", mod_shape: "line", base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', stroke_width: 1.5, rotate: 0},
-        {base_shape: "line", mod_shape: "line", base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', stroke_width: 1.5, rotate: 0},
-    ],
-    rectangle_square: [
-        {base_shape: "square", mod_shape: "rectangle", width_height_ratio: 2, base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 90},
-        {base_shape: "square", mod_shape: "rectangle", width_height_ratio: 2, base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 90},
-        {base_shape: "square", mod_shape: "rectangle", width_height_ratio: 2, base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 90},
-        {base_shape: "square", mod_shape: "rectangle", width_height_ratio: 2, base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 0},
-        {base_shape: "square", mod_shape: "rectangle", width_height_ratio: 2, base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 0},
-        {base_shape: "square", mod_shape: "rectangle", width_height_ratio: 2, base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 0},
-
-        {base_shape: "square", mod_shape: "rectangle", width_height_ratio: 2, base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 90},
-        {base_shape: "square", mod_shape: "rectangle", width_height_ratio: 2, base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 90},
-        {base_shape: "square", mod_shape: "rectangle", width_height_ratio: 2, base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 90},
-        {base_shape: "square", mod_shape: "rectangle", width_height_ratio: 2, base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 0},
-        {base_shape: "square", mod_shape: "rectangle", width_height_ratio: 2, base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 0},
-        {base_shape: "square", mod_shape: "rectangle", width_height_ratio: 2, base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 0},
-
-        {base_shape: "square", mod_shape: "rectangle", width_height_ratio: 2, base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 90},
-        {base_shape: "square", mod_shape: "rectangle", width_height_ratio: 2, base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 90},
-        {base_shape: "square", mod_shape: "rectangle", width_height_ratio: 2, base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 90},
-        {base_shape: "square", mod_shape: "rectangle", width_height_ratio: 2, base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 0},
-        {base_shape: "square", mod_shape: "rectangle", width_height_ratio: 2, base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 0},
-        {base_shape: "square", mod_shape: "rectangle", width_height_ratio: 2, base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 0},
-
-    ],
-    triangle: [
-        {base_shape: "triangle", mod_shape: "triangle", width_height_ratio: 2, base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 90},
-        {base_shape: "triangle", mod_shape: "triangle", width_height_ratio: 2, base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 90},
-        {base_shape: "triangle", mod_shape: "triangle", width_height_ratio: 2, base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 90},
-        {base_shape: "triangle", mod_shape: "triangle", width_height_ratio: 2, base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 0},
-        {base_shape: "triangle", mod_shape: "triangle", width_height_ratio: 2, base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 0},
-        {base_shape: "triangle", mod_shape: "triangle", width_height_ratio: 2, base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 0},
-
-        {base_shape: "triangle", mod_shape: "triangle", width_height_ratio: 2, base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 90},
-        {base_shape: "triangle", mod_shape: "triangle", width_height_ratio: 2, base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 90},
-        {base_shape: "triangle", mod_shape: "triangle", width_height_ratio: 2, base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 90},
-        {base_shape: "triangle", mod_shape: "triangle", width_height_ratio: 2, base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 0},
-        {base_shape: "triangle", mod_shape: "triangle", width_height_ratio: 2, base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 0},
-        {base_shape: "triangle", mod_shape: "triangle", width_height_ratio: 2, base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 0},
-
-        {base_shape: "triangle", mod_shape: "triangle", width_height_ratio: 2, base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 90},
-        {base_shape: "triangle", mod_shape: "triangle", width_height_ratio: 2, base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 90},
-        {base_shape: "triangle", mod_shape: "triangle", width_height_ratio: 2, base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 90},
-        {base_shape: "triangle", mod_shape: "triangle", width_height_ratio: 2, base_size : 2, min_size : 1.2, max_size: 3.0, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 0},
-        {base_shape: "triangle", mod_shape: "triangle", width_height_ratio: 2, base_size : 4, min_size : 3.1, max_size: 5.3, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 0},
-        {base_shape: "triangle", mod_shape: "triangle", width_height_ratio: 2, base_size : 6, min_size : 5.0, max_size: 6.5, max_step_size: 0.05, trials_per_round: 4,fill_color: '#0000FF', rotate: 0},
-    ]
+    shape_estimation: {
+        ref_shapes: {
+            types: ["triangle", "circle", "square"],
+            sizes: [2, 4, 6],
+            fill: FILL_COLOR,
+            outline: OUTLINE_COLOR,
+            rotate_by:[0, 0, 0]
+        },
+        mod_shapes: {
+            types: [["circle", "square"],
+                ["triangle", "square"],
+                ["triangle", "circle"]],
+            sizes: [[1.2, 3.0], [3.1, 5.3], [5.0, 6.5]],
+            fill: FILL_COLOR,
+            outline: OUTLINE_COLOR,
+            rotate_by: [[0], [0], [0]]
+        },
+        trials_per_round: TRIALS_PER_ROUND,
+        max_step_size: MAX_STEP_SIZE
+    },
+    line_length: {
+        ref_shapes: {
+            types: ["line"],
+            sizes: [2, 4, 6],
+            fill: FILL_COLOR,
+            outline: OUTLINE_COLOR,
+            rotate_by:[0]
+        },
+        mod_shapes: {
+            types: [["line"]],
+            sizes: [[1.2, 3.0], [3.1, 5.3], [5.0, 6.5]],
+            fill: FILL_COLOR,
+            outline: OUTLINE_COLOR,
+            rotate_by: [[0]]
+        },
+        trials_per_round: TRIALS_PER_ROUND,
+        max_step_size: MAX_STEP_SIZE
+    },
+    rectangle_square: {
+        ref_shapes: {
+            types: ["square"],
+            sizes: [2, 4, 6],
+            fill: FILL_COLOR,
+            outline: OUTLINE_COLOR,
+            rotate_by:[0]
+        },
+        mod_shapes: {
+            types: [["rectangle"]],
+            sizes: [[1.2, 3.0], [3.1, 5.3], [5.0, 6.5]],
+            fill: FILL_COLOR,
+            outline: OUTLINE_COLOR,
+            rotate_by: [[0, 90]],
+            width_height_ratio: 2
+        },
+        trials_per_round: TRIALS_PER_ROUND,
+        max_step_size: MAX_STEP_SIZE
+    },
+    rectangle_rotated_square_solid: {
+        ref_shapes: {
+            types: ["square"],
+            sizes: [2, 4, 6],
+            fill: FILL_COLOR,
+            outline: OUTLINE_COLOR,
+            rotate_by:[45]
+        },
+        mod_shapes: {
+            types: [["rectangle"]],
+            sizes: [[1.2, 3.0], [3.1, 5.3], [5.0, 6.5]],
+            fill: FILL_COLOR,
+            outline: OUTLINE_COLOR,
+            rotate_by: [[45, 0]],
+            width_height_ratio: 2
+        },
+        trials_per_round: TRIALS_PER_ROUND,
+        max_step_size: MAX_STEP_SIZE
+    },
+    rectangle_rotated_square_outline: {
+        ref_shapes: {
+            types: ["square"],
+            sizes: [2, 4, 6],
+            fill: '#FFFFFF',
+            outline: OUTLINE_COLOR,
+            rotate_by:[45]
+        },
+        mod_shapes: {
+            types: [["rectangle"]],
+            sizes: [[1.2, 3.0], [3.1, 5.3], [5.0, 6.5]],
+            fill: '#FFFFFF',
+            outline: OUTLINE_COLOR,
+            rotate_by: [[45, 0]],
+            width_height_ratio: 2
+        },
+        trials_per_round: TRIALS_PER_ROUND,
+        max_step_size: MAX_STEP_SIZE
+    },
+    triangle: {
+        ref_shapes: {
+            types: ["triangle"],
+            sizes: [2, 4, 6],
+            fill: FILL_COLOR,
+            outline: OUTLINE_COLOR,
+            rotate_by: [0]
+        },
+        mod_shapes: {
+            types: [["triangle"]],
+            sizes: [[1.2, 3.0], [3.1, 5.3], [5.0, 6.5]],
+            fill: FILL_COLOR,
+            width_height_ratio: 2,
+            outline: OUTLINE_COLOR,
+            rotate_by: [[0, 90]]
+        }
+    },
 };

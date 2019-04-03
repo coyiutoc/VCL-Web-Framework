@@ -1,8 +1,8 @@
 import {CUSTOM_TRIAL_STRUCTURE_CONDITIONS, get_subconditions} from "/scripts/experiment-properties/data/custom_subcondition_generator.js";
 import {JND_BASE, JND_CONDITIONS} from "/scripts/experiment-properties/data/constants/jnd_data.js";
 import {STEVENS_BASE, STEVENS_CONDITIONS} from "/scripts/experiment-properties/data/constants/stevens_data.js";
+import {ESTIMATION_BASE} from "/scripts/experiment-properties/data/constants/estimation_data.js";
 import {JND_RADIUS_BASE, JND_RADIUS_CONDITIONS} from "/scripts/experiment-properties/data/constants/jnd_radius_data.js";
-import {ESTIMATION_BASE, ESTIMATION_CONDITIONS} from "/scripts/experiment-properties/data/constants/estimation_data.js";
 
 export { get_data,
          get_data_subset,
@@ -15,14 +15,14 @@ const EXPERIMENT_BASES = {
   "Stevens" : STEVENS_BASE,
   "JND_Radius" : JND_RADIUS_BASE,
   "Estimation" : ESTIMATION_BASE
-}
+};
 
 const EXPERIMENT_CONDITIONS = {
   "JND" : JND_CONDITIONS,
   "Stevens" : STEVENS_CONDITIONS,
   "JND_Radius" : JND_RADIUS_CONDITIONS,
-  "Estimation" : ESTIMATION_CONDITIONS
-}
+  "Estimation" : []
+};
 
 /**
  * Retrieves the data for the corresponding experiment object.
@@ -63,9 +63,17 @@ function get_data(experiment){
     if (!EXPERIMENT_BASES[experiment_name][trial_structure]) {
       throw new Error ("Base for " + condition + " does not exist.");
     }
+  }
 
-    dataset = EXPERIMENT_BASES[experiment_name][trial_structure];
-  } 
+  // if (experiment_name === "Estimation") {
+  //   return generate_estimation_experiment_data(condition);
+  // }
+
+  // Repeat subconditions if specified
+  let result = [];
+  let repeats = SUBCONDITION_REPEATS[range][condition];
+
+  dataset = EXPERIMENT_BASES[experiment_name][trial_structure];
 
   return dataset;
 }

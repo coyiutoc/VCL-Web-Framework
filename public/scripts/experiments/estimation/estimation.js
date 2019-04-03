@@ -1,5 +1,8 @@
 import {initialize_random_order} from "/scripts/experiment-properties/balancing/random_generator.js";
-import {get_data, get_data_subset} from "/scripts/experiment-properties/data/data_controller.js";
+import {get_data} from "/scripts/experiment-properties/data/data_controller.js";
+import {randomize_position,
+        randomize_radius_position,
+        force_greater_right_position} from "/scripts/helpers/experiment_helpers.js";
 
 export default class Estimation {
     /**
@@ -12,15 +15,19 @@ export default class Estimation {
         if (params.condition !== 'shape_estimation'
             && params.condition !== 'line_length'
             && params.condition !== 'rectangle_square'
-            && params.condition !== 'triangle') {
+            && params.condition !== 'triangle'
+            && params.condition !== 'rectangle_rotated_square_solid'
+            && params.condition !== 'rectangle_rotated_square_outline') {
             throw  Error("unexpected condition name " + params.condition);
         }
+
         this.condition_name = params.condition;
         if (params.trial_structure !== "estimation") {
             throw  Error("unexpected trial structure " + params.trial_structure);
         }
+        this.range = params.range;
         this.trial_structure = params.trial_structure;
-        if (params.graph_type !== "shapes") {
+        if (params.graph_type !== "shapes" && params.graph_type !== "line") {
             throw Error("graph type: " + params.graph_type + " is not supported.")}
         else {
             this.graph_type = params.graph_type;
@@ -35,7 +42,7 @@ export default class Estimation {
 
         // ========================================
         // EXPERIMENT CONSTANTS
-        this.X_DISTANCE_BETWEEN_SHAPES = 10;
+        this.X_DISTANCE_BETWEEN_SHAPES = 12;
         this.Y_DIVIATION_FROM_X_AXIS = 3;
         this.MAX_STEP_INTERVAL = 10;
         this.ROUNDS_PER_COND = 4;
@@ -87,6 +94,7 @@ export default class Estimation {
         // PREPARE EXPERIMENT
 
         // Extract raw constants
+        // this.raw_sub_conds = generate_estimation_experiment_data(params.condition);
         this.raw_sub_conds = get_data(this);
         // console.log("raw sub conds");
         // Prepare experiment + practice data
@@ -168,6 +176,7 @@ export default class Estimation {
      * @return trial {object}
      */
     generate_trial(block_type) {
+
         if ((block_type !== "test") && (block_type !== "practice")) {
             throw Error(block_type + " is not supported.")
         }
@@ -291,23 +300,23 @@ export default class Estimation {
         let left_x = mid_width - this.X_DISTANCE_BETWEEN_SHAPES * this.PIXEL_TO_CM / 2;
         let right_x = mid_width + this.X_DISTANCE_BETWEEN_SHAPES * this.PIXEL_TO_CM / 2;
 
-        let ref_size = sub_cond.base_size * estimation_exp.PIXEL_TO_CM ;
+        let ref_size = sub_cond.ref_size * estimation_exp.PIXEL_TO_CM ;
         let ref_y = estimation_exp.calculate_y_position(ref_size);
 
-        // the size of the modifiable shape start from min_size for trial 0 and 2, max_size for 1 and 3;
+        // the size of the modifiable shape start from mod_min_size for trial 0 and 2, mod_max_size for 1 and 3;
         let mod_size = (round_num % 2 === 1)?
-            sub_cond.max_size * estimation_exp.PIXEL_TO_CM  : sub_cond.min_size * estimation_exp.PIXEL_TO_CM;
+            sub_cond.mod_max_size * estimation_exp.PIXEL_TO_CM  : sub_cond.mod_min_size * estimation_exp.PIXEL_TO_CM;
         let mod_y = estimation_exp.calculate_y_position(mod_size);
 
         this.curr_trial_data.is_ref_smaller = (round_num % 2 === 1);
 
         if (this.curr_trial_data.is_ref_left) {
-            this.plot_shape(sub_cond.base_shape, chart, ref_size , ref_y, left_x, true);
-            this.plot_shape(sub_cond.mod_shape, chart, mod_size, mod_y, right_x, false);
+            this.plot_shape(sub_cond.ref_shape, chart, ref_size , ref_y, left_x, true, sub_cond.ref_outline, sub_cond.ref_fill);
+            this.plot_shape(sub_cond.mod_shape, chart, mod_size, mod_y, right_x, false, sub_cond.mod_outline, sub_cond.mod_fill);
             this.curr_trial_data.is_ref_left = true;
         } else {
-            this.plot_shape(sub_cond.mod_shape, chart, mod_size, mod_y, left_x, false);
-            this.plot_shape(sub_cond.base_shape, chart, ref_size, ref_y, right_x, true);
+            this.plot_shape(sub_cond.mod_shape, chart, mod_size, mod_y, left_x, false, sub_cond.mod_outline, sub_cond.mod_fill);
+            this.plot_shape(sub_cond.ref_shape, chart, ref_size, ref_y, right_x, true, sub_cond.ref_outline, sub_cond.ref_fill);
             this.curr_trial_data.is_ref_left = false;
         }
     }
@@ -347,26 +356,28 @@ export default class Estimation {
      * @param y_pos {number}
      * @param x_pos {number}
      * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape
+     * @param outline {string} outline color
+     * @param fill {string} fill color
      */
-    plot_shape(shape, chart, radius, y_pos, x_pos, is_ref) {
+    plot_shape(shape, chart, radius, y_pos, x_pos, is_ref, outline, fill) {
         switch (shape) {
             case "circle":
-                this.plot_circle(chart, radius, y_pos, x_pos, is_ref);
+                this.plot_circle(chart, radius, y_pos, x_pos, is_ref, outline, fill);
                 break;
             case "triangle":
-                this.plot_triangle(chart, radius, y_pos, x_pos, is_ref);
+                this.plot_triangle(chart, radius, y_pos, x_pos, is_ref, outline, fill);
                 break;
             case "square":
-                this.plot_square(chart, radius, y_pos, x_pos, is_ref);
+                this.plot_square(chart, radius, y_pos, x_pos, is_ref, outline, fill);
                 break;
             case "instruction":
                 this.plot_instruction(chart, y_pos, x_pos, trial);
                 break;
             case "line":
-                this.plot_line(chart, radius, y_pos, x_pos, is_ref);
+                this.plot_line(chart, radius, y_pos, x_pos, is_ref, outline);
                 break;
             case "rectangle":
-                this.plot_rectangle(chart, radius, y_pos, x_pos, is_ref);
+                this.plot_rectangle(chart, radius, y_pos, x_pos, is_ref, outline, fill);
                 break;
         }
     }
@@ -398,8 +409,10 @@ export default class Estimation {
      * @param y_pos {number}
      * @param x_pos {number}
      * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape
+     * @param outline {string}
+     * @param fill {string}
      */
-    plot_circle(chart, diameter, y_pos, x_pos, is_ref) {
+    plot_circle(chart, diameter, y_pos, x_pos, is_ref, outline, fill) {
         let exp = this;
         let radius = diameter / 2;
         chart.append("circle")
@@ -408,37 +421,23 @@ export default class Estimation {
             .attr("r", diameter / 2)
             .attr("id", "circle_shape")
             .attr("is_ref", is_ref)
-            .style("fill", exp.curr_trial_data.fill_color);
+            .attr("fill", fill)
+            .attr("stroke", outline);
         if (is_ref === false) {
             d3.select("body")
                 .on("keydown", function () {
                     let event = d3.event;
                     // console.log(event);
                     if (event.key === "m" || event.key === "z") {
-                        let sign = event.key === "m" ? 1 : -1;
-                        let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE / 2;
-                        // divided by 2 because we are changing radius (which is half of diameter)
-                        // for example when we do this for squares we will be chaning width and height
-                        let new_radius = radius + sign * change;
-                        console.log(new_radius);
-                        exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
-                        exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM ;
-                        radius = new_radius;
+                        diameter = exp.calculate_size_change(event.key, diameter);
+                        radius = diameter / 2;
                         d3.select("#circle_shape")
-                            .attr("r", new_radius);
+                            .attr("r", radius);
                     }
                 });
         }
     }
 
-    /**
-     *
-     * @param size {number} dimension in cm
-     * @returns {string} "size.cm"
-     */
-    static cm_size_to_string(size) {
-        return size.toString() + "cm";
-    }
     /**
      *
      * @param exp {object} an Experiment object
@@ -475,8 +474,10 @@ export default class Estimation {
      * @param x_pos {number}
      * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape,
      *                         is_ref === true if the shape is a reference shape
+     * @param outline {string}
+     * @param fill {string}
      */
-    plot_square(chart, width, y_pos, x_pos, is_ref) {
+    plot_square(chart, width, y_pos, x_pos, is_ref, outline, fill) {
         let exp = this;
         chart.append("rect")
             .attr("id", is_ref? "square_shape_ref": "square_shape_mod")
@@ -486,21 +487,25 @@ export default class Estimation {
                                           // however x_pos and y_pos specifies the center of the shape
             .attr("width", width)
             .attr("height", width)
-            .attr("fill", exp.curr_trial_data.fill_color);
+            .attr("fill", fill)
+            .attr("stroke", outline);
+        if (is_ref === true && exp.curr_trial_data.ref_rotate_by) {
+            let transform = "rotate(";
+            transform = transform + exp.curr_trial_data.ref_rotate_by.toString();
+            transform = transform + " " + (x_pos - width).toString();
+            transform = transform + " " + (y_pos - width).toString();
+            transform = transform + ")";
+            d3.select("#square_shape_ref").attr("transform", transform);
+        }
         if (is_ref === false) {
             d3.select("body")
                 .on("keydown", () => {
                     let event = d3.event;
                     if (event.key === "m" || event.key === "z") {
-                        let sign = event.key === "m" ? 1 : -1;
-                        let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE;
-                        let new_radius = width + sign * change;
-                        width = new_radius;
-                        exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
-                        exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM;
+                        width = exp.calculate_size_change(event.key, width);
                         d3.select("#square_shape_mod")
-                            .attr("width", new_radius)
-                            .attr("height", new_radius);
+                            .attr("width", width)
+                            .attr("height", width);
                     }
                 });
         }
@@ -516,7 +521,7 @@ export default class Estimation {
      * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape,
      *                         is_ref === true if the shape is a reference shape
      */
-    plot_triangle(chart, radius, y_pos, x_pos, is_ref) {
+    plot_triangle(chart, radius, y_pos, x_pos, is_ref, outline, fill) {
         let exp = this;
         // for equilateral triangles, height = side * sqrt(3) / 2;
         let short_side = radius;
@@ -529,7 +534,7 @@ export default class Estimation {
                 long_side = short_side * exp.curr_trial_data.width_height_ratio;
                 height = Math.sqrt(Math.pow(long_side, 2) - Math.pow(short_side / 2, 2));
                 width = short_side;
-                if (exp.curr_trial_data.rotate) {
+                if (exp.curr_trial_data.mod_rotate_by) {
                     poly = [
                         {"x":(0.5 * height + x_pos), "y":(y_pos)},
                         {"x":(-0.5 * height + x_pos), "y":(-0.5 * width + y_pos)},
@@ -557,7 +562,8 @@ export default class Estimation {
         chart.append("polygon")
             .attr("points",function() {
                 return poly.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
-            .attr("fill", exp.curr_trial_data.fill_color)
+            .attr("fill", fill)
+            .attr("stroke", outline)
             .attr("id", is_ref? "triangle_shape_ref" : "triangle_shape_mod");
 
         if (is_ref === false) {
@@ -566,17 +572,14 @@ export default class Estimation {
                     let event = d3.event;
                     if (event.key === "m" || event.key === "z") {
                         // decide the amount of change;
-                        let sign = (event.key === "m") ? 1 : -1;
-                        let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE;
-                        let new_radius = radius + sign * change;
-                        radius = new_radius;
+                        radius = exp.calculate_size_change(event.key, radius);
                         // plot the changed shape
-                        short_side = new_radius;
+                        short_side = radius;
                         if (exp.curr_trial_data.width_height_ratio) {
                             long_side = short_side * exp.curr_trial_data.width_height_ratio;
                             height = Math.sqrt(Math.pow(long_side, 2) - Math.pow(short_side / 2, 2));
                             width = short_side;
-                            if (exp.curr_trial_data.rotate) {
+                            if (exp.curr_trial_data.mod_rotate_by) {
                                 poly = [
                                     {"x":(0.5 * height + x_pos), "y":(y_pos)},
                                     {"x":(-0.5 * height + x_pos), "y":(-0.5 * width + y_pos)},
@@ -594,10 +597,7 @@ export default class Estimation {
                                 {"x":(-0.5 * short_side + x_pos), "y":(0.5 * height + y_pos)},
                                 {"x":(0.5 * short_side + x_pos), "y":(0.5 * height + y_pos)}];
                         }
-
-                        exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
-                        exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM ;
-                        chart.select("#triangle_shape_mod")
+                       chart.select("#triangle_shape_mod")
                             .attr("points",function() {
                                 return poly.map(function(d) { return [d.x, d.y].join(","); }).join(" ");});
                     }
@@ -612,8 +612,10 @@ export default class Estimation {
      * @param y_pos {number}
      * @param x_pos {number}
      * @param is_ref {boolean}
+     * @param outline {string}
+     * @param fill {string}
      */
-    plot_rectangle(chart, size, y_pos, x_pos, is_ref) {
+    plot_rectangle(chart, size, y_pos, x_pos, is_ref, outline, fill) {
         let exp = this;
         let short_side = size;
         let long_side = size;
@@ -621,13 +623,8 @@ export default class Estimation {
         if (exp.curr_trial_data.width_height_ratio) {
             long_side = short_side * exp.curr_trial_data.width_height_ratio;
         }
-        if (exp.curr_trial_data.rotate && exp.curr_trial_data.rotate === 90) {
-            width = long_side;
-            height = short_side;
-        } else {
-            width = short_side;
-            height = long_side
-        }
+        width = short_side;
+        height = long_side;
         chart.append("rect")
             .attr("id", is_ref? "rect_shape_ref": "rect_shape_mod")
             .attr("x", x_pos - width / 2)
@@ -636,28 +633,29 @@ export default class Estimation {
             // however x_pos and y_pos specifies the center of the shape
             .attr("width", width)
             .attr("height", height)
-            .attr("fill", exp.curr_trial_data.fill_color);
+            .attr("fill", fill)
+            .attr("stroke", outline);
+        if (is_ref === false && exp.curr_trial_data.mod_rotate_by) {
+            let transform = "rotate(";
+            transform = transform + exp.curr_trial_data.mod_rotate_by.toString();
+            transform = transform + " " + (x_pos).toString();
+            transform = transform + " " + (y_pos).toString();
+            transform = transform + ")";
+            console.log(transform);
+            d3.select("#rect_shape_mod").attr("transform", transform);
+        }
+
         if (is_ref === false) {
             d3.select("body")
                 .on("keydown", function () {
                     let event = d3.event;
                     if (event.key === "m" || event.key === "z") {
-                        let sign = event.key === "m" ? 1 : -1;
-                        let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE;
-                        let new_radius = size + sign * change;
-                        size = new_radius;
-                        exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
-                        exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM;
-                        let short_side = new_radius;
+                        size = exp.calculate_size_change(event.key, size);
+                        let short_side = size;
                         let long_side = exp.curr_trial_data.width_height_ratio * short_side;
                         let new_width = 0, new_height = 0;
-                        if (exp.curr_trial_data.rotate && exp.curr_trial_data.rotate === 90) {
-                            new_width = long_side;
-                            new_height = short_side;
-                        } else {
-                            new_width = short_side;
-                            new_height = long_side
-                        }
+                        new_width = short_side;
+                        new_height = long_side;
                         d3.select("#rect_shape_mod")
                             .attr("width", new_width)
                             .attr("height", new_height);
@@ -675,22 +673,16 @@ export default class Estimation {
      * @param y_pos {number}
      * @param x_pos {number}
      * @param is_ref {boolean}
+     * @param outline
      */
-    plot_line(chart, width, y_pos, x_pos, is_ref) {
+    plot_line(chart, width, y_pos, x_pos, is_ref, outline) {
         let exp = this;
         let x1, x2, y1, y2;
         if (!is_ref) {
-            if (this.curr_trial_data.rotate === 45) {
-                x1 = x_pos - width * Math.sqrt(2)/ 4;
-                x2 = x_pos + width * Math.sqrt(2)/ 4;
-                y1 = y_pos - width * Math.sqrt(2)/ 4;
-                y2 = y_pos + width * Math.sqrt(2)/ 4;
-            } else {
-                x1 = x_pos;
-                x2 = x_pos;
-                y1 = y_pos + width / 2;
-                y2 = y_pos + width / 2;
-            }
+            x1 = x_pos - (width / 2) * Math.sin(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
+            x2 = x_pos + (width / 2) * Math.sin(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
+            y1 = y_pos - (width / 2) * Math.cos(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
+            y2 = y_pos + (width / 2) * Math.cos(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
         } else {
             x1 = x_pos - width / 2;
             x2 = x_pos + width / 2;
@@ -698,7 +690,7 @@ export default class Estimation {
             y2 = y_pos;
         }
         chart.append("line")
-            .style("stroke", exp.curr_trial_data.fill_color)
+            .style("stroke", outline)
             .style("stroke-width", exp.curr_trial_data.stroke_width)
             .attr("id", is_ref? "line_shape_ref": "line_shape_mod")
             .attr("x1", x1)
@@ -710,30 +702,18 @@ export default class Estimation {
                 .on("keydown", function () {
                     let event = d3.event;
                     if (event.key === "m" || event.key === "z") {
-                        let sign = event.key === "m" ? 1 : -1;
-                        let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE;
-                        let new_radius = width + sign * change;
-                        width = new_radius;
+                        width = exp.calculate_size_change(event.key, width);
                         if (!is_ref) {
-                            if (exp.curr_trial_data.rotate === 45) {
-                                x1 = x_pos - width * Math.sqrt(2)/ 4;
-                                x2 = x_pos + width * Math.sqrt(2)/ 4;
-                                y1 = y_pos - width * Math.sqrt(2)/ 4;
-                                y2 = y_pos + width * Math.sqrt(2)/ 4;
-                            } else {
-                                x1 = x_pos;
-                                x2 = x_pos;
-                                y1 = y_pos + width / 2;
-                                y2 = y_pos + width / 2;
-                            }
+                            x1 = x_pos - (width / 2) * Math.sin(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
+                            x2 = x_pos + (width / 2) * Math.sin(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
+                            y1 = y_pos - (width / 2) * Math.cos(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
+                            y2 = y_pos + (width / 2) * Math.cos(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
                         } else {
                             x1 = x_pos - width / 2;
                             x2 = x_pos + width / 2;
                             y1 = y_pos;
                             y2 = y_pos;
                         }
-                        exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
-                        exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM;
                         d3.select("#line_shape_mod")
                             .attr("x1", x1)
                             .attr("x2", x2)
@@ -742,7 +722,22 @@ export default class Estimation {
                     }
                 });
         }
+    }
 
+    /**
+     *
+     * @param event_key m to increase the size and z to decrease the size
+     * @param size the previous size of the shape
+     * @returns number
+     */
+    calculate_size_change(event_key, size) {
+        let sign = event_key === "m" ? 1 : -1;
+        let change = Math.random() * this.PIXEL_TO_CM * this.MAX_STEP_SIZE;
+        let new_radius = size + sign * change;
+        size = new_radius;
+        this.curr_trial_data.adjustments.push(change * sign / this.PIXEL_TO_CM);
+        this.curr_trial_data.estimated_size = new_radius / this.PIXEL_TO_CM;
+        return size;
     }
 
     /*
