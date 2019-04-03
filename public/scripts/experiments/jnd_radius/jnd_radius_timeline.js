@@ -20,7 +20,7 @@ var welcome = {
   type: 'html-keyboard-response',
   stimulus: `<div align = "center" style="margin-top: ${isFirefox ? "25vh" : "0"}">` + `<img src="${address}/img/VCL_lab_logo.png"></img><br><br>` +
             `<b>Base:</b> ${jnd_radius_exp.constructor.name}` + '<br>' + 
-            `<b>Trial Type:</b> ${jnd_radius_exp.range}` + '<br>' + 
+            `<b>Trial Type:</b> ${jnd_radius_exp.trial_structure}` + '<br>' + 
             `<b>Condition:</b> ${shape_names[0]}, ${shape_names[1]}` + 
             '<br><br><br><p><font size = 15>Press any key to begin.<p></font>' +
             '</div>',

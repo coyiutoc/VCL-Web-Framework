@@ -3,8 +3,7 @@ import {initialize_latin_square} from "/scripts/experiment-properties/balancing/
 import {initialize_random_order} from "/scripts/experiment-properties/balancing/random_generator.js";
 import {get_data, 
         get_data_subset} from "/scripts/experiment-properties/data/data_controller.js";
-import {prepare_coordinates,
-        randomize_position,
+import {randomize_position,
         randomize_radius_position,
         force_greater_right_position} from "/scripts/helpers/experiment_helpers.js";
 
@@ -17,7 +16,7 @@ export default class JND_Radius {
    */
   constructor(params) {
 
-    let range = params["range"];
+    let trial_structure = params["trial_structure"];
     let condition_name = params["condition"];
     let graph_type = params["graph_type"];
     let balancing_type = params["balancing"];
@@ -30,13 +29,13 @@ export default class JND_Radius {
     // ========================================
     // PARAMETER CHECKING
 
-    if (range !== "foundational") {
-      throw Error(range + " is not supported.") }
+    if (trial_structure !== "foundational") {
+      throw Error(trial_structure + " is not supported.") }
     else{
-      this.range = range;
+      this.trial_structure = trial_structure;
     }  
 
-    if (graph_type !== "shape") {
+    if (graph_type !== "shapes") {
       throw Error(graph_type + " is not supported.")} 
     else { 
       this.graph_type = graph_type;
@@ -80,8 +79,11 @@ export default class JND_Radius {
     // ========================================
     // CURRENT TRIAL DATA
 
+    // Plotting-related vars
     this.left_radius = "";
     this.right_radius = "";
+
+    // JsPsych trial_data for the current trial
     this.trial_data = "";
 
     // ========================================
@@ -173,6 +175,10 @@ export default class JND_Radius {
         // Randomize position of the base and adjusted graphs
         var result = randomize_radius_position(trial, constants.base_radius, adjusted_radius);
 
+        // Randomize position of the shapes
+        let random = Math.floor(Math.random() * Math.floor(2));
+        trial.data.shapes = random <= 0.5 ? [constants.shape_1, constants.shape_2] : [constants.shape_2, constants.shape_1];
+
         // // For testing purposes, can force R graph to have greater correlation
         // var result = force_greater_right_position(trial,
         //                                           base_coordinates,
@@ -183,6 +189,10 @@ export default class JND_Radius {
         jnd_radius_exp.left_radius = result.left;
         jnd_radius_exp.right_radius = result.right;
         jnd_radius_exp.trial_data = trial.data; 
+
+        let left_radius_conv = result.left * jnd_radius_exp.PIXELS_PER_CM;
+        let right_radius_conv = result.right * jnd_radius_exp.PIXELS_PER_CM;
+        jnd_radius_exp.radii = [left_radius_conv, right_radius_conv];
 
         console.log("[RIGHT] Radius: " + trial.data.right_radius);
         console.log("[LEFT] Radius: " + trial.data.left_radius);
@@ -537,314 +547,4 @@ export default class JND_Radius {
     hiddenElement.download = "S" + this.subject_id + "_" + this.condition_name + "_jnd_slice_summary_results.csv";
     hiddenElement.click();
   }
-
-
-  /**
-   * Performs the necessary D3 operations to plot the slice distributions.
-   */
-  plot_distributions() {
-
-    let radii = [this.left_radius * this.PIXELS_PER_CM, this.right_radius * this.PIXELS_PER_CM];
-    let shapes = this.condition_name.split("_");
-
-    // Margin calculations
-    let width_diff = (3/4)*window.innerWidth - (1/4)*window.innerWidth;
-
-    // Set up for randomizing position of circle or rect
-    let count = 0;
-    let random = Math.floor(Math.random() * Math.floor(2));
-    let order = random <= 0.5 ? [shapes[0], shapes[1]] : [shapes[1], shapes[0]];
-
-    let max_radius = Math.max(...radii);
-    let diff = max_radius - Math.min(...radii);
-
-    for (let radius of radii) {
-
-      // SVG dimensions
-      let height = max_radius*2; 
-      let width = max_radius*2;
-
-      if (count === 0) {
-
-        let margin_right = width_diff - width; // Margin = difference between 3/4 and 1/4 of view width - width of one svg
-        
-        // Firefox check (doesn't handle JsPsych formatting well)
-        if (typeof InstallTrigger !== 'undefined') {
-          var margin_top = window.innerHeight/2 - max_radius;
-        } else {
-          var margin_top = 0;
-        }
-
-        var chart = d3.select("#graph") 
-                       .append("svg") 
-                        .attr("width", width) 
-                        .attr("height", height)
-                        .attr("style", "margin-right:" + margin_right + "px; margin-top: " + margin_top + "px");
-
-      } else {
-         var chart = d3.select("#graph") 
-                       .append("svg") 
-                        .attr("width", width) 
-                        .attr("height", height)
-                        .attr("id", "right_graph");  
-      }  
-
-      // Plot depending on shape specified
-      if (order[count] === "circle") {
-
-        this.plot_circle(chart, radius, max_radius, diff);
-
-      } else if (order[count].includes("slice")) {
-
-        let degrees = order[count].split("-")[1];
-        this.plot_slice(chart, radius, degrees, max_radius, diff);
-
-      } else if (order[count] === "square") {
-
-        this.plot_square(chart, radius, max_radius, diff);
-
-      } else if (order[count] === "rotSquare") { //Diamond position
-
-        this.plot_rotated_square(chart, radius, max_radius, diff);
-
-      } else if (order[count] === "triangle") {
-
-        this.plot_triangle(chart, radius, max_radius, diff);
-
-      } else if (order[count] === "rotTriangle") { //Like 1/2 of a diamond
-
-        this.plot_rotated_triangle(chart, radius, max_radius, diff);
-      }
-
-      count++;
-
-    }
-
-      document.body.style.backgroundColor = this.trial_data.background_color;
-  }
-
-  /**
-   * D3 code for plotting a circle.
-   *
-   * @param  chart      {svg object}
-   *         radius     {double} 
-   *         max_radius {double}     Largest radius of the given trial
-   *         diff       {double}     Difference between max and min radius of given trial        
-   */ 
-  plot_circle(chart, radius, max_radius, diff) {
-
-    let jnd_radius_exp = this;
-    let translation = radius;
-
-    // If radius is the smaller one, need to adjust translation
-    if (radius !== max_radius) {
-      translation += diff;
-    }
-
-    // Move the origin to center of SVG
-    let g = chart.append("g")
-                 .attr("transform", "translate(" + translation + "," + translation + ")");
-
-    // Generate the pie
-    let pie = d3.pie();
-
-    // Generate the arcs
-    let arc = d3.arc()
-                .innerRadius(0)
-                .outerRadius(radius/2);
-
-    // Represents the % that each slice takes up - so this is a pie with 4 "parts".
-    let data = [25, 25, 25, 25];
-    
-    // Generate groups
-    let arcs = g.selectAll("arc")
-                .data(pie(data))
-                .enter()
-                .append("g")
-                .attr("class", "arc")
-
-    // Draw arc paths
-    arcs.append("path")
-        .attr("fill", function(d, i) {
-          return jnd_radius_exp.trial_data.fill_color;
-        })
-        .attr("stroke", function(d, i) {
-          return jnd_radius_exp.trial_data.fill_color;
-        })
-        .attr("d", arc);
-  }
-
-  /**
-   * D3 code for plotting a slice (1/4 of circle).
-   *      
-   * @param  chart      {svg object}
-   *         radius     {double} 
-   *         rotation {int}         Degrees of rotation in the counterclockwise direction.        
-   *         max_radius {double}     Largest radius of the given trial
-   *         diff       {double}     Difference between max and min radius of given trial      
-   */ 
-  plot_slice(chart, radius, rotation, max_radius, diff) {
-
-    let translation = 0;
-    let jnd_radius_exp = this;
-
-    // If radius is the smaller one, need to adjust translation
-    if (radius !== max_radius) {
-      translation = 0.5*diff;
-    }
-
-    // Move the origin to center of SVG
-    let g = chart.append("g")
-                 .attr("transform", "translate(" + (radius + translation) + "," + (1.5*radius + translation) + ")");
-
-    // Generate the pie
-    let pie = d3.pie();
-
-    // Generate the arcs
-    let arc = d3.arc()
-                .innerRadius(0)
-                .outerRadius(radius);
-
-    // Represents the % that each slice takes up - so this is a pie with 4 "parts".
-    let data = [25, 25, 25, 25];
-    
-    // Generate groups
-    let arcs = g.selectAll("arc")
-                .data(pie(data))
-                .enter()
-                .append("g")
-                .attr("class", "arc")
-
-    arcs.append("path")
-        .attr("fill", function(d, i) {
-            if (i === 0) {
-                return jnd_radius_exp.trial_data.fill_color;
-            } else {
-                return "#ffffff";
-            }    
-        })
-        .attr("d", arc)
-        .attr("transform", "rotate(" + (-1)*rotation + ")");
-  }
-
-  /**
-   * D3 code for plotting a square.
-   *
-   * @param  chart      {svg object}
-   *         radius     {double} 
-   *         max_radius {double}     Largest radius of the given trial
-   *         diff       {double}     Difference between max and min radius of given trial         
-   */ 
-  plot_square(chart, radius, max_radius, diff) {
-
-    let translation = 0.5*max_radius;
-    let jnd_radius_exp = this;
-
-    // If radius is the smaller one, need to adjust translation
-    if (radius !== max_radius) {
-      translation = 0.5*max_radius + 0.5*diff;
-    }
-
-    let g = chart.append("g");
-
-    let rect = g.append("rect")
-                   .attr("x", 0)
-                   .attr("y", 0)
-                   .attr("width", radius)
-                   .attr("height", radius)
-                   .attr("fill", jnd_radius_exp.trial_data.fill_color)
-                   .attr("transform", "translate(" + translation + "," + translation + ")");
-  }
-
-  /**
-   * D3 code for plotting a rotated square AKA diamond.
-   *
-   * @param  chart      {svg object}
-   *         radius     {double} 
-   *         max_radius {double}     Largest radius of the given trial
-   *         diff       {double}     Difference between max and min radius of given trial        
-   */ 
-  plot_rotated_square(chart, radius, max_radius, diff) {
-
-    let xtranslation = radius;
-    let ytranslation = 0.25*radius;
-    let jnd_radius_exp = this;
-
-    // If radius is the smaller one, need to adjust translation
-    if (radius !== max_radius) {
-      xtranslation += 0.5*diff;
-      ytranslation += diff;
-    }
-
-    let g = chart.append("g");
-              
-    let rect = g.append("rect")
-                   .attr("x", 0)
-                   .attr("y", 0)
-                   .attr("width", radius)
-                   .attr("height", radius)
-                   .attr("fill", jnd_radius_exp.trial_data.fill_color)
-                   .attr("transform", "translate(" + xtranslation + "," + ytranslation + ") rotate(45)");
-  }
-
-  /**
-   * D3 code for plotting a triangle.
-   *
-   * @param  chart      {svg object}
-   *         radius     {double} 
-   *         max_radius {double}     Largest radius of the given trial
-   *         diff       {double}     Difference between max and min radius of given trial        
-   */ 
-  plot_triangle(chart, radius, max_radius, diff) {
-
-    let translation = 0;
-    let jnd_radius_exp = this;
-
-    // If radius is the smaller one, need to shift by the 0.5*diff
-    if (radius !== max_radius) {
-      translation = diff;
-    }
-
-    let poly = [{"x":(0.5*radius + translation), "y":(0.5*radius + translation)},
-                {"x":(0.5*radius + translation), "y":(1.5*radius + translation)},
-                {"x":(1.5*radius + translation), "y":(1.5*radius + translation)}];
-
-    chart.selectAll("polygon")
-         .data([poly])
-         .enter().append("polygon")
-         .attr("points",function(d) { 
-            return d.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
-         .attr("fill", jnd_radius_exp.trial_data.fill_color);
-  }
-
-  /**
-   * D3 code for plotting a rotated triangle.
-   *
-   * @param  chart      {svg object}
-   *         radius     {double} 
-   *         max_radius {double}     Largest radius of the given trial
-   *         diff       {double}     Difference between max and min radius of given trial        
-   */ 
-  plot_rotated_triangle(chart, radius, max_radius, diff) {
-
-    let translation = 0;
-    let jnd_radius_exp = this;
-
-    // If radius is the smaller one, need to shift by the 0.5*diff
-    if (radius !== max_radius) {
-      translation = diff;
-    }
-
-    let poly = [{"x":(1.5*radius + translation), "y":(0.5*radius + translation)},
-                {"x":(0.5*radius + translation), "y":(radius + translation)},
-                {"x":(1.5*radius + translation), "y":(1.5*radius + translation)}];
-
-    chart.selectAll("polygon")
-         .data([poly])
-         .enter().append("polygon")
-         .attr("points",function(d) { 
-            return d.map(function(d) { return [d.x, d.y].join(","); }).join(" ");})
-         .attr("fill", jnd_radius_exp.trial_data.fill_color);        
-  }
-
 }

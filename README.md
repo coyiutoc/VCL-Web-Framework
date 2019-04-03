@@ -6,16 +6,19 @@ Currently supported experiments:
 
 ### JND
 
-| Name                           | Trial Type      | Graph Type(s)   | Balancing       |
-| ------------------------------ | --------------- | --------------- | --------------- |
-| Base                           | Foundational    | Scatter, Strip  | Latin Square    |
-| Strip Ring Size                | Foundational    | Ring            | Latin Square    |
-| Line Length Strip              | Foundational    | Strip           | Latin Square    |
-| Distractor Rainbow             | Design          | Scatter         | Latin Square    |
-| Multi-Phase [Task 1]           | Design-Multi    | Scatter         | Latin Square    |
+| Name                           				    		    | Trial Type      | Graph Type(s)   | Balancing       |
+| --------------------------------------------------------------| --------------- | --------------- | --------------- |
+| Base                           				   			    | Foundational    | Scatter, Strip  | Latin Square    |
+| Strip Ring Size                				   			    | Foundational    | Ring            | Latin Square    |
+| Line Length Strip              				   			    | Foundational    | Strip           | Latin Square    |
+| Distractor Rainbow             				   			    | Design          | Scatter         | Latin Square    |
+| Distractor Square Red/Blue/Green/Yellow Hue/Lum/Chro          | Design          | Scatter         | Latin Square    |
+| Distractor Square Diamond Red/Blue/Green/Yellow Hue/Lum/Chro  | Design          | Scatter         | Latin Square    |
+| Multi-Phase [Task 1]           				                | Custom          | Scatter         | Latin Square    |
+| Distractor Blue/Red/Yellow/Control Shades           		    | Custom          | Scatter         | Latin Square    |
 
 
-### JND Radius
+### JND Radius 
 
 | Name                           | Trial Type      | Graph Type(s)   | Balancing       |
 | ------------------------------ | --------------- | --------------- | --------------- |
@@ -29,22 +32,33 @@ Currently supported experiments:
 
 ### Stevens
 
-| Name                           | Trial Type      | Graph Type(s)   | Balancing       |
-| ------------------------------ | --------------- | --------------- | --------------- |
-| Base                           | Foundational    | Scatter, Strip  | Latin Square    |
-| Strip Ring Size                | Foundational    | Ring            | Latin Square    |
-| Line Length Strip              | Foundational    | Strip           | Latin Square    |
+| Name                           								| Trial Type      | Graph Type(s)   | Balancing       |
+| ------------------------------------------------------------- | --------------- | --------------- | --------------- |
+| Base                           								| Foundational    | Scatter, Strip  | Latin Square    |
+| Strip Ring Size                								| Foundational    | Ring            | Latin Square    |
+| Line Length Strip              								| Foundational    | Strip           | Latin Square    |
+| Distractor Square Red/Blue/Green/Yellow Hue/Lum/Chro          | Design          | Scatter         | Latin Square    |
+| Distractor Square Diamond Red/Blue/Green/Yellow Hue/Lum/Chro  | Design          | Scatter         | Latin Square    |
+| Distractor Blue/Red/Yellow/Control Shades           		    | Custom          | Scatter         | Latin Square    |
 
 ### Estimation
 
 | Name                           | Trial Type      | Graph Type(s)   | Balancing       |
 | ------------------------------ | --------------- | --------------- | --------------- |
+<<<<<<< HEAD
 | Shape: Circle, Square, Triangle| Estimation      | Shape           | Random          |
 | Line Length                    | Estimation      | Line            | Random          |
 | Shape: Rectangle, Square       | Estimation      | Shape           | Random          |
 | Shape: Rectangle, Rotated Square (Solid)       | Estimation      | Shape           | Random          |
 | Shape: Rectangle, Rotated Square (Outline)     | Estimation      | Shape           | Random          |
 | Shape: Triangle                | Estimation      | Shape           | Random          |
+=======
+| Circle, Square, Triangle       | Estimation      | Shape           | Random          |
+| Line Length                    | Estimation      | Shape           | Random          |
+| Rectangle, Square              | Estimation      | Shape           | Random          |
+| Triangle                       | Estimation      | Shape           | Random          |
+
+>>>>>>> master
 
 1/2/2019 - Madison's Visual Search + Numerosity experiments from December 2018 can be found [here.](https://github.com/Wongelawit/Correlation_MultipleEnsemble/tree/Numerosity-Task)
 

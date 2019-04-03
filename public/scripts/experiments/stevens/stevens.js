@@ -3,8 +3,7 @@ import {initialize_latin_square} from "/scripts/experiment-properties/balancing/
 import {initialize_random_order} from "/scripts/experiment-properties/balancing/random_generator.js";
 import {get_data, 
         get_data_subset} from "/scripts/experiment-properties/data/data_controller.js";
-import {prepare_coordinates,
-        randomize_position,
+import {randomize_position,
         randomize_radius_position,
         force_greater_right_position} from "/scripts/helpers/experiment_helpers.js";
 
@@ -17,22 +16,24 @@ export default class Stevens {
    */
   constructor(params) {
 
-    let range = params["range"];
+    let trial_structure = params["trial_structure"];
     let condition_name = params["condition"];
     let graph_type = params["graph_type"];
     let balancing_type = params["balancing"];
 
     this.condition_name = condition_name; 
+    this.condition_group = this.condition_name.split('_')[0]; // Mostly to handle "distractor" conditions.
+                                                              // TODO: Should have a better flag for it.
     this.subject_id = params["subject_id"];
     this.subject_initials = params["subject_initials"];
 
     // ========================================
     // PARAMETER CHECKING
 
-    if ((range !== "foundational") && (range !== "design")) {
-      throw Error(range + " is not supported.") }
+    if ((trial_structure !== "foundational") && (trial_structure !== "design") && (trial_structure !== "custom")) {
+      throw Error(trial_structure + " is not supported.") }
     else{
-      this.range = range;
+      this.trial_structure = trial_structure;
     }  
 
     if ((graph_type !== "scatter") && (graph_type !== "strip") && (graph_type !== "ring")) {
@@ -78,10 +79,13 @@ export default class Stevens {
     // ========================================
     // CURRENT TRIAL DATA
 
+    // Plotting-related vars
     this.left_coordinates = "";
     this.right_coordinates = "";
     this.middle_coordinates = "";
-    this.distribution_size = "";
+    this.distractor_coordinates = "";
+
+    // JsPsych trial_data for the current trial
     this.trial_data = "";
 
     // ========================================
@@ -108,50 +112,22 @@ export default class Stevens {
 
     let dataset = this.raw_constants;
 
-    // To hold individual data sets according to round type
-    var test_dataset = [];
-    var consistency_dataset = [];
-
-    // To hold balanced indexes
-    var test_order = []; 
-    var consistency_order = [];
-
-    // Extract dataset according to test or consistency round type
-    for (let subcondition of dataset) {
-
-      if (subcondition["round_type"] === "test") {
-        test_dataset.push(subcondition);
-      } else {
-        consistency_dataset.push(subcondition);
-      }
-    }
-
-    // Get balancing order for EACH round type dataset individually
-    switch(this.balancing_type) {
-
-      case 'latin_square':
-        test_order = initialize_latin_square(test_dataset.length);
-        consistency_order = initialize_latin_square(consistency_dataset.length);
-        break;
-
-      case 'random':
-        test_order = initialize_latin_square(test_dataset.length);
-        consistency_order = initialize_latin_square(consistency_dataset.length);
-        break;
-
-      default:
-        throw Error(this.balancing_type + " balancing type is not supported.");
-    }
-
-    // Since test dataset will run first, add index length of it to consistency order
-    for (let i = 0; i < consistency_order.length; i++) {
-      consistency_order[i] += test_dataset.length;
-    }
-
-    //  Merge the two orders 
-    this.sub_condition_order = test_order.concat(consistency_order);
-
     var ordered_dataset = [];
+
+    switch (this.trial_structure) {
+
+      case "foundational":
+        this.set_foundational_dataset_order(dataset);
+        break;
+
+      case "design":
+        this.set_design_dataset_order(dataset);
+        break;
+
+      case "custom":
+        ordered_dataset = dataset;
+        break;
+    }
 
     // Order the data set according to the latin square
     for (let i=0; i < this.sub_condition_order.length; i++){
@@ -194,6 +170,81 @@ export default class Stevens {
     this.sub_conditions_constants = practice_dataset;
     this.current_sub_condition_index = 0; 
     this.input_count_array = new Array(this.sub_conditions_constants[0].trials_per_round).fill(0);
+  }
+
+  /**
+   * Sets the subcondition order for design range.
+   *
+   * @param  dataset {[{assoc array}, {assoc array}, ... ]}   The data used to be ordered. 
+   */
+  set_design_dataset_order(dataset) {
+
+    switch(this.balancing_type) {
+
+      case 'latin_square':
+        this.sub_condition_order = initialize_latin_square(dataset.length);
+        break;
+
+      case 'random':
+        this.sub_condition_order = initialize_random_order(dataset.length);
+        break;
+
+      default:
+        throw Error(this.balancing_type + " balancing type is not supported.");
+    }
+  }
+
+  /**
+   * Sets the subcondition order for foundational range.
+   * Needs to balance INDIVIDUALLY the round and test type conditions,
+   * then maintain that order (e.g. all test goes first, then consistency)
+   *
+   * @param  dataset {[{assoc array}, {assoc array}, ... ]}   The data used to be ordered. 
+   */
+  set_foundational_dataset_order(dataset) {
+
+    // To hold individual data sets according to round type
+    var test_dataset = [];
+    var consistency_dataset = [];
+
+    // To hold balanced indexes
+    var test_order = []; 
+    var consistency_order = [];
+
+    // Extract dataset according to test or consistency round type
+    for (let subcondition of dataset) {
+
+      if (subcondition["round_type"] === "test") {
+        test_dataset.push(subcondition);
+      } else {
+        consistency_dataset.push(subcondition);
+      }
+    }
+
+    // Get balancing order for EACH round type dataset individually
+    switch(this.balancing_type) {
+
+      case 'latin_square':
+        test_order = initialize_latin_square(test_dataset.length);
+        consistency_order = initialize_latin_square(consistency_dataset.length);
+        break;
+
+      case 'random':
+        test_order = initialize_random_order(test_dataset.length);
+        consistency_order = initialize_random_order(consistency_dataset.length);
+        break;
+
+      default:
+        throw Error(this.balancing_type + " balancing type is not supported.");
+    }
+
+    // Since test dataset will run first, add index length of it to consistency order
+    for (let i = 0; i < consistency_order.length; i++) {
+      consistency_order[i] += test_dataset.length;
+    }
+
+    //  Merge the two orders 
+    this.sub_condition_order = test_order.concat(consistency_order);
   }
 
   /**
@@ -378,20 +429,25 @@ export default class Stevens {
                                                       constants.num_SD, 
                                                       constants.mean, 
                                                       constants.SD);
-
+          
           var low_coordinates = generateDistribution(constants.low_ref, 
                                                      constants.error, 
                                                      constants.num_points, 
                                                      constants.num_SD, 
                                                      constants.mean,
                                                      constants.SD);
-
+          
           var estimated_coordinates = generateDistribution(estimated_correlation, 
                                                         constants.error, 
                                                         constants.num_points, 
                                                         constants.num_SD, 
                                                         constants.mean, 
                                                         constants.SD);
+          
+          // If there is a distractor population, generate it:
+          if (stevens_exp.condition_group === "distractor") {
+            stevens_exp.generate_distractor_coordinates(constants);
+          }
 
           // Randomize position of the high and low correlated graphs for a given round
           if (trial.data.round_refreshes == 1){
@@ -406,14 +462,14 @@ export default class Stevens {
           if (trial.data.high_ref_is_right){
             stevens_exp.right_coordinates = high_coordinates;
             stevens_exp.left_coordinates = low_coordinates;
+            stevens_exp.coordinates = [low_coordinates, estimated_coordinates, high_coordinates];
           }
           else{
             stevens_exp.right_coordinates = low_coordinates;
             stevens_exp.left_coordinates = high_coordinates;
+            stevens_exp.coordinates = [high_coordinates, estimated_coordinates, low_coordinates];
           }
 
-          stevens_exp.middle_coordinates = estimated_coordinates;  
-          stevens_exp.distribution_size = constants.num_points; 
           stevens_exp.trial_data = trial.data; 
 
           console.log("[RIGHT] Correlation: " + trial.data.right_correlation);
@@ -423,6 +479,37 @@ export default class Stevens {
       };
 
     return trial; 
+  }
+
+  /**
+   * Will generate the distractor coordinates and save them to the instance.
+   *
+   * @param  {object}  constants (for the given trial)       
+   */
+  generate_distractor_coordinates(constants) {
+
+    let left_dist_coordinates = generateDistribution(constants.dist_base,
+                                                           constants.dist_error,
+                                                           constants.dist_num_points,
+                                                           constants.num_SD,
+                                                           constants.mean,
+                                                           constants.SD);
+    
+    let middle_dist_coordinates = generateDistribution(constants.dist_base,
+                                                           constants.dist_error,
+                                                           constants.dist_num_points,
+                                                           constants.num_SD,
+                                                           constants.mean,
+                                                           constants.SD);
+
+    let right_dist_coordinates = generateDistribution(constants.dist_base,
+                                                           constants.dist_error,
+                                                           constants.dist_num_points,
+                                                           constants.num_SD,
+                                                           constants.mean,
+                                                           constants.SD);
+
+    this.distractor_coordinates = [left_dist_coordinates, middle_dist_coordinates, right_dist_coordinates];
   }
 
   /**
@@ -682,7 +769,7 @@ export default class Stevens {
    */
   export_trial_data() {
 
-    var csv = 'condition,trial_num,sub_condition,balanced_sub_condition,high_ref,estimated_mid,low_ref,num_adjustments,trials_per_round,error,average_rt,num_points,mean,SD,num_SD,round_type,step_size,point_color,background_color,text_color,axis_color,point_size,regen_rate\n';
+    var csv = 'condition,trial_num,sub_condition,balanced_sub_condition,high_ref,estimated_mid,low_ref,num_adjustments,trials_per_round,error,sum_rt,num_points,mean,SD,num_SD,round_type,step_size,point_color,background_color,text_color,axis_color,point_size,regen_rate\n';
     // Get most recent subcondition - will have the max subcondition value
     var max_sub_condition = jsPsych.data.get().filter({type: 'stevens', run_type: 'test'}).last(1).values()[0].sub_condition;
     var data = [];
@@ -703,9 +790,9 @@ export default class Stevens {
         //Take the last trial's estimated mid since we want the most recent value
         var last_estimated_mid = trial_data.last(1).values()[0].estimated_mid;
         var last_num_adjustments = trial_data.last(1).values()[0].num_adjustments;
-        var average_rt = trial_data.filterCustom(function(x){ return x.key_press != 81 }) //Don't use the exit trial rt
+        var sum_rt = trial_data.filterCustom(function(x){ return x.key_press != 81 }) //Don't use the exit trial rt
                                    .select('rt')
-                                   .mean();
+                                   .sum();
                                               
         var row = [this.condition_name];
 
@@ -792,301 +879,4 @@ export default class Stevens {
     hiddenElement.download = "S" + this.subject_id + "_" + this.condition_name + "_stevens_summary_results.csv";
     hiddenElement.click();
   }
-
-  /**
-   * Performs the necessary D3 operations to plot distributions depending on graph type.
-   */
-  plot_distributions() {
-
-    var left_dataset = prepare_coordinates(this.left_coordinates, this.distribution_size);
-    var right_dataset = prepare_coordinates(this.right_coordinates, this.distribution_size);
-    var middle_dataset = prepare_coordinates(this.middle_coordinates, this.distribution_size);
-
-    var datasets = [left_dataset, middle_dataset, right_dataset];
-
-    switch(this.graph_type){
-      case "scatter":
-        this.plot_scatter(datasets);
-        break;
-      case "strip":
-        this.plot_strip(datasets);
-        break;
-      case "ring":
-        this.plot_ring(datasets);
-        break;
-    }
-  }
-
-  /**
-   * Plots distributions using scatter plots. 
-   *
-   * @ param  datasets   {array}
-   */
-  plot_scatter(datasets) {
-
-    var stevens_exp = this;
-
-    var height = window.innerHeight/1.5; 
-    var width = height/2;
-    var multiplier = 1;
-
-    // Create scales:
-    // ** D3 creates a function that takes in input between [0, 100] and 
-    //    outputs between [0, width].
-    //    Basically, domain = input, range = ouput. 
-    var xscale = d3.scaleLinear()
-                   .domain([0, multiplier]) 
-                   .range([0, width]);
-
-    var yscale = d3.scaleLinear()
-                   .domain([multiplier * -1, 0]) // !!! NOTE: this is the hack b/c we flipped the y-values 
-                                                 //     to be negative --> graph is now positive correlation
-                                                 //     but on 4th quadrant --> force domain to be from 
-                                                 //     [-1, 0] to move it to 1st quadrant 
-                   .range([height/2, 0]);
-
-    // Create axes: 
-    var x_axis = d3.axisBottom()
-                   .scale(xscale)
-                   .tickSize([0]);
-
-    var y_axis = d3.axisLeft()
-                   .scale(yscale)
-                   .tickSize([0]);
-
-    var count = 0;
-    // Create/append the SVG for both graphs: 
-    for (var data of datasets){
-      
-      if (count > 0){
-        var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
-                    .append("svg") 
-                      .attr("width", width + 60) // Width and height of the SVG viewpoint
-                      .attr("height", height)   // +40 is for buffer (points going -x)
-                      .attr("style", "margin-left: 100px"); // For width in between graphs
-      }
-      else{
-        var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
-                    .append("svg") 
-                      .attr("width", width + 60) // Width and height of the SVG viewpoint
-                      .attr("height", height);   // +40 is for buffer (points going -x)
-
-      }
-
-      // Creating transform SVG elements + append to SVG: 
-      var yAxisElements = chart.append("g")
-                                 .attr("transform", "translate(50, 10)")
-                                 .call(y_axis);
-
-      var xAxisTranslate = height/2 + 10;
-      var xAxisElements = chart.append("g")
-                                .attr("transform", "translate(50, " + xAxisTranslate  +")")
-                                .call(x_axis)
-
-      // Populating data: 
-      chart.selectAll("circle") // Technically no circles inside div yet, but will be creating it
-            .data(data)
-              .enter()
-              .append("circle") // Creating the circles for each entry in data set 
-              .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
-                return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
-              })
-              .attr("cy", function (d) {
-                return yscale(d[1]);
-              })
-              .attr("r", 2)
-              .attr("r", stevens_exp.trial_data.point_size).style("fill", stevens_exp.trial_data.point_color);
-
-      // Set axis color
-      chart.selectAll("path")
-           .attr("stroke", stevens_exp.trial_data.axis_color);
-
-      // Remove tick labels
-      chart.selectAll("text").remove();   
-
-      count++;
-    }
-
-    // Set background color
-    document.body.style.backgroundColor = stevens_exp.trial_data.background_color;
-  }
-
-  /**
-   * Plots distributions using strip plots. 
-   *
-   * @ param  datasets   {array}
-   */
-  plot_strip(datasets) {
-
-    var stevens_exp = this;
-
-    var width = window.innerWidth * 0.8;
-    var height = window.innerHeight * 0.3;
-    var multiplier = 1;
-
-    // Scale for data slightly smaller than full width of axes to account for outliers.
-    var xscale_for_data = d3.scaleLinear()
-                   .domain([0, multiplier]) 
-                   .range([window.innerWidth * 0.05, window.innerWidth * 0.75]);
-
-    var xscale = d3.scaleLinear()
-                   .domain([0, multiplier]) 
-                   .range([0, width]);
-
-    var yscale = d3.scaleLinear()
-                   .domain([multiplier * -1, 0])
-                   .range([height/2, 0]);
-
-    // Create axes: 
-    var x_axis = d3.axisBottom()
-                   .scale(xscale)
-                   .tickSize([0]);
-
-    var y_axis = d3.axisLeft()
-                   .scale(yscale)
-                   .tickSize([0]);
-
-    // Create/append the SVG for both graphs: 
-    for (var data of datasets){
-
-      var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
-                    .append("svg") 
-                      .attr("width", width) 
-                      .attr("height", height)
-                      .attr("style", "display: block")
-                      .attr("transform", "scale(-1,1)"); // Flip horizontally so cone is
-                                                         // is going left -> right (like orig. version)     
-
-      var xAxisTranslate = height/2;
-      var xAxisElements = chart.append("g")
-                                .attr("transform", "translate(50, " + xAxisTranslate  +")")
-                                .call(x_axis)
-
-      // Populating data: 
-      chart.selectAll("strip") // Technically no circles inside div yet, but will be creating it
-            .data(data)
-              .enter()
-              .append("rect") // Creating the circles for each entry in data set 
-              .attr("x", function (d) {
-                return xscale_for_data(d[0]);
-              })
-              .attr("transform", function (d) {
-                if (stevens_exp.condition_name === "line_length_strip") {
-                  let ytranslation = height/2 - (yscale(d[1]) * 0.5);
-                  return "translate(0, " + ytranslation + ")";
-                } else {
-                return "translate(0, " + height/4 + ")";
-                }
-              })
-              .style("width", function () {
-                if (stevens_exp.trial_data.strip_width !== undefined) {
-                  return stevens_exp.trial_data.strip_width;
-                } else {
-                  return 2;
-                }
-              })
-              .style("height", function (d) {
-                if (stevens_exp.condition_name === "line_length_strip") {
-                  return yscale(d[1]);
-                } else {
-                  return height/2;
-                }
-              });
-
-      // Set axis color
-      chart.selectAll("path")
-           .attr("stroke", stevens_exp.trial_data.axis_color);
-
-      // Remove tick labels
-      chart.selectAll("text").remove();     
-
-    }
-
-    // Set background color
-    document.body.style.backgroundColor = stevens_exp.trial_data.background_color;
-  }
-
-  /**
-   * Plots distributions using strip plots. 
-   *
-   * @ param  datasets   {array}
-   */
-  plot_ring(datasets) {
-
-    var stevens_exp = this;
-
-    var width = window.innerWidth * 0.8;
-    var height = window.innerHeight * 0.3;
-    var multiplier = 1;
-
-    // Scale for data slightly smaller than full width of axes to account for outliers.
-    var xscale_for_data = d3.scaleLinear()
-                   .domain([0, multiplier]) 
-                   .range([window.innerWidth * 0.05, window.innerWidth * 0.75]);
-
-    var xscale = d3.scaleLinear()
-                   .domain([0, multiplier]) 
-                   .range([0, width]);
-
-    var yscale = d3.scaleLinear()
-                   .domain([multiplier * -1, 0])
-                   .range([height/2, 0]);
-
-    // Create axes: 
-    var x_axis = d3.axisBottom()
-                   .scale(xscale)
-                   .tickSize([0]);
-
-    var y_axis = d3.axisLeft()
-                   .scale(yscale)
-                   .tickSize([0]);
-
-    // Create/append the SVG for both graphs: 
-    for (var data of datasets){
-
-      var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
-                    .append("svg") 
-                      .attr("width", width) 
-                      .attr("height", height)
-                      .attr("style", "display: block")
-                      .attr("transform", "scale(-1,1)"); // Flip horizontally so cone is
-                                                         // is going left -> right (like orig. version)     
-
-      var xAxisTranslate = height/2;
-      var xAxisElements = chart.append("g")
-                                .attr("transform", "translate(0, " + xAxisTranslate  +")")
-                                .call(x_axis)
-
-       // Populating data: 
-      chart.selectAll("strip") // Technically no circles inside div yet, but will be creating it
-            .data(data)
-              .enter()
-                .append("circle") // Creating the circles for each entry in data set 
-                .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
-                  return xscale_for_data(d[0]);
-                })
-                .attr("cy", function (d) {
-                  return height/2;
-                })
-                .attr("r", function (d) {
-                  return yscale(d[1])
-                })
-                .attr("stroke", "black")
-                .attr("stroke-width", stevens_exp.trial_data.ring_thickness)
-                .attr("fill", "none");
-
-      // Set axis color
-      chart.selectAll("path")
-           .attr("stroke", stevens_exp.trial_data.axis_color);
-
-      // Remove tick labels
-      chart.selectAll("text").remove();     
-
-    }
-
-    // Set background color
-    document.body.style.backgroundColor = stevens_exp.trial_data.background_color;
-  }
-
 }
-  

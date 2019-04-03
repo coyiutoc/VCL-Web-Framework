@@ -3,8 +3,7 @@ import {initialize_latin_square} from "/scripts/experiment-properties/balancing/
 import {initialize_random_order} from "/scripts/experiment-properties/balancing/random_generator.js";
 import {get_data, 
         get_data_subset} from "/scripts/experiment-properties/data/data_controller.js";
-import {prepare_coordinates,
-        randomize_position,
+import {randomize_position,
         randomize_radius_position,
         force_greater_right_position} from "/scripts/helpers/experiment_helpers.js";
 
@@ -17,23 +16,24 @@ export default class JND {
    */
   constructor(params) {
 
-    let range = params["range"];
+    let trial_structure = params["trial_structure"];
     let condition_name = params["condition"];
     let graph_type = params["graph_type"];
     let balancing_type = params["balancing"];
 
     this.condition_name = condition_name; 
-    this.condition_group = this.condition_name.split('_')[0];
+    this.condition_group = this.condition_name.split('_')[0]; // Mostly to handle "distractor" conditions.
+                                                              // TODO: Should have a better flag for it.
     this.subject_id = params["subject_id"];
     this.subject_initials = params["subject_initials"];
 
     // ========================================
     // PARAMETER CHECKING
 
-    if ((range !== "foundational") && (range !== "design") && (range !== "design_multi")) {
-      throw Error(range + " is not supported.") }
+    if ((trial_structure !== "foundational") && (trial_structure !== "design") && (trial_structure !== "custom")) {
+      throw Error(trial_structure + " is not supported.") }
     else {
-      this.range = range;
+      this.trial_structure = trial_structure;
     }  
 
     if ((graph_type !== "scatter") && (graph_type !== "strip") && (graph_type !== "ring")) {
@@ -79,10 +79,12 @@ export default class JND {
     // ========================================
     // CURRENT TRIAL DATA
 
+    // Plotting-related vars
     this.left_coordinates = "";
     this.right_coordinates = "";
-    this.distribution_size = "";
     this.distractor_coordinates = "";
+    
+    // JsPsych trial_data for the current trial
     this.trial_data = "";
 
     // ========================================
@@ -94,6 +96,7 @@ export default class JND {
     // Prepare experiment + practice data
     this.prepare_experiment();
     this.prepare_practice();   
+
   }
 
   /**
@@ -226,6 +229,7 @@ export default class JND {
                                                            constants.num_SD,
                                                            constants.mean,
                                                            constants.SD);
+
           jnd_exp.distractor_coordinates = [left_dist_coordinates, right_dist_coordinates];
         }
 
@@ -243,9 +247,8 @@ export default class JND {
         //                                           adjusted_correlation);
 
         // Set up D3 variables for plotting
-        jnd_exp.left_coordinates = result.left;
-        jnd_exp.right_coordinates = result.right;
-        jnd_exp.distribution_size = constants.num_points;   
+        jnd_exp.coordinates = [result.left, result.right];
+         
         jnd_exp.trial_data = trial.data; 
 
         console.log("[RIGHT] Correlation: " + trial.data.right_correlation);
@@ -598,327 +601,5 @@ export default class JND {
     hiddenElement.download = "S" + this.subject_id + "_" + this.condition_name + "_jnd_summary_results.csv";
     hiddenElement.click();
   }
-
-
-  /**
-   * Performs the necessary D3 operations to plot distributions depending on graph type.
-   */
-  plot_distributions() {
-
-    var left_dataset = prepare_coordinates(this.left_coordinates, this.distribution_size);
-    var right_dataset = prepare_coordinates(this.right_coordinates, this.distribution_size);
-
-    var datasets = [left_dataset, right_dataset];
-    var distractors = [];
-
-    if (this.condition_group === "distractor"){
-      left_dataset = prepare_coordinates(this.distractor_coordinates[0], this.distribution_size);
-      right_dataset = prepare_coordinates(this.distractor_coordinates[1], this.distribution_size);
-
-      distractors = [left_dataset, right_dataset];
-    }
-
-    switch(this.graph_type){
-      case "scatter":
-        this.plot_scatter(datasets, distractors);
-        break;
-      case "strip":
-        this.plot_strip(datasets);
-        break;
-      case "ring":
-        this.plot_ring(datasets);
-        break;  
-    }
-  }
-
-  /**
-   * Plots distributions using scatter plots. 
-   *
-   * @ param  datasets    {array}     Dataset of data
-   *          distractors {array}     Dataset of distractors, if any
-   */
-  plot_scatter(datasets, distractors) {
-
-    var height = window.innerHeight/1.5; 
-    var width = height/2;
-    var multiplier = 1; // Sets how much the data should be scaled by.
-
-    var buffer = d3.select("#graph") // Insert into the div w/ id = "graph"
-                   .append("svg") 
-                      .attr("width", height) 
-                      .attr("height", width)
-                      .style("display", "block");
-
-    // Create scales:
-    // ** D3 creates a function that takes in input between [0, 100] and 
-    //    outputs between [0, width].
-    //    Basically, domain = input, range = ouput. 
-    var xscale = d3.scaleLinear()
-                   .domain([0, multiplier]) 
-                   .range([0, width]);
-
-    var yscale = d3.scaleLinear()
-                   .domain([multiplier * -1, 0]) // !!! NOTE: this is the hack b/c we flipped the y-values 
-                                                 //     to be negative --> graph is now positive correlation
-                                                 //     but on 4th quadrant --> force domain to be from 
-                                                 //     [-1, 0] to move it to 1st quadrant 
-                   .range([height/2, 0]);
-
-    // Create axes: 
-    var x_axis = d3.axisBottom()
-                   .scale(xscale)
-                   .tickSize([0]);
-
-    var y_axis = d3.axisLeft()
-                   .scale(yscale)
-                   .tickSize([0]);
-
-    // Create/append the SVG for both graphs: 
-    for (let i in datasets){
-
-      var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
-                    .append("svg") 
-                      .attr("width", width + 60) // Width and height of the SVG viewpoint
-                      .attr("height", height)   // +40 is for buffer (points going -x)
-                      .attr("style", "margin-right: " + width/2);
-
-      // Creating transform SVG elements + append to SVG: 
-      var yAxisElements = chart.append("g")
-                               .attr("transform", "translate(50, 10)")
-                               //.attr("transform", "translate(50, " + height/2 + ")")
-                               .call(y_axis);
-
-      var xAxisTranslate = height/2 + 10;
-      //var xAxisTranslate = height - 1;
-      var xAxisElements = chart.append("g")
-                                .attr("transform", "translate(50, " + xAxisTranslate  +")")
-                                .call(x_axis)
-           
-      // TODO: Different handling for distractor - needs to be abstracted out somehow in future     
-      if (this.condition_group === "distractor"){ 
-           
-        let dataset = datasets[i];
-        let distractor = distractors[i];
-
-        // Alternate plotting of distractor and main dataset points - want equal chance of one
-        // getting occluded over the other
-        for (let j in dataset) {
-
-          let point = dataset[j];
-          let dist_point = distractor[j];
-
-          // Distractor point
-          this.plot_scatter_data(chart, xscale, yscale, [point], this.trial_data.point_size, this.trial_data.point_color);  
-
-          // Target point    
-          this.plot_scatter_data(chart, xscale, yscale, [dist_point], this.trial_data.dist_point_size, this.trial_data.dist_color);
-
-        }
-      } else {
-          this.plot_scatter_data(chart, xscale, yscale, datasets[i], this.trial_data.point_size, this.trial_data.point_color);        
-      }     
-
-      // Set axis color
-      chart.selectAll("path")
-           .attr("stroke", this.trial_data.axis_color);
-
-      // Remove tick labels
-      chart.selectAll("text").remove();     
-
-    }
-
-    // Set background color
-    document.body.style.backgroundColor = this.trial_data.background_color;
-  }
-
-  /**
-   * D3 code for appending data into the graph. 
-   */
-  plot_scatter_data(chart, xscale, yscale, data, point_size, point_color) {
-
-    chart.selectAll("circle_data")
-               .data(data)
-                .enter()
-                .append("circle") // Creating the circles for each entry in data set 
-                .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
-                  return xscale(d[0]) + 60; // +60 is for buffer (points going -x, even if they are positive)
-                })
-                .attr("cy", function (d) {
-                  return yscale(d[1]);
-                })
-                .attr("r", point_size).style("fill", point_color);
-  }
-
-  /**
-   * Plots distributions using strip plots. 
-   *
-   * @ param  datasets   {array}
-   */
-  plot_strip(datasets) {
-
-    var jnd_exp = this;
-    var width = window.innerWidth * 0.7;
-    var height = window.innerHeight * 0.5;
-    var multiplier = 1; // Sets how much the data should be scaled by.
-
-    // Scale for data slightly smaller than full width of axes to account for outliers.
-    var xscale_for_data = d3.scaleLinear()
-                   .domain([0, multiplier]) 
-                   .range([window.innerWidth * 0.1, window.innerWidth * 0.6]);
-
-    var xscale = d3.scaleLinear()
-                   .domain([0, multiplier]) 
-                   .range([0, width]);
-
-    var yscale = d3.scaleLinear()
-                   .domain([multiplier * -1, 0])
-                   .range([height/2, 0]);
-
-    // Create axes: 
-    var x_axis = d3.axisBottom()
-                   .scale(xscale)
-                   .tickSize([0]);
-
-    var y_axis = d3.axisLeft()
-                   .scale(yscale)
-                   .tickSize([0]);
-
-    // Create/append the SVG for both graphs: 
-    for (var data of datasets){
-      
-      var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
-                    .append("svg") 
-                      .attr("width", width) 
-                      .attr("height", height)
-                      .attr("transform", "scale(-1,1)"); // Flip horizontally so cone is
-                                                         // is going left -> right (like orig. version)  
-
-      var xAxisTranslate = height/2;
-      var xAxisElements = chart.append("g")
-                                .attr("transform", "translate(0, " + xAxisTranslate  +")")
-                                .call(x_axis)
-
-      // Populating data: 
-      chart.selectAll("strip") // Technically no circles inside div yet, but will be creating it
-            .data(data)
-              .enter()
-              .append("rect") // Creating the circles for each entry in data set 
-              .attr("x", function (d) {
-                return xscale_for_data(d[0]);
-              })
-              .attr("transform", function (d) {
-                if (jnd_exp.condition_name === "line_length_strip") {
-                  let ytranslation = height/2 - (yscale(d[1]) * 0.5);
-                  return "translate(0, " + ytranslation + ")";
-                } else {
-                return "translate(0, " + height/4 + ")";
-                }
-              })
-              .style("width", function () {
-                if (jnd_exp.trial_data.strip_width !== undefined) {
-                  return jnd_exp.trial_data.strip_width;
-                } else {
-                  return 2;
-                }
-              })
-              .style("height", function (d) {
-                if (jnd_exp.condition_name === "line_length_strip") {
-                  return yscale(d[1]);
-                } else {
-                  return height/2;
-                }
-              });
-
-      // Set axis color
-      chart.selectAll("path")
-           .attr("stroke", jnd_exp.trial_data.axis_color);
-
-      // Remove tick labels
-      chart.selectAll("text").remove();     
-
-    }
-
-    // Set background color
-    document.body.style.backgroundColor = jnd_exp.trial_data.background_color;
-  }
-
-  /**
-   * Plots distributions using ring plots. 
-   *
-   * @ param  datasets   {array}
-   */
-  plot_ring(datasets) {
-
-    var width = window.innerWidth * 0.7;
-    var height = window.innerHeight * 0.3;
-    var multiplier = 1; // Sets how much the data should be scaled by.
-
-    // Scale for data slightly smaller than full width of axes to account for outliers.
-    var xscale_for_data = d3.scaleLinear()
-                   .domain([0, multiplier]) 
-                   .range([window.innerWidth * 0.1, window.innerWidth * 0.6]);
-
-    var xscale = d3.scaleLinear()
-                   .domain([0, multiplier])
-                   .range([0, width]);
-
-    var yscale = d3.scaleLinear()
-                   .domain([multiplier * -1, 0])
-                   .range([height/2, 0]);
-
-    // Create axes: 
-    var x_axis = d3.axisBottom()
-                   .scale(xscale)
-                   .tickSize([0]);
-
-    var y_axis = d3.axisLeft()
-                   .scale(yscale)
-                   .tickSize([0]);
-
-    // Create/append the SVG for both graphs: 
-    for (var data of datasets){
-      
-      var chart = d3.select("#graph") // Insert into the div w/ id = "graph"
-                    .append("svg") 
-                      .attr("width", width) 
-                      .attr("height", height)
-                      .attr("transform", "scale(-1,1)"); // Flip horizontally so cone is
-                                                         // is going left -> right (like orig. version)  
-
-      var xAxisTranslate = height/2;
-      var xAxisElements = chart.append("g")
-                                .attr("transform", "translate(0, " + xAxisTranslate  +")")
-                                .call(x_axis);
-
-      // Populating data: 
-      chart.selectAll("strip") // Technically no circles inside div yet, but will be creating it
-            .data(data)
-              .enter()
-                .append("circle") // Creating the circles for each entry in data set 
-                .attr("cx", function (d) { // d is a subarray of the dataset i.e coordinates [5, 20]
-                  return xscale_for_data(d[0]);
-                })
-                .attr("cy", function (d) {
-                  return height/2;
-                })
-                .attr("r", function (d) {
-                  return yscale(d[1]);
-                })
-                .attr("stroke", "black")
-                .attr("stroke-width", this.trial_data.ring_thickness)
-                .attr("fill", "none");
-
-      // Set axis color
-      chart.selectAll("path")
-           .attr("stroke", this.trial_data.axis_color);
-
-      // Remove tick labels
-      chart.selectAll("text").remove();     
-
-    }
-
-    // Set background color
-    document.body.style.backgroundColor = this.trial_data.background_color;
-  }
-
 }
+

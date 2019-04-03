@@ -11,7 +11,7 @@ var welcome = {
   type: 'html-keyboard-response',
   stimulus: `<div align = "center">` + `<img src="${address}/img/VCL_lab_logo.png"></img><br><br>` +
             `<b>Base:</b> JND` + '<br>' + 
-            `<b>Trial Type:</b> ${jnd_exp.range}` + '<br>' + 
+            `<b>Trial Type:</b> ${jnd_exp.trial_structure}` + '<br>' + 
             `<b>Graph Type:</b> ${jnd_exp.graph_type}` + '<br>' + 
             `<b>Condition:</b> ${jnd_exp.condition_name}` + 
             '<br><br><br><p><font size = 15>Press any key to begin.<p></font>' +
@@ -26,7 +26,7 @@ timeline.push(welcome);
 switch(jnd_exp.graph_type){
   case "scatter":
 
-    if (jnd_exp.condition_name === "distractor_multi") {
+    if (jnd_exp.condition_name === "distractor_multi" || jnd_exp.condition_name === "distractor_rainbow") {
       var instructions = {
       type: "html-keyboard-response",
       stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear side-by-side." + 
@@ -38,6 +38,65 @@ switch(jnd_exp.graph_type){
           "<p class='small'><strong>Press the M key</strong></p></div>" +
           "</div>" + "<div> <br><p>Press any key to continue.</p> </div>" + 
           "</div>"          
+      };
+    }
+    else if (jnd_exp.condition_group === "distractor" && jnd_exp.condition_name.split("_")[2] === "shades"){
+      var instructions = {
+      type: "html-keyboard-response",
+      stimulus: "<div align = 'center'> <p>In this experiment, two graphs will appear side-by-side." + 
+          "<br> Indicate which graph is more correlated by pressing the Z or M key. </p><p>" +
+          "<div style='height: 290px; width: 700px; display: block;'>"+
+          `<div style='float: left;'><img src='${address}/img/sample_distractor_shades_1.png'></img>` +
+          "<p class='small'><strong>Press the Z key</strong></p></div>" +
+          `<div style='float: right;'><img src='${address}/img/sample_distractor_shades_2.png'></img>` +
+          "<p class='small'><strong>Press the M key</strong></p></div>" +
+          "</div>" + "<div> <br><p>Press any key to continue.</p> </div>" + 
+          "</div>"          
+      };
+    }
+    else if (jnd_exp.condition_group === "distractor") {
+
+      let name_split_array = jnd_exp.condition_name.split("_");
+      let target = "";
+      let color = "";
+      let axis = "";
+
+      if (name_split_array.length === 4){
+        target = name_split_array[1];
+        color = name_split_array[2];
+        axis = name_split_array[3];
+      } else {
+        target = name_split_array[1];
+        color = name_split_array[3];
+        axis = name_split_array[4];
+
+      }
+
+      var instructions = {
+      type: "html-keyboard-response",
+      stimulus: `<div align = 'center'>In this experiment, two graphs will appear side-by-side. 
+                 <br> 
+                 Indicate which graph has a higher correlation of the <b>target-colored</b> ${target}s by pressing the Z or M key. 
+                 <br>
+                 Ignore any squares with a <b>distractor</b> color.
+                 <br>
+                 <br>
+                 <img src='${address}/img/distractors/target-distractors/${color}_${axis}.png'></img>
+                 <br>
+                <div style='height: 43vh; display: block;'>
+                  <div style='float: left;'>
+                    <img src='${address}/img/distractors/plots/sample_distractor_${color}_1.png'></img>
+                    <p class='small'><strong>Press the Z key</strong></p>
+                  </div>
+                <div style='float: right;'>
+                  <img src='${address}/img/distractors/plots/sample_distractor_${color}_2.png'></img>
+                  <p class='small'><strong>Press the M key</strong></p></div>
+                </div>
+                <div> 
+                  <br>
+                  <p>Press any key to continue.</p> 
+                </div>
+                `        
       };
     } else {
       var instructions = {

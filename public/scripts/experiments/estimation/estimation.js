@@ -24,10 +24,11 @@ export default class Estimation {
         }
 
         this.condition_name = params.condition;
-        if (params.range !== "estimation") {
-            throw  Error("unexpected range " + params.range);
+        if (params.trial_structure !== "estimation") {
+            throw  Error("unexpected trial structure " + params.trial_structure);
         }
         this.range = params.range;
+        this.trial_structure = params.trial_structure;
         if (params.graph_type !== "shape" && params.graph_type !== "line") {
             throw Error("graph type: " + params.graph_type + " is not supported.")}
         else {

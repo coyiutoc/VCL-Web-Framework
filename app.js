@@ -25,12 +25,12 @@ app.get('/', function(request, response) {
 });
 
 // Experiment Routing
-app.get('/experiment/:experiment/graph_type/:graph_type/range/:range/condition/:condition/balancing/:balancing/subject_id/:subject_id/subject_initials/:subject_initials', function(request, response) {
+app.get('/experiment/:experiment/graph_type/:graph_type/trial_structure/:trial_structure/condition/:condition/balancing/:balancing/subject_id/:subject_id/subject_initials/:subject_initials', function(request, response) {
     
     console.log(request.params);
 
     let keys = {
-        range: request.params.range,
+        trial_structure: request.params.trial_structure,
         condition: request.params.condition, 
         graph_type: request.params.graph_type,
         balancing: request.params.balancing,
