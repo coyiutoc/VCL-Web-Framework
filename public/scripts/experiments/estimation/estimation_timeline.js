@@ -24,7 +24,7 @@ timeline.push(welcome);
 // INSTRUCTION TRIAL BLOCKS
 
 switch(estimation_exp.graph_type){
-    case "shape":
+    case "shapes":
         if (estimation_exp.condition_name === "shape_estimation") {
             var instructions = {
                 type: "html-keyboard-response",

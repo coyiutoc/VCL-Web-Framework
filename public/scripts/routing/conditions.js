@@ -558,6 +558,22 @@ var CONDITIONS = {
 		display_name: "Triangle"
 	},
 
+	rectangle_rotated_square_solid: {
+		experiment: ["estimation"],
+		graph_type: ["shapes"],
+		trial_structure: ["estimation"],
+		balancing: "random",
+		display_name: "Rectangle Rotated Square Solid"
+	},
+
+	rectangle_rotated_square_outline: {
+		experiment: ["estimation"],
+		graph_type: ["shapes"],
+		trial_structure: ["estimation"],
+		balancing: "random",
+		display_name: "Rectangle Rotated Square Outline"
+	},
+
 	distractor_blue_shades: {
 		experiment: ["jnd", "stevens"],
 		graph_type: ["scatter"],

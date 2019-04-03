@@ -1,24 +1,11 @@
-export {generate_estimation_experiment_data};
+export {ESTIMATION_BASE};
+
 const TRIALS_PER_ROUND = 4;
 const MAX_STEP_SIZE = 0.05;
 const FILL_COLOR = '#0000FF';
 const OUTLINE_COLOR = '#0000FF';
-const MATCH_SIZES = {
-    "2": {
-        min_size: 1.2,
-        max_size: 3
-    },
-    "4": {
-        min_size: 3.1,
-        max_size: 5.3
-    },
-    "6": {
-        min_size: 5.0,
-        max_size: 6.5
-    }
-};
 
-let ESTIMATION_BASE = {
+const ESTIMATION_BASE = {
     shape_estimation: {
         ref_shapes: {
             types: ["triangle", "circle", "square"],
@@ -132,39 +119,3 @@ let ESTIMATION_BASE = {
         }
     },
 };
-
-const generate_estimation_experiment_data = (condition) => {
-    let result = [];
-    let curr_cond = ESTIMATION_BASE[condition];
-    let ref_shapes = curr_cond.ref_shapes;
-    let mod_shapes = curr_cond.mod_shapes;
-    ref_shapes.types.forEach((ref_shape, index)=>{
-        ref_shapes.sizes.forEach((size)=>{
-            let condition = {};
-            condition.ref_shape = ref_shape;
-            condition.ref_size = size;
-            condition.ref_rotate_by = ref_shapes.rotate_by[index];
-            condition.ref_fill = ref_shapes.fill;
-            condition.ref_outline = ref_shapes.outline;
-            condition.max_step_size = MAX_STEP_SIZE;
-            condition.trials_per_round = TRIALS_PER_ROUND;
-            mod_shapes.types[index].forEach((mod_shape)=>{
-                mod_shapes.rotate_by[index].forEach((angle)=>{
-                    let curr_sub_cond = {};
-                    Object.assign(curr_sub_cond, condition);
-                    curr_sub_cond.mod_shape = mod_shape;
-                    curr_sub_cond.mod_min_size = MATCH_SIZES[size.toString()].min_size;
-                    curr_sub_cond.mod_max_size = MATCH_SIZES[size.toString()].min_size;
-                    curr_sub_cond.mod_rotate_by = angle;
-                    curr_sub_cond.mod_fill = mod_shapes.fill;
-                    curr_sub_cond.mod_outline = mod_shapes.outline;
-                    curr_sub_cond.width_height_ratio = mod_shapes.width_height_ratio;
-                    result.push(curr_sub_cond);
-                });
-            });
-        });
-    });
-    console.log(JSON.stringify(result));
-    return result;
-};
-

@@ -1,10 +1,8 @@
 import {initialize_random_order} from "/scripts/experiment-properties/balancing/random_generator.js";
-
-import {prepare_coordinates,
-    randomize_position,
-    randomize_radius_position,
-    force_greater_right_position} from "/scripts/helpers/experiment_helpers.js";
-import {generate_estimation_experiment_data} from "/scripts/experiment-properties/data/constants/estimation_data.js";
+import {get_data} from "/scripts/experiment-properties/data/data_controller.js";
+import {randomize_position,
+        randomize_radius_position,
+        force_greater_right_position} from "/scripts/helpers/experiment_helpers.js";
 
 export default class Estimation {
     /**
@@ -29,7 +27,7 @@ export default class Estimation {
         }
         this.range = params.range;
         this.trial_structure = params.trial_structure;
-        if (params.graph_type !== "shape" && params.graph_type !== "line") {
+        if (params.graph_type !== "shapes" && params.graph_type !== "line") {
             throw Error("graph type: " + params.graph_type + " is not supported.")}
         else {
             this.graph_type = params.graph_type;
@@ -96,7 +94,8 @@ export default class Estimation {
         // PREPARE EXPERIMENT
 
         // Extract raw constants
-        this.raw_sub_conds = generate_estimation_experiment_data(params.condition);
+        // this.raw_sub_conds = generate_estimation_experiment_data(params.condition);
+        this.raw_sub_conds = get_data(this);
         // console.log("raw sub conds");
         // Prepare experiment + practice data
         this.practice_conditions_constants = [];
@@ -177,6 +176,7 @@ export default class Estimation {
      * @return trial {object}
      */
     generate_trial(block_type) {
+
         if ((block_type !== "test") && (block_type !== "practice")) {
             throw Error(block_type + " is not supported.")
         }
