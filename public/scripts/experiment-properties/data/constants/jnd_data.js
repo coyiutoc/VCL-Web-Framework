@@ -740,4 +740,43 @@ const JND_CONDITIONS = {
     {point_color: "BLACK", strip_width: 1, fixed_strip_height: false}
     ], 
 
+  distractor_ratio_pilot:
+    [
+    // 1:1 ratio
+    {base_correlation: 0.3, dist_base: 0.3, dist_error: 0.0001, num_points: 75, dist_num_points: 75, dist_color: '#dbc667', target_color: '#007ebc', point_size: 4},
+
+    {base_correlation: 0.6, dist_base: 0.3, dist_error: 0.0001, num_points: 75, dist_num_points: 75, dist_color: '#dbc667', target_color: '#007ebc', point_size: 4},
+    
+    {base_correlation: 0.9, dist_base: 0.3, dist_error: 0.0001, num_points: 75, dist_num_points: 75, dist_color: '#dbc667', target_color: '#007ebc', point_size: 4},
+   
+    // 1:5 ratio
+    {base_correlation: 0.3, dist_base: 0.3, dist_error: 0.0001, num_points: 30, dist_num_points: 150, dist_color: '#dbc667', target_color: '#007ebc', point_size: 4},
+
+    {base_correlation: 0.6, dist_base: 0.3, dist_error: 0.0001, num_points: 30, dist_num_points: 150, dist_color: '#dbc667', target_color: '#007ebc', point_size: 4},
+    
+    {base_correlation: 0.9, dist_base: 0.3, dist_error: 0.0001, num_points: 30, dist_num_points: 150, dist_color: '#dbc667', target_color: '#007ebc', point_size: 4},
+    
+    // 5:1 ratio
+    {base_correlation: 0.3, dist_base: 0.3, dist_error: 0.0001, num_points: 150, dist_num_points: 30, dist_color: '#dbc667', target_color: '#007ebc', point_size: 4},
+
+    {base_correlation: 0.6, dist_base: 0.3, dist_error: 0.0001, num_points: 150, dist_num_points: 30, dist_color: '#dbc667', target_color: '#007ebc', point_size: 4},
+    
+    {base_correlation: 0.9, dist_base: 0.3, dist_error: 0.0001, num_points: 150, dist_num_points: 30, dist_color: '#dbc667', target_color: '#007ebc', point_size: 4},
+    
+    // 3:1 ratio
+    {base_correlation: 0.3, dist_base: 0.3, dist_error: 0.0001, num_points: 150, dist_num_points: 50, dist_color: '#dbc667', target_color: '#007ebc', point_size: 4},
+
+    {base_correlation: 0.6, dist_base: 0.3, dist_error: 0.0001, num_points: 150, dist_num_points: 50, dist_color: '#dbc667', target_color: '#007ebc', point_size: 4},
+    
+    {base_correlation: 0.9, dist_base: 0.3, dist_error: 0.0001, num_points: 150, dist_num_points: 50, dist_color: '#dbc667', target_color: '#007ebc', point_size: 4},
+    
+    // 1:3 ratio
+    {base_correlation: 0.3, dist_base: 0.3, dist_error: 0.0001, num_points: 50, dist_num_points: 150, dist_color: '#dbc667', target_color: '#007ebc', point_size: 4},
+
+    {base_correlation: 0.6, dist_base: 0.3, dist_error: 0.0001, num_points: 50, dist_num_points: 150, dist_color: '#dbc667', target_color: '#007ebc', point_size: 4},
+    
+    {base_correlation: 0.9, dist_base: 0.3, dist_error: 0.0001, num_points: 50, dist_num_points: 150, dist_color: '#dbc667', target_color: '#007ebc', point_size: 4},
+    
+    ],
+
 }

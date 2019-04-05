@@ -63,6 +63,7 @@ function get_data(experiment){
     if (!EXPERIMENT_BASES[experiment_name][trial_structure]) {
       throw new Error ("Base for " + condition + " does not exist.");
     }
+
     dataset = EXPERIMENT_BASES[experiment_name][trial_structure];
   }
 

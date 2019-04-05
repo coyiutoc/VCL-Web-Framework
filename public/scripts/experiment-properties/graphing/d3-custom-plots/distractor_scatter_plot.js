@@ -1,51 +1,15 @@
 import {plot_scatter_points} from "/scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js";
-export {prepare_distractor_scatter_plot};
+export {create_distractor_scatter_plot};
 
 var BUFFER = 60;
 var RANGE_ADJUSTMENT = 15;
-
-function prepare_distractor_scatter_plot(experiment) {
-
-  let datasets = experiment.coordinates;
-  let distractors = experiment.distractor_coordinates;
-  let trial_data = experiment.trial_data;
-  let attributes = "";
-
-  for (let i in datasets) {
-
-    attributes = {
-      target: {
-        dataset: datasets[i],
-        graph_attributes: {
-          axis_color:  ("axis_color"   in trial_data ? trial_data.axis_color   : "BLACK"),
-          point_color: ("target_color" in trial_data ? trial_data.target_color : "BLACK"),
-          point_shape: ("target_shape" in trial_data ? trial_data.target_shape : "circle"),
-          point_size:  ("point_size"   in trial_data ? trial_data.point_size   : 3),
-        }
-      },
-      distractor: {
-        dataset: distractors[i],
-        graph_attributes: {
-          point_color: ("dist_color" in trial_data ? trial_data.dist_color : "RED"),
-          point_shape: ("dist_shape" in trial_data ? trial_data.dist_shape : "circle"),
-          point_size:  ("point_size" in trial_data ? trial_data.point_size : 3),
-        }
-      }
-    };
-    
-    create_scatter_plot(attributes);
-  }
-
-  // Set background color
-  document.body.style.backgroundColor = (trial_data.background_color ? trial_data.background_color : "WHITE");
-}
 
 /**
  * D3 code for setting up scatter plot chart area with distractor dataset (so two-populations per graph)
  *
  * @param {object}   attributes
  */
-function create_scatter_plot(attributes) {
+function create_distractor_scatter_plot(attributes) {
 
     let target_dataset = attributes["target"]["dataset"];
     let target_properties = attributes["target"]["graph_attributes"];
@@ -104,18 +68,31 @@ function create_scatter_plot(attributes) {
       plot_scatter_points(chart, xscale, yscale, target_dataset, target_properties["point_size"], target_properties["point_color"], target_properties["point_shape"]);        
     } 
     else {
+
+      let larger_data;
+      let smaller_data;
+
+      // Handle if the number of points between distractor & target are unequal
+      if (attributes["target"]["dataset"].length > attributes["distractor"]["dataset"].length) {
+        larger_data = attributes["target"];
+        smaller_data = attributes["distractor"];
+      } else {
+        larger_data = attributes["distractor"];
+        smaller_data = attributes["target"];
+      }
+
       // Alternate plotting of distractor and main dataset points - want equal chance of one
       // getting occluded over the other
-      for (let j in target_dataset) {
+      for (let j in larger_data["dataset"]) {
 
-        let point = target_dataset[j];
-        let dist_point = distractor_dataset[j];
+        if ( j < smaller_data["dataset"].length){
+          let small_point = smaller_data["dataset"][j];
+          plot_scatter_points(chart, xscale, yscale, [small_point], smaller_data["graph_attributes"]["point_size"], smaller_data["graph_attributes"]["point_color"], smaller_data["graph_attributes"]["point_shape"]);
+        }
 
-        // Distractor point
-        plot_scatter_points(chart, xscale, yscale, [point], target_properties["point_size"], target_properties["point_color"], target_properties["point_shape"]);  
-
-        // Target point    
-        plot_scatter_points(chart, xscale, yscale, [dist_point], distractor_properties["point_size"], distractor_properties["point_color"], distractor_properties["point_shape"]);
+        let large_point = larger_data["dataset"][j];
+        plot_scatter_points(chart, xscale, yscale, [large_point], larger_data["graph_attributes"]["point_size"], larger_data["graph_attributes"]["point_color"], larger_data["graph_attributes"]["point_shape"]);  
+       
       }
     }
 
