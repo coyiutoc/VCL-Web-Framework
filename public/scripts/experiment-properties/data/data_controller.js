@@ -63,17 +63,8 @@ function get_data(experiment){
     if (!EXPERIMENT_BASES[experiment_name][trial_structure]) {
       throw new Error ("Base for " + condition + " does not exist.");
     }
+    dataset = EXPERIMENT_BASES[experiment_name][trial_structure];
   }
-
-  // if (experiment_name === "Estimation") {
-  //   return generate_estimation_experiment_data(condition);
-  // }
-
-  // Repeat subconditions if specified
-  let result = [];
-  let repeats = SUBCONDITION_REPEATS[range][condition];
-
-  dataset = EXPERIMENT_BASES[experiment_name][trial_structure];
 
   return dataset;
 }
