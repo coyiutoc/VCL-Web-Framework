@@ -566,12 +566,44 @@ var CONDITIONS = {
 		display_name: "Rectangle Rotated Square Solid"
 	},
 
-	rectangle_rotated_square_outline: {
+    rectangle_rotated_square_outline: {
 		experiment: ["estimation"],
 		graph_type: ["shapes"],
 		trial_structure: ["estimation"],
 		balancing: "random",
 		display_name: "Rectangle Rotated Square Outline"
+	},
+
+	square: {
+		experiment: ["estimation"],
+		graph_type: ["shapes"],
+		trial_structure: ["estimation"],
+		balancing: "random",
+		display_name: "Square"
+	},
+
+	line_rotated: {
+		experiment: ["estimation"],
+		graph_type: ["shapes"],
+		trial_structure: ["estimation"],
+		balancing: "random",
+		display_name: "Line Rotated"
+	},
+
+	line_curve: {
+		experiment: ["estimation"],
+		graph_type: ["shapes"],
+		trial_structure: ["estimation"],
+		balancing: "random",
+		display_name: "Line, Curve"
+	},
+
+	triangle_fan: {
+		experiment: ["estimation"],
+		graph_type: ["shapes"],
+		trial_structure: ["estimation"],
+		balancing: "random",
+		display_name: "Triangle, Fan"
 	},
 
 	distractor_blue_shades: {

@@ -17,7 +17,12 @@ export default class Estimation {
             && params.condition !== 'rectangle_square'
             && params.condition !== 'triangle'
             && params.condition !== 'rectangle_rotated_square_solid'
-            && params.condition !== 'rectangle_rotated_square_outline') {
+            && params.condition !== 'rectangle_rotated_square_outline'
+            && params.condition !== 'square'
+            && params.condition !== 'line_rotated'
+            && params.condition !== 'line_curve'
+            && params.condition !== 'triangle_fan')
+        {
             throw  Error("unexpected condition name " + params.condition);
         }
 
@@ -489,13 +494,20 @@ export default class Estimation {
             .attr("height", width)
             .attr("fill", fill)
             .attr("stroke", outline);
-        if (is_ref === true && exp.curr_trial_data.ref_rotate_by) {
+        if (is_ref === true) {
             let transform = "rotate(";
             transform = transform + exp.curr_trial_data.ref_rotate_by.toString();
-            transform = transform + " " + (x_pos - width).toString();
-            transform = transform + " " + (y_pos - width).toString();
+            transform = transform + " " + (x_pos).toString();
+            transform = transform + " " + (y_pos).toString();
             transform = transform + ")";
             d3.select("#square_shape_ref").attr("transform", transform);
+        } else {
+            let transform = "rotate(";
+            transform = transform + exp.curr_trial_data.mod_rotate_by.toString();
+            transform = transform + " " + (x_pos).toString();
+            transform = transform + " " + (y_pos).toString();
+            transform = transform + ")";
+            d3.select("#square_shape_mod").attr("transform", transform);
         }
         if (is_ref === false) {
             d3.select("body")
@@ -678,47 +690,53 @@ export default class Estimation {
     plot_line(chart, width, y_pos, x_pos, is_ref, outline) {
         let exp = this;
         let x1, x2, y1, y2;
-        if (!is_ref) {
-            x1 = x_pos - (width / 2) * Math.sin(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
-            x2 = x_pos + (width / 2) * Math.sin(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
-            y1 = y_pos - (width / 2) * Math.cos(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
-            y2 = y_pos + (width / 2) * Math.cos(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
-        } else {
-            x1 = x_pos - width / 2;
-            x2 = x_pos + width / 2;
-            y1 = y_pos;
-            y2 = y_pos;
-        }
+        x1 = x_pos;
+        x2 = x_pos;
+        y1 = y_pos + width / 2;
+        y2 = y_pos - width / 2;
         chart.append("line")
             .style("stroke", outline)
-            .style("stroke-width", exp.curr_trial_data.stroke_width)
+            .style("stroke-width", 2)
             .attr("id", is_ref? "line_shape_ref": "line_shape_mod")
             .attr("x1", x1)
             .attr("x2", x2)
             .attr("y1", y1)
             .attr("y2", y2);
+        if (is_ref === true) {
+            let transform = "rotate(";
+            transform = transform + exp.curr_trial_data.ref_rotate_by.toString();
+            transform = transform + " " + (x_pos).toString();
+            transform = transform + " " + (y_pos).toString();
+            transform = transform + ")";
+            d3.select("#line_shape_ref").attr("transform", transform);
+        } else {
+            let transform = "rotate(";
+            transform = transform + exp.curr_trial_data.mod_rotate_by.toString();
+            transform = transform + " " + (x_pos).toString();
+            transform = transform + " " + (y_pos).toString();
+            transform = transform + ")";
+            d3.select("#line_shape_mod").attr("transform", transform);
+        }
         if (is_ref === false) {
+            let transform = "rotate(";
+            transform = transform + exp.curr_trial_data.mod_rotate_by.toString();
+            transform = transform + " " + (x_pos).toString();
+            transform = transform + " " + (y_pos).toString();
+            transform = transform + ")";
             d3.select("body")
                 .on("keydown", function () {
                     let event = d3.event;
                     if (event.key === "m" || event.key === "z") {
                         width = exp.calculate_size_change(event.key, width);
-                        if (!is_ref) {
-                            x1 = x_pos - (width / 2) * Math.sin(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
-                            x2 = x_pos + (width / 2) * Math.sin(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
-                            y1 = y_pos - (width / 2) * Math.cos(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
-                            y2 = y_pos + (width / 2) * Math.cos(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
-                        } else {
-                            x1 = x_pos - width / 2;
-                            x2 = x_pos + width / 2;
-                            y1 = y_pos;
-                            y2 = y_pos;
-                        }
+                            x1 = x_pos;
+                            x2 = x_pos;
+                            y1 = y_pos - width / 2;
+                            y2 = y_pos + width / 2;
                         d3.select("#line_shape_mod")
                             .attr("x1", x1)
                             .attr("x2", x2)
                             .attr("y1", y1)
-                            .attr("y2", y2);
+                            .attr("y2", y2)
                     }
                 });
         }

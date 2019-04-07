@@ -118,4 +118,73 @@ const ESTIMATION_BASE = {
             rotate_by: [[0, 90]]
         }
     },
+
+    square: {
+        ref_shapes: {
+            types: ["square"],
+            sizes: [2, 4, 6],
+            fill: FILL_COLOR,
+            outline: OUTLINE_COLOR,
+            rotate_by: [0]
+        },
+        mod_shapes: {
+            types: [["square"]],
+            sizes: [[1.2, 3.0], [3.1, 5.3], [5.0, 6.5]],
+            fill: FILL_COLOR,
+            outline: OUTLINE_COLOR,
+            rotate_by: [[0, 15]]
+        }
+    },
+
+    line_rotated: {
+        ref_shapes: {
+            types: ["line"],
+            sizes: [2, 4, 6],
+            fill: FILL_COLOR,
+            outline: OUTLINE_COLOR,
+            rotate_by: [90]
+        },
+        mod_shapes: {
+            types: [["line"]],
+            sizes: [[1.2, 3.0], [3.1, 5.3], [5.0, 6.5]],
+            fill: FILL_COLOR,
+            outline: OUTLINE_COLOR,
+            rotate_by: [[15, 75, -15, -75]]
+        }
+    },
+
+    line_curve: {
+        ref_shapes: {
+            types: ["line"],
+            sizes: [2, 4, 6],
+            fill: FILL_COLOR,
+            outline: OUTLINE_COLOR,
+            rotate_by: [90]
+        },
+        mod_shapes: {
+            types: [["line", "curve_left", "curve_right"]],
+            sizes: [[1.2, 3.0], [3.1, 5.3], [5.0, 6.5]],
+            fill: FILL_COLOR,
+            width_height_ratio: 2,
+            outline: OUTLINE_COLOR,
+            rotate_by: [[0, 0, 0]]
+        }
+    },
+
+    triangle_fan: {
+        ref_shapes: {
+            types: ["triangle"],
+            sizes: [2, 4, 6],
+            fill: FILL_COLOR,
+            outline: OUTLINE_COLOR,
+            rotate_by: [0]
+        },
+        mod_shapes: {
+            types: [["triangle", "fan", "triangle"]],
+            sizes: [[1.2, 3.0], [3.1, 5.3], [5.0, 6.5]],
+            fill: FILL_COLOR,
+            outline: OUTLINE_COLOR,
+            rotate_by: [[0]]
+        }
+    },
 };

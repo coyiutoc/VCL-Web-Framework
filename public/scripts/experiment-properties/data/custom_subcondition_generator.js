@@ -23,7 +23,11 @@ var CUSTOM_TRIAL_STRUCTURE_CONDITIONS = {
     	"rectangle_square",
     	"rectangle_rotated_square_solid",
     	"rectangle_rotated_square_outline",
-    	"triangle"
+    	"triangle",
+		"square",
+		"line_rotated",
+		"triangle_fan",
+		"line_curve"
     ],
     custom : [
     	"distractor_multi",
