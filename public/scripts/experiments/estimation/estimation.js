@@ -384,6 +384,14 @@ export default class Estimation {
             case "rectangle":
                 this.plot_rectangle(chart, radius, y_pos, x_pos, is_ref, outline, fill);
                 break;
+            case "curve_left":
+                this.plot_curve(chart, radius, y_pos, x_pos, is_ref, outline, true);
+                break;
+            case "curve_right":
+                this.plot_curve(chart, radius, y_pos, x_pos, is_ref, outline, false);
+                break;
+            case "fan":
+                this.plot_fan(chart, radius, y_pos, x_pos, is_ref, outline, fill)
         }
     }
 
@@ -542,8 +550,8 @@ export default class Estimation {
 
         let poly = [];
         if (!is_ref) {
-            if (exp.curr_trial_data.width_height_ratio) {
-                long_side = short_side * exp.curr_trial_data.width_height_ratio;
+            if (exp.curr_trial_data.height_to_width) {
+                long_side = short_side * exp.curr_trial_data.height_to_width;
                 height = Math.sqrt(Math.pow(long_side, 2) - Math.pow(short_side / 2, 2));
                 width = short_side;
                 if (exp.curr_trial_data.mod_rotate_by) {
@@ -587,8 +595,8 @@ export default class Estimation {
                         radius = exp.calculate_size_change(event.key, radius);
                         // plot the changed shape
                         short_side = radius;
-                        if (exp.curr_trial_data.width_height_ratio) {
-                            long_side = short_side * exp.curr_trial_data.width_height_ratio;
+                        if (exp.curr_trial_data.height_to_width) {
+                            long_side = short_side * exp.curr_trial_data.height_to_width;
                             height = Math.sqrt(Math.pow(long_side, 2) - Math.pow(short_side / 2, 2));
                             width = short_side;
                             if (exp.curr_trial_data.mod_rotate_by) {
@@ -632,8 +640,8 @@ export default class Estimation {
         let short_side = size;
         let long_side = size;
         let height = 0, width = 0;
-        if (exp.curr_trial_data.width_height_ratio) {
-            long_side = short_side * exp.curr_trial_data.width_height_ratio;
+        if (exp.curr_trial_data.height_to_width) {
+            long_side = short_side * exp.curr_trial_data.height_to_width;
         }
         width = short_side;
         height = long_side;
@@ -664,7 +672,7 @@ export default class Estimation {
                     if (event.key === "m" || event.key === "z") {
                         size = exp.calculate_size_change(event.key, size);
                         let short_side = size;
-                        let long_side = exp.curr_trial_data.width_height_ratio * short_side;
+                        let long_side = exp.curr_trial_data.height_to_width * short_side;
                         let new_width = 0, new_height = 0;
                         new_width = short_side;
                         new_height = long_side;
@@ -677,6 +685,40 @@ export default class Estimation {
 
     }
 
+    plot_curve(chart, curve_length, y_pos, x_pos, is_ref, outline, curve_left) {
+        let exp = this;
+        let curr_trial_data = this.curr_trial_data;
+        // calculate the radius of circle, assume the central angle corresponding to the curve is 60 degrees
+        let r = curve_length * 6 / (Math.PI * 2);
+        let chord = r;
+        let M = [x_pos, y_pos - chord / 2];
+        let A = [r, r, 0, 0, curve_up? 1 : 0, x_pos, y_pos + chord / 2];
+        chart.append("path")
+            .style("stroke", outline)
+            .style("stroke-width", 2)
+            .style("fill", "white")
+            .attr("id", is_ref? "curve_ref" : "curve_mod")
+            .attr("d", "M " + M.join(" ") + " A " + A.join(" "));
+        if (is_ref === false) {
+           d3.select("body")
+                .on("keydown", function () {
+                    let event = d3.event;
+                    if (event.key === "m" || event.key === "z") {
+                        curve_length = exp.calculate_size_change(event.key, curve_length);
+                        r = curve_length * 6 / (Math.PI * 2);
+                        chord = r;
+                        M = [x_pos, y_pos - chord / 2];
+                        A = [r, r, 0, 0, curve_up? 1 : 0, x_pos, y_pos + chord / 2];
+                        d3.select("#curve_mod")
+                            .attr("d",  "M " + M.join(" ") + " A " + A.join(" "));
+                    }
+                });
+        }
+    }
+
+    plot_fan(chart, radius, y_pos, x_pos, is_ref, outline, fill) {
+
+    }
 
     /**
      *
@@ -718,20 +760,15 @@ export default class Estimation {
             d3.select("#line_shape_mod").attr("transform", transform);
         }
         if (is_ref === false) {
-            let transform = "rotate(";
-            transform = transform + exp.curr_trial_data.mod_rotate_by.toString();
-            transform = transform + " " + (x_pos).toString();
-            transform = transform + " " + (y_pos).toString();
-            transform = transform + ")";
             d3.select("body")
                 .on("keydown", function () {
                     let event = d3.event;
                     if (event.key === "m" || event.key === "z") {
                         width = exp.calculate_size_change(event.key, width);
-                            x1 = x_pos;
-                            x2 = x_pos;
-                            y1 = y_pos - width / 2;
-                            y2 = y_pos + width / 2;
+                        x1 = x_pos;
+                        x2 = x_pos;
+                        y1 = y_pos - width / 2;
+                        y2 = y_pos + width / 2;
                         d3.select("#line_shape_mod")
                             .attr("x1", x1)
                             .attr("x2", x2)

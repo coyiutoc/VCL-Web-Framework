@@ -21,7 +21,8 @@ const ESTIMATION_BASE = {
             sizes: [[1.2, 3.0], [3.1, 5.3], [5.0, 6.5]],
             fill: FILL_COLOR,
             outline: OUTLINE_COLOR,
-            rotate_by: [[0], [0], [0]]
+            rotate_by: [[0], [0], [0]],
+            height_to_width: [1, 1, 1]
         },
         trials_per_round: TRIALS_PER_ROUND,
         max_step_size: MAX_STEP_SIZE
@@ -39,7 +40,8 @@ const ESTIMATION_BASE = {
             sizes: [[1.2, 3.0], [3.1, 5.3], [5.0, 6.5]],
             fill: FILL_COLOR,
             outline: OUTLINE_COLOR,
-            rotate_by: [[0]]
+            rotate_by: [[0]],
+            height_to_width: [1]
         },
         trials_per_round: TRIALS_PER_ROUND,
         max_step_size: MAX_STEP_SIZE
@@ -58,7 +60,7 @@ const ESTIMATION_BASE = {
             fill: FILL_COLOR,
             outline: OUTLINE_COLOR,
             rotate_by: [[0, 90]],
-            width_height_ratio: 2
+            height_to_width:[2]
         },
         trials_per_round: TRIALS_PER_ROUND,
         max_step_size: MAX_STEP_SIZE
@@ -77,7 +79,7 @@ const ESTIMATION_BASE = {
             fill: FILL_COLOR,
             outline: OUTLINE_COLOR,
             rotate_by: [[45, 0]],
-            width_height_ratio: 2
+            height_to_width: [2]
         },
         trials_per_round: TRIALS_PER_ROUND,
         max_step_size: MAX_STEP_SIZE
@@ -96,7 +98,7 @@ const ESTIMATION_BASE = {
             fill: '#FFFFFF',
             outline: OUTLINE_COLOR,
             rotate_by: [[45, 0]],
-            width_height_ratio: 2
+            height_to_width: [2]
         },
         trials_per_round: TRIALS_PER_ROUND,
         max_step_size: MAX_STEP_SIZE
@@ -113,7 +115,7 @@ const ESTIMATION_BASE = {
             types: [["triangle"]],
             sizes: [[1.2, 3.0], [3.1, 5.3], [5.0, 6.5]],
             fill: FILL_COLOR,
-            width_height_ratio: 2,
+            height_to_width: [2],
             outline: OUTLINE_COLOR,
             rotate_by: [[0, 90]]
         }
@@ -132,7 +134,8 @@ const ESTIMATION_BASE = {
             sizes: [[1.2, 3.0], [3.1, 5.3], [5.0, 6.5]],
             fill: FILL_COLOR,
             outline: OUTLINE_COLOR,
-            rotate_by: [[0, 15]]
+            rotate_by: [[0, 15]],
+            height_to_width:[1]
         }
     },
 
@@ -165,9 +168,8 @@ const ESTIMATION_BASE = {
             types: [["line", "curve_left", "curve_right"]],
             sizes: [[1.2, 3.0], [3.1, 5.3], [5.0, 6.5]],
             fill: FILL_COLOR,
-            width_height_ratio: 2,
             outline: OUTLINE_COLOR,
-            rotate_by: [[0, 0, 0]]
+            rotate_by: [[0]]
         }
     },
 
@@ -183,6 +185,7 @@ const ESTIMATION_BASE = {
             types: [["triangle", "fan", "triangle"]],
             sizes: [[1.2, 3.0], [3.1, 5.3], [5.0, 6.5]],
             fill: FILL_COLOR,
+            height_to_width: [Math.sqrt(3)/ 2, Math.sqrt(3) / 2, 1 / Math.sqrt(3)],
             outline: OUTLINE_COLOR,
             rotate_by: [[0]]
         }

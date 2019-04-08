@@ -229,7 +229,9 @@ function generate_estimation_subconditions(experiment){
                     curr_sub_cond.mod_rotate_by = angle;
                     curr_sub_cond.mod_fill = mod_shapes.fill;
                     curr_sub_cond.mod_outline = mod_shapes.outline;
-                    curr_sub_cond.width_height_ratio = mod_shapes.width_height_ratio;
+                    if (mod_shapes.height_to_width) {
+                        curr_sub_cond.height_to_width = mod_shapes.height_to_width[index];
+					}
                     result.push(curr_sub_cond);
                 });
             });
