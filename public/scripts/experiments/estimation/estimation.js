@@ -375,9 +375,6 @@ export default class Estimation {
             case "square":
                 this.plot_square(chart, radius, y_pos, x_pos, is_ref, outline, fill);
                 break;
-            case "instruction":
-                this.plot_instruction(chart, y_pos, x_pos, trial);
-                break;
             case "line":
                 this.plot_line(chart, radius, y_pos, x_pos, is_ref, outline);
                 break;
@@ -393,25 +390,6 @@ export default class Estimation {
             case "fan":
                 this.plot_fan(chart, radius, y_pos, x_pos, is_ref, outline, fill)
         }
-    }
-
-    /**
-     *
-     * @param chart {object} svg object
-     * @param y_pos {number} position on the y axis
-     * @param x_pos {number} position on the x axis
-     * @param trial {object}
-     */
-    plot_instruction(chart, y_pos, x_pos, trial) {
-        chart.append("text")
-            .attr("x", x_pos)
-            .attr("y", y_pos)
-            .attr("font-family", "sans-serif")
-            .attr("font-size", "28px")
-            .attr("fill", "black")
-            .text(()=>{
-                return trial.is_ref_left? "The modifiable shape is on the right" :  "The modifiable shape is on the left";
-            });
     }
 
     /**
@@ -540,6 +518,8 @@ export default class Estimation {
      * @param x_pos {number}
      * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape,
      *                         is_ref === true if the shape is a reference shape
+     * @param outline
+     * @param fill
      */
     plot_triangle(chart, radius, y_pos, x_pos, is_ref, outline, fill) {
         let exp = this;
@@ -554,17 +534,10 @@ export default class Estimation {
                 long_side = short_side * exp.curr_trial_data.height_to_width;
                 height = Math.sqrt(Math.pow(long_side, 2) - Math.pow(short_side / 2, 2));
                 width = short_side;
-                if (exp.curr_trial_data.mod_rotate_by) {
-                    poly = [
-                        {"x":(0.5 * height + x_pos), "y":(y_pos)},
-                        {"x":(-0.5 * height + x_pos), "y":(-0.5 * width + y_pos)},
-                        {"x":(-0.5 * height + x_pos), "y":(0.5 * width + y_pos)}];
-                } else {
                     poly = [
                         {"x":(x_pos), "y":(-0.5 * height + y_pos)},
                         {"x":(-0.5 * width + x_pos), "y":(0.5 * height + y_pos)},
                         {"x":(0.5 * width + x_pos), "y":(0.5 * height + y_pos)}];
-                }
             } else {
                 height = radius * Math.sqrt(3)/2;
                 poly = [
@@ -685,6 +658,16 @@ export default class Estimation {
 
     }
 
+    /**
+     *
+     * @param chart
+     * @param curve_length
+     * @param y_pos
+     * @param x_pos
+     * @param is_ref
+     * @param outline
+     * @param curve_left
+     */
     plot_curve(chart, curve_length, y_pos, x_pos, is_ref, outline, curve_left) {
         let exp = this;
         let curr_trial_data = this.curr_trial_data;
@@ -692,7 +675,7 @@ export default class Estimation {
         let r = curve_length * 6 / (Math.PI * 2);
         let chord = r;
         let M = [x_pos, y_pos - chord / 2];
-        let A = [r, r, 0, 0, curve_up? 1 : 0, x_pos, y_pos + chord / 2];
+        let A = [r, r, 0, 0, curve_left? 1 : 0, x_pos, y_pos + chord / 2];
         chart.append("path")
             .style("stroke", outline)
             .style("stroke-width", 2)
@@ -708,7 +691,7 @@ export default class Estimation {
                         r = curve_length * 6 / (Math.PI * 2);
                         chord = r;
                         M = [x_pos, y_pos - chord / 2];
-                        A = [r, r, 0, 0, curve_up? 1 : 0, x_pos, y_pos + chord / 2];
+                        A = [r, r, 0, 0, curve_left? 1 : 0, x_pos, y_pos + chord / 2];
                         d3.select("#curve_mod")
                             .attr("d",  "M " + M.join(" ") + " A " + A.join(" "));
                     }
@@ -716,8 +699,45 @@ export default class Estimation {
         }
     }
 
+    /**
+     *
+     * @param chart
+     * @param radius
+     * @param y_pos
+     * @param x_pos
+     * @param is_ref
+     * @param outline
+     * @param fill
+     */
     plot_fan(chart, radius, y_pos, x_pos, is_ref, outline, fill) {
-
+        let exp = this;
+        let curr_trial_data = this.curr_trial_data;
+        // calculate the radius of circle, assume the central angle corresponding to the curve is 60 degrees
+        let chord = radius;
+        let M = [x_pos, y_pos];
+        let L = [x_pos - chord / 2, y_pos + Math.sqrt(3) * chord / 2];
+        let A = [radius, radius, 0, 0, 0, x_pos + chord / 2, y_pos + Math.sqrt(3) * chord / 2];
+        chart.append("path")
+            .style("stroke", outline)
+            .style("stroke-width", 2)
+            .style("fill", fill)
+            .attr("id", is_ref? "fan_ref" : "fan_mod")
+            .attr("d", "M " + M.join(" ") + " L " + L.join(" ")+ " A " + A.join(" ") + " z");
+        if (is_ref === false) {
+           d3.select("body")
+                .on("keydown", function () {
+                    let event = d3.event;
+                    if (event.key === "m" || event.key === "z") {
+                        radius = exp.calculate_size_change(event.key, radius);
+                        chord = radius;
+                        M = [x_pos, y_pos];
+                        L = [x_pos - chord / 2, y_pos + Math.sqrt(3) * chord / 2];
+                        A = [radius, radius, 0, 0, 0, x_pos + chord / 2, y_pos + Math.sqrt(3) * chord / 2];
+                        d3.select("#fan_mod")
+                            .attr("d",  "M " + M.join(" ") + " L " + L.join(" ") + " A " + A.join(" ") + " z");
+                    }
+                });
+        }
     }
 
     /**
