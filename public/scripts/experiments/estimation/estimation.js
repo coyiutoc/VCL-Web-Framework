@@ -530,14 +530,26 @@ export default class Estimation {
 
         let poly = [];
         if (!is_ref) {
-            if (exp.curr_trial_data.height_to_width) {
-                long_side = short_side * exp.curr_trial_data.height_to_width;
-                height = Math.sqrt(Math.pow(long_side, 2) - Math.pow(short_side / 2, 2));
-                width = short_side;
+            if (exp.curr_trial_data.side_to_bottom) {
+                // TODO: the plotting should be more abstract, refactor this
+                if (exp.condition_name === 'triangle_fan' && exp.curr_trial_data.side_to_bottom !== 1) {
+                   long_side = radius;
+                   width = radius * Math.sqrt(3);
+                   height = long_side / 2;
+                   poly = [
+                        {"x":(x_pos), "y":(-0.5 * height + y_pos)},
+                        {"x":(-0.5 * width + x_pos), "y":(0.5 * height + y_pos)},
+                        {"x":(0.5 * width + x_pos), "y":(0.5 * height + y_pos)}];
+                } else {
+                    long_side = short_side * exp.curr_trial_data.side_to_bottom;
+                    height = Math.sqrt(Math.pow(long_side, 2) - Math.pow(short_side / 2, 2));
+                    width = short_side;
                     poly = [
                         {"x":(x_pos), "y":(-0.5 * height + y_pos)},
                         {"x":(-0.5 * width + x_pos), "y":(0.5 * height + y_pos)},
                         {"x":(0.5 * width + x_pos), "y":(0.5 * height + y_pos)}];
+
+                }
             } else {
                 height = radius * Math.sqrt(3)/2;
                 poly = [
@@ -568,8 +580,16 @@ export default class Estimation {
                         radius = exp.calculate_size_change(event.key, radius);
                         // plot the changed shape
                         short_side = radius;
-                        if (exp.curr_trial_data.height_to_width) {
-                            long_side = short_side * exp.curr_trial_data.height_to_width;
+                        if (exp.condition_name === 'triangle_fan' && exp.curr_trial_data.side_to_bottom !== 1) {
+                            long_side = radius;
+                            width = radius * Math.sqrt(3);
+                            height = long_side / 2;
+                            poly = [
+                                {"x":(x_pos), "y":(-0.5 * height + y_pos)},
+                                {"x":(-0.5 * width + x_pos), "y":(0.5 * height + y_pos)},
+                                {"x":(0.5 * width + x_pos), "y":(0.5 * height + y_pos)}];
+                        } else if (exp.curr_trial_data.side_to_bottom) {
+                            long_side = short_side * exp.curr_trial_data.side_to_bottom;
                             height = Math.sqrt(Math.pow(long_side, 2) - Math.pow(short_side / 2, 2));
                             width = short_side;
                             if (exp.curr_trial_data.mod_rotate_by) {
@@ -590,7 +610,7 @@ export default class Estimation {
                                 {"x":(-0.5 * short_side + x_pos), "y":(0.5 * height + y_pos)},
                                 {"x":(0.5 * short_side + x_pos), "y":(0.5 * height + y_pos)}];
                         }
-                       chart.select("#triangle_shape_mod")
+                        chart.select("#triangle_shape_mod")
                             .attr("points",function() {
                                 return poly.map(function(d) { return [d.x, d.y].join(","); }).join(" ");});
                     }
@@ -613,8 +633,8 @@ export default class Estimation {
         let short_side = size;
         let long_side = size;
         let height = 0, width = 0;
-        if (exp.curr_trial_data.height_to_width) {
-            long_side = short_side * exp.curr_trial_data.height_to_width;
+        if (exp.curr_trial_data.side_to_bottom) {
+            long_side = short_side * exp.curr_trial_data.side_to_bottom;
         }
         width = short_side;
         height = long_side;
@@ -645,7 +665,7 @@ export default class Estimation {
                     if (event.key === "m" || event.key === "z") {
                         size = exp.calculate_size_change(event.key, size);
                         let short_side = size;
-                        let long_side = exp.curr_trial_data.height_to_width * short_side;
+                        let long_side = exp.curr_trial_data.side_to_bottom * short_side;
                         let new_width = 0, new_height = 0;
                         new_width = short_side;
                         new_height = long_side;
@@ -683,7 +703,7 @@ export default class Estimation {
             .attr("id", is_ref? "curve_ref" : "curve_mod")
             .attr("d", "M " + M.join(" ") + " A " + A.join(" "));
         if (is_ref === false) {
-           d3.select("body")
+            d3.select("body")
                 .on("keydown", function () {
                     let event = d3.event;
                     if (event.key === "m" || event.key === "z") {
@@ -711,7 +731,6 @@ export default class Estimation {
      */
     plot_fan(chart, radius, y_pos, x_pos, is_ref, outline, fill) {
         let exp = this;
-        let curr_trial_data = this.curr_trial_data;
         // calculate the radius of circle, assume the central angle corresponding to the curve is 60 degrees
         let chord = radius;
         let M = [x_pos, y_pos];
@@ -724,7 +743,7 @@ export default class Estimation {
             .attr("id", is_ref? "fan_ref" : "fan_mod")
             .attr("d", "M " + M.join(" ") + " L " + L.join(" ")+ " A " + A.join(" ") + " z");
         if (is_ref === false) {
-           d3.select("body")
+            d3.select("body")
                 .on("keydown", function () {
                     let event = d3.event;
                     if (event.key === "m" || event.key === "z") {

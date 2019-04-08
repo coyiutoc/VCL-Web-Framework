@@ -219,24 +219,24 @@ function generate_estimation_subconditions(experiment){
             condition.ref_outline = ref_shapes.outline;
             condition.max_step_size = MAX_STEP_SIZE;
             condition.trials_per_round = TRIALS_PER_ROUND;
-            mod_shapes.types[index].forEach((mod_shape)=>{
+            mod_shapes.types[index].forEach((mod_shape, mod_shape_idx)=>{
                 mod_shapes.rotate_by[index].forEach((angle)=>{
                     let curr_sub_cond = {};
                     Object.assign(curr_sub_cond, condition);
                     curr_sub_cond.mod_shape = mod_shape;
                     curr_sub_cond.mod_min_size = MATCH_SIZES[size.toString()].min_size;
-                    curr_sub_cond.mod_max_size = MATCH_SIZES[size.toString()].min_size;
+                    curr_sub_cond.mod_max_size = MATCH_SIZES[size.toString()].max_size;
                     curr_sub_cond.mod_rotate_by = angle;
                     curr_sub_cond.mod_fill = mod_shapes.fill;
                     curr_sub_cond.mod_outline = mod_shapes.outline;
-                    if (mod_shapes.height_to_width) {
-                        curr_sub_cond.height_to_width = mod_shapes.height_to_width[index];
+                    if (mod_shapes.side_to_bottom) {
+                        curr_sub_cond.side_to_bottom = mod_shapes.side_to_bottom[index][mod_shape_idx];
 					}
                     result.push(curr_sub_cond);
                 });
             });
         });
     });
-    console.log(JSON.stringify(result));
+    // console.log(JSON.stringify(result));
     return result;
-};
+}
