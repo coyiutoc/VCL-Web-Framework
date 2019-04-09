@@ -126,7 +126,7 @@ const ESTIMATION_BASE = {
             sizes: [2, 4, 6],
             fill: FILL_COLOR,
             outline: OUTLINE_COLOR,
-            rotate_by: [0]
+            rotate_by: [45]
         },
         mod_shapes: {
             types: [["square"]],
