@@ -189,4 +189,14 @@ const ESTIMATION_BASE = {
             rotate_by: [[0]]
         }
     },
+
+    /** future conditions:
+     * - what do we see as size
+     * - proportions:
+     * -- 1 / 2 of the size
+     * eg: 2 groups of shapes, adjust one group to have the same proportion as the other group
+     * theory of area perception
+     * theory of proportions perception
+     */
+    // -- pair matching
 };
