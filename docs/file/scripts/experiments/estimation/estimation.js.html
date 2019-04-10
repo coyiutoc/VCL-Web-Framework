@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">scripts/experiments/estimation/estimation.js | huh</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="huh"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/coyiutoc/VCL_Correlation_POC"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-balancing">experiment-properties/balancing</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_latin_square">initialize_latin_square</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_random_order">initialize_random_order</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-data">experiment-properties/data</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get_subconditions">get_subconditions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_condition_dataset">create_condition_dataset</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get_data">get_data</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get_data_subset">get_data_subset</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CUSTOM_TRIAL_STRUCTURE_CONDITIONS">CUSTOM_TRIAL_STRUCTURE_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-EXPERIMENT_BASES">EXPERIMENT_BASES</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-EXPERIMENT_CONDITIONS">EXPERIMENT_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-data-constants">experiment-properties/data/constants</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ESTIMATION_BASE">ESTIMATION_BASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-JND_BASE">JND_BASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-JND_CONDITIONS">JND_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-JND_RADIUS_BASE">JND_RADIUS_BASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-JND_RADIUS_CONDITIONS">JND_RADIUS_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-STEVENS_BASE">STEVENS_BASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-STEVENS_CONDITIONS">STEVENS_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing">experiment-properties/graphing</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-is_custom_plot">is_custom_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_custom_plot">prepare_custom_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_distributions">plot_distributions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-base-plots">experiment-properties/graphing/d3-base-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_ring_plot">create_ring_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_scatter_plot">create_scatter_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_scatter_points">plot_scatter_points</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_shape_plot">create_shape_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_strip_plot">create_strip_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_distractor_scatter_plot">prepare_distractor_scatter_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-estimation">experiments/estimation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html">Estimation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-estimation_exp">estimation_exp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd">experiments/jnd</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd/jnd.js~JND.html">JND</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-jnd_exp">jnd_exp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd-radius">experiments/jnd_radius</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd_radius/jnd_radius.js~JND_Radius.html">JND_Radius</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-jnd_radius_exp">jnd_radius_exp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-stevens">experiments/stevens</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/stevens/stevens.js~Stevens.html">Stevens</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-stevens_exp">stevens_exp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#helpers">helpers</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-force_greater_right_position">force_greater_right_position</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomize_position">randomize_position</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomize_radius_position">randomize_radius_position</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">scripts/experiments/estimation/estimation.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import {initialize_random_order} from &quot;/scripts/experiment-properties/balancing/random_generator.js&quot;;
+import {get_data} from &quot;/scripts/experiment-properties/data/data_controller.js&quot;;
+import {randomize_position,
+        randomize_radius_position,
+        force_greater_right_position} from &quot;/scripts/helpers/experiment_helpers.js&quot;;
+
+export default class Estimation {
+    /**
+     * Initializes a Estimation experiment object.
+     *
+     * @param  params          {object}    Parameters passed in from routing
+     */
+    constructor(params) {
+        // Validate fields of params
+        if (params.condition !== &apos;shape_estimation&apos;
+            &amp;&amp; params.condition !== &apos;line_length&apos;
+            &amp;&amp; params.condition !== &apos;rectangle_square&apos;
+            &amp;&amp; params.condition !== &apos;triangle&apos;
+            &amp;&amp; params.condition !== &apos;rectangle_rotated_square_solid&apos;
+            &amp;&amp; params.condition !== &apos;rectangle_rotated_square_outline&apos;) {
+            throw  Error(&quot;unexpected condition name &quot; + params.condition);
+        }
+
+        this.condition_name = params.condition;
+        if (params.trial_structure !== &quot;estimation&quot;) {
+            throw  Error(&quot;unexpected trial structure &quot; + params.trial_structure);
+        }
+        this.range = params.range;
+        this.trial_structure = params.trial_structure;
+        if (params.graph_type !== &quot;shapes&quot; &amp;&amp; params.graph_type !== &quot;line&quot;) {
+            throw Error(&quot;graph type: &quot; + params.graph_type + &quot; is not supported.&quot;)}
+        else {
+            this.graph_type = params.graph_type;
+        }
+        if (params.balancing !== &quot;random&quot;) {
+            throw Error(&quot;balancing: &quot;+ params.balancing + &quot; is not supported.&quot;) }
+        else {
+            this.balancing = params.balancing;
+        }
+        this.subject_id = params[&quot;subject_id&quot;];
+        this.subject_initials = params[&quot;subject_initials&quot;];
+
+        // ========================================
+        // EXPERIMENT CONSTANTS
+        this.X_DISTANCE_BETWEEN_SHAPES = 12;
+        this.Y_DIVIATION_FROM_X_AXIS = 3;
+        this.MAX_STEP_INTERVAL = 10;
+        this.ROUNDS_PER_COND = 4;
+        this.MAX_Y_POS_JITTER = 0.1; // y axis can be shifted away from default (window / 2) by at most 0.1 * ImageHeight;
+        this.MAX_STEP_SIZE = 0.05; // how much can the size of shapes can be changed at one keypress
+
+        // PIXELS_PER_CM is defined in estimation_experiment.html
+        if (PIXELS_PER_CM) {
+            this.PIXEL_TO_CM = PIXELS_PER_CM;
+        } else {
+            // 1cm is 37.7952755906 pixels
+            this.PIXEL_TO_CM = 37.7952755906;
+            throw Error(&quot;PIXELS_PER_CM is not defined&quot;);
+        }
+
+        // Margin from top and bottom of screen is set to at least 5cm
+        this.MARGIN = 5;
+        // ========================================
+        // EXPERIMENT VARIABLES
+        this.input_count_array= [0, 0, 0, 0];
+        this.curr_round_num = 0;
+        this.curr_condition_index = 0; // pointing to positions in this.curr_conditions_constants
+        this.is_practice = true;
+        // input_count_array has length equals to trials_per_round, each index representing num inputs per round
+        // for a given sub condition
+        this.curr_conditions_constants; // array of sub-conditions currently running
+        this.raw_sub_conds; // subconditions in estimation_data.js
+
+        this.curr_condition_index; // pointing to positions in this.curr_conditions_constants
+        this.round_end = true;
+
+        // ========================================
+        // PRACTICE EXPERIMENT VARIABLES
+
+        this.adjusted_midpoint_matrix = {};
+        this.practice_trial_data = [];
+        this.practice_end = false;
+
+        // ========================================
+        // TEST EXPERIMENT VARIABLES
+        this.sub_condition_order;
+
+        // ========================================
+        // CURRENT TRIAL DATA
+        this.trial_data = {};
+
+        this.results = []; // trials are pushed to results at the end of trial;
+        // ========================================
+        // PREPARE EXPERIMENT
+
+        // Extract raw constants
+        // this.raw_sub_conds = generate_estimation_experiment_data(params.condition);
+        this.raw_sub_conds = get_data(this);
+        // console.log(&quot;raw sub conds&quot;);
+        // Prepare experiment + practice data
+        this.practice_conditions_constants = [];
+        this.curr_conditions_constants = []; // array of sub-conditions currently running
+
+        this.experiment_conditions_constants = [];
+        this.prepare_experiment();
+        this.prepare_practice();
+    }
+
+    /**
+     * Orders the input data according to balancing type and
+     * initializes the Estimation object&apos;s variables.
+     *
+     */
+    prepare_experiment() {
+        let dataset = this.raw_sub_conds;
+        switch(this.balancing) {
+            case &apos;random&apos;:
+                this.sub_condition_order = initialize_random_order(dataset.length);
+                break;
+            default:
+                throw Error(this.balancing_type + &quot; balancing type is not supported.&quot;);
+        }
+
+        let ordered_dataset = [];
+        // Order the data set according to the randomly ordered array
+        for (let i = 0; i &lt; this.sub_condition_order.length; i++) {
+            ordered_dataset[i] = dataset[this.sub_condition_order[i]];
+        }
+        // Set experiment trials
+        this.experiment_conditions_constants = ordered_dataset;
+        console.log(&quot;experiment_conditions_constants&quot;);
+        console.log(JSON.stringify(this.experiment_conditions_constants));
+    }
+
+    /**
+     * Creates the practice dataset by taking the first FOUR subconditions.
+     *
+     */
+    prepare_practice() {
+        let dataset = this.raw_sub_conds;
+        let practice_dataset = [];
+
+        for (let i = 0; i &lt; 1; i++){
+            practice_dataset[i] = dataset[i];
+            this.practice_trial_data[i] = [];
+        }
+        // set variables to practice
+        this.practice_conditions_constants = practice_dataset;
+        this.curr_conditions_constants = practice_dataset;
+        this.curr_condition_index = 0;
+        this.current_practice_condition_index = 0;
+        this.input_count_array = new Array(this.curr_conditions_constants[0].trials_per_round).fill(0);
+        this.is_practice = true;
+    }
+
+    /**
+     * Resets all relevant variables to use that of the experiment.
+     * (input_count_array, curr_conditions_constants, and curr_condition_index
+     * are shared variables between the practice and test trials).
+     *
+     * This function is called once all the practice trials have run.
+     */
+    set_variables_to_experiment() {
+        console.log(&quot;set_variables_to_experiment&quot;);
+        this.curr_conditions_constants = this.experiment_conditions_constants;
+        this.curr_condition_index = 0;
+        this.curr_round_num = 0;
+        this.input_count_array = new Array(this.curr_conditions_constants[0].trials_per_round).fill(0);
+        this.is_practice = false;
+    }
+
+    /**
+     * Generates a Estimation object for use in the JsPsych timeline.
+     *
+     * @param  block_type {string}     &quot;test&quot; or &quot;practice&quot;
+     * @return trial {object}
+     */
+    generate_trial(block_type) {
+
+        if ((block_type !== &quot;test&quot;) &amp;&amp; (block_type !== &quot;practice&quot;)) {
+            throw Error(block_type + &quot; is not supported.&quot;)
+        }
+       // Initialize a variable for this so it is usable inside on_start
+        var estimation_exp = this;
+        var address = location.protocol + &quot;//&quot; + location.hostname + &quot;:&quot; + location.port + &quot;/estimation_trial&quot;;
+
+        let group = {};
+        let is_ref_left = false;
+        let ready = {
+            type: &apos;html-keyboard-response&apos;,
+            choices: [32],
+            stimulus: &quot;&quot;,
+            on_start: function(trial) {
+                is_ref_left = Math.random() &gt; 0.5;
+                trial.stimulus = is_ref_left? &quot;&lt;div align = &apos;center&apos;&gt;&lt;font size = 20&gt;&quot; +
+                    &quot;&lt;p&gt;The Modifiable shape will be on the right&lt;p&gt;&quot; +
+                    &quot;&lt;br&gt; &lt;br&gt; &lt;p&gt;&lt;b&gt;Press space to continue.&lt;/b&gt;&lt;/p&gt;&lt;/font&gt;&lt;/div&gt;&quot; :
+                    &quot;&lt;div align = &apos;center&apos;&gt;&lt;font size = 20&gt;&quot; +
+                    &quot;&lt;p&gt;The Modifiable shape will be on the left&lt;p&gt;&quot; +
+                    &quot;&lt;br&gt; &lt;br&gt; &lt;p&gt;&lt;b&gt;Press space to continue.&lt;/b&gt;&lt;/p&gt;&lt;/font&gt;&lt;/div&gt;&quot; ;
+            },
+            data: {type: &apos;instruction&apos;}
+        };
+        let trial = {
+            type:&apos;external-html-keyboard-response&apos;,
+            url: address,
+            choices: [32, 81],  // 32 = spacebar, 81 = q (exit button for debugging)
+            execute_script: true,
+            response_ends_trial: true,
+            data: {
+                round_num: 0,
+                estimated_size: -1,
+                adjustments: [], // array of numbers representing the adjustments made to the shape
+                sub_condition_index: 0,
+                block_type: block_type
+            },
+            on_start: function(trial) {
+                console.log(&quot;====================on_start=======================&quot;);
+                // Set the constants to be used:
+                trial.data.sub_condition_index = estimation_exp.curr_condition_index;
+                trial.data.round_num = estimation_exp.curr_round_num;
+                trial.data = Object.assign(estimation_exp.curr_conditions_constants[estimation_exp.curr_condition_index],
+                    trial.data);
+                trial.data.is_ref_left = is_ref_left; // is the reference shape on the left
+                estimation_exp.curr_trial_data = trial.data;
+                // Save trial data for practice so can calculate exclusion criteria
+                if (trial.data.run_type === &quot;practice&quot;) {
+                    estimation_exp.practice_trial_data[estimation_exp.curr_condition_index].push(trial.data);
+                }
+                // console.log(JSON.stringify(trial));
+            },
+            on_finish: function(data) { // NOTE: on_finish takes in data var
+                // save data here
+                console.log(&quot;====================on_finish=======================&quot;);
+                let curr_trail_data = JSON.parse(JSON.stringify((data)));
+                estimation_exp.results.push(curr_trail_data);
+                estimation_exp.update_curr_round_number(data);
+                estimation_exp.update_curr_cond_idx(data);
+                estimation_exp.update_input_array(data);
+            }
+        };
+        group.timeline = [ready, trial];
+        console.log(JSON.stringify(group));
+        return group;
+    }
+
+    /**
+     * Set the current trial&apos;s number of inputs in the input_count_array
+     * @param data {object} the trial.data object from jsPsych
+     * */
+    update_input_array(data) {
+        if (data.round_num &lt; 0 || data.round_num &gt; 3) {
+            throw Error(&quot;trail number : &quot; + data.round_num + &quot; is out of range&quot;);
+        }
+        this.input_count_array[data.round_num] = data.adjustments.length;
+    }
+
+    /**
+     * Update the current round number
+     * @param trial_data {object} the trial.data object from jsPsych
+     * */
+    update_curr_round_number(trial_data) {
+        if (trial_data.round_num === this.ROUNDS_PER_COND - 1) {
+            this.curr_round_num  = 0;
+        } else {
+            this.curr_round_num++;
+        }
+    }
+
+    /**
+     * Update the index of the condition that is being referred to
+     * @param trial_data {object} the trail.data object from jsPsych
+     * */
+    update_curr_cond_idx(trial_data) {
+        if (trial_data.round_num === this.ROUNDS_PER_COND - 1) {
+            this.curr_condition_index++;
+        }
+    }
+
+    /**
+     * plot a trial
+     * @param sub_cond {object} a sub_condition object, refer to estimation_data.js for details
+     * @param round_num {number} current round number
+     */
+    plot_trial(sub_cond, round_num) {
+        let estimation_exp = this;
+
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+
+        let mid_width = width / 2;
+        let mid_height = height / 2;
+
+        let chart = d3.select(&quot;#graph&quot;) // Insert into the div w/ id = &quot;graph&quot;
+            .append(&quot;svg&quot;)
+            .attr(&quot;width&quot;, width)
+            .attr(&quot;height&quot;, height)
+            .attr(&quot;style&quot;, &quot;display: block&quot;);
+
+        let left_x = mid_width - this.X_DISTANCE_BETWEEN_SHAPES * this.PIXEL_TO_CM / 2;
+        let right_x = mid_width + this.X_DISTANCE_BETWEEN_SHAPES * this.PIXEL_TO_CM / 2;
+
+        let ref_size = sub_cond.ref_size * estimation_exp.PIXEL_TO_CM ;
+        let ref_y = estimation_exp.calculate_y_position(ref_size);
+
+        // the size of the modifiable shape start from mod_min_size for trial 0 and 2, mod_max_size for 1 and 3;
+        let mod_size = (round_num % 2 === 1)?
+            sub_cond.mod_max_size * estimation_exp.PIXEL_TO_CM  : sub_cond.mod_min_size * estimation_exp.PIXEL_TO_CM;
+        let mod_y = estimation_exp.calculate_y_position(mod_size);
+
+        this.curr_trial_data.is_ref_smaller = (round_num % 2 === 1);
+
+        if (this.curr_trial_data.is_ref_left) {
+            this.plot_shape(sub_cond.ref_shape, chart, ref_size , ref_y, left_x, true, sub_cond.ref_outline, sub_cond.ref_fill);
+            this.plot_shape(sub_cond.mod_shape, chart, mod_size, mod_y, right_x, false, sub_cond.mod_outline, sub_cond.mod_fill);
+            this.curr_trial_data.is_ref_left = true;
+        } else {
+            this.plot_shape(sub_cond.mod_shape, chart, mod_size, mod_y, left_x, false, sub_cond.mod_outline, sub_cond.mod_fill);
+            this.plot_shape(sub_cond.ref_shape, chart, ref_size, ref_y, right_x, true, sub_cond.ref_outline, sub_cond.ref_fill);
+            this.curr_trial_data.is_ref_left = false;
+        }
+    }
+
+    /**
+     * calculate the y value of the position where the shape should be plotted
+     * @param radius the radius of the shape
+     * @returns {number}
+     */
+    calculate_y_position(radius) {
+        let estimation_exp = this;
+        // y_margin is the distance from
+        let y_margin = estimation_exp.MARGIN * estimation_exp.PIXEL_TO_CM;
+        // pick a random position inside the screen such the the shapes will not be displayed outside of the border
+        let range = [y_margin + radius / 2, window.innerHeight - y_margin - radius / 2];
+        console.log(&quot;radius: &quot; + radius);
+        console.log(JSON.stringify(range));
+        let y_pos = Math.random() * (range[1] - range[0]) + range[0];
+        return y_pos;
+    }
+
+    /**
+     * function to display the experiment trials
+     */
+    plot_trials(){
+        console.log(&quot;plot_trials with index = &quot; + this.curr_condition_index +
+            &quot;round number&quot; + this.curr_round_num);
+        this.plot_trial(this.curr_conditions_constants[this.curr_condition_index], this.curr_round_num);
+    }
+
+    /**
+     * plot a shape
+     *
+     * @param shape {string}
+     * @param chart {object}
+     * @param radius {number}
+     * @param y_pos {number}
+     * @param x_pos {number}
+     * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape
+     * @param outline {string} outline color
+     * @param fill {string} fill color
+     */
+    plot_shape(shape, chart, radius, y_pos, x_pos, is_ref, outline, fill) {
+        switch (shape) {
+            case &quot;circle&quot;:
+                this.plot_circle(chart, radius, y_pos, x_pos, is_ref, outline, fill);
+                break;
+            case &quot;triangle&quot;:
+                this.plot_triangle(chart, radius, y_pos, x_pos, is_ref, outline, fill);
+                break;
+            case &quot;square&quot;:
+                this.plot_square(chart, radius, y_pos, x_pos, is_ref, outline, fill);
+                break;
+            case &quot;instruction&quot;:
+                this.plot_instruction(chart, y_pos, x_pos, trial);
+                break;
+            case &quot;line&quot;:
+                this.plot_line(chart, radius, y_pos, x_pos, is_ref, outline);
+                break;
+            case &quot;rectangle&quot;:
+                this.plot_rectangle(chart, radius, y_pos, x_pos, is_ref, outline, fill);
+                break;
+        }
+    }
+
+    /**
+     *
+     * @param chart {object} svg object
+     * @param y_pos {number} position on the y axis
+     * @param x_pos {number} position on the x axis
+     * @param trial {object}
+     */
+    plot_instruction(chart, y_pos, x_pos, trial) {
+        chart.append(&quot;text&quot;)
+            .attr(&quot;x&quot;, x_pos)
+            .attr(&quot;y&quot;, y_pos)
+            .attr(&quot;font-family&quot;, &quot;sans-serif&quot;)
+            .attr(&quot;font-size&quot;, &quot;28px&quot;)
+            .attr(&quot;fill&quot;, &quot;black&quot;)
+            .text(()=&gt;{
+                return trial.is_ref_left? &quot;The modifiable shape is on the right&quot; :  &quot;The modifiable shape is on the left&quot;;
+            });
+    }
+
+    /**
+     * D3 code for plotting a circle.
+     *
+     * @param chart {object}
+     * @param diameter {number}
+     * @param y_pos {number}
+     * @param x_pos {number}
+     * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape
+     * @param outline {string}
+     * @param fill {string}
+     */
+    plot_circle(chart, diameter, y_pos, x_pos, is_ref, outline, fill) {
+        let exp = this;
+        let radius = diameter / 2;
+        chart.append(&quot;circle&quot;)
+            .attr(&quot;cx&quot;, x_pos)
+            .attr(&quot;cy&quot;, y_pos)
+            .attr(&quot;r&quot;, diameter / 2)
+            .attr(&quot;id&quot;, &quot;circle_shape&quot;)
+            .attr(&quot;is_ref&quot;, is_ref)
+            .attr(&quot;fill&quot;, fill)
+            .attr(&quot;stroke&quot;, outline);
+        if (is_ref === false) {
+            d3.select(&quot;body&quot;)
+                .on(&quot;keydown&quot;, function () {
+                    let event = d3.event;
+                    // console.log(event);
+                    if (event.key === &quot;m&quot; || event.key === &quot;z&quot;) {
+                        diameter = exp.calculate_size_change(event.key, diameter);
+                        radius = diameter / 2;
+                        d3.select(&quot;#circle_shape&quot;)
+                            .attr(&quot;r&quot;, radius);
+                    }
+                });
+        }
+    }
+
+    /**
+     *
+     * @param exp {object} an Experiment object
+     * @param radius {number}
+     * @param shape_id {string}
+     * @param shape_type {string}
+     */
+    static append_adjustments_listener(exp, radius, shape_id, shape_type) {
+        d3.select(&quot;body&quot;)
+            .on(&quot;keydown&quot;, function () {
+                let event = d3.event;
+                // console.log(event);
+                if (event.key === &quot;m&quot; || event.key === &quot;z&quot;) {
+                    let sign = event.key === &quot;m&quot; ? 1 : -1;
+                    let change = Math.random() * exp.PIXEL_TO_CM * exp.MAX_STEP_SIZE / 2;
+                    // divided by 2 because we are changing radius (which is half of diameter)
+                    // for example when we do this for squares we will be chaning width and height
+                    let new_radius = radius + sign * change;
+                    console.log(new_radius);
+                    exp.curr_trial_data.adjustments.push(change * sign / exp.PIXEL_TO_CM );
+                    exp.curr_trial_data.estimated_size = new_radius / exp.PIXEL_TO_CM ;
+                    radius = new_radius;
+                    d3.select(shape_id)
+                        .attr(&quot;r&quot;, new_radius);
+                }
+            });
+    }
+
+    /**
+     *
+     * @param chart {object}
+     * @param width {number}
+     * @param y_pos {number}
+     * @param x_pos {number}
+     * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape,
+     *                         is_ref === true if the shape is a reference shape
+     * @param outline {string}
+     * @param fill {string}
+     */
+    plot_square(chart, width, y_pos, x_pos, is_ref, outline, fill) {
+        let exp = this;
+        chart.append(&quot;rect&quot;)
+            .attr(&quot;id&quot;, is_ref? &quot;square_shape_ref&quot;: &quot;square_shape_mod&quot;)
+            .attr(&quot;x&quot;, x_pos - width / 2)
+            .attr(&quot;y&quot;, y_pos - width / 2) // the x and y attributes for square
+                                          // refers to the position of the upper left corner
+                                          // however x_pos and y_pos specifies the center of the shape
+            .attr(&quot;width&quot;, width)
+            .attr(&quot;height&quot;, width)
+            .attr(&quot;fill&quot;, fill)
+            .attr(&quot;stroke&quot;, outline);
+        if (is_ref === true &amp;&amp; exp.curr_trial_data.ref_rotate_by) {
+            let transform = &quot;rotate(&quot;;
+            transform = transform + exp.curr_trial_data.ref_rotate_by.toString();
+            transform = transform + &quot; &quot; + (x_pos - width).toString();
+            transform = transform + &quot; &quot; + (y_pos - width).toString();
+            transform = transform + &quot;)&quot;;
+            d3.select(&quot;#square_shape_ref&quot;).attr(&quot;transform&quot;, transform);
+        }
+        if (is_ref === false) {
+            d3.select(&quot;body&quot;)
+                .on(&quot;keydown&quot;, () =&gt; {
+                    let event = d3.event;
+                    if (event.key === &quot;m&quot; || event.key === &quot;z&quot;) {
+                        width = exp.calculate_size_change(event.key, width);
+                        d3.select(&quot;#square_shape_mod&quot;)
+                            .attr(&quot;width&quot;, width)
+                            .attr(&quot;height&quot;, width);
+                    }
+                });
+        }
+
+    }
+
+    /**
+     *
+     * @param chart {object}
+     * @param radius {number}
+     * @param y_pos {number}
+     * @param x_pos {number}
+     * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape,
+     *                         is_ref === true if the shape is a reference shape
+     */
+    plot_triangle(chart, radius, y_pos, x_pos, is_ref, outline, fill) {
+        let exp = this;
+        // for equilateral triangles, height = side * sqrt(3) / 2;
+        let short_side = radius;
+        let long_side = radius;
+        let height = 0, width = 0;
+
+        let poly = [];
+        if (!is_ref) {
+            if (exp.curr_trial_data.width_height_ratio) {
+                long_side = short_side * exp.curr_trial_data.width_height_ratio;
+                height = Math.sqrt(Math.pow(long_side, 2) - Math.pow(short_side / 2, 2));
+                width = short_side;
+                if (exp.curr_trial_data.mod_rotate_by) {
+                    poly = [
+                        {&quot;x&quot;:(0.5 * height + x_pos), &quot;y&quot;:(y_pos)},
+                        {&quot;x&quot;:(-0.5 * height + x_pos), &quot;y&quot;:(-0.5 * width + y_pos)},
+                        {&quot;x&quot;:(-0.5 * height + x_pos), &quot;y&quot;:(0.5 * width + y_pos)}];
+                } else {
+                    poly = [
+                        {&quot;x&quot;:(x_pos), &quot;y&quot;:(-0.5 * height + y_pos)},
+                        {&quot;x&quot;:(-0.5 * width + x_pos), &quot;y&quot;:(0.5 * height + y_pos)},
+                        {&quot;x&quot;:(0.5 * width + x_pos), &quot;y&quot;:(0.5 * height + y_pos)}];
+                }
+            } else {
+                height = radius * Math.sqrt(3)/2;
+                poly = [
+                    {&quot;x&quot;:x_pos, &quot;y&quot;:(-0.5 * height + y_pos)},
+                    {&quot;x&quot;:(-0.5 * radius + x_pos), &quot;y&quot;:(0.5 * height + y_pos)},
+                    {&quot;x&quot;:(0.5 * radius + x_pos), &quot;y&quot;:(0.5 * height + y_pos)}];
+            }
+        } else {
+            height = radius * Math.sqrt(3)/2;
+            poly = [
+                {&quot;x&quot;:x_pos, &quot;y&quot;:(-0.5 * height + y_pos)},
+                {&quot;x&quot;:(-0.5 * radius + x_pos), &quot;y&quot;:(0.5 * height + y_pos)},
+                {&quot;x&quot;:(0.5 * radius + x_pos), &quot;y&quot;:(0.5 * height + y_pos)}];
+        }
+        chart.append(&quot;polygon&quot;)
+            .attr(&quot;points&quot;,function() {
+                return poly.map(function(d) { return [d.x, d.y].join(&quot;,&quot;); }).join(&quot; &quot;);})
+            .attr(&quot;fill&quot;, fill)
+            .attr(&quot;stroke&quot;, outline)
+            .attr(&quot;id&quot;, is_ref? &quot;triangle_shape_ref&quot; : &quot;triangle_shape_mod&quot;);
+
+        if (is_ref === false) {
+            d3.select(&quot;body&quot;)
+                .on(&quot;keydown&quot;, function () {
+                    let event = d3.event;
+                    if (event.key === &quot;m&quot; || event.key === &quot;z&quot;) {
+                        // decide the amount of change;
+                        radius = exp.calculate_size_change(event.key, radius);
+                        // plot the changed shape
+                        short_side = radius;
+                        if (exp.curr_trial_data.width_height_ratio) {
+                            long_side = short_side * exp.curr_trial_data.width_height_ratio;
+                            height = Math.sqrt(Math.pow(long_side, 2) - Math.pow(short_side / 2, 2));
+                            width = short_side;
+                            if (exp.curr_trial_data.mod_rotate_by) {
+                                poly = [
+                                    {&quot;x&quot;:(0.5 * height + x_pos), &quot;y&quot;:(y_pos)},
+                                    {&quot;x&quot;:(-0.5 * height + x_pos), &quot;y&quot;:(-0.5 * width + y_pos)},
+                                    {&quot;x&quot;:(-0.5 * height + x_pos), &quot;y&quot;:(0.5 * width + y_pos)}];
+                            } else {
+                                poly = [
+                                    {&quot;x&quot;:(x_pos), &quot;y&quot;:(-0.5 * height + y_pos)},
+                                    {&quot;x&quot;:(-0.5 * width + x_pos), &quot;y&quot;:(0.5 * height + y_pos)},
+                                    {&quot;x&quot;:(0.5 * width + x_pos), &quot;y&quot;:(0.5 * height + y_pos)}];
+                            }
+                        } else {
+                            height = short_side * Math.sqrt(3)/2;
+                            poly = [
+                                {&quot;x&quot;:x_pos, &quot;y&quot;:(-0.5 * height + y_pos)},
+                                {&quot;x&quot;:(-0.5 * short_side + x_pos), &quot;y&quot;:(0.5 * height + y_pos)},
+                                {&quot;x&quot;:(0.5 * short_side + x_pos), &quot;y&quot;:(0.5 * height + y_pos)}];
+                        }
+                       chart.select(&quot;#triangle_shape_mod&quot;)
+                            .attr(&quot;points&quot;,function() {
+                                return poly.map(function(d) { return [d.x, d.y].join(&quot;,&quot;); }).join(&quot; &quot;);});
+                    }
+                });
+        }
+    }
+
+    /**
+     *
+     * @param chart {object}
+     * @param size {number}
+     * @param y_pos {number}
+     * @param x_pos {number}
+     * @param is_ref {boolean}
+     * @param outline {string}
+     * @param fill {string}
+     */
+    plot_rectangle(chart, size, y_pos, x_pos, is_ref, outline, fill) {
+        let exp = this;
+        let short_side = size;
+        let long_side = size;
+        let height = 0, width = 0;
+        if (exp.curr_trial_data.width_height_ratio) {
+            long_side = short_side * exp.curr_trial_data.width_height_ratio;
+        }
+        width = short_side;
+        height = long_side;
+        chart.append(&quot;rect&quot;)
+            .attr(&quot;id&quot;, is_ref? &quot;rect_shape_ref&quot;: &quot;rect_shape_mod&quot;)
+            .attr(&quot;x&quot;, x_pos - width / 2)
+            .attr(&quot;y&quot;, y_pos - height / 2) // the x and y attributes for square
+            // refers to the position of the upper left corner
+            // however x_pos and y_pos specifies the center of the shape
+            .attr(&quot;width&quot;, width)
+            .attr(&quot;height&quot;, height)
+            .attr(&quot;fill&quot;, fill)
+            .attr(&quot;stroke&quot;, outline);
+        if (is_ref === false &amp;&amp; exp.curr_trial_data.mod_rotate_by) {
+            let transform = &quot;rotate(&quot;;
+            transform = transform + exp.curr_trial_data.mod_rotate_by.toString();
+            transform = transform + &quot; &quot; + (x_pos).toString();
+            transform = transform + &quot; &quot; + (y_pos).toString();
+            transform = transform + &quot;)&quot;;
+            console.log(transform);
+            d3.select(&quot;#rect_shape_mod&quot;).attr(&quot;transform&quot;, transform);
+        }
+
+        if (is_ref === false) {
+            d3.select(&quot;body&quot;)
+                .on(&quot;keydown&quot;, function () {
+                    let event = d3.event;
+                    if (event.key === &quot;m&quot; || event.key === &quot;z&quot;) {
+                        size = exp.calculate_size_change(event.key, size);
+                        let short_side = size;
+                        let long_side = exp.curr_trial_data.width_height_ratio * short_side;
+                        let new_width = 0, new_height = 0;
+                        new_width = short_side;
+                        new_height = long_side;
+                        d3.select(&quot;#rect_shape_mod&quot;)
+                            .attr(&quot;width&quot;, new_width)
+                            .attr(&quot;height&quot;, new_height);
+                    }
+                });
+        }
+
+    }
+
+
+    /**
+     *
+     * @param chart {object}
+     * @param width {number}
+     * @param y_pos {number}
+     * @param x_pos {number}
+     * @param is_ref {boolean}
+     * @param outline
+     */
+    plot_line(chart, width, y_pos, x_pos, is_ref, outline) {
+        let exp = this;
+        let x1, x2, y1, y2;
+        if (!is_ref) {
+            x1 = x_pos - (width / 2) * Math.sin(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
+            x2 = x_pos + (width / 2) * Math.sin(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
+            y1 = y_pos - (width / 2) * Math.cos(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
+            y2 = y_pos + (width / 2) * Math.cos(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
+        } else {
+            x1 = x_pos - width / 2;
+            x2 = x_pos + width / 2;
+            y1 = y_pos;
+            y2 = y_pos;
+        }
+        chart.append(&quot;line&quot;)
+            .style(&quot;stroke&quot;, outline)
+            .style(&quot;stroke-width&quot;, exp.curr_trial_data.stroke_width)
+            .attr(&quot;id&quot;, is_ref? &quot;line_shape_ref&quot;: &quot;line_shape_mod&quot;)
+            .attr(&quot;x1&quot;, x1)
+            .attr(&quot;x2&quot;, x2)
+            .attr(&quot;y1&quot;, y1)
+            .attr(&quot;y2&quot;, y2);
+        if (is_ref === false) {
+            d3.select(&quot;body&quot;)
+                .on(&quot;keydown&quot;, function () {
+                    let event = d3.event;
+                    if (event.key === &quot;m&quot; || event.key === &quot;z&quot;) {
+                        width = exp.calculate_size_change(event.key, width);
+                        if (!is_ref) {
+                            x1 = x_pos - (width / 2) * Math.sin(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
+                            x2 = x_pos + (width / 2) * Math.sin(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
+                            y1 = y_pos - (width / 2) * Math.cos(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
+                            y2 = y_pos + (width / 2) * Math.cos(exp.curr_trial_data.mod_rotate_by * Math.PI / 180);
+                        } else {
+                            x1 = x_pos - width / 2;
+                            x2 = x_pos + width / 2;
+                            y1 = y_pos;
+                            y2 = y_pos;
+                        }
+                        d3.select(&quot;#line_shape_mod&quot;)
+                            .attr(&quot;x1&quot;, x1)
+                            .attr(&quot;x2&quot;, x2)
+                            .attr(&quot;y1&quot;, y1)
+                            .attr(&quot;y2&quot;, y2);
+                    }
+                });
+        }
+    }
+
+    /**
+     *
+     * @param event_key m to increase the size and z to decrease the size
+     * @param size the previous size of the shape
+     * @returns number
+     */
+    calculate_size_change(event_key, size) {
+        let sign = event_key === &quot;m&quot; ? 1 : -1;
+        let change = Math.random() * this.PIXEL_TO_CM * this.MAX_STEP_SIZE;
+        let new_radius = size + sign * change;
+        size = new_radius;
+        this.curr_trial_data.adjustments.push(change * sign / this.PIXEL_TO_CM);
+        this.curr_trial_data.estimated_size = new_radius / this.PIXEL_TO_CM;
+        return size;
+    }
+
+    /*
+    * Saves experiment data as csv
+    * */
+    export_trial_data() {
+        let trial_data = jsPsych.data.get().filterCustom(function (row) {
+            return row.block_type === &quot;practice&quot; || row.block_type === &quot;test&quot;;
+        })
+        // These are variables forced on by jsPsych
+            .ignore(&apos;stimulus&apos;)
+            .ignore(&apos;key_press&apos;)
+            .ignore(&apos;choices&apos;)
+            .ignore(&apos;trial_type&apos;)
+            .ignore(&apos;trial_index&apos;)
+            .ignore(&apos;time_elapsed&apos;)
+            .ignore(&apos;internal_node_id&apos;)
+            .ignore(&apos;rt&apos;);
+
+        let fileName = &quot;S&quot; + this.subject_id + &quot;_&quot; + this.condition_name + &quot;_shape_estimation_trial_results.csv&quot;;
+
+        trial_data.localSave(&apos;csv&apos;, fileName);
+    }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

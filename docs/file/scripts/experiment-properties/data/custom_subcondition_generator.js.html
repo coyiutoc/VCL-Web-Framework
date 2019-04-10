@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">scripts/experiment-properties/data/custom_subcondition_generator.js | huh</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="huh"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/coyiutoc/VCL_Correlation_POC"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-balancing">experiment-properties/balancing</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_latin_square">initialize_latin_square</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_random_order">initialize_random_order</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-data">experiment-properties/data</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get_subconditions">get_subconditions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_condition_dataset">create_condition_dataset</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get_data">get_data</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get_data_subset">get_data_subset</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CUSTOM_TRIAL_STRUCTURE_CONDITIONS">CUSTOM_TRIAL_STRUCTURE_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-EXPERIMENT_BASES">EXPERIMENT_BASES</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-EXPERIMENT_CONDITIONS">EXPERIMENT_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-data-constants">experiment-properties/data/constants</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ESTIMATION_BASE">ESTIMATION_BASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-JND_BASE">JND_BASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-JND_CONDITIONS">JND_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-JND_RADIUS_BASE">JND_RADIUS_BASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-JND_RADIUS_CONDITIONS">JND_RADIUS_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-STEVENS_BASE">STEVENS_BASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-STEVENS_CONDITIONS">STEVENS_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing">experiment-properties/graphing</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-is_custom_plot">is_custom_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_custom_plot">prepare_custom_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_distributions">plot_distributions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-base-plots">experiment-properties/graphing/d3-base-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_ring_plot">create_ring_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_scatter_plot">create_scatter_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_scatter_points">plot_scatter_points</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_shape_plot">create_shape_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_strip_plot">create_strip_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_distractor_scatter_plot">prepare_distractor_scatter_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-estimation">experiments/estimation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html">Estimation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-estimation_exp">estimation_exp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd">experiments/jnd</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd/jnd.js~JND.html">JND</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-jnd_exp">jnd_exp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd-radius">experiments/jnd_radius</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd_radius/jnd_radius.js~JND_Radius.html">JND_Radius</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-jnd_radius_exp">jnd_radius_exp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-stevens">experiments/stevens</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/stevens/stevens.js~Stevens.html">Stevens</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-stevens_exp">stevens_exp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#helpers">helpers</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-force_greater_right_position">force_greater_right_position</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomize_position">randomize_position</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomize_radius_position">randomize_radius_position</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">scripts/experiment-properties/data/custom_subcondition_generator.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import {EXPERIMENT_BASES, EXPERIMENT_CONDITIONS, create_condition_dataset} from &quot;/scripts/experiment-properties/data/data_controller.js&quot;;
+export {CUSTOM_TRIAL_STRUCTURE_CONDITIONS, get_subconditions};
+
+var CUSTOM_TRIAL_STRUCTURE_CONDITIONS = {
+	foundational : [],
+    design : [
+    	&quot;distractor_diamond_square_red_hue&quot;,
+    	&quot;distractor_diamond_square_red_lum&quot;,
+    	&quot;distractor_diamond_square_red_chrom&quot;,
+    	&quot;distractor_diamond_square_yellow_hue&quot;,
+    	&quot;distractor_diamond_square_yellow_lum&quot;,
+    	&quot;distractor_diamond_square_yellow_chrom&quot;,
+    	&quot;distractor_diamond_square_blue_hue&quot;,
+    	&quot;distractor_diamond_square_blue_lum&quot;,
+    	&quot;distractor_diamond_square_blue_chrom&quot;,
+    	&quot;distractor_diamond_square_green_hue&quot;,
+    	&quot;distractor_diamond_square_green_lum&quot;,
+    	&quot;distractor_diamond_square_green_chrom&quot;
+    ],
+    estimation: [
+    	&quot;shape_estimation&quot;,
+    	&quot;line_length&quot;,
+    	&quot;rectangle_square&quot;,
+    	&quot;rectangle_rotated_square_solid&quot;,
+    	&quot;rectangle_rotated_square_outline&quot;,
+    	&quot;triangle&quot;
+    ],
+    custom : [
+    	&quot;distractor_multi&quot;,
+    	&quot;distractor_blue_shades&quot;,
+    	&quot;distractor_red_shades&quot;,
+    	&quot;distractor_yellow_shades&quot;,
+    	&quot;distractor_control_shades&quot;
+    ]
+}
+
+/**
+ * Controls which helper method to access depending on condition name.
+ *
+ * @param {object}   experiment
+ */
+function get_subconditions(experiment) {
+
+	if (is_distractor_diamond_square(experiment.condition_name)){
+		return generate_distractor_diamond_square_subconditions(experiment);
+	} 
+	else if (experiment.condition_name === &quot;distractor_multi&quot;){
+		return generate_distractor_multi_subconditions(experiment);
+	}
+	else if (experiment.condition_name === &quot;distractor_blue_shades&quot;   ||
+		     experiment.condition_name === &quot;distractor_red_shades&quot;    ||
+		     experiment.condition_name === &quot;distractor_yellow_shades&quot; ||
+		     experiment.condition_name === &quot;distractor_control_shades&quot;){
+		return generate_distractor_shades_subconditions(experiment);
+	}
+	else if (experiment.constructor.name === &quot;Estimation&quot;){
+		return generate_estimation_subconditions(experiment);
+	}
+}
+
+/**
+ * Checks if the condition name is a &quot;distractor_diamond_square&quot; one.
+ *
+ * @param   {object}   experiment
+ * @return  {boolean}
+ */
+function is_distractor_diamond_square(condition_name) {
+
+	let array = condition_name.split(&quot;_&quot;);
+	if (array[0] === &quot;distractor&quot; &amp;&amp; array[1] === &quot;diamond&quot; &amp;&amp; array[2] === &quot;square&quot;) {
+		return true;
+	}
+	return false;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////
+// GENERATORS HERE 
+////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Generates subconditions for distractor_diamond_square conditions
+ *
+ * @param   {object}   experiment
+ */
+function generate_distractor_diamond_square_subconditions(experiment) {
+
+	let array = experiment.condition_name.split(&quot;_&quot;);
+	if (array.length !== 5) throw new Error(experiment.condition_name + &quot; is not a valid distractor_diamond_square condition.&quot;);
+	
+	let square_name = array[0] + &quot;_&quot; + array[2] + &quot;_&quot; + array[3] + &quot;_&quot; + array[4];
+	let experiment_name = experiment.constructor.name;
+	let trial_structure = experiment.trial_structure;
+
+	let subconditions = create_condition_dataset(EXPERIMENT_BASES[experiment_name][trial_structure], EXPERIMENT_CONDITIONS[experiment_name][square_name]);
+
+	for (let c of subconditions) {
+		c[&quot;dist_shape&quot;] = &quot;diamond&quot;;
+
+		// Overwrite to opposing colors when dist_color = white
+		if (c[&quot;dist_color&quot;] === &quot;WHITE&quot;){
+			// If RED
+			if (c[&quot;target_color&quot;] === &quot;#cd4c32&quot;){
+				c[&quot;dist_color&quot;] = &quot;#007ebc&quot;;
+			} 
+			// If BLUE
+			else if (c[&quot;target_color&quot;] === &quot;#007ebc&quot;){
+				c[&quot;dist_color&quot;] = &quot;#cd4c32&quot;;
+			}
+			// If YELLOW
+			else if (c[&quot;target_color&quot;] === &quot;#dbc667&quot;){
+				c[&quot;dist_color&quot;] = &quot;#20874a&quot;;
+			}
+			// If GREEN
+			else {
+				c[&quot;dist_color&quot;] = &quot;#dbc667&quot;;
+			}
+		}
+	}
+
+	return subconditions;
+}
+
+/**
+ * Generates subconditions for distractor_multi condition.
+ *
+ * @param   {object}   experiment
+ */
+function generate_distractor_multi_subconditions(experiment) {
+
+	let condition_name = experiment.condition_name;
+	let experiment_name = experiment.constructor.name;
+	let subconditions = EXPERIMENT_CONDITIONS[experiment_name][condition_name];
+
+	// Using the first 12 subconditions from the JND design:
+	let jnd_base_subconditions = EXPERIMENT_BASES[experiment_name][&quot;design&quot;].slice(1,13);
+
+	let dataset = create_condition_dataset(jnd_base_subconditions, subconditions);
+
+	let result = []
+
+	// Doing each set 4 times
+	for (let i = 0; i &lt; 4; i++) {
+		result = result.concat(dataset);
+	}
+
+	return result;
+}
+
+/**
+ * Generates subconditions for distractor_shade conditions.
+ *
+ * @param   {object}   experiment
+ */
+function generate_distractor_shades_subconditions(experiment) {
+
+	let condition_name = experiment.condition_name;
+	let experiment_name = experiment.constructor.name;
+	let subconditions = EXPERIMENT_CONDITIONS[experiment_name][condition_name];
+
+	// Using the first 12 subconditions from the JND design:
+	if (experiment_name === &quot;JND&quot;){
+		let jnd_base_subconditions = EXPERIMENT_BASES[&quot;JND&quot;][&quot;design&quot;].slice(1,13);
+
+		let dataset = create_condition_dataset(jnd_base_subconditions, subconditions);
+
+		return dataset;
+	} else {
+		let stevens_base_subconditions = EXPERIMENT_BASES[&quot;Stevens&quot;][&quot;design&quot;].slice(1,5);
+
+		let dataset = create_condition_dataset(stevens_base_subconditions, subconditions);
+
+		return dataset;
+	}
+}
+
+/**
+ * Generates subconditions for any Estimation condition.
+ *
+ * @param   {object}   experiment
+ */
+function generate_estimation_subconditions(experiment){
+
+	const TRIALS_PER_ROUND = 4;
+	const MAX_STEP_SIZE = 0.05;
+	const FILL_COLOR = &apos;#0000FF&apos;;
+	const OUTLINE_COLOR = &apos;#0000FF&apos;;
+	const MATCH_SIZES = {
+    &quot;2&quot;: {
+        min_size: 1.2,
+        max_size: 3
+    },
+    &quot;4&quot;: {
+        min_size: 3.1,
+        max_size: 5.3
+    },
+    &quot;6&quot;: {
+        min_size: 5.0,
+        max_size: 6.5
+    }
+	};
+
+
+	let condition = experiment.condition_name;
+    let result = [];
+    let curr_cond = EXPERIMENT_BASES[&quot;Estimation&quot;][condition];
+    let ref_shapes = curr_cond.ref_shapes;
+    let mod_shapes = curr_cond.mod_shapes;
+    ref_shapes.types.forEach((ref_shape, index)=&gt;{
+        ref_shapes.sizes.forEach((size)=&gt;{
+            let condition = {};
+            condition.ref_shape = ref_shape;
+            condition.ref_size = size;
+            condition.ref_rotate_by = ref_shapes.rotate_by[index];
+            condition.ref_fill = ref_shapes.fill;
+            condition.ref_outline = ref_shapes.outline;
+            condition.max_step_size = MAX_STEP_SIZE;
+            condition.trials_per_round = TRIALS_PER_ROUND;
+            mod_shapes.types[index].forEach((mod_shape)=&gt;{
+                mod_shapes.rotate_by[index].forEach((angle)=&gt;{
+                    let curr_sub_cond = {};
+                    Object.assign(curr_sub_cond, condition);
+                    curr_sub_cond.mod_shape = mod_shape;
+                    curr_sub_cond.mod_min_size = MATCH_SIZES[size.toString()].min_size;
+                    curr_sub_cond.mod_max_size = MATCH_SIZES[size.toString()].min_size;
+                    curr_sub_cond.mod_rotate_by = angle;
+                    curr_sub_cond.mod_fill = mod_shapes.fill;
+                    curr_sub_cond.mod_outline = mod_shapes.outline;
+                    curr_sub_cond.width_height_ratio = mod_shapes.width_height_ratio;
+                    result.push(curr_sub_cond);
+                });
+            });
+        });
+    });
+    console.log(JSON.stringify(result));
+    return result;
+};
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

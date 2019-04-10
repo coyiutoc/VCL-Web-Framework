@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">scripts/routing/conditions.js | huh</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="huh"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/coyiutoc/VCL_Correlation_POC"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-balancing">experiment-properties/balancing</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_latin_square">initialize_latin_square</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_random_order">initialize_random_order</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-data">experiment-properties/data</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get_subconditions">get_subconditions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_condition_dataset">create_condition_dataset</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get_data">get_data</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get_data_subset">get_data_subset</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CUSTOM_TRIAL_STRUCTURE_CONDITIONS">CUSTOM_TRIAL_STRUCTURE_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-EXPERIMENT_BASES">EXPERIMENT_BASES</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-EXPERIMENT_CONDITIONS">EXPERIMENT_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-data-constants">experiment-properties/data/constants</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ESTIMATION_BASE">ESTIMATION_BASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-JND_BASE">JND_BASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-JND_CONDITIONS">JND_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-JND_RADIUS_BASE">JND_RADIUS_BASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-JND_RADIUS_CONDITIONS">JND_RADIUS_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-STEVENS_BASE">STEVENS_BASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-STEVENS_CONDITIONS">STEVENS_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing">experiment-properties/graphing</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-is_custom_plot">is_custom_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_custom_plot">prepare_custom_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_distributions">plot_distributions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-base-plots">experiment-properties/graphing/d3-base-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_ring_plot">create_ring_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_scatter_plot">create_scatter_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_scatter_points">plot_scatter_points</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_shape_plot">create_shape_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_strip_plot">create_strip_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_distractor_scatter_plot">prepare_distractor_scatter_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-estimation">experiments/estimation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html">Estimation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-estimation_exp">estimation_exp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd">experiments/jnd</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd/jnd.js~JND.html">JND</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-jnd_exp">jnd_exp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd-radius">experiments/jnd_radius</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd_radius/jnd_radius.js~JND_Radius.html">JND_Radius</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-jnd_radius_exp">jnd_radius_exp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-stevens">experiments/stevens</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/stevens/stevens.js~Stevens.html">Stevens</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-stevens_exp">stevens_exp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#helpers">helpers</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-force_greater_right_position">force_greater_right_position</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomize_position">randomize_position</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomize_radius_position">randomize_radius_position</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">scripts/routing/conditions.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">var CONDITIONS = {
+
+	base: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;, &quot;strip&quot;],
+		trial_structure: &quot;foundational&quot;,
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Base&quot;,
+		display_info: {
+			description: &quot;The standard foundational base condition with no additional manipulation on how the gaussian distributions are displayed or generated.&quot;,
+			researcher: &quot;Everyone&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	strip_ring_size: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;ring&quot;],
+		trial_structure: [&quot;foundational&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Strip Ring Size&quot;,
+		display_info: {
+			description: &quot;Ring visualizations where for a given distribution, the x coordinate is the horizontal translation and the y coordinate is the ring radius.&quot;,
+			researcher: &quot;Main Correlation Team&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	line_length_strip: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;strip&quot;],
+		trial_structure: [&quot;foundational&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Line Length Strip&quot;,
+		display_info: {
+			description: &quot;Strip visualizations where for a given distribution, the x coordinate is the horizontal translation and the y coordinate is the strip height.&quot;,
+			researcher: &quot;Main Correlation Team&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_rainbow: {
+		experiment: [&quot;jnd&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Rainbow&quot;,
+		display_info: {
+			description: &quot;2-distributions presented on each graph, one the target and one the distractor population. &quot; + 
+						 &quot;Target and distractor population colors will vary. Distractor population correlation always set to 0.3.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_multi: {
+		experiment: [&quot;jnd&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;custom&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Multi-Phase (Task 1)&quot;,
+		display_info: {
+			description: &quot;Task one of &apos;Multi-Phase&apos; experiments. 2-distributions presented on each graph, one the target and on the distractor population. &quot; +
+						 &quot;Target and distractor population colors will vary. Distractor population correlation always set to 0.2. Draws from the first 12 &quot; +
+						 &quot;subconditions of Design for base values.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_square_red_hue: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Square Red Hue&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (square shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_diamond_square_red_hue: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Diamond Square Red Hue&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Diamond-Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (diamond shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_square_red_lum: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Square Red Lum&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (square shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_diamond_square_red_lum: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Diamond Square Red Lum&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Diamond-Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (diamond shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_square_red_chrom: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Square Red Chrom&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (square shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_diamond_square_red_chrom: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Diamond Square Red Chrom&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Diamond-Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (diamond shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_square_yellow_hue: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Square Yellow Hue&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (square shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_diamond_square_yellow_hue: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Diamond Square Yellow Hue&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Diamond-Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (diamond shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_square_yellow_lum: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Square Yellow Lum&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (square shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_diamond_square_yellow_lum: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Diamond Square Yellow Lum&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Diamond-Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (diamond shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_square_yellow_chrom: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Square Yellow Chrom&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (square shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_diamond_square_yellow_chrom: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Diamond Square Yellow Chrom&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Diamond-Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (diamond shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_square_blue_hue: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Square Blue Hue&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (square shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_diamond_square_blue_hue: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: [&quot;latin_square&quot;],
+		display_name: &quot;Distractor Diamond Square Blue Hue&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Diamond-Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (diamond shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_square_blue_lum: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Square Blue Lum&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (square shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_diamond_square_blue_lum: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Diamond Square Blue Lum&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Diamond-Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (diamond shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_square_blue_chrom: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Square Blue Chrom&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (square shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_diamond_square_blue_chrom: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Diamond Square Blue Chrom&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Diamond-Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (diamond shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_square_green_hue: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Square Green Hue&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (square shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_diamond_square_green_hue: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Diamond Square Green Hue&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Diamond-Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (diamond shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_square_green_lum: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Square Green Lum Hue&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (square shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_diamond_square_green_lum: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Diamond Square Green Lum Hue&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Diamond-Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (diamond shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_square_green_chrom: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Square Green Chrom&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (square shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_diamond_square_green_chrom: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Diamond Square Green Chrom&quot;,
+		display_info: {
+			description: &quot;Part of the series of Distractor Diamond-Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, &quot; +
+			    		 &quot;Chromaticity and Luminance axes. 2-distributions presented on each graph, one the target (square shaped) and one &quot; +
+			    		 &quot;the distractor (diamond shaped). Distractor population correlation always set to 0.2.&quot;,
+			researcher: &quot;Madison Elliott&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	circle_square: {
+		experiment: [&quot;jnd_radius&quot;],
+		graph_type: [&quot;shapes&quot;],
+		trial_structure: [&quot;foundational&quot;],
+		balancing: &quot;random&quot;,
+		display_name: &quot;Circle, Square&quot;,
+		display_info: {
+			description: &quot;Manipulation on the size of various shape combinations. Responses are based on the user&apos;s ability to &quot; +
+						 &quot;disciminate shape with the greater area.&quot;,
+			researcher: &quot;Tina Qi&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	circle_triangle: {
+		experiment: [&quot;jnd_radius&quot;],
+		graph_type: [&quot;shapes&quot;],
+		trial_structure: [&quot;foundational&quot;],
+		balancing: &quot;random&quot;,
+		display_name: &quot;Circle, Triangle&quot;,
+		display_info: {
+			description: &quot;Manipulation on the size of various shape combinations. Responses are based on the user&apos;s ability to &quot; +
+						 &quot;disciminate shape with the greater area.&quot;,
+			researcher: &quot;Tina Qi&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	square_triangle: {
+		experiment: [&quot;jnd_radius&quot;],
+		graph_type: [&quot;shapes&quot;],
+		trial_structure: [&quot;foundational&quot;],
+		balancing: &quot;random&quot;,
+		display_name: &quot;Square, Triangle&quot;,
+		display_info: {
+			description: &quot;Manipulation on the size of various shape combinations. Responses are based on the user&apos;s ability to &quot; +
+						 &quot;disciminate shape with the greater area.&quot;,
+			researcher: &quot;Tina Qi&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	rotSquare_rotTriangle: {
+		experiment: [&quot;jnd_radius&quot;],
+		graph_type: [&quot;shapes&quot;],
+		trial_structure: [&quot;foundational&quot;],
+		balancing: &quot;random&quot;,
+		display_name: &quot;Rotated Square, Rotated Triangle&quot;,
+		display_info: {
+			description: &quot;Manipulation on the size of various shape combinations. Responses are based on the user&apos;s ability to &quot; +
+						 &quot;disciminate shape with the greater area.&quot;,
+			researcher: &quot;Tina Qi&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	slice0_triangle: {
+		experiment: [&quot;jnd_radius&quot;],
+		graph_type: [&quot;shapes&quot;],
+		trial_structure: [&quot;foundational&quot;],
+		balancing: &quot;random&quot;,
+		display_name: &quot;Slice 0-Degrees, Triangle&quot;,
+		display_info: {
+			description: &quot;Manipulation on the size of various shape combinations. Responses are based on the user&apos;s ability to &quot; +
+						 &quot;disciminate shape with the greater area.&quot;,
+			researcher: &quot;Tina Qi&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	slice45_triangle: {
+		experiment: [&quot;jnd_radius&quot;],
+		graph_type: [&quot;shapes&quot;],
+		trial_structure: [&quot;foundational&quot;],
+		balancing: &quot;random&quot;,
+		display_name: &quot;Slice 45-Degrees, Triangle&quot;,
+		display_info: {
+			description: &quot;Manipulation on the size of various shape combinations. Responses are based on the user&apos;s ability to &quot; +
+						 &quot;disciminate shape with the greater area.&quot;,
+			researcher: &quot;Tina Qi&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	slice90_triangle: {
+		experiment: [&quot;jnd_radius&quot;],
+		graph_type: [&quot;shapes&quot;],
+		trial_structure: [&quot;foundational&quot;],
+		balancing: &quot;random&quot;,
+		display_name: &quot;Slice 90-Degrees, Triangle&quot;,
+		display_info: {
+			description: &quot;Manipulation on the size of various shape combinations. Responses are based on the user&apos;s ability to &quot; +
+						 &quot;disciminate shape with the greater area.&quot;,
+			researcher: &quot;Tina Qi&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	shape_estimation: {
+		experiment: [&quot;estimation&quot;],
+		graph_type: [&quot;shapes&quot;],
+		trial_structure: [&quot;estimation&quot;],
+		balancing: &quot;random&quot;,
+		display_name: &quot;Circle, Square, Triangle&quot;
+	},
+
+	line_length: {
+		experiment: [&quot;estimation&quot;],
+		graph_type: [&quot;shapes&quot;],
+		trial_structure: [&quot;estimation&quot;],
+		balancing: &quot;random&quot;,
+		display_name: &quot;Line Length&quot;
+	},
+
+	rectangle_square: {
+		experiment: [&quot;estimation&quot;],
+		graph_type: [&quot;shapes&quot;],
+		trial_structure: [&quot;estimation&quot;],
+		balancing: &quot;random&quot;,
+		display_name: &quot;Rectangle, Square&quot;
+	},
+
+	triangle: {
+		experiment: [&quot;estimation&quot;],
+		graph_type: [&quot;shapes&quot;],
+		trial_structure: [&quot;estimation&quot;],
+		balancing: &quot;random&quot;,
+		display_name: &quot;Triangle&quot;
+	},
+
+	rectangle_rotated_square_solid: {
+		experiment: [&quot;estimation&quot;],
+		graph_type: [&quot;shapes&quot;],
+		trial_structure: [&quot;estimation&quot;],
+		balancing: &quot;random&quot;,
+		display_name: &quot;Rectangle Rotated Square Solid&quot;
+	},
+
+	rectangle_rotated_square_outline: {
+		experiment: [&quot;estimation&quot;],
+		graph_type: [&quot;shapes&quot;],
+		trial_structure: [&quot;estimation&quot;],
+		balancing: &quot;random&quot;,
+		display_name: &quot;Rectangle Rotated Square Outline&quot;
+	},
+
+	distractor_blue_shades: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;custom&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Blue Shades&quot;,
+		display_info: {
+			description: &quot;Part of series of Distractor Shade experiments for Blue/Red/Yellow. 2-distributions are presented on each graph, one the target and one the distractor population. &quot; + 
+						 &quot;Target is always #699938 (green) and distractor population colors will vary across a Blue, Red or Green for a given condition. &quot; + 
+						 &quot;Distractor population correlation always set to 0.3. Draws on the first 12 subconditions of Design for base values.&quot;,
+			researcher: &quot;Tina Qi&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_red_shades: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;custom&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Red Shades&quot;,
+		display_info: {
+			description: &quot;Part of series of Distractor Shade experiments for Blue/Red/Yellow. 2-distributions are presented on each graph, one the target and one the distractor population. &quot; + 
+						 &quot;Target is always #699938 (green) and distractor population colors will vary across a Blue, Red or Green for a given condition. &quot; + 
+						 &quot;Distractor population correlation always set to 0.3. Draws on the first 12 subconditions of Design for base values.&quot;,
+			researcher: &quot;Tina Qi&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_yellow_shades: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;custom&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Yellow Shades&quot;,
+		display_info: {
+			description: &quot;Part of series of Distractor Shade experiments for Blue/Red/Yellow. 2-distributions are presented on each graph, one the target and one the distractor population. &quot; + 
+						 &quot;Target is always #699938 (green) and distractor population colors will vary across a Blue, Red or Green for a given condition. &quot; + 
+						 &quot;Distractor population correlation always set to 0.3. Draws on the first 12 subconditions of Design for base values.&quot;,
+			researcher: &quot;Tina Qi&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_control_shades: {
+		experiment: [&quot;jnd&quot;, &quot;stevens&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;custom&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Control Shades&quot;,
+		display_info: {
+			description: &quot;Part of series of Distractor Shade experiments for Blue/Red/Yellow. No distractor population for these presentations, only &quot; + 
+						 &quot;the target population with color #699938 (green). Draws on the first 12 subconditions of Design for base values.&quot;,
+			researcher: &quot;Tina Qi&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+};
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
