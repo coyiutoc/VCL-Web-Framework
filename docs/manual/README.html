@@ -2,14 +2,14 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <base data-ice="baseUrl" href="./">
+  <base data-ice="baseUrl" href="../">
   <title data-ice="title">Manual | huh</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
 <meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="huh"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
-<body class="layout-container manual-root manual-index" data-ice="rootContainer">
+<body class="layout-container manual-root" data-ice="rootContainer">
 
 <header>
   <a href="./">Home</a>
@@ -47,8 +47,7 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div class="github-markdown">
-  <div class="manual-user-index" data-ice="manualUserIndex"><h1 id="vcl-web-framework">VCL Web Framework</h1><p>This is a Node.js application that will serve as the modernization of the original VCL Java Framework.</p>
+<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="vcl-web-framework">VCL Web Framework</h1><p>This is a Node.js application that will serve as the modernization of the original VCL Java Framework.</p>
 <h2 id="set-up">Set Up</h2><h4 id="-1--git-clone-the-repository">(1) Git clone the repository</h4><h4 id="-2--install-node">(2) Install Node</h4><p>Visit the following link to download Node: <a href="https://nodejs.org/en/">here.</a></p>
 <h4 id="-3--install-dependencies">(3) Install Dependencies</h4><p>Navigate into the folder:</p>
 <pre><code><code class="source-code prettyprint">cd VCL-Web-Framework</code>
@@ -57,7 +56,7 @@
 </code></pre><h4 id="-4--run-the-application">(4) Run the Application</h4><pre><code><code class="source-code prettyprint">node app.js</code>
 </code></pre><p>Or alternatively, with nodemon:</p>
 <pre><code><code class="source-code prettyprint">nodemon app.js</code>
-</code></pre><p>The app is available at <a href="localhost:8080">localhost:8080</a>. If you want to access it at a different port, change the port number in app.js (line 57).</p>
+</code></pre><p>The app is available at <a href="./manual/localhost:8080">localhost:8080</a>. If you want to access it at a different port, change the port number in app.js (line 57).</p>
 <h2 id="supported-experiments">Supported Experiments</h2><h3 id="jnd">JND</h3><table>
 <thead>
 <tr>
@@ -269,229 +268,6 @@
 </tbody>
 </table>
 <p>1/2/2019 - Madison&apos;s Visual Search + Numerosity experiments from December 2018 can be found <a href="https://github.com/Wongelawit/Correlation_MultipleEnsemble/tree/Numerosity-Task">here.</a></p>
-</div>
-
-  
-
-  <div class="manual-cards">
-    
-  <div class="manual-card-wrap" data-ice="cards">
-      <div class="manual-card">
-        <div data-ice="card"><h1>VCL Web Framework</h1><p>This is a Node.js application that will serve as the modernization of the original VCL Java Framework.</p><h2>Set Up</h2><h4>(1) Git clone the repository</h4><h4>(2) Install Node</h4><p>Visit the following link to download Node: <a href="https://nodejs.org/en/">here.</a></p><h4>(3) Install Dependencies</h4><p>Navigate into the folder:</p><pre><code><code class="source-code prettyprint">cd VCL-Web-Framework</code>
-</code></pre><p>Then run:</p><pre><code><code class="source-code prettyprint">npm install</code>
-</code></pre><h4>(4) Run the Application</h4><pre><code><code class="source-code prettyprint">node app.js</code>
-</code></pre><p>Or alternatively, with nodemon:</p><pre><code><code class="source-code prettyprint">nodemon app.js</code>
-</code></pre><p>The app is available at <a href="./manual/localhost:8080">localhost:8080</a>. If you want to access it at a different port, change the port number in app.js (line 57).</p><h2>Supported Experiments</h2><h3>JND</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Trial Type</th>
-<th>Graph Type(s)</th>
-<th>Balancing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Base</td>
-<td>Foundational</td>
-<td>Scatter, Strip</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Strip Ring Size</td>
-<td>Foundational</td>
-<td>Ring</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Line Length Strip</td>
-<td>Foundational</td>
-<td>Strip</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Rainbow</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Square Red/Blue/Green/Yellow Hue/Lum/Chro</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Square Diamond Red/Blue/Green/Yellow Hue/Lum/Chro</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Multi-Phase [Task 1]</td>
-<td>Custom</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Blue/Red/Yellow/Control Shades</td>
-<td>Custom</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-</tbody>
-</table><h3>JND Radius</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Trial Type</th>
-<th>Graph Type(s)</th>
-<th>Balancing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Circle, Square</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Circle, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Square, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>RotatedSquare, RotatedTriangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Slice, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Slice-45, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Slice-90, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-</tbody>
-</table><h3>Stevens</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Trial Type</th>
-<th>Graph Type(s)</th>
-<th>Balancing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Base</td>
-<td>Foundational</td>
-<td>Scatter, Strip</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Strip Ring Size</td>
-<td>Foundational</td>
-<td>Ring</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Line Length Strip</td>
-<td>Foundational</td>
-<td>Strip</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Square Red/Blue/Green/Yellow Hue/Lum/Chro</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Square Diamond Red/Blue/Green/Yellow Hue/Lum/Chro</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Blue/Red/Yellow/Control Shades</td>
-<td>Custom</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-</tbody>
-</table><h3>Estimation</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Trial Type</th>
-<th>Graph Type(s)</th>
-<th>Balancing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Shape: Circle, Square, Triangle</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Line Length</td>
-<td>Estimation</td>
-<td>Line</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Shape: Rectangle, Square</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Shape: Rectangle, Rotated Square (Solid)</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Shape: Rectangle, Rotated Square (Outline)</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Shape: Triangle</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-</tbody>
-</table><p>1/2/2019 - Madison&apos;s Visual Search + Numerosity experiments from December 2018 can be found <a href="https://github.com/Wongelawit/Correlation_MultipleEnsemble/tree/Numerosity-Task">here.</a></p></div>
-        <a data-ice="link" href="manual/README.html"></a>
-      </div>
-    </div>
-</div>
 </div>
 </div>
 
