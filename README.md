@@ -14,6 +14,7 @@ Currently supported experiments:
 | Distractor Rainbow             				   			    | Design          | Scatter         | Latin Square    |
 | Distractor Square Red/Blue/Green/Yellow Hue/Lum/Chro          | Design          | Scatter         | Latin Square    |
 | Distractor Square Diamond Red/Blue/Green/Yellow Hue/Lum/Chro  | Design          | Scatter         | Latin Square    |
+| Distractor Ratio Pilot           		                        | Design          | Scatter         | Latin Square    |
 | Multi-Phase [Task 1]           				                | Custom          | Scatter         | Latin Square    |
 | Distractor Blue/Red/Yellow/Control Shades           		    | Custom          | Scatter         | Latin Square    |
 

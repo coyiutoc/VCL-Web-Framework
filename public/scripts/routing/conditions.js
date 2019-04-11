@@ -633,4 +633,20 @@ var CONDITIONS = {
 		}
 	},
 
+	distractor_ratio_pilot: {
+		experiment: ["jnd"],
+		graph_type: ["scatter"],
+		trial_structure: ["design"],
+		balancing: "latin_square",
+		display_name: "Distractor Ratio Pilot",
+		display_info: {
+			description: "Pilot for Correlation Discrimination trials of the Numerosity Discrimination experiment. Varying target:distractor numbers with " +
+						 "ratios 1:1, 1:5, and 3:1, which are counterbalanced (except for 1:1) for target and distractor. Max number of points for a given population is 150. Each combination then must be presented with target " +
+						 "correlation values of 0.3, 0.6, and 0.9. Total number of subconditions = 5 (ratios) x " +
+						 "3 (target correlation values) = 15 subconditions. Set target color = blue (#007ebc) and dist color = yellow (#dbc667).",
+			researcher: "Madison Elliott",
+			developer: "Caitlin Coyiuto"
+		}
+	},
+
 };
