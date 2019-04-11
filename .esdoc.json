@@ -1,0 +1,17 @@
+{
+  "source": "./public/scripts",
+  "destination": "./docs",
+  "plugins": [
+  {
+    "name": "esdoc-standard-plugin",
+    "option": {
+      "manual": {
+        "index": "README.md",
+		    "globalIndex": true,
+        "files": [
+          "README.md"
+      	]
+      }
+    }
+  }]
+}

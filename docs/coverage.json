@@ -1,0 +1,362 @@
+{
+  "coverage": "32%",
+  "expectCount": 300,
+  "actualCount": 96,
+  "files": {
+    "scripts/experiment-properties/balancing/latin_square_generator.js": {
+      "expectCount": 4,
+      "actualCount": 1,
+      "undocumentLines": [
+        36,
+        41,
+        52
+      ]
+    },
+    "scripts/experiment-properties/balancing/random_generator.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        3
+      ]
+    },
+    "scripts/experiment-properties/data/constants/estimation_data.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        4,
+        5,
+        6,
+        8
+      ]
+    },
+    "scripts/experiment-properties/data/constants/jnd_data.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        76
+      ]
+    },
+    "scripts/experiment-properties/data/constants/jnd_radius_data.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        19
+      ]
+    },
+    "scripts/experiment-properties/data/constants/stevens_data.js": {
+      "expectCount": 2,
+      "actualCount": 0,
+      "undocumentLines": [
+        3,
+        52
+      ]
+    },
+    "scripts/experiment-properties/data/custom_subcondition_generator.js": {
+      "expectCount": 7,
+      "actualCount": 5,
+      "undocumentLines": [
+        4,
+        42
+      ]
+    },
+    "scripts/experiment-properties/data/data_controller.js": {
+      "expectCount": 5,
+      "actualCount": 3,
+      "undocumentLines": [
+        13,
+        20
+      ]
+    },
+    "scripts/experiment-properties/distribution/gaussian_distribution_generator.js": {
+      "expectCount": 16,
+      "actualCount": 2,
+      "undocumentLines": [
+        1,
+        3,
+        83,
+        102,
+        126,
+        177,
+        181,
+        189,
+        193,
+        209,
+        217,
+        226,
+        273,
+        280
+      ]
+    },
+    "scripts/experiment-properties/graphing/custom_graphing_controller.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    },
+    "scripts/experiment-properties/graphing/d3-base-plots/ring_plot.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js": {
+      "expectCount": 4,
+      "actualCount": 2,
+      "undocumentLines": [
+        3,
+        4
+      ]
+    },
+    "scripts/experiment-properties/graphing/d3-base-plots/shape_plot.js": {
+      "expectCount": 7,
+      "actualCount": 7,
+      "undocumentLines": []
+    },
+    "scripts/experiment-properties/graphing/d3-base-plots/strip_plot.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "scripts/experiment-properties/graphing/d3-custom-plots/distractor_scatter_plot.js": {
+      "expectCount": 4,
+      "actualCount": 1,
+      "undocumentLines": [
+        4,
+        5,
+        7
+      ]
+    },
+    "scripts/experiment-properties/graphing/graphing_controller.js": {
+      "expectCount": 5,
+      "actualCount": 5,
+      "undocumentLines": []
+    },
+    "scripts/experiments/estimation/estimation.js": {
+      "expectCount": 53,
+      "actualCount": 20,
+      "undocumentLines": [
+        7,
+        24,
+        28,
+        29,
+        33,
+        38,
+        40,
+        41,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        54,
+        62,
+        65,
+        66,
+        67,
+        68,
+        75,
+        80,
+        81,
+        82,
+        90,
+        92,
+        98,
+        101,
+        102,
+        104,
+        118,
+        151,
+        746
+      ]
+    },
+    "scripts/experiments/estimation/estimation_timeline.js": {
+      "expectCount": 15,
+      "actualCount": 0,
+      "undocumentLines": [
+        2,
+        4,
+        5,
+        10,
+        113,
+        119,
+        131,
+        132,
+        176,
+        187,
+        200,
+        206,
+        216,
+        217,
+        232
+      ]
+    },
+    "scripts/experiments/jnd/jnd.js": {
+      "expectCount": 41,
+      "actualCount": 13,
+      "undocumentLines": [
+        10,
+        24,
+        25,
+        27,
+        28,
+        36,
+        42,
+        48,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        72,
+        76,
+        83,
+        84,
+        85,
+        88,
+        94,
+        117,
+        138,
+        139,
+        161,
+        162
+      ]
+    },
+    "scripts/experiments/jnd/jnd_timeline.js": {
+      "expectCount": 15,
+      "actualCount": 0,
+      "undocumentLines": [
+        2,
+        4,
+        5,
+        10,
+        151,
+        157,
+        169,
+        201,
+        203,
+        240,
+        250,
+        256,
+        265,
+        267,
+        309
+      ]
+    },
+    "scripts/experiments/jnd_radius/jnd_radius.js": {
+      "expectCount": 37,
+      "actualCount": 12,
+      "undocumentLines": [
+        10,
+        25,
+        26,
+        27,
+        35,
+        41,
+        47,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        72,
+        76,
+        83,
+        84,
+        87,
+        93,
+        115,
+        132,
+        133
+      ]
+    },
+    "scripts/experiments/jnd_radius/jnd_radius_timeline.js": {
+      "expectCount": 10,
+      "actualCount": 0,
+      "undocumentLines": [
+        2,
+        4,
+        5,
+        17,
+        19,
+        34,
+        64,
+        96,
+        98,
+        140
+      ]
+    },
+    "scripts/experiments/stevens/stevens.js": {
+      "expectCount": 43,
+      "actualCount": 19,
+      "undocumentLines": [
+        10,
+        24,
+        25,
+        27,
+        28,
+        36,
+        42,
+        48,
+        54,
+        63,
+        69,
+        70,
+        71,
+        77,
+        83,
+        84,
+        85,
+        86,
+        89,
+        95,
+        145,
+        170,
+        171,
+        172
+      ]
+    },
+    "scripts/experiments/stevens/stevens_timeline.js": {
+      "expectCount": 14,
+      "actualCount": 0,
+      "undocumentLines": [
+        2,
+        4,
+        5,
+        10,
+        110,
+        116,
+        128,
+        130,
+        185,
+        201,
+        207,
+        217,
+        219,
+        265
+      ]
+    },
+    "scripts/helpers/experiment_helpers.js": {
+      "expectCount": 3,
+      "actualCount": 2,
+      "undocumentLines": [
+        39
+      ]
+    },
+    "scripts/routing/conditions.js": {
+      "expectCount": 1,
+      "actualCount": 0,
+      "undocumentLines": [
+        1
+      ]
+    }
+  }
+}

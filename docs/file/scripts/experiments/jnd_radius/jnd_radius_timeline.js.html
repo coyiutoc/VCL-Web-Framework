@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../">
+  <title data-ice="title">scripts/experiments/jnd_radius/jnd_radius_timeline.js | huh</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="huh"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/coyiutoc/VCL_Correlation_POC"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-balancing">experiment-properties/balancing</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_latin_square">initialize_latin_square</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_random_order">initialize_random_order</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-data">experiment-properties/data</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get_subconditions">get_subconditions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_condition_dataset">create_condition_dataset</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get_data">get_data</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get_data_subset">get_data_subset</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CUSTOM_TRIAL_STRUCTURE_CONDITIONS">CUSTOM_TRIAL_STRUCTURE_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-EXPERIMENT_BASES">EXPERIMENT_BASES</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-EXPERIMENT_CONDITIONS">EXPERIMENT_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-data-constants">experiment-properties/data/constants</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ESTIMATION_BASE">ESTIMATION_BASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-JND_BASE">JND_BASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-JND_CONDITIONS">JND_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-JND_RADIUS_BASE">JND_RADIUS_BASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-JND_RADIUS_CONDITIONS">JND_RADIUS_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-STEVENS_BASE">STEVENS_BASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-STEVENS_CONDITIONS">STEVENS_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing">experiment-properties/graphing</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-is_custom_plot">is_custom_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_custom_plot">prepare_custom_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_distributions">plot_distributions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-base-plots">experiment-properties/graphing/d3-base-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_ring_plot">create_ring_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_scatter_plot">create_scatter_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_scatter_points">plot_scatter_points</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_shape_plot">create_shape_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_strip_plot">create_strip_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_distractor_scatter_plot">prepare_distractor_scatter_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-estimation">experiments/estimation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html">Estimation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-estimation_exp">estimation_exp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd">experiments/jnd</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd/jnd.js~JND.html">JND</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-jnd_exp">jnd_exp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd-radius">experiments/jnd_radius</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd_radius/jnd_radius.js~JND_Radius.html">JND_Radius</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-jnd_radius_exp">jnd_radius_exp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-stevens">experiments/stevens</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/stevens/stevens.js~Stevens.html">Stevens</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-stevens_exp">stevens_exp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#helpers">helpers</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-force_greater_right_position">force_greater_right_position</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomize_position">randomize_position</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomize_radius_position">randomize_radius_position</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">scripts/experiments/jnd_radius/jnd_radius_timeline.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import JND_Radius from &quot;/scripts/experiments/jnd_radius/jnd_radius.js&quot;;
+export var jnd_radius_exp = new JND_Radius(params);
+
+var timeline = [];
+var address = location.protocol + &quot;//&quot; + location.hostname + &quot;:&quot; + location.port; 
+
+// Firefox check for formatting
+if (typeof InstallTrigger !== &apos;undefined&apos;) {
+  var isFirefox = true;
+} else {
+  var isFirefox = false;
+}
+
+// =========================================================
+// WELCOME TRIAL BLOCK
+
+let shape_names = jnd_radius_exp.condition_name.split(&quot;_&quot;);
+
+var welcome = {
+  type: &apos;html-keyboard-response&apos;,
+  stimulus: `&lt;div align = &quot;center&quot; style=&quot;margin-top: ${isFirefox ? &quot;25vh&quot; : &quot;0&quot;}&quot;&gt;` + `&lt;img src=&quot;${address}/img/VCL_lab_logo.png&quot;&gt;&lt;/img&gt;&lt;br&gt;&lt;br&gt;` +
+            `&lt;b&gt;Base:&lt;/b&gt; ${jnd_radius_exp.constructor.name}` + &apos;&lt;br&gt;&apos; + 
+            `&lt;b&gt;Trial Type:&lt;/b&gt; ${jnd_radius_exp.trial_structure}` + &apos;&lt;br&gt;&apos; + 
+            `&lt;b&gt;Condition:&lt;/b&gt; ${shape_names[0]}, ${shape_names[1]}` + 
+            &apos;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;p&gt;&lt;font size = 15&gt;Press any key to begin.&lt;p&gt;&lt;/font&gt;&apos; +
+            &apos;&lt;/div&gt;&apos;,
+  data: {type: &apos;instruction&apos;}
+};
+timeline.push(welcome);
+
+// =========================================================
+// INSTRUCTION TRIAL BLOCKS
+
+var instructions = {
+  type: &quot;html-keyboard-response&quot;,
+  stimulus:       
+      `
+      &lt;div align = &apos;center&apos; style = &apos;margin-top: ${isFirefox ? &quot;35vh&quot; : &quot;0&quot;}; height: 35vh; display: block&apos;&gt;
+        &lt;p&gt;In this experiment, two shapes will appear side-by-side.
+        &lt;br&gt;
+        Indicate which graph is has a &lt;b&gt;greater area&lt;/b&gt; by pressing the Z or M key. &lt;/p&gt;&lt;p&gt;
+        &lt;div style=&apos;height: auto;&apos;&gt;
+          &lt;div style=&apos;float: left;&apos;&gt;
+            &lt;img src=&quot;${address}/img/sample_${shape_names[0]}.png&quot;&gt;&lt;/img&gt; 
+            &lt;p class=&apos;small&apos;&gt;&lt;strong&gt;Press the Z key&lt;/strong&gt;&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;div style=&apos;float: right;&apos;&gt;
+            &lt;img src=&quot;${address}/img/sample_${shape_names[1]}.png&quot;&gt;&lt;/img&gt;
+            &lt;p class=&apos;small&apos;&gt;&lt;strong&gt;Press the M key&lt;/strong&gt;&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;  
+      &lt;br&gt;
+      &lt;div style=&apos;text-align: center; display: block&apos;&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;&lt;p&gt;Press any key to continue.&lt;/div&gt;
+      ` 
+};
+
+timeline.push(instructions);
+
+// =========================================================
+// FEEDBACK
+
+var feedback = {
+  type: &apos;html-keyboard-response&apos;,
+  choices: jsPsych.NO_KEYS, //No responses will be accepted as a valid response.
+  trial_duration: 500,
+  data: {type: &apos;feedback&apos;},
+  stimulus: function(){
+
+    document.body.style.backgroundColor = jnd_radius_exp.trial_data.feedback_background_color;
+
+    var last_trial = JSON.parse(jsPsych.data.getLastTrialData().json());
+    var last_trial_correct = last_trial[0][&quot;correct&quot;];
+
+    // For debugging purposes:
+    if (last_trial_correct == -1){
+      return &apos;&lt;p&gt;&apos; + 
+             `&lt;div style = &quot;margin-top: ${isFirefox ? &quot;45vh&quot; : &quot;0&quot;};&quot;&gt;&lt;font style=&quot;font-size:50px; color:blue&quot;&gt;Exiting from experiment.&lt;p&gt;&lt;/font&gt;&lt;/div&gt;`
+    }
+
+    else if (last_trial_correct){
+      return `&lt;p&gt;&lt;div style = &quot;margin-top: ${isFirefox ? &quot;45vh&quot; : &quot;0&quot;};&quot;&gt;&lt;i class=&quot;fa fa-check-circle&quot; style=&quot;font-size:50px; color:green; margin-right: 10px;&quot;&gt;&lt;/i&gt;` + 
+             &apos;&lt;font style=&quot;font-size:50px; color:green&quot;&gt;Correct!&lt;p&gt;&lt;/font&gt;&lt;/div&gt;&apos;
+    }
+    else{
+      return `&lt;p&gt;&lt;div style = &quot;margin-top: ${isFirefox ? &quot;45vh&quot; : &quot;0&quot;};&quot;&gt;&lt;i class=&quot;fa fa-close&quot; style=&quot;font-size:50px; color:red; margin-right: 10px;&quot;&gt;&lt;/i&gt;` + 
+             &apos;&lt;font style=&quot;font-size:50px; color:red;&quot;&quot;&gt;Incorrect!&lt;p&gt;&lt;/font&gt;&lt;/div&gt;&apos;
+    }
+  }
+};
+
+// =========================================================
+// EXPERIMENT TRIAL BLOCKS
+
+var trial = jnd_radius_exp.generate_trial(&quot;test&quot;);
+
+var experiment = {
+  timeline: [trial, feedback], // We use same feedback block as that used in practice 
+  loop_function: function(data){ // Return true if timeline should continue
+                                 // Return false if timeline should end
+
+    // For debugging, if you want to exit out of experiment, press q:
+    if (jsPsych.pluginAPI.convertKeyCharacterToKeyCode(&apos;q&apos;) == data.values()[0].key_press){
+      return false;
+    }
+
+    // If subcondition should end:
+    if(jnd_radius_exp.end_sub_condition()){
+      jnd_radius_exp.first_trial_of_sub_condition = true;
+      // If there are still more subconditions, increment current index
+      if (jnd_radius_exp.current_sub_condition_index &lt; (jnd_radius_exp.sub_conditions_constants.length-1)){
+        jnd_radius_exp.current_sub_condition_index++; 
+        console.log(&quot;!!!!!!!!!! Moved to new sub condition at index &quot; 
+                    + jnd_radius_exp.current_sub_condition_index);
+        return true; 
+      }
+      // Else end experiment
+      else{
+        return false;
+      }
+    } 
+    // Else continue w/ current subcondition:
+    else {
+      return true;
+    }
+  },
+  on_finish: function(data){
+    jnd_radius_exp.trial_data = data; 
+  }
+};
+
+timeline.push(experiment);
+
+console.log(&quot;======================&quot;);
+
+// =========================================================
+// DATA DOWNLOADING 
+
+var experiment_end = {
+  type: &apos;html-keyboard-response&apos;,
+  stimulus: `&lt;div align = &quot;center&quot; style = &quot;margin-top: ${isFirefox ? &quot;45vh&quot; : &quot;0&quot;};&quot;&gt;` + 
+            &apos;&lt;p&gt;&lt;font size = 10&gt;You have completed the experiment!&lt;p&gt;&lt;/font&gt;&apos; +
+            &apos;&lt;br&gt;&apos; +
+            &apos;Trial and summary data files will now automatically download locally.&apos; + 
+            &apos;&lt;/div&gt;&apos; ,
+  on_start: function(){
+
+    jnd_radius_exp.export_trial_data();
+    jnd_radius_exp.export_summary_data();
+
+    // Reset background color to feedback
+    document.body.style.backgroundColor = jnd_radius_exp.trial_data.feedback_background_color;
+  }
+};
+timeline.push(experiment_end);
+
+// =========================================================
+// START JSPSYCH
+
+jsPsych.init({
+    timeline: timeline,
+    on_finish: function(){ 
+        jsPsych.data.displayData();
+    }
+});
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

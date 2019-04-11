@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../../../">
+  <title data-ice="title">scripts/experiment-properties/data/constants/jnd_data.js | huh</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="huh"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/coyiutoc/VCL_Correlation_POC"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-balancing">experiment-properties/balancing</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_latin_square">initialize_latin_square</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_random_order">initialize_random_order</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-data">experiment-properties/data</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get_subconditions">get_subconditions</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_condition_dataset">create_condition_dataset</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get_data">get_data</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get_data_subset">get_data_subset</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-CUSTOM_TRIAL_STRUCTURE_CONDITIONS">CUSTOM_TRIAL_STRUCTURE_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-EXPERIMENT_BASES">EXPERIMENT_BASES</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-EXPERIMENT_CONDITIONS">EXPERIMENT_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-data-constants">experiment-properties/data/constants</a><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-ESTIMATION_BASE">ESTIMATION_BASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-JND_BASE">JND_BASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-JND_CONDITIONS">JND_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-JND_RADIUS_BASE">JND_RADIUS_BASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-JND_RADIUS_CONDITIONS">JND_RADIUS_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-STEVENS_BASE">STEVENS_BASE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-STEVENS_CONDITIONS">STEVENS_CONDITIONS</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing">experiment-properties/graphing</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-is_custom_plot">is_custom_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_custom_plot">prepare_custom_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_distributions">plot_distributions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-base-plots">experiment-properties/graphing/d3-base-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_ring_plot">create_ring_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_scatter_plot">create_scatter_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_scatter_points">plot_scatter_points</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_shape_plot">create_shape_plot</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_strip_plot">create_strip_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_distractor_scatter_plot">prepare_distractor_scatter_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-estimation">experiments/estimation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html">Estimation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-estimation_exp">estimation_exp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd">experiments/jnd</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd/jnd.js~JND.html">JND</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-jnd_exp">jnd_exp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd-radius">experiments/jnd_radius</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd_radius/jnd_radius.js~JND_Radius.html">JND_Radius</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-jnd_radius_exp">jnd_radius_exp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-stevens">experiments/stevens</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/stevens/stevens.js~Stevens.html">Stevens</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-stevens_exp">stevens_exp</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#helpers">helpers</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-force_greater_right_position">force_greater_right_position</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomize_position">randomize_position</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-randomize_radius_position">randomize_radius_position</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">scripts/experiment-properties/data/constants/jnd_data.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">export {JND_BASE, JND_CONDITIONS};
+
+const JND_BASE = {
+
+  foundational : 
+    [
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: false, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.8, error: 0.0001, max_step_size: 0.01, converge_from_above: false, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.7, error: 0.0001, max_step_size: 0.01, converge_from_above: false, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: false, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.5, error: 0.0001, max_step_size: 0.01, converge_from_above: false, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.4, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.2, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.1, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.0, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.8, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.7, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.5, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.4, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3}
+    ],
+
+  design: 
+    [
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 3},
+    ],
+}
+
+const JND_CONDITIONS = {
+
+  distractor_rainbow : 
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;RED&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;RED&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;RED&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;GREEN&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;GREEN&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;GREEN&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;RED&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;RED&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;RED&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;BLUE&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;BLUE&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;BLUE&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;YELLOW&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;YELLOW&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;YELLOW&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3}
+    ],
+
+  distractor_square_red_hue :
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d83862&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d83862&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d83862&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d54049&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d54049&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d54049&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#c05819&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#c05819&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#c05819&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#ae6500&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#ae6500&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#ae6500&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;}
+    ],
+
+  distractor_square_red_lum :
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9e210f&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9e210f&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9e210f&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#b63821&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#b63821&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#b63821&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#e45f43&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#e45f43&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#e45f43&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#fe7657&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#fe7657&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#fe7657&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;}
+    ],
+
+  distractor_square_red_chrom:
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#aa6453&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#aa6453&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#aa6453&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#bc5942&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#bc5942&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#bc5942&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#dc391f&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#dc391f&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#dc391f&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#eb1607&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#eb1607&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#eb1607&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#cd4c32&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;}
+    ], 
+
+  distractor_square_yellow_hue :
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#ffaf7d&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#ffaf7d&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#ffaf7d&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#f4bc6a&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#f4bc6a&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#f4bc6a&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#bfce6d&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#bfce6d&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#bfce6d&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9fd57d&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9fd57d&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9fd57d&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;}
+    ],
+
+  distractor_square_yellow_lum :
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#b19e41&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#b19e41&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#b19e41&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#c6b254&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#c6b254&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#c6b254&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#f1da7a&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#f1da7a&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#f1da7a&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#fff08e&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#fff08e&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#fff08e&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;}
+    ],
+
+  distractor_square_yellow_chrom:
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d1c6a3&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d1c6a3&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d1c6a3&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d7c685&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d7c685&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d7c685&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#dec644&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#dec644&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#dec644&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#dfc602&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#dfc602&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#dfc602&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#dbc667&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;}
+    ], 
+
+  distractor_square_blue_hue :
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#008897&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#008897&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#008897&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#0085ad&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#0085ad&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#0085ad&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#5575bc&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#5575bc&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#5575bc&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#816ab1&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#816ab1&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#816ab1&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;}
+    ],
+
+  distractor_square_blue_lum :
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#005a95&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#005a95&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#005a95&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#006ca9&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#006ca9&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#006ca9&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#006ca9&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#006ca9&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#006ca9&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#43a4e6&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#43a4e6&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#43a4e6&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;}
+    ],
+
+  distractor_square_blue_chrom:
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#6a7887&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#6a7887&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#6a7887&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#4d7ba1&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#4d7ba1&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#4d7ba1&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#0081d9&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#0081d9&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#0081d9&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#0085f7&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#0085f7&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#0085f7&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#007ebc&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;}
+    ], 
+
+  distractor_square_green_hue :
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#6b7e21&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#6b7e21&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#6b7e21&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#4d8433&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#4d8433&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#4d8433&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#008a67&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#008a67&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#008a67&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#008a67&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#008a67&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#008a67&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;},
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;hue&apos;}
+    ],
+
+  distractor_square_green_lum :
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#006228&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#006228&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#006228&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#007438&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#007438&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#007438&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#399b5c&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#399b5c&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#399b5c&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#4eaf6e&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#4eaf6e&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#4eaf6e&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;},
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;lum&apos;}
+    ],
+
+  distractor_square_green_chrom:
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#5e7e66&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#5e7e66&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#5e7e66&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#468358&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#468358&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#468358&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#008d33&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#008d33&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#008d33&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#00920c&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#00920c&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#00920c&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;},
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, dist_shape: &apos;square&apos;, target_color: &apos;#20874a&apos;, target_shape: &apos;square&apos;, point_size: 8, dimension: &apos;chro&apos;}
+    ], 
+
+  distractor_multi: 
+    [
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#cd4c32&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#cd4c32&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#cd4c32&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#007ebc&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#007ebc&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#007ebc&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3}, 
+    
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#20874a&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#20874a&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#20874a&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3}, 
+
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#dbc667&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#dbc667&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3},
+
+    {dist_base: 0.2, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#dbc667&apos;, target_color: &apos;BLACK&apos;, dist_point_size: 3} 
+    ],
+
+  distractor_blue_shades: 
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#004078&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#004078&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#004078&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#2c6fad&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#2c6fad&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#2c6fad&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3}, 
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#69a3e5&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#69a3e5&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#69a3e5&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3}, 
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#a2d9ff&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#a2d9ff&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#a2d9ff&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3} 
+    ],
+
+  distractor_red_shades: 
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9f2b2a&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9f2b2a&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9f2b2a&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#bc4740&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#bc4740&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#bc4740&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3}, 
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#db6158&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#db6158&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#db6158&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3}, 
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#ff988a&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#ff988a&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#ff988a&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3} 
+    ],
+
+  distractor_yellow_shades: 
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d3c86a&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d3c86a&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d3c86a&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9b9236&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9b9236&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9b9236&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3}, 
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#80781b&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#80781b&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#80781b&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3}, 
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#f0e484&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#f0e484&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#f0e484&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3} 
+    ],
+
+  distractor_yellow_shades: 
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d3c86a&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d3c86a&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d3c86a&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9b9236&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9b9236&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9b9236&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3}, 
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#80781b&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#80781b&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#80781b&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3}, 
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#f0e484&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#f0e484&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#f0e484&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3} 
+    ],
+
+  distractor_control_shades: 
+    [
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3}, 
+    
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3}, 
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3} 
+    ],
+
+  strip_ring_size:
+    [
+    {ring_thickness: 1},
+
+    {ring_thickness: 1},
+
+    {ring_thickness: 1},
+
+    {ring_thickness: 1},
+
+    {ring_thickness: 1},
+
+    {ring_thickness: 1},
+
+    {ring_thickness: 1},
+
+    {ring_thickness: 1},
+
+    {ring_thickness: 1},
+
+    {ring_thickness: 1},
+
+    {ring_thickness: 1},
+
+    {ring_thickness: 1},
+
+    {ring_thickness: 1},
+
+    {ring_thickness: 1},
+
+    {ring_thickness: 1},
+
+    {ring_thickness: 1},
+
+    {ring_thickness: 1}
+    ],
+
+  line_length_strip:
+    [
+    {point_color: &quot;BLACK&quot;, strip_width: 1, fixed_strip_height: false},
+
+    {point_color: &quot;BLACK&quot;, strip_width: 1, fixed_strip_height: false},
+
+    {point_color: &quot;BLACK&quot;, strip_width: 1, fixed_strip_height: false},
+
+    {point_color: &quot;BLACK&quot;, strip_width: 1, fixed_strip_height: false},
+
+    {point_color: &quot;BLACK&quot;, strip_width: 1, fixed_strip_height: false},
+
+    {point_color: &quot;BLACK&quot;, strip_width: 1, fixed_strip_height: false},
+
+    {point_color: &quot;BLACK&quot;, strip_width: 1, fixed_strip_height: false},
+
+    {point_color: &quot;BLACK&quot;, strip_width: 1, fixed_strip_height: false},
+
+    {point_color: &quot;BLACK&quot;, strip_width: 1, fixed_strip_height: false},
+
+    {point_color: &quot;BLACK&quot;, strip_width: 1, fixed_strip_height: false},
+
+    {point_color: &quot;BLACK&quot;, strip_width: 1, fixed_strip_height: false},
+
+    {point_color: &quot;BLACK&quot;, strip_width: 1, fixed_strip_height: false},
+
+    {point_color: &quot;BLACK&quot;, strip_width: 1, fixed_strip_height: false},
+
+    {point_color: &quot;BLACK&quot;, strip_width: 1, fixed_strip_height: false},
+
+    {point_color: &quot;BLACK&quot;, strip_width: 1, fixed_strip_height: false},
+
+    {point_color: &quot;BLACK&quot;, strip_width: 1, fixed_strip_height: false},
+
+    {point_color: &quot;BLACK&quot;, strip_width: 1, fixed_strip_height: false}
+    ], 
+
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
