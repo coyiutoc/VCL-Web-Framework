@@ -29,19 +29,20 @@ export default class JND_Radius {
     // ========================================
     // PARAMETER CHECKING
 
-    if (trial_structure !== "foundational") {
-      throw Error(trial_structure + " is not supported.") }
-    else{
+    // **NOTE: EXPERIMENTS variable comes from /public/config/experiments-config.js
+    if (!EXPERIMENTS["jnd_radius"]["trial_structure"].includes(trial_structure)) {
+      throw Error(trial_structure + " is not supported.");}
+    else {
       this.trial_structure = trial_structure;
-    }  
+    }
 
-    if (graph_type !== "shapes") {
+    if (!EXPERIMENTS["jnd_radius"]["graph_type"].includes(graph_type)){
       throw Error(graph_type + " is not supported.")} 
     else { 
       this.graph_type = graph_type;
     };  
 
-    if (balancing_type !== "random") {
+    if (!EXPERIMENTS["jnd_radius"]["balancing_type"].includes(balancing_type)) {
       throw Error(balancing_type + " is not supported.") }
     else {
       this.balancing_type = balancing_type;

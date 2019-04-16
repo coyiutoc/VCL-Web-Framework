@@ -1,218 +1,218 @@
 window.esdocSearchIndex = [
   [
-    "huh/scripts/experiment-properties/data/custom_subcondition_generator.js~custom_trial_structure_conditions",
+    "vcl framework/scripts/experiment-properties/data/custom_subcondition_generator.js~custom_trial_structure_conditions",
     "variable/index.html#static-variable-CUSTOM_TRIAL_STRUCTURE_CONDITIONS",
-    "<span>CUSTOM_TRIAL_STRUCTURE_CONDITIONS</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/data/custom_subcondition_generator.js</span>",
+    "<span>CUSTOM_TRIAL_STRUCTURE_CONDITIONS</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/data/custom_subcondition_generator.js</span>",
     "variable"
   ],
   [
-    "huh/scripts/experiment-properties/data/constants/estimation_data.js~estimation_base",
+    "vcl framework/scripts/experiment-properties/data/constants/estimation_data.js~estimation_base",
     "variable/index.html#static-variable-ESTIMATION_BASE",
-    "<span>ESTIMATION_BASE</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/data/constants/estimation_data.js</span>",
+    "<span>ESTIMATION_BASE</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/data/constants/estimation_data.js</span>",
     "variable"
   ],
   [
-    "huh/scripts/experiment-properties/data/data_controller.js~experiment_bases",
+    "vcl framework/scripts/experiment-properties/data/data_controller.js~experiment_bases",
     "variable/index.html#static-variable-EXPERIMENT_BASES",
-    "<span>EXPERIMENT_BASES</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/data/data_controller.js</span>",
+    "<span>EXPERIMENT_BASES</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/data/data_controller.js</span>",
     "variable"
   ],
   [
-    "huh/scripts/experiment-properties/data/data_controller.js~experiment_conditions",
+    "vcl framework/scripts/experiment-properties/data/data_controller.js~experiment_conditions",
     "variable/index.html#static-variable-EXPERIMENT_CONDITIONS",
-    "<span>EXPERIMENT_CONDITIONS</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/data/data_controller.js</span>",
+    "<span>EXPERIMENT_CONDITIONS</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/data/data_controller.js</span>",
     "variable"
   ],
   [
-    "huh/scripts/experiments/estimation/estimation.js~estimation",
+    "vcl framework/scripts/experiments/estimation/estimation.js~estimation",
     "class/scripts/experiments/estimation/estimation.js~Estimation.html",
-    "<span>Estimation</span> <span class=\"search-result-import-path\">huh/scripts/experiments/estimation/estimation.js</span>",
+    "<span>Estimation</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiments/estimation/estimation.js</span>",
     "class"
   ],
   [
-    "huh/scripts/experiments/jnd/jnd.js~jnd",
+    "vcl framework/scripts/experiments/jnd/jnd.js~jnd",
     "class/scripts/experiments/jnd/jnd.js~JND.html",
-    "<span>JND</span> <span class=\"search-result-import-path\">huh/scripts/experiments/jnd/jnd.js</span>",
+    "<span>JND</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiments/jnd/jnd.js</span>",
     "class"
   ],
   [
-    "huh/scripts/experiment-properties/data/constants/jnd_data.js~jnd_base",
+    "vcl framework/scripts/experiment-properties/data/constants/jnd_data.js~jnd_base",
     "variable/index.html#static-variable-JND_BASE",
-    "<span>JND_BASE</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/data/constants/jnd_data.js</span>",
+    "<span>JND_BASE</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/data/constants/jnd_data.js</span>",
     "variable"
   ],
   [
-    "huh/scripts/experiment-properties/data/constants/jnd_data.js~jnd_conditions",
+    "vcl framework/scripts/experiment-properties/data/constants/jnd_data.js~jnd_conditions",
     "variable/index.html#static-variable-JND_CONDITIONS",
-    "<span>JND_CONDITIONS</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/data/constants/jnd_data.js</span>",
+    "<span>JND_CONDITIONS</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/data/constants/jnd_data.js</span>",
     "variable"
   ],
   [
-    "huh/scripts/experiment-properties/data/constants/jnd_radius_data.js~jnd_radius_base",
+    "vcl framework/scripts/experiment-properties/data/constants/jnd_radius_data.js~jnd_radius_base",
     "variable/index.html#static-variable-JND_RADIUS_BASE",
-    "<span>JND_RADIUS_BASE</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/data/constants/jnd_radius_data.js</span>",
+    "<span>JND_RADIUS_BASE</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/data/constants/jnd_radius_data.js</span>",
     "variable"
   ],
   [
-    "huh/scripts/experiment-properties/data/constants/jnd_radius_data.js~jnd_radius_conditions",
+    "vcl framework/scripts/experiment-properties/data/constants/jnd_radius_data.js~jnd_radius_conditions",
     "variable/index.html#static-variable-JND_RADIUS_CONDITIONS",
-    "<span>JND_RADIUS_CONDITIONS</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/data/constants/jnd_radius_data.js</span>",
+    "<span>JND_RADIUS_CONDITIONS</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/data/constants/jnd_radius_data.js</span>",
     "variable"
   ],
   [
-    "huh/scripts/experiments/jnd_radius/jnd_radius.js~jnd_radius",
+    "vcl framework/scripts/experiments/jnd_radius/jnd_radius.js~jnd_radius",
     "class/scripts/experiments/jnd_radius/jnd_radius.js~JND_Radius.html",
-    "<span>JND_Radius</span> <span class=\"search-result-import-path\">huh/scripts/experiments/jnd_radius/jnd_radius.js</span>",
+    "<span>JND_Radius</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiments/jnd_radius/jnd_radius.js</span>",
     "class"
   ],
   [
-    "huh/scripts/experiment-properties/data/constants/stevens_data.js~stevens_base",
+    "vcl framework/scripts/experiment-properties/data/constants/stevens_data.js~stevens_base",
     "variable/index.html#static-variable-STEVENS_BASE",
-    "<span>STEVENS_BASE</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/data/constants/stevens_data.js</span>",
+    "<span>STEVENS_BASE</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/data/constants/stevens_data.js</span>",
     "variable"
   ],
   [
-    "huh/scripts/experiment-properties/data/constants/stevens_data.js~stevens_conditions",
+    "vcl framework/scripts/experiment-properties/data/constants/stevens_data.js~stevens_conditions",
     "variable/index.html#static-variable-STEVENS_CONDITIONS",
-    "<span>STEVENS_CONDITIONS</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/data/constants/stevens_data.js</span>",
+    "<span>STEVENS_CONDITIONS</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/data/constants/stevens_data.js</span>",
     "variable"
   ],
   [
-    "huh/scripts/experiments/stevens/stevens.js~stevens",
+    "vcl framework/scripts/experiments/stevens/stevens.js~stevens",
     "class/scripts/experiments/stevens/stevens.js~Stevens.html",
-    "<span>Stevens</span> <span class=\"search-result-import-path\">huh/scripts/experiments/stevens/stevens.js</span>",
+    "<span>Stevens</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiments/stevens/stevens.js</span>",
     "class"
   ],
   [
-    "huh/scripts/experiment-properties/data/data_controller.js~create_condition_dataset",
+    "vcl framework/scripts/experiment-properties/data/data_controller.js~create_condition_dataset",
     "function/index.html#static-function-create_condition_dataset",
-    "<span>create_condition_dataset</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/data/data_controller.js</span>",
+    "<span>create_condition_dataset</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/data/data_controller.js</span>",
     "function"
   ],
   [
-    "huh/scripts/experiment-properties/graphing/d3-base-plots/ring_plot.js~create_ring_plot",
+    "vcl framework/scripts/experiment-properties/graphing/d3-custom-plots/distractor_scatter_plot.js~create_distractor_scatter_plot",
+    "function/index.html#static-function-create_distractor_scatter_plot",
+    "<span>create_distractor_scatter_plot</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/graphing/d3-custom-plots/distractor_scatter_plot.js</span>",
+    "function"
+  ],
+  [
+    "vcl framework/scripts/experiment-properties/graphing/d3-base-plots/ring_plot.js~create_ring_plot",
     "function/index.html#static-function-create_ring_plot",
-    "<span>create_ring_plot</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/graphing/d3-base-plots/ring_plot.js</span>",
+    "<span>create_ring_plot</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/graphing/d3-base-plots/ring_plot.js</span>",
     "function"
   ],
   [
-    "huh/scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js~create_scatter_plot",
+    "vcl framework/scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js~create_scatter_plot",
     "function/index.html#static-function-create_scatter_plot",
-    "<span>create_scatter_plot</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js</span>",
+    "<span>create_scatter_plot</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js</span>",
     "function"
   ],
   [
-    "huh/scripts/experiment-properties/graphing/d3-base-plots/shape_plot.js~create_shape_plot",
+    "vcl framework/scripts/experiment-properties/graphing/d3-base-plots/shape_plot.js~create_shape_plot",
     "function/index.html#static-function-create_shape_plot",
-    "<span>create_shape_plot</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/graphing/d3-base-plots/shape_plot.js</span>",
+    "<span>create_shape_plot</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/graphing/d3-base-plots/shape_plot.js</span>",
     "function"
   ],
   [
-    "huh/scripts/experiment-properties/graphing/d3-base-plots/strip_plot.js~create_strip_plot",
+    "vcl framework/scripts/experiment-properties/graphing/d3-base-plots/strip_plot.js~create_strip_plot",
     "function/index.html#static-function-create_strip_plot",
-    "<span>create_strip_plot</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/graphing/d3-base-plots/strip_plot.js</span>",
+    "<span>create_strip_plot</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/graphing/d3-base-plots/strip_plot.js</span>",
     "function"
   ],
   [
-    "huh/scripts/experiments/estimation/estimation_timeline.js~estimation_exp",
+    "vcl framework/scripts/experiments/estimation/estimation_timeline.js~estimation_exp",
     "variable/index.html#static-variable-estimation_exp",
-    "<span>estimation_exp</span> <span class=\"search-result-import-path\">huh/scripts/experiments/estimation/estimation_timeline.js</span>",
+    "<span>estimation_exp</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiments/estimation/estimation_timeline.js</span>",
     "variable"
   ],
   [
-    "huh/scripts/helpers/experiment_helpers.js~force_greater_right_position",
+    "vcl framework/scripts/helpers/experiment_helpers.js~force_greater_right_position",
     "function/index.html#static-function-force_greater_right_position",
-    "<span>force_greater_right_position</span> <span class=\"search-result-import-path\">huh/scripts/helpers/experiment_helpers.js</span>",
+    "<span>force_greater_right_position</span> <span class=\"search-result-import-path\">VCL Framework/scripts/helpers/experiment_helpers.js</span>",
     "function"
   ],
   [
-    "huh/scripts/experiment-properties/data/data_controller.js~get_data",
+    "vcl framework/scripts/experiment-properties/data/data_controller.js~get_data",
     "function/index.html#static-function-get_data",
-    "<span>get_data</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/data/data_controller.js</span>",
+    "<span>get_data</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/data/data_controller.js</span>",
     "function"
   ],
   [
-    "huh/scripts/experiment-properties/data/data_controller.js~get_data_subset",
+    "vcl framework/scripts/experiment-properties/data/data_controller.js~get_data_subset",
     "function/index.html#static-function-get_data_subset",
-    "<span>get_data_subset</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/data/data_controller.js</span>",
+    "<span>get_data_subset</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/data/data_controller.js</span>",
     "function"
   ],
   [
-    "huh/scripts/experiment-properties/data/custom_subcondition_generator.js~get_subconditions",
+    "vcl framework/scripts/experiment-properties/data/custom_subcondition_generator.js~get_subconditions",
     "function/index.html#static-function-get_subconditions",
-    "<span>get_subconditions</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/data/custom_subcondition_generator.js</span>",
+    "<span>get_subconditions</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/data/custom_subcondition_generator.js</span>",
     "function"
   ],
   [
-    "huh/scripts/experiment-properties/balancing/latin_square_generator.js~initialize_latin_square",
+    "vcl framework/scripts/experiment-properties/balancing/latin_square_generator.js~initialize_latin_square",
     "function/index.html#static-function-initialize_latin_square",
-    "<span>initialize_latin_square</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/balancing/latin_square_generator.js</span>",
+    "<span>initialize_latin_square</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/balancing/latin_square_generator.js</span>",
     "function"
   ],
   [
-    "huh/scripts/experiment-properties/balancing/random_generator.js~initialize_random_order",
+    "vcl framework/scripts/experiment-properties/balancing/random_generator.js~initialize_random_order",
     "function/index.html#static-function-initialize_random_order",
-    "<span>initialize_random_order</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/balancing/random_generator.js</span>",
+    "<span>initialize_random_order</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/balancing/random_generator.js</span>",
     "function"
   ],
   [
-    "huh/scripts/experiment-properties/graphing/custom_graphing_controller.js~is_custom_plot",
+    "vcl framework/scripts/experiment-properties/graphing/custom_graphing_controller.js~is_custom_plot",
     "function/index.html#static-function-is_custom_plot",
-    "<span>is_custom_plot</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/graphing/custom_graphing_controller.js</span>",
+    "<span>is_custom_plot</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/graphing/custom_graphing_controller.js</span>",
     "function"
   ],
   [
-    "huh/scripts/experiments/jnd/jnd_timeline.js~jnd_exp",
+    "vcl framework/scripts/experiments/jnd/jnd_timeline.js~jnd_exp",
     "variable/index.html#static-variable-jnd_exp",
-    "<span>jnd_exp</span> <span class=\"search-result-import-path\">huh/scripts/experiments/jnd/jnd_timeline.js</span>",
+    "<span>jnd_exp</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiments/jnd/jnd_timeline.js</span>",
     "variable"
   ],
   [
-    "huh/scripts/experiments/jnd_radius/jnd_radius_timeline.js~jnd_radius_exp",
+    "vcl framework/scripts/experiments/jnd_radius/jnd_radius_timeline.js~jnd_radius_exp",
     "variable/index.html#static-variable-jnd_radius_exp",
-    "<span>jnd_radius_exp</span> <span class=\"search-result-import-path\">huh/scripts/experiments/jnd_radius/jnd_radius_timeline.js</span>",
+    "<span>jnd_radius_exp</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiments/jnd_radius/jnd_radius_timeline.js</span>",
     "variable"
   ],
   [
-    "huh/scripts/experiment-properties/graphing/graphing_controller.js~plot_distributions",
+    "vcl framework/scripts/experiment-properties/graphing/graphing_controller.js~plot_distributions",
     "function/index.html#static-function-plot_distributions",
-    "<span>plot_distributions</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/graphing/graphing_controller.js</span>",
+    "<span>plot_distributions</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/graphing/graphing_controller.js</span>",
     "function"
   ],
   [
-    "huh/scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js~plot_scatter_points",
+    "vcl framework/scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js~plot_scatter_points",
     "function/index.html#static-function-plot_scatter_points",
-    "<span>plot_scatter_points</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js</span>",
+    "<span>plot_scatter_points</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js</span>",
     "function"
   ],
   [
-    "huh/scripts/experiment-properties/graphing/custom_graphing_controller.js~prepare_custom_plot",
+    "vcl framework/scripts/experiment-properties/graphing/custom_graphing_controller.js~prepare_custom_plot",
     "function/index.html#static-function-prepare_custom_plot",
-    "<span>prepare_custom_plot</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/graphing/custom_graphing_controller.js</span>",
+    "<span>prepare_custom_plot</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/graphing/custom_graphing_controller.js</span>",
     "function"
   ],
   [
-    "huh/scripts/experiment-properties/graphing/d3-custom-plots/distractor_scatter_plot.js~prepare_distractor_scatter_plot",
-    "function/index.html#static-function-prepare_distractor_scatter_plot",
-    "<span>prepare_distractor_scatter_plot</span> <span class=\"search-result-import-path\">huh/scripts/experiment-properties/graphing/d3-custom-plots/distractor_scatter_plot.js</span>",
-    "function"
-  ],
-  [
-    "huh/scripts/helpers/experiment_helpers.js~randomize_position",
+    "vcl framework/scripts/helpers/experiment_helpers.js~randomize_position",
     "function/index.html#static-function-randomize_position",
-    "<span>randomize_position</span> <span class=\"search-result-import-path\">huh/scripts/helpers/experiment_helpers.js</span>",
+    "<span>randomize_position</span> <span class=\"search-result-import-path\">VCL Framework/scripts/helpers/experiment_helpers.js</span>",
     "function"
   ],
   [
-    "huh/scripts/helpers/experiment_helpers.js~randomize_radius_position",
+    "vcl framework/scripts/helpers/experiment_helpers.js~randomize_radius_position",
     "function/index.html#static-function-randomize_radius_position",
-    "<span>randomize_radius_position</span> <span class=\"search-result-import-path\">huh/scripts/helpers/experiment_helpers.js</span>",
+    "<span>randomize_radius_position</span> <span class=\"search-result-import-path\">VCL Framework/scripts/helpers/experiment_helpers.js</span>",
     "function"
   ],
   [
-    "huh/scripts/experiments/stevens/stevens_timeline.js~stevens_exp",
+    "vcl framework/scripts/experiments/stevens/stevens_timeline.js~stevens_exp",
     "variable/index.html#static-variable-stevens_exp",
-    "<span>stevens_exp</span> <span class=\"search-result-import-path\">huh/scripts/experiments/stevens/stevens_timeline.js</span>",
+    "<span>stevens_exp</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiments/stevens/stevens_timeline.js</span>",
     "variable"
   ],
   [
@@ -654,9 +654,9 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
-    "scripts/experiments/estimation/estimation.js~estimation#balancing",
-    "class/scripts/experiments/estimation/estimation.js~Estimation.html#instance-member-balancing",
-    "scripts/experiments/estimation/estimation.js~Estimation#balancing",
+    "scripts/experiments/estimation/estimation.js~estimation#balancing_type",
+    "class/scripts/experiments/estimation/estimation.js~Estimation.html#instance-member-balancing_type",
+    "scripts/experiments/estimation/estimation.js~Estimation#balancing_type",
     "member"
   ],
   [
@@ -826,12 +826,6 @@ window.esdocSearchIndex = [
     "class/scripts/experiments/estimation/estimation.js~Estimation.html#instance-method-prepare_practice",
     "scripts/experiments/estimation/estimation.js~Estimation#prepare_practice",
     "method"
-  ],
-  [
-    "scripts/experiments/estimation/estimation.js~estimation#range",
-    "class/scripts/experiments/estimation/estimation.js~Estimation.html#instance-member-range",
-    "scripts/experiments/estimation/estimation.js~Estimation#range",
-    "member"
   ],
   [
     "scripts/experiments/estimation/estimation.js~estimation#raw_sub_conds",
@@ -1665,12 +1659,6 @@ window.esdocSearchIndex = [
     "scripts/helpers/experiment_helpers.js",
     "file/scripts/helpers/experiment_helpers.js.html",
     "scripts/helpers/experiment_helpers.js",
-    "file"
-  ],
-  [
-    "scripts/routing/conditions.js",
-    "file/scripts/routing/conditions.js.html",
-    "scripts/routing/conditions.js",
     "file"
   ]
 ]

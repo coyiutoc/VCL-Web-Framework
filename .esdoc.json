@@ -9,9 +9,25 @@
         "index": "README.md",
 		    "globalIndex": true,
         "files": [
-          "README.md"
+          "README.md",
+          "./docs/manual/pages/experiments.md",
+          "./docs/manual/pages/jnd.md",
+          "./docs/manual/pages/jnd_radius.md",
+          "./docs/manual/pages/stevens.md",
+          "./docs/manual/pages/estimation.md",
+          "./docs/manual/pages/conditions.md"
       	]
       }
     }
+  },
+  { "name": "esdoc-inject-script-plugin", 
+    "option": {
+      "enable": true, 
+      "scripts": [
+        "./public/config/conditions-config.js",
+        "./public/config/experiments-config.js",
+        "./docs/manual/scripts/conditions-renderer.js"
+      ]}
   }]
 }
+

@@ -11,6 +11,12 @@ export default class Estimation {
      * @param  params          {object}    Parameters passed in from routing
      */
     constructor(params) {
+
+        let trial_structure = params["trial_structure"];
+        let condition_name = params["condition"];
+        let graph_type = params["graph_type"];
+        let balancing_type = params["balancing"];
+
         // Validate fields of params
         if (params.condition !== 'shape_estimation'
             && params.condition !== 'line_length'
@@ -21,22 +27,26 @@ export default class Estimation {
             throw  Error("unexpected condition name " + params.condition);
         }
 
-        this.condition_name = params.condition;
-        if (params.trial_structure !== "estimation") {
-            throw  Error("unexpected trial structure " + params.trial_structure);
-        }
-        this.range = params.range;
-        this.trial_structure = params.trial_structure;
-        if (params.graph_type !== "shapes" && params.graph_type !== "line") {
-            throw Error("graph type: " + params.graph_type + " is not supported.")}
+        // **NOTE: EXPERIMENTS variable comes from /public/config/experiments-config.js
+        if (!EXPERIMENTS["estimation"]["trial_structure"].includes(trial_structure)) {
+          throw Error(trial_structure + " is not supported.");}
         else {
-            this.graph_type = params.graph_type;
+          this.trial_structure = trial_structure;
         }
-        if (params.balancing !== "random") {
-            throw Error("balancing: "+ params.balancing + " is not supported.") }
+
+        if (!EXPERIMENTS["estimation"]["graph_type"].includes(graph_type)){
+          throw Error(graph_type + " is not supported.")} 
+        else { 
+          this.graph_type = graph_type;
+        };  
+
+        if (!EXPERIMENTS["estimation"]["balancing_type"].includes(balancing_type)) {
+          throw Error(balancing_type + " is not supported.") }
         else {
-            this.balancing = params.balancing;
-        }
+          this.balancing_type = balancing_type;
+        }  
+
+        this.condition_name = condition_name;
         this.subject_id = params["subject_id"];
         this.subject_initials = params["subject_initials"];
 
@@ -113,7 +123,7 @@ export default class Estimation {
      */
     prepare_experiment() {
         let dataset = this.raw_sub_conds;
-        switch(this.balancing) {
+        switch(this.balancing_type) {
             case 'random':
                 this.sub_condition_order = initialize_random_order(dataset.length);
                 break;

@@ -30,19 +30,20 @@ export default class Stevens {
     // ========================================
     // PARAMETER CHECKING
 
-    if ((trial_structure !== "foundational") && (trial_structure !== "design") && (trial_structure !== "custom")) {
-      throw Error(trial_structure + " is not supported.") }
-    else{
+    // **NOTE: EXPERIMENTS variable comes from /public/config/experiments-config.js
+    if (!EXPERIMENTS["stevens"]["trial_structure"].includes(trial_structure)) {
+      throw Error(trial_structure + " is not supported.");}
+    else {
       this.trial_structure = trial_structure;
-    }  
+    }
 
-    if ((graph_type !== "scatter") && (graph_type !== "strip") && (graph_type !== "ring")) {
+    if (!EXPERIMENTS["stevens"]["graph_type"].includes(graph_type)){
       throw Error(graph_type + " is not supported.")} 
     else { 
       this.graph_type = graph_type;
     };  
 
-    if (balancing_type !== "latin_square") {
+    if (!EXPERIMENTS["stevens"]["balancing_type"].includes(balancing_type)) {
       throw Error(balancing_type + " is not supported.") }
     else {
       this.balancing_type = balancing_type;

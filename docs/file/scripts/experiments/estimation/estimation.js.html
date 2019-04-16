@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../../">
-  <title data-ice="title">scripts/experiments/estimation/estimation.js | huh</title>
+  <title data-ice="title">scripts/experiments/estimation/estimation.js | VCL Framework</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="huh"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -53,7 +53,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_scatter_points">plot_scatter_points</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_shape_plot">create_shape_plot</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_strip_plot">create_strip_plot</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_distractor_scatter_plot">prepare_distractor_scatter_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_distractor_scatter_plot">create_distractor_scatter_plot</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-estimation">experiments/estimation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html">Estimation</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-estimation_exp">estimation_exp</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd">experiments/jnd</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd/jnd.js~JND.html">JND</a></span></span></li>
@@ -83,6 +83,12 @@ export default class Estimation {
      * @param  params          {object}    Parameters passed in from routing
      */
     constructor(params) {
+
+        let trial_structure = params[&quot;trial_structure&quot;];
+        let condition_name = params[&quot;condition&quot;];
+        let graph_type = params[&quot;graph_type&quot;];
+        let balancing_type = params[&quot;balancing&quot;];
+
         // Validate fields of params
         if (params.condition !== &apos;shape_estimation&apos;
             &amp;&amp; params.condition !== &apos;line_length&apos;
@@ -93,22 +99,26 @@ export default class Estimation {
             throw  Error(&quot;unexpected condition name &quot; + params.condition);
         }
 
-        this.condition_name = params.condition;
-        if (params.trial_structure !== &quot;estimation&quot;) {
-            throw  Error(&quot;unexpected trial structure &quot; + params.trial_structure);
-        }
-        this.range = params.range;
-        this.trial_structure = params.trial_structure;
-        if (params.graph_type !== &quot;shapes&quot; &amp;&amp; params.graph_type !== &quot;line&quot;) {
-            throw Error(&quot;graph type: &quot; + params.graph_type + &quot; is not supported.&quot;)}
+        // **NOTE: EXPERIMENTS variable comes from /public/config/experiments-config.js
+        if (!EXPERIMENTS[&quot;estimation&quot;][&quot;trial_structure&quot;].includes(trial_structure)) {
+          throw Error(trial_structure + &quot; is not supported.&quot;);}
         else {
-            this.graph_type = params.graph_type;
+          this.trial_structure = trial_structure;
         }
-        if (params.balancing !== &quot;random&quot;) {
-            throw Error(&quot;balancing: &quot;+ params.balancing + &quot; is not supported.&quot;) }
+
+        if (!EXPERIMENTS[&quot;estimation&quot;][&quot;graph_type&quot;].includes(graph_type)){
+          throw Error(graph_type + &quot; is not supported.&quot;)} 
+        else { 
+          this.graph_type = graph_type;
+        };  
+
+        if (!EXPERIMENTS[&quot;estimation&quot;][&quot;balancing_type&quot;].includes(balancing_type)) {
+          throw Error(balancing_type + &quot; is not supported.&quot;) }
         else {
-            this.balancing = params.balancing;
-        }
+          this.balancing_type = balancing_type;
+        }  
+
+        this.condition_name = condition_name;
         this.subject_id = params[&quot;subject_id&quot;];
         this.subject_initials = params[&quot;subject_initials&quot;];
 
@@ -185,7 +195,7 @@ export default class Estimation {
      */
     prepare_experiment() {
         let dataset = this.raw_sub_conds;
-        switch(this.balancing) {
+        switch(this.balancing_type) {
             case &apos;random&apos;:
                 this.sub_condition_order = initialize_random_order(dataset.length);
                 break;

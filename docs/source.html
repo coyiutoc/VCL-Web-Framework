@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="">
-  <title data-ice="title">Source | huh</title>
+  <title data-ice="title">Source | VCL Framework</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="huh"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -53,7 +53,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_scatter_points">plot_scatter_points</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_shape_plot">create_shape_plot</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_strip_plot">create_strip_plot</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_distractor_scatter_plot">prepare_distractor_scatter_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_distractor_scatter_plot">create_distractor_scatter_plot</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-estimation">experiments/estimation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html">Estimation</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-estimation_exp">estimation_exp</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd">experiments/jnd</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd/jnd.js~JND.html">JND</a></span></span></li>
@@ -69,7 +69,7 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1>Source <img data-ice="coverageBadge" src="./badge.svg"><span data-ice="totalCoverageCount" class="total-coverage-count">96/300</span></h1>
+<div class="content" data-ice="content"><h1>Source <img data-ice="coverageBadge" src="./badge.svg"><span data-ice="totalCoverageCount" class="total-coverage-count">97/298</span></h1>
 
 <table class="files-summary" data-ice="files" data-use-coverage="true">
   <thead>
@@ -113,9 +113,9 @@
       <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-JND_BASE">JND_BASE</a></span>
 <span><a href="variable/index.html#static-variable-JND_CONDITIONS">JND_CONDITIONS</a></span></td>
       <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/2</span></td>
-      <td style="display: none;" data-ice="size">59701 byte</td>
-      <td style="display: none;" data-ice="lines">743</td>
-      <td style="display: none;" data-ice="updated">2019-04-05 04:34:38 (UTC)</td>
+      <td style="display: none;" data-ice="size">62367 byte</td>
+      <td style="display: none;" data-ice="lines">782</td>
+      <td style="display: none;" data-ice="updated">2019-04-05 19:08:29 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/scripts/experiment-properties/data/constants/jnd_radius_data.js.html#errorLines=19,3">scripts/experiment-properties/data/constants/jnd_radius_data.js</a></span></td>
@@ -152,9 +152,9 @@
 <span><a href="function/index.html#static-function-get_data">get_data</a></span>
 <span><a href="function/index.html#static-function-get_data_subset">get_data_subset</a></span></td>
       <td class="coverage"><span data-ice="coverage">60 %</span><span data-ice="coverageCount" class="coverage-count">3/5</span></td>
-      <td style="display: none;" data-ice="size">3788 byte</td>
-      <td style="display: none;" data-ice="lines">110</td>
-      <td style="display: none;" data-ice="updated">2019-04-05 04:34:38 (UTC)</td>
+      <td style="display: none;" data-ice="size">3789 byte</td>
+      <td style="display: none;" data-ice="lines">111</td>
+      <td style="display: none;" data-ice="updated">2019-04-05 19:08:29 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/scripts/experiment-properties/distribution/gaussian_distribution_generator.js.html#errorLines=1,102,126,177,181,189,193,209,217,226,273,280,3,83">scripts/experiment-properties/distribution/gaussian_distribution_generator.js</a></span></td>
@@ -168,10 +168,10 @@
       <td data-ice="filePath"><span><a href="file/scripts/experiment-properties/graphing/custom_graphing_controller.js.html">scripts/experiment-properties/graphing/custom_graphing_controller.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-is_custom_plot">is_custom_plot</a></span>
 <span><a href="function/index.html#static-function-prepare_custom_plot">prepare_custom_plot</a></span></td>
-      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">2/2</span></td>
-      <td style="display: none;" data-ice="size">877 byte</td>
-      <td style="display: none;" data-ice="lines">32</td>
-      <td style="display: none;" data-ice="updated">2019-04-05 04:34:38 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">3/3</span></td>
+      <td style="display: none;" data-ice="size">2496 byte</td>
+      <td style="display: none;" data-ice="lines">78</td>
+      <td style="display: none;" data-ice="updated">2019-04-05 19:08:29 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/scripts/experiment-properties/graphing/d3-base-plots/ring_plot.js.html">scripts/experiment-properties/graphing/d3-base-plots/ring_plot.js</a></span></td>
@@ -207,12 +207,12 @@
       <td style="display: none;" data-ice="updated">2019-04-05 23:08:54 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/scripts/experiment-properties/graphing/d3-custom-plots/distractor_scatter_plot.js.html#errorLines=4,5,7">scripts/experiment-properties/graphing/d3-custom-plots/distractor_scatter_plot.js</a></span></td>
-      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-prepare_distractor_scatter_plot">prepare_distractor_scatter_plot</a></span></td>
-      <td class="coverage"><span data-ice="coverage">25 %</span><span data-ice="coverageCount" class="coverage-count">1/4</span></td>
-      <td style="display: none;" data-ice="size">4950 byte</td>
-      <td style="display: none;" data-ice="lines">129</td>
-      <td style="display: none;" data-ice="updated">2019-04-05 04:34:38 (UTC)</td>
+      <td data-ice="filePath"><span><a href="file/scripts/experiment-properties/graphing/d3-custom-plots/distractor_scatter_plot.js.html#errorLines=4,5">scripts/experiment-properties/graphing/d3-custom-plots/distractor_scatter_plot.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="function/index.html#static-function-create_distractor_scatter_plot">create_distractor_scatter_plot</a></span></td>
+      <td class="coverage"><span data-ice="coverage">33 %</span><span data-ice="coverageCount" class="coverage-count">1/3</span></td>
+      <td style="display: none;" data-ice="size">4256 byte</td>
+      <td style="display: none;" data-ice="lines">106</td>
+      <td style="display: none;" data-ice="updated">2019-04-05 19:08:29 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/scripts/experiment-properties/graphing/graphing_controller.js.html">scripts/experiment-properties/graphing/graphing_controller.js</a></span></td>
@@ -223,12 +223,12 @@
       <td style="display: none;" data-ice="updated">2019-04-05 23:08:54 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/scripts/experiments/estimation/estimation.js.html#errorLines=101,102,104,118,151,24,28,29,33,38,40,41,45,46,47,48,49,50,54,62,65,66,67,68,7,746,75,80,81,82,90,92,98">scripts/experiments/estimation/estimation.js</a></span></td>
+      <td data-ice="filePath"><span><a href="file/scripts/experiments/estimation/estimation.js.html#errorLines=100,102,108,111,112,114,128,161,34,40,46,49,50,51,55,56,57,58,59,60,64,7,72,75,756,76,77,78,85,90,91,92">scripts/experiments/estimation/estimation.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html">Estimation</a></span></td>
-      <td class="coverage"><span data-ice="coverage">37 %</span><span data-ice="coverageCount" class="coverage-count">20/53</span></td>
-      <td style="display: none;" data-ice="size">32057 byte</td>
-      <td style="display: none;" data-ice="lines">764</td>
-      <td style="display: none;" data-ice="updated">2019-04-05 23:08:54 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">38 %</span><span data-ice="coverageCount" class="coverage-count">20/52</span></td>
+      <td style="display: none;" data-ice="size">32338 byte</td>
+      <td style="display: none;" data-ice="lines">774</td>
+      <td style="display: none;" data-ice="updated">2019-04-03 02:23:03 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/scripts/experiments/estimation/estimation_timeline.js.html#errorLines=10,113,119,131,132,176,187,2,200,206,216,217,232,4,5">scripts/experiments/estimation/estimation_timeline.js</a></span></td>
@@ -239,28 +239,28 @@
       <td style="display: none;" data-ice="updated">2019-04-05 23:08:54 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/scripts/experiments/jnd/jnd.js.html#errorLines=10,117,138,139,161,162,24,25,27,28,36,42,48,54,55,56,57,58,59,60,61,72,76,83,84,85,88,94">scripts/experiments/jnd/jnd.js</a></span></td>
+      <td data-ice="filePath"><span><a href="file/scripts/experiments/jnd/jnd.js.html#errorLines=10,118,139,140,162,163,24,25,27,28,37,43,49,55,56,57,58,59,60,61,62,73,77,84,85,86,89,95">scripts/experiments/jnd/jnd.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/scripts/experiments/jnd/jnd.js~JND.html">JND</a></span></td>
       <td class="coverage"><span data-ice="coverage">31 %</span><span data-ice="coverageCount" class="coverage-count">13/41</span></td>
-      <td style="display: none;" data-ice="size">22923 byte</td>
-      <td style="display: none;" data-ice="lines">605</td>
-      <td style="display: none;" data-ice="updated">2019-04-06 00:21:12 (UTC)</td>
+      <td style="display: none;" data-ice="size">22931 byte</td>
+      <td style="display: none;" data-ice="lines">606</td>
+      <td style="display: none;" data-ice="updated">2019-04-03 02:13:43 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/scripts/experiments/jnd/jnd_timeline.js.html#errorLines=10,151,157,169,2,201,203,240,250,256,265,267,309,4,5">scripts/experiments/jnd/jnd_timeline.js</a></span></td>
+      <td data-ice="filePath"><span><a href="file/scripts/experiments/jnd/jnd_timeline.js.html#errorLines=10,165,171,183,2,215,217,254,264,270,279,281,323,4,5">scripts/experiments/jnd/jnd_timeline.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-jnd_exp">jnd_exp</a></span></td>
       <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/15</span></td>
-      <td style="display: none;" data-ice="size">13273 byte</td>
-      <td style="display: none;" data-ice="lines">334</td>
-      <td style="display: none;" data-ice="updated">2019-04-05 04:34:38 (UTC)</td>
+      <td style="display: none;" data-ice="size">14202 byte</td>
+      <td style="display: none;" data-ice="lines">348</td>
+      <td style="display: none;" data-ice="updated">2019-04-05 19:08:29 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/scripts/experiments/jnd_radius/jnd_radius.js.html#errorLines=10,115,132,133,25,26,27,35,41,47,53,54,55,56,57,58,59,60,61,72,76,83,84,87,93">scripts/experiments/jnd_radius/jnd_radius.js</a></span></td>
+      <td data-ice="filePath"><span><a href="file/scripts/experiments/jnd_radius/jnd_radius.js.html#errorLines=10,116,133,134,25,26,27,36,42,48,54,55,56,57,58,59,60,61,62,73,77,84,85,88,94">scripts/experiments/jnd_radius/jnd_radius.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/scripts/experiments/jnd_radius/jnd_radius.js~JND_Radius.html">JND_Radius</a></span></td>
       <td class="coverage"><span data-ice="coverage">32 %</span><span data-ice="coverageCount" class="coverage-count">12/37</span></td>
-      <td style="display: none;" data-ice="size">19611 byte</td>
-      <td style="display: none;" data-ice="lines">550</td>
-      <td style="display: none;" data-ice="updated">2019-04-05 23:08:54 (UTC)</td>
+      <td style="display: none;" data-ice="size">19810 byte</td>
+      <td style="display: none;" data-ice="lines">551</td>
+      <td style="display: none;" data-ice="updated">2019-04-03 02:33:27 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/scripts/experiments/jnd_radius/jnd_radius_timeline.js.html#errorLines=140,17,19,2,34,4,5,64,96,98">scripts/experiments/jnd_radius/jnd_radius_timeline.js</a></span></td>
@@ -271,12 +271,12 @@
       <td style="display: none;" data-ice="updated">2019-03-04 02:46:04 (UTC)</td>
     </tr>
 <tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/scripts/experiments/stevens/stevens.js.html#errorLines=10,145,170,171,172,24,25,27,28,36,42,48,54,63,69,70,71,77,83,84,85,86,89,95">scripts/experiments/stevens/stevens.js</a></span></td>
+      <td data-ice="filePath"><span><a href="file/scripts/experiments/stevens/stevens.js.html#errorLines=10,146,171,172,173,24,25,27,28,37,43,49,55,64,70,71,72,78,84,85,86,87,90,96">scripts/experiments/stevens/stevens.js</a></span></td>
       <td data-ice="identifier" class="identifiers"><span><a href="class/scripts/experiments/stevens/stevens.js~Stevens.html">Stevens</a></span></td>
       <td class="coverage"><span data-ice="coverage">44 %</span><span data-ice="coverageCount" class="coverage-count">19/43</span></td>
-      <td style="display: none;" data-ice="size">32844 byte</td>
-      <td style="display: none;" data-ice="lines">882</td>
-      <td style="display: none;" data-ice="updated">2019-04-05 23:08:54 (UTC)</td>
+      <td style="display: none;" data-ice="size">32900 byte</td>
+      <td style="display: none;" data-ice="lines">883</td>
+      <td style="display: none;" data-ice="updated">2019-04-03 02:14:06 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/scripts/experiments/stevens/stevens_timeline.js.html#errorLines=10,110,116,128,130,185,2,201,207,217,219,265,4,5">scripts/experiments/stevens/stevens_timeline.js</a></span></td>
@@ -295,14 +295,6 @@
       <td style="display: none;" data-ice="size">2835 byte</td>
       <td style="display: none;" data-ice="lines">92</td>
       <td style="display: none;" data-ice="updated">2019-04-05 23:08:54 (UTC)</td>
-    </tr>
-<tr data-ice="file">
-      <td data-ice="filePath"><span><a href="file/scripts/routing/conditions.js.html#errorLines=1">scripts/routing/conditions.js</a></span></td>
-      <td data-ice="identifier" class="identifiers">-</td>
-      <td class="coverage"><span data-ice="coverage">0 %</span><span data-ice="coverageCount" class="coverage-count">0/1</span></td>
-      <td style="display: none;" data-ice="size">25110 byte</td>
-      <td style="display: none;" data-ice="lines">636</td>
-      <td style="display: none;" data-ice="updated">2019-04-05 04:34:38 (UTC)</td>
     </tr>
 </tbody>
 </table>

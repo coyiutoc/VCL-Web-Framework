@@ -1,7 +1,7 @@
 {
-  "coverage": "32%",
-  "expectCount": 300,
-  "actualCount": 96,
+  "coverage": "32.55%",
+  "expectCount": 298,
+  "actualCount": 97,
   "files": {
     "scripts/experiment-properties/balancing/latin_square_generator.js": {
       "expectCount": 4,
@@ -91,8 +91,8 @@
       ]
     },
     "scripts/experiment-properties/graphing/custom_graphing_controller.js": {
-      "expectCount": 2,
-      "actualCount": 2,
+      "expectCount": 3,
+      "actualCount": 3,
       "undocumentLines": []
     },
     "scripts/experiment-properties/graphing/d3-base-plots/ring_plot.js": {
@@ -119,12 +119,11 @@
       "undocumentLines": []
     },
     "scripts/experiment-properties/graphing/d3-custom-plots/distractor_scatter_plot.js": {
-      "expectCount": 4,
+      "expectCount": 3,
       "actualCount": 1,
       "undocumentLines": [
         4,
-        5,
-        7
+        5
       ]
     },
     "scripts/experiment-properties/graphing/graphing_controller.js": {
@@ -133,42 +132,41 @@
       "undocumentLines": []
     },
     "scripts/experiments/estimation/estimation.js": {
-      "expectCount": 53,
+      "expectCount": 52,
       "actualCount": 20,
       "undocumentLines": [
         7,
-        24,
-        28,
-        29,
-        33,
-        38,
+        34,
         40,
-        41,
-        45,
         46,
-        47,
-        48,
         49,
         50,
-        54,
-        62,
-        65,
-        66,
-        67,
-        68,
+        51,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        64,
+        72,
         75,
-        80,
-        81,
-        82,
+        76,
+        77,
+        78,
+        85,
         90,
+        91,
         92,
-        98,
-        101,
+        100,
         102,
-        104,
-        118,
-        151,
-        746
+        108,
+        111,
+        112,
+        114,
+        128,
+        161,
+        756
       ]
     },
     "scripts/experiments/estimation/estimation_timeline.js": {
@@ -201,6 +199,60 @@
         25,
         27,
         28,
+        37,
+        43,
+        49,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        73,
+        77,
+        84,
+        85,
+        86,
+        89,
+        95,
+        118,
+        139,
+        140,
+        162,
+        163
+      ]
+    },
+    "scripts/experiments/jnd/jnd_timeline.js": {
+      "expectCount": 15,
+      "actualCount": 0,
+      "undocumentLines": [
+        2,
+        4,
+        5,
+        10,
+        165,
+        171,
+        183,
+        215,
+        217,
+        254,
+        264,
+        270,
+        279,
+        281,
+        323
+      ]
+    },
+    "scripts/experiments/jnd_radius/jnd_radius.js": {
+      "expectCount": 37,
+      "actualCount": 12,
+      "undocumentLines": [
+        10,
+        25,
+        26,
+        27,
         36,
         42,
         48,
@@ -212,70 +264,16 @@
         59,
         60,
         61,
-        72,
-        76,
-        83,
+        62,
+        73,
+        77,
         84,
         85,
         88,
         94,
-        117,
-        138,
-        139,
-        161,
-        162
-      ]
-    },
-    "scripts/experiments/jnd/jnd_timeline.js": {
-      "expectCount": 15,
-      "actualCount": 0,
-      "undocumentLines": [
-        2,
-        4,
-        5,
-        10,
-        151,
-        157,
-        169,
-        201,
-        203,
-        240,
-        250,
-        256,
-        265,
-        267,
-        309
-      ]
-    },
-    "scripts/experiments/jnd_radius/jnd_radius.js": {
-      "expectCount": 37,
-      "actualCount": 12,
-      "undocumentLines": [
-        10,
-        25,
-        26,
-        27,
-        35,
-        41,
-        47,
-        53,
-        54,
-        55,
-        56,
-        57,
-        58,
-        59,
-        60,
-        61,
-        72,
-        76,
-        83,
-        84,
-        87,
-        93,
-        115,
-        132,
-        133
+        116,
+        133,
+        134
       ]
     },
     "scripts/experiments/jnd_radius/jnd_radius_timeline.js": {
@@ -303,25 +301,25 @@
         25,
         27,
         28,
-        36,
-        42,
-        48,
-        54,
-        63,
-        69,
+        37,
+        43,
+        49,
+        55,
+        64,
         70,
         71,
-        77,
-        83,
+        72,
+        78,
         84,
         85,
         86,
-        89,
-        95,
-        145,
-        170,
+        87,
+        90,
+        96,
+        146,
         171,
-        172
+        172,
+        173
       ]
     },
     "scripts/experiments/stevens/stevens_timeline.js": {
@@ -349,13 +347,6 @@
       "actualCount": 2,
       "undocumentLines": [
         39
-      ]
-    },
-    "scripts/routing/conditions.js": {
-      "expectCount": 1,
-      "actualCount": 0,
-      "undocumentLines": [
-        1
       ]
     }
   }

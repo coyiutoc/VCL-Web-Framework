@@ -1,5 +1,5 @@
 {
-  "name": "huh",
+  "name": "VCL Framework",
   "version": "1.0.0",
   "description": "This is a Node.js application that runs proof of concept experiments for the following:",
   "main": "app.js",

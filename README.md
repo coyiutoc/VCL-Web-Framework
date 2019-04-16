@@ -1,6 +1,6 @@
 # VCL Web Framework
 
-This is a Node.js application that will serve as the modernization of the original VCL Java Framework.
+This is a Node.js application that serves as the modernization of the original VCL Java Framework.
 
 ## Set Up
 

@@ -44,43 +44,43 @@
     "filePath": "scripts/experiment-properties/data/data_controller.js",
     "lines": [
       {
-        "lineNumber": 71,
+        "lineNumber": 72,
         "line": "/**"
       },
       {
-        "lineNumber": 72,
+        "lineNumber": 73,
         "line": " * Retrieves a smaller dataset (4 subconditions) given experiment, trial structure and condition."
       },
       {
-        "lineNumber": 73,
-        "line": " *"
-      },
-      {
         "lineNumber": 74,
-        "line": " * @param  experiment      {string}            \"jnd\" or \"stevens\"   "
+        "line": " *"
       },
       {
         "lineNumber": 75,
-        "line": " *         trial_structure {string}            \"foundational\" or \"design\"         "
+        "line": " * @param  experiment      {string}            \"jnd\" or \"stevens\"   "
       },
       {
         "lineNumber": 76,
-        "line": " *         condition       {string}            Name of condition"
+        "line": " *         trial_structure {string}            \"foundational\" or \"design\"         "
       },
       {
         "lineNumber": 77,
-        "line": " *"
+        "line": " *         condition       {string}            Name of condition"
       },
       {
         "lineNumber": 78,
-        "line": " * @return dataset     [{assoc}, {assoc}, .... ]         "
+        "line": " *"
       },
       {
         "lineNumber": 79,
-        "line": " */"
+        "line": " * @return dataset     [{assoc}, {assoc}, .... ]         "
       },
       {
         "lineNumber": 80,
+        "line": " */"
+      },
+      {
+        "lineNumber": 81,
         "line": "function get_data_subset(experiment, trial_structure, condition) {"
       }
     ],
@@ -537,43 +537,43 @@
     "filePath": "scripts/experiments/estimation/estimation.js",
     "lines": [
       {
-        "lineNumber": 514,
+        "lineNumber": 524,
         "line": "    /**"
       },
       {
-        "lineNumber": 515,
+        "lineNumber": 525,
         "line": "     *"
       },
       {
-        "lineNumber": 516,
+        "lineNumber": 526,
         "line": "     * @param chart {object}"
       },
       {
-        "lineNumber": 517,
+        "lineNumber": 527,
         "line": "     * @param radius {number}"
       },
       {
-        "lineNumber": 518,
+        "lineNumber": 528,
         "line": "     * @param y_pos {number}"
       },
       {
-        "lineNumber": 519,
+        "lineNumber": 529,
         "line": "     * @param x_pos {number}"
       },
       {
-        "lineNumber": 520,
+        "lineNumber": 530,
         "line": "     * @param is_ref {boolean} if the shape is a reference shape or a modifiable shape,"
       },
       {
-        "lineNumber": 521,
+        "lineNumber": 531,
         "line": "     *                         is_ref === true if the shape is a reference shape"
       },
       {
-        "lineNumber": 522,
+        "lineNumber": 532,
         "line": "     */"
       },
       {
-        "lineNumber": 523,
+        "lineNumber": 533,
         "line": "    plot_triangle(chart, radius, y_pos, x_pos, is_ref, outline, fill) {"
       }
     ],
@@ -599,39 +599,39 @@
     "filePath": "scripts/experiments/jnd/jnd.js",
     "lines": [
       {
-        "lineNumber": 101,
+        "lineNumber": 102,
         "line": "  /**"
       },
       {
-        "lineNumber": 102,
+        "lineNumber": 103,
         "line": "   * Orders the input data according to balancing type and"
       },
       {
-        "lineNumber": 103,
+        "lineNumber": 104,
         "line": "   * initializes the JND object's variables.  "
       },
       {
-        "lineNumber": 104,
+        "lineNumber": 105,
         "line": "   *"
       },
       {
-        "lineNumber": 105,
+        "lineNumber": 106,
         "line": "   * @param  balancing_type {string}                             Type of balancing. Currently only latin_square"
       },
       {
-        "lineNumber": 106,
+        "lineNumber": 107,
         "line": "   *                                                             is supported."
       },
       {
-        "lineNumber": 107,
+        "lineNumber": 108,
         "line": "   *         dataset {[{assoc array}, {assoc array}, ... ]}      The data to be ordered. "
       },
       {
-        "lineNumber": 108,
+        "lineNumber": 109,
         "line": "   */ "
       },
       {
-        "lineNumber": 109,
+        "lineNumber": 110,
         "line": "  prepare_experiment() {"
       }
     ],
@@ -645,27 +645,27 @@
     "filePath": "scripts/experiments/jnd/jnd.js",
     "lines": [
       {
-        "lineNumber": 141,
+        "lineNumber": 142,
         "line": "  /**"
       },
       {
-        "lineNumber": 142,
+        "lineNumber": 143,
         "line": "   * Orders the input dataset by randomizing it, and initializes the practice variables."
       },
       {
-        "lineNumber": 143,
+        "lineNumber": 144,
         "line": "   *"
       },
       {
-        "lineNumber": 144,
+        "lineNumber": 145,
         "line": "   * @param  dataset {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. "
       },
       {
-        "lineNumber": 145,
+        "lineNumber": 146,
         "line": "   */"
       },
       {
-        "lineNumber": 146,
+        "lineNumber": 147,
         "line": "  prepare_practice() {"
       }
     ],
@@ -679,31 +679,31 @@
     "filePath": "scripts/experiments/jnd/jnd.js",
     "lines": [
       {
-        "lineNumber": 164,
+        "lineNumber": 165,
         "line": "  /**"
       },
       {
-        "lineNumber": 165,
+        "lineNumber": 166,
         "line": "   * Generates a JND trial object for use in the JsPsych timeline."
       },
       {
-        "lineNumber": 166,
+        "lineNumber": 167,
         "line": "   *"
       },
       {
-        "lineNumber": 167,
+        "lineNumber": 168,
         "line": "   * @param  type {string}             \"test\" or \"practice\""
       },
       {
-        "lineNumber": 168,
+        "lineNumber": 169,
         "line": "   * @return trial {object}"
       },
       {
-        "lineNumber": 169,
+        "lineNumber": 170,
         "line": "   */ "
       },
       {
-        "lineNumber": 170,
+        "lineNumber": 171,
         "line": "  generate_trial(block_type) {"
       }
     ],
@@ -719,119 +719,119 @@
     "filePath": "scripts/experiments/jnd/jnd.js",
     "lines": [
       {
-        "lineNumber": 266,
+        "lineNumber": 267,
         "line": "  /**"
       },
       {
-        "lineNumber": 267,
+        "lineNumber": 268,
         "line": "   * Handles saving the relevant data on a given trial."
       },
       {
-        "lineNumber": 268,
-        "line": "   *"
-      },
-      {
         "lineNumber": 269,
-        "line": "   * For reference, these are the helper variables created to assist in trial logic (i.e not present in excel)"
+        "line": "   *"
       },
       {
         "lineNumber": 270,
-        "line": "   * trial_variables =         "
+        "line": "   * For reference, these are the helper variables created to assist in trial logic (i.e not present in excel)"
       },
       {
         "lineNumber": 271,
-        "line": "   *       {type: 'jnd',"
+        "line": "   * trial_variables =         "
       },
       {
         "lineNumber": 272,
-        "line": "   *       run_type: '',"
+        "line": "   *       {type: 'jnd',"
       },
       {
         "lineNumber": 273,
-        "line": "   *       left_correlation: '',"
+        "line": "   *       run_type: '',"
       },
       {
         "lineNumber": 274,
-        "line": "   *       right_correlation: '',"
+        "line": "   *       left_correlation: '',"
       },
       {
         "lineNumber": 275,
-        "line": "   *       };"
+        "line": "   *       right_correlation: '',"
       },
       {
         "lineNumber": 276,
-        "line": "   *"
-      },
-      {
-        "lineNumber": 277,
-        "line": "   * These are variables created WITHIN the trial logic that were not present in excel (but need to be"
-      },
-      {
-        "lineNumber": 278,
-        "line": "   * outputted to results).     "
-      },
-      {
-        "lineNumber": 279,
-        "line": "   * export_variables = "
-      },
-      {
-        "lineNumber": 280,
-        "line": "   *       {sub_condition: '',           // Chronological ordering of sub_condition [1, 2, 3 ... ]"
-      },
-      {
-        "lineNumber": 281,
-        "line": "   *        balanced_sub_condition: '',  // Index of sub_condition according to balancing order"
-      },
-      {
-        "lineNumber": 282,
-        "line": "   *        jnd: '',"
-      },
-      {
-        "lineNumber": 283,
-        "line": "   *        base_correlation: '',"
-      },
-      {
-        "lineNumber": 284,
-        "line": "   *        adjusted_correlation: '',"
-      },
-      {
-        "lineNumber": 285,
-        "line": "   *        correct: '',"
-      },
-      {
-        "lineNumber": 286,
         "line": "   *       };"
       },
       {
-        "lineNumber": 287,
+        "lineNumber": 277,
         "line": "   *"
       },
       {
+        "lineNumber": 278,
+        "line": "   * These are variables created WITHIN the trial logic that were not present in excel (but need to be"
+      },
+      {
+        "lineNumber": 279,
+        "line": "   * outputted to results).     "
+      },
+      {
+        "lineNumber": 280,
+        "line": "   * export_variables = "
+      },
+      {
+        "lineNumber": 281,
+        "line": "   *       {sub_condition: '',           // Chronological ordering of sub_condition [1, 2, 3 ... ]"
+      },
+      {
+        "lineNumber": 282,
+        "line": "   *        balanced_sub_condition: '',  // Index of sub_condition according to balancing order"
+      },
+      {
+        "lineNumber": 283,
+        "line": "   *        jnd: '',"
+      },
+      {
+        "lineNumber": 284,
+        "line": "   *        base_correlation: '',"
+      },
+      {
+        "lineNumber": 285,
+        "line": "   *        adjusted_correlation: '',"
+      },
+      {
+        "lineNumber": 286,
+        "line": "   *        correct: '',"
+      },
+      {
+        "lineNumber": 287,
+        "line": "   *       };"
+      },
+      {
         "lineNumber": 288,
-        "line": "   * @param trial {object}"
+        "line": "   *"
       },
       {
         "lineNumber": 289,
-        "line": "   *        block_type {string}           \"test\" or \"practice\""
+        "line": "   * @param trial {object}"
       },
       {
         "lineNumber": 290,
-        "line": "   *        constants {assoc array}"
+        "line": "   *        block_type {string}           \"test\" or \"practice\""
       },
       {
         "lineNumber": 291,
-        "line": "   *        index {integer}"
+        "line": "   *        constants {assoc array}"
       },
       {
         "lineNumber": 292,
-        "line": "   *        adjusted_correlation {double}"
+        "line": "   *        index {integer}"
       },
       {
         "lineNumber": 293,
-        "line": "   */"
+        "line": "   *        adjusted_correlation {double}"
       },
       {
         "lineNumber": 294,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 295,
         "line": "  handle_data_saving(trial, block_type, constants, index, adjusted_correlation) {"
       }
     ],
@@ -851,39 +851,39 @@
     "filePath": "scripts/experiments/jnd/jnd.js",
     "lines": [
       {
-        "lineNumber": 445,
+        "lineNumber": 446,
         "line": "  /**"
       },
       {
-        "lineNumber": 446,
+        "lineNumber": 447,
         "line": "   * Initializes the adjusted correlation for the first time."
       },
       {
-        "lineNumber": 447,
+        "lineNumber": 448,
         "line": "   *"
       },
       {
-        "lineNumber": 448,
+        "lineNumber": 449,
         "line": "   * @param  converge_from_above {boolean}    "
       },
       {
-        "lineNumber": 449,
+        "lineNumber": 450,
         "line": "   *         base_correlation {double}         "
       },
       {
-        "lineNumber": 450,
+        "lineNumber": 451,
         "line": "   *         initial_difference {double}"
       },
       {
-        "lineNumber": 451,
+        "lineNumber": 452,
         "line": "   * @return adjusted_correlation {double}          "
       },
       {
-        "lineNumber": 452,
+        "lineNumber": 453,
         "line": "   */"
       },
       {
-        "lineNumber": 453,
+        "lineNumber": 454,
         "line": "  initialize_adjusted_statistic(converge_from_above, base_correlation, initial_difference) {"
       }
     ],
@@ -901,51 +901,51 @@
     "filePath": "scripts/experiments/jnd/jnd.js",
     "lines": [
       {
-        "lineNumber": 465,
+        "lineNumber": 466,
         "line": "  /**"
       },
       {
-        "lineNumber": 466,
+        "lineNumber": 467,
         "line": "   * Calculates the next adjusted correlation/statistic."
       },
       {
-        "lineNumber": 467,
+        "lineNumber": 468,
         "line": "   *"
       },
       {
-        "lineNumber": 468,
+        "lineNumber": 469,
         "line": "   * @param  correct {boolean}"
       },
       {
-        "lineNumber": 469,
+        "lineNumber": 470,
         "line": "   *         converge_from_above {boolean}    "
       },
       {
-        "lineNumber": 470,
+        "lineNumber": 471,
         "line": "   *         adjusted_quantity {double}         "
       },
       {
-        "lineNumber": 471,
+        "lineNumber": 472,
         "line": "   *         base_correlation {double}"
       },
       {
-        "lineNumber": 472,
+        "lineNumber": 473,
         "line": "   *         initial_difference {double}"
       },
       {
-        "lineNumber": 473,
+        "lineNumber": 474,
         "line": "   *         max_step_size {double}"
       },
       {
-        "lineNumber": 474,
+        "lineNumber": 475,
         "line": "   * @return adjusted_correlation {double}          "
       },
       {
-        "lineNumber": 475,
+        "lineNumber": 476,
         "line": "   */"
       },
       {
-        "lineNumber": 476,
+        "lineNumber": 477,
         "line": "  get_next_adjusted_statistic(correct, converge_from_above, adjusted_quantity, base_correlation, max_step_size) {"
       }
     ],
@@ -965,43 +965,43 @@
     "filePath": "scripts/experiments/jnd_radius/jnd_radius.js",
     "lines": [
       {
-        "lineNumber": 98,
+        "lineNumber": 99,
         "line": "  /**"
       },
       {
-        "lineNumber": 99,
+        "lineNumber": 100,
         "line": "   * Orders the input data according to balancing type and"
       },
       {
-        "lineNumber": 100,
+        "lineNumber": 101,
         "line": "   * initializes the JND object's variables.  "
       },
       {
-        "lineNumber": 101,
+        "lineNumber": 102,
         "line": "   *"
       },
       {
-        "lineNumber": 102,
+        "lineNumber": 103,
         "line": "   * @param  balancing_type {string}                             Type of balancing. Currently only latin_square"
       },
       {
-        "lineNumber": 103,
+        "lineNumber": 104,
         "line": "   *                                                             is supported."
       },
       {
-        "lineNumber": 104,
+        "lineNumber": 105,
         "line": "   *         data_set {[{assoc array}, {assoc array}, ... ]}     The data to be ordered. "
       },
       {
-        "lineNumber": 105,
+        "lineNumber": 106,
         "line": "   *         practice_set {[{assoc array}, {assoc array}, ... ]} The practice data. "
       },
       {
-        "lineNumber": 106,
+        "lineNumber": 107,
         "line": "   */ "
       },
       {
-        "lineNumber": 107,
+        "lineNumber": 108,
         "line": "  prepare_experiment() {"
       }
     ],
@@ -1015,31 +1015,31 @@
     "filePath": "scripts/experiments/jnd_radius/jnd_radius.js",
     "lines": [
       {
-        "lineNumber": 136,
+        "lineNumber": 137,
         "line": "  /**"
       },
       {
-        "lineNumber": 137,
+        "lineNumber": 138,
         "line": "   * Generates a JND trial object for use in the JsPsych timeline."
       },
       {
-        "lineNumber": 138,
+        "lineNumber": 139,
         "line": "   *"
       },
       {
-        "lineNumber": 139,
+        "lineNumber": 140,
         "line": "   * @param  type {string}             \"test\" or \"practice\""
       },
       {
-        "lineNumber": 140,
+        "lineNumber": 141,
         "line": "   * @return trial {object}"
       },
       {
-        "lineNumber": 141,
+        "lineNumber": 142,
         "line": "   */ "
       },
       {
-        "lineNumber": 142,
+        "lineNumber": 143,
         "line": "  generate_trial(block_type) {"
       }
     ],
@@ -1055,119 +1055,119 @@
     "filePath": "scripts/experiments/jnd_radius/jnd_radius.js",
     "lines": [
       {
-        "lineNumber": 209,
+        "lineNumber": 210,
         "line": "  /**"
       },
       {
-        "lineNumber": 210,
+        "lineNumber": 211,
         "line": "   * Handles saving the relevant data on a given trial."
       },
       {
-        "lineNumber": 211,
-        "line": "   *"
-      },
-      {
         "lineNumber": 212,
-        "line": "   * For reference, these are the helper variables created to assist in trial logic (i.e not present in excel)"
+        "line": "   *"
       },
       {
         "lineNumber": 213,
-        "line": "   * trial_variables =         "
+        "line": "   * For reference, these are the helper variables created to assist in trial logic (i.e not present in excel)"
       },
       {
         "lineNumber": 214,
-        "line": "   *       {type: 'jnd',"
+        "line": "   * trial_variables =         "
       },
       {
         "lineNumber": 215,
-        "line": "   *       run_type: '',"
+        "line": "   *       {type: 'jnd',"
       },
       {
         "lineNumber": 216,
-        "line": "   *       left_radius: '',"
+        "line": "   *       run_type: '',"
       },
       {
         "lineNumber": 217,
-        "line": "   *       right_radius: '',"
+        "line": "   *       left_radius: '',"
       },
       {
         "lineNumber": 218,
-        "line": "   *       };"
+        "line": "   *       right_radius: '',"
       },
       {
         "lineNumber": 219,
-        "line": "   *"
-      },
-      {
-        "lineNumber": 220,
-        "line": "   * These are variables created WITHIN the trial logic that were not present in excel (but need to be"
-      },
-      {
-        "lineNumber": 221,
-        "line": "   * outputted to results).     "
-      },
-      {
-        "lineNumber": 222,
-        "line": "   * export_variables = "
-      },
-      {
-        "lineNumber": 223,
-        "line": "   *       {sub_condition: '',           // Chronological ordering of sub_condition [1, 2, 3 ... ]"
-      },
-      {
-        "lineNumber": 224,
-        "line": "   *        balanced_sub_condition: '',  // Index of sub_condition according to balancing order"
-      },
-      {
-        "lineNumber": 225,
-        "line": "   *        jnd: '',"
-      },
-      {
-        "lineNumber": 226,
-        "line": "   *        base_radius: '',"
-      },
-      {
-        "lineNumber": 227,
-        "line": "   *        adjusted_radius: '',"
-      },
-      {
-        "lineNumber": 228,
-        "line": "   *        correct: '',"
-      },
-      {
-        "lineNumber": 229,
         "line": "   *       };"
       },
       {
-        "lineNumber": 230,
+        "lineNumber": 220,
         "line": "   *"
       },
       {
+        "lineNumber": 221,
+        "line": "   * These are variables created WITHIN the trial logic that were not present in excel (but need to be"
+      },
+      {
+        "lineNumber": 222,
+        "line": "   * outputted to results).     "
+      },
+      {
+        "lineNumber": 223,
+        "line": "   * export_variables = "
+      },
+      {
+        "lineNumber": 224,
+        "line": "   *       {sub_condition: '',           // Chronological ordering of sub_condition [1, 2, 3 ... ]"
+      },
+      {
+        "lineNumber": 225,
+        "line": "   *        balanced_sub_condition: '',  // Index of sub_condition according to balancing order"
+      },
+      {
+        "lineNumber": 226,
+        "line": "   *        jnd: '',"
+      },
+      {
+        "lineNumber": 227,
+        "line": "   *        base_radius: '',"
+      },
+      {
+        "lineNumber": 228,
+        "line": "   *        adjusted_radius: '',"
+      },
+      {
+        "lineNumber": 229,
+        "line": "   *        correct: '',"
+      },
+      {
+        "lineNumber": 230,
+        "line": "   *       };"
+      },
+      {
         "lineNumber": 231,
-        "line": "   * @param trial {object}"
+        "line": "   *"
       },
       {
         "lineNumber": 232,
-        "line": "   *        block_type {string}           \"test\" or \"practice\""
+        "line": "   * @param trial {object}"
       },
       {
         "lineNumber": 233,
-        "line": "   *        constants {assoc array}"
+        "line": "   *        block_type {string}           \"test\" or \"practice\""
       },
       {
         "lineNumber": 234,
-        "line": "   *        index {integer}"
+        "line": "   *        constants {assoc array}"
       },
       {
         "lineNumber": 235,
-        "line": "   *        adjusted_correlation {double}"
+        "line": "   *        index {integer}"
       },
       {
         "lineNumber": 236,
-        "line": "   */"
+        "line": "   *        adjusted_correlation {double}"
       },
       {
         "lineNumber": 237,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 238,
         "line": "  handle_data_saving(trial, block_type, constants, index, adjusted_radius) {"
       }
     ],
@@ -1187,39 +1187,39 @@
     "filePath": "scripts/experiments/jnd_radius/jnd_radius.js",
     "lines": [
       {
-        "lineNumber": 387,
+        "lineNumber": 388,
         "line": "  /**"
       },
       {
-        "lineNumber": 388,
+        "lineNumber": 389,
         "line": "   * Initializes the adjusted radius for the first time."
       },
       {
-        "lineNumber": 389,
+        "lineNumber": 390,
         "line": "   *"
       },
       {
-        "lineNumber": 390,
+        "lineNumber": 391,
         "line": "   * @param  converge_from_above {boolean}    "
       },
       {
-        "lineNumber": 391,
+        "lineNumber": 392,
         "line": "   *         base_radius {double}         "
       },
       {
-        "lineNumber": 392,
+        "lineNumber": 393,
         "line": "   *         initial_difference {double}"
       },
       {
-        "lineNumber": 393,
+        "lineNumber": 394,
         "line": "   * @return adjusted_radius {double}          "
       },
       {
-        "lineNumber": 394,
+        "lineNumber": 395,
         "line": "   */"
       },
       {
-        "lineNumber": 395,
+        "lineNumber": 396,
         "line": "  initialize_adjusted_statistic(converge_from_above, base_radius, initial_difference) {"
       }
     ],
@@ -1237,51 +1237,51 @@
     "filePath": "scripts/experiments/jnd_radius/jnd_radius.js",
     "lines": [
       {
-        "lineNumber": 407,
+        "lineNumber": 408,
         "line": "  /**"
       },
       {
-        "lineNumber": 408,
+        "lineNumber": 409,
         "line": "   * Calculates the next adjusted correlation/statistic."
       },
       {
-        "lineNumber": 409,
-        "line": "   *"
-      },
-      {
         "lineNumber": 410,
-        "line": "   * @param  correct {boolean}"
+        "line": "   *"
       },
       {
         "lineNumber": 411,
-        "line": "   *         converge_from_above {boolean}    "
+        "line": "   * @param  correct {boolean}"
       },
       {
         "lineNumber": 412,
-        "line": "   *         adjusted_quantity {double}         "
+        "line": "   *         converge_from_above {boolean}    "
       },
       {
         "lineNumber": 413,
-        "line": "   *         base_correlation {double}"
+        "line": "   *         adjusted_quantity {double}         "
       },
       {
         "lineNumber": 414,
-        "line": "   *         initial_difference {double}"
+        "line": "   *         base_correlation {double}"
       },
       {
         "lineNumber": 415,
-        "line": "   *"
+        "line": "   *         initial_difference {double}"
       },
       {
         "lineNumber": 416,
-        "line": "   * @return adjusted_correlation {double}          "
+        "line": "   *"
       },
       {
         "lineNumber": 417,
-        "line": "   */"
+        "line": "   * @return adjusted_correlation {double}          "
       },
       {
         "lineNumber": 418,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 419,
         "line": "  get_next_adjusted_statistic(correct, converge_from_above, adjusted_quantity, base_radius) {"
       }
     ],
@@ -1300,39 +1300,39 @@
     "filePath": "scripts/experiments/stevens/stevens.js",
     "lines": [
       {
-        "lineNumber": 102,
+        "lineNumber": 103,
         "line": "  /**"
       },
       {
-        "lineNumber": 103,
+        "lineNumber": 104,
         "line": "   * Orders the input data according to balancing type and"
       },
       {
-        "lineNumber": 104,
+        "lineNumber": 105,
         "line": "   * initializes the Stevens object's variables.  "
       },
       {
-        "lineNumber": 105,
+        "lineNumber": 106,
         "line": "   *"
       },
       {
-        "lineNumber": 106,
+        "lineNumber": 107,
         "line": "   * @param  balancing_type {string}                           Type of balancing. Currently only latin_square"
       },
       {
-        "lineNumber": 107,
+        "lineNumber": 108,
         "line": "   *                                                           is supported."
       },
       {
-        "lineNumber": 108,
+        "lineNumber": 109,
         "line": "   *         dataset {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. "
       },
       {
-        "lineNumber": 109,
+        "lineNumber": 110,
         "line": "   */"
       },
       {
-        "lineNumber": 110,
+        "lineNumber": 111,
         "line": "  prepare_experiment() {"
       }
     ],
@@ -1346,27 +1346,27 @@
     "filePath": "scripts/experiments/stevens/stevens.js",
     "lines": [
       {
-        "lineNumber": 147,
+        "lineNumber": 148,
         "line": "  /**"
       },
       {
-        "lineNumber": 148,
+        "lineNumber": 149,
         "line": "   * Creates the practice dataset by taking the first FOUR subconditions."
       },
       {
-        "lineNumber": 149,
+        "lineNumber": 150,
         "line": "   *"
       },
       {
-        "lineNumber": 150,
+        "lineNumber": 151,
         "line": "   * @param  dataset {[{assoc array}, {assoc array}, ... ]}   The data to be ordered. "
       },
       {
-        "lineNumber": 151,
+        "lineNumber": 152,
         "line": "   */"
       },
       {
-        "lineNumber": 152,
+        "lineNumber": 153,
         "line": "  prepare_practice() {"
       }
     ],
@@ -1380,31 +1380,31 @@
     "filePath": "scripts/experiments/stevens/stevens.js",
     "lines": [
       {
-        "lineNumber": 383,
+        "lineNumber": 384,
         "line": "  /**"
       },
       {
-        "lineNumber": 384,
+        "lineNumber": 385,
         "line": "   * Generates a Stevens object for use in the JsPsych timeline."
       },
       {
-        "lineNumber": 385,
+        "lineNumber": 386,
         "line": "   *"
       },
       {
-        "lineNumber": 386,
+        "lineNumber": 387,
         "line": "   * @param  type {string}                             \"test\" or \"practice\""
       },
       {
-        "lineNumber": 387,
+        "lineNumber": 388,
         "line": "   * @return trial {object}"
       },
       {
-        "lineNumber": 388,
+        "lineNumber": 389,
         "line": "   */   "
       },
       {
-        "lineNumber": 389,
+        "lineNumber": 390,
         "line": "  generate_trial(block_type) {"
       }
     ],
@@ -1420,47 +1420,47 @@
     "filePath": "scripts/experiments/stevens/stevens.js",
     "lines": [
       {
-        "lineNumber": 514,
+        "lineNumber": 515,
         "line": "  /**"
       },
       {
-        "lineNumber": 515,
+        "lineNumber": 516,
         "line": "   * Retrieves the last stevens trial depending on block_type for a"
       },
       {
-        "lineNumber": 516,
+        "lineNumber": 517,
         "line": "   * given sub condition index. "
       },
       {
-        "lineNumber": 517,
+        "lineNumber": 518,
         "line": "   * If this is the first trial of a given block_type, returns null. "
       },
       {
-        "lineNumber": 518,
+        "lineNumber": 519,
         "line": "   *"
       },
       {
-        "lineNumber": 519,
+        "lineNumber": 520,
         "line": "   * @param  trial {object}   "
       },
       {
-        "lineNumber": 520,
+        "lineNumber": 521,
         "line": "   *         block_type {string}          \"test\" or \"practice\"         "
       },
       {
-        "lineNumber": 521,
+        "lineNumber": 522,
         "line": "   *         index {integer}"
       },
       {
-        "lineNumber": 522,
+        "lineNumber": 523,
         "line": "   * @return last_stevens_trial {object}           "
       },
       {
-        "lineNumber": 523,
+        "lineNumber": 524,
         "line": "   */"
       },
       {
-        "lineNumber": 524,
+        "lineNumber": 525,
         "line": "  get_last_trial(trial, block_type, index) {"
       }
     ],
@@ -1478,135 +1478,135 @@
     "filePath": "scripts/experiments/stevens/stevens.js",
     "lines": [
       {
-        "lineNumber": 553,
+        "lineNumber": 554,
         "line": "  /**"
       },
       {
-        "lineNumber": 554,
+        "lineNumber": 555,
         "line": "   * Handles saving the relevant data on a given trial."
       },
       {
-        "lineNumber": 555,
-        "line": "   *"
-      },
-      {
         "lineNumber": 556,
-        "line": "   * For reference, these are the helper variables created to assist in trial logic (i.e not present in excel)"
+        "line": "   *"
       },
       {
         "lineNumber": 557,
-        "line": "   * this.trial_variables =         "
+        "line": "   * For reference, these are the helper variables created to assist in trial logic (i.e not present in excel)"
       },
       {
         "lineNumber": 558,
-        "line": "   *       {type: 'stevens',"
+        "line": "   * this.trial_variables =         "
       },
       {
         "lineNumber": 559,
-        "line": "   *       run_type: '',"
+        "line": "   *       {type: 'stevens',"
       },
       {
         "lineNumber": 560,
-        "line": "   *       left_correlation: '',"
+        "line": "   *       run_type: '',"
       },
       {
         "lineNumber": 561,
-        "line": "   *       right_correlation: '',"
+        "line": "   *       left_correlation: '',"
       },
       {
         "lineNumber": 562,
-        "line": "   *       round_refreshes: 0,      // Number of times there is a refresh for a given round "
+        "line": "   *       right_correlation: '',"
       },
       {
         "lineNumber": 563,
-        "line": "   *       high_ref_is_right: false"
+        "line": "   *       round_refreshes: 0,      // Number of times there is a refresh for a given round "
       },
       {
         "lineNumber": 564,
-        "line": "   *       start_ref: ''"
+        "line": "   *       high_ref_is_right: false"
       },
       {
         "lineNumber": 565,
-        "line": "   *       };"
+        "line": "   *       start_ref: ''"
       },
       {
         "lineNumber": 566,
-        "line": "   *"
-      },
-      {
-        "lineNumber": 567,
-        "line": "   * These are variables created WITHIN the trial logic that were not present in excel (but need to be"
-      },
-      {
-        "lineNumber": 568,
-        "line": "   * outputted to results).         "
-      },
-      {
-        "lineNumber": 569,
-        "line": "   * this.export_variables = "
-      },
-      {
-        "lineNumber": 570,
-        "line": "   *       {trial_num: 0,                // Round index trial is currently on (aka trial_num from excel)"
-      },
-      {
-        "lineNumber": 571,
-        "line": "   *        sub_condition: '',           // Chronological ordering of sub_condition [1, 2, 3 ... ]"
-      },
-      {
-        "lineNumber": 572,
-        "line": "   *        balanced_sub_condition: '',  // Index of sub_condition according to balancing order"
-      },
-      {
-        "lineNumber": 573,
-        "line": "   *        estimated_mid: '',"
-      },
-      {
-        "lineNumber": 574,
-        "line": "   *        num_adjustments: 0,          // Number of inputs for a given round (aka num_adjustments from excel)"
-      },
-      {
-        "lineNumber": 575,
-        "line": "   *        trials_per_round: '',"
-      },
-      {
-        "lineNumber": 576,
         "line": "   *       };"
       },
       {
-        "lineNumber": 577,
+        "lineNumber": 567,
         "line": "   *"
       },
       {
+        "lineNumber": 568,
+        "line": "   * These are variables created WITHIN the trial logic that were not present in excel (but need to be"
+      },
+      {
+        "lineNumber": 569,
+        "line": "   * outputted to results).         "
+      },
+      {
+        "lineNumber": 570,
+        "line": "   * this.export_variables = "
+      },
+      {
+        "lineNumber": 571,
+        "line": "   *       {trial_num: 0,                // Round index trial is currently on (aka trial_num from excel)"
+      },
+      {
+        "lineNumber": 572,
+        "line": "   *        sub_condition: '',           // Chronological ordering of sub_condition [1, 2, 3 ... ]"
+      },
+      {
+        "lineNumber": 573,
+        "line": "   *        balanced_sub_condition: '',  // Index of sub_condition according to balancing order"
+      },
+      {
+        "lineNumber": 574,
+        "line": "   *        estimated_mid: '',"
+      },
+      {
+        "lineNumber": 575,
+        "line": "   *        num_adjustments: 0,          // Number of inputs for a given round (aka num_adjustments from excel)"
+      },
+      {
+        "lineNumber": 576,
+        "line": "   *        trials_per_round: '',"
+      },
+      {
+        "lineNumber": 577,
+        "line": "   *       };"
+      },
+      {
         "lineNumber": 578,
-        "line": "   * @param trial {object}"
+        "line": "   *"
       },
       {
         "lineNumber": 579,
-        "line": "   *        block_type {string}               \"test\" or \"practice\""
+        "line": "   * @param trial {object}"
       },
       {
         "lineNumber": 580,
-        "line": "   *        constants {assoc array}"
+        "line": "   *        block_type {string}               \"test\" or \"practice\""
       },
       {
         "lineNumber": 581,
-        "line": "   *        estimated_correlation {double}"
+        "line": "   *        constants {assoc array}"
       },
       {
         "lineNumber": 582,
-        "line": "   *        last_stevens_trial {object}"
+        "line": "   *        estimated_correlation {double}"
       },
       {
         "lineNumber": 583,
-        "line": "   *        index {integer}"
+        "line": "   *        last_stevens_trial {object}"
       },
       {
         "lineNumber": 584,
-        "line": "   */"
+        "line": "   *        index {integer}"
       },
       {
         "lineNumber": 585,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 586,
         "line": "  handle_data_saving(trial, block_type, constants, estimated_correlation, last_stevens_trial, index) {"
       }
     ],
@@ -1627,67 +1627,67 @@
     "filePath": "scripts/experiments/stevens/stevens.js",
     "lines": [
       {
-        "lineNumber": 638,
+        "lineNumber": 639,
         "line": "  /**"
       },
       {
-        "lineNumber": 639,
+        "lineNumber": 640,
         "line": "   * Updates the estimated correlation."
       },
       {
-        "lineNumber": 640,
+        "lineNumber": 641,
         "line": "   * If  : "
       },
       {
-        "lineNumber": 641,
+        "lineNumber": 642,
         "line": "   *    Is the first trial, will initialize the correlation and step size."
       },
       {
-        "lineNumber": 642,
+        "lineNumber": 643,
         "line": "   * Else:"
       },
       {
-        "lineNumber": 643,
+        "lineNumber": 644,
         "line": "   *    If there was a key press in previous trial, will calculate the"
       },
       {
-        "lineNumber": 644,
+        "lineNumber": 645,
         "line": "   *    the estimated correlation (depending on whether it was an inc or dec)."
       },
       {
-        "lineNumber": 645,
+        "lineNumber": 646,
         "line": "   *    Else if no key press in previous trial, will set estimated correlation"
       },
       {
-        "lineNumber": 646,
+        "lineNumber": 647,
         "line": "   *    to the previous trial's. "
       },
       {
-        "lineNumber": 647,
+        "lineNumber": 648,
         "line": "   *"
       },
       {
-        "lineNumber": 648,
+        "lineNumber": 649,
         "line": "   * @param  trial {object}   "
       },
       {
-        "lineNumber": 649,
+        "lineNumber": 650,
         "line": "   *         constants {object}         "
       },
       {
-        "lineNumber": 650,
+        "lineNumber": 651,
         "line": "   *         last_trial {object}"
       },
       {
-        "lineNumber": 651,
+        "lineNumber": 652,
         "line": "   * @return estimated_correlation {double}           "
       },
       {
-        "lineNumber": 652,
+        "lineNumber": 653,
         "line": "   */"
       },
       {
-        "lineNumber": 653,
+        "lineNumber": 654,
         "line": "  update_estimated_correlation(trial, constants, last_trial) {"
       }
     ],

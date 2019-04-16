@@ -3,7 +3,7 @@ var CONDITIONS = {
 	base: {
 		experiment: ["jnd", "stevens"],
 		graph_type: ["scatter", "strip"],
-		trial_structure: "foundational",
+		trial_structure: ["foundational"],
 		balancing: "latin_square",
 		display_name: "Base",
 		display_info: {
@@ -267,7 +267,7 @@ var CONDITIONS = {
 		experiment: ["jnd", "stevens"],
 		graph_type: ["scatter"],
 		trial_structure: ["design"],
-		balancing: ["latin_square"],
+		balancing: "latin_square",
 		display_name: "Distractor Diamond Square Blue Hue",
 		display_info: {
 			description: "Part of the series of Distractor Diamond-Square experiments across Red/Blue/Green/Yellow colors and for axes Hue, " +
@@ -531,7 +531,13 @@ var CONDITIONS = {
 		graph_type: ["shapes"],
 		trial_structure: ["estimation"],
 		balancing: "random",
-		display_name: "Circle, Square, Triangle"
+		display_name: "Circle, Square, Triangle",
+		display_info: {
+			description: "User must manipulate the size of the reference shape to match that of the target shape. Shapes " +
+						 "presented are subject to the condition being run.",
+			researcher: "Tina Qi",
+			developer: "Zoe Zhao"
+		}
 	},
 
 	line_length: {
@@ -539,7 +545,13 @@ var CONDITIONS = {
 		graph_type: ["shapes"],
 		trial_structure: ["estimation"],
 		balancing: "random",
-		display_name: "Line Length"
+		display_name: "Line Length",
+		display_info: {
+			description: "User must manipulate the size of the reference shape to match that of the target shape. Shapes " +
+						 "presented are subject to the condition being run.",
+			researcher: "Tina Qi",
+			developer: "Zoe Zhao"
+		}
 	},
 
 	rectangle_square: {
@@ -547,7 +559,13 @@ var CONDITIONS = {
 		graph_type: ["shapes"],
 		trial_structure: ["estimation"],
 		balancing: "random",
-		display_name: "Rectangle, Square"
+		display_name: "Rectangle, Square",
+		display_info: {
+			description: "User must manipulate the size of the reference shape to match that of the target shape. Shapes " +
+						 "presented are subject to the condition being run.",
+			researcher: "Tina Qi",
+			developer: "Zoe Zhao"
+		}
 	},
 
 	triangle: {
@@ -555,7 +573,13 @@ var CONDITIONS = {
 		graph_type: ["shapes"],
 		trial_structure: ["estimation"],
 		balancing: "random",
-		display_name: "Triangle"
+		display_name: "Triangle",
+		display_info: {
+			description: "User must manipulate the size of the reference shape to match that of the target shape. Shapes " +
+						 "presented are subject to the condition being run.",
+			researcher: "Tina Qi",
+			developer: "Zoe Zhao"
+		}
 	},
 
 	rectangle_rotated_square_solid: {
@@ -563,7 +587,13 @@ var CONDITIONS = {
 		graph_type: ["shapes"],
 		trial_structure: ["estimation"],
 		balancing: "random",
-		display_name: "Rectangle Rotated Square Solid"
+		display_name: "Rectangle Rotated Square Solid",
+		display_info: {
+			description: "User must manipulate the size of the reference shape to match that of the target shape. Shapes " +
+						 "presented are subject to the condition being run.",
+			researcher: "Tina Qi",
+			developer: "Zoe Zhao"
+		}
 	},
 
 	rectangle_rotated_square_outline: {
@@ -571,7 +601,13 @@ var CONDITIONS = {
 		graph_type: ["shapes"],
 		trial_structure: ["estimation"],
 		balancing: "random",
-		display_name: "Rectangle Rotated Square Outline"
+		display_name: "Rectangle Rotated Square Outline",
+		display_info: {
+			description: "User must manipulate the size of the reference shape to match that of the target shape. Shapes " +
+						 "presented are subject to the condition being run.",
+			researcher: "Tina Qi",
+			developer: "Zoe Zhao"
+		}
 	},
 
 	distractor_blue_shades: {

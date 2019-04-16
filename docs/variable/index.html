@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../">
-  <title data-ice="title">Variable | huh</title>
+  <title data-ice="title">Variable | VCL Framework</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="huh"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -53,7 +53,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_scatter_points">plot_scatter_points</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_shape_plot">create_shape_plot</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_strip_plot">create_strip_plot</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_distractor_scatter_plot">prepare_distractor_scatter_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_distractor_scatter_plot">create_distractor_scatter_plot</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-estimation">experiments/estimation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html">Estimation</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-estimation_exp">estimation_exp</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd">experiments/jnd</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd/jnd.js~JND.html">JND</a></span></span></li>
@@ -228,7 +228,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-JND_CONDITIONS">JND_CONDITIONS</a></span></span><span class="code" data-ice="signature">: {&quot;distractor_rainbow&quot;: <span>*</span>, &quot;distractor_square_red_hue&quot;: <span>*</span>, &quot;distractor_square_red_lum&quot;: <span>*</span>, &quot;distractor_square_red_chrom&quot;: <span>*</span>, &quot;distractor_square_yellow_hue&quot;: <span>*</span>, &quot;distractor_square_yellow_lum&quot;: <span>*</span>, &quot;distractor_square_yellow_chrom&quot;: <span>*</span>, &quot;distractor_square_blue_hue&quot;: <span>*</span>, &quot;distractor_square_blue_lum&quot;: <span>*</span>, &quot;distractor_square_blue_chrom&quot;: <span>*</span>, &quot;distractor_square_green_hue&quot;: <span>*</span>, &quot;distractor_square_green_lum&quot;: <span>*</span>, &quot;distractor_square_green_chrom&quot;: <span>*</span>, &quot;distractor_multi&quot;: <span>*</span>, &quot;distractor_blue_shades&quot;: <span>*</span>, &quot;distractor_red_shades&quot;: <span>*</span>, &quot;distractor_yellow_shades&quot;: <span>*</span>, &quot;distractor_control_shades&quot;: <span>*</span>, &quot;strip_ring_size&quot;: <span>*</span>, &quot;line_length_strip&quot;: <span>*</span>}</span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-JND_CONDITIONS">JND_CONDITIONS</a></span></span><span class="code" data-ice="signature">: {&quot;distractor_rainbow&quot;: <span>*</span>, &quot;distractor_square_red_hue&quot;: <span>*</span>, &quot;distractor_square_red_lum&quot;: <span>*</span>, &quot;distractor_square_red_chrom&quot;: <span>*</span>, &quot;distractor_square_yellow_hue&quot;: <span>*</span>, &quot;distractor_square_yellow_lum&quot;: <span>*</span>, &quot;distractor_square_yellow_chrom&quot;: <span>*</span>, &quot;distractor_square_blue_hue&quot;: <span>*</span>, &quot;distractor_square_blue_lum&quot;: <span>*</span>, &quot;distractor_square_blue_chrom&quot;: <span>*</span>, &quot;distractor_square_green_hue&quot;: <span>*</span>, &quot;distractor_square_green_lum&quot;: <span>*</span>, &quot;distractor_square_green_chrom&quot;: <span>*</span>, &quot;distractor_multi&quot;: <span>*</span>, &quot;distractor_blue_shades&quot;: <span>*</span>, &quot;distractor_red_shades&quot;: <span>*</span>, &quot;distractor_yellow_shades&quot;: <span>*</span>, &quot;distractor_control_shades&quot;: <span>*</span>, &quot;strip_ring_size&quot;: <span>*</span>, &quot;line_length_strip&quot;: <span>*</span>, &quot;distractor_ratio_pilot&quot;: <span>*</span>}</span>
         </p>
       </div>
       <div>
@@ -487,7 +487,7 @@
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {CUSTOM_TRIAL_STRUCTURE_CONDITIONS} from &apos;<span><a href="file/scripts/experiment-properties/data/custom_subcondition_generator.js.html#lineNumber4">huh/scripts/experiment-properties/data/custom_subcondition_generator.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {CUSTOM_TRIAL_STRUCTURE_CONDITIONS} from &apos;<span><a href="file/scripts/experiment-properties/data/custom_subcondition_generator.js.html#lineNumber4">VCL Framework/scripts/experiment-properties/data/custom_subcondition_generator.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -530,7 +530,7 @@
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {ESTIMATION_BASE} from &apos;<span><a href="file/scripts/experiment-properties/data/constants/estimation_data.js.html#lineNumber8">huh/scripts/experiment-properties/data/constants/estimation_data.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {ESTIMATION_BASE} from &apos;<span><a href="file/scripts/experiment-properties/data/constants/estimation_data.js.html#lineNumber8">VCL Framework/scripts/experiment-properties/data/constants/estimation_data.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -573,7 +573,7 @@
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {EXPERIMENT_BASES} from &apos;<span><a href="file/scripts/experiment-properties/data/data_controller.js.html#lineNumber13">huh/scripts/experiment-properties/data/data_controller.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {EXPERIMENT_BASES} from &apos;<span><a href="file/scripts/experiment-properties/data/data_controller.js.html#lineNumber13">VCL Framework/scripts/experiment-properties/data/data_controller.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -616,7 +616,7 @@
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {EXPERIMENT_CONDITIONS} from &apos;<span><a href="file/scripts/experiment-properties/data/data_controller.js.html#lineNumber20">huh/scripts/experiment-properties/data/data_controller.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {EXPERIMENT_CONDITIONS} from &apos;<span><a href="file/scripts/experiment-properties/data/data_controller.js.html#lineNumber20">VCL Framework/scripts/experiment-properties/data/data_controller.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -659,7 +659,7 @@
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {JND_BASE} from &apos;<span><a href="file/scripts/experiment-properties/data/constants/jnd_data.js.html#lineNumber3">huh/scripts/experiment-properties/data/constants/jnd_data.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {JND_BASE} from &apos;<span><a href="file/scripts/experiment-properties/data/constants/jnd_data.js.html#lineNumber3">VCL Framework/scripts/experiment-properties/data/constants/jnd_data.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -694,7 +694,7 @@
     
     
     
-    <span class="code" data-ice="name">JND_CONDITIONS</span><span class="code" data-ice="signature">: {&quot;distractor_rainbow&quot;: <span>*</span>, &quot;distractor_square_red_hue&quot;: <span>*</span>, &quot;distractor_square_red_lum&quot;: <span>*</span>, &quot;distractor_square_red_chrom&quot;: <span>*</span>, &quot;distractor_square_yellow_hue&quot;: <span>*</span>, &quot;distractor_square_yellow_lum&quot;: <span>*</span>, &quot;distractor_square_yellow_chrom&quot;: <span>*</span>, &quot;distractor_square_blue_hue&quot;: <span>*</span>, &quot;distractor_square_blue_lum&quot;: <span>*</span>, &quot;distractor_square_blue_chrom&quot;: <span>*</span>, &quot;distractor_square_green_hue&quot;: <span>*</span>, &quot;distractor_square_green_lum&quot;: <span>*</span>, &quot;distractor_square_green_chrom&quot;: <span>*</span>, &quot;distractor_multi&quot;: <span>*</span>, &quot;distractor_blue_shades&quot;: <span>*</span>, &quot;distractor_red_shades&quot;: <span>*</span>, &quot;distractor_yellow_shades&quot;: <span>*</span>, &quot;distractor_control_shades&quot;: <span>*</span>, &quot;strip_ring_size&quot;: <span>*</span>, &quot;line_length_strip&quot;: <span>*</span>}</span>
+    <span class="code" data-ice="name">JND_CONDITIONS</span><span class="code" data-ice="signature">: {&quot;distractor_rainbow&quot;: <span>*</span>, &quot;distractor_square_red_hue&quot;: <span>*</span>, &quot;distractor_square_red_lum&quot;: <span>*</span>, &quot;distractor_square_red_chrom&quot;: <span>*</span>, &quot;distractor_square_yellow_hue&quot;: <span>*</span>, &quot;distractor_square_yellow_lum&quot;: <span>*</span>, &quot;distractor_square_yellow_chrom&quot;: <span>*</span>, &quot;distractor_square_blue_hue&quot;: <span>*</span>, &quot;distractor_square_blue_lum&quot;: <span>*</span>, &quot;distractor_square_blue_chrom&quot;: <span>*</span>, &quot;distractor_square_green_hue&quot;: <span>*</span>, &quot;distractor_square_green_lum&quot;: <span>*</span>, &quot;distractor_square_green_chrom&quot;: <span>*</span>, &quot;distractor_multi&quot;: <span>*</span>, &quot;distractor_blue_shades&quot;: <span>*</span>, &quot;distractor_red_shades&quot;: <span>*</span>, &quot;distractor_yellow_shades&quot;: <span>*</span>, &quot;distractor_control_shades&quot;: <span>*</span>, &quot;strip_ring_size&quot;: <span>*</span>, &quot;line_length_strip&quot;: <span>*</span>, &quot;distractor_ratio_pilot&quot;: <span>*</span>}</span>
     <span class="right-info">
       
       
@@ -702,7 +702,7 @@
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {JND_CONDITIONS} from &apos;<span><a href="file/scripts/experiment-properties/data/constants/jnd_data.js.html#lineNumber76">huh/scripts/experiment-properties/data/constants/jnd_data.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {JND_CONDITIONS} from &apos;<span><a href="file/scripts/experiment-properties/data/constants/jnd_data.js.html#lineNumber76">VCL Framework/scripts/experiment-properties/data/constants/jnd_data.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -745,7 +745,7 @@
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {JND_RADIUS_BASE} from &apos;<span><a href="file/scripts/experiment-properties/data/constants/jnd_radius_data.js.html#lineNumber3">huh/scripts/experiment-properties/data/constants/jnd_radius_data.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {JND_RADIUS_BASE} from &apos;<span><a href="file/scripts/experiment-properties/data/constants/jnd_radius_data.js.html#lineNumber3">VCL Framework/scripts/experiment-properties/data/constants/jnd_radius_data.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -788,7 +788,7 @@
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {JND_RADIUS_CONDITIONS} from &apos;<span><a href="file/scripts/experiment-properties/data/constants/jnd_radius_data.js.html#lineNumber19">huh/scripts/experiment-properties/data/constants/jnd_radius_data.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {JND_RADIUS_CONDITIONS} from &apos;<span><a href="file/scripts/experiment-properties/data/constants/jnd_radius_data.js.html#lineNumber19">VCL Framework/scripts/experiment-properties/data/constants/jnd_radius_data.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -831,7 +831,7 @@
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {STEVENS_BASE} from &apos;<span><a href="file/scripts/experiment-properties/data/constants/stevens_data.js.html#lineNumber3">huh/scripts/experiment-properties/data/constants/stevens_data.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {STEVENS_BASE} from &apos;<span><a href="file/scripts/experiment-properties/data/constants/stevens_data.js.html#lineNumber3">VCL Framework/scripts/experiment-properties/data/constants/stevens_data.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -874,7 +874,7 @@
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {STEVENS_CONDITIONS} from &apos;<span><a href="file/scripts/experiment-properties/data/constants/stevens_data.js.html#lineNumber52">huh/scripts/experiment-properties/data/constants/stevens_data.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {STEVENS_CONDITIONS} from &apos;<span><a href="file/scripts/experiment-properties/data/constants/stevens_data.js.html#lineNumber52">VCL Framework/scripts/experiment-properties/data/constants/stevens_data.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -917,7 +917,7 @@
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {estimation_exp} from &apos;<span><a href="file/scripts/experiments/estimation/estimation_timeline.js.html#lineNumber2">huh/scripts/experiments/estimation/estimation_timeline.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {estimation_exp} from &apos;<span><a href="file/scripts/experiments/estimation/estimation_timeline.js.html#lineNumber2">VCL Framework/scripts/experiments/estimation/estimation_timeline.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -960,7 +960,7 @@
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {jnd_exp} from &apos;<span><a href="file/scripts/experiments/jnd/jnd_timeline.js.html#lineNumber2">huh/scripts/experiments/jnd/jnd_timeline.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {jnd_exp} from &apos;<span><a href="file/scripts/experiments/jnd/jnd_timeline.js.html#lineNumber2">VCL Framework/scripts/experiments/jnd/jnd_timeline.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -1003,7 +1003,7 @@
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {jnd_radius_exp} from &apos;<span><a href="file/scripts/experiments/jnd_radius/jnd_radius_timeline.js.html#lineNumber2">huh/scripts/experiments/jnd_radius/jnd_radius_timeline.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {jnd_radius_exp} from &apos;<span><a href="file/scripts/experiments/jnd_radius/jnd_radius_timeline.js.html#lineNumber2">VCL Framework/scripts/experiments/jnd_radius/jnd_radius_timeline.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -1046,7 +1046,7 @@
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {stevens_exp} from &apos;<span><a href="file/scripts/experiments/stevens/stevens_timeline.js.html#lineNumber2">huh/scripts/experiments/stevens/stevens_timeline.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {stevens_exp} from &apos;<span><a href="file/scripts/experiments/stevens/stevens_timeline.js.html#lineNumber2">VCL Framework/scripts/experiments/stevens/stevens_timeline.js</a></span>&apos;</code></pre></div>
   
   
   
