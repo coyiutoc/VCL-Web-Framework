@@ -134,7 +134,7 @@ function plot_scatter_points(chart, xscale, yscale, data, point_size, point_colo
                   .attr("cy", function (d) {
                     return yscale(d[1]);
                   })
-                  .attr("r", point_size).style("fill", point_color);
+                  .attr("r", point_size/2).style("fill", point_color);
       break;
   }
 }
