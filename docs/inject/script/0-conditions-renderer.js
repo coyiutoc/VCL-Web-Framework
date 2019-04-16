@@ -1,22 +1,5 @@
-window.onload = function() {
+function render_conditions_navigation(){
 
-	if (document.getElementById("conditions")){
-		// Add jQuery
-		var script = document.createElement('script');
-		script.type = 'text/javascript';
-		script.onload = function() {
-
-			// Add content after jQuery is loaded
-			render_conditions();
-		}
-		script.src = "https://code.jquery.com/jquery-3.1.1.min.js";  
-
-		document.getElementsByTagName('head')[0].appendChild(script);
-	}
-}
-
-function render_conditions(){
-	
 	let target_li = $("[data-link = 'manual/conditions.html']");
 	let li_html = "";
 
@@ -32,7 +15,10 @@ function render_conditions(){
 	}
 
 	target_li.after(li_html);
+}
 
+function render_conditions(){
+	
 	for (let exp_key in EXPERIMENTS) {
 
 		let exp = EXPERIMENTS[exp_key];
@@ -81,23 +67,4 @@ function render_conditions(){
 		$(".github-markdown").append(html);
 	}
 
-}
-
-function stringify_array(array){
-	let result = "";
-	for (let obj of array) {
-		result += humanize(obj) + ", ";
-	}
-
-	result = result.slice(0, -2);
-
-	return result;
-}
-
-function humanize(str) {
-  var frags = str.split('_');
-  for (i=0; i<frags.length; i++) {
-    frags[i] = frags[i].charAt(0).toUpperCase() + frags[i].slice(1);
-  }
-  return frags.join(' ');
 }

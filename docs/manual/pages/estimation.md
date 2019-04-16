@@ -2,10 +2,6 @@
 
 - **Task**: Discrimination
 - **Method**: Estimation w/ Bisection
-- **Method Properties**: Random balancing
-- **Stimuli Type**: Shapes
-
-The Estimation experiment presents users with 2 shapes side-by-side. The task involves having to adjust the size of the modifiable shape so that it is the same size as the reference shape. 
 
 ## Specifications
 

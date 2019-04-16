@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../">
+  <title data-ice="title">Manual | VCL Framework</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<body class="layout-container manual-root" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/coyiutoc/VCL_Correlation_POC"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div class="manual-toc-root">
+  
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/README.html"><a href="manual/README.html" data-ice="link">VCL Web Framework</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#set-up" data-ice="link">Set Up</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-1--git-clone-the-repository" data-ice="link">(1) Git clone the repository</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-2--install-node" data-ice="link">(2) Install Node</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-3--install-dependencies" data-ice="link">(3) Install Dependencies</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-4--run-the-application" data-ice="link">(4) Run the Application</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/terminology.html"><a href="manual/terminology.html" data-ice="link">Terminology</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/terminology.html"><a href="manual/terminology.html#describing-an-experiment" data-ice="link">Describing an Experiment</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-task--strong-" data-ice="link">Task</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-method--strong-" data-ice="link">Method</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-properties--strong-" data-ice="link">Properties</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/terminology.html"><a href="manual/terminology.html#condition-identifiers" data-ice="link">Condition Identifiers</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-base-experiment--strong-" data-ice="link">Base Experiment</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-trial-structure--strong-" data-ice="link">Trial Structure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-balancing--strong-" data-ice="link">Balancing</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-condition--strong-" data-ice="link">Condition</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/experiments.html"><a href="manual/experiments.html" data-ice="link">Experiments</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/jnd.html"><a href="manual/jnd.html" data-ice="link">&gt;&gt; JND</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/jnd.html"><a href="manual/jnd.html#specifications" data-ice="link">Specifications</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#practice-procedure" data-ice="link">Practice Procedure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#test-procedure" data-ice="link">Test Procedure</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/jnd.html"><a href="manual/jnd.html#jspsych-timeline" data-ice="link">JsPsych Timeline</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#general-timeline" data-ice="link">General Timeline</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#trial-logic" data-ice="link">Trial Logic</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#adjusted-correlation" data-ice="link">Adjusted Correlation</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#constants" data-ice="link">Constants</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/jnd_radius.html"><a href="manual/jnd_radius.html" data-ice="link">&gt;&gt; JND Radius</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/jnd_radius.html"><a href="manual/jnd_radius.html#specifications" data-ice="link">Specifications</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd_radius.html"><a href="manual/jnd_radius.html#test-procedure" data-ice="link">Test Procedure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd_radius.html"><a href="manual/jnd_radius.html#constants" data-ice="link">Constants</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/stevens.html"><a href="manual/stevens.html" data-ice="link">&gt;&gt; Stevens</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/stevens.html"><a href="manual/stevens.html#specifications" data-ice="link">Specifications</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/stevens.html"><a href="manual/stevens.html#practice-procedure" data-ice="link">Practice Procedure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/stevens.html"><a href="manual/stevens.html#test-procedure" data-ice="link">Test Procedure</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/stevens.html"><a href="manual/stevens.html#jspsych-timeline" data-ice="link">JsPsych Timeline</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/stevens.html"><a href="manual/stevens.html#trial-logic" data-ice="link">Trial Logic</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/stevens.html"><a href="manual/stevens.html#estimated-correlation" data-ice="link">Estimated Correlation</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/stevens.html"><a href="manual/stevens.html#constants" data-ice="link">Constants</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/estimation.html"><a href="manual/estimation.html" data-ice="link">&gt;&gt; Estimation</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/estimation.html"><a href="manual/estimation.html#specifications" data-ice="link">Specifications</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/conditions.html"><a href="manual/conditions.html" data-ice="link">Conditions</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html" data-ice="link">Developing New Conditions</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#identifiers" data-ice="link">Identifiers</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#properties" data-ice="link">Properties</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#distribution" data-ice="link">Distribution</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#graphing" data-ice="link">Graphing</a></li>
+</ul>
+  </div>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="terminology">Terminology</h1><p>Below is common terminology the lab uses when describing experiments.</p>
+<h2 id="describing-an-experiment">Describing an Experiment</h2><p>Every experiment has the following:</p>
+<ul>
+<li><strong>Experiment</strong> : the type of task to be performed.</li>
+<li><strong>Condition</strong> : dictated by the task, the method(s) used, and the stimuli type.</li>
+<li><strong>Subcondition</strong> : a set of stable constants.</li>
+<li><strong>Trial</strong> : marked by the user making a meaningful response/input that is purposely recorded.<ul>
+<li>E.g. I am trying to adjust the correlation of a specific plot to be the midpoint between a plot with a high correlation, and a plot with a lower correlation. The final correlation that I have adjusted marks the relevant trial data to be saved.</li>
+</ul>
+</li>
+<li><strong>Action</strong> : the actions a user can make within a trial.<ul>
+<li>E.g. In the above trial example, I can be taking actions to increase or decrease my correlation.</li>
+</ul>
+</li>
+</ul>
+<h3 id="-strong-task--strong-"><strong>Task</strong></h3><p>The decision task defined in terms of the stimuli and question posed.</p>
+<ul>
+<li><strong>Detection</strong> : &quot;there may be any number of alternative stimuli, but one is blank, and the observer is asked only to distinguish between the blank and the other stimuli.&quot;</li>
+<li><strong>Discrimination</strong> : &quot;there are any number of alternative stimuli, but one of the stimuli (which need not be blank), is designated as the reference, and the observer is asked only to distinguish between the reference and other stimuli.&quot;</li>
+</ul>
+<h3 id="-strong-method--strong-"><strong>Method</strong></h3><ul>
+<li><strong>Forced Choice</strong> : &quot;traditionally characterized by two separate stimulus presentations, one blank and one nonblank, in random order. The two stimuli may be presented successively or side by side. The observer is asked whether the nonblank stimulus was first or second (or on the left or right).&quot;</li>
+<li><strong>Matching</strong> : &quot;two stimuli are presented, and the observer is asked to adjust one to match the other.&quot;</li>
+<li><strong>Staircase</strong> : &quot;for difference thresholds, a variable stimulus is adjusted to increase its absolute difference from a standard stimulus whenever the difference is not discriminated or is adjusted to decrease its absolute difference from the standard stimulus whenever the difference is discriminated.&quot;<ul>
+<li><em><strong>E.g.</strong></em> We have two scatter plots side by side. Let us say plot A has r = 0.5 and plot B has r = 0.8. The task is to pick the plot with the higher correlation.<ul>
+<li><em>You correctly pick plot B:</em> So the next trial will be harder, in that the correlations of the two plots are now closer together. For example, plot A would have r = 0.5 and plot B would have r = 0.7.  </li>
+<li><em>You incorrectly pick plot A:</em> So the next trial will be easier, in that the correlations of the two plots are now wider apart. For example, plot A would have r = 0.5 and plot B would have r = 0.9.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="-strong-properties--strong-"><strong>Properties</strong></h3><ul>
+<li><strong>Balancing</strong> : the ways in which the subconditions for a given condition are ordered.<ul>
+<li>Random</li>
+<li>Latin-Square</li>
+</ul>
+</li>
+<li><strong>Graph Type</strong> : e.g. scatter plots, ring plots, strip plots, shapes </li>
+<li><strong>Graphical Manipulation</strong>: <ul>
+<li>May be on how the points are plotted e.g. for strip plots, a y coordinate defines the horizontal translation of the &quot;strip&quot; and x coordinate defines the height of the &quot;strip&quot;.</li>
+<li>May be in terms of how many distributions are plotted on the same graph e.g. on the same axes, we can have TWO scatter plots with different correlations.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p>Definitions adapted from:</p>
+<p><em>D. G., &amp; Farell, B. (lOlD). Psychophysical methods. In M. Bass, C. DeCusatis. J. Enoch, V. Lakshmit1arayanan. G. U, C. MacDonald, V. Mahajan &amp; E. V. Stryland (Eds,), Handbook 01 Optics. Third Edition, VDlume III: Visioo and Vision Optics (w. 3.1-3.12). New Yori&lt;: McGraw+liR. http:// psych.nyu,edu/pelilpubslpelIi20 IOpsychophysical-methods,pdt</em></p>
+<h2 id="condition-identifiers">Condition Identifiers</h2><p>Each condition is uniquely defined by 4 properties.</p>
+<h3 id="-strong-base-experiment--strong-"><strong>Base Experiment</strong></h3><p>Defines the underlying procedural logic of the experiment.</p>
+<ul>
+<li>JND</li>
+<li>Stevens</li>
+<li>Equalizer</li>
+<li>Estimation</li>
+</ul>
+<h3 id="-strong-trial-structure--strong-"><strong>Trial Structure</strong></h3><p>The trial structure represents the range or pattern of correlation values, and defines a set of constants for each subcondition. Each condition can follow these pattern of values, or use it&apos;s own custom structure.</p>
+<p>The two main types of patterns are Design or Foundational.</p>
+<ul>
+<li>Foundational : 17 subconditions, base correlation is in the range of [0.0, 0.9] in 0.1 increments.</li>
+<li>Design       : 15 subconditions, grouped into five sets with base correlation values set at 0.3, 0.6, 0.9.</li>
+<li>Estimation</li>
+<li>Custom       : used when a condition does not follow any of the above structures.</li>
+</ul>
+<h3 id="-strong-balancing--strong-"><strong>Balancing</strong></h3><p>How subconditions in a given condition get ordered.</p>
+<ul>
+<li>Randomized</li>
+<li>Latin Square</li>
+</ul>
+<h3 id="-strong-condition--strong-"><strong>Condition</strong></h3><p>Any given condition will always have a base, trial structure, and balancing. However, they will also have a set of variables that manipulate different aspects of the distribution, graphical properties of the visualization, and non-graphical properties such as having a custom instruction set. </p>
+<p>Here is a non-comprehensive list of properties that could be manipulated by a condition.</p>
+<ul>
+<li>Plot type: <ul>
+<li>Scatter</li>
+<li>Strip</li>
+</ul>
+</li>
+<li>Distribution type: <ul>
+<li>Gaussian</li>
+<li>Uniform</li>
+</ul>
+</li>
+<li>Number of distributions <em>on a single plot</em>: <ul>
+<li>Single</li>
+<li>Multiple (i.e distractor)</li>
+</ul>
+</li>
+<li>Graphical Properties of the Distribution:<ul>
+<li>Some examples if <code>plot type = scatter</code>:<ul>
+<li>Point shape: circle, diamond, triangle</li>
+<li>Point color</li>
+<li>Point size</li>
+</ul>
+</li>
+<li>Some examples if <code>plot type = strip</code>:<ul>
+<li>Line length</li>
+<li>Line width</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Graphical Properties <em>not to do with the Distribution</em>:<ul>
+<li>Axis color, ticks</li>
+<li>Background color</li>
+<li>Text color</li>
+</ul>
+</li>
+<li>Custom Instructions</li>
+</ul>
+</div>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

@@ -2,10 +2,6 @@
 
 - **Task**: Discrimination
 - **Method**: Estimation w/ Bisection
-- **Method Properties**: Latin-Square balancing
-- **Stimuli Type**: Scatter, ring, or strip plots
-
-The Stevens experiment presents users with 3 plots. The task involves having to adjust the correlation of the middle plot by pressing the "z" or "m" keys to increase or decrease the correlation respectively. The goal is to adjust the middle plot so that its correlation is a midpoint between the 2 other plots. 
 
 ## Specifications
 

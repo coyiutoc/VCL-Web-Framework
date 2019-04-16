@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container manual-root manual-index" data-ice="rootContainer">
 
 <header>
@@ -37,11 +37,21 @@
 <li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-2--install-node" data-ice="link">(2) Install Node</a></li>
 <li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-3--install-dependencies" data-ice="link">(3) Install Dependencies</a></li>
 <li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-4--run-the-application" data-ice="link">(4) Run the Application</a></li>
-<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#supported-experiments" data-ice="link">Supported Experiments</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#jnd" data-ice="link">JND</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#jnd-radius" data-ice="link">JND Radius</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#stevens" data-ice="link">Stevens</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#estimation" data-ice="link">Estimation</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/terminology.html"><a href="manual/terminology.html" data-ice="link">Terminology</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/terminology.html"><a href="manual/terminology.html#describing-an-experiment" data-ice="link">Describing an Experiment</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-task--strong-" data-ice="link">Task</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-method--strong-" data-ice="link">Method</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-properties--strong-" data-ice="link">Properties</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/terminology.html"><a href="manual/terminology.html#condition-identifiers" data-ice="link">Condition Identifiers</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-base-experiment--strong-" data-ice="link">Base Experiment</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-trial-structure--strong-" data-ice="link">Trial Structure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-balancing--strong-" data-ice="link">Balancing</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-condition--strong-" data-ice="link">Condition</a></li>
 </ul>
   </div>
 <div data-ice="manual">
@@ -99,6 +109,16 @@
     <li data-ice="manualNav" class="indent-h1" data-link="manual/conditions.html"><a href="manual/conditions.html" data-ice="link">Conditions</a></li>
 </ul>
   </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html" data-ice="link">Developing New Conditions</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#identifiers" data-ice="link">Identifiers</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#properties" data-ice="link">Properties</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#distribution" data-ice="link">Distribution</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#graphing" data-ice="link">Graphing</a></li>
+</ul>
+  </div>
 </div>
 </nav>
 
@@ -113,223 +133,6 @@
 </code></pre><p>Or alternatively, with nodemon:</p>
 <pre><code><code class="source-code prettyprint">nodemon app.js</code>
 </code></pre><p>The app is available at <a href="localhost:8080">localhost:8080</a>. If you want to access it at a different port, change the port number in app.js (line 57).</p>
-<h2 id="supported-experiments">Supported Experiments</h2><h3 id="jnd">JND</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Trial Type</th>
-<th>Graph Type(s)</th>
-<th>Balancing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Base</td>
-<td>Foundational</td>
-<td>Scatter, Strip</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Strip Ring Size</td>
-<td>Foundational</td>
-<td>Ring</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Line Length Strip</td>
-<td>Foundational</td>
-<td>Strip</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Rainbow</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Square Red/Blue/Green/Yellow Hue/Lum/Chro</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Square Diamond Red/Blue/Green/Yellow Hue/Lum/Chro</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Ratio Pilot</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Multi-Phase [Task 1]</td>
-<td>Custom</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Blue/Red/Yellow/Control Shades</td>
-<td>Custom</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-</tbody>
-</table>
-<h3 id="jnd-radius">JND Radius</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Trial Type</th>
-<th>Graph Type(s)</th>
-<th>Balancing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Circle, Square</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Circle, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Square, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>RotatedSquare, RotatedTriangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Slice, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Slice-45, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Slice-90, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-</tbody>
-</table>
-<h3 id="stevens">Stevens</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Trial Type</th>
-<th>Graph Type(s)</th>
-<th>Balancing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Base</td>
-<td>Foundational</td>
-<td>Scatter, Strip</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Strip Ring Size</td>
-<td>Foundational</td>
-<td>Ring</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Line Length Strip</td>
-<td>Foundational</td>
-<td>Strip</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Square Red/Blue/Green/Yellow Hue/Lum/Chro</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Square Diamond Red/Blue/Green/Yellow Hue/Lum/Chro</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Blue/Red/Yellow/Control Shades</td>
-<td>Custom</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-</tbody>
-</table>
-<h3 id="estimation">Estimation</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Trial Type</th>
-<th>Graph Type(s)</th>
-<th>Balancing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Shape: Circle, Square, Triangle</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Line Length</td>
-<td>Estimation</td>
-<td>Line</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Shape: Rectangle, Square</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Shape: Rectangle, Rotated Square (Solid)</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Shape: Rectangle, Rotated Square (Outline)</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Shape: Triangle</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-</tbody>
-</table>
-<p>1/2/2019 - Madison&apos;s Visual Search + Numerosity experiments from December 2018 can be found <a href="https://github.com/Wongelawit/Correlation_MultipleEnsemble/tree/Numerosity-Task">here.</a></p>
 </div>
 
   
@@ -342,225 +145,107 @@
 </code></pre><p>Then run:</p><pre><code><code class="source-code prettyprint">npm install</code>
 </code></pre><h4>(4) Run the Application</h4><pre><code><code class="source-code prettyprint">node app.js</code>
 </code></pre><p>Or alternatively, with nodemon:</p><pre><code><code class="source-code prettyprint">nodemon app.js</code>
-</code></pre><p>The app is available at <a href="./manual/localhost:8080">localhost:8080</a>. If you want to access it at a different port, change the port number in app.js (line 57).</p><h2>Supported Experiments</h2><h3>JND</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Trial Type</th>
-<th>Graph Type(s)</th>
-<th>Balancing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Base</td>
-<td>Foundational</td>
-<td>Scatter, Strip</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Strip Ring Size</td>
-<td>Foundational</td>
-<td>Ring</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Line Length Strip</td>
-<td>Foundational</td>
-<td>Strip</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Rainbow</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Square Red/Blue/Green/Yellow Hue/Lum/Chro</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Square Diamond Red/Blue/Green/Yellow Hue/Lum/Chro</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Ratio Pilot</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Multi-Phase [Task 1]</td>
-<td>Custom</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Blue/Red/Yellow/Control Shades</td>
-<td>Custom</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-</tbody>
-</table><h3>JND Radius</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Trial Type</th>
-<th>Graph Type(s)</th>
-<th>Balancing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Circle, Square</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Circle, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Square, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>RotatedSquare, RotatedTriangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Slice, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Slice-45, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Slice-90, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-</tbody>
-</table><h3>Stevens</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Trial Type</th>
-<th>Graph Type(s)</th>
-<th>Balancing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Base</td>
-<td>Foundational</td>
-<td>Scatter, Strip</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Strip Ring Size</td>
-<td>Foundational</td>
-<td>Ring</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Line Length Strip</td>
-<td>Foundational</td>
-<td>Strip</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Square Red/Blue/Green/Yellow Hue/Lum/Chro</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Square Diamond Red/Blue/Green/Yellow Hue/Lum/Chro</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Blue/Red/Yellow/Control Shades</td>
-<td>Custom</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-</tbody>
-</table><h3>Estimation</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Trial Type</th>
-<th>Graph Type(s)</th>
-<th>Balancing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Shape: Circle, Square, Triangle</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Line Length</td>
-<td>Estimation</td>
-<td>Line</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Shape: Rectangle, Square</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Shape: Rectangle, Rotated Square (Solid)</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Shape: Rectangle, Rotated Square (Outline)</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Shape: Triangle</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-</tbody>
-</table><p>1/2/2019 - Madison&apos;s Visual Search + Numerosity experiments from December 2018 can be found <a href="https://github.com/Wongelawit/Correlation_MultipleEnsemble/tree/Numerosity-Task">here.</a></p></div>
+</code></pre><p>The app is available at <a href="./manual/localhost:8080">localhost:8080</a>. If you want to access it at a different port, change the port number in app.js (line 57).</p></div>
         <a data-ice="link" href="manual/README.html"></a>
       </div>
     </div>
 <div class="manual-card-wrap" data-ice="cards">
       <div class="manual-card">
-        <div data-ice="card"><h1>Experiments</h1><p>These are the following experiments supported by our framework.</p></div>
+        <div data-ice="card"><h1>Terminology</h1><p>Below is common terminology the lab uses when describing experiments.</p><h2>Describing an Experiment</h2><p>Every experiment has the following:</p><ul>
+<li><strong>Experiment</strong> : the type of task to be performed.</li>
+<li><strong>Condition</strong> : dictated by the task, the method(s) used, and the stimuli type.</li>
+<li><strong>Subcondition</strong> : a set of stable constants.</li>
+<li><strong>Trial</strong> : marked by the user making a meaningful response/input that is purposely recorded.<ul>
+<li>E.g. I am trying to adjust the correlation of a specific plot to be the midpoint between a plot with a high correlation, and a plot with a lower correlation. The final correlation that I have adjusted marks the relevant trial data to be saved.</li>
+</ul>
+</li>
+<li><strong>Action</strong> : the actions a user can make within a trial.<ul>
+<li>E.g. In the above trial example, I can be taking actions to increase or decrease my correlation.</li>
+</ul>
+</li>
+</ul><h3><strong>Task</strong></h3><p>The decision task defined in terms of the stimuli and question posed.</p><ul>
+<li><strong>Detection</strong> : &quot;there may be any number of alternative stimuli, but one is blank, and the observer is asked only to distinguish between the blank and the other stimuli.&quot;</li>
+<li><strong>Discrimination</strong> : &quot;there are any number of alternative stimuli, but one of the stimuli (which need not be blank), is designated as the reference, and the observer is asked only to distinguish between the reference and other stimuli.&quot;</li>
+</ul><h3><strong>Method</strong></h3><ul>
+<li><strong>Forced Choice</strong> : &quot;traditionally characterized by two separate stimulus presentations, one blank and one nonblank, in random order. The two stimuli may be presented successively or side by side. The observer is asked whether the nonblank stimulus was first or second (or on the left or right).&quot;</li>
+<li><strong>Matching</strong> : &quot;two stimuli are presented, and the observer is asked to adjust one to match the other.&quot;</li>
+<li><strong>Staircase</strong> : &quot;for difference thresholds, a variable stimulus is adjusted to increase its absolute difference from a standard stimulus whenever the difference is not discriminated or is adjusted to decrease its absolute difference from the standard stimulus whenever the difference is discriminated.&quot;<ul>
+<li><em><strong>E.g.</strong></em> We have two scatter plots side by side. Let us say plot A has r = 0.5 and plot B has r = 0.8. The task is to pick the plot with the higher correlation.<ul>
+<li><em>You correctly pick plot B:</em> So the next trial will be harder, in that the correlations of the two plots are now closer together. For example, plot A would have r = 0.5 and plot B would have r = 0.7.  </li>
+<li><em>You incorrectly pick plot A:</em> So the next trial will be easier, in that the correlations of the two plots are now wider apart. For example, plot A would have r = 0.5 and plot B would have r = 0.9.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><h3><strong>Properties</strong></h3><ul>
+<li><strong>Balancing</strong> : the ways in which the subconditions for a given condition are ordered.<ul>
+<li>Random</li>
+<li>Latin-Square</li>
+</ul>
+</li>
+<li><strong>Graph Type</strong> : e.g. scatter plots, ring plots, strip plots, shapes </li>
+<li><strong>Graphical Manipulation</strong>: <ul>
+<li>May be on how the points are plotted e.g. for strip plots, a y coordinate defines the horizontal translation of the &quot;strip&quot; and x coordinate defines the height of the &quot;strip&quot;.</li>
+<li>May be in terms of how many distributions are plotted on the same graph e.g. on the same axes, we can have TWO scatter plots with different correlations.</li>
+</ul>
+</li>
+</ul><hr><p>Definitions adapted from:</p><p><em>D. G., &amp; Farell, B. (lOlD). Psychophysical methods. In M. Bass, C. DeCusatis. J. Enoch, V. Lakshmit1arayanan. G. U, C. MacDonald, V. Mahajan &amp; E. V. Stryland (Eds,), Handbook 01 Optics. Third Edition, VDlume III: Visioo and Vision Optics (w. 3.1-3.12). New Yori&lt;: McGraw+liR. http:// psych.nyu,edu/pelilpubslpelIi20 IOpsychophysical-methods,pdt</em></p><h2>Condition Identifiers</h2><p>Each condition is uniquely defined by 4 properties.</p><h3><strong>Base Experiment</strong></h3><p>Defines the underlying procedural logic of the experiment.</p><ul>
+<li>JND</li>
+<li>Stevens</li>
+<li>Equalizer</li>
+<li>Estimation</li>
+</ul><h3><strong>Trial Structure</strong></h3><p>The trial structure represents the range or pattern of correlation values, and defines a set of constants for each subcondition. Each condition can follow these pattern of values, or use it&apos;s own custom structure.</p><p>The two main types of patterns are Design or Foundational.</p><ul>
+<li>Foundational : 17 subconditions, base correlation is in the range of [0.0, 0.9] in 0.1 increments.</li>
+<li>Design       : 15 subconditions, grouped into five sets with base correlation values set at 0.3, 0.6, 0.9.</li>
+<li>Estimation</li>
+<li>Custom       : used when a condition does not follow any of the above structures.</li>
+</ul><h3><strong>Balancing</strong></h3><p>How subconditions in a given condition get ordered.</p><ul>
+<li>Randomized</li>
+<li>Latin Square</li>
+</ul><h3><strong>Condition</strong></h3><p>Any given condition will always have a base, trial structure, and balancing. However, they will also have a set of variables that manipulate different aspects of the distribution, graphical properties of the visualization, and non-graphical properties such as having a custom instruction set. </p><p>Here is a non-comprehensive list of properties that could be manipulated by a condition.</p><ul>
+<li>Plot type: <ul>
+<li>Scatter</li>
+<li>Strip</li>
+</ul>
+</li>
+<li>Distribution type: <ul>
+<li>Gaussian</li>
+<li>Uniform</li>
+</ul>
+</li>
+<li>Number of distributions <em>on a single plot</em>: <ul>
+<li>Single</li>
+<li>Multiple (i.e distractor)</li>
+</ul>
+</li>
+<li>Graphical Properties of the Distribution:<ul>
+<li>Some examples if <code>plot type = scatter</code>:<ul>
+<li>Point shape: circle, diamond, triangle</li>
+<li>Point color</li>
+<li>Point size</li>
+</ul>
+</li>
+<li>Some examples if <code>plot type = strip</code>:<ul>
+<li>Line length</li>
+<li>Line width</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Graphical Properties <em>not to do with the Distribution</em>:<ul>
+<li>Axis color, ticks</li>
+<li>Background color</li>
+<li>Text color</li>
+</ul>
+</li>
+<li>Custom Instructions</li>
+</ul></div>
+        <a data-ice="link" href="manual/terminology.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>Experiments</h1><p>These are the following experiments supported by our framework. The table lists the different identifiers that conditions of each experiment currently use.</p></div>
         <a data-ice="link" href="manual/experiments.html"></a>
       </div>
     </div>
@@ -569,9 +254,7 @@
         <div data-ice="card"><h1>&gt;&gt; JND</h1><ul>
 <li><strong>Task</strong>: Discrimination</li>
 <li><strong>Method</strong>: Forced choice with Staircase</li>
-<li><strong>Method Properties</strong>: Latin-Square balancing</li>
-<li><strong>Stimuli Type</strong>: Scatter, ring, or strip plots</li>
-</ul><p>The JND experiment essentially presents users with 2 plots, one with a higher correlation than the other. The user then must choose the graph with the higher correlation by pressing the &quot;z&quot; or &quot;m&quot; keys to select the left or right graphs respectively.</p><h2>Specifications</h2><p><strong>_</strong>Note that all CAPPED variables are constants taken from the excel sheets/data file.<strong>_</strong></p><ul>
+</ul><h2>Specifications</h2><p><strong>_</strong>Note that all CAPPED variables are constants taken from the excel sheets/data file.<strong>_</strong></p><ul>
 <li>For a given subcondition, there are at minimum 24 trials and at maximum 52. Once a user has reached the 24th trial, we start computing for convergence by calculating an F-value to see if it is lower than the threshold. <ul>
 <li>If the F-value is &lt; <code>(1-CONVERGENCE_THRESHOLD)</code>, then the current subcondition ends, and proceeds to the next subcondition.</li>
 <li>If the F-value is &gt;= <code>(1-CONVERGENCE_THRESHOLD)</code>, then the trials continue.</li>
@@ -741,9 +424,7 @@ function get_next_adjusted_statistic(correct, converge_from_above, adjusted_quan
         <div data-ice="card"><h1>&gt;&gt; JND Radius</h1><ul>
 <li><strong>Task</strong>: Discrimination</li>
 <li><strong>Method</strong>: Forced choice with Staircase</li>
-<li><strong>Method Properties</strong>: Random</li>
-<li><strong>Stimuli Type</strong>: Shape</li>
-</ul><p>The JND experiment essentially presents users with 2 different shapes, one with a bigger area than the other. The user then must choose the graph with the greater area by pressing the &quot;z&quot; or &quot;m&quot; keys to select the left or right graphs respectively.</p><h2>Specifications</h2><p><strong>_</strong>Note that all CAPPED variables are constants taken from the excel sheets/data file.<strong>_</strong></p><ul>
+</ul><h2>Specifications</h2><p><strong>_</strong>Note that all CAPPED variables are constants taken from the excel sheets/data file.<strong>_</strong></p><ul>
 <li>For a given subcondition, there are at minimum 24 trials and at maximum 52. Once a user has reached the 24th trial, we start computing for convergence by calculating an F-value to see if it is lower than the threshold. <ul>
 <li>If the F-value is &lt; <code>(1-CONVERGENCE_THRESHOLD)</code>, then the current subcondition ends, and proceeds to the next subcondition.</li>
 <li>If the F-value is &gt;= <code>(1-CONVERGENCE_THRESHOLD)</code>, then the trials continue.</li>
@@ -790,9 +471,7 @@ function get_next_adjusted_statistic(correct, converge_from_above, adjusted_quan
         <div data-ice="card"><h1>&gt;&gt; Stevens</h1><ul>
 <li><strong>Task</strong>: Discrimination</li>
 <li><strong>Method</strong>: Estimation w/ Bisection</li>
-<li><strong>Method Properties</strong>: Latin-Square balancing</li>
-<li><strong>Stimuli Type</strong>: Scatter, ring, or strip plots</li>
-</ul><p>The Stevens experiment presents users with 3 plots. The task involves having to adjust the correlation of the middle plot by pressing the &quot;z&quot; or &quot;m&quot; keys to increase or decrease the correlation respectively. The goal is to adjust the middle plot so that its correlation is a midpoint between the 2 other plots. </p><h2>Specifications</h2><p><strong>_</strong>Note that all CAPPED variables are constants taken from the excel sheets/data file.<strong>_</strong></p><h3>Practice Procedure</h3><ul>
+</ul><h2>Specifications</h2><p><strong>_</strong>Note that all CAPPED variables are constants taken from the excel sheets/data file.<strong>_</strong></p><h3>Practice Procedure</h3><ul>
 <li>We choose the first <strong>4</strong> subconditions of the data constants (prior to any balancing being done on the subconditions). It otherwise follows the same procedure like the test detailed below.</li>
 <li>Exclusion criteria is calculated during the practice procedure. 2 values are calculated at the end of every subcondition, then stored to be displayed to the researcher who will then determine whether the participant should be excluded or not. <ul>
 <li>We calculate standard deviation using the estimated correlations at the end of a trial (e.g. the value when the user hits space bar).</li>
@@ -953,9 +632,7 @@ function update_estimated_correlation(trial, constants, last_trial){
         <div data-ice="card"><h1>&gt;&gt; Estimation</h1><ul>
 <li><strong>Task</strong>: Discrimination</li>
 <li><strong>Method</strong>: Estimation w/ Bisection</li>
-<li><strong>Method Properties</strong>: Random balancing</li>
-<li><strong>Stimuli Type</strong>: Shapes</li>
-</ul><p>The Estimation experiment presents users with 2 shapes side-by-side. The task involves having to adjust the size of the modifiable shape so that it is the same size as the reference shape. </p><h2>Specifications</h2><ul>
+</ul><h2>Specifications</h2><ul>
 <li>This task presents 2 shapes side by side. One shape is the reference shape, while the other is the modifiable shape, in which the user can increase or decrease the size of the shape (by pressing the M or Z keys). The goal is that the user will adjust the size of the modifiable shape so that it is as equal as possible to the reference shape&apos;s area. </li>
 <li>Subconditions:<ul>
 <li>3 types of shapes - circle, square, or triangle<ul>
@@ -997,8 +674,14 @@ function update_estimated_correlation(trial, constants, last_trial){
     </div>
 <div class="manual-card-wrap" data-ice="cards">
       <div class="manual-card">
-        <div data-ice="card"><h1>Conditions</h1><p>Below is a list of all supported conditions in the framework.</p></div>
+        <div data-ice="card"><h1>Conditions</h1><p>Below is a list of all supported conditions in the framework organized by experiment.</p><p>** 1/2/2019 - Madison&apos;s Visual Search + Numerosity experiments from December 2018 can be found <a href="https://github.com/Wongelawit/Correlation_MultipleEnsemble/tree/Numerosity-Task">here.</a></p></div>
         <a data-ice="link" href="manual/conditions.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>Developing New Conditions</h1><h2>Identifiers</h2><h2>Properties</h2><h3>Distribution</h3><h3>Graphing</h3></div>
+        <a data-ice="link" href="manual/developing_new_conditions.html"></a>
       </div>
     </div>
 </div>

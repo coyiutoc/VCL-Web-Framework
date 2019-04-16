@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -129,12 +129,7 @@ function prepare_scatter_plot(experiment) {
 
     	let attributes = {
 			dataset: datasets[i],
-			graph_attributes: {
-				axis_color:  (&quot;axis_color&quot;  in trial_data ? trial_data.axis_color  : &quot;BLACK&quot;),
-				point_color: (&quot;point_color&quot; in trial_data ? trial_data.point_color : &quot;BLACK&quot;),
-				point_shape: (&quot;point_shape&quot; in trial_data ? trial_data.point_shape : &quot;circle&quot;),
-				point_size:  (&quot;point_size&quot;  in trial_data ? trial_data.point_size  : 3),
-			}
+			graph_attributes: generate_attributes_object(&quot;scatter&quot;, trial_data, i)
 		};
 		
 	    create_scatter_plot(attributes);
@@ -158,12 +153,7 @@ function prepare_strip_plot(experiment) {
 
 		let attributes = {
 			dataset: datasets[i],
-			graph_attributes: {
-				axis_color: 		(&quot;axis_color&quot;         in trial_data ? trial_data.axis_color         : &quot;BLACK&quot;),
-				fill_color: 		(&quot;fill_color&quot;         in trial_data ? trial_data.fill_color         : &quot;BLACK&quot;),
-				fixed_strip_height: (&quot;fixed_strip_height&quot; in trial_data ? trial_data.fixed_strip_height : true),
-				strip_width: 		(&quot;strip_width&quot;        in trial_data ? trial_data.strip_width        : 1),
-			}	
+			graph_attributes: generate_attributes_object(&quot;strip&quot;, trial_data, i)
 		};
 
 		create_strip_plot(attributes);
@@ -187,12 +177,7 @@ function prepare_ring_plot(experiment) {
 
 		let attributes = {
 			dataset: datasets[i],
-			graph_attributes: {
-				axis_color:     (&quot;axis_color&quot;     in trial_data ? trial_data.axis_color     : &quot;BLACK&quot;),
-				fill_color:     (&quot;fill_color&quot;     in trial_data ? trial_data.fill_color     : &quot;none&quot;),
-				ring_thickness: (&quot;ring_thickness&quot; in trial_data ? trial_data.ring_thickness : 1),
-				stroke_color:   (&quot;stroke_color&quot;   in trial_data ? trial_data.stroke_color   : &quot;BLACK&quot;),
-			}
+			graph_attributes: generate_attributes_object(&quot;ring&quot;, trial_data, i)
 		};
 
 		create_ring_plot(attributes);
@@ -221,13 +206,7 @@ function prepare_shapes_plot(experiment) {
 			curr_radius: radii[i],
 			max_radius:  max_radius,
 			min_radius:  min_radius, 
-			graph_attributes: {
-				axis_color: 	(&quot;axis_color&quot;     in trial_data ? trial_data.axis_color     : &quot;BLACK&quot;),
-				fill_color: 	(&quot;fill_color&quot;     in trial_data ? trial_data.fill_color     : &quot;BLACK&quot;),
-				shape_type:  	(&quot;shapes&quot;         in trial_data ? trial_data.shapes[i]      : &quot;circle&quot;),
-				slice_rotation: (&quot;slice_rotation&quot; in trial_data ? trial_data.slice_rotation : 0),
-				stroke_color:   (&quot;stroke_color&quot;   in trial_data ? trial_data.stroke_color   : &quot;none&quot;),
-			}
+			graph_attributes: generate_attributes_object(&quot;shapes&quot;, trial_data, i)
 		};
 
 		create_shape_plot(attributes);
@@ -235,6 +214,51 @@ function prepare_shapes_plot(experiment) {
 
 	// Set background color
     document.body.style.backgroundColor = (trial_data.background_color ? trial_data.background_color : &quot;WHITE&quot;);
+}
+
+/**
+ * Generates the js object for graph_attributes based on what is specified in
+ * the graphing-config.js. 
+ *
+ * E.g., will return object in this format:
+ * {
+ *	&quot;axis_color&quot;  : &quot;BLACK&quot;,
+ *  &quot;point_color&quot; : &quot;RED&quot;,
+ *  &quot;point_size&quot;  : 3
+ *   ....
+ * }
+ *
+ * @param {string}   plot_type			Only takes in &quot;scatter&quot;, &quot;strip&quot;, &quot;ring&quot;, &quot;shapes&quot;
+ * @param {object}   trial_data         Trial data object from experiment model
+ * @param {int}		 plot_number		Denotes plot number from left to right (e.g. leftmost is 1 etc.)
+ *
+ * @return {object}  graph_attributes
+ */
+function generate_attributes_object(plot_type, trial_data, plot_number) {
+
+	let obj = {};
+	let attributes = PLOT_PROPERTIES[plot_type]; //PLOT_PROPERTIES comes from /config/graphing-config.js
+
+	for (let property in attributes) {
+
+		let attrib = attributes[property];
+		let key = attrib[&quot;trial_data_key&quot;];
+
+		// These attributes are dependent on plot_number:
+		if (property === &quot;shape_type&quot;) {
+
+			obj[property] = (key in trial_data ? trial_data[key][plot_number] : attrib[&quot;default&quot;])
+
+		} else {
+
+			// Check if the key exists in trial_data
+			// If it exists, used the value in trial_data
+			// Else, use the default specified
+			obj[property] = (key in trial_data ? trial_data[key] : attrib[&quot;default&quot;]);
+		}
+	}
+
+	return obj;
 }
 </code></pre>
 

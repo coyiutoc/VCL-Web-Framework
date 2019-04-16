@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container manual-root" data-ice="rootContainer">
 
 <header>
@@ -37,11 +37,21 @@
 <li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-2--install-node" data-ice="link">(2) Install Node</a></li>
 <li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-3--install-dependencies" data-ice="link">(3) Install Dependencies</a></li>
 <li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-4--run-the-application" data-ice="link">(4) Run the Application</a></li>
-<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#supported-experiments" data-ice="link">Supported Experiments</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#jnd" data-ice="link">JND</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#jnd-radius" data-ice="link">JND Radius</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#stevens" data-ice="link">Stevens</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#estimation" data-ice="link">Estimation</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/terminology.html"><a href="manual/terminology.html" data-ice="link">Terminology</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/terminology.html"><a href="manual/terminology.html#describing-an-experiment" data-ice="link">Describing an Experiment</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-task--strong-" data-ice="link">Task</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-method--strong-" data-ice="link">Method</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-properties--strong-" data-ice="link">Properties</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/terminology.html"><a href="manual/terminology.html#condition-identifiers" data-ice="link">Condition Identifiers</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-base-experiment--strong-" data-ice="link">Base Experiment</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-trial-structure--strong-" data-ice="link">Trial Structure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-balancing--strong-" data-ice="link">Balancing</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-condition--strong-" data-ice="link">Condition</a></li>
 </ul>
   </div>
 <div data-ice="manual">
@@ -99,10 +109,20 @@
     <li data-ice="manualNav" class="indent-h1" data-link="manual/conditions.html"><a href="manual/conditions.html" data-ice="link">Conditions</a></li>
 </ul>
   </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html" data-ice="link">Developing New Conditions</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#identifiers" data-ice="link">Identifiers</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#properties" data-ice="link">Properties</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#distribution" data-ice="link">Distribution</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#graphing" data-ice="link">Graphing</a></li>
+</ul>
+  </div>
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="experiments">Experiments</h1><p>These are the following experiments supported by our framework.</p>
+<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="experiments">Experiments</h1><p>These are the following experiments supported by our framework. The table lists the different identifiers that conditions of each experiment currently use.</p>
 </div>
 </div>
 

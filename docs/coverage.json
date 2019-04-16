@@ -1,7 +1,7 @@
 {
-  "coverage": "32.55%",
-  "expectCount": 298,
-  "actualCount": 97,
+  "coverage": "32.77%",
+  "expectCount": 299,
+  "actualCount": 98,
   "files": {
     "scripts/experiment-properties/balancing/latin_square_generator.js": {
       "expectCount": 4,
@@ -127,8 +127,8 @@
       ]
     },
     "scripts/experiment-properties/graphing/graphing_controller.js": {
-      "expectCount": 5,
-      "actualCount": 5,
+      "expectCount": 6,
+      "actualCount": 6,
       "undocumentLines": []
     },
     "scripts/experiments/estimation/estimation.js": {

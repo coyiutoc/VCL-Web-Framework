@@ -2,10 +2,6 @@
 
 - **Task**: Discrimination
 - **Method**: Forced choice with Staircase
-- **Method Properties**: Latin-Square balancing
-- **Stimuli Type**: Scatter, ring, or strip plots
-
-The JND experiment essentially presents users with 2 plots, one with a higher correlation than the other. The user then must choose the graph with the higher correlation by pressing the "z" or "m" keys to select the left or right graphs respectively.
 
 ## Specifications
 

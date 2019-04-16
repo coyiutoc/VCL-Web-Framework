@@ -2,10 +2,6 @@
 
 - **Task**: Discrimination
 - **Method**: Forced choice with Staircase
-- **Method Properties**: Random
-- **Stimuli Type**: Shape
-
-The JND experiment essentially presents users with 2 different shapes, one with a bigger area than the other. The user then must choose the graph with the greater area by pressing the "z" or "m" keys to select the left or right graphs respectively.
 
 ## Specifications
 
