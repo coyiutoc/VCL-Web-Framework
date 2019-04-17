@@ -29,6 +29,7 @@
         "./public/config/conditions-config.js",
         "./public/config/experiments-config.js",
         "./public/config/graphing-config.js",
+        "./public/config/trial-structure-config.js",
         "./docs/manual/scripts/view-controller.js",
         "./docs/manual/scripts/experiments-renderer.js",
         "./docs/manual/scripts/conditions-renderer.js"

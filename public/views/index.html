@@ -20,6 +20,7 @@
     <script type="text/javascript" src="/config/experiments-config.js"></script>
     <script type="text/javascript" src="/config/trial-structure-config.js"></script>
     <script type="text/javascript" src="/config/graphing-config.js"></script>
+    <script type="text/javascript" src="/config/balancing-config.js"></script>
 
 </head>
 
@@ -56,10 +57,6 @@
               <div class="form-group col-md-12">
                 <label for="trial-struct-label"><b>Trial Structure:</b></label>
                 <select id = "trial-struct-select" class="custom-select">
-<!--                   <option value="foundational" selected>Foundational</option>
-                  <option value="design">Design</option>
-                  <option value="estimation">Estimation</option>
-                  <option value="custom">Custom</option> -->
                 </select>
               </div>
             </div>
@@ -68,10 +65,6 @@
               <div class="form-group col-md-12">
                 <label for="graph-label"><b>Graph Type:</b></label>
                 <select id = "graph-select" class="custom-select">
-<!--                   <option value="scatter" selected>Scatter</option>
-                  <option value="strip">Strip</option>
-                  <option value="ring">Ring</option>
-                  <option value="shapes">Shapes</option> -->
                 </select>
               </div>
             </div>
@@ -127,6 +120,7 @@
 
   <script type = "text/javascript">
 
+    // Set up drop-downs
     for (let key in EXPERIMENTS) {
       let exp = EXPERIMENTS[key];
       let html = `<option value="${key}" ${function(){key === "jnd" ? "selected" : ""}}>${exp.docs.display_name}</option>`;  
@@ -145,6 +139,7 @@
       $("#graph-select").append(html);
     }
 
+    // 
     var experiment = "jnd";
     var trial_structure = "foundational";
     var graph_type = "scatter";
@@ -158,6 +153,7 @@
 
     //////////////////////////////////////////////////////////
     // JQuery UI Change Events
+    //////////////////////////////////////////////////////////
 
     // Triggered on change of experiment selection drop down
     $('#experiment-select').change(function(){ 
@@ -199,6 +195,10 @@
           throw Error("Condition " + condition_name + " does not support graph type " + graph_type);
         }
 
+        if (!BALANCING_TYPES[CONDITIONS[condition_name]["balancing"]]){
+          throw Error("Balancing type " + CONDITIONS[condition_name]["balancing"] + " is not supported.");
+        }
+
         address += `/experiment/${experiment}/graph_type/${graph_type}/trial_structure/${trial_structure}/condition/${condition_name}/balancing/${CONDITIONS[condition_name]["balancing"]}`;
 
         let subject_initials = document.getElementById("subjectInitials_input").value;
@@ -223,6 +223,7 @@
 
     //////////////////////////////////////////////////////////
     // Helper functions
+    //////////////////////////////////////////////////////////
 
     // Will update the conditions displayed upon change on any of the dropdowns 
     function update_conditions_list(){
