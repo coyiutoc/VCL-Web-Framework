@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container manual-root manual-index" data-ice="rootContainer">
 
 <header>
@@ -101,6 +101,16 @@
       
     <li data-ice="manualNav" class="indent-h1" data-link="manual/estimation.html"><a href="manual/estimation.html" data-ice="link">&gt;&gt; Estimation</a></li>
 <li data-ice="manualNav" class="indent-h2" data-link="manual/estimation.html"><a href="manual/estimation.html#specifications" data-ice="link">Specifications</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html" data-ice="link">Supported Properties</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#base-experiment" data-ice="link">Base Experiment</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#trial-structure" data-ice="link">Trial Structure</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#balancing" data-ice="link">Balancing</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#graphical-properties" data-ice="link">Graphical Properties</a></li>
 </ul>
   </div>
 <div data-ice="manual">
@@ -248,7 +258,7 @@
     </div>
 <div class="manual-card-wrap" data-ice="cards">
       <div class="manual-card">
-        <div data-ice="card"><h1>Experiments</h1><p>These are the following experiments supported by our framework. The table lists the different identifiers that conditions of each experiment currently use.</p></div>
+        <div data-ice="card"><h1>Experiments</h1><p>These are the following experiments supported by our framework. The table lists the values for the different identifiers used.</p></div>
         <a data-ice="link" href="manual/experiments.html"></a>
       </div>
     </div>
@@ -677,6 +687,12 @@ function update_estimated_correlation(trial, constants, last_trial){
     </div>
 <div class="manual-card-wrap" data-ice="cards">
       <div class="manual-card">
+        <div data-ice="card"><h1>Supported Properties</h1><p>Below are all the valid inputs for each of the the identifiers (base experiment, trial structure, balancing, condition), as well as all manipulatable graphical attributes specific to each graph type. </p><h2>Base Experiment</h2><h2>Trial Structure</h2><h2>Balancing</h2><h2>Graphical Properties</h2></div>
+        <a data-ice="link" href="manual/supported_properties.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
         <div data-ice="card"><h1>Conditions</h1><p>Below is a list of all supported conditions in the framework organized by experiment.</p><p>** 1/2/2019 - Madison&apos;s Visual Search + Numerosity experiments from December 2018 can be found <a href="https://github.com/Wongelawit/Correlation_MultipleEnsemble/tree/Numerosity-Task">here.</a></p></div>
         <a data-ice="link" href="manual/conditions.html"></a>
       </div>
@@ -735,15 +751,15 @@ function update_estimated_correlation(trial, constants, last_trial){
     }
 }    </code>
 </code></pre><p>Check that when you load the UI, your condition is visible with the identifiers specified.</p><p>Note that <code>experiment</code>, <code>graph_type</code> and <code>trial_structure</code> can take multiple strings (in an array). So you can have the SAME condition name,
-with the same kind of subcondition-level manipulation, but different underlying base experiment, different graph type, or different trial structure.
-A good example of this are the base experiments that run across JND and Stevens, and are supported on both scatter and strip graph types. </p><p>If we use the example from above, the JS object looks like this:</p><pre><code><code class="source-code prettyprint">small_point_sizes: {
+with the same kind of subcondition-level manipulation, but different underlying base experiment, different graph type, or different trial structure. Good examples of these are the base experiments that run across JND and Stevens, and are supported on both scatter and strip graph types. </p><p>If we use the example from above, the JS object looks like this:</p><pre><code><code class="source-code prettyprint">small_point_sizes: {
     experiment: [&quot;jnd&quot;],
     graph_type: [&quot;scatter&quot;],
     trial_structure: [&quot;design&quot;],
     balancing: &quot;latin_square&quot;,
     display_name: &quot;Small Point Sizes&quot;,
     display_info: {
-        description: &quot;Standard JND scatter plot condition, except point sizes vary between 5 - 13 pixels for each 0.3, 0.6, 0.9 base correlation grouping.&quot;,
+        description: &quot;Standard JND scatter plot condition, except point sizes vary between&quot; +  
+                     &quot;5 - 13 pixels for each 0.3, 0.6, 0.9 base correlation grouping.&quot;,
         researcher: &quot;Caitlin Coyiuto&quot;,
         developer: &quot;Caitlin Coyiuto&quot;
     }
@@ -752,7 +768,7 @@ A good example of this are the base experiments that run across JND and Stevens,
 Add a JS object into the file with the same experiment base name. You want to add into the array for CONDITIONS, not BASE. E.g. for JND, there is
 an array for JND_BASE, which has all the base attributes on each subcondition of a given trial structure. All condition data, which either adds or
 overrides any parameters in JND_BASE, is inside JND_CONDITIONS.</p><p><strong>Each entry in the array represents ONE subcondition. So you must define all
-attributes that are being changed for each subcondition.</strong></p><p><strong>You can OVERRIDE any of the attributes found in base subconditions. E.g. you can redefine &quot;point_size&quot; in your subcondition if you are changing it
+attributes that are being changed for each subcondition.</strong></p><p><strong>You can OVERRIDE any of the attributes found in the base subconditions. E.g. you can redefine &quot;point_size&quot; in your subcondition if you are changing it
 on a subcondition-basis.</strong></p><p>Object should look something like this:</p><pre><code><code class="source-code prettyprint">name_of_new_condition:
 [
     {constant1: ___, constant2: ____},

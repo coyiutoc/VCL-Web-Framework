@@ -200,39 +200,39 @@
     "filePath": "scripts/experiment-properties/graphing/d3-base-plots/shape_plot.js",
     "lines": [
       {
-        "lineNumber": 69,
+        "lineNumber": 74,
         "line": "/**"
       },
       {
-        "lineNumber": 70,
+        "lineNumber": 75,
         "line": " * D3 code for plotting a circle."
       },
       {
-        "lineNumber": 71,
+        "lineNumber": 76,
         "line": " *"
       },
       {
-        "lineNumber": 72,
+        "lineNumber": 77,
         "line": " * @param  chart      {svg object}"
       },
       {
-        "lineNumber": 73,
+        "lineNumber": 78,
         "line": " *         radius     {double} "
       },
       {
-        "lineNumber": 74,
+        "lineNumber": 79,
         "line": " *         max_radius {double}     Largest radius of the given trial"
       },
       {
-        "lineNumber": 75,
+        "lineNumber": 80,
         "line": " *         diff       {double}     Difference between max and min radius of given trial        "
       },
       {
-        "lineNumber": 76,
+        "lineNumber": 81,
         "line": " */ "
       },
       {
-        "lineNumber": 77,
+        "lineNumber": 82,
         "line": "function plot_circle(chart, radius, max_radius, diff, properties) {"
       }
     ],
@@ -252,47 +252,47 @@
     "filePath": "scripts/experiment-properties/graphing/d3-base-plots/shape_plot.js",
     "lines": [
       {
-        "lineNumber": 119,
+        "lineNumber": 124,
         "line": "/**"
       },
       {
-        "lineNumber": 120,
+        "lineNumber": 125,
         "line": " * D3 code for plotting a slice (1/4 of circle)."
       },
       {
-        "lineNumber": 121,
+        "lineNumber": 126,
         "line": " *      "
       },
       {
-        "lineNumber": 122,
+        "lineNumber": 127,
         "line": " * @param  chart      {svg object}"
       },
       {
-        "lineNumber": 123,
+        "lineNumber": 128,
         "line": " *         radius     {double} "
       },
       {
-        "lineNumber": 124,
+        "lineNumber": 129,
         "line": " *         rotation   {int}        Degrees of rotation in the counterclockwise direction.        "
       },
       {
-        "lineNumber": 125,
+        "lineNumber": 130,
         "line": " *         max_radius {double}     Largest radius of the given trial"
       },
       {
-        "lineNumber": 126,
+        "lineNumber": 131,
         "line": " *         diff       {double}     Difference between max and min radius of given trial  "
       },
       {
-        "lineNumber": 127,
+        "lineNumber": 132,
         "line": " *         properties {object}     Graph attributes extracted from constants"
       },
       {
-        "lineNumber": 128,
+        "lineNumber": 133,
         "line": " */ "
       },
       {
-        "lineNumber": 129,
+        "lineNumber": 134,
         "line": "function plot_slice(chart, radius, rotation, max_radius, diff, properties) {"
       }
     ],
@@ -313,43 +313,43 @@
     "filePath": "scripts/experiment-properties/graphing/d3-base-plots/shape_plot.js",
     "lines": [
       {
-        "lineNumber": 186,
+        "lineNumber": 191,
         "line": "/**"
       },
       {
-        "lineNumber": 187,
+        "lineNumber": 192,
         "line": " * D3 code for plotting a square."
       },
       {
-        "lineNumber": 188,
+        "lineNumber": 193,
         "line": " *"
       },
       {
-        "lineNumber": 189,
+        "lineNumber": 194,
         "line": " * @param  chart      {svg object}"
       },
       {
-        "lineNumber": 190,
+        "lineNumber": 195,
         "line": " *         radius     {double} "
       },
       {
-        "lineNumber": 191,
+        "lineNumber": 196,
         "line": " *         max_radius {double}     Largest radius of the given trial"
       },
       {
-        "lineNumber": 192,
+        "lineNumber": 197,
         "line": " *         diff       {double}     Difference between max and min radius of given trial  "
       },
       {
-        "lineNumber": 193,
+        "lineNumber": 198,
         "line": " *         properties {object}     Graph attributes extracted from constants       "
       },
       {
-        "lineNumber": 194,
+        "lineNumber": 199,
         "line": " */ "
       },
       {
-        "lineNumber": 195,
+        "lineNumber": 200,
         "line": "function plot_square(chart, radius, max_radius, diff, properties) {"
       }
     ],
@@ -369,43 +369,43 @@
     "filePath": "scripts/experiment-properties/graphing/d3-base-plots/shape_plot.js",
     "lines": [
       {
-        "lineNumber": 216,
+        "lineNumber": 221,
         "line": "/**"
       },
       {
-        "lineNumber": 217,
+        "lineNumber": 222,
         "line": " * D3 code for plotting a rotated square AKA diamond."
       },
       {
-        "lineNumber": 218,
+        "lineNumber": 223,
         "line": " *"
       },
       {
-        "lineNumber": 219,
+        "lineNumber": 224,
         "line": " * @param  chart      {svg object}"
       },
       {
-        "lineNumber": 220,
+        "lineNumber": 225,
         "line": " *         radius     {double} "
       },
       {
-        "lineNumber": 221,
+        "lineNumber": 226,
         "line": " *         max_radius {double}     Largest radius of the given trial"
       },
       {
-        "lineNumber": 222,
+        "lineNumber": 227,
         "line": " *         diff       {double}     Difference between max and min radius of given trial   "
       },
       {
-        "lineNumber": 223,
+        "lineNumber": 228,
         "line": " *         properties {object}     Graph attributes extracted from constants     "
       },
       {
-        "lineNumber": 224,
+        "lineNumber": 229,
         "line": " */ "
       },
       {
-        "lineNumber": 225,
+        "lineNumber": 230,
         "line": "function plot_rotated_square(chart, radius, max_radius, diff, properties) {"
       }
     ],
@@ -425,43 +425,43 @@
     "filePath": "scripts/experiment-properties/graphing/d3-base-plots/shape_plot.js",
     "lines": [
       {
-        "lineNumber": 248,
+        "lineNumber": 253,
         "line": "/**"
       },
       {
-        "lineNumber": 249,
+        "lineNumber": 254,
         "line": " * D3 code for plotting a triangle."
       },
       {
-        "lineNumber": 250,
+        "lineNumber": 255,
         "line": " *"
       },
       {
-        "lineNumber": 251,
+        "lineNumber": 256,
         "line": " * @param  chart      {svg object}"
       },
       {
-        "lineNumber": 252,
+        "lineNumber": 257,
         "line": " *         radius     {double} "
       },
       {
-        "lineNumber": 253,
+        "lineNumber": 258,
         "line": " *         max_radius {double}     Largest radius of the given trial"
       },
       {
-        "lineNumber": 254,
+        "lineNumber": 259,
         "line": " *         diff       {double}     Difference between max and min radius of given trial   "
       },
       {
-        "lineNumber": 255,
+        "lineNumber": 260,
         "line": " *         properties {object}     Graph attributes extracted from constants     "
       },
       {
-        "lineNumber": 256,
+        "lineNumber": 261,
         "line": " */ "
       },
       {
-        "lineNumber": 257,
+        "lineNumber": 262,
         "line": "function plot_triangle(chart, radius, max_radius, diff, properties) {"
       }
     ],
@@ -481,43 +481,43 @@
     "filePath": "scripts/experiment-properties/graphing/d3-base-plots/shape_plot.js",
     "lines": [
       {
-        "lineNumber": 279,
+        "lineNumber": 284,
         "line": "/**"
       },
       {
-        "lineNumber": 280,
+        "lineNumber": 285,
         "line": " * D3 code for plotting a rotated triangle."
       },
       {
-        "lineNumber": 281,
+        "lineNumber": 286,
         "line": " *"
       },
       {
-        "lineNumber": 282,
+        "lineNumber": 287,
         "line": " * @param  chart      {svg object}"
       },
       {
-        "lineNumber": 283,
+        "lineNumber": 288,
         "line": " *         radius     {double} "
       },
       {
-        "lineNumber": 284,
+        "lineNumber": 289,
         "line": " *         max_radius {double}     Largest radius of the given trial"
       },
       {
-        "lineNumber": 285,
+        "lineNumber": 290,
         "line": " *         diff       {double}     Difference between max and min radius of given trial "
       },
       {
-        "lineNumber": 286,
+        "lineNumber": 291,
         "line": " *         properties {object}     Graph attributes extracted from constants       "
       },
       {
-        "lineNumber": 287,
+        "lineNumber": 292,
         "line": " */ "
       },
       {
-        "lineNumber": 288,
+        "lineNumber": 293,
         "line": "function plot_rotated_triangle(chart, radius, max_radius, diff, properties) {"
       }
     ],

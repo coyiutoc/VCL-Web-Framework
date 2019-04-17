@@ -44,10 +44,10 @@ var GRAPH_TYPES = {
 			point_shape: {
 				default: "circle",
 				trial_data_key: "point_shape",
+				valid_inputs: ["square", "diamond", "circle"],
 				docs: {
 					desc: "Changes shape of the point. Takes in string name of shape.",
-					input_type: INPUT_TYPES.string,
-					valid_inputs: ["square", "diamond", "circle"]
+					input_type: INPUT_TYPES.string
 				}
 			},
 
@@ -178,10 +178,10 @@ var GRAPH_TYPES = {
 			shape_type: {
 				default: "circle",
 				trial_data_key: "shapes",
+				valid_inputs: ["slice", "square", "rotSquare", "triangle", "rotTriangle"],
 				docs: {
 					desc: "Changes shape. Takes in string name of shape.",
-					input_type: INPUT_TYPES.string,
-					valid_inputs: ["slice", "square", "rotSquare", "triangle", "rotTriangle"]
+					input_type: INPUT_TYPES.string
 				}
 			},
 

@@ -71,7 +71,8 @@ small_point_sizes: {
 	balancing: "latin_square",
 	display_name: "Small Point Sizes",
 	display_info: {
-		description: "Standard JND scatter plot condition, except point sizes vary between 5 - 13 pixels for each 0.3, 0.6, 0.9 base correlation grouping.",
+		description: "Standard JND scatter plot condition, except point sizes vary between" +  
+					 "5 - 13 pixels for each 0.3, 0.6, 0.9 base correlation grouping.",
 		researcher: "Caitlin Coyiuto",
 		developer: "Caitlin Coyiuto"
 	}

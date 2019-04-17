@@ -1,3 +1,9 @@
+function render_conditions(){
+	render_conditions_navigation();
+	render_conditions_tables();
+}
+
+
 function render_conditions_navigation(){
 
 	let target_li = $("[data-link = 'manual/conditions.html']");
@@ -17,7 +23,7 @@ function render_conditions_navigation(){
 	target_li.after(li_html);
 }
 
-function render_conditions(){
+function render_conditions_tables(){
 	
 	for (let exp_key in EXPERIMENTS) {
 
