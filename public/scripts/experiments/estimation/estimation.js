@@ -681,19 +681,18 @@ export default class Estimation {
     /**
      *
      * @param chart
-     * @param curve_length
+     * @param chord
      * @param y_pos
      * @param x_pos
      * @param is_ref
      * @param outline
      * @param curve_left
      */
-    plot_curve(chart, curve_length, y_pos, x_pos, is_ref, outline, curve_left) {
+    plot_curve(chart, chord, y_pos, x_pos, is_ref, outline, curve_left) {
         let exp = this;
         let curr_trial_data = this.curr_trial_data;
         // calculate the radius of circle, assume the central angle corresponding to the curve is 60 degrees
-        let r = curve_length * 6 / (Math.PI * 2);
-        let chord = r;
+        let r = chord;
         let M = [x_pos, y_pos - chord / 2];
         let A = [r, r, 0, 0, curve_left? 1 : 0, x_pos, y_pos + chord / 2];
         chart.append("path")
@@ -707,9 +706,8 @@ export default class Estimation {
                 .on("keydown", function () {
                     let event = d3.event;
                     if (event.key === "m" || event.key === "z") {
-                        curve_length = exp.calculate_size_change(event.key, curve_length);
-                        r = curve_length * 6 / (Math.PI * 2);
-                        chord = r;
+                        chord = exp.calculate_size_change(event.key, chord);
+                        r = chord;
                         M = [x_pos, y_pos - chord / 2];
                         A = [r, r, 0, 0, curve_left? 1 : 0, x_pos, y_pos + chord / 2];
                         d3.select("#curve_mod")
