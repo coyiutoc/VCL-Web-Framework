@@ -113,16 +113,152 @@
     <ul class="manual-toc">
       
     <li data-ice="manualNav" class="indent-h1" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html" data-ice="link">Developing New Conditions</a></li>
-<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#identifiers" data-ice="link">Identifiers</a></li>
-<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#properties" data-ice="link">Properties</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#distribution" data-ice="link">Distribution</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#graphing" data-ice="link">Graphing</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#for-researchers" data-ice="link">For Researchers</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#example" data-ice="link">Example</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#for-developers" data-ice="link">For Developers</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#-1--add-to-config" data-ice="link">(1) Add to config</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#-2--add-constants" data-ice="link">(2) Add constants</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#todo--instruction-panels" data-ice="link">TODO: Instruction panels</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#-4--update-docs-" data-ice="link">(4) Update docs.</a></li>
 </ul>
   </div>
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="developing-new-conditions">Developing New Conditions</h1><h2 id="identifiers">Identifiers</h2><h2 id="properties">Properties</h2><h3 id="distribution">Distribution</h3><h3 id="graphing">Graphing</h3></div>
+<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="developing-new-conditions">Developing New Conditions</h1><h2 id="for-researchers">For Researchers</h2><p>If you are planning to add a new condition that uses the base experiments already supported, please provide the following information:</p>
+<ul>
+<li><strong>Condition Name</strong></li>
+<li><strong>High-Level Description of Condition</strong></li>
+<li><strong>Identifiers</strong><ul>
+<li><strong>Base Experiment</strong></li>
+<li><strong>Trial Structure</strong></li>
+<li><strong>Balancing</strong></li>
+<li><strong>Graph Type</strong></li>
+</ul>
+</li>
+<li><strong>Subconditions</strong><ul>
+<li><strong>How many subconditions?</strong></li>
+<li><strong>What is changing on each subcondition? List all variables.</strong></li>
+<li><strong>How are each of the variables being changed?</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="example">Example</h3><p>Let us say you want to make a new condition for a JND Design experiment that changes point size on each grouping of the Design trial structure. This is what your information would look like:</p>
+<ul>
+<li><strong>Condition Name</strong>: small_point_sizes</li>
+<li><strong>High-Level Description of Condition</strong>: Standard JND scatter plot condition, except point sizes vary between 5 - 13 pixels for each 0.3, 0.6, 0.9 base correlation grouping.</li>
+<li><strong>Identifiers</strong><ul>
+<li><strong>Base Experiment</strong>: JND</li>
+<li><strong>Trial Structure</strong>: Design</li>
+<li><strong>Balancing</strong>: Latin Square</li>
+<li><strong>Graph Type</strong>: Scatter</li>
+</ul>
+</li>
+<li><strong>Subconditions</strong><ul>
+<li><strong>How many subconditions?</strong>: 15</li>
+<li><strong>What is changing on each subcondition? List all variables.</strong>: Point size</li>
+<li><strong>How are each of the variables being changed on each subcondition?</strong>: The design trial structure has 5 groupings of the base_correlation = 0.3, 0.6, 0.9, making 15 total subconditions. For each group, point size is different.<ul>
+<li>Group 1 point size = 5 px</li>
+<li>Group 2 point size = 7 px</li>
+<li>Group 3 point size = 9 px</li>
+<li>Group 4 point size = 11 px</li>
+<li>Group 5 point size = 13 px</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="for-developers">For Developers</h2><h3 id="-1--add-to-config">(1) Add to config</h3><p>Under <code>public/config/conditions-config</code>, add a new key and javascript object at the bottom. The object should look like this:</p>
+<pre><code><code class="source-code prettyprint">name_of_new_condition: {
+    experiment: [],
+    graph_type: [],
+    trial_structure: [],
+    balancing: &quot;&quot;,
+    display_name: &quot;New condition name&quot;,
+    display_info: {
+        description: &quot;&quot;,
+        researcher: &quot;&quot;,
+        developer: &quot;&quot;
+    }
+}    </code>
+</code></pre><p>Check that when you load the UI, your condition is visible with the identifiers specified.</p>
+<p>Note that <code>experiment</code>, <code>graph_type</code> and <code>trial_structure</code> can take multiple strings (in an array). So you can have the SAME condition name,
+with the same kind of subcondition-level manipulation, but different underlying base experiment, different graph type, or different trial structure.
+A good example of this are the base experiments that run across JND and Stevens, and are supported on both scatter and strip graph types. </p>
+<p>If we use the example from above, the JS object looks like this:</p>
+<pre><code><code class="source-code prettyprint">small_point_sizes: {
+    experiment: [&quot;jnd&quot;],
+    graph_type: [&quot;scatter&quot;],
+    trial_structure: [&quot;design&quot;],
+    balancing: &quot;latin_square&quot;,
+    display_name: &quot;Small Point Sizes&quot;,
+    display_info: {
+        description: &quot;Standard JND scatter plot condition, except point sizes vary between 5 - 13 pixels for each 0.3, 0.6, 0.9 base correlation grouping.&quot;,
+        researcher: &quot;Caitlin Coyiuto&quot;,
+        developer: &quot;Caitlin Coyiuto&quot;
+    }
+}</code>
+</code></pre><h3 id="-2--add-constants">(2) Add constants</h3><p>Add the constants needed to run each subcondition into the right data file. All data files are in <code>public/scripts/experiment-properties/data/constants</code>.
+Add a JS object into the file with the same experiment base name. You want to add into the array for CONDITIONS, not BASE. E.g. for JND, there is
+an array for JND_BASE, which has all the base attributes on each subcondition of a given trial structure. All condition data, which either adds or
+overrides any parameters in JND_BASE, is inside JND_CONDITIONS.</p>
+<p><strong>Each entry in the array represents ONE subcondition. So you must define all
+attributes that are being changed for each subcondition.</strong></p>
+<p><strong>You can OVERRIDE any of the attributes found in base subconditions. E.g. you can redefine &quot;point_size&quot; in your subcondition if you are changing it
+on a subcondition-basis.</strong></p>
+<p>Object should look something like this:</p>
+<pre><code><code class="source-code prettyprint">name_of_new_condition:
+[
+    {constant1: ___, constant2: ____},
+
+    {constant1: ___, constant2: ____},
+
+    {constant1: ___, constant2: ____},
+
+    {constant1: ___, constant2: ____},
+
+    .....
+]</code>
+</code></pre><p>Using example from above, we are just changing <code>point_size</code>, so we need to define each of the sizes on every subcondition.
+Note that the subconditions for a JND Design already has <code>point_size</code> (look at <code>JND_BASE[&quot;design&quot;]</code>). By re-defining the <code>point_size</code>
+attribute here, you are <strong>OVERRIDING</strong> the <code>point_size</code> variable in the base.</p>
+<pre><code><code class="source-code prettyprint">small_point_sizes:
+    [
+    {point_size: 5},
+
+    {point_size: 5},
+
+    {point_size: 5},
+
+    {point_size: 7},
+
+    {point_size: 7},
+
+    {point_size: 7},
+
+    {point_size: 9},
+
+    {point_size: 9},
+
+    {point_size: 9},
+
+    {point_size: 11},
+
+    {point_size: 11},
+
+    {point_size: 11},
+
+    {point_size: 13},
+
+    {point_size: 13},
+
+    {point_size: 13},
+    ]</code>
+</code></pre><h3 id="todo--instruction-panels">TODO: Instruction panels</h3><h3 id="-4--update-docs-">(4) Update docs.</h3><p> The docs dynamically gets all the condition data specified in the config files. However, it needs to be compiled to be re-updated.</p>
+<p> Run this in the command line:</p>
+<p> <code>./node_modules/.bin/esdoc</code></p>
+<p> And check that your condition exists in the Conditions tab.</p>
+</div>
 </div>
 
 <footer class="footer">

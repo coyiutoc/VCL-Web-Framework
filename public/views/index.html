@@ -17,6 +17,9 @@
 
     <!-- Routing helper: -->
     <script type="text/javascript" src="/config/conditions-config.js"></script>
+    <script type="text/javascript" src="/config/experiments-config.js"></script>
+    <script type="text/javascript" src="/config/trial-structure-config.js"></script>
+    <script type="text/javascript" src="/config/graphing-config.js"></script>
 
 </head>
 
@@ -45,10 +48,6 @@
               <div class="form-group col-md-12">
                 <label for="experiment-label"><b>Experiment:</b></label>
                 <select id = "experiment-select" class="custom-select">
-                  <option value="jnd" selected>JND</option>
-                  <option value="jnd_radius">JND Radius</option>
-                  <option value="stevens">Stevens</option>
-                  <option value="estimation">Estimation</option>
                 </select>
               </div>
             </div>
@@ -57,10 +56,10 @@
               <div class="form-group col-md-12">
                 <label for="trial-struct-label"><b>Trial Structure:</b></label>
                 <select id = "trial-struct-select" class="custom-select">
-                  <option value="foundational" selected>Foundational</option>
+<!--                   <option value="foundational" selected>Foundational</option>
                   <option value="design">Design</option>
                   <option value="estimation">Estimation</option>
-                  <option value="custom">Custom</option>
+                  <option value="custom">Custom</option> -->
                 </select>
               </div>
             </div>
@@ -69,10 +68,10 @@
               <div class="form-group col-md-12">
                 <label for="graph-label"><b>Graph Type:</b></label>
                 <select id = "graph-select" class="custom-select">
-                  <option value="scatter" selected>Scatter</option>
+<!--                   <option value="scatter" selected>Scatter</option>
                   <option value="strip">Strip</option>
                   <option value="ring">Ring</option>
-                  <option value="shapes">Shapes</option>
+                  <option value="shapes">Shapes</option> -->
                 </select>
               </div>
             </div>
@@ -127,6 +126,24 @@
   </body> 
 
   <script type = "text/javascript">
+
+    for (let key in EXPERIMENTS) {
+      let exp = EXPERIMENTS[key];
+      let html = `<option value="${key}" ${function(){key === "jnd" ? "selected" : ""}}>${exp.docs.display_name}</option>`;  
+      $("#experiment-select").append(html);
+    }
+
+    for (let key in TRIAL_STRUCTURES) {
+      let struct = TRIAL_STRUCTURES[key];
+      let html = `<option value="${key}" ${function(){key === "foundational" ? "selected" : ""}}>${struct.docs.display_name}</option>`;  
+      $("#trial-struct-select").append(html);
+    }
+
+    for (let key in GRAPH_TYPES) {
+      let graph_type = GRAPH_TYPES[key];
+      let html = `<option value="${key}" ${function(){key === "scatter" ? "selected" : ""}}>${graph_type.docs.display_name}</option>`;  
+      $("#graph-select").append(html);
+    }
 
     var experiment = "jnd";
     var trial_structure = "foundational";

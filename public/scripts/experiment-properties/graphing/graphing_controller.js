@@ -165,7 +165,8 @@ function prepare_shapes_plot(experiment) {
 function generate_attributes_object(plot_type, trial_data, plot_number) {
 
 	let obj = {};
-	let attributes = PLOT_PROPERTIES[plot_type]; //PLOT_PROPERTIES comes from /config/graphing-config.js
+	let graph = GRAPH_TYPES[plot_type]; //GRAPH_TYPES comes from /config/graphing-config.js
+	let attributes = graph["attributes"];
 
 	for (let property in attributes) {
 

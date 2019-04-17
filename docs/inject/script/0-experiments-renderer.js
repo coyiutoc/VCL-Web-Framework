@@ -9,6 +9,7 @@ function render_experiments(){
 						<th>Graph Type(s)</th>
 						<th>Balancing</th>
 						<th>Description</th>
+						<th>Developer</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -25,6 +26,7 @@ function render_experiments(){
 					<td>${stringify_array(exp.graph_type)}</td>
 					<td>${stringify_array(exp.balancing_type)}</td>
 					<td>${exp.docs.description}</td>
+					<td>${exp.docs.developer}</td>
 				</tr>
 			`;
 
