@@ -533,137 +533,137 @@ const JND_CONDITIONS = {
 
   distractor_blue_shades: 
     [
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#004078', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#004078', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#004078', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#004078', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#004078', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#004078', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#2c6fad', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#2c6fad', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#2c6fad', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#2c6fad', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#2c6fad', target_color: '#699938', dist_point_size: 3}, 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#2c6fad', target_color: '#699938', dist_point_size: 6}, 
     
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#69a3e5', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#69a3e5', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#69a3e5', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#69a3e5', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#69a3e5', target_color: '#699938', dist_point_size: 3}, 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#69a3e5', target_color: '#699938', dist_point_size: 6}, 
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#a2d9ff', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#a2d9ff', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#a2d9ff', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#a2d9ff', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#a2d9ff', target_color: '#699938', dist_point_size: 3} 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#a2d9ff', target_color: '#699938', dist_point_size: 6} 
     ],
 
   distractor_red_shades: 
     [
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9f2b2a', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9f2b2a', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9f2b2a', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9f2b2a', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9f2b2a', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9f2b2a', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#bc4740', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#bc4740', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#bc4740', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#bc4740', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#bc4740', target_color: '#699938', dist_point_size: 3}, 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#bc4740', target_color: '#699938', dist_point_size: 6}, 
     
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#db6158', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#db6158', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#db6158', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#db6158', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#db6158', target_color: '#699938', dist_point_size: 3}, 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#db6158', target_color: '#699938', dist_point_size: 6}, 
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#ff988a', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#ff988a', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#ff988a', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#ff988a', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#ff988a', target_color: '#699938', dist_point_size: 3} 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#ff988a', target_color: '#699938', dist_point_size: 6} 
     ],
 
   distractor_yellow_shades: 
     [
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 3}, 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 6}, 
     
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 3}, 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 6}, 
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 3} 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 6} 
     ],
 
   distractor_yellow_shades: 
     [
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 3}, 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 6}, 
     
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 3}, 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 6}, 
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 3} 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 6} 
     ],
 
   distractor_control_shades: 
     [
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3}, 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 6}, 
     
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3}, 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 6}, 
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3} 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 6} 
     ],
 
   strip_ring_size:

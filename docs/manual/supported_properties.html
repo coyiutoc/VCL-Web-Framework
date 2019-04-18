@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><link rel="stylesheet" href="./inject/css/0-styles.css"><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container manual-root" data-ice="rootContainer">
 
 <header>
@@ -107,10 +107,14 @@
     <ul class="manual-toc">
       
     <li data-ice="manualNav" class="indent-h1" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html" data-ice="link">Supported Properties</a></li>
-<li data-ice="manualNav" class="indent-h2" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#base-experiment" data-ice="link">Base Experiment</a></li>
-<li data-ice="manualNav" class="indent-h2" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#trial-structure" data-ice="link">Trial Structure</a></li>
-<li data-ice="manualNav" class="indent-h2" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#balancing" data-ice="link">Balancing</a></li>
-<li data-ice="manualNav" class="indent-h2" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#graphical-properties" data-ice="link">Graphical Properties</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#identifiers" data-ice="link">Identifiers</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#base-experiment" data-ice="link">Base Experiment</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#trial-structure" data-ice="link">Trial Structure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#balancing" data-ice="link">Balancing</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#graph-types" data-ice="link">Graph Types</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#subcondition-attributes" data-ice="link">Subcondition Attributes</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#experimental-attributes" data-ice="link">Experimental Attributes</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#graphical-attributes" data-ice="link">Graphical Attributes</a></li>
 </ul>
   </div>
 <div data-ice="manual">
@@ -135,8 +139,12 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="supported-properties">Supported Properties</h1><p>Below are all the valid inputs for each of the the identifiers (base experiment, trial structure, balancing, condition), as well as all manipulatable graphical attributes specific to each graph type. </p>
-<h2 id="base-experiment">Base Experiment</h2><h2 id="trial-structure">Trial Structure</h2><h2 id="balancing">Balancing</h2><h2 id="graphical-properties">Graphical Properties</h2></div>
+<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="supported-properties">Supported Properties</h1><h2 id="identifiers">Identifiers</h2><p>Below are all the supported values for each of the four identifiers. </p>
+<h3 id="base-experiment">Base Experiment</h3><h3 id="trial-structure">Trial Structure</h3><h3 id="balancing">Balancing</h3><h3 id="graph-types">Graph Types</h3><h2 id="subcondition-attributes">Subcondition Attributes</h2><p>Below are each of the attributes used to define a subcondition. For experimental attributes, some attributes 
+MUST be defined depending on the experiment. Usually, if you are adding a new condition that uses a pre-existing trial structure, the base subconditions from the trial structure already define all these attributes.</p>
+<p>Depending on the graph type of the condition, certain graphical attributes can be customized. They will default 
+to a specific value if they are not defined in your new condition.</p>
+<h3 id="experimental-attributes">Experimental Attributes</h3><h3 id="graphical-attributes">Graphical Attributes</h3></div>
 </div>
 
 <footer class="footer">

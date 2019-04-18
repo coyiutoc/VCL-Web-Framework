@@ -178,7 +178,10 @@ export default class JND_Radius {
 
         // Randomize position of the shapes
         let random = Math.floor(Math.random() * Math.floor(2));
-        trial.data.shapes = random <= 0.5 ? [constants.shape_1, constants.shape_2] : [constants.shape_2, constants.shape_1];
+        let shape1 = constants.shapes[0];
+        let shape2 = constants.shapes[1];
+
+        trial.data.shapes = random <= 0.5 ? [shape1, shape2] : [shape2, shape1];
 
         // // For testing purposes, can force R graph to have greater correlation
         // var result = force_greater_right_position(trial,

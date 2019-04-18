@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><link rel="stylesheet" href="./inject/css/0-styles.css"><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -250,7 +250,10 @@ export default class JND_Radius {
 
         // Randomize position of the shapes
         let random = Math.floor(Math.random() * Math.floor(2));
-        trial.data.shapes = random &lt;= 0.5 ? [constants.shape_1, constants.shape_2] : [constants.shape_2, constants.shape_1];
+        let shape1 = constants.shapes[0];
+        let shape2 = constants.shapes[1];
+
+        trial.data.shapes = random &lt;= 0.5 ? [shape1, shape2] : [shape2, shape1];
 
         // // For testing purposes, can force R graph to have greater correlation
         // var result = force_greater_right_position(trial,

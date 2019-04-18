@@ -40,40 +40,28 @@
     ]
   },
   {
-    "name": "get_data_subset",
+    "name": "check_dataset",
     "filePath": "scripts/experiment-properties/data/data_controller.js",
     "lines": [
       {
-        "lineNumber": 72,
+        "lineNumber": 75,
         "line": "/**"
       },
       {
-        "lineNumber": 73,
-        "line": " * Retrieves a smaller dataset (4 subconditions) given experiment, trial structure and condition."
-      },
-      {
-        "lineNumber": 74,
-        "line": " *"
-      },
-      {
-        "lineNumber": 75,
-        "line": " * @param  experiment      {string}            \"jnd\" or \"stevens\"   "
-      },
-      {
         "lineNumber": 76,
-        "line": " *         trial_structure {string}            \"foundational\" or \"design\"         "
+        "line": " * Checks if all subconditions have the necessary attributes to run the experiment."
       },
       {
         "lineNumber": 77,
-        "line": " *         condition       {string}            Name of condition"
-      },
-      {
-        "lineNumber": 78,
         "line": " *"
       },
       {
+        "lineNumber": 78,
+        "line": " * @param  experiment      {string}                 \"jnd\" or \"stevens\"   "
+      },
+      {
         "lineNumber": 79,
-        "line": " * @return dataset     [{assoc}, {assoc}, .... ]         "
+        "line": " *         dataset         {array of JS objects}    dataset to check            "
       },
       {
         "lineNumber": 80,
@@ -81,6 +69,59 @@
       },
       {
         "lineNumber": 81,
+        "line": "function check_dataset(experiment_name, dataset) {"
+      }
+    ],
+    "codeParams": [
+      "experiment_name",
+      "dataset"
+    ],
+    "docParams": [
+      "experiment"
+    ]
+  },
+  {
+    "name": "get_data_subset",
+    "filePath": "scripts/experiment-properties/data/data_controller.js",
+    "lines": [
+      {
+        "lineNumber": 99,
+        "line": "/**"
+      },
+      {
+        "lineNumber": 100,
+        "line": " * Retrieves a smaller dataset (4 subconditions) given experiment, trial structure and condition."
+      },
+      {
+        "lineNumber": 101,
+        "line": " *"
+      },
+      {
+        "lineNumber": 102,
+        "line": " * @param  experiment      {string}            \"jnd\", \"stevens\", etc.  "
+      },
+      {
+        "lineNumber": 103,
+        "line": " *         trial_structure {string}            \"foundational\", \"design\", etc.      "
+      },
+      {
+        "lineNumber": 104,
+        "line": " *         condition       {string}            Name of condition"
+      },
+      {
+        "lineNumber": 105,
+        "line": " *"
+      },
+      {
+        "lineNumber": 106,
+        "line": " * @return dataset     [{assoc}, {assoc}, .... ]         "
+      },
+      {
+        "lineNumber": 107,
+        "line": " */"
+      },
+      {
+        "lineNumber": 108,
         "line": "function get_data_subset(experiment, trial_structure, condition) {"
       }
     ],
@@ -1055,119 +1096,119 @@
     "filePath": "scripts/experiments/jnd_radius/jnd_radius.js",
     "lines": [
       {
-        "lineNumber": 210,
+        "lineNumber": 213,
         "line": "  /**"
       },
       {
-        "lineNumber": 211,
+        "lineNumber": 214,
         "line": "   * Handles saving the relevant data on a given trial."
       },
       {
-        "lineNumber": 212,
-        "line": "   *"
-      },
-      {
-        "lineNumber": 213,
-        "line": "   * For reference, these are the helper variables created to assist in trial logic (i.e not present in excel)"
-      },
-      {
-        "lineNumber": 214,
-        "line": "   * trial_variables =         "
-      },
-      {
         "lineNumber": 215,
-        "line": "   *       {type: 'jnd',"
+        "line": "   *"
       },
       {
         "lineNumber": 216,
-        "line": "   *       run_type: '',"
+        "line": "   * For reference, these are the helper variables created to assist in trial logic (i.e not present in excel)"
       },
       {
         "lineNumber": 217,
-        "line": "   *       left_radius: '',"
+        "line": "   * trial_variables =         "
       },
       {
         "lineNumber": 218,
-        "line": "   *       right_radius: '',"
+        "line": "   *       {type: 'jnd',"
       },
       {
         "lineNumber": 219,
-        "line": "   *       };"
+        "line": "   *       run_type: '',"
       },
       {
         "lineNumber": 220,
-        "line": "   *"
+        "line": "   *       left_radius: '',"
       },
       {
         "lineNumber": 221,
-        "line": "   * These are variables created WITHIN the trial logic that were not present in excel (but need to be"
+        "line": "   *       right_radius: '',"
       },
       {
         "lineNumber": 222,
-        "line": "   * outputted to results).     "
-      },
-      {
-        "lineNumber": 223,
-        "line": "   * export_variables = "
-      },
-      {
-        "lineNumber": 224,
-        "line": "   *       {sub_condition: '',           // Chronological ordering of sub_condition [1, 2, 3 ... ]"
-      },
-      {
-        "lineNumber": 225,
-        "line": "   *        balanced_sub_condition: '',  // Index of sub_condition according to balancing order"
-      },
-      {
-        "lineNumber": 226,
-        "line": "   *        jnd: '',"
-      },
-      {
-        "lineNumber": 227,
-        "line": "   *        base_radius: '',"
-      },
-      {
-        "lineNumber": 228,
-        "line": "   *        adjusted_radius: '',"
-      },
-      {
-        "lineNumber": 229,
-        "line": "   *        correct: '',"
-      },
-      {
-        "lineNumber": 230,
         "line": "   *       };"
       },
       {
-        "lineNumber": 231,
+        "lineNumber": 223,
         "line": "   *"
       },
       {
+        "lineNumber": 224,
+        "line": "   * These are variables created WITHIN the trial logic that were not present in excel (but need to be"
+      },
+      {
+        "lineNumber": 225,
+        "line": "   * outputted to results).     "
+      },
+      {
+        "lineNumber": 226,
+        "line": "   * export_variables = "
+      },
+      {
+        "lineNumber": 227,
+        "line": "   *       {sub_condition: '',           // Chronological ordering of sub_condition [1, 2, 3 ... ]"
+      },
+      {
+        "lineNumber": 228,
+        "line": "   *        balanced_sub_condition: '',  // Index of sub_condition according to balancing order"
+      },
+      {
+        "lineNumber": 229,
+        "line": "   *        jnd: '',"
+      },
+      {
+        "lineNumber": 230,
+        "line": "   *        base_radius: '',"
+      },
+      {
+        "lineNumber": 231,
+        "line": "   *        adjusted_radius: '',"
+      },
+      {
         "lineNumber": 232,
-        "line": "   * @param trial {object}"
+        "line": "   *        correct: '',"
       },
       {
         "lineNumber": 233,
-        "line": "   *        block_type {string}           \"test\" or \"practice\""
+        "line": "   *       };"
       },
       {
         "lineNumber": 234,
-        "line": "   *        constants {assoc array}"
+        "line": "   *"
       },
       {
         "lineNumber": 235,
-        "line": "   *        index {integer}"
+        "line": "   * @param trial {object}"
       },
       {
         "lineNumber": 236,
-        "line": "   *        adjusted_correlation {double}"
+        "line": "   *        block_type {string}           \"test\" or \"practice\""
       },
       {
         "lineNumber": 237,
-        "line": "   */"
+        "line": "   *        constants {assoc array}"
       },
       {
         "lineNumber": 238,
+        "line": "   *        index {integer}"
+      },
+      {
+        "lineNumber": 239,
+        "line": "   *        adjusted_correlation {double}"
+      },
+      {
+        "lineNumber": 240,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 241,
         "line": "  handle_data_saving(trial, block_type, constants, index, adjusted_radius) {"
       }
     ],
@@ -1187,39 +1228,39 @@
     "filePath": "scripts/experiments/jnd_radius/jnd_radius.js",
     "lines": [
       {
-        "lineNumber": 388,
+        "lineNumber": 391,
         "line": "  /**"
       },
       {
-        "lineNumber": 389,
+        "lineNumber": 392,
         "line": "   * Initializes the adjusted radius for the first time."
       },
       {
-        "lineNumber": 390,
+        "lineNumber": 393,
         "line": "   *"
       },
       {
-        "lineNumber": 391,
+        "lineNumber": 394,
         "line": "   * @param  converge_from_above {boolean}    "
       },
       {
-        "lineNumber": 392,
+        "lineNumber": 395,
         "line": "   *         base_radius {double}         "
       },
       {
-        "lineNumber": 393,
+        "lineNumber": 396,
         "line": "   *         initial_difference {double}"
       },
       {
-        "lineNumber": 394,
+        "lineNumber": 397,
         "line": "   * @return adjusted_radius {double}          "
       },
       {
-        "lineNumber": 395,
+        "lineNumber": 398,
         "line": "   */"
       },
       {
-        "lineNumber": 396,
+        "lineNumber": 399,
         "line": "  initialize_adjusted_statistic(converge_from_above, base_radius, initial_difference) {"
       }
     ],
@@ -1237,51 +1278,51 @@
     "filePath": "scripts/experiments/jnd_radius/jnd_radius.js",
     "lines": [
       {
-        "lineNumber": 408,
+        "lineNumber": 411,
         "line": "  /**"
       },
       {
-        "lineNumber": 409,
+        "lineNumber": 412,
         "line": "   * Calculates the next adjusted correlation/statistic."
       },
       {
-        "lineNumber": 410,
-        "line": "   *"
-      },
-      {
-        "lineNumber": 411,
-        "line": "   * @param  correct {boolean}"
-      },
-      {
-        "lineNumber": 412,
-        "line": "   *         converge_from_above {boolean}    "
-      },
-      {
         "lineNumber": 413,
-        "line": "   *         adjusted_quantity {double}         "
+        "line": "   *"
       },
       {
         "lineNumber": 414,
-        "line": "   *         base_correlation {double}"
+        "line": "   * @param  correct {boolean}"
       },
       {
         "lineNumber": 415,
-        "line": "   *         initial_difference {double}"
+        "line": "   *         converge_from_above {boolean}    "
       },
       {
         "lineNumber": 416,
-        "line": "   *"
+        "line": "   *         adjusted_quantity {double}         "
       },
       {
         "lineNumber": 417,
-        "line": "   * @return adjusted_correlation {double}          "
+        "line": "   *         base_correlation {double}"
       },
       {
         "lineNumber": 418,
-        "line": "   */"
+        "line": "   *         initial_difference {double}"
       },
       {
         "lineNumber": 419,
+        "line": "   *"
+      },
+      {
+        "lineNumber": 420,
+        "line": "   * @return adjusted_correlation {double}          "
+      },
+      {
+        "lineNumber": 421,
+        "line": "   */"
+      },
+      {
+        "lineNumber": 422,
         "line": "  get_next_adjusted_statistic(correct, converge_from_above, adjusted_quantity, base_radius) {"
       }
     ],

@@ -168,22 +168,21 @@ function generate_attributes_object(plot_type, trial_data, plot_number) {
 	let graph = GRAPH_TYPES[plot_type]; //GRAPH_TYPES comes from /config/graphing-config.js
 	let attributes = graph["attributes"];
 
-	for (let property in attributes) {
+	for (let key in attributes) {
 
-		let attrib = attributes[property];
-		let key = attrib["trial_data_key"];
+		let attrib = attributes[key];
 
 		// These attributes are dependent on plot_number:
-		if (property === "shape_type") {
+		if (key === "shapes") {
 
-			obj[property] = (key in trial_data ? trial_data[key][plot_number] : attrib["default"])
+			obj[key] = (key in trial_data ? trial_data[key][plot_number] : attrib["default"])
 
 		} else {
 
 			// Check if the key exists in trial_data
 			// If it exists, used the value in trial_data
 			// Else, use the default specified
-			obj[property] = (key in trial_data ? trial_data[key] : attrib["default"]);
+			obj[key] = (key in trial_data ? trial_data[key] : attrib["default"]);
 		}
 	}
 

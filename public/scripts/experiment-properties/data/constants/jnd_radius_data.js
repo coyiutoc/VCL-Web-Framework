@@ -20,92 +20,92 @@ const JND_RADIUS_CONDITIONS = {
 
   circle_square:
   	[
-  	{shape_1: "circle", shape_2: "square"},
+    {shapes: ["circle", "square"]},
 
-  	{shape_1: "circle", shape_2: "square"},
+    {shapes: ["circle", "square"]},
 
-  	{shape_1: "circle", shape_2: "square"},
+    {shapes: ["circle", "square"]},
 
-  	{shape_1: "circle", shape_2: "square"},
+    {shapes: ["circle", "square"]},
 
-  	{shape_1: "circle", shape_2: "square"}
+    {shapes: ["circle", "square"]}
   	],
 
   circle_triangle:
   	[
-  	{shape_1: "circle", shape_2: "triangle"},
+  	{shapes: ["circle", "triangle"]},
 
-  	{shape_1: "circle", shape_2: "triangle"},
+    {shapes: ["circle", "triangle"]},
 
-  	{shape_1: "circle", shape_2: "triangle"},
+    {shapes: ["circle", "triangle"]},
 
-  	{shape_1: "circle", shape_2: "triangle"},
+    {shapes: ["circle", "triangle"]},
 
-  	{shape_1: "circle", shape_2: "triangle"}
+    {shapes: ["circle", "triangle"]}
   	],
 
   square_triangle:
     [
-    {shape_1: "square", shape_2: "triangle"},
+    {shapes: ["square", "triangle"]},
 
-    {shape_1: "square", shape_2: "triangle"},
+    {shapes: ["square", "triangle"]},
 
-    {shape_1: "square", shape_2: "triangle"},
+    {shapes: ["square", "triangle"]},
 
-    {shape_1: "square", shape_2: "triangle"},
+    {shapes: ["square", "triangle"]},
 
-    {shape_1: "square", shape_2: "triangle"}
+    {shapes: ["square", "triangle"]}
     ], 
 
   rotSquare_rotTriangle:
     [
-    {shape_1: "rotSquare", shape_2: "rotTriangle"},
+    {shapes: ["rotSquare", "rotTriangle"]},
 
-    {shape_1: "rotSquare", shape_2: "rotTriangle"},
+    {shapes: ["rotSquare", "rotTriangle"]},
 
-    {shape_1: "rotSquare", shape_2: "rotTriangle"},
+    {shapes: ["rotSquare", "rotTriangle"]},
 
-    {shape_1: "rotSquare", shape_2: "rotTriangle"},
+    {shapes: ["rotSquare", "rotTriangle"]},
 
-    {shape_1: "rotSquare", shape_2: "rotTriangle"}
+    {shapes: ["rotSquare", "rotTriangle"]}
     ],
 
   slice0_triangle:
     [
-    {shape_1: "slice", shape_2: "triangle", slice_rotation: 0},
+    {shapes: ["slice", "triangle"], slice_rotation: 0},
 
-    {shape_1: "slice", shape_2: "triangle", slice_rotation: 0},
+    {shapes: ["slice", "triangle"], slice_rotation: 0},
 
-    {shape_1: "slice", shape_2: "triangle", slice_rotation: 0},
+    {shapes: ["slice", "triangle"], slice_rotation: 0},
 
-    {shape_1: "slice", shape_2: "triangle", slice_rotation: 0},
+    {shapes: ["slice", "triangle"], slice_rotation: 0},
 
-    {shape_1: "slice", shape_2: "triangle", slice_rotation: 0}
+    {shapes: ["slice", "triangle"], slice_rotation: 0}
     ],
 
   slice45_triangle:
     [
-    {shape_1: "slice", shape_2: "triangle", slice_rotation: 45},
+    {shapes: ["slice", "triangle"], slice_rotation: 45},
 
-    {shape_1: "slice", shape_2: "triangle", slice_rotation: 45},
+    {shapes: ["slice", "triangle"], slice_rotation: 45},
 
-    {shape_1: "slice", shape_2: "triangle", slice_rotation: 45},
+    {shapes: ["slice", "triangle"], slice_rotation: 45},
 
-    {shape_1: "slice", shape_2: "triangle", slice_rotation: 45},
+    {shapes: ["slice", "triangle"], slice_rotation: 45},
 
-    {shape_1: "slice", shape_2: "triangle", slice_rotation: 45}
+    {shapes: ["slice", "triangle"], slice_rotation: 45}
     ],
 
   slice90_triangle:
     [
-    {shape_1: "slice", shape_2: "triangle", slice_rotation: 90},
+    {shapes: ["slice", "triangle"], slice_rotation: 90},
 
-    {shape_1: "slice", shape_2: "triangle", slice_rotation: 90},
+    {shapes: ["slice", "triangle"], slice_rotation: 90},
 
-    {shape_1: "slice", shape_2: "triangle", slice_rotation: 90},
+    {shapes: ["slice", "triangle"], slice_rotation: 90},
 
-    {shape_1: "slice", shape_2: "triangle", slice_rotation: 90},
+    {shapes: ["slice", "triangle"], slice_rotation: 90},
 
-    {shape_1: "slice", shape_2: "triangle", slice_rotation: 90},
+    {shapes: ["slice", "triangle"], slice_rotation: 90}
     ]
 }

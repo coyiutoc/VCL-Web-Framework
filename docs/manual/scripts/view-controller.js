@@ -1,9 +1,12 @@
 window.onload = function() {
 
 	var libs = [
-    'https://code.jquery.com/jquery-3.1.1.min.js',
-    'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js'
+    'https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js',
+    'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js',
+    'https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js'
   	];
+
+  	var length = libs.length;
 
   	var count = 0;
 
@@ -24,7 +27,7 @@ window.onload = function() {
           count++;
 
           // Once all scripts loaded, render:
-          if (count === libs.length) {
+          if (count === length) {
           	render();
           }
 

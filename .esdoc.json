@@ -37,6 +37,13 @@
         "./docs/manual/scripts/conditions-renderer.js",
         "./docs/manual/scripts/supported-properties-renderer.js"
       ]}
+  },
+  {
+    "name": "esdoc-inject-style-plugin",
+    "option": {
+      "enable": true,
+      "styles":["./docs/manual/css/styles.css"]
+    }
   }]
 }
 

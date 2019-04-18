@@ -1,15 +1,15 @@
-const INPUT_TYPES = {
+const G_INPUT_TYPES = {
 	string: {
 		display_name: "String", 
-		color: "BLUE"
+		bootstrap_label: "default"
 	},
 	boolean: {
 		display_name: "Boolean",
-		color: "GREEN"
+		bootstrap_label: "success"
 	},
 	number: {
 		display_name: "Number",
-		color: "RED"
+		bootstrap_label: "danger"
 	}
 };
 
@@ -25,40 +25,36 @@ var GRAPH_TYPES = {
 		attributes: {
 			axis_color: {
 				default: "BLACK",
-				trial_data_key: "axis_color",
 				docs: {
 					desc: "Changes color of the axes. Takes in color name (e.g. 'RED') or HEX value.",
-					input_type: INPUT_TYPES.string
+					input_type: G_INPUT_TYPES.string
 				}
 			},
 
 			point_color: {
 				default: "BLACK",
-				trial_data_key: "point_color",
 				docs: {
-					desc: "Changes color of the points. Takes in color name (e.g. 'RED' or HEX value.)",
-					input_type: INPUT_TYPES.string
+					desc: "Changes color of the points. Takes in color name (e.g. 'RED') or HEX value.",
+					input_type: G_INPUT_TYPES.string
 				}
 			},
 
 			point_shape: {
 				default: "circle",
-				trial_data_key: "point_shape",
 				valid_inputs: ["square", "diamond", "circle"],
 				docs: {
 					desc: "Changes shape of the point. Takes in string name of shape.",
-					input_type: INPUT_TYPES.string
+					input_type: G_INPUT_TYPES.string
 				}
 			},
 
 			point_size: {
 				default: 6,
-				trial_data_key: "point_size",
 				docs: {
 					desc: "Changes size of the point. Takes in an integer value.",
-					input_type: INPUT_TYPES.number
+					input_type: G_INPUT_TYPES.number
 				}
-			}
+			},
 		}
 	},
 
@@ -73,38 +69,34 @@ var GRAPH_TYPES = {
 		attributes: {
 			axis_color: {
 				default: "BLACK",
-				trial_data_key: "axis_color",
 				docs: {
-					desc: "Changes color of the axes. Takes in color name (e.g. 'RED') or HEX value.",
-					input_type: INPUT_TYPES.string
+					desc: "Changes color of the horiztonal axis. Takes in color name (e.g. 'RED') or HEX value.",
+					input_type: G_INPUT_TYPES.string
 				}
 			},
 
 			fill_color: {
 				default: "BLACK",
-				trial_data_key: "fill_color",
 				docs: {
 					desc: "Changes the fill color of the strip. Takes in color name (e.g. 'RED') or HEX value.",
-					input_type: INPUT_TYPES.string
+					input_type: G_INPUT_TYPES.string
 				}
 			},
 
 			fixed_strip_height: {
 				default: true,
-				trial_data_key: "fixed_strip_height",
 				docs: {
 					desc: "If true, makes all strip heights equal. If false, uses the y-coordinate as the height." + 
 						  "(So height of strips vary).",
-					input_type: INPUT_TYPES.boolean
+					input_type: G_INPUT_TYPES.boolean
 				}
 			},
 
 			strip_width: {
 				default: 1,
-				trial_data_key: "strip_width",
 				docs: {
 					desc: "Width of the strip in pixels.",
-					input_type: INPUT_TYPES.number
+					input_type: G_INPUT_TYPES.number
 				}
 			},
 		}
@@ -122,37 +114,33 @@ var GRAPH_TYPES = {
 		attributes: {
 			axis_color: {
 				default: "BLACK",
-				trial_data_key: "axis_color",
 				docs: {
-					desc: "Changes color of the axes. Takes in color name (e.g. 'RED') or HEX value.",
-					input_type: INPUT_TYPES.string
+					desc: "Changes color of the horizontal axis. Takes in color name (e.g. 'RED') or HEX value.",
+					input_type: G_INPUT_TYPES.string
 				}
 			},
 
 			fill_color: {
 				default: "none",
-				trial_data_key: "fill_color",
 				docs: {
 					desc: "Changes the fill color of the ring. Takes in color name (e.g. 'RED') or HEX value.",
-					input_type: INPUT_TYPES.string
+					input_type: G_INPUT_TYPES.string
 				}
 			},
 
 			ring_thickness: {
 				default: 1,
-				trial_data_key: "ring_thickness",
 				docs: {
 					desc: "Changes ring thickness/stroke width in pixels.",
-					input_type: INPUT_TYPES.number
+					input_type: G_INPUT_TYPES.number
 				}
 			},
 
 			stroke_color: {
 				default: "BLACK",
-				trial_data_key: "stroke_color",
 				docs: {
 					desc: "Changes the stroke color of the ring. Takes in color name (e.g. 'RED') or HEX value.",
-					input_type: INPUT_TYPES.string
+					input_type: G_INPUT_TYPES.string
 				}
 			},
 		}
@@ -168,47 +156,34 @@ var GRAPH_TYPES = {
 		attributes: {
 			fill_color: {
 				default: "BLACK",
-				trial_data_key: "fill_color",
 				docs: {
 					desc: "Changes the fill color of the shape. Takes in color name (e.g. 'RED') or HEX value.",
-					input_type: INPUT_TYPES.string
+					input_type: G_INPUT_TYPES.string
 				}
 			},
 
-			shape_type: {
+			shapes: {
 				default: "circle",
-				trial_data_key: "shapes",
-				valid_inputs: ["slice", "square", "rotSquare", "triangle", "rotTriangle"],
+				valid_inputs: ["circle", "slice", "square", "rotSquare", "triangle", "rotTriangle"],
 				docs: {
-					desc: "Changes shape. Takes in string name of shape.",
-					input_type: INPUT_TYPES.string
+					desc: "ARRAY containing two strings, each indicating shape type. E.g. ['circle', 'square'].",
+					input_type: G_INPUT_TYPES.string
 				}
 			},
 
 			slice_rotation: {
 				default: 0,
-				trial_data_key: "slice_rotation",
 				docs: {
-					desc: "Changes rotation ONLY if shape_type = 'slice'.",
-					input_type: INPUT_TYPES.number
-				}
-			},
-
-			slice_rotation: {
-				default: 0,
-				trial_data_key: "slice_rotation",
-				docs: {
-					desc: "Changes rotation ONLY if shape_type = 'slice'.",
-					input_type: INPUT_TYPES.number
+					desc: "Changes rotation ONLY if ones of the shapes specified is = 'slice'.",
+					input_type: G_INPUT_TYPES.number
 				}
 			},
 
 			stroke_color: {
 				default: "none",
-				trial_data_key: "stroke_color",
 				docs: {
 					desc: "Changes the stroke color of the shape. Takes in color name (e.g. 'RED') or HEX value.",
-					input_type: INPUT_TYPES.string
+					input_type: G_INPUT_TYPES.string
 				}
 			},
 		}

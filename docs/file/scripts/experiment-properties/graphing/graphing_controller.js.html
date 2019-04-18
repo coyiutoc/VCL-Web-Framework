@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><link rel="stylesheet" href="./inject/css/0-styles.css"><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -240,22 +240,21 @@ function generate_attributes_object(plot_type, trial_data, plot_number) {
 	let graph = GRAPH_TYPES[plot_type]; //GRAPH_TYPES comes from /config/graphing-config.js
 	let attributes = graph[&quot;attributes&quot;];
 
-	for (let property in attributes) {
+	for (let key in attributes) {
 
-		let attrib = attributes[property];
-		let key = attrib[&quot;trial_data_key&quot;];
+		let attrib = attributes[key];
 
 		// These attributes are dependent on plot_number:
-		if (property === &quot;shape_type&quot;) {
+		if (key === &quot;shapes&quot;) {
 
-			obj[property] = (key in trial_data ? trial_data[key][plot_number] : attrib[&quot;default&quot;])
+			obj[key] = (key in trial_data ? trial_data[key][plot_number] : attrib[&quot;default&quot;])
 
 		} else {
 
 			// Check if the key exists in trial_data
 			// If it exists, used the value in trial_data
 			// Else, use the default specified
-			obj[property] = (key in trial_data ? trial_data[key] : attrib[&quot;default&quot;]);
+			obj[key] = (key in trial_data ? trial_data[key] : attrib[&quot;default&quot;]);
 		}
 	}
 

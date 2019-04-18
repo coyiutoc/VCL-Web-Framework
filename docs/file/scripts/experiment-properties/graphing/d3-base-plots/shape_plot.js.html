@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><link rel="stylesheet" href="./inject/css/0-styles.css"><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -109,12 +109,12 @@ function create_shape_plot(attributes) {
                   .attr(&quot;style&quot;, `margin-right: ${width_diff}; margin-left: ${width_diff}; margin-top: ${margin_top}`);
 
   // var GRAPH_TYPES comes from /config/graphing-config.js
-  if (!GRAPH_TYPES[&quot;shapes&quot;][&quot;attributes&quot;][&quot;shape_type&quot;][&quot;valid_inputs&quot;].includes(properties[&quot;shape_type&quot;])){
-    throw Error(&quot;Shape type &quot; + shape_type + &quot; is not a valid shape for graph type shapes.&quot;);
+  if (!GRAPH_TYPES[&quot;shapes&quot;][&quot;attributes&quot;][&quot;shapes&quot;][&quot;valid_inputs&quot;].includes(properties[&quot;shapes&quot;])){
+    throw Error(&quot; &quot; + shape_type + &quot; is not a valid shape for graph type shapes.&quot;);
   }
 
   // Plot depending on shape specified
-  switch (properties[&quot;shape_type&quot;]){
+  switch (properties[&quot;shapes&quot;]){
     
     case &quot;slice&quot;:
       let degrees = properties[&quot;slice_rotation&quot;];

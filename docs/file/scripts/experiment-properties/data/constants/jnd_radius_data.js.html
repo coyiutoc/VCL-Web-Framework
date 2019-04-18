@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><link rel="stylesheet" href="./inject/css/0-styles.css"><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -92,93 +92,93 @@ const JND_RADIUS_CONDITIONS = {
 
   circle_square:
   	[
-  	{shape_1: &quot;circle&quot;, shape_2: &quot;square&quot;},
+    {shapes: [&quot;circle&quot;, &quot;square&quot;]},
 
-  	{shape_1: &quot;circle&quot;, shape_2: &quot;square&quot;},
+    {shapes: [&quot;circle&quot;, &quot;square&quot;]},
 
-  	{shape_1: &quot;circle&quot;, shape_2: &quot;square&quot;},
+    {shapes: [&quot;circle&quot;, &quot;square&quot;]},
 
-  	{shape_1: &quot;circle&quot;, shape_2: &quot;square&quot;},
+    {shapes: [&quot;circle&quot;, &quot;square&quot;]},
 
-  	{shape_1: &quot;circle&quot;, shape_2: &quot;square&quot;}
+    {shapes: [&quot;circle&quot;, &quot;square&quot;]}
   	],
 
   circle_triangle:
   	[
-  	{shape_1: &quot;circle&quot;, shape_2: &quot;triangle&quot;},
+  	{shapes: [&quot;circle&quot;, &quot;triangle&quot;]},
 
-  	{shape_1: &quot;circle&quot;, shape_2: &quot;triangle&quot;},
+    {shapes: [&quot;circle&quot;, &quot;triangle&quot;]},
 
-  	{shape_1: &quot;circle&quot;, shape_2: &quot;triangle&quot;},
+    {shapes: [&quot;circle&quot;, &quot;triangle&quot;]},
 
-  	{shape_1: &quot;circle&quot;, shape_2: &quot;triangle&quot;},
+    {shapes: [&quot;circle&quot;, &quot;triangle&quot;]},
 
-  	{shape_1: &quot;circle&quot;, shape_2: &quot;triangle&quot;}
+    {shapes: [&quot;circle&quot;, &quot;triangle&quot;]}
   	],
 
   square_triangle:
     [
-    {shape_1: &quot;square&quot;, shape_2: &quot;triangle&quot;},
+    {shapes: [&quot;square&quot;, &quot;triangle&quot;]},
 
-    {shape_1: &quot;square&quot;, shape_2: &quot;triangle&quot;},
+    {shapes: [&quot;square&quot;, &quot;triangle&quot;]},
 
-    {shape_1: &quot;square&quot;, shape_2: &quot;triangle&quot;},
+    {shapes: [&quot;square&quot;, &quot;triangle&quot;]},
 
-    {shape_1: &quot;square&quot;, shape_2: &quot;triangle&quot;},
+    {shapes: [&quot;square&quot;, &quot;triangle&quot;]},
 
-    {shape_1: &quot;square&quot;, shape_2: &quot;triangle&quot;}
+    {shapes: [&quot;square&quot;, &quot;triangle&quot;]}
     ], 
 
   rotSquare_rotTriangle:
     [
-    {shape_1: &quot;rotSquare&quot;, shape_2: &quot;rotTriangle&quot;},
+    {shapes: [&quot;rotSquare&quot;, &quot;rotTriangle&quot;]},
 
-    {shape_1: &quot;rotSquare&quot;, shape_2: &quot;rotTriangle&quot;},
+    {shapes: [&quot;rotSquare&quot;, &quot;rotTriangle&quot;]},
 
-    {shape_1: &quot;rotSquare&quot;, shape_2: &quot;rotTriangle&quot;},
+    {shapes: [&quot;rotSquare&quot;, &quot;rotTriangle&quot;]},
 
-    {shape_1: &quot;rotSquare&quot;, shape_2: &quot;rotTriangle&quot;},
+    {shapes: [&quot;rotSquare&quot;, &quot;rotTriangle&quot;]},
 
-    {shape_1: &quot;rotSquare&quot;, shape_2: &quot;rotTriangle&quot;}
+    {shapes: [&quot;rotSquare&quot;, &quot;rotTriangle&quot;]}
     ],
 
   slice0_triangle:
     [
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 0},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 0},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 0},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 0},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 0},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 0},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 0},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 0},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 0}
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 0}
     ],
 
   slice45_triangle:
     [
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 45},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 45},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 45},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 45},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 45},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 45},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 45},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 45},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 45}
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 45}
     ],
 
   slice90_triangle:
     [
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 90},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 90},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 90},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 90},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 90},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 90},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 90},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 90},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 90},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 90}
     ]
 }
 </code></pre>

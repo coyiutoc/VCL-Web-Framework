@@ -14,7 +14,7 @@ If you are planning to add a new condition that uses the base experiments alread
 - **Subconditions**
   - **How many subconditions?**
   - **What is changing on each subcondition? List all variables.**
-  - **How are each of the variables being changed?**
+  - **How are each of the variables being changed? List all equations/computations needed if changing on trial-by-trial basis.**
 
 ### Example
 
@@ -30,7 +30,7 @@ Let us say you want to make a new condition for a JND Design experiment that cha
 - **Subconditions**
   - **How many subconditions?**: 15
   - **What is changing on each subcondition? List all variables.**: Point size
-  - **How are each of the variables being changed on each subcondition?**: The design trial structure has 5 groupings of the base_correlation = 0.3, 0.6, 0.9, making 15 total subconditions. For each group, point size is different.
+  - **How are each of the variables being changed on each subcondition? List all equations/computations needed if changing on trial-by-trial basis.**: The design trial structure has 5 groupings of the base_correlation = 0.3, 0.6, 0.9, making 15 total subconditions. For each group, point size is different.
      - Group 1 point size = 5 px
      - Group 2 point size = 7 px
      - Group 3 point size = 9 px
