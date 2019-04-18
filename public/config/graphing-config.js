@@ -180,7 +180,7 @@ var GRAPH_TYPES = {
 			},
 
 			stroke_color: {
-				default: "none",
+				default: "BLUE",
 				docs: {
 					desc: "Changes the stroke color of the shape. Takes in color name (e.g. 'RED') or HEX value.",
 					input_type: G_INPUT_TYPES.string
