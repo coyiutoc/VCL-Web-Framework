@@ -82,26 +82,24 @@ small_point_sizes: {
 ### (2) Add constants
 
 Add the constants needed to run each subcondition into the right data file. All data files are in `public/scripts/experiment-properties/data/constants`.
-Add a JS object into the file with the same experiment base name. You want to add into the array for CONDITIONS, not BASE. E.g. for JND, there is
-an array for JND_BASE, which has all the base attributes on each subcondition of a given trial structure. All condition data, which either adds or
-overrides any parameters in JND_BASE, is inside JND_CONDITIONS.
 
-**Each entry in the array represents ONE subcondition. So you must define all
-attributes that are being changed for each subcondition.**
+How the constants work is that for a given trial structure, the application **MERGES** all constants defined in the `BASE` variable with all constants defined in `CONDITIONS` variable.
 
-**You can OVERRIDE any of the attributes found in the base subconditions. E.g. you can redefine "point_size" in your subcondition if you are changing it
-on a subcondition-basis.**
-
-Object should look something like this:
+If the trial structure is already defined, you would only need to add all subconditions for your new condition in `CONDITIONS`. 
+- Add a JS object into the file with the same experiment base name. You want to add into the array for CONDITIONS, not BASE. 
+- Note that **each entry in the array represents ONE subcondition. So you must define all
+attributes that are being changed on a subcondition-basis.**
+- You can **OVERRIDE** any of the attributes found in the base subconditions. E.g. you can redefine "point_size" in your subcondition if you are changing it on a subcondition-basis.
+- An example of a new object representing a condition should look something like this:
 
 ```
 name_of_new_condition:
 [
-	{constant1: ___, constant2: ____},
+	{constant1: ___, constant2: ____}, //first subcondition
 
-	{constant1: ___, constant2: ____},
+	{constant1: ___, constant2: ____}, //second subcondition
 
-	{constant1: ___, constant2: ____},
+	{constant1: ___, constant2: ____}, //third...
 
 	{constant1: ___, constant2: ____},
 
@@ -148,9 +146,34 @@ small_point_sizes:
     ]
  ```
 
- ### TODO: Instruction panels
+Again, depending on your trial structure, the application will merge the constants you define in `CONDITIONS` with any that are defined in the `BASE`. So for this example, all the subconditions for `small_point_sizes` is whatever is listed in the `JND_BASE["design"]`, plus whatever is defined in the `CONDITIONS` variable. 
 
- ### (4) Update docs.
+```
+[
+    {distribution_type: "gaussian", base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, 
+    converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, 
+    num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', 
+    feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 5}, // <-- point_size is now   
+                                                                                   // overriden (usually for JND 
+                                                                                   // design, point_size = 6)
+
+    {distribution_type: "gaussian", base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, 
+    converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, 
+    num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', 
+    feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 5},
+    .....
+]
+```
+
+ ### (3) Update instructions
+
+ To update the instructions that are displayed to the participant, you will have to add additional code to the
+ timeline object. Navigate to the `_timeline.js` associated with the condition's experiment. Under 'INSTRUCTION TRIAL BLOCKS', under the case for the condition's graph type, add an instruction block. 
+
+ For this example, we would go to `/experiments/jnd/jnd_timeline.js`, and add another if statement under
+ case "scatter". 
+
+ ### (4) Update docs
 
  The docs dynamically gets all the condition data specified in the config files. However, it needs to be compiled to be re-updated.
 
