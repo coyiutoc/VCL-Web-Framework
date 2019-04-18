@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../">
+  <title data-ice="title">Manual | VCL Framework</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><link rel="stylesheet" href="./inject/css/0-styles.css"><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<body class="layout-container manual-root" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/coyiutoc/VCL_Correlation_POC"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div class="manual-toc-root">
+  
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/README.html"><a href="manual/README.html" data-ice="link">VCL Web Framework</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#set-up" data-ice="link">Set Up</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-1--git-clone-the-repository" data-ice="link">(1) Git clone the repository</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-2--install-node" data-ice="link">(2) Install Node</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-3--install-dependencies" data-ice="link">(3) Install Dependencies</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-4--run-the-application" data-ice="link">(4) Run the Application</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/terminology.html"><a href="manual/terminology.html" data-ice="link">Terminology</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/terminology.html"><a href="manual/terminology.html#describing-an-experiment" data-ice="link">Describing an Experiment</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-task--strong-" data-ice="link">Task</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-method--strong-" data-ice="link">Method</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-properties--strong-" data-ice="link">Properties</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/terminology.html"><a href="manual/terminology.html#condition-identifiers" data-ice="link">Condition Identifiers</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-base-experiment--strong-" data-ice="link">Base Experiment</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-trial-structure--strong-" data-ice="link">Trial Structure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-balancing--strong-" data-ice="link">Balancing</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-condition--strong-" data-ice="link">Condition</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/experiments.html"><a href="manual/experiments.html" data-ice="link">Experiments</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/jnd.html"><a href="manual/jnd.html" data-ice="link">&gt;&gt; JND</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/jnd.html"><a href="manual/jnd.html#specifications" data-ice="link">Specifications</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#practice-procedure" data-ice="link">Practice Procedure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#test-procedure" data-ice="link">Test Procedure</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/jnd.html"><a href="manual/jnd.html#jspsych-timeline" data-ice="link">JsPsych Timeline</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#general-timeline" data-ice="link">General Timeline</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#trial-logic" data-ice="link">Trial Logic</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#adjusted-correlation" data-ice="link">Adjusted Correlation</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#constants" data-ice="link">Constants</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/jnd_radius.html"><a href="manual/jnd_radius.html" data-ice="link">&gt;&gt; JND Radius</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/jnd_radius.html"><a href="manual/jnd_radius.html#specifications" data-ice="link">Specifications</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd_radius.html"><a href="manual/jnd_radius.html#test-procedure" data-ice="link">Test Procedure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd_radius.html"><a href="manual/jnd_radius.html#constants" data-ice="link">Constants</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/stevens.html"><a href="manual/stevens.html" data-ice="link">&gt;&gt; Stevens</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/stevens.html"><a href="manual/stevens.html#specifications" data-ice="link">Specifications</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/stevens.html"><a href="manual/stevens.html#practice-procedure" data-ice="link">Practice Procedure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/stevens.html"><a href="manual/stevens.html#test-procedure" data-ice="link">Test Procedure</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/stevens.html"><a href="manual/stevens.html#jspsych-timeline" data-ice="link">JsPsych Timeline</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/stevens.html"><a href="manual/stevens.html#trial-logic" data-ice="link">Trial Logic</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/stevens.html"><a href="manual/stevens.html#estimated-correlation" data-ice="link">Estimated Correlation</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/stevens.html"><a href="manual/stevens.html#constants" data-ice="link">Constants</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/estimation.html"><a href="manual/estimation.html" data-ice="link">&gt;&gt; Estimation</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/estimation.html"><a href="manual/estimation.html#specifications" data-ice="link">Specifications</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html" data-ice="link">Supported Properties</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#identifiers" data-ice="link">Identifiers</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#base-experiment" data-ice="link">Base Experiment</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#trial-structure" data-ice="link">Trial Structure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#balancing" data-ice="link">Balancing</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#graph-types" data-ice="link">Graph Types</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#subcondition-attributes" data-ice="link">Subcondition Attributes</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#experimental-attributes" data-ice="link">Experimental Attributes</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#graphical-attributes" data-ice="link">Graphical Attributes</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/conditions.html"><a href="manual/conditions.html" data-ice="link">Conditions</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html" data-ice="link">Developing New Conditions</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#for-researchers" data-ice="link">For Researchers</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#example" data-ice="link">Example</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#for-developers" data-ice="link">For Developers</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#-1--add-to-config" data-ice="link">(1) Add to config</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#-2--add-constants" data-ice="link">(2) Add constants</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#-3--update-instructions" data-ice="link">(3) Update instructions</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#-4--update-docs" data-ice="link">(4) Update docs</a></li>
+</ul>
+  </div>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="-gt--gt--stevens">&gt;&gt; Stevens</h1><ul>
+<li><strong>Task</strong>: Discrimination</li>
+<li><strong>Method</strong>: Estimation w/ Bisection</li>
+</ul>
+<h2 id="specifications">Specifications</h2><p><strong>_</strong>Note that all CAPPED variables are constants taken from the excel sheets/data file.<strong>_</strong></p>
+<h3 id="practice-procedure">Practice Procedure</h3><ul>
+<li>We choose the first <strong>4</strong> subconditions of the data constants (prior to any balancing being done on the subconditions). It otherwise follows the same procedure like the test detailed below.</li>
+<li>Exclusion criteria is calculated during the practice procedure. 2 values are calculated at the end of every subcondition, then stored to be displayed to the researcher who will then determine whether the participant should be excluded or not. <ul>
+<li>We calculate standard deviation using the estimated correlations at the end of a trial (e.g. the value when the user hits space bar).</li>
+<li>To calculate anchoring, summate the final estimated correlation values for when the trial started with the LOW_REF for the middle plot, and the values for when the trial started with the HIGH_REF for the middle plot. So there would be 2 values for when the user started on LOW_REF, and 2 values for when the user started on HIGH_REF. Then take the absolute difference between these 2 sums.<ul>
+<li><code>anchoring_value = Math.abs(high_ref_trial_sum - low_ref_trial_sum)</code></li>
+</ul>
+</li>
+<li>So essentially, there will be 4 sets of anchoring and standard deviation values. </li>
+<li>A subcondition is flagged if the anchoring value &gt; 0.5 or if the standard deviation is &gt; 0.2. </li>
+</ul>
+</li>
+</ul>
+<h3 id="test-procedure">Test Procedure</h3><ul>
+<li>A subcondition&apos;s structure is &quot;nested&quot; in a sense, in which the user has <strong>4</strong> tries (TRIALS_PER_ROUND) to set the middle graph to be the midpoint between the two other plots. <ul>
+<li>For example: let us say a subcondition is defined to have a high correlation (HIGH_REF) of 1.0 and a low correlation (LOW_REF) of 0. These are the R values for the two comparison plots. However, the starting value for the middle plot (the one that participants adjust) will alternate between starting off as the HIGH_REF or LOW_REF.<ul>
+<li>Trial 1: middle graph&apos;s starting correlation = LOW_REF</li>
+<li>Trial 2: middle graph&apos;s starting correlation = HIGH_REF</li>
+<li>Trial 3: middle graph&apos;s starting correlation = LOW_REF</li>
+<li>Trial 4: middle graph&apos;s starting correlation = HIGH_REF</li>
+</ul>
+</li>
+<li>A trial is defined as a series of presentations using the HIGH_REF and LOW_REF values, in which the position of the HIGH_REF and LOW_REF distributions are constant (e.g. in Round 1: right graph = HIGH_REF, left graph = LOW_REF). The positioning of whether the left/right plots get which distribution is random <strong>across</strong> trials, but <strong>consistent</strong> within a trial. So Round 2 might have the right graph = LOW_REF and left graph = HIGH_REF instead.<ul>
+<li>Within a given trial, the user can use the &quot;z&quot; or &quot;m&quot; keys to decrease or increase respectively the correlation of the middle graph. Once the user believes that their middle correlation is a midpoint between the two straddling graphs, they hit <em>spacebar</em> to lock in their answer. So this process happens 4 times, with (a) the middle graph alternating between taking the LOW or HIGH_REF, and (b) the straddling graphs randomizing in position in terms of whether the left or right get the HIGH and LOW_REF correlations.<ul>
+<li>To calculate the estimated correlation with respect to the key press (e.g. they want to increase or decrease the correlation), the following formulas apply:</li>
+</ul>
+</li>
+<li><code>step_size = (HIGH_REF - LOW_REF) / MAX_STEP_INTERVAL</code></li>
+<li>If increasing the correlation, <code>estimated_correlation = Math.min(HIGH_REF, last trial&apos;s estimated correlation + (Math.random() * step_size)</code></li>
+<li>If decreasing the correlation, <code>estimated_correlation = Math.max(LOW_REF, last trial&apos;s estimated correlation - (Math.random() * step_size)</code><ul>
+<li>Within a given trial, all the distributions will <strong>refresh</strong> (e.g. new distributions will be generated using the HIGH_REF, LOW_REF and estimated correlation values) with a refresh rate defined by REGEN_RATE. </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Distributions used are gaussian. The manner in which the distribution is plotted varies depending on the type of plot. For example:<ul>
+<li>For a conventional strip, the x coordinate defines the horizontal translation while the y coordinate determines the height of the &quot;strip&quot;.</li>
+<li>For a conventional ring, the x coordinate defines the horizontal translation while the y coordinate determines the radius of the &quot;ring&quot;.</li>
+</ul>
+</li>
+</ul>
+<h2 id="jspsych-timeline">JsPsych Timeline</h2><pre><code><code class="source-code prettyprint">- Display instructions
+- Ready screen
+- Display Stevens practice trials {
+    For a given Stevens experiment, continue to display trials if: 
+    - The person has inputted less than the value of TRIALS_PER_ROUND for a given subcondition, or, 
+    - There are still more subconditions to show, or
+    - The person&apos;s performance has not passed the exclusion criteria
+  }  
+- Stop screen
+- Ready screen
+- Display Stevens test trials {
+    For a given Stevens experiment, continue to display trials if: 
+    - The person has inputted less than the value of TRIALS_PER_ROUND for a given subcondition, or, 
+    - There are still more subconditions to show
+  }  
+- Stop screen with data download options</code>
+</code></pre><h3 id="trial-logic">Trial Logic</h3><p>Within the trial object, all computations for distributions and constants are performed in the <code>on_start()</code> function. This means that prior to a trial executing, we perform ALL operations detailed in this function. This trial object can be found on line 123 in <code>scripts/experiments/stevens.js</code>. </p>
+<p>In general, this is what is executed:</p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">on_start: function(){
+
+  // Retrieve the constants (i.e variables listed in the section below) for the given subcondition index i
+  var constants = get_constants_for_subcondition(i); 
+
+  // Save all relevant constants of this trial to the JsPsych data object
+  handle_data_saving(constants); 
+
+  // Update the estimated correlation
+  // (Refer to next section for pseudocode of this function)
+  var estimated_correlation = update_estimated_correlation(this.trial, constants, last_trial); 
+
+  // Generate the gaussian distributions
+  var high_coordinates = generate_distribution(constants.HIGH_REF, 
+                                               constants.ERROR, 
+                                               constants.NUM_POINTS, 
+                                               constants.NUM_SD, 
+                                               constants.MEAN,
+                                               constants.SD);
+
+  var high_coordinates = generate_distribution(constants.LOW_REF, 
+                                               constants.ERROR, 
+                                               constants.NUM_POINTS, 
+                                               constants.NUM_SD, 
+                                               constants.MEAN,
+                                               constants.SD);
+
+  var estimated_coordinates = generate_distribution(estimated_correlation, 
+                                               constants.ERROR, 
+                                               constants.NUM_POINTS, 
+                                               constants.NUM_SD, 
+                                               constants.MEAN,
+                                               constants.SD);
+
+  // Randomize position of the low/high correlations to be either left/right
+  // and keep these positions constant for a given subcondition
+  if (is_last_trial_of_subcondition(i)){
+    var result = randomize_position(high_coordinates, low_coordinates);
+  }
+
+  // Set these correlations to the global D3 variables used for plotting
+  left_coordinates = result.left;
+  right_coordinates = result.right; 
+  middle_coordinates = estimated_coordinates;
+
+} </code>
+</code></pre>
+<h3 id="estimated-correlation">Estimated Correlation</h3><p>Below is the pseudocode for how the estimated correlation value is generated for a given trial. </p>
+<pre><code class="lang-javascript"><code class="source-code prettyprint">var MAX_STEP_INTERVAL = 10;
+
+function update_estimated_correlation(trial, constants, last_trial){
+
+  var estimated_correlation;
+
+  // If this is the first trial, we need to initialize the middle correlation value
+  if (this_is_the_first_trial()){
+    estimated_correlation = Math.random() &lt; 0.5 ? constants.LOW_REF : constants.HIGH_REF;
+    trial.data.step_size = (constants.HIGH_REF - constants.LOW_REF) / MAX_STEP_INTERVAL;
+  }
+
+  // If there was a key press in the last value, we set this current trial&apos;s middle correlation value
+  // to be based on that input
+  else if (last_trial.key_press != null &amp;&amp; last_trial.key_press.is_valid_value){
+    if (last_trial.key_press == UP_VALUE){
+      estimated_correlation = Math.min(constants.HIGH_REF, last_trial.estimated_correlation + (Math.random() * 
+      last_trial.step_size));
+    }
+    else if (last_trial.key_press == DOWN_VALUE){
+      estimated_correlation = Math.max(constants.LOW_REF, last_trial.estimated_correlation - (Math.random() * 
+      last_trial.step_size));
+    }
+  }
+
+  // If there was no input in the last trial
+  else {
+    estimated_correlation = last_trial.estimated_correlation;
+  }
+
+  return estimated_correlation;
+}</code>
+</code></pre>
+<h3 id="constants">Constants</h3><p>These are the constants extracted from the input excel sheets. The values of these constants differ for each sub condition.</p>
+<ul>
+<li>DISTRIBUTION_TYPE</li>
+<li>ROUND_TYPE</li>
+<li>TRIALS_PER_ROUND</li>
+<li>HIGH_REF</li>
+<li>LOW_REF</li>
+<li>ERROR</li>
+<li>NUM_POINTS</li>
+<li>POINT_SIZE</li>
+<li>POINT_COLOR</li>
+<li>BACKGROUND_COLOR</li>
+<li>TEXT_COLOR</li>
+<li>AXIS_COLOR</li>
+<li>REGEN_RATE</li>
+<li>MEAN</li>
+<li>SD</li>
+<li>NUM_SD</li>
+</ul>
+</div>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

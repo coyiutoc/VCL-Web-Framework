@@ -8,7 +8,7 @@
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="huh"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-test.js"></script><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="huh"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -53,7 +53,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_scatter_points">plot_scatter_points</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_shape_plot">create_shape_plot</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_strip_plot">create_strip_plot</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_distractor_scatter_plot">prepare_distractor_scatter_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_distractor_scatter_plot">create_distractor_scatter_plot</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-estimation">experiments/estimation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html">Estimation</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-estimation_exp">estimation_exp</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd">experiments/jnd</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd/jnd.js~JND.html">JND</a></span></span></li>
@@ -701,6 +701,22 @@
 			description: &quot;Part of series of Distractor Shade experiments for Blue/Red/Yellow. No distractor population for these presentations, only &quot; + 
 						 &quot;the target population with color #699938 (green). Draws on the first 12 subconditions of Design for base values.&quot;,
 			researcher: &quot;Tina Qi&quot;,
+			developer: &quot;Caitlin Coyiuto&quot;
+		}
+	},
+
+	distractor_ratio_pilot: {
+		experiment: [&quot;jnd&quot;],
+		graph_type: [&quot;scatter&quot;],
+		trial_structure: [&quot;design&quot;],
+		balancing: &quot;latin_square&quot;,
+		display_name: &quot;Distractor Ratio Pilot&quot;,
+		display_info: {
+			description: &quot;Pilot for Correlation Discrimination trials of the Numerosity Discrimination experiment. Varying target:distractor numbers with &quot; +
+						 &quot;ratios 1:1, 1:5, and 3:1, which are counterbalanced (except for 1:1) for target and distractor. Max number of points for a given population is 150. Each combination then must be presented with target &quot; +
+						 &quot;correlation values of 0.3, 0.6, and 0.9. Total number of subconditions = 5 (ratios) x &quot; +
+						 &quot;3 (target correlation values) = 15 subconditions. Set target color = blue (#007ebc) and dist color = yellow (#dbc667).&quot;,
+			researcher: &quot;Madison Elliott&quot;,
 			developer: &quot;Caitlin Coyiuto&quot;
 		}
 	},

@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../">
-  <title data-ice="title">Function | huh</title>
+  <title data-ice="title">Function | VCL Framework</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="huh"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><link rel="stylesheet" href="./inject/css/0-styles.css"><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -53,7 +53,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_scatter_points">plot_scatter_points</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_shape_plot">create_shape_plot</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_strip_plot">create_strip_plot</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_distractor_scatter_plot">prepare_distractor_scatter_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_distractor_scatter_plot">create_distractor_scatter_plot</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-estimation">experiments/estimation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html">Estimation</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-estimation_exp">estimation_exp</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd">experiments/jnd</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd/jnd.js~JND.html">JND</a></span></span></li>
@@ -95,6 +95,35 @@
         
         
         <div data-ice="description"><p>Appends condition-specific data to the dataset.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-create_distractor_scatter_plot">create_distractor_scatter_plot</a></span></span><span class="code" data-ice="signature">(attributes: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>)</span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>D3 code for setting up scatter plot chart area with distractor dataset (so two-populations per graph)</p>
 </div>
       </div>
     </td>
@@ -522,34 +551,6 @@ experiment condition.</p>
           
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-prepare_distractor_scatter_plot">prepare_distractor_scatter_plot</a></span></span><span class="code" data-ice="signature">(experiment: <span>*</span>)</span>
-        </p>
-      </div>
-      <div>
-        
-        
-        
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
           <span class="code" data-ice="name"><span><a href="function/index.html#static-function-randomize_position">randomize_position</a></span></span><span class="code" data-ice="signature">(trial: <span>*</span>): <span>*</span></span>
         </p>
       </div>
@@ -612,11 +613,11 @@ the coordinates for the graphs.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiment-properties/data/data_controller.js.html#lineNumber96">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiment-properties/data/data_controller.js.html#lineNumber124">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {create_condition_dataset} from &apos;<span><a href="file/scripts/experiment-properties/data/data_controller.js.html#lineNumber96">huh/scripts/experiment-properties/data/data_controller.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {create_condition_dataset} from &apos;<span><a href="file/scripts/experiment-properties/data/data_controller.js.html#lineNumber124">VCL Framework/scripts/experiment-properties/data/data_controller.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Appends condition-specific data to the dataset.</p>
@@ -682,6 +683,66 @@ the coordinates for the graphs.</p>
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-function-create_distractor_scatter_plot">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">create_distractor_scatter_plot</span><span class="code" data-ice="signature">(attributes: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>)</span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/scripts/experiment-properties/graphing/d3-custom-plots/distractor_scatter_plot.js.html#lineNumber12">source</a></span></span>
+    </span>
+  </h3>
+
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {create_distractor_scatter_plot} from &apos;<span><a href="file/scripts/experiment-properties/graphing/d3-custom-plots/distractor_scatter_plot.js.html#lineNumber12">VCL Framework/scripts/experiment-properties/graphing/d3-custom-plots/distractor_scatter_plot.js</a></span>&apos;</code></pre></div>
+  
+  
+  <div data-ice="description"><p>D3 code for setting up scatter plot chart area with distractor dataset (so two-populations per graph)</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">attributes</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="static-function-create_ring_plot">
     <span class="access" data-ice="access">public</span>
     
@@ -697,7 +758,7 @@ the coordinates for the graphs.</p>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {create_ring_plot} from &apos;<span><a href="file/scripts/experiment-properties/graphing/d3-base-plots/ring_plot.js.html#lineNumber8">huh/scripts/experiment-properties/graphing/d3-base-plots/ring_plot.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {create_ring_plot} from &apos;<span><a href="file/scripts/experiment-properties/graphing/d3-base-plots/ring_plot.js.html#lineNumber8">VCL Framework/scripts/experiment-properties/graphing/d3-base-plots/ring_plot.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>D3 code for plotting a ring plot.</p>
@@ -757,7 +818,7 @@ the coordinates for the graphs.</p>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {create_scatter_plot} from &apos;<span><a href="file/scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js.html#lineNumber11">huh/scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {create_scatter_plot} from &apos;<span><a href="file/scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js.html#lineNumber11">VCL Framework/scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>D3 code for setting up scatter plot chart area</p>
@@ -817,7 +878,7 @@ the coordinates for the graphs.</p>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {create_shape_plot} from &apos;<span><a href="file/scripts/experiment-properties/graphing/d3-base-plots/shape_plot.js.html#lineNumber8">huh/scripts/experiment-properties/graphing/d3-base-plots/shape_plot.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {create_shape_plot} from &apos;<span><a href="file/scripts/experiment-properties/graphing/d3-base-plots/shape_plot.js.html#lineNumber8">VCL Framework/scripts/experiment-properties/graphing/d3-base-plots/shape_plot.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>D3 code for setting up shape plot chart area</p>
@@ -877,7 +938,7 @@ the coordinates for the graphs.</p>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {create_strip_plot} from &apos;<span><a href="file/scripts/experiment-properties/graphing/d3-base-plots/strip_plot.js.html#lineNumber8">huh/scripts/experiment-properties/graphing/d3-base-plots/strip_plot.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {create_strip_plot} from &apos;<span><a href="file/scripts/experiment-properties/graphing/d3-base-plots/strip_plot.js.html#lineNumber8">VCL Framework/scripts/experiment-properties/graphing/d3-base-plots/strip_plot.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>D3 code for plotting a strip plot.</p>
@@ -937,7 +998,7 @@ the coordinates for the graphs.</p>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {force_greater_right_position} from &apos;<span><a href="file/scripts/helpers/experiment_helpers.js.html#lineNumber73">huh/scripts/helpers/experiment_helpers.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {force_greater_right_position} from &apos;<span><a href="file/scripts/helpers/experiment_helpers.js.html#lineNumber73">VCL Framework/scripts/helpers/experiment_helpers.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Forces the right graph to always have the greater correlation.
@@ -1014,7 +1075,7 @@ Used for testing purposes.</p>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {get_data} from &apos;<span><a href="file/scripts/experiment-properties/data/data_controller.js.html#lineNumber34">huh/scripts/experiment-properties/data/data_controller.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {get_data} from &apos;<span><a href="file/scripts/experiment-properties/data/data_controller.js.html#lineNumber34">VCL Framework/scripts/experiment-properties/data/data_controller.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Retrieves the data for the corresponding experiment object.</p>
@@ -1084,11 +1145,11 @@ Used for testing purposes.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiment-properties/data/data_controller.js.html#lineNumber81">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiment-properties/data/data_controller.js.html#lineNumber109">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {get_data_subset} from &apos;<span><a href="file/scripts/experiment-properties/data/data_controller.js.html#lineNumber81">huh/scripts/experiment-properties/data/data_controller.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {get_data_subset} from &apos;<span><a href="file/scripts/experiment-properties/data/data_controller.js.html#lineNumber109">VCL Framework/scripts/experiment-properties/data/data_controller.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Retrieves a smaller dataset (4 subconditions) given experiment, trial structure and condition.</p>
@@ -1108,7 +1169,7 @@ Used for testing purposes.</p>
       <td data-ice="name" class="code" data-depth="0">experiment</td>
       <td data-ice="type" class="code"><span>*</span></td>
       <td data-ice="appendix"></td>
-      <td data-ice="description"><p>{string}            &quot;jnd&quot; or &quot;stevens&quot;<br>        trial_structure {string}            &quot;foundational&quot; or &quot;design&quot;<br>        condition       {string}            Name of condition</p>
+      <td data-ice="description"><p>{string}            &quot;jnd&quot;, &quot;stevens&quot;, etc.<br>        trial_structure {string}            &quot;foundational&quot;, &quot;design&quot;, etc.<br>        condition       {string}            Name of condition</p>
 </td>
     </tr>
 </tbody>
@@ -1162,7 +1223,7 @@ Used for testing purposes.</p>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {get_subconditions} from &apos;<span><a href="file/scripts/experiment-properties/data/custom_subcondition_generator.js.html#lineNumber42">huh/scripts/experiment-properties/data/custom_subcondition_generator.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {get_subconditions} from &apos;<span><a href="file/scripts/experiment-properties/data/custom_subcondition_generator.js.html#lineNumber42">VCL Framework/scripts/experiment-properties/data/custom_subcondition_generator.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -1233,7 +1294,7 @@ Used for testing purposes.</p>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {initialize_latin_square} from &apos;<span><a href="file/scripts/experiment-properties/balancing/latin_square_generator.js.html#lineNumber52">huh/scripts/experiment-properties/balancing/latin_square_generator.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {initialize_latin_square} from &apos;<span><a href="file/scripts/experiment-properties/balancing/latin_square_generator.js.html#lineNumber52">VCL Framework/scripts/experiment-properties/balancing/latin_square_generator.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -1304,7 +1365,7 @@ Used for testing purposes.</p>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {initialize_random_order} from &apos;<span><a href="file/scripts/experiment-properties/balancing/random_generator.js.html#lineNumber3">huh/scripts/experiment-properties/balancing/random_generator.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {initialize_random_order} from &apos;<span><a href="file/scripts/experiment-properties/balancing/random_generator.js.html#lineNumber3">VCL Framework/scripts/experiment-properties/balancing/random_generator.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -1375,7 +1436,7 @@ Used for testing purposes.</p>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {is_custom_plot} from &apos;<span><a href="file/scripts/experiment-properties/graphing/custom_graphing_controller.js.html#lineNumber10">huh/scripts/experiment-properties/graphing/custom_graphing_controller.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {is_custom_plot} from &apos;<span><a href="file/scripts/experiment-properties/graphing/custom_graphing_controller.js.html#lineNumber10">VCL Framework/scripts/experiment-properties/graphing/custom_graphing_controller.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Checks if the experiment needs a custom plot.</p>
@@ -1447,7 +1508,7 @@ Used for testing purposes.</p>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {plot_distributions} from &apos;<span><a href="file/scripts/experiment-properties/graphing/graphing_controller.js.html#lineNumber14">huh/scripts/experiment-properties/graphing/graphing_controller.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {plot_distributions} from &apos;<span><a href="file/scripts/experiment-properties/graphing/graphing_controller.js.html#lineNumber14">VCL Framework/scripts/experiment-properties/graphing/graphing_controller.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Main point of entry to determine whether there is a custom plotting code for
@@ -1520,7 +1581,7 @@ the condition, or we use one of the standard supported graph plots.</p>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {plot_scatter_points} from &apos;<span><a href="file/scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js.html#lineNumber84">huh/scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {plot_scatter_points} from &apos;<span><a href="file/scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js.html#lineNumber84">VCL Framework/scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>D3 code for appending data to the graph depending on point shape type.</p>
@@ -1617,7 +1678,7 @@ the condition, or we use one of the standard supported graph plots.</p>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {prepare_custom_plot} from &apos;<span><a href="file/scripts/experiment-properties/graphing/custom_graphing_controller.js.html#lineNumber25">huh/scripts/experiment-properties/graphing/custom_graphing_controller.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {prepare_custom_plot} from &apos;<span><a href="file/scripts/experiment-properties/graphing/custom_graphing_controller.js.html#lineNumber25">VCL Framework/scripts/experiment-properties/graphing/custom_graphing_controller.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Routes to the correct plotting code in /d3-custom-plots depending on 
@@ -1675,65 +1736,6 @@ experiment condition.</p>
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-function-prepare_distractor_scatter_plot">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">prepare_distractor_scatter_plot</span><span class="code" data-ice="signature">(experiment: <span>*</span>)</span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/scripts/experiment-properties/graphing/d3-custom-plots/distractor_scatter_plot.js.html#lineNumber7">source</a></span></span>
-    </span>
-  </h3>
-
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {prepare_distractor_scatter_plot} from &apos;<span><a href="file/scripts/experiment-properties/graphing/d3-custom-plots/distractor_scatter_plot.js.html#lineNumber7">huh/scripts/experiment-properties/graphing/d3-custom-plots/distractor_scatter_plot.js</a></span>&apos;</code></pre></div>
-  
-  
-  
-
-  
-
-  <div data-ice="properties"><div data-ice="properties">
-  <h4 data-ice="title">Params:</h4>
-  <table class="params">
-    <thead>
-    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
-    </thead>
-    <tbody>
-    
-    <tr data-ice="property" data-depth="0">
-      <td data-ice="name" class="code" data-depth="0">experiment</td>
-      <td data-ice="type" class="code"><span>*</span></td>
-      <td data-ice="appendix"></td>
-      <td data-ice="description"></td>
-    </tr>
-</tbody>
-  </table>
-</div>
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="static-function-randomize_position">
     <span class="access" data-ice="access">public</span>
     
@@ -1749,7 +1751,7 @@ experiment condition.</p>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {randomize_position} from &apos;<span><a href="file/scripts/helpers/experiment_helpers.js.html#lineNumber16">huh/scripts/helpers/experiment_helpers.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {randomize_position} from &apos;<span><a href="file/scripts/helpers/experiment_helpers.js.html#lineNumber16">VCL Framework/scripts/helpers/experiment_helpers.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Randomizes the position of the base and adjusted coordinates
@@ -1827,7 +1829,7 @@ the coordinates for the graphs.</p>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {randomize_radius_position} from &apos;<span><a href="file/scripts/helpers/experiment_helpers.js.html#lineNumber39">huh/scripts/helpers/experiment_helpers.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {randomize_radius_position} from &apos;<span><a href="file/scripts/helpers/experiment_helpers.js.html#lineNumber39">VCL Framework/scripts/helpers/experiment_helpers.js</a></span>&apos;</code></pre></div>
   
   
   

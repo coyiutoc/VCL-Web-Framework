@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../../../">
-  <title data-ice="title">scripts/experiment-properties/data/constants/stevens_data.js | huh</title>
+  <title data-ice="title">scripts/experiment-properties/data/constants/stevens_data.js | VCL Framework</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="huh"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><link rel="stylesheet" href="./inject/css/0-styles.css"><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -53,7 +53,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_scatter_points">plot_scatter_points</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_shape_plot">create_shape_plot</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_strip_plot">create_strip_plot</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_distractor_scatter_plot">prepare_distractor_scatter_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_distractor_scatter_plot">create_distractor_scatter_plot</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-estimation">experiments/estimation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html">Estimation</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-estimation_exp">estimation_exp</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd">experiments/jnd</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd/jnd.js~JND.html">JND</a></span></span></li>
@@ -76,48 +76,48 @@ const STEVENS_BASE = {
 
   foundational : 
     [
-    {distribution_type: &quot;gaussian&quot;, round_type: &apos;test&apos;, trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 3, regen_rate: 1000},
+    {distribution_type: &quot;gaussian&quot;, round_type: &apos;test&apos;, trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 6, regen_rate: 1000},
 
-    {distribution_type: &quot;gaussian&quot;, round_type: &apos;test&apos;, trials_per_round: 4, high_ref: 0.5, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 3, regen_rate: 1000},
+    {distribution_type: &quot;gaussian&quot;, round_type: &apos;test&apos;, trials_per_round: 4, high_ref: 0.5, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 6, regen_rate: 1000},
 
-    {distribution_type: &quot;gaussian&quot;, round_type: &apos;test&apos;, trials_per_round: 4, high_ref: 1, low_ref: 0.5, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 3, regen_rate: 1000},
+    {distribution_type: &quot;gaussian&quot;, round_type: &apos;test&apos;, trials_per_round: 4, high_ref: 1, low_ref: 0.5, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 6, regen_rate: 1000},
 
-    {distribution_type: &quot;gaussian&quot;, round_type: &apos;test&apos;, trials_per_round: 4, high_ref: 0.25, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 3, regen_rate: 1000},
+    {distribution_type: &quot;gaussian&quot;, round_type: &apos;test&apos;, trials_per_round: 4, high_ref: 0.25, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 6, regen_rate: 1000},
 
-    {distribution_type: &quot;gaussian&quot;, round_type: &apos;test&apos;, trials_per_round: 4, high_ref: 0.5, low_ref: 0.25, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 3, regen_rate: 1000},
+    {distribution_type: &quot;gaussian&quot;, round_type: &apos;test&apos;, trials_per_round: 4, high_ref: 0.5, low_ref: 0.25, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 6, regen_rate: 1000},
 
-    {distribution_type: &quot;gaussian&quot;, round_type: &apos;test&apos;, trials_per_round: 4, high_ref: 0.75, low_ref: 0.5, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 3, regen_rate: 1000},
+    {distribution_type: &quot;gaussian&quot;, round_type: &apos;test&apos;, trials_per_round: 4, high_ref: 0.75, low_ref: 0.5, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 6, regen_rate: 1000},
 
-    {distribution_type: &quot;gaussian&quot;, round_type: &apos;test&apos;, trials_per_round: 4, high_ref: 1, low_ref: 0.75, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 3, regen_rate: 1000},
+    {distribution_type: &quot;gaussian&quot;, round_type: &apos;test&apos;, trials_per_round: 4, high_ref: 1, low_ref: 0.75, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 6, regen_rate: 1000},
     
-    {distribution_type: &quot;gaussian&quot;, round_type: &apos;consistency&apos;, trials_per_round: 4, high_ref: 0.375, low_ref: 0.125, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 3, regen_rate: 1000},
+    {distribution_type: &quot;gaussian&quot;, round_type: &apos;consistency&apos;, trials_per_round: 4, high_ref: 0.375, low_ref: 0.125, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 6, regen_rate: 1000},
     
-    {distribution_type: &quot;gaussian&quot;, round_type: &apos;consistency&apos;, trials_per_round: 4, high_ref: 0.5, low_ref: 0.25, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 3, regen_rate: 1000},
+    {distribution_type: &quot;gaussian&quot;, round_type: &apos;consistency&apos;, trials_per_round: 4, high_ref: 0.5, low_ref: 0.25, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 6, regen_rate: 1000},
     
-    {distribution_type: &quot;gaussian&quot;, round_type: &apos;consistency&apos;, trials_per_round: 4, high_ref: 0.625, low_ref: 0.375, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 3, regen_rate: 1000},
+    {distribution_type: &quot;gaussian&quot;, round_type: &apos;consistency&apos;, trials_per_round: 4, high_ref: 0.625, low_ref: 0.375, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 6, regen_rate: 1000},
     
-    {distribution_type: &quot;gaussian&quot;, round_type: &apos;consistency&apos;, trials_per_round: 4, high_ref: 0.75, low_ref: 0.5, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 3, regen_rate: 1000},
+    {distribution_type: &quot;gaussian&quot;, round_type: &apos;consistency&apos;, trials_per_round: 4, high_ref: 0.75, low_ref: 0.5, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 6, regen_rate: 1000},
     
-    {distribution_type: &quot;gaussian&quot;, round_type: &apos;consistency&apos;, trials_per_round: 4, high_ref: 0.875, low_ref: 0.625, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 3, regen_rate: 1000},
+    {distribution_type: &quot;gaussian&quot;, round_type: &apos;consistency&apos;, trials_per_round: 4, high_ref: 0.875, low_ref: 0.625, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 6, regen_rate: 1000},
     
-    {distribution_type: &quot;gaussian&quot;, round_type: &apos;consistency&apos;, trials_per_round: 4, high_ref: 0.875, low_ref: 0.125, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 3, regen_rate: 1000},
+    {distribution_type: &quot;gaussian&quot;, round_type: &apos;consistency&apos;, trials_per_round: 4, high_ref: 0.875, low_ref: 0.125, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 6, regen_rate: 1000},
     
-    {distribution_type: &quot;gaussian&quot;, round_type: &apos;consistency&apos;, trials_per_round: 4, high_ref: 0.75, low_ref: 0.25, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 3, regen_rate: 1000},
+    {distribution_type: &quot;gaussian&quot;, round_type: &apos;consistency&apos;, trials_per_round: 4, high_ref: 0.75, low_ref: 0.25, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 6, regen_rate: 1000},
     
-    {distribution_type: &quot;gaussian&quot;, round_type: &apos;consistency&apos;, trials_per_round: 4, high_ref: 0.625, low_ref: 0.375, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 3, regen_rate: 1000},
+    {distribution_type: &quot;gaussian&quot;, round_type: &apos;consistency&apos;, trials_per_round: 4, high_ref: 0.625, low_ref: 0.375, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 6, regen_rate: 1000},
     ],
 
   design: 
     [
-    {distribution_type: &quot;gaussian&quot;, round_type: &apos;design&apos;, trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 3, regen_rate: 1000},
+    {distribution_type: &quot;gaussian&quot;, round_type: &apos;design&apos;, trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 6, regen_rate: 1000},
 
-    {distribution_type: &quot;gaussian&quot;, round_type: &apos;design&apos;, trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 3, regen_rate: 1000},
+    {distribution_type: &quot;gaussian&quot;, round_type: &apos;design&apos;, trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 6, regen_rate: 1000},
 
-    {distribution_type: &quot;gaussian&quot;, round_type: &apos;design&apos;, trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 3, regen_rate: 1000},
+    {distribution_type: &quot;gaussian&quot;, round_type: &apos;design&apos;, trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 6, regen_rate: 1000},
 
-    {distribution_type: &quot;gaussian&quot;, round_type: &apos;design&apos;, trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 3, regen_rate: 1000},
+    {distribution_type: &quot;gaussian&quot;, round_type: &apos;design&apos;, trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 6, regen_rate: 1000},
 
-    {distribution_type: &quot;gaussian&quot;, round_type: &apos;design&apos;, trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 3, regen_rate: 1000}
+    {distribution_type: &quot;gaussian&quot;, round_type: &apos;design&apos;, trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, background_color: &apos;WHITE&apos;, point_size: 6, regen_rate: 1000}
     ]
 }
 
@@ -348,57 +348,57 @@ const STEVENS_CONDITIONS = {
 
   distractor_blue_shades: 
     [
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#004078&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#004078&apos;, target_color: &apos;#699938&apos;, dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#2c6fad&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#2c6fad&apos;, target_color: &apos;#699938&apos;, dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#69a3e5&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#69a3e5&apos;, target_color: &apos;#699938&apos;, dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#a2d9ff&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3} 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#a2d9ff&apos;, target_color: &apos;#699938&apos;, dist_point_size: 6} 
     ],
 
   distractor_red_shades: 
     [
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9f2b2a&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9f2b2a&apos;, target_color: &apos;#699938&apos;, dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#bc4740&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#bc4740&apos;, target_color: &apos;#699938&apos;, dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#db6158&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#db6158&apos;, target_color: &apos;#699938&apos;, dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#ff988a&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3} 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#ff988a&apos;, target_color: &apos;#699938&apos;, dist_point_size: 6} 
     ],
 
   distractor_yellow_shades: 
     [
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d3c86a&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d3c86a&apos;, target_color: &apos;#699938&apos;, dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9b9236&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3}, 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9b9236&apos;, target_color: &apos;#699938&apos;, dist_point_size: 6}, 
     
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#80781b&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#80781b&apos;, target_color: &apos;#699938&apos;, dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#f0e484&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3} 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#f0e484&apos;, target_color: &apos;#699938&apos;, dist_point_size: 6} 
     ],
 
   distractor_yellow_shades: 
     [
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d3c86a&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#d3c86a&apos;, target_color: &apos;#699938&apos;, dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9b9236&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3}, 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#9b9236&apos;, target_color: &apos;#699938&apos;, dist_point_size: 6}, 
     
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#80781b&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#80781b&apos;, target_color: &apos;#699938&apos;, dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#f0e484&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3} 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;#f0e484&apos;, target_color: &apos;#699938&apos;, dist_point_size: 6} 
     ],
 
   distractor_control_shades: 
     [
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, target_color: &apos;#699938&apos;, dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, target_color: &apos;#699938&apos;, dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, target_color: &apos;#699938&apos;, dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, target_color: &apos;#699938&apos;, dist_point_size: 3}
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: &apos;WHITE&apos;, target_color: &apos;#699938&apos;, dist_point_size: 6}
     ],
 
 }

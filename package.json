@@ -1,5 +1,5 @@
 {
-  "name": "huh",
+  "name": "VCL Framework",
   "version": "1.0.0",
   "description": "This is a Node.js application that runs proof of concept experiments for the following:",
   "main": "app.js",
@@ -12,6 +12,7 @@
     "d3": "^5.7.0",
     "ejs": "^2.6.1",
     "esdoc-inject-script-plugin": "^1.0.0",
+    "esdoc-inject-style-plugin": "^1.0.0",
     "esdoc-integrate-manual-plugin": "^1.0.0",
     "express": "^4.16.4",
     "gaussian": "^1.1.0",

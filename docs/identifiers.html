@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl">
-  <title data-ice="title">Reference | huh</title>
+  <title data-ice="title">Reference | VCL Framework</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="huh"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><link rel="stylesheet" href="./inject/css/0-styles.css"><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -53,7 +53,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_scatter_points">plot_scatter_points</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_shape_plot">create_shape_plot</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_strip_plot">create_strip_plot</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_distractor_scatter_plot">prepare_distractor_scatter_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_distractor_scatter_plot">create_distractor_scatter_plot</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-estimation">experiments/estimation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html">Estimation</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-estimation_exp">estimation_exp</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd">experiments/jnd</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd/jnd.js~JND.html">JND</a></span></span></li>
@@ -425,7 +425,7 @@
           <span data-ice="kind-icon" class="kind-variable">V</span>
           
           
-          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-JND_CONDITIONS">JND_CONDITIONS</a></span></span><span class="code" data-ice="signature">: {&quot;distractor_rainbow&quot;: <span>*</span>, &quot;distractor_square_red_hue&quot;: <span>*</span>, &quot;distractor_square_red_lum&quot;: <span>*</span>, &quot;distractor_square_red_chrom&quot;: <span>*</span>, &quot;distractor_square_yellow_hue&quot;: <span>*</span>, &quot;distractor_square_yellow_lum&quot;: <span>*</span>, &quot;distractor_square_yellow_chrom&quot;: <span>*</span>, &quot;distractor_square_blue_hue&quot;: <span>*</span>, &quot;distractor_square_blue_lum&quot;: <span>*</span>, &quot;distractor_square_blue_chrom&quot;: <span>*</span>, &quot;distractor_square_green_hue&quot;: <span>*</span>, &quot;distractor_square_green_lum&quot;: <span>*</span>, &quot;distractor_square_green_chrom&quot;: <span>*</span>, &quot;distractor_multi&quot;: <span>*</span>, &quot;distractor_blue_shades&quot;: <span>*</span>, &quot;distractor_red_shades&quot;: <span>*</span>, &quot;distractor_yellow_shades&quot;: <span>*</span>, &quot;distractor_control_shades&quot;: <span>*</span>, &quot;strip_ring_size&quot;: <span>*</span>, &quot;line_length_strip&quot;: <span>*</span>}</span>
+          <span class="code" data-ice="name"><span><a href="variable/index.html#static-variable-JND_CONDITIONS">JND_CONDITIONS</a></span></span><span class="code" data-ice="signature">: {&quot;distractor_rainbow&quot;: <span>*</span>, &quot;distractor_square_red_hue&quot;: <span>*</span>, &quot;distractor_square_red_lum&quot;: <span>*</span>, &quot;distractor_square_red_chrom&quot;: <span>*</span>, &quot;distractor_square_yellow_hue&quot;: <span>*</span>, &quot;distractor_square_yellow_lum&quot;: <span>*</span>, &quot;distractor_square_yellow_chrom&quot;: <span>*</span>, &quot;distractor_square_blue_hue&quot;: <span>*</span>, &quot;distractor_square_blue_lum&quot;: <span>*</span>, &quot;distractor_square_blue_chrom&quot;: <span>*</span>, &quot;distractor_square_green_hue&quot;: <span>*</span>, &quot;distractor_square_green_lum&quot;: <span>*</span>, &quot;distractor_square_green_chrom&quot;: <span>*</span>, &quot;distractor_multi&quot;: <span>*</span>, &quot;distractor_blue_shades&quot;: <span>*</span>, &quot;distractor_red_shades&quot;: <span>*</span>, &quot;distractor_yellow_shades&quot;: <span>*</span>, &quot;distractor_control_shades&quot;: <span>*</span>, &quot;strip_ring_size&quot;: <span>*</span>, &quot;line_length_strip&quot;: <span>*</span>, &quot;distractor_ratio_pilot&quot;: <span>*</span>, &quot;small_point_sizes&quot;: <span>*</span>}</span>
         </p>
       </div>
       <div>
@@ -829,13 +829,14 @@ the condition, or we use one of the standard supported graph plots.</p>
           <span data-ice="kind-icon" class="kind-function">F</span>
           
           
-          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-prepare_distractor_scatter_plot">prepare_distractor_scatter_plot</a></span></span><span class="code" data-ice="signature">(experiment: <span>*</span>)</span>
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-create_distractor_scatter_plot">create_distractor_scatter_plot</a></span></span><span class="code" data-ice="signature">(attributes: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">object</a></span>)</span>
         </p>
       </div>
       <div>
         
         
-        
+        <div data-ice="description"><p>D3 code for setting up scatter plot chart area with distractor dataset (so two-populations per graph)</p>
+</div>
       </div>
     </td>
     <td>

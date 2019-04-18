@@ -83,6 +83,11 @@ function create_scatter_plot(attributes) {
  */
 function plot_scatter_points(chart, xscale, yscale, data, point_size, point_color, point_shape) {
 
+  // var GRAPH_TYPES comes from /config/graphing-config.js
+  if (!GRAPH_TYPES["scatter"]["attributes"]["point_shape"]["valid_inputs"].includes(point_shape)){
+    throw Error("Point shape " + point_shape + " is not a valid shape for graph type scatter.");
+  }
+
   switch(point_shape){
     case "square":
       chart.selectAll("square_data")
@@ -134,7 +139,7 @@ function plot_scatter_points(chart, xscale, yscale, data, point_size, point_colo
                   .attr("cy", function (d) {
                     return yscale(d[1]);
                   })
-                  .attr("r", point_size).style("fill", point_color);
+                  .attr("r", point_size/2).style("fill", point_color);
       break;
   }
 }

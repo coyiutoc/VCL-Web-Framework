@@ -4,48 +4,48 @@ const STEVENS_BASE = {
 
   foundational : 
     [
-    {distribution_type: "gaussian", round_type: 'test', trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000},
+    {distribution_type: "gaussian", round_type: 'test', trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 6, regen_rate: 1000},
 
-    {distribution_type: "gaussian", round_type: 'test', trials_per_round: 4, high_ref: 0.5, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000},
+    {distribution_type: "gaussian", round_type: 'test', trials_per_round: 4, high_ref: 0.5, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 6, regen_rate: 1000},
 
-    {distribution_type: "gaussian", round_type: 'test', trials_per_round: 4, high_ref: 1, low_ref: 0.5, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000},
+    {distribution_type: "gaussian", round_type: 'test', trials_per_round: 4, high_ref: 1, low_ref: 0.5, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 6, regen_rate: 1000},
 
-    {distribution_type: "gaussian", round_type: 'test', trials_per_round: 4, high_ref: 0.25, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000},
+    {distribution_type: "gaussian", round_type: 'test', trials_per_round: 4, high_ref: 0.25, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 6, regen_rate: 1000},
 
-    {distribution_type: "gaussian", round_type: 'test', trials_per_round: 4, high_ref: 0.5, low_ref: 0.25, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000},
+    {distribution_type: "gaussian", round_type: 'test', trials_per_round: 4, high_ref: 0.5, low_ref: 0.25, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 6, regen_rate: 1000},
 
-    {distribution_type: "gaussian", round_type: 'test', trials_per_round: 4, high_ref: 0.75, low_ref: 0.5, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000},
+    {distribution_type: "gaussian", round_type: 'test', trials_per_round: 4, high_ref: 0.75, low_ref: 0.5, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 6, regen_rate: 1000},
 
-    {distribution_type: "gaussian", round_type: 'test', trials_per_round: 4, high_ref: 1, low_ref: 0.75, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000},
+    {distribution_type: "gaussian", round_type: 'test', trials_per_round: 4, high_ref: 1, low_ref: 0.75, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 6, regen_rate: 1000},
     
-    {distribution_type: "gaussian", round_type: 'consistency', trials_per_round: 4, high_ref: 0.375, low_ref: 0.125, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000},
+    {distribution_type: "gaussian", round_type: 'consistency', trials_per_round: 4, high_ref: 0.375, low_ref: 0.125, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 6, regen_rate: 1000},
     
-    {distribution_type: "gaussian", round_type: 'consistency', trials_per_round: 4, high_ref: 0.5, low_ref: 0.25, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000},
+    {distribution_type: "gaussian", round_type: 'consistency', trials_per_round: 4, high_ref: 0.5, low_ref: 0.25, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 6, regen_rate: 1000},
     
-    {distribution_type: "gaussian", round_type: 'consistency', trials_per_round: 4, high_ref: 0.625, low_ref: 0.375, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000},
+    {distribution_type: "gaussian", round_type: 'consistency', trials_per_round: 4, high_ref: 0.625, low_ref: 0.375, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 6, regen_rate: 1000},
     
-    {distribution_type: "gaussian", round_type: 'consistency', trials_per_round: 4, high_ref: 0.75, low_ref: 0.5, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000},
+    {distribution_type: "gaussian", round_type: 'consistency', trials_per_round: 4, high_ref: 0.75, low_ref: 0.5, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 6, regen_rate: 1000},
     
-    {distribution_type: "gaussian", round_type: 'consistency', trials_per_round: 4, high_ref: 0.875, low_ref: 0.625, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000},
+    {distribution_type: "gaussian", round_type: 'consistency', trials_per_round: 4, high_ref: 0.875, low_ref: 0.625, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 6, regen_rate: 1000},
     
-    {distribution_type: "gaussian", round_type: 'consistency', trials_per_round: 4, high_ref: 0.875, low_ref: 0.125, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000},
+    {distribution_type: "gaussian", round_type: 'consistency', trials_per_round: 4, high_ref: 0.875, low_ref: 0.125, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 6, regen_rate: 1000},
     
-    {distribution_type: "gaussian", round_type: 'consistency', trials_per_round: 4, high_ref: 0.75, low_ref: 0.25, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000},
+    {distribution_type: "gaussian", round_type: 'consistency', trials_per_round: 4, high_ref: 0.75, low_ref: 0.25, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 6, regen_rate: 1000},
     
-    {distribution_type: "gaussian", round_type: 'consistency', trials_per_round: 4, high_ref: 0.625, low_ref: 0.375, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000},
+    {distribution_type: "gaussian", round_type: 'consistency', trials_per_round: 4, high_ref: 0.625, low_ref: 0.375, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 6, regen_rate: 1000},
     ],
 
   design: 
     [
-    {distribution_type: "gaussian", round_type: 'design', trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000},
+    {distribution_type: "gaussian", round_type: 'design', trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 6, regen_rate: 1000},
 
-    {distribution_type: "gaussian", round_type: 'design', trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000},
+    {distribution_type: "gaussian", round_type: 'design', trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 6, regen_rate: 1000},
 
-    {distribution_type: "gaussian", round_type: 'design', trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000},
+    {distribution_type: "gaussian", round_type: 'design', trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 6, regen_rate: 1000},
 
-    {distribution_type: "gaussian", round_type: 'design', trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000},
+    {distribution_type: "gaussian", round_type: 'design', trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 6, regen_rate: 1000},
 
-    {distribution_type: "gaussian", round_type: 'design', trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 3, regen_rate: 1000}
+    {distribution_type: "gaussian", round_type: 'design', trials_per_round: 4, high_ref: 1, low_ref: 0, error: 0.0001, num_points: 100, regen_rate: 1000, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', background_color: 'WHITE', point_size: 6, regen_rate: 1000}
     ]
 }
 
@@ -276,57 +276,57 @@ const STEVENS_CONDITIONS = {
 
   distractor_blue_shades: 
     [
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#004078', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#004078', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#2c6fad', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#2c6fad', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#69a3e5', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#69a3e5', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#a2d9ff', target_color: '#699938', dist_point_size: 3} 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#a2d9ff', target_color: '#699938', dist_point_size: 6} 
     ],
 
   distractor_red_shades: 
     [
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9f2b2a', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9f2b2a', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#bc4740', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#bc4740', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#db6158', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#db6158', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#ff988a', target_color: '#699938', dist_point_size: 3} 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#ff988a', target_color: '#699938', dist_point_size: 6} 
     ],
 
   distractor_yellow_shades: 
     [
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 3}, 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 6}, 
     
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 3} 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 6} 
     ],
 
   distractor_yellow_shades: 
     [
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#d3c86a', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 3}, 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#9b9236', target_color: '#699938', dist_point_size: 6}, 
     
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#80781b', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 3} 
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: '#f0e484', target_color: '#699938', dist_point_size: 6} 
     ],
 
   distractor_control_shades: 
     [
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3},
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 6},
 
-    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 3}
+    {dist_base: 0.3, dist_error: 0.0001, dist_num_points: 100, dist_color: 'WHITE', target_color: '#699938', dist_point_size: 6}
     ],
 
 }

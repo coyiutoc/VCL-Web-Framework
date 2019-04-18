@@ -9,9 +9,41 @@
         "index": "README.md",
 		    "globalIndex": true,
         "files": [
-          "README.md"
+          "README.md",
+          "./docs/manual/pages/terminology.md",
+          "./docs/manual/pages/experiments.md",
+          "./docs/manual/pages/jnd.md",
+          "./docs/manual/pages/jnd_radius.md",
+          "./docs/manual/pages/stevens.md",
+          "./docs/manual/pages/estimation.md",
+          "./docs/manual/pages/supported_properties.md",
+          "./docs/manual/pages/conditions.md",
+          "./docs/manual/pages/developing_new_conditions.md"
       	]
       }
     }
+  },
+  { "name": "esdoc-inject-script-plugin", 
+    "option": {
+      "enable": true, 
+      "scripts": [
+        "./public/config/conditions-config.js",
+        "./public/config/experiments-config.js",
+        "./public/config/graphing-config.js",
+        "./public/config/trial-structure-config.js",
+        "./public/config/balancing-config.js",
+        "./docs/manual/scripts/view-controller.js",
+        "./docs/manual/scripts/experiments-renderer.js",
+        "./docs/manual/scripts/conditions-renderer.js",
+        "./docs/manual/scripts/supported-properties-renderer.js"
+      ]}
+  },
+  {
+    "name": "esdoc-inject-style-plugin",
+    "option": {
+      "enable": true,
+      "styles":["./docs/manual/css/styles.css"]
+    }
   }]
 }
+

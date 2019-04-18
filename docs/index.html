@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="./">
-  <title data-ice="title">Manual | huh</title>
+  <title data-ice="title">Manual | VCL Framework</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="huh"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><link rel="stylesheet" href="./inject/css/0-styles.css"><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container manual-root manual-index" data-ice="rootContainer">
 
 <header>
@@ -37,18 +37,110 @@
 <li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-2--install-node" data-ice="link">(2) Install Node</a></li>
 <li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-3--install-dependencies" data-ice="link">(3) Install Dependencies</a></li>
 <li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-4--run-the-application" data-ice="link">(4) Run the Application</a></li>
-<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#supported-experiments" data-ice="link">Supported Experiments</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#jnd" data-ice="link">JND</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#jnd-radius" data-ice="link">JND Radius</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#stevens" data-ice="link">Stevens</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/README.html"><a href="manual/README.html#estimation" data-ice="link">Estimation</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/terminology.html"><a href="manual/terminology.html" data-ice="link">Terminology</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/terminology.html"><a href="manual/terminology.html#describing-an-experiment" data-ice="link">Describing an Experiment</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-task--strong-" data-ice="link">Task</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-method--strong-" data-ice="link">Method</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-properties--strong-" data-ice="link">Properties</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/terminology.html"><a href="manual/terminology.html#condition-identifiers" data-ice="link">Condition Identifiers</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-base-experiment--strong-" data-ice="link">Base Experiment</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-trial-structure--strong-" data-ice="link">Trial Structure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-balancing--strong-" data-ice="link">Balancing</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-condition--strong-" data-ice="link">Condition</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/experiments.html"><a href="manual/experiments.html" data-ice="link">Experiments</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/jnd.html"><a href="manual/jnd.html" data-ice="link">&gt;&gt; JND</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/jnd.html"><a href="manual/jnd.html#specifications" data-ice="link">Specifications</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#practice-procedure" data-ice="link">Practice Procedure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#test-procedure" data-ice="link">Test Procedure</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/jnd.html"><a href="manual/jnd.html#jspsych-timeline" data-ice="link">JsPsych Timeline</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#general-timeline" data-ice="link">General Timeline</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#trial-logic" data-ice="link">Trial Logic</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#adjusted-correlation" data-ice="link">Adjusted Correlation</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#constants" data-ice="link">Constants</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/jnd_radius.html"><a href="manual/jnd_radius.html" data-ice="link">&gt;&gt; JND Radius</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/jnd_radius.html"><a href="manual/jnd_radius.html#specifications" data-ice="link">Specifications</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd_radius.html"><a href="manual/jnd_radius.html#test-procedure" data-ice="link">Test Procedure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd_radius.html"><a href="manual/jnd_radius.html#constants" data-ice="link">Constants</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/stevens.html"><a href="manual/stevens.html" data-ice="link">&gt;&gt; Stevens</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/stevens.html"><a href="manual/stevens.html#specifications" data-ice="link">Specifications</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/stevens.html"><a href="manual/stevens.html#practice-procedure" data-ice="link">Practice Procedure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/stevens.html"><a href="manual/stevens.html#test-procedure" data-ice="link">Test Procedure</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/stevens.html"><a href="manual/stevens.html#jspsych-timeline" data-ice="link">JsPsych Timeline</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/stevens.html"><a href="manual/stevens.html#trial-logic" data-ice="link">Trial Logic</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/stevens.html"><a href="manual/stevens.html#estimated-correlation" data-ice="link">Estimated Correlation</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/stevens.html"><a href="manual/stevens.html#constants" data-ice="link">Constants</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/estimation.html"><a href="manual/estimation.html" data-ice="link">&gt;&gt; Estimation</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/estimation.html"><a href="manual/estimation.html#specifications" data-ice="link">Specifications</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html" data-ice="link">Supported Properties</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#identifiers" data-ice="link">Identifiers</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#base-experiment" data-ice="link">Base Experiment</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#trial-structure" data-ice="link">Trial Structure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#balancing" data-ice="link">Balancing</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#graph-types" data-ice="link">Graph Types</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#subcondition-attributes" data-ice="link">Subcondition Attributes</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#experimental-attributes" data-ice="link">Experimental Attributes</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#graphical-attributes" data-ice="link">Graphical Attributes</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/conditions.html"><a href="manual/conditions.html" data-ice="link">Conditions</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html" data-ice="link">Developing New Conditions</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#for-researchers" data-ice="link">For Researchers</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#example" data-ice="link">Example</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#for-developers" data-ice="link">For Developers</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#-1--add-to-config" data-ice="link">(1) Add to config</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#-2--add-constants" data-ice="link">(2) Add constants</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#-3--update-instructions" data-ice="link">(3) Update instructions</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#-4--update-docs" data-ice="link">(4) Update docs</a></li>
 </ul>
   </div>
 </div>
 </nav>
 
 <div class="content" data-ice="content"><div class="github-markdown">
-  <div class="manual-user-index" data-ice="manualUserIndex"><h1 id="vcl-web-framework">VCL Web Framework</h1><p>This is a Node.js application that will serve as the modernization of the original VCL Java Framework.</p>
+  <div class="manual-user-index" data-ice="manualUserIndex"><h1 id="vcl-web-framework">VCL Web Framework</h1><p>This is a Node.js application that serves as the modernization of the original VCL Java Framework.</p>
 <h2 id="set-up">Set Up</h2><h4 id="-1--git-clone-the-repository">(1) Git clone the repository</h4><h4 id="-2--install-node">(2) Install Node</h4><p>Visit the following link to download Node: <a href="https://nodejs.org/en/">here.</a></p>
 <h4 id="-3--install-dependencies">(3) Install Dependencies</h4><p>Navigate into the folder:</p>
 <pre><code><code class="source-code prettyprint">cd VCL-Web-Framework</code>
@@ -58,217 +150,6 @@
 </code></pre><p>Or alternatively, with nodemon:</p>
 <pre><code><code class="source-code prettyprint">nodemon app.js</code>
 </code></pre><p>The app is available at <a href="localhost:8080">localhost:8080</a>. If you want to access it at a different port, change the port number in app.js (line 57).</p>
-<h2 id="supported-experiments">Supported Experiments</h2><h3 id="jnd">JND</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Trial Type</th>
-<th>Graph Type(s)</th>
-<th>Balancing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Base</td>
-<td>Foundational</td>
-<td>Scatter, Strip</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Strip Ring Size</td>
-<td>Foundational</td>
-<td>Ring</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Line Length Strip</td>
-<td>Foundational</td>
-<td>Strip</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Rainbow</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Square Red/Blue/Green/Yellow Hue/Lum/Chro</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Square Diamond Red/Blue/Green/Yellow Hue/Lum/Chro</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Multi-Phase [Task 1]</td>
-<td>Custom</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Blue/Red/Yellow/Control Shades</td>
-<td>Custom</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-</tbody>
-</table>
-<h3 id="jnd-radius">JND Radius</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Trial Type</th>
-<th>Graph Type(s)</th>
-<th>Balancing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Circle, Square</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Circle, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Square, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>RotatedSquare, RotatedTriangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Slice, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Slice-45, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Slice-90, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-</tbody>
-</table>
-<h3 id="stevens">Stevens</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Trial Type</th>
-<th>Graph Type(s)</th>
-<th>Balancing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Base</td>
-<td>Foundational</td>
-<td>Scatter, Strip</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Strip Ring Size</td>
-<td>Foundational</td>
-<td>Ring</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Line Length Strip</td>
-<td>Foundational</td>
-<td>Strip</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Square Red/Blue/Green/Yellow Hue/Lum/Chro</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Square Diamond Red/Blue/Green/Yellow Hue/Lum/Chro</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Blue/Red/Yellow/Control Shades</td>
-<td>Custom</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-</tbody>
-</table>
-<h3 id="estimation">Estimation</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Trial Type</th>
-<th>Graph Type(s)</th>
-<th>Balancing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Shape: Circle, Square, Triangle</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Line Length</td>
-<td>Estimation</td>
-<td>Line</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Shape: Rectangle, Square</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Shape: Rectangle, Rotated Square (Solid)</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Shape: Rectangle, Rotated Square (Outline)</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Shape: Triangle</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-</tbody>
-</table>
-<p>1/2/2019 - Madison&apos;s Visual Search + Numerosity experiments from December 2018 can be found <a href="https://github.com/Wongelawit/Correlation_MultipleEnsemble/tree/Numerosity-Task">here.</a></p>
 </div>
 
   
@@ -277,218 +158,688 @@
     
   <div class="manual-card-wrap" data-ice="cards">
       <div class="manual-card">
-        <div data-ice="card"><h1>VCL Web Framework</h1><p>This is a Node.js application that will serve as the modernization of the original VCL Java Framework.</p><h2>Set Up</h2><h4>(1) Git clone the repository</h4><h4>(2) Install Node</h4><p>Visit the following link to download Node: <a href="https://nodejs.org/en/">here.</a></p><h4>(3) Install Dependencies</h4><p>Navigate into the folder:</p><pre><code><code class="source-code prettyprint">cd VCL-Web-Framework</code>
+        <div data-ice="card"><h1>VCL Web Framework</h1><p>This is a Node.js application that serves as the modernization of the original VCL Java Framework.</p><h2>Set Up</h2><h4>(1) Git clone the repository</h4><h4>(2) Install Node</h4><p>Visit the following link to download Node: <a href="https://nodejs.org/en/">here.</a></p><h4>(3) Install Dependencies</h4><p>Navigate into the folder:</p><pre><code><code class="source-code prettyprint">cd VCL-Web-Framework</code>
 </code></pre><p>Then run:</p><pre><code><code class="source-code prettyprint">npm install</code>
 </code></pre><h4>(4) Run the Application</h4><pre><code><code class="source-code prettyprint">node app.js</code>
 </code></pre><p>Or alternatively, with nodemon:</p><pre><code><code class="source-code prettyprint">nodemon app.js</code>
-</code></pre><p>The app is available at <a href="./manual/localhost:8080">localhost:8080</a>. If you want to access it at a different port, change the port number in app.js (line 57).</p><h2>Supported Experiments</h2><h3>JND</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Trial Type</th>
-<th>Graph Type(s)</th>
-<th>Balancing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Base</td>
-<td>Foundational</td>
-<td>Scatter, Strip</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Strip Ring Size</td>
-<td>Foundational</td>
-<td>Ring</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Line Length Strip</td>
-<td>Foundational</td>
-<td>Strip</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Rainbow</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Square Red/Blue/Green/Yellow Hue/Lum/Chro</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Square Diamond Red/Blue/Green/Yellow Hue/Lum/Chro</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Multi-Phase [Task 1]</td>
-<td>Custom</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Blue/Red/Yellow/Control Shades</td>
-<td>Custom</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-</tbody>
-</table><h3>JND Radius</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Trial Type</th>
-<th>Graph Type(s)</th>
-<th>Balancing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Circle, Square</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Circle, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Square, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>RotatedSquare, RotatedTriangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Slice, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Slice-45, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Slice-90, Triangle</td>
-<td>Foundational</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-</tbody>
-</table><h3>Stevens</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Trial Type</th>
-<th>Graph Type(s)</th>
-<th>Balancing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Base</td>
-<td>Foundational</td>
-<td>Scatter, Strip</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Strip Ring Size</td>
-<td>Foundational</td>
-<td>Ring</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Line Length Strip</td>
-<td>Foundational</td>
-<td>Strip</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Square Red/Blue/Green/Yellow Hue/Lum/Chro</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Square Diamond Red/Blue/Green/Yellow Hue/Lum/Chro</td>
-<td>Design</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-<tr>
-<td>Distractor Blue/Red/Yellow/Control Shades</td>
-<td>Custom</td>
-<td>Scatter</td>
-<td>Latin Square</td>
-</tr>
-</tbody>
-</table><h3>Estimation</h3><table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Trial Type</th>
-<th>Graph Type(s)</th>
-<th>Balancing</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Shape: Circle, Square, Triangle</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Line Length</td>
-<td>Estimation</td>
-<td>Line</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Shape: Rectangle, Square</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Shape: Rectangle, Rotated Square (Solid)</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Shape: Rectangle, Rotated Square (Outline)</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-<tr>
-<td>Shape: Triangle</td>
-<td>Estimation</td>
-<td>Shape</td>
-<td>Random</td>
-</tr>
-</tbody>
-</table><p>1/2/2019 - Madison&apos;s Visual Search + Numerosity experiments from December 2018 can be found <a href="https://github.com/Wongelawit/Correlation_MultipleEnsemble/tree/Numerosity-Task">here.</a></p></div>
+</code></pre><p>The app is available at <a href="./manual/localhost:8080">localhost:8080</a>. If you want to access it at a different port, change the port number in app.js (line 57).</p></div>
         <a data-ice="link" href="manual/README.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>Terminology</h1><p>Below is common terminology the lab uses when describing experiments.</p><h2>Describing an Experiment</h2><p>Every experiment has the following:</p><ul>
+<li><strong>Experiment</strong> : the type of task to be performed.</li>
+<li><strong>Condition</strong> : dictated by the task, the method(s) used, and the stimuli type.</li>
+<li><strong>Subcondition</strong> : a set of stable constants.</li>
+<li><strong>Trial</strong> : marked by the user making a meaningful response/input that is purposely recorded.<ul>
+<li>E.g. I am trying to adjust the correlation of a specific plot to be the midpoint between a plot with a high correlation, and a plot with a lower correlation. The final correlation that I have adjusted marks the relevant trial data to be saved.</li>
+</ul>
+</li>
+<li><strong>Action</strong> : the actions a user can make within a trial.<ul>
+<li>E.g. In the above trial example, I can be taking actions to increase or decrease my correlation.</li>
+</ul>
+</li>
+</ul><h3><strong>Task</strong></h3><p>The decision task defined in terms of the stimuli and question posed.</p><ul>
+<li><strong>Detection</strong> : &quot;there may be any number of alternative stimuli, but one is blank, and the observer is asked only to distinguish between the blank and the other stimuli.&quot;</li>
+<li><strong>Discrimination</strong> : &quot;there are any number of alternative stimuli, but one of the stimuli (which need not be blank), is designated as the reference, and the observer is asked only to distinguish between the reference and other stimuli.&quot;</li>
+</ul><h3><strong>Method</strong></h3><ul>
+<li><strong>Forced Choice</strong> : &quot;traditionally characterized by two separate stimulus presentations, one blank and one nonblank, in random order. The two stimuli may be presented successively or side by side. The observer is asked whether the nonblank stimulus was first or second (or on the left or right).&quot;</li>
+<li><strong>Matching</strong> : &quot;two stimuli are presented, and the observer is asked to adjust one to match the other.&quot;</li>
+<li><strong>Staircase</strong> : &quot;for difference thresholds, a variable stimulus is adjusted to increase its absolute difference from a standard stimulus whenever the difference is not discriminated or is adjusted to decrease its absolute difference from the standard stimulus whenever the difference is discriminated.&quot;<ul>
+<li><em><strong>E.g.</strong></em> We have two scatter plots side by side. Let us say plot A has r = 0.5 and plot B has r = 0.8. The task is to pick the plot with the higher correlation.<ul>
+<li><em>You correctly pick plot B:</em> So the next trial will be harder, in that the correlations of the two plots are now closer together. For example, plot A would have r = 0.5 and plot B would have r = 0.7.  </li>
+<li><em>You incorrectly pick plot A:</em> So the next trial will be easier, in that the correlations of the two plots are now wider apart. For example, plot A would have r = 0.5 and plot B would have r = 0.9.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><h3><strong>Properties</strong></h3><ul>
+<li><strong>Balancing</strong> : the ways in which the subconditions for a given condition are ordered.<ul>
+<li>Random</li>
+<li>Latin-Square</li>
+</ul>
+</li>
+<li><strong>Graph Type</strong> : e.g. scatter plots, ring plots, strip plots, shapes </li>
+<li><strong>Graphical Manipulation</strong>: <ul>
+<li>May be on how the points are plotted e.g. for strip plots, a y coordinate defines the horizontal translation of the &quot;strip&quot; and x coordinate defines the height of the &quot;strip&quot;.</li>
+<li>May be in terms of how many distributions are plotted on the same graph e.g. on the same axes, we can have TWO scatter plots with different correlations.</li>
+</ul>
+</li>
+</ul><hr><p>Definitions adapted from:</p><p><em>D. G., &amp; Farell, B. (lOlD). Psychophysical methods. In M. Bass, C. DeCusatis. J. Enoch, V. Lakshmit1arayanan. G. U, C. MacDonald, V. Mahajan &amp; E. V. Stryland (Eds,), Handbook 01 Optics. Third Edition, VDlume III: Visioo and Vision Optics (w. 3.1-3.12). New Yori&lt;: McGraw+liR. http:// psych.nyu,edu/pelilpubslpelIi20 IOpsychophysical-methods,pdt</em></p><h2>Condition Identifiers</h2><p>Each condition is uniquely defined by 4 properties.</p><h3><strong>Base Experiment</strong></h3><p>Defines the underlying procedural logic of the experiment.</p><ul>
+<li>JND</li>
+<li>Stevens</li>
+<li>Equalizer</li>
+<li>Estimation</li>
+</ul><h3><strong>Trial Structure</strong></h3><p>The trial structure represents the range or pattern of correlation values, and defines a set of constants for each subcondition. Each condition can follow these pattern of values, or use it&apos;s own custom structure.</p><p>The two main types of patterns are Design or Foundational.</p><ul>
+<li>Foundational : 17 subconditions, base correlation is in the range of [0.0, 0.9] in 0.1 increments.</li>
+<li>Design       : 15 subconditions, grouped into five sets with base correlation values set at 0.3, 0.6, 0.9.</li>
+<li>Estimation</li>
+<li>Custom       : used when a condition does not follow any of the above structures.</li>
+</ul><h3><strong>Balancing</strong></h3><p>How subconditions in a given condition get ordered.</p><ul>
+<li>Randomized</li>
+<li>Latin Square</li>
+</ul><h3><strong>Condition</strong></h3><p>Any given condition will always have a base, trial structure, and balancing. However, they will also have a set of variables that manipulate different aspects of the distribution, graphical properties of the visualization, and non-graphical properties such as having a custom instruction set. </p><p>Here is a non-comprehensive list of properties that could be manipulated by a condition.</p><ul>
+<li>Plot type: <ul>
+<li>Scatter</li>
+<li>Strip</li>
+</ul>
+</li>
+<li>Distribution type: <ul>
+<li>Gaussian</li>
+<li>Uniform</li>
+</ul>
+</li>
+<li>Number of distributions <em>on a single plot</em>: <ul>
+<li>Single</li>
+<li>Multiple (i.e distractor)</li>
+</ul>
+</li>
+<li>Graphical Properties of the Distribution:<ul>
+<li>Some examples if <code>plot type = scatter</code>:<ul>
+<li>Point shape: circle, diamond, triangle</li>
+<li>Point color</li>
+<li>Point size</li>
+</ul>
+</li>
+<li>Some examples if <code>plot type = strip</code>:<ul>
+<li>Line length</li>
+<li>Line width</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Graphical Properties <em>not to do with the Distribution</em>:<ul>
+<li>Axis color, ticks</li>
+<li>Background color</li>
+<li>Text color</li>
+</ul>
+</li>
+<li>Custom Instructions</li>
+</ul></div>
+        <a data-ice="link" href="manual/terminology.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>Experiments</h1><p>These are the following experiments supported by our framework. The table lists the values for the different identifiers used.</p></div>
+        <a data-ice="link" href="manual/experiments.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>&gt;&gt; JND</h1><ul>
+<li><strong>Task</strong>: Discrimination</li>
+<li><strong>Method</strong>: Forced choice with Staircase</li>
+</ul><h2>Specifications</h2><p><strong>_</strong>Note that all CAPPED variables are constants taken from the excel sheets/data file.<strong>_</strong></p><ul>
+<li>For a given subcondition, there are at minimum 24 trials and at maximum 52. Once a user has reached the 24th trial, we start computing for convergence by calculating an F-value to see if it is lower than the threshold. <ul>
+<li>If the F-value is &lt; <code>(1-CONVERGENCE_THRESHOLD)</code>, then the current subcondition ends, and proceeds to the next subcondition.</li>
+<li>If the F-value is &gt;= <code>(1-CONVERGENCE_THRESHOLD)</code>, then the trials continue.</li>
+</ul>
+</li>
+</ul><h3>Practice Procedure</h3><ul>
+<li>We choose 4 subconditions randomly, and let the participant run through those. It otherwise follows the same procedure like the test detailed below.</li>
+</ul><h3>Test Procedure</h3><ul>
+<li>For a given subcondition&apos;s trial:<ul>
+<li>The BASE_CORRELATION for that subcondition will be used to calculate the distribution of one plot, but we need to calculate the adjusted correlation on a trial-by-trial basis.<ul>
+<li><em>At the first presentation of a trial</em>, there is a need to compute the adjusted correlation. <ul>
+<li>If converging from above, we calculate it by: <code>Math.min(MAX_CORRELATION, BASE_CORRELATION + INITIAL_DIFFERENCE)</code></li>
+<li>If converging from below, we calculate it by: <code>Math.max(MAX_CORRELATION, BASE_CORRELATION - INITIAL_DIFFERENCE)</code></li>
+</ul>
+</li>
+<li><em>If this is NOT the first presentation of a trial</em>, then use the <strong>staircase method</strong> to calculate the adjusted correlation. <ul>
+<li>If converging from above:<ul>
+<li>If the <strong>previous</strong> trial was correct, adjusted correlation = <code>Math.max(INITIAL_DIFFERENCE, previous adjusted correlation - MAX_STEP_SIZE)</code></li>
+<li>If the <strong>previous</strong> trial was incorrect, adjusted correlation = <code>Math.min(MAX_CORRELATION, previous adjusted correlation + MAX_STEP_SIZE * INCORRECT_MULTIPLIER)</code></li>
+</ul>
+</li>
+<li>If converging from below:<ul>
+<li>If the <strong>previous</strong> trial was correct, adjusted correlation = <code>Math.min(INITIAL_DIFFERENCE, previous adjusted correlation + MAX_STEP_SIZE)</code></li>
+<li>If the <strong>previous</strong> trial was incorrect, adjusted correlation = <code>Math.max(MIN_CORRELATION, previous adjusted correlation - MAX_STEP_SIZE * INCORRECT_MULTIPLIER)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Generate a gaussian distribution using the BASE_CORRELATION and adjusted correlation.</li>
+<li>Plot each distribution onto a separate plot, and randomize whether the right/left plots get the base or adjusted correlation. The manner in which the distribution is plotted varies depending on the type of plot. For example:<ul>
+<li>For a conventional strip, the x coordinate defines the horizontal translation while the y coordinate determines the height of the &quot;strip&quot;.</li>
+<li>For a conventional ring, the x coordinate defines the horizontal translation while the y coordinate determines the radius of the &quot;ring&quot;.</li>
+</ul>
+</li>
+<li>A user can make keyboard inputs with the &quot;z&quot; or &quot;m&quot; keys. &quot;z&quot; corresponds to the left graph, &quot;m&quot; corresponds to the right graph.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><h2>JsPsych Timeline</h2><h3>General Timeline</h3><pre><code><code class="source-code prettyprint">- Display instructions
+- Ready screen
+- Display JND practice trials {
+    For a given JND experiment, continue to display trials if: 
+    - There are still more practice subconditions
+  }  
+- Stop screen
+- Ready screen
+- Display JND test trials {
+    For a given JND experiment, continue to display trials if: 
+    - There are still more test subconditions
+  }  
+- Stop screen with data download options</code>
+</code></pre><h3>Trial Logic</h3><p>Within the trial object, all computations for distributions and constants are performed in the <code>on_start()</code> function. This means that prior to a trial executing, we perform ALL operations detailed in this function. This trial object can be found on line 120 in <code>scripts/experiments/jnd.js</code>. </p><p>In general, this is what is executed:</p><pre><code class="lang-javascript"><code class="source-code prettyprint">on_start: function(){
+
+  // Retrieve the constants (i.e variables listed in the section below) for the given subcondition index i
+  var constants = get_constants_for_subcondition(i); 
+
+  // Calculate adjusted correlation
+  // (Refer to next section for pseudocode of this function)
+  var adjusted_correlation = calculate_adjusted_correlation(constants);
+
+  // Save all relevant constants of this trial to the JsPsych data object
+  handle_data_saving(constants); 
+
+  var base_coordinates = generate_distribution(constants.BASE_CORRELATION, 
+                                               constants.ERROR, 
+                                               constants.NUM_POINTS, 
+                                               constants.NUM_SD, 
+                                               constants.MEAN,
+                                               constants.SD);
+
+  var adjusted_coordinates = generate_distribution(adjusted_correlation, 
+                                               constants.ERROR, 
+                                               constants.NUM_POINTS, 
+                                               constants.NUM_SD, 
+                                               constants.MEAN,
+                                               constants.SD);
+
+  // Randomize position of the base/adjusted correlations to be either left/right
+  // and keep these positions constant for a given subcondition
+  var result = randomize_position(base_coordinates, adjusted_coordinates);
+
+  // Set these correlations to the global D3 variables used for plotting
+  left_coordinates = result.left;
+  right_coordinates = result.right; 
+
+} </code>
+</code></pre><h3>Adjusted Correlation</h3><p>Below is the pseudocode for how the adjusted correlation value is generated for a given trial. </p><pre><code class="lang-javascript"><code class="source-code prettyprint">
+var MIN_CORRELATION = 0.0;
+var MAX_CORRELATION = 1.0;
+var INCORRECT_MULTIPLIER = 3;
+
+function calculate_adjusted_correlation(constants){
+
+   // If first trial, compute solely using constants:
+   if (this_is_the_first_trial()){
+      var adjusted_correlation = initialize_adjusted_statistic(constants.CONVERGE_FROM_ABOVE,
+                                                               constants.BASE_CORRELATION, 
+                                                               constants.INITIAL_DIFFERENCE);
+   }
+   // If not first trial, data from previous trial is needed:
+   else{
+     var last_JND_trial = get_data_from_last_trial();
+
+     var adjusted_correlation = get_next_adjusted_statistic(last_JND_trial.correct,
+                                                            constants.CONVERGE_FROM_ABOVE,
+                                                            last_JND_trial.adjusted_correlation,
+                                                            constants.BASE_CORRELATION,
+                                                            constants.MAX_STEP_SIZE);
+   }
+   return adjusted_correlation;
+}
+
+function initialize_adjusted_statistic(converge_from_above, base_correlation, initial_difference){
+
+  var adjusted_correlation;
+
+  if (converge_from_above){
+    adjusted_correlation = Math.min(MAX_CORRELATION, base_correlation + initial_difference); }
+  else{
+    adjusted_correlation = Math.max(MIN_CORRELATION, base_correlation - initial_difference);
+  };
+
+  return adjusted_correlation;
+}
+
+function get_next_adjusted_statistic(correct, converge_from_above, adjusted_quantity, base_correlation, max_step_size){
+
+  var next_adjusted_statistic;
+
+  var initial_difference = base_correlation;
+
+  if (converge_from_above) {
+    if (correct) {
+      next_adjusted_statistic = Math.max(initial_difference, adjusted_quantity - max_step_size);
+    } else {
+      next_adjusted_statistic = Math.min(MAX_CORRELATION, adjusted_quantity + max_step_size
+                                * INCORRECT_MULTIPLIER);
+    }
+  } else {
+    if (correct) {
+      next_adjusted_statistic = Math.min(initial_difference, adjusted_quantity + max_step_size);
+    } else {
+      next_adjusted_statistic = Math.max(MIN_CORRELATION, adjusted_quantity - max_step_size
+                                * INCORRECT_MULTIPLIER);
+    }
+  }
+
+  return next_adjusted_statistic;
+}</code>
+</code></pre><h3>Constants</h3><p>These are the constants extracted from the input excel sheets. The values of these constants differ for each sub condition.</p><ul>
+<li>BASE_CORRELATION</li>
+<li>ERROR</li>
+<li>MAX_STEP_SIZE</li>
+<li>CONVERGE_FROM_ABOVE</li>
+<li>INITIAL_DIFFERENCE</li>
+<li>NUM_POINTS</li>
+<li>MEAN</li>
+<li>SD</li>
+<li>NUM_SD</li>
+</ul></div>
+        <a data-ice="link" href="manual/jnd.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>&gt;&gt; JND Radius</h1><ul>
+<li><strong>Task</strong>: Discrimination</li>
+<li><strong>Method</strong>: Forced choice with Staircase</li>
+</ul><h2>Specifications</h2><p><strong>_</strong>Note that all CAPPED variables are constants taken from the excel sheets/data file.<strong>_</strong></p><ul>
+<li>For a given subcondition, there are at minimum 24 trials and at maximum 52. Once a user has reached the 24th trial, we start computing for convergence by calculating an F-value to see if it is lower than the threshold. <ul>
+<li>If the F-value is &lt; <code>(1-CONVERGENCE_THRESHOLD)</code>, then the current subcondition ends, and proceeds to the next subcondition.</li>
+<li>If the F-value is &gt;= <code>(1-CONVERGENCE_THRESHOLD)</code>, then the trials continue.</li>
+</ul>
+</li>
+</ul><h3>Test Procedure</h3><ul>
+<li>For a given subcondition&apos;s trial:<ul>
+<li>The BASE_RADIUS for that subcondition will be used to calculate the distribution of one plot, but we need to calculate the adjusted radius on a trial-by-trial basis.<ul>
+<li><em>At the first presentation of a trial</em>, there is a need to compute the adjusted radius. <ul>
+<li>If converging from above, we calculate it by: <code>BASE_RADIUS + INITIAL_DIFFERENCE</code></li>
+<li>If converging from below, we calculate it by: <code>BASE_RADIUS - INITIAL_DIFFERENCE</code></li>
+</ul>
+</li>
+<li><em>If this is NOT the first presentation of a trial</em>, then use the <strong>staircase method</strong> to calculate the adjusted radius. <ul>
+<li>If converging from above:<ul>
+<li>If the <strong>previous</strong> trial was correct, adjusted radius = <code>previous adjusted radius - 0.002</code></li>
+<li>If the <strong>previous</strong> trial was incorrect, adjusted correlation = <code>previous adjusted radius + 0.006</code></li>
+</ul>
+</li>
+<li>If converging from below:<ul>
+<li>If the <strong>previous</strong> trial was correct, adjusted correlation = <code>previous adjusted radius + 0.002</code></li>
+<li>If the <strong>previous</strong> trial was incorrect, adjusted correlation = <code>previous adjusted radius - 0.006</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Generate the shape using the BASE_RADIUS and adjusted radius.</li>
+<li>Plot each shape side by side, and randomize whether the right/left areas get the base or adjusted shapes.</li>
+<li>A user can make keyboard inputs with the &quot;z&quot; or &quot;m&quot; keys. &quot;z&quot; corresponds to the left graph, &quot;m&quot; corresponds to the right graph.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><h3>Constants</h3><p>These are the constants extracted from the input excel sheets. The values of these constants differ for each sub condition.</p><ul>
+<li>BASE_RADIUS</li>
+<li>CONVERGE_FROM_ABOVE</li>
+<li>INITIAL_DIFFERENCE</li>
+</ul></div>
+        <a data-ice="link" href="manual/jnd_radius.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>&gt;&gt; Stevens</h1><ul>
+<li><strong>Task</strong>: Discrimination</li>
+<li><strong>Method</strong>: Estimation w/ Bisection</li>
+</ul><h2>Specifications</h2><p><strong>_</strong>Note that all CAPPED variables are constants taken from the excel sheets/data file.<strong>_</strong></p><h3>Practice Procedure</h3><ul>
+<li>We choose the first <strong>4</strong> subconditions of the data constants (prior to any balancing being done on the subconditions). It otherwise follows the same procedure like the test detailed below.</li>
+<li>Exclusion criteria is calculated during the practice procedure. 2 values are calculated at the end of every subcondition, then stored to be displayed to the researcher who will then determine whether the participant should be excluded or not. <ul>
+<li>We calculate standard deviation using the estimated correlations at the end of a trial (e.g. the value when the user hits space bar).</li>
+<li>To calculate anchoring, summate the final estimated correlation values for when the trial started with the LOW_REF for the middle plot, and the values for when the trial started with the HIGH_REF for the middle plot. So there would be 2 values for when the user started on LOW_REF, and 2 values for when the user started on HIGH_REF. Then take the absolute difference between these 2 sums.<ul>
+<li><code>anchoring_value = Math.abs(high_ref_trial_sum - low_ref_trial_sum)</code></li>
+</ul>
+</li>
+<li>So essentially, there will be 4 sets of anchoring and standard deviation values. </li>
+<li>A subcondition is flagged if the anchoring value &gt; 0.5 or if the standard deviation is &gt; 0.2. </li>
+</ul>
+</li>
+</ul><h3>Test Procedure</h3><ul>
+<li>A subcondition&apos;s structure is &quot;nested&quot; in a sense, in which the user has <strong>4</strong> tries (TRIALS_PER_ROUND) to set the middle graph to be the midpoint between the two other plots. <ul>
+<li>For example: let us say a subcondition is defined to have a high correlation (HIGH_REF) of 1.0 and a low correlation (LOW_REF) of 0. These are the R values for the two comparison plots. However, the starting value for the middle plot (the one that participants adjust) will alternate between starting off as the HIGH_REF or LOW_REF.<ul>
+<li>Trial 1: middle graph&apos;s starting correlation = LOW_REF</li>
+<li>Trial 2: middle graph&apos;s starting correlation = HIGH_REF</li>
+<li>Trial 3: middle graph&apos;s starting correlation = LOW_REF</li>
+<li>Trial 4: middle graph&apos;s starting correlation = HIGH_REF</li>
+</ul>
+</li>
+<li>A trial is defined as a series of presentations using the HIGH_REF and LOW_REF values, in which the position of the HIGH_REF and LOW_REF distributions are constant (e.g. in Round 1: right graph = HIGH_REF, left graph = LOW_REF). The positioning of whether the left/right plots get which distribution is random <strong>across</strong> trials, but <strong>consistent</strong> within a trial. So Round 2 might have the right graph = LOW_REF and left graph = HIGH_REF instead.<ul>
+<li>Within a given trial, the user can use the &quot;z&quot; or &quot;m&quot; keys to decrease or increase respectively the correlation of the middle graph. Once the user believes that their middle correlation is a midpoint between the two straddling graphs, they hit <em>spacebar</em> to lock in their answer. So this process happens 4 times, with (a) the middle graph alternating between taking the LOW or HIGH_REF, and (b) the straddling graphs randomizing in position in terms of whether the left or right get the HIGH and LOW_REF correlations.<ul>
+<li>To calculate the estimated correlation with respect to the key press (e.g. they want to increase or decrease the correlation), the following formulas apply:</li>
+</ul>
+</li>
+<li><code>step_size = (HIGH_REF - LOW_REF) / MAX_STEP_INTERVAL</code></li>
+<li>If increasing the correlation, <code>estimated_correlation = Math.min(HIGH_REF, last trial&apos;s estimated correlation + (Math.random() * step_size)</code></li>
+<li>If decreasing the correlation, <code>estimated_correlation = Math.max(LOW_REF, last trial&apos;s estimated correlation - (Math.random() * step_size)</code><ul>
+<li>Within a given trial, all the distributions will <strong>refresh</strong> (e.g. new distributions will be generated using the HIGH_REF, LOW_REF and estimated correlation values) with a refresh rate defined by REGEN_RATE. </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Distributions used are gaussian. The manner in which the distribution is plotted varies depending on the type of plot. For example:<ul>
+<li>For a conventional strip, the x coordinate defines the horizontal translation while the y coordinate determines the height of the &quot;strip&quot;.</li>
+<li>For a conventional ring, the x coordinate defines the horizontal translation while the y coordinate determines the radius of the &quot;ring&quot;.</li>
+</ul>
+</li>
+</ul><h2>JsPsych Timeline</h2><pre><code><code class="source-code prettyprint">- Display instructions
+- Ready screen
+- Display Stevens practice trials {
+    For a given Stevens experiment, continue to display trials if: 
+    - The person has inputted less than the value of TRIALS_PER_ROUND for a given subcondition, or, 
+    - There are still more subconditions to show, or
+    - The person&apos;s performance has not passed the exclusion criteria
+  }  
+- Stop screen
+- Ready screen
+- Display Stevens test trials {
+    For a given Stevens experiment, continue to display trials if: 
+    - The person has inputted less than the value of TRIALS_PER_ROUND for a given subcondition, or, 
+    - There are still more subconditions to show
+  }  
+- Stop screen with data download options</code>
+</code></pre><h3>Trial Logic</h3><p>Within the trial object, all computations for distributions and constants are performed in the <code>on_start()</code> function. This means that prior to a trial executing, we perform ALL operations detailed in this function. This trial object can be found on line 123 in <code>scripts/experiments/stevens.js</code>. </p><p>In general, this is what is executed:</p><pre><code class="lang-javascript"><code class="source-code prettyprint">on_start: function(){
+
+  // Retrieve the constants (i.e variables listed in the section below) for the given subcondition index i
+  var constants = get_constants_for_subcondition(i); 
+
+  // Save all relevant constants of this trial to the JsPsych data object
+  handle_data_saving(constants); 
+
+  // Update the estimated correlation
+  // (Refer to next section for pseudocode of this function)
+  var estimated_correlation = update_estimated_correlation(this.trial, constants, last_trial); 
+
+  // Generate the gaussian distributions
+  var high_coordinates = generate_distribution(constants.HIGH_REF, 
+                                               constants.ERROR, 
+                                               constants.NUM_POINTS, 
+                                               constants.NUM_SD, 
+                                               constants.MEAN,
+                                               constants.SD);
+
+  var high_coordinates = generate_distribution(constants.LOW_REF, 
+                                               constants.ERROR, 
+                                               constants.NUM_POINTS, 
+                                               constants.NUM_SD, 
+                                               constants.MEAN,
+                                               constants.SD);
+
+  var estimated_coordinates = generate_distribution(estimated_correlation, 
+                                               constants.ERROR, 
+                                               constants.NUM_POINTS, 
+                                               constants.NUM_SD, 
+                                               constants.MEAN,
+                                               constants.SD);
+
+  // Randomize position of the low/high correlations to be either left/right
+  // and keep these positions constant for a given subcondition
+  if (is_last_trial_of_subcondition(i)){
+    var result = randomize_position(high_coordinates, low_coordinates);
+  }
+
+  // Set these correlations to the global D3 variables used for plotting
+  left_coordinates = result.left;
+  right_coordinates = result.right; 
+  middle_coordinates = estimated_coordinates;
+
+} </code>
+</code></pre><h3>Estimated Correlation</h3><p>Below is the pseudocode for how the estimated correlation value is generated for a given trial. </p><pre><code class="lang-javascript"><code class="source-code prettyprint">var MAX_STEP_INTERVAL = 10;
+
+function update_estimated_correlation(trial, constants, last_trial){
+
+  var estimated_correlation;
+
+  // If this is the first trial, we need to initialize the middle correlation value
+  if (this_is_the_first_trial()){
+    estimated_correlation = Math.random() &lt; 0.5 ? constants.LOW_REF : constants.HIGH_REF;
+    trial.data.step_size = (constants.HIGH_REF - constants.LOW_REF) / MAX_STEP_INTERVAL;
+  }
+
+  // If there was a key press in the last value, we set this current trial&apos;s middle correlation value
+  // to be based on that input
+  else if (last_trial.key_press != null &amp;&amp; last_trial.key_press.is_valid_value){
+    if (last_trial.key_press == UP_VALUE){
+      estimated_correlation = Math.min(constants.HIGH_REF, last_trial.estimated_correlation + (Math.random() * 
+      last_trial.step_size));
+    }
+    else if (last_trial.key_press == DOWN_VALUE){
+      estimated_correlation = Math.max(constants.LOW_REF, last_trial.estimated_correlation - (Math.random() * 
+      last_trial.step_size));
+    }
+  }
+
+  // If there was no input in the last trial
+  else {
+    estimated_correlation = last_trial.estimated_correlation;
+  }
+
+  return estimated_correlation;
+}</code>
+</code></pre><h3>Constants</h3><p>These are the constants extracted from the input excel sheets. The values of these constants differ for each sub condition.</p><ul>
+<li>DISTRIBUTION_TYPE</li>
+<li>ROUND_TYPE</li>
+<li>TRIALS_PER_ROUND</li>
+<li>HIGH_REF</li>
+<li>LOW_REF</li>
+<li>ERROR</li>
+<li>NUM_POINTS</li>
+<li>POINT_SIZE</li>
+<li>POINT_COLOR</li>
+<li>BACKGROUND_COLOR</li>
+<li>TEXT_COLOR</li>
+<li>AXIS_COLOR</li>
+<li>REGEN_RATE</li>
+<li>MEAN</li>
+<li>SD</li>
+<li>NUM_SD</li>
+</ul></div>
+        <a data-ice="link" href="manual/stevens.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>&gt;&gt; Estimation</h1><ul>
+<li><strong>Task</strong>: Discrimination</li>
+<li><strong>Method</strong>: Estimation w/ Bisection</li>
+</ul><h2>Specifications</h2><ul>
+<li>This task presents 2 shapes side by side. One shape is the reference shape, while the other is the modifiable shape, in which the user can increase or decrease the size of the shape (by pressing the M or Z keys). The goal is that the user will adjust the size of the modifiable shape so that it is as equal as possible to the reference shape&apos;s area. </li>
+<li>Subconditions:<ul>
+<li>3 types of shapes - circle, square, or triangle<ul>
+<li>So there are 3 x 3 = 9 different permutations of paired shapes (e.g. circle-circle, circle-square, circle-triangle etc.) - duplicates (3) = 6 permutations</li>
+</ul>
+</li>
+<li>3 sizes that the reference shape can start on - 2cm, 4cm or 6 cm</li>
+<li>2 ways the modifiable shape can &quot;start&quot; on e.g. they can be either <em>smaller</em> or <em>larger</em> in size than the reference shape<ul>
+<li>For 2cm reference shape, low = 1.2, high = 3</li>
+<li>For 4cm reference shape, low = 3.1, high = 5.3</li>
+<li>For 6cm reference shape, low = 5.0, high = 6.5</li>
+</ul>
+</li>
+<li><strong>Total number of subconditions</strong> = 6 [permutation of pairs] x 3 [possible reference sizes] = 18 subconditions</li>
+</ul>
+</li>
+<li>Randomize the order of the 18 subconditions.</li>
+<li>On a given subcondition:<ul>
+<li>The reference and modifiable shape positions can be either left or right (randomized). So before a subcondition starts, there will be text like &quot;Adjust the shape on the <em>left/right</em> so that its size equals that of the other shape.&quot;</li>
+<li>For a given subcondition, there are 4 trials. In each trial, the user basically has to make the modifiable shape the same as the reference shape. On a given trial:<ul>
+<li>For trials 1 and 3, the modifiable shape&apos;s size will start on the low value as specified above (e.g. if 2cm is the reference shape, then modifiable shape&apos;s size is 1.2)</li>
+<li>For trials 2 and 4, the modifiable shape&apos;s size will start on the high value as specified above.</li>
+<li>The y position of the shapes relative to each other should be slightly jittered (e.g. if have a circle and square, the circle is not completely aligned with the square, so could be a few pixels higher or lower etc.) - the degree of jitter can be randomized.</li>
+<li>The user can press the z [make shape bigger] or m [make shape smaller] keys.<ul>
+<li>The step size of the adjustment will be randomized (so not constant).</li>
+</ul>
+</li>
+<li>They can adjust for an unlimited amount of times.</li>
+<li>Once satisfied, they hit space bar, which then records the size of their modified shape.</li>
+<li>This happens 3 more times (for the same subcondition).</li>
+</ul>
+</li>
+<li>After the 4 trials for a given subcondition, experiment then moves to the next subcondition.</li>
+</ul>
+</li>
+</ul></div>
+        <a data-ice="link" href="manual/estimation.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>Supported Properties</h1><h2>Identifiers</h2><p>Below are all the supported values for each of the four identifiers. </p><h3>Base Experiment</h3><h3>Trial Structure</h3><h3>Balancing</h3><h3>Graph Types</h3><h2>Subcondition Attributes</h2><p>Below are each of the attributes used to define a subcondition. For experimental attributes, some attributes 
+MUST be defined depending on the experiment. Usually, if you are adding a new condition that uses a pre-existing trial structure, the base subconditions from the trial structure already define all these attributes.</p><p>Depending on the graph type of the condition, certain graphical attributes can be customized. They will default 
+to a specific value if they are not defined in your new condition.</p><h3>Experimental Attributes</h3><h3>Graphical Attributes</h3></div>
+        <a data-ice="link" href="manual/supported_properties.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>Conditions</h1><p>Below is a list of all supported conditions in the framework organized by experiment.</p><p>** 1/2/2019 - Madison&apos;s Visual Search + Numerosity experiments from December 2018 can be found <a href="https://github.com/Wongelawit/Correlation_MultipleEnsemble/tree/Numerosity-Task">here.</a></p></div>
+        <a data-ice="link" href="manual/conditions.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>Developing New Conditions</h1><h2>For Researchers</h2><p>If you are planning to add a new condition that uses the base experiments already supported, please provide the following information:</p><ul>
+<li><strong>Condition Name</strong></li>
+<li><strong>High-Level Description of Condition</strong></li>
+<li><strong>Identifiers</strong><ul>
+<li><strong>Base Experiment</strong></li>
+<li><strong>Trial Structure</strong></li>
+<li><strong>Balancing</strong></li>
+<li><strong>Graph Type</strong></li>
+</ul>
+</li>
+<li><strong>Subconditions</strong><ul>
+<li><strong>How many subconditions?</strong></li>
+<li><strong>What is changing on each subcondition? List all variables.</strong></li>
+<li><strong>How are each of the variables being changed? List all equations/computations needed if changing on trial-by-trial basis.</strong></li>
+</ul>
+</li>
+</ul><h3>Example</h3><p>Let us say you want to make a new condition for a JND Design experiment that changes point size on each grouping of the Design trial structure. This is what your information would look like:</p><ul>
+<li><strong>Condition Name</strong>: small_point_sizes</li>
+<li><strong>High-Level Description of Condition</strong>: Standard JND scatter plot condition, except point sizes vary between 5 - 13 pixels for each 0.3, 0.6, 0.9 base correlation grouping.</li>
+<li><strong>Identifiers</strong><ul>
+<li><strong>Base Experiment</strong>: JND</li>
+<li><strong>Trial Structure</strong>: Design</li>
+<li><strong>Balancing</strong>: Latin Square</li>
+<li><strong>Graph Type</strong>: Scatter</li>
+</ul>
+</li>
+<li><strong>Subconditions</strong><ul>
+<li><strong>How many subconditions?</strong>: 15</li>
+<li><strong>What is changing on each subcondition? List all variables.</strong>: Point size</li>
+<li><strong>How are each of the variables being changed on each subcondition? List all equations/computations needed if changing on trial-by-trial basis.</strong>: The design trial structure has 5 groupings of the base_correlation = 0.3, 0.6, 0.9, making 15 total subconditions. For each group, point size is different.<ul>
+<li>Group 1 point size = 5 px</li>
+<li>Group 2 point size = 7 px</li>
+<li>Group 3 point size = 9 px</li>
+<li>Group 4 point size = 11 px</li>
+<li>Group 5 point size = 13 px</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><h2>For Developers</h2><h3>(1) Add to config</h3><p>Under <code>public/config/conditions-config</code>, add a new key and javascript object at the bottom. The object should look like this:</p><pre><code><code class="source-code prettyprint">name_of_new_condition: {
+    experiment: [],
+    graph_type: [],
+    trial_structure: [],
+    balancing: &quot;&quot;,
+    display_name: &quot;New condition name&quot;,
+    display_info: {
+        description: &quot;&quot;,
+        researcher: &quot;&quot;,
+        developer: &quot;&quot;
+    }
+}    </code>
+</code></pre><p>Check that when you load the UI, your condition is visible with the identifiers specified.</p><p>Note that <code>experiment</code>, <code>graph_type</code> and <code>trial_structure</code> can take multiple strings (in an array). So you can have the SAME condition name,
+with the same kind of subcondition-level manipulation, but different underlying base experiment, different graph type, or different trial structure. Good examples of these are the base experiments that run across JND and Stevens, and are supported on both scatter and strip graph types. </p><p>If we use the example from above, the JS object looks like this:</p><pre><code><code class="source-code prettyprint">small_point_sizes: {
+    experiment: [&quot;jnd&quot;],
+    graph_type: [&quot;scatter&quot;],
+    trial_structure: [&quot;design&quot;],
+    balancing: &quot;latin_square&quot;,
+    display_name: &quot;Small Point Sizes&quot;,
+    display_info: {
+        description: &quot;Standard JND scatter plot condition, except point sizes vary between&quot; +  
+                     &quot;5 - 13 pixels for each 0.3, 0.6, 0.9 base correlation grouping.&quot;,
+        researcher: &quot;Caitlin Coyiuto&quot;,
+        developer: &quot;Caitlin Coyiuto&quot;
+    }
+}</code>
+</code></pre><h3>(2) Add constants</h3><p>Add the constants needed to run each subcondition into the right data file. All data files are in <code>public/scripts/experiment-properties/data/constants</code>.</p><p>How the constants work is that for a given trial structure, the application <strong>MERGES</strong> all constants defined in the <code>BASE</code> variable with all constants defined in <code>CONDITIONS</code> variable.</p><p>If the trial structure is already defined, you would only need to add all subconditions for your new condition in <code>CONDITIONS</code>. </p><ul>
+<li>Add a JS object into the file with the same experiment base name. You want to add into the array for CONDITIONS, not BASE. </li>
+<li>Note that <strong>each entry in the array represents ONE subcondition. So you must define all
+attributes that are being changed on a subcondition-basis.</strong></li>
+<li>You can <strong>OVERRIDE</strong> any of the attributes found in the base subconditions. E.g. you can redefine &quot;point_size&quot; in your subcondition if you are changing it on a subcondition-basis.</li>
+<li>An example of a new object representing a condition should look something like this:</li>
+</ul><pre><code><code class="source-code prettyprint">name_of_new_condition:
+[
+    {constant1: ___, constant2: ____}, //first subcondition
+
+    {constant1: ___, constant2: ____}, //second subcondition
+
+    {constant1: ___, constant2: ____}, //third...
+
+    {constant1: ___, constant2: ____},
+
+    .....
+]</code>
+</code></pre><p>Using example from above, we are just changing <code>point_size</code>, so we need to define each of the sizes on every subcondition.
+Note that the subconditions for a JND Design already has <code>point_size</code> (look at <code>JND_BASE[&quot;design&quot;]</code>). By re-defining the <code>point_size</code>
+attribute here, you are <strong>OVERRIDING</strong> the <code>point_size</code> variable in the base.</p><pre><code><code class="source-code prettyprint">small_point_sizes:
+    [
+    {point_size: 5},
+
+    {point_size: 5},
+
+    {point_size: 5},
+
+    {point_size: 7},
+
+    {point_size: 7},
+
+    {point_size: 7},
+
+    {point_size: 9},
+
+    {point_size: 9},
+
+    {point_size: 9},
+
+    {point_size: 11},
+
+    {point_size: 11},
+
+    {point_size: 11},
+
+    {point_size: 13},
+
+    {point_size: 13},
+
+    {point_size: 13},
+    ]</code>
+</code></pre><p>Again, depending on your trial structure, the application will merge the constants you define in <code>CONDITIONS</code> with any that are defined in the <code>BASE</code>. So for this example, all the subconditions for <code>small_point_sizes</code> is whatever is listed in the <code>JND_BASE[&quot;design&quot;]</code>, plus whatever is defined in the <code>CONDITIONS</code> variable. </p><pre><code><code class="source-code prettyprint">[
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, 
+    converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, 
+    num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, 
+    feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 5}, // &lt;-- point_size is now   
+                                                                                   // overriden (usually for JND 
+                                                                                   // design, point_size = 6)
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, 
+    converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, 
+    num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, 
+    feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 5},
+    .....
+]</code>
+</code></pre><h3>(3) Update instructions</h3><p> To update the instructions that are displayed to the participant, you will have to add additional code to the
+ timeline object. Navigate to the <code>_timeline.js</code> associated with the condition&apos;s experiment. Under &apos;INSTRUCTION TRIAL BLOCKS&apos;, under the case for the condition&apos;s graph type, add an instruction block. </p><p> For this example, we would go to <code>/experiments/jnd/jnd_timeline.js</code>, and add another if statement under
+ case &quot;scatter&quot;. </p><h3>(4) Update docs</h3><p> The docs dynamically gets all the condition data specified in the config files. However, it needs to be compiled to be re-updated.</p><p> Run this in the command line:</p><p> <code>./node_modules/.bin/esdoc</code></p><p> And check that your condition exists in the Conditions tab.</p></div>
+        <a data-ice="link" href="manual/developing_new_conditions.html"></a>
       </div>
     </div>
 </div>

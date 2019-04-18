@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../../../">
-  <title data-ice="title">scripts/experiment-properties/data/constants/jnd_radius_data.js | huh</title>
+  <title data-ice="title">scripts/experiment-properties/data/constants/jnd_radius_data.js | VCL Framework</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="huh"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><link rel="stylesheet" href="./inject/css/0-styles.css"><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -53,7 +53,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_scatter_points">plot_scatter_points</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_shape_plot">create_shape_plot</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_strip_plot">create_strip_plot</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_distractor_scatter_plot">prepare_distractor_scatter_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_distractor_scatter_plot">create_distractor_scatter_plot</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-estimation">experiments/estimation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html">Estimation</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-estimation_exp">estimation_exp</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd">experiments/jnd</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd/jnd.js~JND.html">JND</a></span></span></li>
@@ -76,15 +76,15 @@ const JND_RADIUS_BASE = {
 
   foundational:
     [
-    {base_radius: 2, initial_difference: 0.586, converge_from_above: true, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, stroke_color: &apos;none&apos;, fill_color: &apos;BLUE&apos;},
+    {base_radius: 2, initial_difference: 0.586, converge_from_above: true, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, stroke_color: &apos;BLUE&apos;, fill_color: &apos;BLUE&apos;},
 
-    {base_radius: 3, initial_difference: 0.879, converge_from_above: true, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, stroke_color: &apos;none&apos;, fill_color: &apos;BLUE&apos;},
+    {base_radius: 3, initial_difference: 0.879, converge_from_above: true, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, stroke_color: &apos;BLUE&apos;, fill_color: &apos;BLUE&apos;},
 
-    {base_radius: 4, initial_difference: 1.172, converge_from_above: true, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, stroke_color: &apos;none&apos;, fill_color: &apos;BLUE&apos;},
+    {base_radius: 4, initial_difference: 1.172, converge_from_above: true, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, stroke_color: &apos;BLUE&apos;, fill_color: &apos;BLUE&apos;},
 
-    {base_radius: 5, initial_difference: 1.464, converge_from_above: true, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, stroke_color: &apos;none&apos;, fill_color: &apos;BLUE&apos;},
+    {base_radius: 5, initial_difference: 1.464, converge_from_above: true, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, stroke_color: &apos;BLUE&apos;, fill_color: &apos;BLUE&apos;},
 
-    {base_radius: 6, initial_difference: 1.757, converge_from_above: true, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, stroke_color: &apos;none&apos;, fill_color: &apos;BLUE&apos;}
+    {base_radius: 6, initial_difference: 1.757, converge_from_above: true, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, stroke_color: &apos;BLUE&apos;, fill_color: &apos;BLUE&apos;}
     ] 
 }
 
@@ -92,93 +92,93 @@ const JND_RADIUS_CONDITIONS = {
 
   circle_square:
   	[
-  	{shape_1: &quot;circle&quot;, shape_2: &quot;square&quot;},
+    {shapes: [&quot;circle&quot;, &quot;square&quot;]},
 
-  	{shape_1: &quot;circle&quot;, shape_2: &quot;square&quot;},
+    {shapes: [&quot;circle&quot;, &quot;square&quot;]},
 
-  	{shape_1: &quot;circle&quot;, shape_2: &quot;square&quot;},
+    {shapes: [&quot;circle&quot;, &quot;square&quot;]},
 
-  	{shape_1: &quot;circle&quot;, shape_2: &quot;square&quot;},
+    {shapes: [&quot;circle&quot;, &quot;square&quot;]},
 
-  	{shape_1: &quot;circle&quot;, shape_2: &quot;square&quot;}
+    {shapes: [&quot;circle&quot;, &quot;square&quot;]}
   	],
 
   circle_triangle:
   	[
-  	{shape_1: &quot;circle&quot;, shape_2: &quot;triangle&quot;},
+  	{shapes: [&quot;circle&quot;, &quot;triangle&quot;]},
 
-  	{shape_1: &quot;circle&quot;, shape_2: &quot;triangle&quot;},
+    {shapes: [&quot;circle&quot;, &quot;triangle&quot;]},
 
-  	{shape_1: &quot;circle&quot;, shape_2: &quot;triangle&quot;},
+    {shapes: [&quot;circle&quot;, &quot;triangle&quot;]},
 
-  	{shape_1: &quot;circle&quot;, shape_2: &quot;triangle&quot;},
+    {shapes: [&quot;circle&quot;, &quot;triangle&quot;]},
 
-  	{shape_1: &quot;circle&quot;, shape_2: &quot;triangle&quot;}
+    {shapes: [&quot;circle&quot;, &quot;triangle&quot;]}
   	],
 
   square_triangle:
     [
-    {shape_1: &quot;square&quot;, shape_2: &quot;triangle&quot;},
+    {shapes: [&quot;square&quot;, &quot;triangle&quot;]},
 
-    {shape_1: &quot;square&quot;, shape_2: &quot;triangle&quot;},
+    {shapes: [&quot;square&quot;, &quot;triangle&quot;]},
 
-    {shape_1: &quot;square&quot;, shape_2: &quot;triangle&quot;},
+    {shapes: [&quot;square&quot;, &quot;triangle&quot;]},
 
-    {shape_1: &quot;square&quot;, shape_2: &quot;triangle&quot;},
+    {shapes: [&quot;square&quot;, &quot;triangle&quot;]},
 
-    {shape_1: &quot;square&quot;, shape_2: &quot;triangle&quot;}
+    {shapes: [&quot;square&quot;, &quot;triangle&quot;]}
     ], 
 
   rotSquare_rotTriangle:
     [
-    {shape_1: &quot;rotSquare&quot;, shape_2: &quot;rotTriangle&quot;},
+    {shapes: [&quot;rotSquare&quot;, &quot;rotTriangle&quot;]},
 
-    {shape_1: &quot;rotSquare&quot;, shape_2: &quot;rotTriangle&quot;},
+    {shapes: [&quot;rotSquare&quot;, &quot;rotTriangle&quot;]},
 
-    {shape_1: &quot;rotSquare&quot;, shape_2: &quot;rotTriangle&quot;},
+    {shapes: [&quot;rotSquare&quot;, &quot;rotTriangle&quot;]},
 
-    {shape_1: &quot;rotSquare&quot;, shape_2: &quot;rotTriangle&quot;},
+    {shapes: [&quot;rotSquare&quot;, &quot;rotTriangle&quot;]},
 
-    {shape_1: &quot;rotSquare&quot;, shape_2: &quot;rotTriangle&quot;}
+    {shapes: [&quot;rotSquare&quot;, &quot;rotTriangle&quot;]}
     ],
 
   slice0_triangle:
     [
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 0},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 0},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 0},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 0},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 0},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 0},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 0},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 0},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 0}
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 0}
     ],
 
   slice45_triangle:
     [
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 45},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 45},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 45},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 45},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 45},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 45},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 45},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 45},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 45}
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 45}
     ],
 
   slice90_triangle:
     [
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 90},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 90},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 90},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 90},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 90},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 90},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 90},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 90},
 
-    {shape_1: &quot;slice&quot;, shape_2: &quot;triangle&quot;, slice_rotation: 90},
+    {shapes: [&quot;slice&quot;, &quot;triangle&quot;], slice_rotation: 90}
     ]
 }
 </code></pre>

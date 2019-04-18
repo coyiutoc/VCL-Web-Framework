@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../../">
-  <title data-ice="title">Estimation | huh</title>
+  <title data-ice="title">Estimation | VCL Framework</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="huh"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><link rel="stylesheet" href="./inject/css/0-styles.css"><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -53,7 +53,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_scatter_points">plot_scatter_points</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_shape_plot">create_shape_plot</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_strip_plot">create_strip_plot</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_distractor_scatter_plot">prepare_distractor_scatter_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_distractor_scatter_plot">create_distractor_scatter_plot</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-estimation">experiments/estimation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html">Estimation</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-estimation_exp">estimation_exp</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd">experiments/jnd</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd/jnd.js~JND.html">JND</a></span></span></li>
@@ -70,7 +70,7 @@
 </nav>
 
 <div class="content" data-ice="content"><div class="header-notice">
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Estimation from &apos;<span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber7">huh/scripts/experiments/estimation/estimation.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import Estimation from &apos;<span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber7">VCL Framework/scripts/experiments/estimation/estimation.js</a></span>&apos;</code></pre></div>
   <span data-ice="access">public</span>
   <span data-ice="kind">class</span>
   
@@ -454,7 +454,7 @@
           
           
           
-          <span class="code" data-ice="name"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html#instance-member-balancing">balancing</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
+          <span class="code" data-ice="name"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html#instance-member-balancing_type">balancing_type</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -791,34 +791,6 @@
           
           
           <span class="code" data-ice="name"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html#instance-member-practice_trial_data">practice_trial_data</a></span></span><span class="code" data-ice="signature">: <span><span>*</span><span>[]</span></span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-          
-          
-          
-          <span class="code" data-ice="name"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html#instance-member-range">range</a></span></span><span class="code" data-ice="signature">: <span>*</span></span>
         </p>
       </div>
       <div>
@@ -1629,7 +1601,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber448">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber458">source</a></span></span>
     </span>
   </h3>
 
@@ -1777,7 +1749,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber62">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber72">source</a></span></span>
     </span>
   </h3>
 
@@ -1820,7 +1792,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber47">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber57">source</a></span></span>
     </span>
   </h3>
 
@@ -1863,7 +1835,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber50">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber60">source</a></span></span>
     </span>
   </h3>
 
@@ -1906,7 +1878,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber49">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber59">source</a></span></span>
     </span>
   </h3>
 
@@ -1949,7 +1921,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber54">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber64">source</a></span></span>
     </span>
   </h3>
 
@@ -1992,7 +1964,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber48">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber58">source</a></span></span>
     </span>
   </h3>
 
@@ -2035,7 +2007,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber45">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber55">source</a></span></span>
     </span>
   </h3>
 
@@ -2078,7 +2050,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber46">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber56">source</a></span></span>
     </span>
   </h3>
 
@@ -2121,7 +2093,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber80">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber90">source</a></span></span>
     </span>
   </h3>
 
@@ -2153,18 +2125,18 @@ initializes the Estimation object&apos;s variables.</p>
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-balancing">
+  <h3 data-ice="anchor" id="instance-member-balancing_type">
     <span class="access" data-ice="access">public</span>
     
     
     
     
     
-    <span class="code" data-ice="name">balancing</span><span class="code" data-ice="signature">: <span>*</span></span>
+    <span class="code" data-ice="name">balancing_type</span><span class="code" data-ice="signature">: <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber38">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber46">source</a></span></span>
     </span>
   </h3>
 
@@ -2207,7 +2179,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber24">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber49">source</a></span></span>
     </span>
   </h3>
 
@@ -2250,7 +2222,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber67">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber77">source</a></span></span>
     </span>
   </h3>
 
@@ -2293,7 +2265,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber102">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber112">source</a></span></span>
     </span>
   </h3>
 
@@ -2336,7 +2308,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber66">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber76">source</a></span></span>
     </span>
   </h3>
 
@@ -2379,7 +2351,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber151">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber161">source</a></span></span>
     </span>
   </h3>
 
@@ -2422,7 +2394,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber104">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber114">source</a></span></span>
     </span>
   </h3>
 
@@ -2465,7 +2437,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber33">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber40">source</a></span></span>
     </span>
   </h3>
 
@@ -2508,7 +2480,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber65">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber75">source</a></span></span>
     </span>
   </h3>
 
@@ -2551,7 +2523,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber68">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber78">source</a></span></span>
     </span>
   </h3>
 
@@ -2594,7 +2566,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber101">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber111">source</a></span></span>
     </span>
   </h3>
 
@@ -2637,7 +2609,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber82">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber92">source</a></span></span>
     </span>
   </h3>
 
@@ -2680,50 +2652,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber81">source</a></span></span>
-    </span>
-  </h3>
-
-  
-  
-  
-  
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="instance-member-range">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    
-    <span class="code" data-ice="name">range</span><span class="code" data-ice="signature">: <span>*</span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber28">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber91">source</a></span></span>
     </span>
   </h3>
 
@@ -2766,7 +2695,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber98">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber108">source</a></span></span>
     </span>
   </h3>
 
@@ -2809,7 +2738,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber92">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber102">source</a></span></span>
     </span>
   </h3>
 
@@ -2852,7 +2781,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber75">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber85">source</a></span></span>
     </span>
   </h3>
 
@@ -2895,7 +2824,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber118">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber128">source</a></span></span>
     </span>
   </h3>
 
@@ -2938,7 +2867,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber40">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber50">source</a></span></span>
     </span>
   </h3>
 
@@ -2981,7 +2910,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber41">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber51">source</a></span></span>
     </span>
   </h3>
 
@@ -3024,7 +2953,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber90">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber100">source</a></span></span>
     </span>
   </h3>
 
@@ -3067,7 +2996,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber29">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber34">source</a></span></span>
     </span>
   </h3>
 
@@ -3113,7 +3042,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber733">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber743">source</a></span></span>
     </span>
   </h3>
 
@@ -3193,7 +3122,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber329">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber339">source</a></span></span>
     </span>
   </h3>
 
@@ -3266,7 +3195,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber746">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber756">source</a></span></span>
     </span>
   </h3>
 
@@ -3309,7 +3238,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber178">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber188">source</a></span></span>
     </span>
   </h3>
 
@@ -3383,7 +3312,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber415">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber425">source</a></span></span>
     </span>
   </h3>
 
@@ -3486,7 +3415,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber392">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber402">source</a></span></span>
     </span>
   </h3>
 
@@ -3567,7 +3496,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber678">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber688">source</a></span></span>
     </span>
   </h3>
 
@@ -3661,7 +3590,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber618">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber628">source</a></span></span>
     </span>
   </h3>
 
@@ -3763,7 +3692,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber362">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber372">source</a></span></span>
     </span>
   </h3>
 
@@ -3873,7 +3802,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber480">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber490">source</a></span></span>
     </span>
   </h3>
 
@@ -3976,7 +3905,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber285">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber295">source</a></span></span>
     </span>
   </h3>
 
@@ -4044,7 +3973,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber344">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber354">source</a></span></span>
     </span>
   </h3>
 
@@ -4088,7 +4017,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber524">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber534">source</a></span></span>
     </span>
   </h3>
 
@@ -4177,7 +4106,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber114">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber124">source</a></span></span>
     </span>
   </h3>
 
@@ -4222,7 +4151,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber139">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber149">source</a></span></span>
     </span>
   </h3>
 
@@ -4266,7 +4195,7 @@ initializes the Estimation object&apos;s variables.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber163">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber173">source</a></span></span>
     </span>
   </h3>
 
@@ -4313,7 +4242,7 @@ are shared variables between the practice and test trials).</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber274">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber284">source</a></span></span>
     </span>
   </h3>
 
@@ -4374,7 +4303,7 @@ are shared variables between the practice and test trials).</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber262">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber272">source</a></span></span>
     </span>
   </h3>
 
@@ -4435,7 +4364,7 @@ are shared variables between the practice and test trials).</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber251">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiments/estimation/estimation.js.html#lineNumber261">source</a></span></span>
     </span>
   </h3>
 

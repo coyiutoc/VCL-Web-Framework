@@ -57,12 +57,7 @@ function prepare_scatter_plot(experiment) {
 
     	let attributes = {
 			dataset: datasets[i],
-			graph_attributes: {
-				axis_color:  ("axis_color"  in trial_data ? trial_data.axis_color  : "BLACK"),
-				point_color: ("point_color" in trial_data ? trial_data.point_color : "BLACK"),
-				point_shape: ("point_shape" in trial_data ? trial_data.point_shape : "circle"),
-				point_size:  ("point_size"  in trial_data ? trial_data.point_size  : 3),
-			}
+			graph_attributes: generate_attributes_object("scatter", trial_data, i)
 		};
 		
 	    create_scatter_plot(attributes);
@@ -86,12 +81,7 @@ function prepare_strip_plot(experiment) {
 
 		let attributes = {
 			dataset: datasets[i],
-			graph_attributes: {
-				axis_color: 		("axis_color"         in trial_data ? trial_data.axis_color         : "BLACK"),
-				fill_color: 		("fill_color"         in trial_data ? trial_data.fill_color         : "BLACK"),
-				fixed_strip_height: ("fixed_strip_height" in trial_data ? trial_data.fixed_strip_height : true),
-				strip_width: 		("strip_width"        in trial_data ? trial_data.strip_width        : 1),
-			}	
+			graph_attributes: generate_attributes_object("strip", trial_data, i)
 		};
 
 		create_strip_plot(attributes);
@@ -115,12 +105,7 @@ function prepare_ring_plot(experiment) {
 
 		let attributes = {
 			dataset: datasets[i],
-			graph_attributes: {
-				axis_color:     ("axis_color"     in trial_data ? trial_data.axis_color     : "BLACK"),
-				fill_color:     ("fill_color"     in trial_data ? trial_data.fill_color     : "none"),
-				ring_thickness: ("ring_thickness" in trial_data ? trial_data.ring_thickness : 1),
-				stroke_color:   ("stroke_color"   in trial_data ? trial_data.stroke_color   : "BLACK"),
-			}
+			graph_attributes: generate_attributes_object("ring", trial_data, i)
 		};
 
 		create_ring_plot(attributes);
@@ -149,13 +134,7 @@ function prepare_shapes_plot(experiment) {
 			curr_radius: radii[i],
 			max_radius:  max_radius,
 			min_radius:  min_radius, 
-			graph_attributes: {
-				axis_color: 	("axis_color"     in trial_data ? trial_data.axis_color     : "BLACK"),
-				fill_color: 	("fill_color"     in trial_data ? trial_data.fill_color     : "BLACK"),
-				shape_type:  	("shapes"         in trial_data ? trial_data.shapes[i]      : "circle"),
-				slice_rotation: ("slice_rotation" in trial_data ? trial_data.slice_rotation : 0),
-				stroke_color:   ("stroke_color"   in trial_data ? trial_data.stroke_color   : "none"),
-			}
+			graph_attributes: generate_attributes_object("shapes", trial_data, i)
 		};
 
 		create_shape_plot(attributes);
@@ -163,4 +142,49 @@ function prepare_shapes_plot(experiment) {
 
 	// Set background color
     document.body.style.backgroundColor = (trial_data.background_color ? trial_data.background_color : "WHITE");
+}
+
+/**
+ * Generates the js object for graph_attributes based on what is specified in
+ * the graphing-config.js. 
+ *
+ * E.g., will return object in this format:
+ * {
+ *	"axis_color"  : "BLACK",
+ *  "point_color" : "RED",
+ *  "point_size"  : 3
+ *   ....
+ * }
+ *
+ * @param {string}   plot_type			Only takes in "scatter", "strip", "ring", "shapes"
+ * @param {object}   trial_data         Trial data object from experiment model
+ * @param {int}		 plot_number		Denotes plot number from left to right (e.g. leftmost is 1 etc.)
+ *
+ * @return {object}  graph_attributes
+ */
+function generate_attributes_object(plot_type, trial_data, plot_number) {
+
+	let obj = {};
+	let graph = GRAPH_TYPES[plot_type]; //GRAPH_TYPES comes from /config/graphing-config.js
+	let attributes = graph["attributes"];
+
+	for (let key in attributes) {
+
+		let attrib = attributes[key];
+
+		// These attributes are dependent on plot_number:
+		if (key === "shapes") {
+
+			obj[key] = (key in trial_data ? trial_data[key][plot_number] : attrib["default"])
+
+		} else {
+
+			// Check if the key exists in trial_data
+			// If it exists, used the value in trial_data
+			// Else, use the default specified
+			obj[key] = (key in trial_data ? trial_data[key] : attrib["default"]);
+		}
+	}
+
+	return obj;
 }

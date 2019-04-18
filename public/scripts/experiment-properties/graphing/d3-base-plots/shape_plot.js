@@ -36,8 +36,13 @@ function create_shape_plot(attributes) {
                   .attr("height", height)
                   .attr("style", `margin-right: ${width_diff}; margin-left: ${width_diff}; margin-top: ${margin_top}`);
 
+  // var GRAPH_TYPES comes from /config/graphing-config.js
+  if (!GRAPH_TYPES["shapes"]["attributes"]["shapes"]["valid_inputs"].includes(properties["shapes"])){
+    throw Error(" " + shape_type + " is not a valid shape for graph type shapes.");
+  }
+
   // Plot depending on shape specified
-  switch (properties["shape_type"]){
+  switch (properties["shapes"]){
     
     case "slice":
       let degrees = properties["slice_rotation"];

@@ -1,0 +1,13 @@
+.label {
+  color: white;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 2px;
+}
+
+.success {background-color: #9999ff;} /* Purple */
+.default {background-color: #00ccff;} /* Blue */
+.danger {background-color: #ff9800;} /* Orange */
+
+.true {background-color: #4CAF50;} /* Green */
+.false {background-color: #990033;} /* Dark Orange */

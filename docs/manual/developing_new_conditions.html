@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../">
+  <title data-ice="title">Manual | VCL Framework</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><link rel="stylesheet" href="./inject/css/0-styles.css"><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<body class="layout-container manual-root" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/coyiutoc/VCL_Correlation_POC"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div class="manual-toc-root">
+  
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/README.html"><a href="manual/README.html" data-ice="link">VCL Web Framework</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/README.html"><a href="manual/README.html#set-up" data-ice="link">Set Up</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-1--git-clone-the-repository" data-ice="link">(1) Git clone the repository</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-2--install-node" data-ice="link">(2) Install Node</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-3--install-dependencies" data-ice="link">(3) Install Dependencies</a></li>
+<li data-ice="manualNav" class="indent-h4" data-link="manual/README.html"><a href="manual/README.html#-4--run-the-application" data-ice="link">(4) Run the Application</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/terminology.html"><a href="manual/terminology.html" data-ice="link">Terminology</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/terminology.html"><a href="manual/terminology.html#describing-an-experiment" data-ice="link">Describing an Experiment</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-task--strong-" data-ice="link">Task</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-method--strong-" data-ice="link">Method</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-properties--strong-" data-ice="link">Properties</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/terminology.html"><a href="manual/terminology.html#condition-identifiers" data-ice="link">Condition Identifiers</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-base-experiment--strong-" data-ice="link">Base Experiment</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-trial-structure--strong-" data-ice="link">Trial Structure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-balancing--strong-" data-ice="link">Balancing</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-condition--strong-" data-ice="link">Condition</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/experiments.html"><a href="manual/experiments.html" data-ice="link">Experiments</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/jnd.html"><a href="manual/jnd.html" data-ice="link">&gt;&gt; JND</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/jnd.html"><a href="manual/jnd.html#specifications" data-ice="link">Specifications</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#practice-procedure" data-ice="link">Practice Procedure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#test-procedure" data-ice="link">Test Procedure</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/jnd.html"><a href="manual/jnd.html#jspsych-timeline" data-ice="link">JsPsych Timeline</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#general-timeline" data-ice="link">General Timeline</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#trial-logic" data-ice="link">Trial Logic</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#adjusted-correlation" data-ice="link">Adjusted Correlation</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd.html"><a href="manual/jnd.html#constants" data-ice="link">Constants</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/jnd_radius.html"><a href="manual/jnd_radius.html" data-ice="link">&gt;&gt; JND Radius</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/jnd_radius.html"><a href="manual/jnd_radius.html#specifications" data-ice="link">Specifications</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd_radius.html"><a href="manual/jnd_radius.html#test-procedure" data-ice="link">Test Procedure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/jnd_radius.html"><a href="manual/jnd_radius.html#constants" data-ice="link">Constants</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/stevens.html"><a href="manual/stevens.html" data-ice="link">&gt;&gt; Stevens</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/stevens.html"><a href="manual/stevens.html#specifications" data-ice="link">Specifications</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/stevens.html"><a href="manual/stevens.html#practice-procedure" data-ice="link">Practice Procedure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/stevens.html"><a href="manual/stevens.html#test-procedure" data-ice="link">Test Procedure</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/stevens.html"><a href="manual/stevens.html#jspsych-timeline" data-ice="link">JsPsych Timeline</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/stevens.html"><a href="manual/stevens.html#trial-logic" data-ice="link">Trial Logic</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/stevens.html"><a href="manual/stevens.html#estimated-correlation" data-ice="link">Estimated Correlation</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/stevens.html"><a href="manual/stevens.html#constants" data-ice="link">Constants</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/estimation.html"><a href="manual/estimation.html" data-ice="link">&gt;&gt; Estimation</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/estimation.html"><a href="manual/estimation.html#specifications" data-ice="link">Specifications</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html" data-ice="link">Supported Properties</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#identifiers" data-ice="link">Identifiers</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#base-experiment" data-ice="link">Base Experiment</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#trial-structure" data-ice="link">Trial Structure</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#balancing" data-ice="link">Balancing</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#graph-types" data-ice="link">Graph Types</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#subcondition-attributes" data-ice="link">Subcondition Attributes</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#experimental-attributes" data-ice="link">Experimental Attributes</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/supported_properties.html"><a href="manual/supported_properties.html#graphical-attributes" data-ice="link">Graphical Attributes</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/conditions.html"><a href="manual/conditions.html" data-ice="link">Conditions</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html" data-ice="link">Developing New Conditions</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#for-researchers" data-ice="link">For Researchers</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#example" data-ice="link">Example</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#for-developers" data-ice="link">For Developers</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#-1--add-to-config" data-ice="link">(1) Add to config</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#-2--add-constants" data-ice="link">(2) Add constants</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#-3--update-instructions" data-ice="link">(3) Update instructions</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#-4--update-docs" data-ice="link">(4) Update docs</a></li>
+</ul>
+  </div>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="developing-new-conditions">Developing New Conditions</h1><h2 id="for-researchers">For Researchers</h2><p>If you are planning to add a new condition that uses the base experiments already supported, please provide the following information:</p>
+<ul>
+<li><strong>Condition Name</strong></li>
+<li><strong>High-Level Description of Condition</strong></li>
+<li><strong>Identifiers</strong><ul>
+<li><strong>Base Experiment</strong></li>
+<li><strong>Trial Structure</strong></li>
+<li><strong>Balancing</strong></li>
+<li><strong>Graph Type</strong></li>
+</ul>
+</li>
+<li><strong>Subconditions</strong><ul>
+<li><strong>How many subconditions?</strong></li>
+<li><strong>What is changing on each subcondition? List all variables.</strong></li>
+<li><strong>How are each of the variables being changed? List all equations/computations needed if changing on trial-by-trial basis.</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="example">Example</h3><p>Let us say you want to make a new condition for a JND Design experiment that changes point size on each grouping of the Design trial structure. This is what your information would look like:</p>
+<ul>
+<li><strong>Condition Name</strong>: small_point_sizes</li>
+<li><strong>High-Level Description of Condition</strong>: Standard JND scatter plot condition, except point sizes vary between 5 - 13 pixels for each 0.3, 0.6, 0.9 base correlation grouping.</li>
+<li><strong>Identifiers</strong><ul>
+<li><strong>Base Experiment</strong>: JND</li>
+<li><strong>Trial Structure</strong>: Design</li>
+<li><strong>Balancing</strong>: Latin Square</li>
+<li><strong>Graph Type</strong>: Scatter</li>
+</ul>
+</li>
+<li><strong>Subconditions</strong><ul>
+<li><strong>How many subconditions?</strong>: 15</li>
+<li><strong>What is changing on each subcondition? List all variables.</strong>: Point size</li>
+<li><strong>How are each of the variables being changed on each subcondition? List all equations/computations needed if changing on trial-by-trial basis.</strong>: The design trial structure has 5 groupings of the base_correlation = 0.3, 0.6, 0.9, making 15 total subconditions. For each group, point size is different.<ul>
+<li>Group 1 point size = 5 px</li>
+<li>Group 2 point size = 7 px</li>
+<li>Group 3 point size = 9 px</li>
+<li>Group 4 point size = 11 px</li>
+<li>Group 5 point size = 13 px</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="for-developers">For Developers</h2><h3 id="-1--add-to-config">(1) Add to config</h3><p>Under <code>public/config/conditions-config</code>, add a new key and javascript object at the bottom. The object should look like this:</p>
+<pre><code><code class="source-code prettyprint">name_of_new_condition: {
+    experiment: [],
+    graph_type: [],
+    trial_structure: [],
+    balancing: &quot;&quot;,
+    display_name: &quot;New condition name&quot;,
+    display_info: {
+        description: &quot;&quot;,
+        researcher: &quot;&quot;,
+        developer: &quot;&quot;
+    }
+}    </code>
+</code></pre><p>Check that when you load the UI, your condition is visible with the identifiers specified.</p>
+<p>Note that <code>experiment</code>, <code>graph_type</code> and <code>trial_structure</code> can take multiple strings (in an array). So you can have the SAME condition name,
+with the same kind of subcondition-level manipulation, but different underlying base experiment, different graph type, or different trial structure. Good examples of these are the base experiments that run across JND and Stevens, and are supported on both scatter and strip graph types. </p>
+<p>If we use the example from above, the JS object looks like this:</p>
+<pre><code><code class="source-code prettyprint">small_point_sizes: {
+    experiment: [&quot;jnd&quot;],
+    graph_type: [&quot;scatter&quot;],
+    trial_structure: [&quot;design&quot;],
+    balancing: &quot;latin_square&quot;,
+    display_name: &quot;Small Point Sizes&quot;,
+    display_info: {
+        description: &quot;Standard JND scatter plot condition, except point sizes vary between&quot; +  
+                     &quot;5 - 13 pixels for each 0.3, 0.6, 0.9 base correlation grouping.&quot;,
+        researcher: &quot;Caitlin Coyiuto&quot;,
+        developer: &quot;Caitlin Coyiuto&quot;
+    }
+}</code>
+</code></pre><h3 id="-2--add-constants">(2) Add constants</h3><p>Add the constants needed to run each subcondition into the right data file. All data files are in <code>public/scripts/experiment-properties/data/constants</code>.</p>
+<p>How the constants work is that for a given trial structure, the application <strong>MERGES</strong> all constants defined in the <code>BASE</code> variable with all constants defined in <code>CONDITIONS</code> variable.</p>
+<p>If the trial structure is already defined, you would only need to add all subconditions for your new condition in <code>CONDITIONS</code>. </p>
+<ul>
+<li>Add a JS object into the file with the same experiment base name. You want to add into the array for CONDITIONS, not BASE. </li>
+<li>Note that <strong>each entry in the array represents ONE subcondition. So you must define all
+attributes that are being changed on a subcondition-basis.</strong></li>
+<li>You can <strong>OVERRIDE</strong> any of the attributes found in the base subconditions. E.g. you can redefine &quot;point_size&quot; in your subcondition if you are changing it on a subcondition-basis.</li>
+<li>An example of a new object representing a condition should look something like this:</li>
+</ul>
+<pre><code><code class="source-code prettyprint">name_of_new_condition:
+[
+    {constant1: ___, constant2: ____}, //first subcondition
+
+    {constant1: ___, constant2: ____}, //second subcondition
+
+    {constant1: ___, constant2: ____}, //third...
+
+    {constant1: ___, constant2: ____},
+
+    .....
+]</code>
+</code></pre><p>Using example from above, we are just changing <code>point_size</code>, so we need to define each of the sizes on every subcondition.
+Note that the subconditions for a JND Design already has <code>point_size</code> (look at <code>JND_BASE[&quot;design&quot;]</code>). By re-defining the <code>point_size</code>
+attribute here, you are <strong>OVERRIDING</strong> the <code>point_size</code> variable in the base.</p>
+<pre><code><code class="source-code prettyprint">small_point_sizes:
+    [
+    {point_size: 5},
+
+    {point_size: 5},
+
+    {point_size: 5},
+
+    {point_size: 7},
+
+    {point_size: 7},
+
+    {point_size: 7},
+
+    {point_size: 9},
+
+    {point_size: 9},
+
+    {point_size: 9},
+
+    {point_size: 11},
+
+    {point_size: 11},
+
+    {point_size: 11},
+
+    {point_size: 13},
+
+    {point_size: 13},
+
+    {point_size: 13},
+    ]</code>
+</code></pre><p>Again, depending on your trial structure, the application will merge the constants you define in <code>CONDITIONS</code> with any that are defined in the <code>BASE</code>. So for this example, all the subconditions for <code>small_point_sizes</code> is whatever is listed in the <code>JND_BASE[&quot;design&quot;]</code>, plus whatever is defined in the <code>CONDITIONS</code> variable. </p>
+<pre><code><code class="source-code prettyprint">[
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, 
+    converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, 
+    num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, 
+    feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 5}, // &lt;-- point_size is now   
+                                                                                   // overriden (usually for JND 
+                                                                                   // design, point_size = 6)
+
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, 
+    converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, 
+    num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, 
+    feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 5},
+    .....
+]</code>
+</code></pre><h3 id="-3--update-instructions">(3) Update instructions</h3><p> To update the instructions that are displayed to the participant, you will have to add additional code to the
+ timeline object. Navigate to the <code>_timeline.js</code> associated with the condition&apos;s experiment. Under &apos;INSTRUCTION TRIAL BLOCKS&apos;, under the case for the condition&apos;s graph type, add an instruction block. </p>
+<p> For this example, we would go to <code>/experiments/jnd/jnd_timeline.js</code>, and add another if statement under
+ case &quot;scatter&quot;. </p>
+<h3 id="-4--update-docs">(4) Update docs</h3><p> The docs dynamically gets all the condition data specified in the config files. However, it needs to be compiled to be re-updated.</p>
+<p> Run this in the command line:</p>
+<p> <code>./node_modules/.bin/esdoc</code></p>
+<p> And check that your condition exists in the Conditions tab.</p>
+</div>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

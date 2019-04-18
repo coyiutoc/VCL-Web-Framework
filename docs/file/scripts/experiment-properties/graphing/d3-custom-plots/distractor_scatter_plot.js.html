@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../../../">
-  <title data-ice="title">scripts/experiment-properties/graphing/d3-custom-plots/distractor_scatter_plot.js | huh</title>
+  <title data-ice="title">scripts/experiment-properties/graphing/d3-custom-plots/distractor_scatter_plot.js | VCL Framework</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="huh"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><link rel="stylesheet" href="./inject/css/0-styles.css"><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -53,7 +53,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_scatter_points">plot_scatter_points</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_shape_plot">create_shape_plot</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_strip_plot">create_strip_plot</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_distractor_scatter_plot">prepare_distractor_scatter_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_distractor_scatter_plot">create_distractor_scatter_plot</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-estimation">experiments/estimation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html">Estimation</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-estimation_exp">estimation_exp</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd">experiments/jnd</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd/jnd.js~JND.html">JND</a></span></span></li>
@@ -71,53 +71,17 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">scripts/experiment-properties/graphing/d3-custom-plots/distractor_scatter_plot.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import {plot_scatter_points} from &quot;/scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js&quot;;
-export {prepare_distractor_scatter_plot};
+export {create_distractor_scatter_plot};
 
 var BUFFER = 60;
 var RANGE_ADJUSTMENT = 15;
-
-function prepare_distractor_scatter_plot(experiment) {
-
-  let datasets = experiment.coordinates;
-  let distractors = experiment.distractor_coordinates;
-  let trial_data = experiment.trial_data;
-  let attributes = &quot;&quot;;
-
-  for (let i in datasets) {
-
-    attributes = {
-      target: {
-        dataset: datasets[i],
-        graph_attributes: {
-          axis_color:  (&quot;axis_color&quot;   in trial_data ? trial_data.axis_color   : &quot;BLACK&quot;),
-          point_color: (&quot;target_color&quot; in trial_data ? trial_data.target_color : &quot;BLACK&quot;),
-          point_shape: (&quot;target_shape&quot; in trial_data ? trial_data.target_shape : &quot;circle&quot;),
-          point_size:  (&quot;point_size&quot;   in trial_data ? trial_data.point_size   : 3),
-        }
-      },
-      distractor: {
-        dataset: distractors[i],
-        graph_attributes: {
-          point_color: (&quot;dist_color&quot; in trial_data ? trial_data.dist_color : &quot;RED&quot;),
-          point_shape: (&quot;dist_shape&quot; in trial_data ? trial_data.dist_shape : &quot;circle&quot;),
-          point_size:  (&quot;point_size&quot; in trial_data ? trial_data.point_size : 3),
-        }
-      }
-    };
-    
-    create_scatter_plot(attributes);
-  }
-
-  // Set background color
-  document.body.style.backgroundColor = (trial_data.background_color ? trial_data.background_color : &quot;WHITE&quot;);
-}
 
 /**
  * D3 code for setting up scatter plot chart area with distractor dataset (so two-populations per graph)
  *
  * @param {object}   attributes
  */
-function create_scatter_plot(attributes) {
+function create_distractor_scatter_plot(attributes) {
 
     let target_dataset = attributes[&quot;target&quot;][&quot;dataset&quot;];
     let target_properties = attributes[&quot;target&quot;][&quot;graph_attributes&quot;];
@@ -176,18 +140,31 @@ function create_scatter_plot(attributes) {
       plot_scatter_points(chart, xscale, yscale, target_dataset, target_properties[&quot;point_size&quot;], target_properties[&quot;point_color&quot;], target_properties[&quot;point_shape&quot;]);        
     } 
     else {
+
+      let larger_data;
+      let smaller_data;
+
+      // Handle if the number of points between distractor &amp; target are unequal
+      if (attributes[&quot;target&quot;][&quot;dataset&quot;].length &gt; attributes[&quot;distractor&quot;][&quot;dataset&quot;].length) {
+        larger_data = attributes[&quot;target&quot;];
+        smaller_data = attributes[&quot;distractor&quot;];
+      } else {
+        larger_data = attributes[&quot;distractor&quot;];
+        smaller_data = attributes[&quot;target&quot;];
+      }
+
       // Alternate plotting of distractor and main dataset points - want equal chance of one
       // getting occluded over the other
-      for (let j in target_dataset) {
+      for (let j in larger_data[&quot;dataset&quot;]) {
 
-        let point = target_dataset[j];
-        let dist_point = distractor_dataset[j];
+        if ( j &lt; smaller_data[&quot;dataset&quot;].length){
+          let small_point = smaller_data[&quot;dataset&quot;][j];
+          plot_scatter_points(chart, xscale, yscale, [small_point], smaller_data[&quot;graph_attributes&quot;][&quot;point_size&quot;], smaller_data[&quot;graph_attributes&quot;][&quot;point_color&quot;], smaller_data[&quot;graph_attributes&quot;][&quot;point_shape&quot;]);
+        }
 
-        // Distractor point
-        plot_scatter_points(chart, xscale, yscale, [point], target_properties[&quot;point_size&quot;], target_properties[&quot;point_color&quot;], target_properties[&quot;point_shape&quot;]);  
-
-        // Target point    
-        plot_scatter_points(chart, xscale, yscale, [dist_point], distractor_properties[&quot;point_size&quot;], distractor_properties[&quot;point_color&quot;], distractor_properties[&quot;point_shape&quot;]);
+        let large_point = larger_data[&quot;dataset&quot;][j];
+        plot_scatter_points(chart, xscale, yscale, [large_point], larger_data[&quot;graph_attributes&quot;][&quot;point_size&quot;], larger_data[&quot;graph_attributes&quot;][&quot;point_color&quot;], larger_data[&quot;graph_attributes&quot;][&quot;point_shape&quot;]);  
+       
       }
     }
 

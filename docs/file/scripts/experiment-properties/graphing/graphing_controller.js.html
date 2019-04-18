@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../../">
-  <title data-ice="title">scripts/experiment-properties/graphing/graphing_controller.js | huh</title>
+  <title data-ice="title">scripts/experiment-properties/graphing/graphing_controller.js | VCL Framework</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
   <script src="script/manual.js"></script>
-<meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="huh"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
+<script src="./inject/script/0-conditions-config.js"></script><script src="./inject/script/0-experiments-config.js"></script><script src="./inject/script/0-graphing-config.js"></script><script src="./inject/script/0-trial-structure-config.js"></script><script src="./inject/script/0-balancing-config.js"></script><script src="./inject/script/0-view-controller.js"></script><script src="./inject/script/0-experiments-renderer.js"></script><script src="./inject/script/0-conditions-renderer.js"></script><script src="./inject/script/0-supported-properties-renderer.js"></script><link rel="stylesheet" href="./inject/css/0-styles.css"><meta name="description" content="This is a Node.js application that runs proof of concept experiments for the following:"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="VCL Framework"><meta property="twitter:description" content="This is a Node.js application that runs proof of concept experiments for the following:"></head>
 <body class="layout-container" data-ice="rootContainer">
 
 <header>
@@ -53,7 +53,7 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-plot_scatter_points">plot_scatter_points</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_shape_plot">create_shape_plot</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_strip_plot">create_strip_plot</a></span></span></li>
-<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-prepare_distractor_scatter_plot">prepare_distractor_scatter_plot</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-graphing-d3-custom-plots">experiment-properties/graphing/d3-custom-plots</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_distractor_scatter_plot">create_distractor_scatter_plot</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-estimation">experiments/estimation</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/estimation/estimation.js~Estimation.html">Estimation</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-estimation_exp">estimation_exp</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiments-jnd">experiments/jnd</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/scripts/experiments/jnd/jnd.js~JND.html">JND</a></span></span></li>
@@ -129,12 +129,7 @@ function prepare_scatter_plot(experiment) {
 
     	let attributes = {
 			dataset: datasets[i],
-			graph_attributes: {
-				axis_color:  (&quot;axis_color&quot;  in trial_data ? trial_data.axis_color  : &quot;BLACK&quot;),
-				point_color: (&quot;point_color&quot; in trial_data ? trial_data.point_color : &quot;BLACK&quot;),
-				point_shape: (&quot;point_shape&quot; in trial_data ? trial_data.point_shape : &quot;circle&quot;),
-				point_size:  (&quot;point_size&quot;  in trial_data ? trial_data.point_size  : 3),
-			}
+			graph_attributes: generate_attributes_object(&quot;scatter&quot;, trial_data, i)
 		};
 		
 	    create_scatter_plot(attributes);
@@ -158,12 +153,7 @@ function prepare_strip_plot(experiment) {
 
 		let attributes = {
 			dataset: datasets[i],
-			graph_attributes: {
-				axis_color: 		(&quot;axis_color&quot;         in trial_data ? trial_data.axis_color         : &quot;BLACK&quot;),
-				fill_color: 		(&quot;fill_color&quot;         in trial_data ? trial_data.fill_color         : &quot;BLACK&quot;),
-				fixed_strip_height: (&quot;fixed_strip_height&quot; in trial_data ? trial_data.fixed_strip_height : true),
-				strip_width: 		(&quot;strip_width&quot;        in trial_data ? trial_data.strip_width        : 1),
-			}	
+			graph_attributes: generate_attributes_object(&quot;strip&quot;, trial_data, i)
 		};
 
 		create_strip_plot(attributes);
@@ -187,12 +177,7 @@ function prepare_ring_plot(experiment) {
 
 		let attributes = {
 			dataset: datasets[i],
-			graph_attributes: {
-				axis_color:     (&quot;axis_color&quot;     in trial_data ? trial_data.axis_color     : &quot;BLACK&quot;),
-				fill_color:     (&quot;fill_color&quot;     in trial_data ? trial_data.fill_color     : &quot;none&quot;),
-				ring_thickness: (&quot;ring_thickness&quot; in trial_data ? trial_data.ring_thickness : 1),
-				stroke_color:   (&quot;stroke_color&quot;   in trial_data ? trial_data.stroke_color   : &quot;BLACK&quot;),
-			}
+			graph_attributes: generate_attributes_object(&quot;ring&quot;, trial_data, i)
 		};
 
 		create_ring_plot(attributes);
@@ -221,13 +206,7 @@ function prepare_shapes_plot(experiment) {
 			curr_radius: radii[i],
 			max_radius:  max_radius,
 			min_radius:  min_radius, 
-			graph_attributes: {
-				axis_color: 	(&quot;axis_color&quot;     in trial_data ? trial_data.axis_color     : &quot;BLACK&quot;),
-				fill_color: 	(&quot;fill_color&quot;     in trial_data ? trial_data.fill_color     : &quot;BLACK&quot;),
-				shape_type:  	(&quot;shapes&quot;         in trial_data ? trial_data.shapes[i]      : &quot;circle&quot;),
-				slice_rotation: (&quot;slice_rotation&quot; in trial_data ? trial_data.slice_rotation : 0),
-				stroke_color:   (&quot;stroke_color&quot;   in trial_data ? trial_data.stroke_color   : &quot;none&quot;),
-			}
+			graph_attributes: generate_attributes_object(&quot;shapes&quot;, trial_data, i)
 		};
 
 		create_shape_plot(attributes);
@@ -235,6 +214,51 @@ function prepare_shapes_plot(experiment) {
 
 	// Set background color
     document.body.style.backgroundColor = (trial_data.background_color ? trial_data.background_color : &quot;WHITE&quot;);
+}
+
+/**
+ * Generates the js object for graph_attributes based on what is specified in
+ * the graphing-config.js. 
+ *
+ * E.g., will return object in this format:
+ * {
+ *	&quot;axis_color&quot;  : &quot;BLACK&quot;,
+ *  &quot;point_color&quot; : &quot;RED&quot;,
+ *  &quot;point_size&quot;  : 3
+ *   ....
+ * }
+ *
+ * @param {string}   plot_type			Only takes in &quot;scatter&quot;, &quot;strip&quot;, &quot;ring&quot;, &quot;shapes&quot;
+ * @param {object}   trial_data         Trial data object from experiment model
+ * @param {int}		 plot_number		Denotes plot number from left to right (e.g. leftmost is 1 etc.)
+ *
+ * @return {object}  graph_attributes
+ */
+function generate_attributes_object(plot_type, trial_data, plot_number) {
+
+	let obj = {};
+	let graph = GRAPH_TYPES[plot_type]; //GRAPH_TYPES comes from /config/graphing-config.js
+	let attributes = graph[&quot;attributes&quot;];
+
+	for (let key in attributes) {
+
+		let attrib = attributes[key];
+
+		// These attributes are dependent on plot_number:
+		if (key === &quot;shapes&quot;) {
+
+			obj[key] = (key in trial_data ? trial_data[key][plot_number] : attrib[&quot;default&quot;])
+
+		} else {
+
+			// Check if the key exists in trial_data
+			// If it exists, used the value in trial_data
+			// Else, use the default specified
+			obj[key] = (key in trial_data ? trial_data[key] : attrib[&quot;default&quot;]);
+		}
+	}
+
+	return obj;
 }
 </code></pre>
 
