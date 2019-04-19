@@ -85,7 +85,7 @@ small_point_sizes: {
 
 ### (2) Add subconditions
 
-Add the attributes needed to run each subcondition into the right data file. All data files are in `public/scripts/experiment-properties/data/constants`. All attributes that are supported can be found here [here](/VCLLab/VCL_POC/docs/manual/supported_properties.html#subcondition-attributes).
+Add the attributes needed to run each subcondition into the right data file. All data files are in `public/scripts/experiment-properties/data/constants`. All attributes that are supported can be found here [here](/VCL-Web-Framework/manual/supported_properties.html#subcondition-attributes).
 
 How the subconditions work is that for a given trial structure, the application **MERGES** all attributes defined in the `BASE` object with all attributes defined in the `CONDITIONS` object. From the example, `small_point_sizes` is a JND condition using a design trial structure. So the app generates the subconditions for `small_point_sizes` by merging the attributes from `JND_BASE["design"]` and `JND_CONDITIONS["small_point_sizes"]`.
 
@@ -187,4 +187,4 @@ Again, depending on your trial structure, the application will merge the constan
 
  `./node_modules/.bin/esdoc`
 
- And check that your condition exists in the [Conditions tab](/VCLLab/VCL_POC/docs/manual/conditions.html).
+ And check that your condition exists in the [Conditions tab](/VCL-Web-Framework/manual/conditions.html).

@@ -238,7 +238,7 @@ with the same kind of subcondition-level manipulation, but different underlying 
         developer: &quot;Caitlin Coyiuto&quot;
     }
 }</code>
-</code></pre><h3 id="-2--add-subconditions">(2) Add subconditions</h3><p>Add the attributes needed to run each subcondition into the right data file. All data files are in <code>public/scripts/experiment-properties/data/constants</code>. All attributes that are supported can be found here <a href="/VCLLab/VCL_POC/docs/manual/supported_properties.html#subcondition-attributes">here</a>.</p>
+</code></pre><h3 id="-2--add-subconditions">(2) Add subconditions</h3><p>Add the attributes needed to run each subcondition into the right data file. All data files are in <code>public/scripts/experiment-properties/data/constants</code>. All attributes that are supported can be found here <a href="/VCL-Web-Framework/manual/supported_properties.html#subcondition-attributes">here</a>.</p>
 <p>How the subconditions work is that for a given trial structure, the application <strong>MERGES</strong> all attributes defined in the <code>BASE</code> object with all attributes defined in the <code>CONDITIONS</code> object. From the example, <code>small_point_sizes</code> is a JND condition using a design trial structure. So the app generates the subconditions for <code>small_point_sizes</code> by merging the attributes from <code>JND_BASE[&quot;design&quot;]</code> and <code>JND_CONDITIONS[&quot;small_point_sizes&quot;]</code>.</p>
 <p>If the trial structure is already supported, you would only need to add all subconditions in a <code>key: []</code> structure to the <code>CONDITIONS</code> object.</p>
 <ul>
@@ -320,7 +320,7 @@ attribute here, you are <strong>OVERRIDING</strong> the <code>point_size</code> 
 <h3 id="-4--update-docs">(4) Update docs</h3><p> The docs dynamically gets all the condition data specified in the config files. However, it needs to be compiled to be re-updated.</p>
 <p> Run this in the command line:</p>
 <p> <code>./node_modules/.bin/esdoc</code></p>
-<p> And check that your condition exists in the <a href="/VCLLab/VCL_POC/docs/manual/conditions.html">Conditions tab</a>.</p>
+<p> And check that your condition exists in the <a href="/VCL-Web-Framework/manual/conditions.html">Conditions tab</a>.</p>
 </div>
 </div>
 
