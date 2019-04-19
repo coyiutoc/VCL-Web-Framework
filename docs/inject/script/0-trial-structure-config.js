@@ -27,5 +27,4 @@ var TRIAL_STRUCTURES = {
 			description: "Does not follow any particular base structure. Customized on a condition-by-condition basis."
 		}
 	}
-
 };

@@ -29,7 +29,8 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-balancing">experiment-properties/balancing</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_latin_square">initialize_latin_square</a></span></span></li>
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-balancing">experiment-properties/balancing</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-balance_subconditions">balance_subconditions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-balancing-generators">experiment-properties/balancing/generators</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_latin_square">initialize_latin_square</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_random_order">initialize_random_order</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-data">experiment-properties/data</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get_subconditions">get_subconditions</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_condition_dataset">create_condition_dataset</a></span></span></li>
@@ -76,15 +77,15 @@ const JND_RADIUS_BASE = {
 
   foundational:
     [
-    {base_radius: 2, initial_difference: 0.586, converge_from_above: true, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, stroke_color: &apos;BLUE&apos;, fill_color: &apos;BLUE&apos;},
+    {base_radius: 2, initial_difference: 0.586, converge_from_above: true, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, stroke_color: &apos;none&apos;, fill_color: &apos;BLUE&apos;},
 
-    {base_radius: 3, initial_difference: 0.879, converge_from_above: true, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, stroke_color: &apos;BLUE&apos;, fill_color: &apos;BLUE&apos;},
+    {base_radius: 3, initial_difference: 0.879, converge_from_above: true, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, stroke_color: &apos;none&apos;, fill_color: &apos;BLUE&apos;},
 
-    {base_radius: 4, initial_difference: 1.172, converge_from_above: true, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, stroke_color: &apos;BLUE&apos;, fill_color: &apos;BLUE&apos;},
+    {base_radius: 4, initial_difference: 1.172, converge_from_above: true, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, stroke_color: &apos;none&apos;, fill_color: &apos;BLUE&apos;},
 
-    {base_radius: 5, initial_difference: 1.464, converge_from_above: true, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, stroke_color: &apos;BLUE&apos;, fill_color: &apos;BLUE&apos;},
+    {base_radius: 5, initial_difference: 1.464, converge_from_above: true, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, stroke_color: &apos;none&apos;, fill_color: &apos;BLUE&apos;},
 
-    {base_radius: 6, initial_difference: 1.757, converge_from_above: true, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, stroke_color: &apos;BLUE&apos;, fill_color: &apos;BLUE&apos;}
+    {base_radius: 6, initial_difference: 1.757, converge_from_above: true, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, stroke_color: &apos;none&apos;, fill_color: &apos;BLUE&apos;}
     ] 
 }
 
@@ -92,54 +93,54 @@ const JND_RADIUS_CONDITIONS = {
 
   circle_square:
   	[
-    {shapes: [&quot;circle&quot;, &quot;square&quot;]},
+    {shapes: [&quot;circle&quot;, &quot;square&quot;], stroke_color: &quot;BLUE&quot;},
 
-    {shapes: [&quot;circle&quot;, &quot;square&quot;]},
+    {shapes: [&quot;circle&quot;, &quot;square&quot;], stroke_color: &quot;BLUE&quot;},
 
-    {shapes: [&quot;circle&quot;, &quot;square&quot;]},
+    {shapes: [&quot;circle&quot;, &quot;square&quot;], stroke_color: &quot;BLUE&quot;},
 
-    {shapes: [&quot;circle&quot;, &quot;square&quot;]},
+    {shapes: [&quot;circle&quot;, &quot;square&quot;], stroke_color: &quot;BLUE&quot;},
 
-    {shapes: [&quot;circle&quot;, &quot;square&quot;]}
+    {shapes: [&quot;circle&quot;, &quot;square&quot;], stroke_color: &quot;BLUE&quot;}
   	],
 
   circle_triangle:
   	[
-  	{shapes: [&quot;circle&quot;, &quot;triangle&quot;]},
+  	{shapes: [&quot;circle&quot;, &quot;triangle&quot;], stroke_color: &quot;BLUE&quot;},
 
-    {shapes: [&quot;circle&quot;, &quot;triangle&quot;]},
+    {shapes: [&quot;circle&quot;, &quot;triangle&quot;], stroke_color: &quot;BLUE&quot;},
 
-    {shapes: [&quot;circle&quot;, &quot;triangle&quot;]},
+    {shapes: [&quot;circle&quot;, &quot;triangle&quot;], stroke_color: &quot;BLUE&quot;},
 
-    {shapes: [&quot;circle&quot;, &quot;triangle&quot;]},
+    {shapes: [&quot;circle&quot;, &quot;triangle&quot;], stroke_color: &quot;BLUE&quot;},
 
-    {shapes: [&quot;circle&quot;, &quot;triangle&quot;]}
+    {shapes: [&quot;circle&quot;, &quot;triangle&quot;], stroke_color: &quot;BLUE&quot;}
   	],
 
   square_triangle:
     [
-    {shapes: [&quot;square&quot;, &quot;triangle&quot;]},
+    {shapes: [&quot;square&quot;, &quot;triangle&quot;], stroke_color: &quot;BLUE&quot;},
 
-    {shapes: [&quot;square&quot;, &quot;triangle&quot;]},
+    {shapes: [&quot;square&quot;, &quot;triangle&quot;], stroke_color: &quot;BLUE&quot;},
 
-    {shapes: [&quot;square&quot;, &quot;triangle&quot;]},
+    {shapes: [&quot;square&quot;, &quot;triangle&quot;], stroke_color: &quot;BLUE&quot;},
 
-    {shapes: [&quot;square&quot;, &quot;triangle&quot;]},
+    {shapes: [&quot;square&quot;, &quot;triangle&quot;], stroke_color: &quot;BLUE&quot;},
 
-    {shapes: [&quot;square&quot;, &quot;triangle&quot;]}
+    {shapes: [&quot;square&quot;, &quot;triangle&quot;], stroke_color: &quot;BLUE&quot;}
     ], 
 
   rotSquare_rotTriangle:
     [
-    {shapes: [&quot;rotSquare&quot;, &quot;rotTriangle&quot;]},
+    {shapes: [&quot;rotSquare&quot;, &quot;rotTriangle&quot;], stroke_color: &quot;BLUE&quot;},
 
-    {shapes: [&quot;rotSquare&quot;, &quot;rotTriangle&quot;]},
+    {shapes: [&quot;rotSquare&quot;, &quot;rotTriangle&quot;], stroke_color: &quot;BLUE&quot;},
 
-    {shapes: [&quot;rotSquare&quot;, &quot;rotTriangle&quot;]},
+    {shapes: [&quot;rotSquare&quot;, &quot;rotTriangle&quot;], stroke_color: &quot;BLUE&quot;},
 
-    {shapes: [&quot;rotSquare&quot;, &quot;rotTriangle&quot;]},
+    {shapes: [&quot;rotSquare&quot;, &quot;rotTriangle&quot;], stroke_color: &quot;BLUE&quot;},
 
-    {shapes: [&quot;rotSquare&quot;, &quot;rotTriangle&quot;]}
+    {shapes: [&quot;rotSquare&quot;, &quot;rotTriangle&quot;], stroke_color: &quot;BLUE&quot;}
     ],
 
   slice0_triangle:

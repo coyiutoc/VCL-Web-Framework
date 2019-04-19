@@ -11,6 +11,7 @@
         "files": [
           "README.md",
           "./docs/manual/pages/terminology.md",
+          "./docs/manual/pages/architecture.md",
           "./docs/manual/pages/experiments.md",
           "./docs/manual/pages/jnd.md",
           "./docs/manual/pages/jnd_radius.md",
@@ -18,7 +19,8 @@
           "./docs/manual/pages/estimation.md",
           "./docs/manual/pages/supported_properties.md",
           "./docs/manual/pages/conditions.md",
-          "./docs/manual/pages/developing_new_conditions.md"
+          "./docs/manual/pages/developing_new_conditions.md",
+          "./docs/manual/pages/developing_new_properties.md"
       	]
       }
     }

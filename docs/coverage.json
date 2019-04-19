@@ -3,7 +3,12 @@
   "expectCount": 300,
   "actualCount": 99,
   "files": {
-    "scripts/experiment-properties/balancing/latin_square_generator.js": {
+    "scripts/experiment-properties/balancing/balancing_controller.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "scripts/experiment-properties/balancing/generators/latin_square_generator.js": {
       "expectCount": 4,
       "actualCount": 1,
       "undocumentLines": [
@@ -12,7 +17,7 @@
         52
       ]
     },
-    "scripts/experiment-properties/balancing/random_generator.js": {
+    "scripts/experiment-properties/balancing/generators/random_generator.js": {
       "expectCount": 1,
       "actualCount": 0,
       "undocumentLines": [
@@ -164,9 +169,9 @@
         111,
         112,
         114,
-        128,
-        161,
-        756
+        127,
+        156,
+        751
       ]
     },
     "scripts/experiments/estimation/estimation_timeline.js": {
@@ -217,11 +222,11 @@
         86,
         89,
         95,
-        118,
-        139,
-        140,
-        162,
-        163
+        115,
+        127,
+        128,
+        150,
+        151
       ]
     },
     "scripts/experiments/jnd/jnd_timeline.js": {
@@ -249,13 +254,14 @@
       "expectCount": 37,
       "actualCount": 12,
       "undocumentLines": [
-        10,
+        9,
+        24,
         25,
         26,
-        27,
-        36,
-        42,
-        48,
+        35,
+        41,
+        47,
+        53,
         54,
         55,
         56,
@@ -264,16 +270,15 @@
         59,
         60,
         61,
-        62,
-        73,
-        77,
+        72,
+        76,
+        83,
         84,
-        85,
-        88,
-        94,
-        116,
-        133,
-        134
+        87,
+        93,
+        112,
+        124,
+        125
       ]
     },
     "scripts/experiments/jnd_radius/jnd_radius_timeline.js": {
@@ -293,33 +298,33 @@
       ]
     },
     "scripts/experiments/stevens/stevens.js": {
-      "expectCount": 43,
-      "actualCount": 19,
+      "expectCount": 42,
+      "actualCount": 18,
       "undocumentLines": [
-        10,
-        24,
+        11,
         25,
-        27,
+        26,
         28,
-        37,
-        43,
-        49,
-        55,
-        64,
-        70,
+        29,
+        38,
+        44,
+        50,
+        56,
+        65,
         71,
         72,
-        78,
-        84,
+        73,
+        79,
         85,
         86,
         87,
-        90,
-        96,
-        146,
-        171,
+        88,
+        91,
+        97,
+        147,
         172,
-        173
+        173,
+        174
       ]
     },
     "scripts/experiments/stevens/stevens_timeline.js": {

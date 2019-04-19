@@ -1,4 +1,4 @@
-import {initialize_random_order} from "/scripts/experiment-properties/balancing/random_generator.js";
+import {balance_subconditions} from "/scripts/experiment-properties/balancing/balancing_controller.js";
 import {get_data} from "/scripts/experiment-properties/data/data_controller.js";
 import {randomize_position,
         randomize_radius_position,
@@ -123,13 +123,8 @@ export default class Estimation {
      */
     prepare_experiment() {
         let dataset = this.raw_sub_conds;
-        switch(this.balancing_type) {
-            case 'random':
-                this.sub_condition_order = initialize_random_order(dataset.length);
-                break;
-            default:
-                throw Error(this.balancing_type + " balancing type is not supported.");
-        }
+        
+        this.sub_condition_order = balance_subconditions(this.balancing_type, this.constructor.name.toLowerCase(), dataset.length);
 
         let ordered_dataset = [];
         // Order the data set according to the randomly ordered array

@@ -29,7 +29,8 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-balancing">experiment-properties/balancing</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_latin_square">initialize_latin_square</a></span></span></li>
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-balancing">experiment-properties/balancing</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-balance_subconditions">balance_subconditions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-balancing-generators">experiment-properties/balancing/generators</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_latin_square">initialize_latin_square</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_random_order">initialize_random_order</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-data">experiment-properties/data</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get_subconditions">get_subconditions</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_condition_dataset">create_condition_dataset</a></span></span></li>
@@ -71,8 +72,7 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">scripts/experiments/jnd_radius/jnd_radius.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">// import {generateDistribution} from &quot;/scripts/generators/gaussian_distribution_generator.js&quot;;
-import {initialize_latin_square} from &quot;/scripts/experiment-properties/balancing/latin_square_generator.js&quot;;
-import {initialize_random_order} from &quot;/scripts/experiment-properties/balancing/random_generator.js&quot;;
+import {balance_subconditions} from &quot;/scripts/experiment-properties/balancing/balancing_controller.js&quot;;
 import {get_data, 
         get_data_subset} from &quot;/scripts/experiment-properties/data/data_controller.js&quot;;
 import {randomize_position,
@@ -182,15 +182,7 @@ export default class JND_Radius {
 
     let dataset = this.raw_constants;
 
-    switch(this.balancing_type) {
-
-      case &apos;random&apos;:
-        this.sub_condition_order = initialize_random_order(dataset.length);
-        break;
-
-      default:
-        throw Error(this.balancing_type + &quot; balancing type is not supported.&quot;);
-    }
+    this.sub_condition_order = balance_subconditions(this.balancing_type, this.constructor.name.toLowerCase(), dataset.length);
 
     var ordered_data_set = [];
 

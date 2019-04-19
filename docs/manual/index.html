@@ -131,9 +131,25 @@
 <li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#example" data-ice="link">Example</a></li>
 <li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#for-developers" data-ice="link">For Developers</a></li>
 <li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#-1--add-to-config" data-ice="link">(1) Add to config</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#-2--add-constants" data-ice="link">(2) Add constants</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#-2--add-subconditions" data-ice="link">(2) Add subconditions</a></li>
 <li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#-3--update-instructions" data-ice="link">(3) Update instructions</a></li>
 <li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_conditions.html"><a href="manual/developing_new_conditions.html#-4--update-docs" data-ice="link">(4) Update docs</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/developing_new_properties.html"><a href="manual/developing_new_properties.html" data-ice="link">Developing New Properties</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_properties.html"><a href="manual/developing_new_properties.html#trial-structures" data-ice="link">Trial Structures</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_properties.html"><a href="manual/developing_new_properties.html#balancing-types" data-ice="link">Balancing Types</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_properties.html"><a href="manual/developing_new_properties.html#graph-related" data-ice="link">Graph-Related</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_properties.html"><a href="manual/developing_new_properties.html#graphical-attributes" data-ice="link">Graphical Attributes</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_properties.html"><a href="manual/developing_new_properties.html#graph-types" data-ice="link">Graph Types</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_properties.html"><a href="manual/developing_new_properties.html#point-shape-types" data-ice="link">Point/Shape Types</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_properties.html"><a href="manual/developing_new_properties.html#adding-experiments" data-ice="link">Adding Experiments</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/developing_new_properties.html"><a href="manual/developing_new_properties.html#overriding" data-ice="link">Overriding</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_properties.html"><a href="manual/developing_new_properties.html#custom-plots" data-ice="link">Custom Plots</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/developing_new_properties.html"><a href="manual/developing_new_properties.html#subcondition-generation" data-ice="link">Subcondition Generation</a></li>
 </ul>
   </div>
 </div>
@@ -262,7 +278,7 @@
     </div>
 <div class="manual-card-wrap" data-ice="cards">
       <div class="manual-card">
-        <div data-ice="card"><h1>Experiments</h1><p>These are the following experiments supported by our framework. The table lists the values for the different identifiers used.</p></div>
+        <div data-ice="card"><h1>Experiments</h1><p>These are the following experiments supported by our framework. The table lists the values for the different identifiers used.</p><p>For the Madison&apos;s multiple ensemble experiments from December 2018, it is in the repo <a href="https://github.com/Wongelawit/Correlation_MultipleEnsemble">here</a> - you need to pull the <code>Numerosity-Task</code> and <code>visualSearch</code> branches independently. (So the experiments are <strong>NOT</strong> on master.)</p><p>Look <a href="/VCL_POC/docs/manual/terminology.html#condition-identifiers">here</a> to understand what identifiers are.</p></div>
         <a data-ice="link" href="manual/experiments.html"></a>
       </div>
     </div>
@@ -718,7 +734,7 @@ to a specific value if they are not defined in your new condition.</p><h3>Experi
 <li><strong>Subconditions</strong><ul>
 <li><strong>How many subconditions?</strong></li>
 <li><strong>What is changing on each subcondition? List all variables.</strong></li>
-<li><strong>How are each of the variables being changed? List all equations/computations needed if changing on trial-by-trial basis.</strong></li>
+<li><strong>How are each of the variables being changed? List all equations/computations needed if changing on a trial-by-trial basis.</strong></li>
 </ul>
 </li>
 </ul><h3>Example</h3><p>Let us say you want to make a new condition for a JND Design experiment that changes point size on each grouping of the Design trial structure. This is what your information would look like:</p><ul>
@@ -744,7 +760,7 @@ to a specific value if they are not defined in your new condition.</p><h3>Experi
 </li>
 </ul>
 </li>
-</ul><h2>For Developers</h2><h3>(1) Add to config</h3><p>Under <code>public/config/conditions-config</code>, add a new key and javascript object at the bottom. The object should look like this:</p><pre><code><code class="source-code prettyprint">name_of_new_condition: {
+</ul><h2>For Developers</h2><h3>(1) Add to config</h3><p>Under <code>public/config/conditions-config</code>, add a new key and javascript object at the bottom. The object should something like below.</p><p>Refer <a href="/VCL-Web-Framework/manual/developing_new_conditions.html/supported_properties.html#identifiers">here</a> for what is supported on each identifier (experiment, graph type, trial structure, balancing).</p><pre><code><code class="source-code prettyprint">name_of_new_condition: {
     experiment: [],
     graph_type: [],
     trial_structure: [],
@@ -770,27 +786,30 @@ with the same kind of subcondition-level manipulation, but different underlying 
         developer: &quot;Caitlin Coyiuto&quot;
     }
 }</code>
-</code></pre><h3>(2) Add constants</h3><p>Add the constants needed to run each subcondition into the right data file. All data files are in <code>public/scripts/experiment-properties/data/constants</code>.</p><p>How the constants work is that for a given trial structure, the application <strong>MERGES</strong> all constants defined in the <code>BASE</code> variable with all constants defined in <code>CONDITIONS</code> variable.</p><p>If the trial structure is already defined, you would only need to add all subconditions for your new condition in <code>CONDITIONS</code>. </p><ul>
-<li>Add a JS object into the file with the same experiment base name. You want to add into the array for CONDITIONS, not BASE. </li>
+</code></pre><h3>(2) Add subconditions</h3><p>Add the attributes needed to run each subcondition into the right data file. All data files are in <code>public/scripts/experiment-properties/data/constants</code>. All attributes that are supported can be found here <a href="/VCLLab/VCL_POC/docs/manual/supported_properties.html#subcondition-attributes">here</a>.</p><p>How the subconditions work is that for a given trial structure, the application <strong>MERGES</strong> all attributes defined in the <code>BASE</code> object with all attributes defined in the <code>CONDITIONS</code> object. From the example, <code>small_point_sizes</code> is a JND condition using a design trial structure. So the app generates the subconditions for <code>small_point_sizes</code> by merging the attributes from <code>JND_BASE[&quot;design&quot;]</code> and <code>JND_CONDITIONS[&quot;small_point_sizes&quot;]</code>.</p><p>If the trial structure is already supported, you would only need to add all subconditions in a <code>key: []</code> structure to the <code>CONDITIONS</code> object.</p><ul>
+<li>Add a JS object into the file with the same experiment base name. You want to add the new key-value pair into the object for <code>CONDITIONS</code>.</li>
 <li>Note that <strong>each entry in the array represents ONE subcondition. So you must define all
-attributes that are being changed on a subcondition-basis.</strong></li>
+attributes that are being changed on a subcondition-basis.</strong><ul>
+<li>The number of entries in the array <strong>must match</strong> the number of entries in the trial structure array. (E.g. if the design trial structure has 15 subconditions/rows, then the new array under <code>CONDITIONS</code> must also have 15 rows).</li>
+</ul>
+</li>
 <li>You can <strong>OVERRIDE</strong> any of the attributes found in the base subconditions. E.g. you can redefine &quot;point_size&quot; in your subcondition if you are changing it on a subcondition-basis.</li>
-<li>An example of a new object representing a condition should look something like this:</li>
+<li>An example of a new object holding all subconditions should look something like this:</li>
 </ul><pre><code><code class="source-code prettyprint">name_of_new_condition:
 [
-    {constant1: ___, constant2: ____}, //first subcondition
+    {attribute1: ___, attribute2: ____}, //first subcondition
 
-    {constant1: ___, constant2: ____}, //second subcondition
+    {attribute1: ___, attribute2: ____}, //second subcondition
 
-    {constant1: ___, constant2: ____}, //third...
+    {attribute1: ___, attribute2: ____}, //third...
 
-    {constant1: ___, constant2: ____},
+    {attribute1: ___, attribute2: ____},
 
-    .....
+    .....                                //Number of rows = number of rows or subconditions in trial structure
 ]</code>
-</code></pre><p>Using example from above, we are just changing <code>point_size</code>, so we need to define each of the sizes on every subcondition.
+</code></pre><p>Using the example from above, we are just changing <code>point_size</code>, so we need to define each of the sizes on every subcondition.
 Note that the subconditions for a JND Design already has <code>point_size</code> (look at <code>JND_BASE[&quot;design&quot;]</code>). By re-defining the <code>point_size</code>
-attribute here, you are <strong>OVERRIDING</strong> the <code>point_size</code> variable in the base.</p><pre><code><code class="source-code prettyprint">small_point_sizes:
+attribute here, you are <strong>OVERRIDING</strong> the <code>point_size</code> variable in the base. Also note that the number of rows below are equal to the number of rows in <code>JND_BASE[&quot;design&quot;]</code>.</p><pre><code><code class="source-code prettyprint">small_point_sizes:
     [
     {point_size: 5},
 
@@ -822,7 +841,7 @@ attribute here, you are <strong>OVERRIDING</strong> the <code>point_size</code> 
 
     {point_size: 13},
     ]</code>
-</code></pre><p>Again, depending on your trial structure, the application will merge the constants you define in <code>CONDITIONS</code> with any that are defined in the <code>BASE</code>. So for this example, all the subconditions for <code>small_point_sizes</code> is whatever is listed in the <code>JND_BASE[&quot;design&quot;]</code>, plus whatever is defined in the <code>CONDITIONS</code> variable. </p><pre><code><code class="source-code prettyprint">[
+</code></pre><p>Again, depending on your trial structure, the application will merge the constants you define in <code>CONDITIONS</code> with any that are defined in the <code>BASE</code> to get all attributes for the subconditions. So for this example, all the subconditions for <code>small_point_sizes</code> is whatever is listed in the <code>JND_BASE[&quot;design&quot;]</code>, plus whatever is defined in the <code>CONDITIONS</code> variable. </p><pre><code><code class="source-code prettyprint">[
     {distribution_type: &quot;gaussian&quot;, base_correlation: 0.3, error: 0.0001, max_step_size: 0.01, 
     converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, 
     num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, 
@@ -838,8 +857,188 @@ attribute here, you are <strong>OVERRIDING</strong> the <code>point_size</code> 
 ]</code>
 </code></pre><h3>(3) Update instructions</h3><p> To update the instructions that are displayed to the participant, you will have to add additional code to the
  timeline object. Navigate to the <code>_timeline.js</code> associated with the condition&apos;s experiment. Under &apos;INSTRUCTION TRIAL BLOCKS&apos;, under the case for the condition&apos;s graph type, add an instruction block. </p><p> For this example, we would go to <code>/experiments/jnd/jnd_timeline.js</code>, and add another if statement under
- case &quot;scatter&quot;. </p><h3>(4) Update docs</h3><p> The docs dynamically gets all the condition data specified in the config files. However, it needs to be compiled to be re-updated.</p><p> Run this in the command line:</p><p> <code>./node_modules/.bin/esdoc</code></p><p> And check that your condition exists in the Conditions tab.</p></div>
+ case &quot;scatter&quot;. </p><h3>(4) Update docs</h3><p> The docs dynamically gets all the condition data specified in the config files. However, it needs to be compiled to be re-updated.</p><p> Run this in the command line:</p><p> <code>./node_modules/.bin/esdoc</code></p><p> And check that your condition exists in the <a href="/VCLLab/VCL_POC/docs/manual/conditions.html">Conditions tab</a>.</p></div>
         <a data-ice="link" href="manual/developing_new_conditions.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>Developing New Properties</h1><p>Sometimes, new conditions require new properties to be added to the framework. This section goes through how to add new properties for each identifier.</p><h2>Trial Structures</h2><p>To add a new trial structure to an <strong>existing</strong> experiment:</p><ol>
+<li>In <code>public/config/trial-structure-config.js</code>, add a new key-object pair. Add the relevant doc information like the pre-existing trial structures.</li>
+<li>Make sure that the base experiment supports the new structure:</li>
+<li>In <code>public/config/experiments-config.js</code>, add the name of the new trial structure under the <code>trial_structure</code> key for the correct base experiment.</li>
+<li><p>Navigate to the right <code>public/scripts/data/constants/___data.js</code> file for the base experiment. Determine how many subconditions the structure will support, and add the new key-array object under the <code>&lt;experiment_name&gt;_BASE</code> object. For example:</p>
+<pre><code><code class="source-code prettyprint">const JND_BASE = {
+  ....
+
+  new_trial_structure: // &lt;--
+  [
+      { ... }
+      { ... }
+      etc. 
+  ]
+}</code>
+</code></pre><p>When adding the attributes, make sure you add <strong>all attributes that the experiment needs to run</strong>. Look at the attributes required for each experiment <a href="/VCL_POC/docs/manual/supported_properties.html#experimental-attributes">here</a>.</p>
+</li>
+<li><p>In <code>public/scripts/data/custom_subcondition_generator.js</code>, add a new key-object pair under <code>CUSTOM_TRIAL_STRUCTURE_CONDITIONS</code>. </p>
+<pre><code><code class="source-code prettyprint">var CUSTOM_TRIAL_STRUCTURE_CONDITIONS = {
+ foundational : [],
+ ...
+
+ new_structure: [] // &lt;-- 
+}</code>
+</code></pre></li>
+</ol><h2>Balancing Types</h2><p>If you want to add a new way to balance subconditions:</p><ol>
+<li>In <code>public/config/balancing-config.js</code>, add a new key-object pair. Add the relevant doc information like the pre-existing balancing types.</li>
+<li>Create a new generator file inside <code>scripts/experiment-properties/balancing/generators</code>. It should take <strong>the length of the dataset array, and return the ordered indices of the subconditions.</strong> E.g., if the dataset has 4 subconditions, the random generator will give back [2, 0, 1, 3] AKA randomize the order of the indices.</li>
+<li>Make sure the balancing controller supports the new type. In <code>scripts/experiment-properties/balancing/balancing_controllers.js</code>, import the function from your generator js, then add another case in the switch statement.</li>
+<li>Make sure that the base experiment supports the new structure. In <code>public/config/experiments-config.js</code>, add the name of the new balancing type under the <code>balancing_type</code> key for the correct base experiment.</li>
+</ol><h2>Graph-Related</h2><p>In terms of graph-related properties, you could either be adding attributes to an <strong>already existing graph type</strong>, or adding an entire new type of <strong>plot or graph type</strong>. </p><h3>Graphical Attributes</h3><p>This assumes that you are adding to a <strong>pre-existing graph type</strong>. E.g. if you want to add <code>stroke_width</code> to the <code>scatter</code> graph type.</p><ol>
+<li>In <code>public/config/graphing-config.js</code> add a key-object pair under the <code>attributes</code> of the graph type. Fill in the doc information, and what the default value is. If the attribute only takes in a <strong>fixed</strong> set of inputs, add a key called <code>valid_inputs: [input1, input2 .... ]</code>.</li>
+<li>Add d3 code to handle the new attribute. Open the right js file corresponding to the graph type in <code>public/scripts/graphing/d3-base-plots</code>. </li>
+</ol><h3>Graph Types</h3><p>If you want to add a <strong>completely new graph type</strong> (AKA plot):</p><ol>
+<li>In <code>public/config/graphing-config.js</code>, add a new key-object pair for the graph type. Add the doc information, and all the attributes that can be manipulatable by subconditions.</li>
+<li>In <code>public/config/experiments-config.js</code>, add the name of the graph type under the experiment that it will support.</li>
+<li>In <code>public/scripts/experiment-properties/graphing/graphing_controller.js</code>:<ul>
+<li>Add a new switch case in <code>plot_distributions</code>. </li>
+<li>Add a new &quot;prepare&quot; function - it can be modelled after <code>prepare_scatter_plot</code>, but in the event that you need to pass additional params which are dependent on the trial data, you can add those in your <code>attributes</code> object too (look at <code>prepare_shapes_plot</code>). Basically, the prepare function sets up all the data and attributes needed for a <strong>single</strong> plot, and passes it into the d3 script that will actually generate the plot.</li>
+</ul>
+</li>
+<li>Now you need to write the d3 code, which will take in the the <code>attributes</code> object created in your <code>prepare</code> function.<ul>
+<li>Create a new js file named after the graph type inside <code>d3-base-plots</code>. </li>
+<li>Write your d3 code. You will be appending the chart to a div with id = <code>graph</code>. So you would be doing something like:<pre><code><code class="source-code prettyprint">let chart = d3.select(&quot;#graph&quot;)
+         .append(&quot;svg&quot;)
+            ......</code>
+</code></pre></li>
+</ul>
+</li>
+</ol><h3>Point/Shape Types</h3><p>For some conditions, there may be a need to simply add a new kind of <code>point_type</code> (belonging to <code>scatter</code> graph type) or a new type of shape taken inside the <code>shapes</code> array (belonging to <code>shapes</code> graph type).</p><ol>
+<li>In <code>public/config/graphing-config.js</code>, add the name of the new kind of point or shape type, either under the <code>valid_inputs</code> key of scatter&apos;s <code>point_type</code>, or shapes&apos; <code>shapes</code>. </li>
+<li>Add the relevant d3 code in the <code>public/scripts/experiment-properties/graphing/d3-base-plots</code>. </li>
+<li>If adding a new <code>point-type</code>, open <code>scatter_plot.js</code>, and add a switch case with the d3 code in <code>plot_scatter_points</code>. </li>
+<li>If adding a new shape type for <code>shapes</code>, open <code>shape_plot.js</code>, and add a switch case inside <code>create_shape_plot</code>. Write the d3 function to handle that case.</li>
+</ol><h2>Adding Experiments</h2><p>In the case you are building an entirely new experiment, you will have to do all of the above, plus build the jsPsych timeline and model object to support the timeline. If you haven&apos;t read up on <a href="https://www.jspsych.org/">JsPsych</a>, I would suggest you do that first, and at least do the <a href="https://www.jspsych.org/tutorials/rt-task/">reaction time tutorial</a>.</p><ol>
+<li>In <code>public/config/experiments-config.js</code>, add a new key-object inside <code>EXPERIMENTS</code>. You need to provide the <code>trial_structure</code>, <code>graph_type</code>, <code>balancing_type</code>, <code>docs</code>, and all <code>attributes</code> the experiment supports. Refer to the above ^^ instructions if you are adding any new properties for the identifiers.</li>
+<li><p>Create the <strong>relevant html files</strong> that (a) holds the jsPsych timeline, and (b) displays the trials. E.g. look under <code>public/views/jnd</code> - there is an HTML for jnd_experiment.html and jnd_trial_display.html.</p>
+<ul>
+<li>Create a new folder with the same name as your experiment under <code>public/views</code> for your experiment.</li>
+<li>Add an HTML file called <code>&lt;experiment_name&gt;_experiment.html</code> and <code>&lt;experiment_name&gt;_trial_display.html</code>. </li>
+<li><p>Inside the experiment HTML, you will pass the routing params from the server side. Literally copy and paste below and change all the <code>&lt;Experiment Name&gt;</code> tags to the new experiment.</p>
+<pre><code><code class="source-code prettyprint">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+ &lt;head&gt;
+
+   &lt;title&gt;VCL: &lt;Experiment Name&gt; Experiment&lt;/title&gt;
+
+   &lt;%- include(&apos;../header&apos;); %&gt;
+
+   &lt;script type=&quot;text/javascript&quot;&gt;
+
+     // Routing params from EJS:
+     var params = {&quot;trial_structure&quot;: &quot;&lt;%= trial_structure %&gt;&quot;,
+                   &quot;condition&quot;: &quot;&lt;%= condition %&gt;&quot;,
+                   &quot;graph_type&quot;: &quot;&lt;%= graph_type %&gt;&quot;,
+                   &quot;balancing&quot;: &quot;&lt;%= balancing %&gt;&quot;,
+                   &quot;subject_id&quot;: &quot;&lt;%= subject_id %&gt;&quot;,
+                   &quot;subject_initials&quot;: &quot;&lt;%= subject_initials %&gt;&quot;};
+
+   &lt;/script&gt;
+
+   &lt;script type=&quot;module&quot; src=&quot;/scripts/experiments/&lt;experiment_name&gt;/&lt;experiment_name&gt;_timeline.js&quot; &gt;&lt;/script&gt;
+
+ &lt;/head&gt;
+
+ &lt;body&gt;
+ &lt;/body&gt;
+
+&lt;/html&gt;</code>
+</code></pre></li>
+<li><p>Inside the trial display HTML, we need to call the function to plot the graphs. Copy and paste below, and change the <code>&lt;experiment name&gt;</code> tags.</p>
+<pre><code><code class="source-code prettyprint">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+   &lt;link rel=&quot;icon&quot; href=&quot;./img/VCL_favicon.png&quot;&gt;
+
+   &lt;!-- Scripts: --&gt;
+
+   &lt;!-- D3: --&gt;
+   &lt;script src = &quot;https://d3js.org/d3.v4.min.js&quot;&gt;&lt;/script&gt;
+   &lt;script src=&quot;https://d3js.org/d3-selection-multi.v0.4.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;/head&gt;
+&lt;body&gt;
+ &lt;div align = &quot;center&quot;&gt;
+
+   &lt;!-- D3 graph goes here: --&gt;
+   &lt;div id=&quot;graph&quot;&gt;
+   &lt;/div&gt;
+
+   &lt;script type=&quot;module&quot;&gt;
+
+       import { &lt;experiment_name&gt;_exp } from &quot;/scripts/experiments/&lt;experiment_name&gt;/&lt;experiment_name&gt;_timeline.js&quot;;
+       import { plot_distributions } from &quot;/scripts/experiment-properties/graphing/graphing_controller.js&quot;;
+
+       plot_distributions(&lt;experiment_name&gt;_exp);
+
+   &lt;/script&gt;
+ &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code>
+</code></pre></li>
+</ul>
+</li>
+<li>Add your <strong>data</strong> for the experiment. <ul>
+<li>In <code>/scripts/data/constants</code> add a new js file called <code>&lt;experiment_name&gt;_data.js</code>. </li>
+<li>Add all your subcondition data for the trial structure it supports, and any new conditions. Refer <a href="/VCL_POC/docs/manual/developing_new_properties.html#trial-structures">here</a> if you&apos;re making a new trial structure, and <a href="/VCL_POC/docs/manual/developing_new_conditions.html">part 2 of here</a> for the new conditions.</li>
+<li>In <code>/scripts/data/data_controller.js</code>, import your <code>BASE</code> and <code>CONDITIONS</code> variables your data js file. <ul>
+<li>Add the new base experiment to <code>EXPERIMENT_BASES</code> and <code>EXPERIMENT_CONDITIONS</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Update <strong>server-side routing</strong>. Open <code>app.js</code> under root, and add another <code>else if</code> statement. Make the response render the <code>&lt;experiment_name&gt;_experiment.html</code> that you recently created. </li>
+<li>Add the <strong>experimental logic</strong>. You need to build: <strong>(a) the JsPsych timeline,</strong> and <strong>(b) a model class to support the timeline.</strong> You <strong>MAY</strong> not need a new model class, especially if your experiment is simple enough and doesn&apos;t have a lot trial-by-trial dependencies (e.g. look at the visualSearch branch from <a href="https://github.com/Wongelawit/Correlation_MultipleEnsemble">here</a>). I would suggest using <code>JND_Radius</code> as a base, it is the simplest among the experiments.<ul>
+<li>Add a new folder under <code>public/scripts/experiments</code>.</li>
+<li>Add two js files, (or one if you don&apos;t need the model class), called <code>&lt;experiment_name&gt;.js</code> and <code>&lt;experiment_name&gt;_timeline.js</code>. </li>
+<li>For the timeline, there should be blocks for:<ul>
+<li>The welcome page</li>
+<li>Instructions</li>
+<li>Feedback (if any after a trial)</li>
+<li>Experimental trial</li>
+<li>The end page</li>
+</ul>
+</li>
+<li>For the model class, you need to be able to:<ul>
+<li>Retrieve the right data from the /constants folder</li>
+<li>Balance the data</li>
+<li>Make the trial block (e.g. <code>generate_trial</code> jsPsych object)</li>
+<li>Save any variables that the researchers want saved on a trial-by-trial basis</li>
+<li>Determine what is a correct/incorrect response, and change the next trial&apos;s presentation (if the experiment demands it)</li>
+<li>Export the data once the experiment ends</li>
+</ul>
+</li>
+<li>There is no template for the model class, though there are some functions that you can probably re-use from <code>JND_Radius</code> (aka <code>prepare_experiment</code>), but a lot of the constants are subject to whatever the experiment needs, and the <code>generate_trial</code> object is task-dependent.   </li>
+</ul>
+</li>
+</ol><h2>Overriding</h2><p>There are instances where new conditions or plots cannot be supported naturally by the framework. These usually are <strong>unconventional</strong> instances. A good example are all the conditions prefixed with <code>distractor_&lt;color&gt;_shades</code>. These conditions plot <strong>TWO</strong> distributions onto a graph, and additionally do not follow any of the supported trial structures. There is therefore a way to <strong>NOT USE</strong> the base plots (e.g. anything in <code>d3-base-plots</code>) and to not be dependent on any of the trial structures, so you can create your subconditions dynamically instead of declaring them inside <code>/data/constants</code>. </p><h3>Custom Plots</h3><p>If you need to create a d3 script specially tailored for the condition:</p><ol>
+<li>Inside <code>/scripts/experiment-properties/graphing/custom_graphing_controller.js</code>. <ul>
+<li>Add an if-else clause inside the function <code>is_custom_plot</code>. Basically should return true for your condition.</li>
+<li>Add an if-else clause inside <code>prepare_custom_plot</code>, and create a new function that sets up the attributes to be sent to your d3 function.</li>
+<li>Import that function at the top of this script.</li>
+</ul>
+</li>
+<li>Create the d3 script. Add a new custom plot script inside <code>/d3-custom-plots</code>.</li>
+<li>Lastly, although the d3 code is customized for your condition, the framework still assumes that your condition uses one of the base plots (e.g scatter, strip etc.). If the new plot doesn&apos;t fit &quot;naturally&quot; into these types, then you might as well create a <a href="/VCL_POC/docs/manual/developing_new_properties.html#graph-types">new graph type</a>.</li>
+</ol><h3>Subcondition Generation</h3><p>There are two instances where you can have custom code for your subconditions: (1) you want to write code that generates the subconditions instead of writing your data inside <code>/data/constants</code> (so this still means you are following a certain trial structure), or (2) you are NOT following any trial structure altogether, so the trial structure is <code>custom</code>. </p><p>Inside <code>/scripts/data/custom_subcondition_generator.js</code>:</p><ul>
+<li>For (1): Add your condition name inside <code>CUSTOM_TRIAL_STRUCTURE_CONDITIONS</code>, under <code>custom</code> key.</li>
+<li>For (2): Add your condition name inside <code>CUSTOM_TRIAL_STRUCTURE_CONDITIONS</code>, under the trial structure it follows.</li>
+<li>Then:<ol>
+<li>Add an if-else inside <code>get_subconditions</code> to route it to your custom generator function.</li>
+<li>Write the function below to generate the subconditions.</li>
+</ol>
+</li>
+</ul></div>
+        <a data-ice="link" href="manual/developing_new_properties.html"></a>
       </div>
     </div>
 </div>
