@@ -16,6 +16,8 @@ If you are planning to add a new condition that uses the base experiments alread
   - **What is changing on each subcondition? List all variables.**
   - **How are each of the variables being changed? List all equations/computations needed if changing on trial-by-trial basis.**
 
+To see what identifiers are supported, refer to the page [here](/supported_properties.html#subcondition-attributes).
+
 ### Example
 
 Let us say you want to make a new condition for a JND Design experiment that changes point size on each grouping of the Design trial structure. This is what your information would look like:
