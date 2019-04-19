@@ -293,7 +293,16 @@
 <li>JsPsych</li>
 <li>D3.js</li>
 <li>ESDoc (for documentation)</li>
-</ul><h2>Structure</h2><p><img src="/VCL-Web-Framework/manual/img/architecture.png" alt="image of architecture"></p></div>
+</ul><h2>Structure</h2><p>Below is a very high-level overview of the entire structure. Basically:</p><ol>
+<li><code>conditions.js</code> feeds into the index to generate the UI, and send the correct identifiers for that condition.</li>
+<li>Upon user input on UI, we do a GET request to obtain the correct HTML based on <code>base experiment</code>. </li>
+<li>The experiment HTML is linked to an <strong>experiment timeline</strong> and <strong>model singleton class</strong>. <ul>
+<li>The timeline uses JsPsych, which helps order the presentation of what is displayed to the user.</li>
+<li>The singleton class extracts the right data, balances subconditions, does any calculations necessary on a trial-by-trial basis, and sends what needs to be presented to the timeline and to the <code>trial HTML</code>, which displays all trial presentations.</li>
+</ul>
+</li>
+<li>Experimental properties, such as graphing, constants used, balancing, or the type of distribution, are fed into the singleton or into the trial HTML (since it is doing the displaying).</li>
+</ol><p><img src="/VCL-Web-Framework/manual/img/architecture.png" alt="image of architecture"></p></div>
         <a data-ice="link" href="manual/architecture.html"></a>
       </div>
     </div>
