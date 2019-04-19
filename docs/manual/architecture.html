@@ -163,47 +163,16 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="-gt--gt--estimation">&gt;&gt; Estimation</h1><ul>
-<li><strong>Task</strong>: Discrimination</li>
-<li><strong>Method</strong>: Estimation w/ Bisection</li>
+<div class="content" data-ice="content"><div class="github-markdown" data-ice="content"><h1 id="architecture">Architecture</h1><p>The framework runs on a web-based stack, using JsPsych for experimental logic support and D3 for visualization.</p>
+<h2 id="stack">Stack</h2><ul>
+<li>Javascript</li>
+<li>Node.js</li>
+<li>Express.js</li>
+<li>JsPsych</li>
+<li>D3.js</li>
+<li>ESDoc (for documentation)</li>
 </ul>
-<h2 id="specifications">Specifications</h2><ul>
-<li>This task presents 2 shapes side by side. One shape is the reference shape, while the other is the modifiable shape, in which the user can increase or decrease the size of the shape (by pressing the M or Z keys). The goal is that the user will adjust the size of the modifiable shape so that it is as equal as possible to the reference shape&apos;s area. </li>
-<li>Subconditions:<ul>
-<li>3 types of shapes - circle, square, or triangle<ul>
-<li>So there are 3 x 3 = 9 different permutations of paired shapes (e.g. circle-circle, circle-square, circle-triangle etc.) - duplicates (3) = 6 permutations</li>
-</ul>
-</li>
-<li>3 sizes that the reference shape can start on - 2cm, 4cm or 6 cm</li>
-<li>2 ways the modifiable shape can &quot;start&quot; on e.g. they can be either <em>smaller</em> or <em>larger</em> in size than the reference shape<ul>
-<li>For 2cm reference shape, low = 1.2, high = 3</li>
-<li>For 4cm reference shape, low = 3.1, high = 5.3</li>
-<li>For 6cm reference shape, low = 5.0, high = 6.5</li>
-</ul>
-</li>
-<li><strong>Total number of subconditions</strong> = 6 [permutation of pairs] x 3 [possible reference sizes] = 18 subconditions</li>
-</ul>
-</li>
-<li>Randomize the order of the 18 subconditions.</li>
-<li>On a given subcondition:<ul>
-<li>The reference and modifiable shape positions can be either left or right (randomized). So before a subcondition starts, there will be text like &quot;Adjust the shape on the <em>left/right</em> so that its size equals that of the other shape.&quot;</li>
-<li>For a given subcondition, there are 4 trials. In each trial, the user basically has to make the modifiable shape the same as the reference shape. On a given trial:<ul>
-<li>For trials 1 and 3, the modifiable shape&apos;s size will start on the low value as specified above (e.g. if 2cm is the reference shape, then modifiable shape&apos;s size is 1.2)</li>
-<li>For trials 2 and 4, the modifiable shape&apos;s size will start on the high value as specified above.</li>
-<li>The y position of the shapes relative to each other should be slightly jittered (e.g. if have a circle and square, the circle is not completely aligned with the square, so could be a few pixels higher or lower etc.) - the degree of jitter can be randomized.</li>
-<li>The user can press the z [make shape bigger] or m [make shape smaller] keys.<ul>
-<li>The step size of the adjustment will be randomized (so not constant).</li>
-</ul>
-</li>
-<li>They can adjust for an unlimited amount of times.</li>
-<li>Once satisfied, they hit space bar, which then records the size of their modified shape.</li>
-<li>This happens 3 more times (for the same subcondition).</li>
-</ul>
-</li>
-<li>After the 4 trials for a given subcondition, experiment then moves to the next subcondition.</li>
-</ul>
-</li>
-</ul>
+<h2 id="structure">Structure</h2><p><img src="/VCL-Web-Framework/manual/img/architecture.png" alt="image of architecture"></p>
 </div>
 </div>
 

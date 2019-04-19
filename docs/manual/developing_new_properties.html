@@ -57,6 +57,14 @@
 <div data-ice="manual">
     <ul class="manual-toc">
       
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/architecture.html"><a href="manual/architecture.html" data-ice="link">Architecture</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/architecture.html"><a href="manual/architecture.html#stack" data-ice="link">Stack</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/architecture.html"><a href="manual/architecture.html#structure" data-ice="link">Structure</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
     <li data-ice="manualNav" class="indent-h1" data-link="manual/experiments.html"><a href="manual/experiments.html" data-ice="link">Experiments</a></li>
 </ul>
   </div>
@@ -172,7 +180,7 @@
       etc. 
   ]
 }</code>
-</code></pre><p>When adding the attributes, make sure you add <strong>all attributes that the experiment needs to run</strong>. Look at the attributes required for each experiment <a href="/VCL_POC/docs/manual/supported_properties.html#experimental-attributes">here</a>.</p>
+</code></pre><p>When adding the attributes, make sure you add <strong>all attributes that the experiment needs to run</strong>. Look at the attributes required for each experiment <a href="/VCL-Web-Framework/manual/supported_properties.html#experimental-attributes">here</a>.</p>
 </li>
 <li><p>In <code>public/scripts/data/custom_subcondition_generator.js</code>, add a new key-object pair under <code>CUSTOM_TRIAL_STRUCTURE_CONDITIONS</code>. </p>
 <pre><code><code class="source-code prettyprint">var CUSTOM_TRIAL_STRUCTURE_CONDITIONS = {
@@ -294,7 +302,7 @@
 </li>
 <li>Add your <strong>data</strong> for the experiment. <ul>
 <li>In <code>/scripts/data/constants</code> add a new js file called <code>&lt;experiment_name&gt;_data.js</code>. </li>
-<li>Add all your subcondition data for the trial structure it supports, and any new conditions. Refer <a href="/VCL_POC/docs/manual/developing_new_properties.html#trial-structures">here</a> if you&apos;re making a new trial structure, and <a href="/VCL_POC/docs/manual/developing_new_conditions.html">part 2 of here</a> for the new conditions.</li>
+<li>Add all your subcondition data for the trial structure it supports, and any new conditions. Refer <a href="/VCL-Web-Framework/manual/developing_new_properties.html#trial-structures">here</a> if you&apos;re making a new trial structure, and <a href="/VCL-Web-Framework/manual/developing_new_conditions.html">part 2 of here</a> for the new conditions.</li>
 <li>In <code>/scripts/data/data_controller.js</code>, import your <code>BASE</code> and <code>CONDITIONS</code> variables your data js file. <ul>
 <li>Add the new base experiment to <code>EXPERIMENT_BASES</code> and <code>EXPERIMENT_CONDITIONS</code>.</li>
 </ul>
@@ -336,7 +344,7 @@
 </ul>
 </li>
 <li>Create the d3 script. Add a new custom plot script inside <code>/d3-custom-plots</code>.</li>
-<li>Lastly, although the d3 code is customized for your condition, the framework still assumes that your condition uses one of the base plots (e.g scatter, strip etc.). If the new plot doesn&apos;t fit &quot;naturally&quot; into these types, then you might as well create a <a href="/VCL_POC/docs/manual/developing_new_properties.html#graph-types">new graph type</a>.</li>
+<li>Lastly, although the d3 code is customized for your condition, the framework still assumes that your condition uses one of the base plots (e.g scatter, strip etc.). If the new plot doesn&apos;t fit &quot;naturally&quot; into these types, then you might as well create a <a href="/VCL-Web-Framework/manual/developing_new_properties.html#graph-types">new graph type</a>.</li>
 </ol>
 <h3 id="subcondition-generation">Subcondition Generation</h3><p>There are two instances where you can have custom code for your subconditions: (1) you want to write code that generates the subconditions instead of writing your data inside <code>/data/constants</code> (so this still means you are following a certain trial structure), or (2) you are NOT following any trial structure altogether, so the trial structure is <code>custom</code>. </p>
 <p>Inside <code>/scripts/data/custom_subcondition_generator.js</code>:</p>

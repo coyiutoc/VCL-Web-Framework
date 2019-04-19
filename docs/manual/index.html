@@ -57,6 +57,14 @@
 <div data-ice="manual">
     <ul class="manual-toc">
       
+    <li data-ice="manualNav" class="indent-h1" data-link="manual/architecture.html"><a href="manual/architecture.html" data-ice="link">Architecture</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/architecture.html"><a href="manual/architecture.html#stack" data-ice="link">Stack</a></li>
+<li data-ice="manualNav" class="indent-h2" data-link="manual/architecture.html"><a href="manual/architecture.html#structure" data-ice="link">Structure</a></li>
+</ul>
+  </div>
+<div data-ice="manual">
+    <ul class="manual-toc">
+      
     <li data-ice="manualNav" class="indent-h1" data-link="manual/experiments.html"><a href="manual/experiments.html" data-ice="link">Experiments</a></li>
 </ul>
   </div>
@@ -278,7 +286,20 @@
     </div>
 <div class="manual-card-wrap" data-ice="cards">
       <div class="manual-card">
-        <div data-ice="card"><h1>Experiments</h1><p>These are the following experiments supported by our framework. The table lists the values for the different identifiers used.</p><p>For the Madison&apos;s multiple ensemble experiments from December 2018, it is in the repo <a href="https://github.com/Wongelawit/Correlation_MultipleEnsemble">here</a> - you need to pull the <code>Numerosity-Task</code> and <code>visualSearch</code> branches independently. (So the experiments are <strong>NOT</strong> on master.)</p><p>Look <a href="/VCL_POC/docs/manual/terminology.html#condition-identifiers">here</a> to understand what identifiers are.</p></div>
+        <div data-ice="card"><h1>Architecture</h1><p>The framework runs on a web-based stack, using JsPsych for experimental logic support and D3 for visualization.</p><h2>Stack</h2><ul>
+<li>Javascript</li>
+<li>Node.js</li>
+<li>Express.js</li>
+<li>JsPsych</li>
+<li>D3.js</li>
+<li>ESDoc (for documentation)</li>
+</ul><h2>Structure</h2><p><img src="/VCL-Web-Framework/manual/img/architecture.png" alt="image of architecture"></p></div>
+        <a data-ice="link" href="manual/architecture.html"></a>
+      </div>
+    </div>
+<div class="manual-card-wrap" data-ice="cards">
+      <div class="manual-card">
+        <div data-ice="card"><h1>Experiments</h1><p>These are the following experiments supported by our framework. The table lists the values for the different identifiers used.</p><p>For the Madison&apos;s multiple ensemble experiments from December 2018, it is in the repo <a href="https://github.com/Wongelawit/Correlation_MultipleEnsemble">here</a> - you need to pull the <code>Numerosity-Task</code> and <code>visualSearch</code> branches independently. (So the experiments are <strong>NOT</strong> on master.)</p><p>Look <a href="/VCL-Web-Framework/manual/terminology.html#condition-identifiers">here</a> to understand what identifiers are.</p></div>
         <a data-ice="link" href="manual/experiments.html"></a>
       </div>
     </div>
@@ -878,7 +899,7 @@ attribute here, you are <strong>OVERRIDING</strong> the <code>point_size</code> 
       etc. 
   ]
 }</code>
-</code></pre><p>When adding the attributes, make sure you add <strong>all attributes that the experiment needs to run</strong>. Look at the attributes required for each experiment <a href="/VCL_POC/docs/manual/supported_properties.html#experimental-attributes">here</a>.</p>
+</code></pre><p>When adding the attributes, make sure you add <strong>all attributes that the experiment needs to run</strong>. Look at the attributes required for each experiment <a href="/VCL-Web-Framework/manual/supported_properties.html#experimental-attributes">here</a>.</p>
 </li>
 <li><p>In <code>public/scripts/data/custom_subcondition_generator.js</code>, add a new key-object pair under <code>CUSTOM_TRIAL_STRUCTURE_CONDITIONS</code>. </p>
 <pre><code><code class="source-code prettyprint">var CUSTOM_TRIAL_STRUCTURE_CONDITIONS = {
@@ -989,7 +1010,7 @@ attribute here, you are <strong>OVERRIDING</strong> the <code>point_size</code> 
 </li>
 <li>Add your <strong>data</strong> for the experiment. <ul>
 <li>In <code>/scripts/data/constants</code> add a new js file called <code>&lt;experiment_name&gt;_data.js</code>. </li>
-<li>Add all your subcondition data for the trial structure it supports, and any new conditions. Refer <a href="/VCL_POC/docs/manual/developing_new_properties.html#trial-structures">here</a> if you&apos;re making a new trial structure, and <a href="/VCL_POC/docs/manual/developing_new_conditions.html">part 2 of here</a> for the new conditions.</li>
+<li>Add all your subcondition data for the trial structure it supports, and any new conditions. Refer <a href="/VCL-Web-Framework/manual/developing_new_properties.html#trial-structures">here</a> if you&apos;re making a new trial structure, and <a href="/VCL-Web-Framework/manual/developing_new_conditions.html">part 2 of here</a> for the new conditions.</li>
 <li>In <code>/scripts/data/data_controller.js</code>, import your <code>BASE</code> and <code>CONDITIONS</code> variables your data js file. <ul>
 <li>Add the new base experiment to <code>EXPERIMENT_BASES</code> and <code>EXPERIMENT_CONDITIONS</code>.</li>
 </ul>
@@ -1028,7 +1049,7 @@ attribute here, you are <strong>OVERRIDING</strong> the <code>point_size</code> 
 </ul>
 </li>
 <li>Create the d3 script. Add a new custom plot script inside <code>/d3-custom-plots</code>.</li>
-<li>Lastly, although the d3 code is customized for your condition, the framework still assumes that your condition uses one of the base plots (e.g scatter, strip etc.). If the new plot doesn&apos;t fit &quot;naturally&quot; into these types, then you might as well create a <a href="/VCL_POC/docs/manual/developing_new_properties.html#graph-types">new graph type</a>.</li>
+<li>Lastly, although the d3 code is customized for your condition, the framework still assumes that your condition uses one of the base plots (e.g scatter, strip etc.). If the new plot doesn&apos;t fit &quot;naturally&quot; into these types, then you might as well create a <a href="/VCL-Web-Framework/manual/developing_new_properties.html#graph-types">new graph type</a>.</li>
 </ol><h3>Subcondition Generation</h3><p>There are two instances where you can have custom code for your subconditions: (1) you want to write code that generates the subconditions instead of writing your data inside <code>/data/constants</code> (so this still means you are following a certain trial structure), or (2) you are NOT following any trial structure altogether, so the trial structure is <code>custom</code>. </p><p>Inside <code>/scripts/data/custom_subcondition_generator.js</code>:</p><ul>
 <li>For (1): Add your condition name inside <code>CUSTOM_TRIAL_STRUCTURE_CONDITIONS</code>, under <code>custom</code> key.</li>
 <li>For (2): Add your condition name inside <code>CUSTOM_TRIAL_STRUCTURE_CONDITIONS</code>, under the trial structure it follows.</li>
