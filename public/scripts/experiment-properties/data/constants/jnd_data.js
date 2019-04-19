@@ -70,7 +70,7 @@ const JND_BASE = {
     {distribution_type: "gaussian", base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 6},
 
     {distribution_type: "gaussian", base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: 'BLACK', axis_color: 'BLACK', text_color: 'BLACK', feedback_background_color: 'WHITE', background_color: 'WHITE', point_size: 6},
-    ],
+    ]
 }
 
 const JND_CONDITIONS = {
@@ -777,38 +777,5 @@ const JND_CONDITIONS = {
     
     {base_correlation: 0.9, dist_base: 0.3, dist_error: 0.0001, num_points: 50, dist_num_points: 150, dist_color: '#dbc667', target_color: '#007ebc', point_size: 4},
     
-    ],
-
-   small_point_sizes:
-    [
-    {point_size: 5},
-
-    {point_size: 5},
-
-    {point_size: 5},
-
-    {point_size: 7},
-
-    {point_size: 7},
-
-    {point_size: 7},
-
-    {point_size: 9},
-
-    {point_size: 9},
-
-    {point_size: 9},
-
-    {point_size: 11},
-
-    {point_size: 11},
-
-    {point_size: 11},
-
-    {point_size: 13},
-
-    {point_size: 13},
-
-    {point_size: 13},
-    ],
+    ] 
 }

@@ -12,5 +12,12 @@ var BALANCING_TYPES = {
 			display_name: "Random",
 			description: "Randomizes the order of the subcondition presentation."
 		}
+	},
+
+	foo_balancing: {
+		docs: {
+			display_name: "Foo Balancing",
+			description: "Foo foo"
+		}
 	}
 };

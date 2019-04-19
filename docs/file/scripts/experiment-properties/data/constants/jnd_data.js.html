@@ -29,7 +29,8 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-balancing">experiment-properties/balancing</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_latin_square">initialize_latin_square</a></span></span></li>
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-balancing">experiment-properties/balancing</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-balance_subconditions">balance_subconditions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-balancing-generators">experiment-properties/balancing/generators</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_latin_square">initialize_latin_square</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_random_order">initialize_random_order</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-data">experiment-properties/data</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get_subconditions">get_subconditions</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_condition_dataset">create_condition_dataset</a></span></span></li>
@@ -143,6 +144,17 @@ const JND_BASE = {
 
     {distribution_type: &quot;gaussian&quot;, base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: true, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 6},
     ],
+
+   foo:
+    [
+    {blep: 0},
+
+    {blep: 0},
+
+    {blep: 0},
+
+    {blep: 0},
+    ] 
 }
 
 const JND_CONDITIONS = {
@@ -851,38 +863,16 @@ const JND_CONDITIONS = {
     
     ],
 
-   small_point_sizes:
+  small_point_sizes:
     [
-    {point_size: 5},
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.9, error: 0.0001, max_step_size: 0.01, converge_from_above: false, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 6},
 
-    {point_size: 5},
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.8, error: 0.0001, max_step_size: 0.01, converge_from_above: false, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 6},
 
-    {point_size: 5},
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.7, error: 0.0001, max_step_size: 0.01, converge_from_above: false, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 6},
 
-    {point_size: 7},
-
-    {point_size: 7},
-
-    {point_size: 7},
-
-    {point_size: 9},
-
-    {point_size: 9},
-
-    {point_size: 9},
-
-    {point_size: 11},
-
-    {point_size: 11},
-
-    {point_size: 11},
-
-    {point_size: 13},
-
-    {point_size: 13},
-
-    {point_size: 13},
-    ],
+    {distribution_type: &quot;gaussian&quot;, base_correlation: 0.6, error: 0.0001, max_step_size: 0.01, converge_from_above: false, initial_difference: 0.1, num_points: 100, mean: 0.5, SD: 0.2, num_SD: 2.5, point_color: &apos;BLACK&apos;, axis_color: &apos;BLACK&apos;, text_color: &apos;BLACK&apos;, feedback_background_color: &apos;WHITE&apos;, background_color: &apos;WHITE&apos;, point_size: 6},
+    ]  
 }
 </code></pre>
 

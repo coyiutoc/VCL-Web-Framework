@@ -16,7 +16,7 @@ To see what identifiers are supported, refer to the page [here](/VCL-Web-Framewo
 - **Subconditions**
   - **How many subconditions?**
   - **What is changing on each subcondition? List all variables.**
-  - **How are each of the variables being changed? List all equations/computations needed if changing on trial-by-trial basis.**
+  - **How are each of the variables being changed? List all equations/computations needed if changing on a trial-by-trial basis.**
 
 ### Example
 
@@ -43,7 +43,9 @@ Let us say you want to make a new condition for a JND Design experiment that cha
 
 ### (1) Add to config
 
-Under `public/config/conditions-config`, add a new key and javascript object at the bottom. The object should look like this:
+Under `public/config/conditions-config`, add a new key and javascript object at the bottom. The object should something like below.
+
+Refer [here](/VCL-Web-Framework/manual/developing_new_conditions.html/supported_properties.html#identifiers) for what is supported on each identifier (experiment, graph type, trial structure, balancing).
 
 ```
 name_of_new_condition: {
@@ -81,37 +83,39 @@ small_point_sizes: {
 }
 ```
 
-### (2) Add constants
+### (2) Add subconditions
 
-Add the constants needed to run each subcondition into the right data file. All data files are in `public/scripts/experiment-properties/data/constants`.
+Add the attributes needed to run each subcondition into the right data file. All data files are in `public/scripts/experiment-properties/data/constants`. All attributes that are supported can be found here [here](/VCLLab/VCL_POC/docs/manual/supported_properties.html#subcondition-attributes).
 
-How the constants work is that for a given trial structure, the application **MERGES** all constants defined in the `BASE` variable with all constants defined in `CONDITIONS` variable.
+How the subconditions work is that for a given trial structure, the application **MERGES** all attributes defined in the `BASE` object with all attributes defined in the `CONDITIONS` object. From the example, `small_point_sizes` is a JND condition using a design trial structure. So the app generates the subconditions for `small_point_sizes` by merging the attributes from `JND_BASE["design"]` and `JND_CONDITIONS["small_point_sizes"]`.
 
-If the trial structure is already defined, you would only need to add all subconditions for your new condition in `CONDITIONS`. 
-- Add a JS object into the file with the same experiment base name. You want to add into the array for CONDITIONS, not BASE. 
+If the trial structure is already supported, you would only need to add all subconditions in a `key: []` structure to the `CONDITIONS` object.
+- Add a JS object into the file with the same experiment base name. You want to add the new key-value pair into the object for `CONDITIONS`.
 - Note that **each entry in the array represents ONE subcondition. So you must define all
 attributes that are being changed on a subcondition-basis.**
+  - The number of entries in the array **must match** the number of entries in the trial structure array. (E.g. if the design trial structure has 15 subconditions/rows, then the new array under `CONDITIONS` must also have 15 rows).
 - You can **OVERRIDE** any of the attributes found in the base subconditions. E.g. you can redefine "point_size" in your subcondition if you are changing it on a subcondition-basis.
-- An example of a new object representing a condition should look something like this:
+- An example of a new object holding all subconditions should look something like this:
+
 
 ```
 name_of_new_condition:
 [
-	{constant1: ___, constant2: ____}, //first subcondition
+	{attribute1: ___, attribute2: ____}, //first subcondition
 
-	{constant1: ___, constant2: ____}, //second subcondition
+	{attribute1: ___, attribute2: ____}, //second subcondition
 
-	{constant1: ___, constant2: ____}, //third...
+	{attribute1: ___, attribute2: ____}, //third...
 
-	{constant1: ___, constant2: ____},
+	{attribute1: ___, attribute2: ____},
 
-	.....
+	.....                                //Number of rows = number of rows or subconditions in trial structure
 ]
 ```
 
-Using example from above, we are just changing `point_size`, so we need to define each of the sizes on every subcondition.
+Using the example from above, we are just changing `point_size`, so we need to define each of the sizes on every subcondition.
 Note that the subconditions for a JND Design already has `point_size` (look at `JND_BASE["design"]`). By re-defining the `point_size`
-attribute here, you are **OVERRIDING** the `point_size` variable in the base.
+attribute here, you are **OVERRIDING** the `point_size` variable in the base. Also note that the number of rows below are equal to the number of rows in `JND_BASE["design"]`.
 
 ```
 small_point_sizes:
@@ -148,7 +152,7 @@ small_point_sizes:
     ]
  ```
 
-Again, depending on your trial structure, the application will merge the constants you define in `CONDITIONS` with any that are defined in the `BASE`. So for this example, all the subconditions for `small_point_sizes` is whatever is listed in the `JND_BASE["design"]`, plus whatever is defined in the `CONDITIONS` variable. 
+Again, depending on your trial structure, the application will merge the constants you define in `CONDITIONS` with any that are defined in the `BASE` to get all attributes for the subconditions. So for this example, all the subconditions for `small_point_sizes` is whatever is listed in the `JND_BASE["design"]`, plus whatever is defined in the `CONDITIONS` variable. 
 
 ```
 [
@@ -183,4 +187,4 @@ Again, depending on your trial structure, the application will merge the constan
 
  `./node_modules/.bin/esdoc`
 
- And check that your condition exists in the Conditions tab.
+ And check that your condition exists in the [Conditions tab](/VCLLab/VCL_POC/docs/manual/conditions.html).

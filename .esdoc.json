@@ -18,7 +18,8 @@
           "./docs/manual/pages/estimation.md",
           "./docs/manual/pages/supported_properties.md",
           "./docs/manual/pages/conditions.md",
-          "./docs/manual/pages/developing_new_conditions.md"
+          "./docs/manual/pages/developing_new_conditions.md",
+          "./docs/manual/pages/developing_new_properties.md"
       	]
       }
     }

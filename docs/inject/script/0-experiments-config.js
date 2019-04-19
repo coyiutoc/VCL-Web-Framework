@@ -16,9 +16,9 @@ const INPUT_TYPES = {
 var EXPERIMENTS = {
 
 	jnd : {
-		trial_structure: ["foundational", "design", "custom"],
+		trial_structure: ["foundational", "design", "custom", "foo"],
 		graph_type: ["scatter", "strip", "ring"],
-		balancing_type: ["random", "latin_square"],
+		balancing_type: ["random", "latin_square", "foo_balancing"],
 		docs: {
 			display_name: "JND",
 			description: "The JND experiment essentially presents users with 2 plots, one with a higher correlation than the other. " + 

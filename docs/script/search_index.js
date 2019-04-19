@@ -84,6 +84,12 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "vcl framework/scripts/experiment-properties/balancing/balancing_controller.js~balance_subconditions",
+    "function/index.html#static-function-balance_subconditions",
+    "<span>balance_subconditions</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/balancing/balancing_controller.js</span>",
+    "function"
+  ],
+  [
     "vcl framework/scripts/experiment-properties/data/data_controller.js~create_condition_dataset",
     "function/index.html#static-function-create_condition_dataset",
     "<span>create_condition_dataset</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/data/data_controller.js</span>",
@@ -150,15 +156,15 @@ window.esdocSearchIndex = [
     "function"
   ],
   [
-    "vcl framework/scripts/experiment-properties/balancing/latin_square_generator.js~initialize_latin_square",
+    "vcl framework/scripts/experiment-properties/balancing/generators/latin_square_generator.js~initialize_latin_square",
     "function/index.html#static-function-initialize_latin_square",
-    "<span>initialize_latin_square</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/balancing/latin_square_generator.js</span>",
+    "<span>initialize_latin_square</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/balancing/generators/latin_square_generator.js</span>",
     "function"
   ],
   [
-    "vcl framework/scripts/experiment-properties/balancing/random_generator.js~initialize_random_order",
+    "vcl framework/scripts/experiment-properties/balancing/generators/random_generator.js~initialize_random_order",
     "function/index.html#static-function-initialize_random_order",
-    "<span>initialize_random_order</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/balancing/random_generator.js</span>",
+    "<span>initialize_random_order</span> <span class=\"search-result-import-path\">VCL Framework/scripts/experiment-properties/balancing/generators/random_generator.js</span>",
     "function"
   ],
   [
@@ -498,15 +504,21 @@ window.esdocSearchIndex = [
     "external"
   ],
   [
-    "scripts/experiment-properties/balancing/latin_square_generator.js",
-    "file/scripts/experiment-properties/balancing/latin_square_generator.js.html",
-    "scripts/experiment-properties/balancing/latin_square_generator.js",
+    "scripts/experiment-properties/balancing/balancing_controller.js",
+    "file/scripts/experiment-properties/balancing/balancing_controller.js.html",
+    "scripts/experiment-properties/balancing/balancing_controller.js",
     "file"
   ],
   [
-    "scripts/experiment-properties/balancing/random_generator.js",
-    "file/scripts/experiment-properties/balancing/random_generator.js.html",
-    "scripts/experiment-properties/balancing/random_generator.js",
+    "scripts/experiment-properties/balancing/generators/latin_square_generator.js",
+    "file/scripts/experiment-properties/balancing/generators/latin_square_generator.js.html",
+    "scripts/experiment-properties/balancing/generators/latin_square_generator.js",
+    "file"
+  ],
+  [
+    "scripts/experiment-properties/balancing/generators/random_generator.js",
+    "file/scripts/experiment-properties/balancing/generators/random_generator.js.html",
+    "scripts/experiment-properties/balancing/generators/random_generator.js",
     "file"
   ],
   [
@@ -1594,12 +1606,6 @@ window.esdocSearchIndex = [
     "class/scripts/experiments/stevens/stevens.js~Stevens.html#instance-member-round_end",
     "scripts/experiments/stevens/stevens.js~Stevens#round_end",
     "member"
-  ],
-  [
-    "scripts/experiments/stevens/stevens.js~stevens#set_design_dataset_order",
-    "class/scripts/experiments/stevens/stevens.js~Stevens.html#instance-method-set_design_dataset_order",
-    "scripts/experiments/stevens/stevens.js~Stevens#set_design_dataset_order",
-    "method"
   ],
   [
     "scripts/experiments/stevens/stevens.js~stevens#set_foundational_dataset_order",

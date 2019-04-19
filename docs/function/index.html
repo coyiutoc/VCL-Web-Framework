@@ -29,7 +29,8 @@
 <nav class="navigation" data-ice="nav"><div>
   <ul>
     
-  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-balancing">experiment-properties/balancing</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_latin_square">initialize_latin_square</a></span></span></li>
+  <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-balancing">experiment-properties/balancing</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-balance_subconditions">balance_subconditions</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-balancing-generators">experiment-properties/balancing/generators</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_latin_square">initialize_latin_square</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-initialize_random_order">initialize_random_order</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#experiment-properties-data">experiment-properties/data</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-get_subconditions">get_subconditions</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-create_condition_dataset">create_condition_dataset</a></span></span></li>
@@ -75,6 +76,36 @@
   <tbody>
   
   <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+          
+          
+          
+          <span class="code" data-ice="name"><span><a href="function/index.html#static-function-balance_subconditions">balance_subconditions</a></span></span><span class="code" data-ice="signature">(balancing_type: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, name: <span>experiment_name</span>, length: <span>dataset_length</span>): <span><span>[]</span></span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Returns the balanced order of the subconditions given balancing type,
+experiment, and number of subconditions.</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
     <td>
       <span class="access" data-ice="access">public</span>
       
@@ -601,6 +632,94 @@ the coordinates for the graphs.</p>
 </div>
 <div data-ice="details"><h2 data-ice="title">Static Public </h2>
 
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-function-balance_subconditions">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    
+    <span class="code" data-ice="name">balance_subconditions</span><span class="code" data-ice="signature">(balancing_type: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span>, name: <span>experiment_name</span>, length: <span>dataset_length</span>): <span><span>[]</span></span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/scripts/experiment-properties/balancing/balancing_controller.js.html#lineNumber16">source</a></span></span>
+    </span>
+  </h3>
+
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {balance_subconditions} from &apos;<span><a href="file/scripts/experiment-properties/balancing/balancing_controller.js.html#lineNumber16">VCL Framework/scripts/experiment-properties/balancing/balancing_controller.js</a></span>&apos;</code></pre></div>
+  
+  
+  <div data-ice="description"><p>Returns the balanced order of the subconditions given balancing type,
+experiment, and number of subconditions.</p>
+</div>
+
+  
+
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Params:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">balancing_type</td>
+      <td data-ice="type" class="code"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">name</td>
+      <td data-ice="type" class="code"><span>experiment_name</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>of experiment</p>
+</td>
+    </tr>
+<tr data-ice="property" data-depth="0">
+      <td data-ice="name" class="code" data-depth="0">length</td>
+      <td data-ice="type" class="code"><span>dataset_length</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"><p>of dataset AKA number of subconditions</p>
+</td>
+    </tr>
+</tbody>
+  </table>
+</div>
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tbody>
+        <tr>
+          <td class="return-type code" data-ice="returnType"><span><span>[]</span></span></td>
+          <td class="return-desc" data-ice="returnDescription"><p>array of indices, representing each subcondition in the dataset.</p>
+</td>
+        </tr>
+      </tbody>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
 <div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="static-function-create_condition_dataset">
     <span class="access" data-ice="access">public</span>
@@ -1219,11 +1338,11 @@ Used for testing purposes.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiment-properties/data/custom_subcondition_generator.js.html#lineNumber42">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiment-properties/data/custom_subcondition_generator.js.html#lineNumber43">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {get_subconditions} from &apos;<span><a href="file/scripts/experiment-properties/data/custom_subcondition_generator.js.html#lineNumber42">VCL Framework/scripts/experiment-properties/data/custom_subcondition_generator.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {get_subconditions} from &apos;<span><a href="file/scripts/experiment-properties/data/custom_subcondition_generator.js.html#lineNumber43">VCL Framework/scripts/experiment-properties/data/custom_subcondition_generator.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -1290,11 +1409,11 @@ Used for testing purposes.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiment-properties/balancing/latin_square_generator.js.html#lineNumber52">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiment-properties/balancing/generators/latin_square_generator.js.html#lineNumber52">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {initialize_latin_square} from &apos;<span><a href="file/scripts/experiment-properties/balancing/latin_square_generator.js.html#lineNumber52">VCL Framework/scripts/experiment-properties/balancing/latin_square_generator.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {initialize_latin_square} from &apos;<span><a href="file/scripts/experiment-properties/balancing/generators/latin_square_generator.js.html#lineNumber52">VCL Framework/scripts/experiment-properties/balancing/generators/latin_square_generator.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -1361,11 +1480,11 @@ Used for testing purposes.</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/scripts/experiment-properties/balancing/random_generator.js.html#lineNumber3">source</a></span></span>
+      <span data-ice="source"><span><a href="file/scripts/experiment-properties/balancing/generators/random_generator.js.html#lineNumber3">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {initialize_random_order} from &apos;<span><a href="file/scripts/experiment-properties/balancing/random_generator.js.html#lineNumber3">VCL Framework/scripts/experiment-properties/balancing/random_generator.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {initialize_random_order} from &apos;<span><a href="file/scripts/experiment-properties/balancing/generators/random_generator.js.html#lineNumber3">VCL Framework/scripts/experiment-properties/balancing/generators/random_generator.js</a></span>&apos;</code></pre></div>
   
   
   

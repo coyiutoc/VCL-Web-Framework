@@ -1,6 +1,7 @@
 // import {generateDistribution} from "/scripts/generators/gaussian_distribution_generator.js";
-import {initialize_latin_square} from "/scripts/experiment-properties/balancing/latin_square_generator.js";
-import {initialize_random_order} from "/scripts/experiment-properties/balancing/random_generator.js";
+import {initialize_random_order} from "/scripts/experiment-properties/balancing/generators/random_generator.js";
+import {initialize_latin_square} from "/scripts/experiment-properties/balancing/generators/latin_square_generator.js";
+import {balance_subconditions} from "/scripts/experiment-properties/balancing/balancing_controller.js";
 import {get_data, 
         get_data_subset} from "/scripts/experiment-properties/data/data_controller.js";
 import {randomize_position,
@@ -122,7 +123,7 @@ export default class Stevens {
         break;
 
       case "design":
-        this.set_design_dataset_order(dataset);
+        this.sub_condition_order = balance_subconditions(this.balancing_type, this.constructor.name.toLowerCase(), dataset.length);
         break;
 
       case "custom":
@@ -173,27 +174,7 @@ export default class Stevens {
     this.input_count_array = new Array(this.sub_conditions_constants[0].trials_per_round).fill(0);
   }
 
-  /**
-   * Sets the subcondition order for design range.
-   *
-   * @param  dataset {[{assoc array}, {assoc array}, ... ]}   The data used to be ordered. 
-   */
-  set_design_dataset_order(dataset) {
 
-    switch(this.balancing_type) {
-
-      case 'latin_square':
-        this.sub_condition_order = initialize_latin_square(dataset.length);
-        break;
-
-      case 'random':
-        this.sub_condition_order = initialize_random_order(dataset.length);
-        break;
-
-      default:
-        throw Error(this.balancing_type + " balancing type is not supported.");
-    }
-  }
 
   /**
    * Sets the subcondition order for foundational range.
