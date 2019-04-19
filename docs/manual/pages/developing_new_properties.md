@@ -22,7 +22,7 @@ const JND_BASE = {
 	]
 }
 ```
-When adding the attributes, make sure you add **all attributes that the experiment needs to run**. Look at the attributes required for each experiment [here](/VCL_POC/docs/manual/supported_properties.html#experimental-attributes).
+When adding the attributes, make sure you add **all attributes that the experiment needs to run**. Look at the attributes required for each experiment [here](/VCL-Web-Framework/manual/supported_properties.html#experimental-attributes).
 3. In `public/scripts/data/custom_subcondition_generator.js`, add a new key-object pair under `CUSTOM_TRIAL_STRUCTURE_CONDITIONS`. 
 ```
 var CUSTOM_TRIAL_STRUCTURE_CONDITIONS = {
@@ -154,7 +154,7 @@ In the case you are building an entirely new experiment, you will have to do all
   ```	
 3. Add your **data** for the experiment. 
   - In `/scripts/data/constants` add a new js file called `<experiment_name>_data.js`. 
-  - Add all your subcondition data for the trial structure it supports, and any new conditions. Refer [here](/VCL_POC/docs/manual/developing_new_properties.html#trial-structures) if you're making a new trial structure, and [part 2 of here](/VCL_POC/docs/manual/developing_new_conditions.html) for the new conditions.
+  - Add all your subcondition data for the trial structure it supports, and any new conditions. Refer [here](/VCL-Web-Framework/manual/developing_new_properties.html#trial-structures) if you're making a new trial structure, and [part 2 of here](/VCL-Web-Framework/manual/developing_new_conditions.html) for the new conditions.
   - In `/scripts/data/data_controller.js`, import your `BASE` and `CONDITIONS` variables your data js file. 
     - Add the new base experiment to `EXPERIMENT_BASES` and `EXPERIMENT_CONDITIONS`.
 4. Update **server-side routing**. Open `app.js` under root, and add another `else if` statement. Make the response render the `<experiment_name>_experiment.html` that you recently created. 
@@ -189,7 +189,7 @@ If you need to create a d3 script specially tailored for the condition:
    - Add an if-else clause inside `prepare_custom_plot`, and create a new function that sets up the attributes to be sent to your d3 function.
    - Import that function at the top of this script.
 2. Create the d3 script. Add a new custom plot script inside `/d3-custom-plots`.
-3. Lastly, although the d3 code is customized for your condition, the framework still assumes that your condition uses one of the base plots (e.g scatter, strip etc.). If the new plot doesn't fit "naturally" into these types, then you might as well create a [new graph type](/VCL_POC/docs/manual/developing_new_properties.html#graph-types).
+3. Lastly, although the d3 code is customized for your condition, the framework still assumes that your condition uses one of the base plots (e.g scatter, strip etc.). If the new plot doesn't fit "naturally" into these types, then you might as well create a [new graph type](/VCL-Web-Framework/manual/developing_new_properties.html#graph-types).
 
 ### Subcondition Generation
 
