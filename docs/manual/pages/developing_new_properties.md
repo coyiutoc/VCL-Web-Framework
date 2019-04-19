@@ -178,11 +178,13 @@ In the case you are building an entirely new experiment, you will have to do all
 
 ## Overriding
 
-There are instances where new conditions or plots cannot be supported naturally by the framework. These usually are **unconventional** instances. A good example are all the conditions prefixed with `distractor_<color>_shades`. These conditions plot **TWO** distributions onto a graph, and additionally do not follow any of the supported trial structures. There is therefore a way to **NOT USE** the base plots (e.g. anything in `d3-base-plots`) and to not be dependent on any of the trial structures, so you can create your subconditions dynamically instead of declaring them inside `/data/constants`. 
+There are instances where new conditions or plots cannot be supported naturally by the framework. These usually are **unconventional** instances. A good example are all the conditions prefixed with `distractor_<color>_shades`. These conditions plot **TWO** distributions onto a scatter graph, and additionally do not follow any of the supported trial structures. There is therefore a way to **NOT USE** the base plots (e.g. anything in `d3-base-plots`) and to not be dependent on any of the trial structures, so you can create your subconditions dynamically instead of declaring them inside `/data/constants`. 
 
 ### Custom Plots
 
-If you need to create a d3 script specially tailored for the condition:
+Assuming that you have a plot that can be categorized under one of the main graph types, but there is some **unconventional** set-up involved that may likely break or cause the main base plot code to become messy, create a custom d3 script. 
+
+For example, the `distractor` conditions plot two distributions onto a single scatter plot, and also have a very specific way of plotting points to allow equal occlusion between the distributions. Adding this into this functionality into the `d3-base-plots/scatter_plot.js` will likely make things very messy. So we created a custom D3 script for it instead (`d3-custom-plots/distractor_scatter_plot.js`).
 
 1. Inside `/scripts/experiment-properties/graphing/custom_graphing_controller.js`. 
    - Add an if-else clause inside the function `is_custom_plot`. Basically should return true for your condition.
@@ -193,7 +195,7 @@ If you need to create a d3 script specially tailored for the condition:
 
 ### Subcondition Generation
 
-There are two instances where you can have custom code for your subconditions: (1) you want to write code that generates the subconditions instead of writing your data inside `/data/constants` (so this still means you are following a certain trial structure), or (2) you are NOT following any trial structure altogether, so the trial structure is `custom`. 
+There are two instances where you can have custom code for your subconditions: (1) you want to write code that programmatically generates the subconditions instead of writing your data manually inside `/data/constants` (so this **still means you are following a certain trial structure**), or (2) you are **NOT following any trial structure** altogether, so the **trial structure is `custom`**. 
 
 Inside `/scripts/data/custom_subcondition_generator.js`:
 - For (1): Add your condition name inside `CUSTOM_TRIAL_STRUCTURE_CONDITIONS`, under `custom` key.
