@@ -4,7 +4,7 @@
 
 If you are planning to add a new condition that uses the base experiments already supported, please provide the following information.
 
-To see what identifiers are supported, refer to the page [here](http://www.coyiutoc.com/VCL-Web-Framework/manual/supported_properties.html#identifiers).
+To see what identifiers are supported, refer to the page [here](/VCL-Web-Framework/manual/developing_new_conditions.html/supported_properties.html#subcondition-attributes).
 
 - **Condition Name**
 - **High-Level Description of Condition**
