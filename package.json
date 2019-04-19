@@ -10,6 +10,7 @@
     "babel-loader": "^8.0.4",
     "body-parser": "^1.18.3",
     "d3": "^5.7.0",
+    "d3-vs-plots": "^1.0.0",
     "ejs": "^2.6.1",
     "esdoc-inject-script-plugin": "^1.0.0",
     "esdoc-inject-style-plugin": "^1.0.0",

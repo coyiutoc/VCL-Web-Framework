@@ -1,4 +1,5 @@
-import {create_scatter_plot} from "/scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js";
+// import {create_scatter_plot} from "/scripts/experiment-properties/graphing/d3-base-plots/scatter_plot.js";
+const plots = require('d3-vs-plots');
 import {create_strip_plot} from "/scripts/experiment-properties/graphing/d3-base-plots/strip_plot.js";
 import {create_ring_plot} from "/scripts/experiment-properties/graphing/d3-base-plots/ring_plot.js";
 import {create_shape_plot} from "/scripts/experiment-properties/graphing/d3-base-plots/shape_plot.js";
@@ -59,8 +60,8 @@ function prepare_scatter_plot(experiment) {
 			dataset: datasets[i],
 			graph_attributes: generate_attributes_object("scatter", trial_data, i)
 		};
-		
-	    create_scatter_plot(attributes);
+
+        plots.scatter_plot.create_scatter_plot(attributes);
 	}
 
     // Set background color
