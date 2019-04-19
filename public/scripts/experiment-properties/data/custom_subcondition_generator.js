@@ -31,8 +31,7 @@ var CUSTOM_TRIAL_STRUCTURE_CONDITIONS = {
     	"distractor_red_shades",
     	"distractor_yellow_shades",
     	"distractor_control_shades"
-    ],
-    foo: []
+    ]
 }
 
 /**

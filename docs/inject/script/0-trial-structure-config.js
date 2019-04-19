@@ -26,13 +26,5 @@ var TRIAL_STRUCTURES = {
 			display_name: "Custom",
 			description: "Does not follow any particular base structure. Customized on a condition-by-condition basis."
 		}
-	},
-
-	foo : {
-		docs: {
-			display_name: "Foo",
-			description: "FOO"
-		}
 	}
-
 };

@@ -40,7 +40,7 @@
       "actualCount": 0,
       "undocumentLines": [
         3,
-        87
+        76
       ]
     },
     "scripts/experiment-properties/data/constants/jnd_radius_data.js": {
@@ -64,7 +64,7 @@
       "actualCount": 5,
       "undocumentLines": [
         4,
-        43
+        42
       ]
     },
     "scripts/experiment-properties/data/data_controller.js": {

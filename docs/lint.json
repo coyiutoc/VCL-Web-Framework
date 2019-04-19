@@ -64,31 +64,31 @@
     "filePath": "scripts/experiment-properties/data/custom_subcondition_generator.js",
     "lines": [
       {
-        "lineNumber": 61,
+        "lineNumber": 60,
         "line": "/**"
       },
       {
-        "lineNumber": 62,
+        "lineNumber": 61,
         "line": " * Checks if the condition name is a \"distractor_diamond_square\" one."
       },
       {
-        "lineNumber": 63,
+        "lineNumber": 62,
         "line": " *"
       },
       {
-        "lineNumber": 64,
+        "lineNumber": 63,
         "line": " * @param   {object}   experiment"
       },
       {
-        "lineNumber": 65,
+        "lineNumber": 64,
         "line": " * @return  {boolean}"
       },
       {
-        "lineNumber": 66,
+        "lineNumber": 65,
         "line": " */"
       },
       {
-        "lineNumber": 67,
+        "lineNumber": 66,
         "line": "function is_distractor_diamond_square(condition_name) {"
       }
     ],
