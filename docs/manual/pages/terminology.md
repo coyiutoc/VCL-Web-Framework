@@ -74,31 +74,32 @@ How subconditions in a given condition get ordered.
 - Randomized
 - Latin Square
 
-### **Condition**
+### **Graph Types**
 
-Any given condition will always have a base, trial structure, and balancing. However, they will also have a set of variables that manipulate different aspects of the distribution, graphical properties of the visualization, and non-graphical properties such as having a custom instruction set. 
+The type of graph used in the visualization.
+
+- Scatter
+- Strip
+- Ring
+- Shapes
+
+### **Attributes**
+
+Any given condition will always have a base, trial structure, balancing and graph type. However, they will also have a set of variables that manipulate different aspects of the distribution, graphical properties of the visualization, and non-graphical properties such as having a custom instruction set. 
 
 Here is a non-comprehensive list of properties that could be manipulated by a condition.
 
-* Plot type: 
-   * Scatter
-   * Strip
-* Distribution type: 
-   * Gaussian
-   * Uniform
-* Number of distributions _on a single plot_: 
-   * Single
-   * Multiple (i.e distractor)
-* Graphical Properties of the Distribution:
+* Experimental attributes:
+  * Distribution type
+  * Base correlation of the reference plot
+  * Whether the correlation converges from above or below
+  * Complete list of experimental attributes [here](/VCL-Web-Framework/manual/supported_properties.html#experimental-attributes)
+* Graphical attributes: 
    * Some examples if `plot type = scatter`:
-      * Point shape: circle, diamond, triangle
+      * Point shape
       * Point color
       * Point size
    * Some examples if `plot type = strip`:
       * Line length
       * Line width
-* Graphical Properties _not to do with the Distribution_:
-   * Axis color, ticks
-   * Background color
-   * Text color
-* Custom Instructions
+   * Complete list of graphical attributes [here](/VCL-Web-Framework/manual/supported_properties.html#experimental-attributes)   

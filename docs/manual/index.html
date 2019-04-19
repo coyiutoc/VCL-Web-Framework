@@ -51,7 +51,8 @@
 <li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-base-experiment--strong-" data-ice="link">Base Experiment</a></li>
 <li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-trial-structure--strong-" data-ice="link">Trial Structure</a></li>
 <li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-balancing--strong-" data-ice="link">Balancing</a></li>
-<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-condition--strong-" data-ice="link">Condition</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-graph-types--strong-" data-ice="link">Graph Types</a></li>
+<li data-ice="manualNav" class="indent-h3" data-link="manual/terminology.html"><a href="manual/terminology.html#-strong-attributes--strong-" data-ice="link">Attributes</a></li>
 </ul>
   </div>
 <div data-ice="manual">
@@ -243,25 +244,22 @@
 </ul><h3><strong>Balancing</strong></h3><p>How subconditions in a given condition get ordered.</p><ul>
 <li>Randomized</li>
 <li>Latin Square</li>
-</ul><h3><strong>Condition</strong></h3><p>Any given condition will always have a base, trial structure, and balancing. However, they will also have a set of variables that manipulate different aspects of the distribution, graphical properties of the visualization, and non-graphical properties such as having a custom instruction set. </p><p>Here is a non-comprehensive list of properties that could be manipulated by a condition.</p><ul>
-<li>Plot type: <ul>
+</ul><h3><strong>Graph Types</strong></h3><p>The type of graph used in the visualization.</p><ul>
 <li>Scatter</li>
 <li>Strip</li>
+<li>Ring</li>
+<li>Shapes</li>
+</ul><h3><strong>Attributes</strong></h3><p>Any given condition will always have a base, trial structure, balancing and graph type. However, they will also have a set of variables that manipulate different aspects of the distribution, graphical properties of the visualization, and non-graphical properties such as having a custom instruction set. </p><p>Here is a non-comprehensive list of properties that could be manipulated by a condition.</p><ul>
+<li>Experimental attributes:<ul>
+<li>Distribution type</li>
+<li>Base correlation of the reference plot</li>
+<li>Whether the correlation converges from above or below</li>
+<li>Complete list of experimental attributes <a href="/VCL-Web-Framework/manual/supported_properties.html#experimental-attributes">here</a></li>
 </ul>
 </li>
-<li>Distribution type: <ul>
-<li>Gaussian</li>
-<li>Uniform</li>
-</ul>
-</li>
-<li>Number of distributions <em>on a single plot</em>: <ul>
-<li>Single</li>
-<li>Multiple (i.e distractor)</li>
-</ul>
-</li>
-<li>Graphical Properties of the Distribution:<ul>
+<li>Graphical attributes: <ul>
 <li>Some examples if <code>plot type = scatter</code>:<ul>
-<li>Point shape: circle, diamond, triangle</li>
+<li>Point shape</li>
 <li>Point color</li>
 <li>Point size</li>
 </ul>
@@ -271,15 +269,9 @@
 <li>Line width</li>
 </ul>
 </li>
+<li>Complete list of graphical attributes <a href="/VCL-Web-Framework/manual/supported_properties.html#experimental-attributes">here</a>   </li>
 </ul>
 </li>
-<li>Graphical Properties <em>not to do with the Distribution</em>:<ul>
-<li>Axis color, ticks</li>
-<li>Background color</li>
-<li>Text color</li>
-</ul>
-</li>
-<li>Custom Instructions</li>
 </ul></div>
         <a data-ice="link" href="manual/terminology.html"></a>
       </div>
