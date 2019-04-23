@@ -27,7 +27,8 @@ var CUSTOM_TRIAL_STRUCTURE_CONDITIONS = {
 		"square",
 		"line_rotated",
 		"triangle_fan",
-		"line_curve"
+		"line_curve",
+		"curve"
     ],
     custom : [
     	"distractor_multi",
@@ -238,5 +239,8 @@ function generate_estimation_subconditions(experiment){
         });
     });
     // console.log(JSON.stringify(result));
-    return result;
+    // return result;
+	// console.log(ESTIMATION_CONDITIONS[experiment]);
+	return EXPERIMENT_CONDITIONS["Estimation"][experiment.condition_name];
+
 }
