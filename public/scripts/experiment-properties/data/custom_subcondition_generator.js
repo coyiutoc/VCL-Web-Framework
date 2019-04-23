@@ -184,7 +184,7 @@ function generate_distractor_shades_subconditions(experiment) {
  * @param   {object}   experiment
  */
 function generate_estimation_subconditions(experiment){
-
+/*
 	const TRIALS_PER_ROUND = 4;
 	const MAX_STEP_SIZE = 0.05;
 	const FILL_COLOR = '#0000FF';
@@ -238,9 +238,10 @@ function generate_estimation_subconditions(experiment){
             });
         });
     });
+    */
     // console.log(JSON.stringify(result));
     // return result;
-	// console.log(ESTIMATION_CONDITIONS[experiment]);
+	console.log(EXPERIMENT_CONDITIONS["Estimation"][experiment.condition_name]);
 	return EXPERIMENT_CONDITIONS["Estimation"][experiment.condition_name];
 
 }
