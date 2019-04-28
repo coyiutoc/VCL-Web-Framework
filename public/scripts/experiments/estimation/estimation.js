@@ -228,6 +228,7 @@ export default class Estimation {
                 trial.data = Object.assign(estimation_exp.curr_conditions_constants[estimation_exp.curr_condition_index],
                     trial.data);
                 trial.data.is_ref_left = is_ref_left; // is the reference shape on the left
+                trial.data.start_time = Date.now();
                 estimation_exp.curr_trial_data = trial.data;
                 // Save trial data for practice so can calculate exclusion criteria
                 if (trial.data.run_type === "practice") {
@@ -238,6 +239,8 @@ export default class Estimation {
             on_finish: function(data) { // NOTE: on_finish takes in data var
                 // save data here
                 console.log("====================on_finish=======================");
+                data.end_time = Date.now();
+                data.response_time = data.start_time - data.end_time;
                 let curr_trail_data = JSON.parse(JSON.stringify((data)));
                 estimation_exp.results.push(curr_trail_data);
                 estimation_exp.update_curr_round_number(data);
