@@ -598,6 +598,13 @@ var CONDITIONS = {
 		display_name: "Line, Curve"
 	},
 
+	curve: {
+        experiment: ["estimation"],
+        graph_type: ["shapes"],
+        trial_structure: ["estimation"],
+        balancing: "random",
+        display_name: "Curves"
+	},
 	triangle_fan: {
 		experiment: ["estimation"],
 		graph_type: ["shapes"],

@@ -21,6 +21,7 @@ export default class Estimation {
             && params.condition !== 'square'
             && params.condition !== 'line_rotated'
             && params.condition !== 'line_curve'
+            && params.condition !== 'curve'
             && params.condition !== 'triangle_fan')
         {
             throw  Error("unexpected condition name " + params.condition);
@@ -692,7 +693,7 @@ export default class Estimation {
         let exp = this;
         let curr_trial_data = this.curr_trial_data;
         // calculate the radius of circle, assume the central angle corresponding to the curve is 60 degrees
-        let r = chord;
+        let r = (chord / 2) / Math.sin(curr_trial_data.mod_central_angle * Math.PI / 360);
         let M = [x_pos, y_pos - chord / 2];
         let A = [r, r, 0, 0, curve_left? 1 : 0, x_pos, y_pos + chord / 2];
         chart.append("path")
@@ -707,7 +708,7 @@ export default class Estimation {
                     let event = d3.event;
                     if (event.key === "m" || event.key === "z") {
                         chord = exp.calculate_size_change(event.key, chord);
-                        r = chord;
+                        r = (chord / 2) / Math.sin(curr_trial_data.mod_central_angle * Math.PI / 360);
                         M = [x_pos, y_pos - chord / 2];
                         A = [r, r, 0, 0, curve_left? 1 : 0, x_pos, y_pos + chord / 2];
                         d3.select("#curve_mod")
