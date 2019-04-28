@@ -28,7 +28,10 @@ var CUSTOM_TRIAL_STRUCTURE_CONDITIONS = {
 		"line_rotated",
 		"triangle_fan",
 		"line_curve",
-		"curve"
+		"curve",
+		"rectangle_square_with_150ms",
+		"rectangle_square_with_300ms",
+        "rectangle_square_with_450ms"
     ],
     custom : [
     	"distractor_multi",

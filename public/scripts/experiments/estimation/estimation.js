@@ -22,7 +22,11 @@ export default class Estimation {
             && params.condition !== 'line_rotated'
             && params.condition !== 'line_curve'
             && params.condition !== 'curve'
-            && params.condition !== 'triangle_fan')
+            && params.condition !== 'triangle_fan'
+            && params.condition !== 'rectangle_square_with_150ms'
+            && params.condition !== 'rectangle_square_with_300ms'
+            && params.condition !== 'rectangle_square_with_450ms'
+        )
         {
             throw  Error("unexpected condition name " + params.condition);
         }
@@ -491,6 +495,11 @@ export default class Estimation {
             transform = transform + " " + (y_pos).toString();
             transform = transform + ")";
             d3.select("#square_shape_ref").attr("transform", transform);
+            if (exp.curr_trial_data.ref_timelimit) {
+                setTimeout(() => {
+                    d3.select("#square_shape_ref").attr("display", "none")
+                }, exp.curr_trial_data.ref_timelimit);
+            }
         } else {
             let transform = "rotate(";
             transform = transform + exp.curr_trial_data.mod_rotate_by.toString();
