@@ -2,9 +2,12 @@
 
 This is a Node.js application that serves as the modernization of the original VCL Java Framework.
 
-***!!! Note that this is an outdated version - a more up-to-date version was ported under VCL's repo [here.](https://github.com/UBC-VCL/VCLWebFramework) (only members of the lab have access). !!!***
+- Deployed on heroku [here.](https://vcl-web-framework.herokuapp.com/)
+- Documentation is hosted [here.](https://ubc-vcl.github.io/VCLWebFramework/manual/README.html)
 
-## Set Up
+***!!! Note that the code here is an outdated version - a more up-to-date version was ported under VCL's repo [here.](https://github.com/UBC-VCL/VCLWebFramework) (only members of the lab have access). !!!***
+
+## Local Set Up
 
 #### (1) Git clone the repository
 #### (2) Install Node
