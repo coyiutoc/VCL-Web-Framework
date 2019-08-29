@@ -2,6 +2,8 @@
 
 This is a Node.js application that serves as the modernization of the original VCL Java Framework.
 
+***!!! Note that this is an outdated version - a more up-to-date version was ported under VCL's repo [here.](https://github.com/UBC-VCL/VCLWebFramework) (only members of the lab have access). !!!***
+
 ## Set Up
 
 #### (1) Git clone the repository
